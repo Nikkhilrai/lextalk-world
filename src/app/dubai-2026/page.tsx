@@ -281,7 +281,7 @@ export default function DubaiEventPage() {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-30 container mx-auto px-4 text-center pt-44 md:pt-36">
+                <div className="relative z-30 container mx-auto px-4 text-center pt-48 md:pt-36">
                     {/* Presents Badge */}
                     <div className={`mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
@@ -289,7 +289,7 @@ export default function DubaiEventPage() {
 
                     {/* Logo - Reduced Size */}
                     <div className={`flex items-center justify-center mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative h-10 w-32 md:h-24 md:w-80">
+                        <div className="relative h-10 w-28 md:h-24 md:w-80">
                             <Image
                                 src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
                                 alt="Lextalk World"
@@ -354,11 +354,11 @@ export default function DubaiEventPage() {
                     </p>
 
                     {/* CTA Buttons - More Spacing Above */}
-                    <div className={`flex flex-col sm:flex-row justify-center gap-3 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`flex flex-col sm:flex-row justify-center items-center gap-3 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {/* Secure Pass */}
                         <Link
                             href="#register"
-                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300 w-full sm:w-auto"
+                            className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300 w-auto"
                         >
                             <span className="text-white font-semibold text-sm tracking-wide">Secure Pass</span>
                             <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
@@ -367,7 +367,7 @@ export default function DubaiEventPage() {
                         {/* Download Agenda */}
                         <Link
                             href="#agenda"
-                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto"
+                            className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-auto"
                         >
                             <Download className="w-4 h-4 text-amber-400" />
                             <span className="text-white/90 group-hover:text-white font-medium text-sm">Download Agenda</span>
@@ -377,7 +377,7 @@ export default function DubaiEventPage() {
             </section>
 
             {/* ===================== KEY HIGHLIGHTS - 3D OVERLAP BELOW BUTTONS ===================== */}
-            <section className="relative mt-8 md:-mt-16 z-20 pb-12">
+            <section className="relative mt-12 md:-mt-16 z-20 pb-12">
                 <div className="container mx-auto px-4">
                     <div
                         ref={highlightsRef}
