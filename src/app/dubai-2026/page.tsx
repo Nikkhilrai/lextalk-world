@@ -258,52 +258,6 @@ export default function DubaiEventPage() {
                     {/* Multi-layer gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/95 via-[#050a15]/80 to-[#050a15]" />
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-900/30 via-transparent to-amber-900/20" />
-
-                    {/* Hexagonal Pattern Background */}
-                    <div
-                        className="absolute inset-0 opacity-[0.08]"
-                        style={{
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%23f59e0b' stroke-width='0.5'/%3E%3C/svg%3E")`,
-                            backgroundSize: '60px 60px'
-                        }}
-                    />
-                </div>
-
-                {/* Diagonal Gold Accent Lines */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" style={{ transform: 'skewY(-2deg)' }} />
-                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" style={{ transform: 'skewY(2deg)' }} />
-                </div>
-
-                {/* Professional Geometric Corner Ornaments */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {/* Top-left ornament */}
-                    <div className="absolute top-8 left-8 w-24 h-24">
-                        <div className="absolute top-0 left-0 w-16 h-[1px] bg-gradient-to-r from-amber-500/40 to-transparent" />
-                        <div className="absolute top-0 left-0 w-[1px] h-16 bg-gradient-to-b from-amber-500/40 to-transparent" />
-                        <div className="absolute top-4 left-4 w-3 h-3 border border-amber-500/30 rotate-45" />
-                    </div>
-
-                    {/* Top-right ornament */}
-                    <div className="absolute top-8 right-8 w-24 h-24">
-                        <div className="absolute top-0 right-0 w-16 h-[1px] bg-gradient-to-l from-amber-500/40 to-transparent" />
-                        <div className="absolute top-0 right-0 w-[1px] h-16 bg-gradient-to-b from-amber-500/40 to-transparent" />
-                        <div className="absolute top-4 right-4 w-3 h-3 border border-amber-500/30 rotate-45" />
-                    </div>
-
-                    {/* Bottom-left ornament */}
-                    <div className="absolute bottom-8 left-8 w-24 h-24">
-                        <div className="absolute bottom-0 left-0 w-16 h-[1px] bg-gradient-to-r from-amber-500/40 to-transparent" />
-                        <div className="absolute bottom-0 left-0 w-[1px] h-16 bg-gradient-to-t from-amber-500/40 to-transparent" />
-                        <div className="absolute bottom-4 left-4 w-3 h-3 border border-amber-500/30 rotate-45" />
-                    </div>
-
-                    {/* Bottom-right ornament */}
-                    <div className="absolute bottom-8 right-8 w-24 h-24">
-                        <div className="absolute bottom-0 right-0 w-16 h-[1px] bg-gradient-to-l from-amber-500/40 to-transparent" />
-                        <div className="absolute bottom-0 right-0 w-[1px] h-16 bg-gradient-to-t from-amber-500/40 to-transparent" />
-                        <div className="absolute bottom-4 right-4 w-3 h-3 border border-amber-500/30 rotate-45" />
-                    </div>
                 </div>
 
                 {/* Luxury Background Elements */}
