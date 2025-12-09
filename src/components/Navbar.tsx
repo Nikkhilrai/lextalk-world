@@ -55,8 +55,8 @@ export function Navbar() {
                             <Image
                                 src="/logo/Lextalk-Logo.png"
                                 alt="Lextalk World"
-                                width={192}
-                                height={48}
+                                fill
+                                sizes="(max-width: 768px) 128px, 192px"
                                 className="object-contain object-left"
                                 priority
                             />
