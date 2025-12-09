@@ -270,15 +270,28 @@ export default function DubaiEventPage() {
 
 
                 {/* Content */}
-                <div className="relative z-30 container mx-auto px-4 text-center pt-48 md:pt-36">
+                <div className="relative z-30 container mx-auto px-4 text-center pt-32 md:pt-28">
+                    {/* Company Logo */}
+                    <div className={`flex justify-center mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <div className="relative w-56 h-16 md:w-80 md:h-24 opacity-90">
+                            <Image
+                                src="/logo/mrs-new-logo.avif"
+                                alt="Mrs Company Logo"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+                    </div>
+
                     {/* Presents Badge */}
-                    <div className={`mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
                     </div>
 
-                    {/* Logo - Reduced Size */}
-                    <div className={`flex items-center justify-center mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative h-10 w-28 md:h-24 md:w-80">
+                    {/* LexTalk Logo - Reduced Size */}
+                    <div className={`flex items-center justify-center mb-5 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <div className="relative h-10 w-28 md:h-20 md:w-72">
                             <Image
                                 src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
                                 alt="Lextalk World"
@@ -291,13 +304,13 @@ export default function DubaiEventPage() {
 
                     {/* Main Title Badge - Reduced Scale */}
                     <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
-                        <div className="inline-block relative mb-5">
+                        <div className="inline-block relative mb-4">
                             {/* Glow effect */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/50 via-amber-400/50 to-amber-500/50 rounded-full blur-lg opacity-70" />
                             <div className="relative px-5 py-2 md:px-8 md:py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-full overflow-hidden group">
                                 {/* Shimmer Effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                <h1 className="text-white text-[10px] md:text-base font-bold tracking-[0.2em] uppercase relative z-10">
+                                <h1 className="text-white text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase relative z-10">
                                     Conference & Exhibition
                                 </h1>
                             </div>
@@ -305,12 +318,12 @@ export default function DubaiEventPage() {
                     </div>
 
                     {/* Navigation Tabs - Compact */}
-                    <div className={`flex flex-wrap justify-center gap-2 mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`flex flex-wrap justify-center gap-2 mb-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {navTabs.map((tab, index) => (
                             <Link
                                 key={index}
                                 href={tab.href}
-                                className="px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-sm font-medium"
+                                className="px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-xs font-medium"
                             >
                                 {tab.label}
                             </Link>
@@ -318,32 +331,35 @@ export default function DubaiEventPage() {
                     </div>
 
                     {/* Event Date & Venue - Refined Typography */}
-                    <div className={`space-y-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        {/* Date Badge */}
-                        <div className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm rounded-full border border-amber-500/20">
-                            <Calendar className="w-4 h-4 text-amber-400" />
-                            <span className="text-amber-400 text-sm md:text-lg font-semibold tracking-wide">May 20th & 21st, 2026</span>
-                        </div>
+                    <div className={`mb-8 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <div className="inline-flex flex-col items-center">
+                            <div className="flex items-center gap-3 mb-3 px-6 py-2 bg-black/30 backdrop-blur-sm rounded-full border border-amber-500/30">
+                                <Calendar className="w-5 h-5 text-amber-500" />
+                                <span className="text-amber-400 font-serif text-lg md:text-xl tracking-wide">
+                                    May 20th & 21st, 2026
+                                </span>
+                            </div>
 
-                        {/* Venue - Balanced Size */}
-                        <h2 className="text-white text-2xl md:text-4xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
-                            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">Dubai World Trade Centre</span>
-                        </h2>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-2 leading-tight drop-shadow-2xl">
+                                Dubai World Trade Centre
+                            </h2>
 
-                        {/* Location */}
-                        <div className="flex items-center justify-center gap-2 text-white/60">
-                            <MapPin className="w-4 h-4 text-amber-400" />
-                            <span className="text-sm md:text-lg tracking-wide">Dubai, United Arab Emirates</span>
+                            <div className="flex items-center gap-2 text-slate-300">
+                                <MapPin className="w-4 h-4 text-amber-500" />
+                                <span className="text-sm md:text-base tracking-widest uppercase opacity-80">Dubai, United Arab Emirates</span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Description - Concise */}
-                    <p className={`max-w-xl mx-auto text-white/40 text-xs md:text-sm mt-4 leading-relaxed transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        The premier global platform for legal professionals. Networking, innovation, and excellence converge.
-                    </p>
+                    {/* Description - Cleaner */}
+                    <div className={`max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <p className="text-slate-300 text-sm md:text-base font-light leading-relaxed">
+                            The premier global platform for legal professionals. Networking, innovation, and excellence converge.
+                        </p>
+                    </div>
 
-                    {/* CTA Buttons - More Spacing Above */}
-                    <div className={`flex flex-col sm:flex-row justify-center items-center gap-3 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    {/* Hero Buttons - Premium Design */}
+                    <div className={`flex flex-col sm:flex-row justify-center gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {/* Secure Pass */}
                         <Link
                             href="#register"
@@ -432,11 +448,11 @@ export default function DubaiEventPage() {
             </section>
 
             {/* ===================== FEATURED IN ===================== */}
-            <section className="py-12 bg-[#0a0a0a] border-y border-white/5 relative overflow-hidden">
+            <section className="py-12 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
                 <div className="container mx-auto px-4 mb-8 relative z-10">
                     <div className="flex items-center justify-center gap-4">
                         <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-amber-500/50"></div>
-                        <p className="text-xs md:text-sm font-bold text-amber-500 tracking-[0.4em] uppercase opacity-90 whitespace-nowrap">
+                        <p className="text-xs md:text-sm font-bold text-slate-800 tracking-[0.4em] uppercase opacity-90 whitespace-nowrap">
                             Featured In
                         </p>
                         <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-amber-500/50"></div>
@@ -445,27 +461,23 @@ export default function DubaiEventPage() {
 
                 {/* Marquee Container */}
                 <div className="relative w-full max-w-[100vw] overflow-hidden group">
-                    {/* Gradient Masks */}
-                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                    {/* Gradient Masks (Light) */}
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
                     <div className="flex animate-marquee group-hover:[animation-play-state:paused] items-center">
                         {marqueeList.map((item, index) => (
                             <div key={index} className="mx-4 shrink-0">
-                                {/* Glass Card Container */}
-                                <div className="group/card relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center p-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/50 hover:bg-white/10">
-
-                                    {/* Inner White Logo Box */}
-                                    <div className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-lg flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover/card:scale-110">
-                                        <div className="relative w-full h-full p-2">
-                                            <Image
-                                                src={item.logo}
-                                                alt={item.name}
-                                                fill
-                                                className="object-contain"
-                                                sizes="(max-width: 768px) 64px, 80px"
-                                            />
-                                        </div>
+                                {/* Clean Light Card */}
+                                <div className="group/card relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center p-4 transition-all duration-300 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 hover:scale-105">
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={item.logo}
+                                            alt={item.name}
+                                            fill
+                                            className="object-contain mix-blend-multiply"
+                                            sizes="(max-width: 768px) 64px, 80px"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -475,21 +487,7 @@ export default function DubaiEventPage() {
             </section>
 
             {/* ===================== WHY ATTEND ===================== */}
-            <section ref={whyAttendRef} className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden">
-                {/* Minimalistic Dot Pattern Background */}
-                <div
-                    className="absolute inset-0 opacity-[0.03]"
-                    style={{
-                        backgroundImage: 'radial-gradient(circle, #64748b 1px, transparent 1px)',
-                        backgroundSize: '24px 24px'
-                    }}
-                />
-
-                {/* Subtle Corner Accents */}
-                <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-amber-500/10" />
-                <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-amber-500/10" />
-
-
+            <section ref={whyAttendRef} className="py-20 md:py-28 bg-white relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     {/* Section Header with Slideshow - 2 Column Layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 max-w-7xl mx-auto">
@@ -502,59 +500,30 @@ export default function DubaiEventPage() {
                                 <span className="h-px w-8 bg-gradient-to-l from-transparent to-amber-500" />
                             </div>
 
-                            {/* Heading with decorative elements */}
+                            {/* Heading with classic serif */}
                             <div className="relative mb-8">
-                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold">
-                                    <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
-                                        Why Attend?
-                                    </span>
+                                <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-slate-900 leading-tight">
+                                    Why <span className="italic text-amber-600">Attend?</span>
                                 </h2>
-                                {/* Decorative underline */}
                                 <div className="mt-6 flex items-center gap-2 justify-center lg:justify-start">
-                                    <div className="w-12 h-0.5 bg-amber-500 rounded-full" />
-                                    <div className="w-3 h-3 border-2 border-amber-500 rotate-45" />
                                     <div className="w-12 h-0.5 bg-amber-500 rounded-full" />
                                 </div>
                             </div>
 
                             {/* Enhanced Description */}
                             <div className="relative">
-                                <p className="text-slate-600 text-base md:text-lg leading-[1.8] first-letter:text-4xl first-letter:font-serif first-letter:font-bold first-letter:text-amber-600 first-letter:mr-1 first-letter:float-left">
-                                    Interested in advancing your knowledge, network and skills in the field of law? Look no further than LexTalk World Conference, the premier global event for lawyers, legal professionals and law enthusiasts alike. With a diverse range of speakers, workshops, and networking opportunities, LexTalk World Conference is the perfect platform to learn, grow, and connect with others who are passionate about the law and its enforcement.
-                                </p>
-                                <p className="text-amber-700 font-medium mt-4 text-sm md:text-base italic">
-                                    Here are just a few reasons why attending LexTalk World Conference is a must.
+                                <p className="text-slate-600 text-base md:text-lg leading-[1.8] font-light">
+                                    <strong className="text-slate-900 font-serif text-xl">Review. Connect. Innovate.</strong><br />
+                                    Join the premier global gathering for legal excellence. LexTalk World Conference isn't just an event; it's a nexus where the future of law is written by those who lead it.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right Column - Slideshow with Clean Professional Design */}
+                        {/* Right Column - Slideshow */}
                         <div className="relative" style={{ perspective: '1200px' }}>
-                            {/* Elegant Gold Corner Frame */}
-                            <div className="absolute -inset-4 pointer-events-none">
-                                {/* Top-left corner */}
-                                <div className="absolute top-0 left-0 w-16 h-0.5 bg-gradient-to-r from-amber-500 to-transparent" />
-                                <div className="absolute top-0 left-0 w-0.5 h-16 bg-gradient-to-b from-amber-500 to-transparent" />
-
-                                {/* Top-right corner */}
-                                <div className="absolute top-0 right-0 w-16 h-0.5 bg-gradient-to-l from-amber-500 to-transparent" />
-                                <div className="absolute top-0 right-0 w-0.5 h-16 bg-gradient-to-b from-amber-500 to-transparent" />
-
-                                {/* Bottom-left corner */}
-                                <div className="absolute bottom-0 left-0 w-16 h-0.5 bg-gradient-to-r from-amber-500 to-transparent" />
-                                <div className="absolute bottom-0 left-0 w-0.5 h-16 bg-gradient-to-t from-amber-500 to-transparent" />
-
-                                {/* Bottom-right corner */}
-                                <div className="absolute bottom-0 right-0 w-16 h-0.5 bg-gradient-to-l from-amber-500 to-transparent" />
-                                <div className="absolute bottom-0 right-0 w-0.5 h-16 bg-gradient-to-t from-amber-500 to-transparent" />
-                            </div>
-
-                            {/* Subtle Background Shadow Layer */}
-                            <div className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-2xl bg-slate-200/50" />
-
-                            {/* 3D Transformed Slideshow Container */}
+                            {/* 3D Transformed Slideshow Container - Cleaner Look */}
                             <div
-                                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)] border border-white/50 transition-transform duration-700 hover:scale-[1.02]"
+                                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0"
                                 style={{
                                     transform: 'rotateY(-5deg) rotateX(2deg)',
                                     transformStyle: 'preserve-3d'
@@ -576,76 +545,42 @@ export default function DubaiEventPage() {
                                         />
                                     </div>
                                 ))}
-
-                                {/* Glass Reflection Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
-
-                                {/* Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
-
-                                {/* Progress Dots */}
-                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                                    {slideshowImages.map((_, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => setCurrentSlide(index)}
-                                            className={`w-2 h-2 rounded-full transition-all duration-300 shadow-lg ${index === currentSlide
-                                                ? 'bg-amber-500 w-8'
-                                                : 'bg-white/70 hover:bg-white'
-                                                }`}
-                                            aria-label={`Go to slide ${index + 1}`}
-                                        />
-                                    ))}
-                                </div>
+                                {/* Gradient Overlay for text readability if needed */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                             </div>
-
-                            {/* 3D Shadow Layer */}
-                            <div
-                                className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-slate-200 to-slate-300"
-                                style={{
-                                    transform: 'rotateY(-5deg) rotateX(2deg) translateZ(-20px) scale(0.98)',
-                                    transformStyle: 'preserve-3d'
-                                }}
-                            />
                         </div>
                     </div>
 
-                    {/* Feature Cards Grid - 2 cols on mobile, 3 on desktop */}
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 max-w-6xl mx-auto">
+                    {/* Feature Cards - Ultra Modern Clean Style */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
                         {whyAttendFeatures.map((feature, index) => (
                             <div
                                 key={index}
-                                className={`group flex flex-col w-full max-w-[320px] mx-auto ${whyAttendVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                className={`group flex flex-col w-full ${whyAttendVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                                 style={{ transitionDelay: `${feature.delay}ms`, transitionDuration: '700ms' }}
                             >
-                                {/* Card Container - Equal Height */}
-                                <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible h-full flex flex-col">
-                                    {/* Image Container */}
-                                    <div className="relative w-full h-[200px] sm:h-[320px] lg:h-[420px] rounded-t-lg overflow-hidden">
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/20 transition-colors duration-500 z-10" />
+                                <div className="relative bg-white h-full flex flex-col group-hover:-translate-y-2 transition-transform duration-500">
+                                    {/* Image Area - Clean rounded corners */}
+                                    <div className="relative h-[240px] overflow-hidden rounded-2xl shadow-md group-hover:shadow-xl transition-all duration-500">
                                         <Image
                                             src={feature.image}
                                             alt={feature.title}
                                             fill
-                                            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                                            priority={index < 3}
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
-                                    </div>
+                                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
 
-                                    {/* Floating Title Badge - Overlapping */}
-                                    <div className="relative -mt-6 sm:-mt-8 mx-2 sm:mx-4 z-20">
-                                        <div className="bg-white/98 backdrop-blur-md border border-slate-200/50 rounded-md shadow-xl p-3 sm:p-5 group-hover:border-amber-400/50 transition-all duration-300">
-                                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-b-md" />
-                                            <h3 className="text-sm sm:text-lg lg:text-xl font-serif font-bold text-slate-900 uppercase tracking-wide text-center">
+                                        {/* Floating Title Inside Image */}
+                                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                                            <h3 className="text-white font-serif text-xl md:text-2xl font-bold tracking-wide">
                                                 {feature.title}
                                             </h3>
                                         </div>
                                     </div>
 
-                                    {/* Description - Flex grow for equal height */}
-                                    <div className="p-3 sm:p-5 text-center flex-1 flex items-start justify-center">
-                                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                    {/* Description - Minimal text below */}
+                                    <div className="pt-5 px-1">
+                                        <p className="text-slate-500 text-sm leading-relaxed border-l-2 border-amber-200 pl-4 py-1">
                                             {feature.description}
                                         </p>
                                     </div>
@@ -657,69 +592,39 @@ export default function DubaiEventPage() {
             </section>
 
             {/* ===================== WHO ATTENDS ===================== */}
-            <section ref={whoAttendsRef} className="py-20 md:py-28 bg-slate-800 relative overflow-hidden">
-                {/* Hexagon Pattern Background */}
-                <div
-                    className="absolute inset-0 opacity-[0.15]"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0l21.65 12.5v25L25 50 3.35 37.5v-25z' fill='none' stroke='%23f59e0b' stroke-width='0.5'/%3E%3C/svg%3E")`,
-                        backgroundSize: '50px 50px'
-                    }}
-                />
-
-                {/* Corner Accents */}
-                <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-amber-500/20" />
-                <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-amber-500/20" />
-
+            <section ref={whoAttendsRef} className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
-                    {/* Enhanced Header */}
                     <div className="text-center mb-16">
-                        {/* Beautiful Bordered Badge */}
-                        <div className="inline-block mb-6">
-                            <span className="px-5 py-2 text-xs font-bold text-amber-400 uppercase tracking-[0.3em] border border-amber-500/50 rounded-full bg-amber-500/10">
-                                Our Audience
-                            </span>
-                        </div>
-
-                        {/* Improved Heading */}
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">
-                            <span className="text-white">Who </span>
-                            <span className="text-amber-400">Attends?</span>
+                        <span className="text-amber-600 font-bold tracking-[0.2em] text-sm uppercase">Global Network</span>
+                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mt-3 mb-6">
+                            Who Attends?
                         </h2>
-
-                        {/* Decorative Underline */}
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-500" />
-                            <div className="w-2 h-2 bg-amber-500 rotate-45" />
-                            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-500" />
-                        </div>
+                        <div className="w-20 h-1 bg-slate-200 mx-auto rounded-full" />
                     </div>
 
-                    {/* Cards Grid - 2 cols mobile, 3 cols desktop */}
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 max-w-5xl mx-auto">
+                    {/* Minimalist Cards Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
                         {whoAttends.map((item, index) => (
                             <div
                                 key={index}
-                                className={`group text-center p-4 sm:p-6 lg:p-8 bg-slate-100 rounded-xl lg:rounded-2xl border border-slate-200 hover:border-amber-400/50 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-500 hover:-translate-y-1 max-w-[320px] mx-auto w-full ${whoAttendsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                className={`group p-6 sm:p-8 bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden ${whoAttendsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                                 style={{ transitionDelay: `${index * 100}ms` }}
                             >
+                                {/* Top Gold Accent Line */}
+                                <div className="absolute top-0 left-0 w-full h-1 bg-slate-100 group-hover:bg-amber-500 transition-colors duration-500" />
+
                                 {/* Icon */}
-                                <div className={`w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 mx-auto mb-4 sm:mb-6 ${item.iconBg} rounded-xl lg:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-md`}>
-                                    <item.icon className={`w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 ${item.iconColor} transition-colors duration-300`} />
+                                <div className={`w-12 h-12 mb-6 rounded-lg ${item.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                                    <item.icon className="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors" />
                                 </div>
 
-                                {/* Title */}
-                                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-slate-900 mb-2 sm:mb-4 group-hover:text-amber-600 transition-colors">
+                                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors font-serif">
                                     {item.title}
                                 </h3>
 
-                                {/* Description - Hidden on mobile for space */}
-                                <p className="hidden sm:block text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                <p className="text-slate-500 text-sm leading-relaxed hidden sm:block">
                                     {item.description}
                                 </p>
-
-                                {/* Bottom Gold Accent Bar */}
-                                <div className="h-1 bg-gradient-to-r from-amber-400 to-amber-600 mt-4 sm:mt-6 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                             </div>
                         ))}
                     </div>

@@ -8,8 +8,8 @@ import { RegisterModal } from "@/components/RegisterModal";
 
 const navItems = [
     { label: "Home", href: "/" },
-    { label: "Upcoming Conference", href: "#" },
-    { label: "Blog", href: "#" },
+    { label: "Upcoming Conference", href: "/conferences" },
+    { label: "Blog", href: "/blog" },
     { label: "Sponsor", href: "#sponsorship" },
 ];
 
