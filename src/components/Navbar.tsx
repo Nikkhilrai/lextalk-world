@@ -51,7 +51,7 @@ export function Navbar() {
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="relative h-12 w-48 transition-transform group-hover:scale-105">
+                        <div className="relative h-8 w-32 lg:h-12 lg:w-48 transition-transform group-hover:scale-105">
                             <Image
                                 src="/logo/Lextalk-Logo.png"
                                 alt="Lextalk World"
