@@ -51,13 +51,13 @@ export function Navbar() {
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="relative h-8 w-32 lg:h-12 lg:w-48 transition-transform group-hover:scale-105">
+                        <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12 transition-transform group-hover:scale-105 flex items-center">
                             <Image
                                 src="/logo/Lextalk-Logo.png"
                                 alt="Lextalk World"
-                                fill
-                                sizes="(max-width: 768px) 128px, 192px"
-                                className="object-contain object-left"
+                                width={192}
+                                height={48}
+                                className="object-contain object-left w-full h-full"
                                 priority
                             />
                         </div>
