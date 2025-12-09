@@ -243,7 +243,7 @@ export default function DubaiEventPage() {
             <EventNavbar />
 
             {/* ===================== HERO SECTION ===================== */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#050a15] pb-48">
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a15] pb-24 md:pb-48">
                 {/* Video Background */}
                 <div className="absolute inset-0 w-full h-full">
                     <video
@@ -281,7 +281,7 @@ export default function DubaiEventPage() {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-30 container mx-auto px-4 text-center pt-36">
+                <div className="relative z-30 container mx-auto px-4 text-center pt-44 md:pt-36">
                     {/* Presents Badge */}
                     <div className={`mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
@@ -289,7 +289,7 @@ export default function DubaiEventPage() {
 
                     {/* Logo - Reduced Size */}
                     <div className={`flex items-center justify-center mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative h-12 w-40 md:h-24 md:w-80">
+                        <div className="relative h-10 w-32 md:h-24 md:w-80">
                             <Image
                                 src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
                                 alt="Lextalk World"
@@ -308,7 +308,7 @@ export default function DubaiEventPage() {
                             <div className="relative px-5 py-2 md:px-8 md:py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-full overflow-hidden group">
                                 {/* Shimmer Effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                <h1 className="text-white text-xs md:text-base font-bold tracking-[0.2em] uppercase relative z-10">
+                                <h1 className="text-white text-[10px] md:text-base font-bold tracking-[0.2em] uppercase relative z-10">
                                     Conference & Exhibition
                                 </h1>
                             </div>
@@ -333,11 +333,11 @@ export default function DubaiEventPage() {
                         {/* Date Badge */}
                         <div className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm rounded-full border border-amber-500/20">
                             <Calendar className="w-4 h-4 text-amber-400" />
-                            <span className="text-amber-400 text-base md:text-lg font-semibold tracking-wide">May 20th & 21st, 2026</span>
+                            <span className="text-amber-400 text-sm md:text-lg font-semibold tracking-wide">May 20th & 21st, 2026</span>
                         </div>
 
                         {/* Venue - Balanced Size */}
-                        <h2 className="text-white text-3xl md:text-4xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
+                        <h2 className="text-white text-2xl md:text-4xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
                             <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">Dubai World Trade Centre</span>
                         </h2>
 
@@ -354,11 +354,11 @@ export default function DubaiEventPage() {
                     </p>
 
                     {/* CTA Buttons - More Spacing Above */}
-                    <div className={`flex flex-col sm:flex-row justify-center gap-4 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`flex flex-col sm:flex-row justify-center gap-3 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {/* Secure Pass */}
                         <Link
                             href="#register"
-                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-3 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300"
+                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300 w-full sm:w-auto"
                         >
                             <span className="text-white font-semibold text-sm tracking-wide">Secure Pass</span>
                             <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
@@ -367,7 +367,7 @@ export default function DubaiEventPage() {
                         {/* Download Agenda */}
                         <Link
                             href="#agenda"
-                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-3 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300"
+                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto"
                         >
                             <Download className="w-4 h-4 text-amber-400" />
                             <span className="text-white/90 group-hover:text-white font-medium text-sm">Download Agenda</span>
@@ -377,7 +377,7 @@ export default function DubaiEventPage() {
             </section>
 
             {/* ===================== KEY HIGHLIGHTS - 3D OVERLAP BELOW BUTTONS ===================== */}
-            <section className="relative -mt-16 z-20 pb-12">
+            <section className="relative mt-8 md:-mt-16 z-20 pb-12">
                 <div className="container mx-auto px-4">
                     <div
                         ref={highlightsRef}
