@@ -1,0 +1,802 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { EventNavbar } from "@/components/EventNavbar";
+import { Footer } from "@/components/Footer";
+import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
+import {
+    Calendar, MapPin, Users, Award, Mic, BookOpen,
+    ArrowRight, Download, Handshake, GraduationCap,
+    Trophy, Monitor, Globe, UserCheck, Briefcase, Scale,
+    Building, Gavel, Cpu, Landmark, ChevronDown
+} from "lucide-react";
+
+// Key Highlights Data
+const highlights = [
+    { icon: Users, number: "500+", label: "Global Attendees" },
+    { icon: Award, number: "100+", label: "Selected Awardees" },
+    { icon: Mic, number: "100+", label: "Renowned Speakers" },
+    { icon: BookOpen, number: "20+", label: "Learning Sessions" },
+];
+
+// Navigation Tabs
+const navTabs = [
+    { label: "Agenda", href: "#agenda" },
+    { label: "Speakers", href: "#speakers" },
+    { label: "Awards & Recognition", href: "#awards" },
+    { label: "Past Event Images", href: "#gallery" },
+    { label: "Sponsorship", href: "#sponsorship" },
+];
+
+// Featured In Logos
+const featuredLogos = [
+    { name: "Corporate Counsel Association of India", logo: "/dubai-event/logos/2.png" },
+    { name: "Asia Pacific Centre for Arbitration & Mediation", logo: "/dubai-event/logos/3.png" },
+    { name: "Global Lawyers Association", logo: "/dubai-event/logos/4.png" },
+    { name: "Asian Institute of Alternative Dispute Resolution", logo: "/dubai-event/logos/5.png" },
+    { name: "Indian Institute of Arbitration & Mediation", logo: "/dubai-event/logos/6.png" },
+    { name: "Society of Indian Law Firms", logo: "/dubai-event/logos/7.png" },
+];
+
+// Why Attend Features
+interface WhyAttendFeature {
+    icon: any;
+    title: string;
+    description: string;
+    image: string;
+    delay: number;
+}
+
+const whyAttendFeatures: WhyAttendFeature[] = [
+    {
+        icon: Handshake,
+        title: "Networking",
+        description: "At LexTalk World Conference, networking is a focal point. Connect with legal professionals, experts, and industry leaders from around the world. Build relationships, exchange ideas, and explore collaborations within the legal community. Expand your network, discover opportunities, and enhance your professional growth.",
+        image: "/dubai-event/why-attend/Networking_edited.avif",
+        delay: 0
+    },
+    {
+        icon: GraduationCap,
+        title: "Learning",
+        description: "Learning is a core component of LexTalk World Conference. Attendees have the opportunity to gain insights from legal experts, industry leaders, and thought influencers through keynote speeches, panel discussions, and workshops. The conference offers a diverse range of sessions covering various legal topics, emerging trends, and advancements in the field.",
+        image: "/dubai-event/why-attend/learning.avif",
+        delay: 100
+    },
+    {
+        icon: Trophy,
+        title: "Recognition",
+        description: "LexTalk World Conference presents the esteemed Legal Honor Global Awards, honoring excellence and innovation in the legal industry. Recognizing outstanding achievements in various categories, these awards celebrate individuals, organizations, and initiatives that have made significant contributions to the legal profession.",
+        image: "/dubai-event/why-attend/Recognition.avif",
+        delay: 200
+    },
+    {
+        icon: Monitor,
+        title: "Exhibition & Tech Demo",
+        description: "Exhibition and Tech Demo section is providing a platform for legal technology companies and solution providers to showcase their products and services. Attendees have the opportunity to explore cutting-edge technologies, innovative solutions, and advancements in the legal industry. The exhibition area allows for interactive demonstrations, hands-on experiences, and discussions with industry experts.",
+        image: "/dubai-event/why-attend/Exhibition & Tech Demo.avif",
+        delay: 300
+    },
+    {
+        icon: Globe,
+        title: "International Visitors",
+        description: "With an international audience, LexTalk World Conference offers a unique opportunity to engage with professionals from different legal systems, gain insights into global legal trends, and expand professional networks on a global scale. The conference provides a global platform for knowledge exchange, fostering cross-cultural perspectives, and facilitating collaborations among legal practitioners.",
+        image: "/dubai-event/why-attend/International Visitors.avif",
+        delay: 400
+    },
+    {
+        icon: UserCheck,
+        title: "One-to-One Meetings",
+        description: "At LexTalk World Conference, participants have the opportunity to engage in one-to-one meetings. These meetings provide a dedicated space for individuals to connect with specific attendees, experts, or potential collaborators. It offers a personalized and focused environment for discussions, networking, and exploring potential partnerships.",
+        image: "/dubai-event/why-attend/One-to-One Meetings.avif",
+        delay: 500
+    },
+];
+
+// Who Attends Data
+const whoAttends = [
+    {
+        icon: Briefcase,
+        title: "In-House Counsel",
+        description: "In-House Counsel and Legal Departments regularly freatures at various LexTalk platforms to acquire knowledge, network with peers and industry experts, stay abreast of legal trends, and improve their professional skills, all of which can contribute to their effectiveness in serving their organizations.",
+        color: "bg-emerald-500",
+        iconBg: "bg-emerald-100",
+        iconColor: "text-emerald-600"
+    },
+    {
+        icon: Scale,
+        title: "Law Firms",
+        description: "LexTalk World Conference and online platforms offers an excellent opportunity to Law firms where they can network, acquire knowledge, develop business opportunities, stay current with industry insights and trends, recruit talent, and enhance their reputation in the legal profession.",
+        color: "bg-purple-500",
+        iconBg: "bg-purple-100",
+        iconColor: "text-purple-600"
+    },
+    {
+        icon: Building,
+        title: "Lawyers & Attorneys",
+        description: "Lawyers and attorneys from different practice areas, including private practitioners, government lawyers, and public interest lawyers. They attend LexTalk World conferences to stay updated on legal developments, network with peers, and enhance their professional skills.",
+        color: "bg-slate-500",
+        iconBg: "bg-slate-100",
+        iconColor: "text-slate-600"
+    },
+    {
+        icon: Gavel,
+        title: "Judges & Legal Scholars",
+        description: "Judges, both from trial and appellate courts, often participate in LexTalk World conferences as speakers or panelists. They share their expertise and insights on legal issues and contribute to discussions on topics relevant to the legal community. Legal scholars also attend to present research papers and documents.",
+        color: "bg-red-500",
+        iconBg: "bg-red-100",
+        iconColor: "text-red-600"
+    },
+    {
+        icon: Cpu,
+        title: "Legal Tech Vendors",
+        description: "LexTalk World brings together the providers of legal tech solutions, legal research tools, practice management software, and other legal services to showcase their products and services to potential clients, lawyers, and law firms and help them improve their productivity and clients handling.",
+        color: "bg-amber-500",
+        iconBg: "bg-amber-100",
+        iconColor: "text-amber-600"
+    },
+    {
+        icon: Landmark,
+        title: "Government Representatives",
+        description: "The focused sessions on edtech entrepreneurship, investment strategies, and market trends, are provided as a platform for entrepreneurs and investors to network with one another.",
+        color: "bg-blue-500",
+        iconBg: "bg-blue-100",
+        iconColor: "text-blue-600"
+    },
+];
+
+// Marquee list for Featured In
+const marqueeList = [...featuredLogos, ...featuredLogos, ...featuredLogos];
+
+// Animated Counter Component
+function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
+    const [count, setCount] = useState(0);
+    const [hasAnimated, setHasAnimated] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    let start = 0;
+                    const increment = target / (duration / 50);
+                    const timer = setInterval(() => {
+                        start += increment;
+                        if (start >= target) {
+                            setCount(target);
+                            clearInterval(timer);
+                        } else {
+                            setCount(Math.floor(start));
+                        }
+                    }, 50);
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => observer.disconnect();
+    }, [target, duration, hasAnimated]);
+
+    return (
+        <span ref={ref}>
+            {count}{suffix}
+        </span>
+    );
+}
+
+export default function DubaiEventPage() {
+    const [isVisible, setIsVisible] = useState(false);
+    const [whyAttendVisible, setWhyAttendVisible] = useState(false);
+    const [whoAttendsVisible, setWhoAttendsVisible] = useState(false);
+    const [highlightsVisible, setHighlightsVisible] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const whyAttendRef = useRef<HTMLDivElement>(null);
+    const whoAttendsRef = useRef<HTMLDivElement>(null);
+    const highlightsRef = useRef<HTMLDivElement>(null);
+
+    // Slideshow auto-rotation
+    const slideshowImages = Array.from({ length: 10 }, (_, i) => `/dubai-event/why-attend-slideshow/${i + 1}.avif`);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % slideshowImages.length);
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [slideshowImages.length]);
+
+    useEffect(() => {
+        setIsVisible(true);
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const sectionsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target === whyAttendRef.current) setWhyAttendVisible(true);
+                    if (entry.target === whoAttendsRef.current) setWhoAttendsVisible(true);
+                    if (entry.target === highlightsRef.current) setHighlightsVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        if (whyAttendRef.current) sectionsObserver.observe(whyAttendRef.current);
+        if (whoAttendsRef.current) sectionsObserver.observe(whoAttendsRef.current);
+        if (highlightsRef.current) sectionsObserver.observe(highlightsRef.current);
+
+        return () => {
+            sectionsObserver.disconnect();
+        };
+    }, []);
+
+    return (
+        <main className="min-h-screen bg-white">
+            <EventNavbar />
+
+            {/* ===================== HERO SECTION ===================== */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#050a15] pb-48">
+                {/* Video Background */}
+                <div className="absolute inset-0 w-full h-full">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="object-cover w-full h-full"
+                    >
+                        <source src="/lextalk-hero.mp4" type="video/mp4" />
+                    </video>
+                    {/* Multi-layer gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/95 via-[#050a15]/80 to-[#050a15]" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-900/30 via-transparent to-amber-900/20" />
+                    {/* Luxury gold accent lines */}
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_49.5%,rgba(217,119,6,0.03)_49.5%,rgba(217,119,6,0.03)_50.5%,transparent_50.5%)] bg-[size:100px_100%]" />
+                </div>
+
+                {/* Luxury border frame */}
+                <div className="absolute inset-4 md:inset-8 border border-amber-500/10 rounded-3xl pointer-events-none" />
+                <div className="absolute inset-6 md:inset-12 border border-white/5 rounded-2xl pointer-events-none" />
+
+                {/* Luxury Background Elements */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Elegant Gradient Orbs */}
+                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/15 via-amber-600/10 to-transparent rounded-full blur-[120px]" />
+                    <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-amber-400/10 via-orange-500/5 to-transparent rounded-full blur-[150px]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/5 to-transparent rounded-full" />
+
+                    {/* Luxury corner accents */}
+                    <div className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-amber-500/30 rounded-tl-xl" />
+                    <div className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-amber-500/30 rounded-tr-xl" />
+                    <div className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-amber-500/30 rounded-bl-xl" />
+                    <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-amber-500/30 rounded-br-xl" />
+                </div>
+
+                {/* Content */}
+                <div className="relative z-30 container mx-auto px-4 text-center pt-36">
+                    {/* Presents Badge */}
+                    <div className={`mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
+                    </div>
+
+                    {/* Logo - Reduced Size */}
+                    <div className={`flex items-center justify-center mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <div className="relative h-16 w-52 md:h-24 md:w-80">
+                            <Image
+                                src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                                alt="Lextalk World"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+                    </div>
+
+                    {/* Main Title Badge - Reduced Scale */}
+                    <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
+                        <div className="inline-block relative mb-5">
+                            {/* Glow effect */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/50 via-amber-400/50 to-amber-500/50 rounded-full blur-lg opacity-70" />
+                            <div className="relative px-5 py-2 md:px-8 md:py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-full overflow-hidden group">
+                                {/* Shimmer Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                                <h1 className="text-white text-xs md:text-base font-bold tracking-[0.2em] uppercase relative z-10">
+                                    Conference & Exhibition
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Navigation Tabs - Compact */}
+                    <div className={`flex flex-wrap justify-center gap-2 mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        {navTabs.map((tab, index) => (
+                            <Link
+                                key={index}
+                                href={tab.href}
+                                className="px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-sm font-medium"
+                            >
+                                {tab.label}
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Event Date & Venue - Refined Typography */}
+                    <div className={`space-y-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        {/* Date Badge */}
+                        <div className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm rounded-full border border-amber-500/20">
+                            <Calendar className="w-4 h-4 text-amber-400" />
+                            <span className="text-amber-400 text-base md:text-lg font-semibold tracking-wide">May 20th & 21st, 2026</span>
+                        </div>
+
+                        {/* Venue - Balanced Size */}
+                        <h2 className="text-white text-3xl md:text-4xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
+                            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">Dubai World Trade Centre</span>
+                        </h2>
+
+                        {/* Location */}
+                        <div className="flex items-center justify-center gap-2 text-white/60">
+                            <MapPin className="w-4 h-4 text-amber-400" />
+                            <span className="text-sm md:text-lg tracking-wide">Dubai, United Arab Emirates</span>
+                        </div>
+                    </div>
+
+                    {/* Description - Concise */}
+                    <p className={`max-w-xl mx-auto text-white/40 text-xs md:text-sm mt-4 leading-relaxed transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        The premier global platform for legal professionals. Networking, innovation, and excellence converge.
+                    </p>
+
+                    {/* CTA Buttons - More Spacing Above */}
+                    <div className={`flex flex-col sm:flex-row justify-center gap-4 mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        {/* Secure Pass */}
+                        <Link
+                            href="#register"
+                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-3 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300"
+                        >
+                            <span className="text-white font-semibold text-sm tracking-wide">Secure Pass</span>
+                            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+
+                        {/* Download Agenda */}
+                        <Link
+                            href="#agenda"
+                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-3 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300"
+                        >
+                            <Download className="w-4 h-4 text-amber-400" />
+                            <span className="text-white/90 group-hover:text-white font-medium text-sm">Download Agenda</span>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===================== KEY HIGHLIGHTS - 3D OVERLAP BELOW BUTTONS ===================== */}
+            <section className="relative -mt-16 z-20 pb-12">
+                <div className="container mx-auto px-4">
+                    <div
+                        ref={highlightsRef}
+                        className={`max-w-4xl mx-auto bg-gradient-to-b from-white to-slate-50 rounded-3xl shadow-[0_40px_70px_-15px_rgba(0,0,0,0.3)] border border-white/40 ring-1 ring-white/50 ring-offset-0 overflow-hidden transition-all duration-1000 ${highlightsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                    >
+                        {/* Card Content */}
+                        <div className="px-6 py-5 md:px-8 md:py-6">
+                            {/* Heading - Fixed Visibility */}
+                            <div className="text-center mb-6 md:mb-8">
+                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-2">
+                                    <span className="text-slate-900">Key </span>
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-500 relative">
+                                        Highlights
+                                        <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-600 to-amber-500 rounded-full" />
+                                    </span>
+                                </h2>
+                                <p className="text-slate-500 text-xs md:text-sm mt-2 font-medium">
+                                    Join the world's premier legal conference
+                                </p>
+                            </div>
+
+                            {/* Stats Grid */}
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                                {highlights.map((item, index) => {
+                                    const numericValue = parseInt(item.number.replace(/\D/g, '')) || 0;
+                                    const suffix = item.number.replace(/[0-9]/g, '');
+
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="text-center group cursor-pointer"
+                                        >
+                                            {/* Light Background Container - Reduced Size */}
+                                            <div className="p-4 md:p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/50 group-hover:from-amber-50 group-hover:to-amber-100/30 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
+                                                {/* Icon - Smaller */}
+                                                <div className="flex justify-center mb-3">
+                                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-sm flex items-center justify-center group-hover:shadow-md transition-all duration-300">
+                                                        <item.icon className="w-4 h-4 md:w-5 md:h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                                                    </div>
+                                                </div>
+
+                                                {/* Number - Smaller */}
+                                                <div className="text-2xl md:text-3xl font-bold text-slate-900 font-serif mb-1 group-hover:text-amber-600 transition-colors">
+                                                    {highlightsVisible ? (
+                                                        <AnimatedCounter target={numericValue} suffix={suffix} />
+                                                    ) : (
+                                                        '0' + suffix
+                                                    )}
+                                                </div>
+
+                                                {/* Label - Smaller */}
+                                                <p className="text-[10px] md:text-xs text-slate-600 font-medium uppercase tracking-wider leading-tight">
+                                                    {item.label}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===================== FEATURED IN ===================== */}
+            <section className="py-12 bg-[#0a0a0a] border-y border-white/5 relative overflow-hidden">
+                <div className="container mx-auto px-4 mb-8 relative z-10">
+                    <div className="flex items-center justify-center gap-4">
+                        <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-amber-500/50"></div>
+                        <p className="text-xs md:text-sm font-bold text-amber-500 tracking-[0.4em] uppercase opacity-90 whitespace-nowrap">
+                            Featured In
+                        </p>
+                        <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-amber-500/50"></div>
+                    </div>
+                </div>
+
+                {/* Marquee Container */}
+                <div className="relative w-full max-w-[100vw] overflow-hidden group">
+                    {/* Gradient Masks */}
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+
+                    <div className="flex animate-marquee group-hover:[animation-play-state:paused] items-center">
+                        {marqueeList.map((item, index) => (
+                            <div key={index} className="mx-4 shrink-0">
+                                {/* Glass Card Container */}
+                                <div className="group/card relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center p-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/50 hover:bg-white/10">
+
+                                    {/* Inner White Logo Box */}
+                                    <div className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-lg flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover/card:scale-110">
+                                        <div className="relative w-full h-full p-2">
+                                            <Image
+                                                src={item.logo}
+                                                alt={item.name}
+                                                fill
+                                                className="object-contain"
+                                                sizes="(max-width: 768px) 64px, 80px"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===================== WHY ATTEND ===================== */}
+            <section ref={whyAttendRef} className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden">
+                {/* Minimalistic Dot Pattern Background */}
+                <div
+                    className="absolute inset-0 opacity-[0.03]"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, #64748b 1px, transparent 1px)',
+                        backgroundSize: '24px 24px'
+                    }}
+                />
+
+                {/* Subtle Corner Accents */}
+                <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-amber-500/10" />
+                <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-amber-500/10" />
+
+
+                <div className="container mx-auto px-4 relative z-10">
+                    {/* Section Header with Slideshow - 2 Column Layout */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 max-w-7xl mx-auto">
+                        {/* Left Column - Enhanced Text Content */}
+                        <div className="text-center lg:text-left">
+                            {/* Premium Badge */}
+                            <div className="inline-flex items-center gap-3 mb-6">
+                                <span className="h-px w-8 bg-gradient-to-r from-transparent to-amber-500" />
+                                <span className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em]">Premium Event</span>
+                                <span className="h-px w-8 bg-gradient-to-l from-transparent to-amber-500" />
+                            </div>
+
+                            {/* Heading with decorative elements */}
+                            <div className="relative mb-8">
+                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold">
+                                    <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
+                                        Why Attend?
+                                    </span>
+                                </h2>
+                                {/* Decorative underline */}
+                                <div className="mt-6 flex items-center gap-2 justify-center lg:justify-start">
+                                    <div className="w-12 h-0.5 bg-amber-500 rounded-full" />
+                                    <div className="w-3 h-3 border-2 border-amber-500 rotate-45" />
+                                    <div className="w-12 h-0.5 bg-amber-500 rounded-full" />
+                                </div>
+                            </div>
+
+                            {/* Enhanced Description */}
+                            <div className="relative">
+                                <p className="text-slate-600 text-base md:text-lg leading-[1.8] first-letter:text-4xl first-letter:font-serif first-letter:font-bold first-letter:text-amber-600 first-letter:mr-1 first-letter:float-left">
+                                    Interested in advancing your knowledge, network and skills in the field of law? Look no further than LexTalk World Conference, the premier global event for lawyers, legal professionals and law enthusiasts alike. With a diverse range of speakers, workshops, and networking opportunities, LexTalk World Conference is the perfect platform to learn, grow, and connect with others who are passionate about the law and its enforcement.
+                                </p>
+                                <p className="text-amber-700 font-medium mt-4 text-sm md:text-base italic">
+                                    Here are just a few reasons why attending LexTalk World Conference is a must.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Right Column - Slideshow with Clean Professional Design */}
+                        <div className="relative" style={{ perspective: '1200px' }}>
+                            {/* Elegant Gold Corner Frame */}
+                            <div className="absolute -inset-4 pointer-events-none">
+                                {/* Top-left corner */}
+                                <div className="absolute top-0 left-0 w-16 h-0.5 bg-gradient-to-r from-amber-500 to-transparent" />
+                                <div className="absolute top-0 left-0 w-0.5 h-16 bg-gradient-to-b from-amber-500 to-transparent" />
+
+                                {/* Top-right corner */}
+                                <div className="absolute top-0 right-0 w-16 h-0.5 bg-gradient-to-l from-amber-500 to-transparent" />
+                                <div className="absolute top-0 right-0 w-0.5 h-16 bg-gradient-to-b from-amber-500 to-transparent" />
+
+                                {/* Bottom-left corner */}
+                                <div className="absolute bottom-0 left-0 w-16 h-0.5 bg-gradient-to-r from-amber-500 to-transparent" />
+                                <div className="absolute bottom-0 left-0 w-0.5 h-16 bg-gradient-to-t from-amber-500 to-transparent" />
+
+                                {/* Bottom-right corner */}
+                                <div className="absolute bottom-0 right-0 w-16 h-0.5 bg-gradient-to-l from-amber-500 to-transparent" />
+                                <div className="absolute bottom-0 right-0 w-0.5 h-16 bg-gradient-to-t from-amber-500 to-transparent" />
+                            </div>
+
+                            {/* Subtle Background Shadow Layer */}
+                            <div className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-2xl bg-slate-200/50" />
+
+                            {/* 3D Transformed Slideshow Container */}
+                            <div
+                                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)] border border-white/50 transition-transform duration-700 hover:scale-[1.02]"
+                                style={{
+                                    transform: 'rotateY(-5deg) rotateX(2deg)',
+                                    transformStyle: 'preserve-3d'
+                                }}
+                            >
+                                {/* Slideshow Images */}
+                                {slideshowImages.map((img, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                    >
+                                        <Image
+                                            src={img}
+                                            alt={`LexTalk World Conference ${index + 1}`}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 1024px) 100vw, 45vw"
+                                        />
+                                    </div>
+                                ))}
+
+                                {/* Glass Reflection Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
+
+                                {/* Progress Dots */}
+                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                    {slideshowImages.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => setCurrentSlide(index)}
+                                            className={`w-2 h-2 rounded-full transition-all duration-300 shadow-lg ${index === currentSlide
+                                                ? 'bg-amber-500 w-8'
+                                                : 'bg-white/70 hover:bg-white'
+                                                }`}
+                                            aria-label={`Go to slide ${index + 1}`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* 3D Shadow Layer */}
+                            <div
+                                className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-slate-200 to-slate-300"
+                                style={{
+                                    transform: 'rotateY(-5deg) rotateX(2deg) translateZ(-20px) scale(0.98)',
+                                    transformStyle: 'preserve-3d'
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Feature Cards Grid - 2 cols on mobile, 3 on desktop */}
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 max-w-6xl mx-auto">
+                        {whyAttendFeatures.map((feature, index) => (
+                            <div
+                                key={index}
+                                className={`group flex flex-col w-full max-w-[320px] mx-auto ${whyAttendVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                style={{ transitionDelay: `${feature.delay}ms`, transitionDuration: '700ms' }}
+                            >
+                                {/* Card Container - Equal Height */}
+                                <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible h-full flex flex-col">
+                                    {/* Image Container */}
+                                    <div className="relative w-full h-[200px] sm:h-[320px] lg:h-[420px] rounded-t-lg overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/20 transition-colors duration-500 z-10" />
+                                        <Image
+                                            src={feature.image}
+                                            alt={feature.title}
+                                            fill
+                                            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                                            priority={index < 3}
+                                        />
+                                    </div>
+
+                                    {/* Floating Title Badge - Overlapping */}
+                                    <div className="relative -mt-6 sm:-mt-8 mx-2 sm:mx-4 z-20">
+                                        <div className="bg-white/98 backdrop-blur-md border border-slate-200/50 rounded-md shadow-xl p-3 sm:p-5 group-hover:border-amber-400/50 transition-all duration-300">
+                                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-b-md" />
+                                            <h3 className="text-sm sm:text-lg lg:text-xl font-serif font-bold text-slate-900 uppercase tracking-wide text-center">
+                                                {feature.title}
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    {/* Description - Flex grow for equal height */}
+                                    <div className="p-3 sm:p-5 text-center flex-1 flex items-start justify-center">
+                                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                            {feature.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===================== WHO ATTENDS ===================== */}
+            <section ref={whoAttendsRef} className="py-20 md:py-28 bg-slate-800 relative overflow-hidden">
+                {/* Hexagon Pattern Background */}
+                <div
+                    className="absolute inset-0 opacity-[0.15]"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0l21.65 12.5v25L25 50 3.35 37.5v-25z' fill='none' stroke='%23f59e0b' stroke-width='0.5'/%3E%3C/svg%3E")`,
+                        backgroundSize: '50px 50px'
+                    }}
+                />
+
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-amber-500/20" />
+                <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-amber-500/20" />
+
+                <div className="container mx-auto px-4 relative z-10">
+                    {/* Enhanced Header */}
+                    <div className="text-center mb-16">
+                        {/* Beautiful Bordered Badge */}
+                        <div className="inline-block mb-6">
+                            <span className="px-5 py-2 text-xs font-bold text-amber-400 uppercase tracking-[0.3em] border border-amber-500/50 rounded-full bg-amber-500/10">
+                                Our Audience
+                            </span>
+                        </div>
+
+                        {/* Improved Heading */}
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">
+                            <span className="text-white">Who </span>
+                            <span className="text-amber-400">Attends?</span>
+                        </h2>
+
+                        {/* Decorative Underline */}
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-500" />
+                            <div className="w-2 h-2 bg-amber-500 rotate-45" />
+                            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-500" />
+                        </div>
+                    </div>
+
+                    {/* Cards Grid - 2 cols mobile, 3 cols desktop */}
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 max-w-5xl mx-auto">
+                        {whoAttends.map((item, index) => (
+                            <div
+                                key={index}
+                                className={`group text-center p-4 sm:p-6 lg:p-8 bg-slate-100 rounded-xl lg:rounded-2xl border border-slate-200 hover:border-amber-400/50 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-500 hover:-translate-y-1 max-w-[320px] mx-auto w-full ${whoAttendsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                style={{ transitionDelay: `${index * 100}ms` }}
+                            >
+                                {/* Icon */}
+                                <div className={`w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 mx-auto mb-4 sm:mb-6 ${item.iconBg} rounded-xl lg:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-md`}>
+                                    <item.icon className={`w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 ${item.iconColor} transition-colors duration-300`} />
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-slate-900 mb-2 sm:mb-4 group-hover:text-amber-600 transition-colors">
+                                    {item.title}
+                                </h3>
+
+                                {/* Description - Hidden on mobile for space */}
+                                <p className="hidden sm:block text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                    {item.description}
+                                </p>
+
+                                {/* Bottom Gold Accent Bar */}
+                                <div className="h-1 bg-gradient-to-r from-amber-400 to-amber-600 mt-4 sm:mt-6 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===================== ADVISORY BOARD ===================== */}
+            <DubaiAdvisoryBoard />
+
+            {/* ===================== CTA SECTION ===================== */}
+            <section className="py-20 md:py-24 bg-gradient-to-br from-[#0a0f1a] via-[#1a1f2e] to-[#0a0f1a] relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+                {/* Glow Effects */}
+                <div className="absolute top-0 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-amber-500/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-0 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-blue-500/10 rounded-full blur-[100px]" />
+
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
+                            Ready to Join Us in <span className="text-amber-400 italic">Dubai?</span>
+                        </h2>
+                        <p className="text-slate-400 text-base md:text-lg mb-10">
+                            Secure your spot at the premier legal conference in the Middle East.
+                            Early bird registration now open.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row justify-center gap-4">
+                            <Link
+                                href="#register"
+                                className="group px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base md:text-lg rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-amber-500/30 hover:scale-105"
+                            >
+                                Register Now
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                            <Link
+                                href="#contact"
+                                className="px-8 py-4 md:px-10 md:py-5 bg-transparent text-white font-bold text-base md:text-lg rounded-full border-2 border-white/20 hover:bg-white hover:text-slate-900 transition-all duration-300 hover:scale-105"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
+
+            {/* Custom Animations */}
+            <style jsx global>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-20px); }
+                }
+                .animate-float {
+                    animation: float 6s ease-in-out infinite;
+                }
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-33.333%); }
+                }
+                .animate-marquee {
+                    animation: marquee 30s linear infinite;
+                }
+            `}</style>
+        </main>
+    );
+}
