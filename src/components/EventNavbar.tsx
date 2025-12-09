@@ -40,13 +40,13 @@ export function EventNavbar() {
                         {/* Logo */}
                         {/* Logo */}
                         <Link href="/" className="relative">
-                            <div className="relative h-12 w-48">
+                            <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12">
                                 <Image
                                     src="/logo/Lextalk-Logo.png"
                                     alt="Lextalk World"
-                                    width={192}
+                                    className="object-contain object-left w-full h-full"
+                                    width={200}
                                     height={48}
-                                    className="object-contain object-left"
                                     priority
                                 />
                             </div>

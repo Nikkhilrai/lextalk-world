@@ -289,7 +289,7 @@ export default function DubaiEventPage() {
 
                     {/* Logo - Reduced Size */}
                     <div className={`flex items-center justify-center mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative h-16 w-52 md:h-24 md:w-80">
+                        <div className="relative h-12 w-40 md:h-24 md:w-80">
                             <Image
                                 src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
                                 alt="Lextalk World"
