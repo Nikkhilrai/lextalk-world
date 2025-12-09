@@ -258,13 +258,53 @@ export default function DubaiEventPage() {
                     {/* Multi-layer gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/95 via-[#050a15]/80 to-[#050a15]" />
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-900/30 via-transparent to-amber-900/20" />
-                    {/* Luxury gold accent lines */}
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_49.5%,rgba(217,119,6,0.03)_49.5%,rgba(217,119,6,0.03)_50.5%,transparent_50.5%)] bg-[size:100px_100%]" />
+
+                    {/* Hexagonal Pattern Background */}
+                    <div
+                        className="absolute inset-0 opacity-[0.08]"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%23f59e0b' stroke-width='0.5'/%3E%3C/svg%3E")`,
+                            backgroundSize: '60px 60px'
+                        }}
+                    />
                 </div>
 
-                {/* Luxury border frame */}
-                <div className="absolute inset-4 md:inset-8 border border-amber-500/10 rounded-3xl pointer-events-none" />
-                <div className="absolute inset-6 md:inset-12 border border-white/5 rounded-2xl pointer-events-none" />
+                {/* Diagonal Gold Accent Lines */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" style={{ transform: 'skewY(-2deg)' }} />
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" style={{ transform: 'skewY(2deg)' }} />
+                </div>
+
+                {/* Professional Geometric Corner Ornaments */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Top-left ornament */}
+                    <div className="absolute top-8 left-8 w-24 h-24">
+                        <div className="absolute top-0 left-0 w-16 h-[1px] bg-gradient-to-r from-amber-500/40 to-transparent" />
+                        <div className="absolute top-0 left-0 w-[1px] h-16 bg-gradient-to-b from-amber-500/40 to-transparent" />
+                        <div className="absolute top-4 left-4 w-3 h-3 border border-amber-500/30 rotate-45" />
+                    </div>
+
+                    {/* Top-right ornament */}
+                    <div className="absolute top-8 right-8 w-24 h-24">
+                        <div className="absolute top-0 right-0 w-16 h-[1px] bg-gradient-to-l from-amber-500/40 to-transparent" />
+                        <div className="absolute top-0 right-0 w-[1px] h-16 bg-gradient-to-b from-amber-500/40 to-transparent" />
+                        <div className="absolute top-4 right-4 w-3 h-3 border border-amber-500/30 rotate-45" />
+                    </div>
+
+                    {/* Bottom-left ornament */}
+                    <div className="absolute bottom-8 left-8 w-24 h-24">
+                        <div className="absolute bottom-0 left-0 w-16 h-[1px] bg-gradient-to-r from-amber-500/40 to-transparent" />
+                        <div className="absolute bottom-0 left-0 w-[1px] h-16 bg-gradient-to-t from-amber-500/40 to-transparent" />
+                        <div className="absolute bottom-4 left-4 w-3 h-3 border border-amber-500/30 rotate-45" />
+                    </div>
+
+                    {/* Bottom-right ornament */}
+                    <div className="absolute bottom-8 right-8 w-24 h-24">
+                        <div className="absolute bottom-0 right-0 w-16 h-[1px] bg-gradient-to-l from-amber-500/40 to-transparent" />
+                        <div className="absolute bottom-0 right-0 w-[1px] h-16 bg-gradient-to-t from-amber-500/40 to-transparent" />
+                        <div className="absolute bottom-4 right-4 w-3 h-3 border border-amber-500/30 rotate-45" />
+                    </div>
+                </div>
 
                 {/* Luxury Background Elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -272,13 +312,8 @@ export default function DubaiEventPage() {
                     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/15 via-amber-600/10 to-transparent rounded-full blur-[120px]" />
                     <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-amber-400/10 via-orange-500/5 to-transparent rounded-full blur-[150px]" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/5 to-transparent rounded-full" />
-
-                    {/* Luxury corner accents */}
-                    <div className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-amber-500/30 rounded-tl-xl" />
-                    <div className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-amber-500/30 rounded-tr-xl" />
-                    <div className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-amber-500/30 rounded-bl-xl" />
-                    <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-amber-500/30 rounded-br-xl" />
                 </div>
+
 
                 {/* Content */}
                 <div className="relative z-30 container mx-auto px-4 text-center pt-48 md:pt-36">
