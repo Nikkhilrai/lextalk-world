@@ -56,7 +56,7 @@ export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     return (
-        <section className="relative min-h-[75svh] md:min-h-[100svh] flex items-center pt-32 md:pt-28 lg:pt-24 pb-2 md:pb-8 overflow-hidden bg-slate-900">
+        <section className="relative min-h-[75svh] md:min-h-[100svh] flex items-start md:items-center pt-40 md:pt-28 lg:pt-24 pb-2 md:pb-8 overflow-hidden bg-slate-900">
             {/* Video Background */}
             <div className="absolute inset-0 w-full h-full">
                 <video
@@ -81,12 +81,12 @@ export function Hero() {
                     <div className="space-y-6 lg:space-y-8">
                         {/* Main Headline */}
                         <div className="space-y-1">
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.1] tracking-tight">
+                            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.1] tracking-tight">
                                 The Global Stage
                                 <br />
                                 <span className="whitespace-nowrap">For Legal Minds to</span>
                             </h1>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] tracking-tight">
+                            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] tracking-tight">
                                 <span className="text-amber-500 italic">Connect, Lead and Innovate</span>
                             </h1>
                         </div>
