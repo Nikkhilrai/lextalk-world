@@ -1,0 +1,4 @@
+Deployment Verification File
+Timestamp: 2025-12-10 11:50 AM
+Commit SHA: e5fe081
+If you can see this, Vercel IS updating.
