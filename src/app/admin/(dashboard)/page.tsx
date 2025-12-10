@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { StatCard } from "@/components/admin/StatCard";
+import { AnalyticsWidget } from "@/components/admin/AnalyticsWidget";
 import { Users, TrendingUp, Calendar, ArrowRight } from "lucide-react";
 import { getLeadStats } from "@/actions/lead-stats";
 import { getLeads } from "@/actions/lead";
@@ -38,7 +39,12 @@ export default function AdminDashboard() {
                 <p className="text-slate-400">Welcome back, here&apos;s your real-time data.</p>
             </div>
 
-            {/* Real Stats Grid */}
+            {/* Google Analytics Widget */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <AnalyticsWidget />
+            </div>
+
+            {/* Lead Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard
                     title="Total Registrations"
@@ -96,8 +102,8 @@ export default function AdminDashboard() {
                                     </div>
                                     <div className="text-right shrink-0">
                                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${lead.status === 'New' ? 'bg-blue-500/10 text-blue-400' :
-                                                lead.status === 'Contacted' ? 'bg-amber-500/10 text-amber-400' :
-                                                    'bg-emerald-500/10 text-emerald-400'
+                                            lead.status === 'Contacted' ? 'bg-amber-500/10 text-amber-400' :
+                                                'bg-emerald-500/10 text-emerald-400'
                                             }`}>
                                             {lead.status}
                                         </span>
