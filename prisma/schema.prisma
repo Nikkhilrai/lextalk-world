@@ -10,6 +10,24 @@ datasource db {
   provider = "postgresql"
 }
 
+// Leads / Registrations Model
+model Lead {
+  id           String   @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String
+  contact      String
+  organization String?
+  designation  String?
+  country      String
+  joinAs       String?
+  conference   String?
+  query        String?
+  status       String   @default("New") // New, Contacted, Converted
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 // Blog Post Model
 model BlogPost {
   id          String   @id @default(cuid())

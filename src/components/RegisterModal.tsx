@@ -13,27 +13,41 @@ interface RegisterModalProps {
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const [mounted, setMounted] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState("");
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true);
         const formData = new FormData(e.currentTarget);
+
         const data = {
-            id: Date.now(),
-            name: `${formData.get("firstName")} ${formData.get("lastName")}`,
+            firstName: formData.get("firstName"),
+            lastName: formData.get("lastName"),
             email: formData.get("email"),
+            contact: formData.get("contact"),
             organization: formData.get("organization"),
-            role: formData.get("designation"),
+            designation: formData.get("designation"),
             country: selectedCountry || "International",
-            status: "New",
-            date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+            joinAs: formData.get("joinAs"),
+            conference: formData.get("conference"),
+            query: formData.get("query"),
         };
 
-        // Save to LocalStorage for Admin Demo
-        const existingLeads = JSON.parse(localStorage.getItem("leads") || "[]");
-        localStorage.setItem("leads", JSON.stringify([data, ...existingLeads]));
+        try {
+            const { createLead } = await import("@/actions/lead");
+            const result = await createLead(data);
 
-        setIsSubmitted(true);
+            if (result.success) {
+                setIsSubmitted(true);
+            } else {
+                alert("Failed to register. Please try again.");
+            }
+        } catch (error) {
+            console.error("Registration failed", error);
+            alert("An error occurred. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // Reset submission state when modal closes
