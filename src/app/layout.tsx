@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, DM_Sans } from "next/font/google";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-// Elegant, lighter serif for headings - refined and professional
-const sourceSerif = Source_Serif_4({
+// Elegant, high-contrast serif for headings - authoritative and professional
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
   variable: "--font-heading",
 });
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${sourceSerif.variable} ${dmSans.variable} font-sans antialiased bg-slate-50 text-slate-900`}
+        className={`${playfair.variable} ${dmSans.variable} font-sans antialiased bg-slate-50 text-slate-900`}
       >
         {children}
       </body>

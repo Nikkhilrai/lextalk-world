@@ -81,12 +81,6 @@ export function Hero() {
                     <div className="space-y-5 lg:space-y-6">
                         {/* Main Headline */}
                         <div className="space-y-2">
-                            {/* Eyebrow - The Global Legal Platform */}
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-[1px] w-8 md:w-12 bg-amber-500/60"></div>
-                                <span className="text-amber-500 font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Global Legal Platform</span>
-                            </div>
-
                             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-none tracking-tight">
                                 The Global Stage
                                 <br />
