@@ -44,7 +44,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
     return (
         <>
-            <div ref={ref} className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white">
+            <div ref={ref} className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white leading-none">
                 {count}{suffix}<span className="text-amber-500">+</span>
             </div>
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
@@ -80,19 +80,25 @@ export function Hero() {
                     {/* Left Column: Content */}
                     <div className="space-y-6 lg:space-y-8">
                         {/* Main Headline */}
-                        <div className="space-y-1">
-                            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.1] tracking-tight">
+                        <div className="space-y-2">
+                            {/* Eyebrow - The Global Legal Platform */}
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="h-[1px] w-8 md:w-12 bg-amber-500/60"></div>
+                                <span className="text-amber-500 font-bold tracking-[0.2em] text-[10px] md:text-sm uppercase">The Global Legal Platform</span>
+                            </div>
+
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-none tracking-tight">
                                 The Global Stage
                                 <br />
                                 <span className="whitespace-nowrap">For Legal Minds to</span>
                             </h1>
-                            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] tracking-tight">
-                                <span className="text-amber-500 italic">Connect, Lead and Innovate</span>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif leading-none tracking-tight">
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic pb-2">Connect, Lead and Innovate</span>
                             </h1>
                         </div>
 
                         {/* Subtitle with elegant styling */}
-                        <p className="text-base sm:text-lg md:text-xl text-slate-300 md:max-w-xl leading-relaxed">
+                        <p className="text-base sm:text-lg md:text-xl text-slate-200 font-light md:max-w-xl leading-relaxed">
                             Conferences, content, and recognition for{" "}
                             <span className="font-medium text-amber-400">modern legal professionals</span>{" "}
                             worldwide.
