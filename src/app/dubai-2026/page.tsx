@@ -276,7 +276,7 @@ export default function DubaiEventPage() {
                     <div className={`flex justify-center mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <div className="relative w-56 h-16 md:w-80 md:h-24 opacity-90">
                             <Image
-                                src="/logo/mrs-new-logo.avif"
+                                src="/logo/mrs-logo.avif"
                                 alt="Mrs Company Logo"
                                 fill
                                 className="object-contain"
@@ -342,7 +342,7 @@ export default function DubaiEventPage() {
                             </div>
 
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-2 leading-tight drop-shadow-2xl">
-                                Dubai World Trade Centre
+                                Dubai World Trade Centre (Live)
                             </h2>
 
                             <div className="flex items-center gap-2 text-slate-300">
