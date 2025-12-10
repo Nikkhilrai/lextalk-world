@@ -18,14 +18,7 @@ const navLinks = [
             { name: "Upcoming Conferences", href: "/conferences" },
         ]
     },
-    {
-        name: "Awardees",
-        href: "/awardees-dubai-2024",
-        hasDropdown: true,
-        dropdownItems: [
-            { name: "Dubai 2024", href: "/awardees-dubai-2024" },
-        ]
-    },
+    { name: "Awardees", href: "/awards" },
     { name: "Sponsor", href: "#" },
     { name: "Blog", href: "/blog" },
 ];
