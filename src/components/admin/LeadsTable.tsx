@@ -6,6 +6,7 @@ import { Check, Mail, MapPin, MoreVertical, Search, Trash } from "lucide-react";
 
 
 import { useState, useEffect } from "react";
+import { getLeads, deleteLead } from "@/actions/lead";
 
 export function LeadsTable() {
     const [leads, setLeads] = useState<any[]>([]);
@@ -14,7 +15,6 @@ export function LeadsTable() {
     const loadLeads = async () => {
         setIsLoading(true);
         try {
-            const { getLeads } = await import("@/actions/lead");
             const result = await getLeads();
             if (result.success && result.leads) {
                 setLeads(result.leads);
@@ -30,7 +30,6 @@ export function LeadsTable() {
         if (!confirm("Are you sure you want to delete this lead?")) return;
 
         try {
-            const { deleteLead } = await import("@/actions/lead");
             await deleteLead(id);
             setLeads(leads.filter(l => l.id !== id));
         } catch (error) {

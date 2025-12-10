@@ -10,6 +10,8 @@ interface RegisterModalProps {
     onClose: () => void;
 }
 
+import { createLead } from "@/actions/lead";
+
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const [mounted, setMounted] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState("");
@@ -34,7 +36,6 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         };
 
         try {
-            const { createLead } = await import("@/actions/lead");
             const result = await createLead(data);
 
             if (result.success) {
