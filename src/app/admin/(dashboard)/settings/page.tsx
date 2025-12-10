@@ -1,33 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Lock, Save, Shield, User } from "lucide-react";
+import { updateProfile, updatePassword, getAdminProfile } from "@/actions/auth";
 
 export default function SettingsPage() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+    const [isLoadingPassword, setIsLoadingPassword] = useState(false);
+
+    // Profile State
+    const [profile, setProfile] = useState({ name: "", email: "" });
+
+    // Password State
     const [passwordData, setPasswordData] = useState({
         current: "",
         new: "",
         confirm: ""
     });
 
+    useEffect(() => {
+        const loadProfile = async () => {
+            const res = await getAdminProfile();
+            if (res.success && res.profile) {
+                setProfile({
+                    name: res.profile.name || "",
+                    email: res.profile.email
+                });
+            }
+        };
+        loadProfile();
+    }, []);
+
+    const handleProfileUpdate = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoadingProfile(true);
+
+        const res = await updateProfile(profile);
+        if (res.success) {
+            alert("Profile updated successfully!");
+        } else {
+            alert(res.error || "Failed to update profile");
+        }
+        setIsLoadingProfile(false);
+    };
+
     const handlePasswordUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
+        setIsLoadingPassword(true);
 
         if (passwordData.new !== passwordData.confirm) {
             alert("New passwords do not match!");
-            setIsLoading(false);
+            setIsLoadingPassword(false);
             return;
         }
 
-        // Logic to update password server-side would go here
-        // For now, simulating a request
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const res = await updatePassword({
+            current: passwordData.current,
+            new: passwordData.new
+        });
 
-        alert("Password updated successfully (Simulation)");
-        setPasswordData({ current: "", new: "", confirm: "" });
-        setIsLoading(false);
+        if (res.success) {
+            alert("Password updated successfully!");
+            setPasswordData({ current: "", new: "", confirm: "" });
+        } else {
+            alert(res.error || "Failed to update password");
+        }
+        setIsLoadingPassword(false);
     };
 
     return (
@@ -50,12 +88,13 @@ export default function SettingsPage() {
                         </div>
                     </div>
 
-                    <form className="space-y-4">
+                    <form onSubmit={handleProfileUpdate} className="space-y-4">
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-slate-300">Display Name</label>
                             <input
                                 type="text"
-                                defaultValue="Super Admin"
+                                value={profile.name}
+                                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                                 className="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:border-amber-500 outline-none"
                             />
                         </div>
@@ -63,14 +102,23 @@ export default function SettingsPage() {
                             <label className="text-sm font-medium text-slate-300">Email Address</label>
                             <input
                                 type="email"
-                                defaultValue="admin@lextalk.world"
+                                value={profile.email}
+                                onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                                 className="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:border-amber-500 outline-none"
                             />
                         </div>
                         <div className="pt-4">
-                            <button className="px-4 py-2 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-2">
-                                <Save size={16} />
-                                Save Profile
+                            <button
+                                type="submit"
+                                disabled={isLoadingProfile}
+                                className="px-4 py-2 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+                            >
+                                {isLoadingProfile ? "Saving..." : (
+                                    <>
+                                        <Save size={16} />
+                                        Save Profile
+                                    </>
+                                )}
                             </button>
                         </div>
                     </form>
@@ -122,10 +170,10 @@ export default function SettingsPage() {
                         <div className="pt-4">
                             <button
                                 type="submit"
-                                disabled={isLoading}
+                                disabled={isLoadingPassword}
                                 className="px-4 py-2 bg-amber-500 text-white font-medium rounded-lg hover:bg-amber-600 transition-colors flex items-center gap-2 disabled:opacity-50"
                             >
-                                {isLoading ? "Updating..." : (
+                                {isLoadingPassword ? "Updating..." : (
                                     <>
                                         <Shield size={16} />
                                         Update Password

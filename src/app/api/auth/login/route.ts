@@ -1,34 +1,48 @@
+
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
+import { prisma } from "@/lib/prisma";
+import { verifyPassword } from "@/lib/auth";
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { password } = body;
+        const { email, To, password } = body;
+        // Note: Client currently sends only 'password', but we should support 'email' too.
+        // For backward compatibility/single-password login, we can default to the main admin email.
 
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+        // Use provided email or default
+        const loginEmail = email || "admin@lextalk.world";
+        const loginPassword = password || "";
+
+        // 1. Find User
+        const user = await prisma.adminUser.findUnique({
+            where: { email: loginEmail }
+        });
+
+        if (!user) {
+            // Fallback for transition period: check Env Var if DB user fails? 
+            // Better to rely on DB now that we seeded it.
+            return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+        }
+
+        // 2. Verify Password
+        const isValid = await verifyPassword(loginPassword, user.password);
+
+        if (!isValid) {
+            return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+        }
+
+        // 3. Create Session
         const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key_change_me";
-
-        if (!ADMIN_PASSWORD) {
-            console.error("ADMIN_PASSWORD is not defined in environment variables");
-            return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
-        }
-
-        // Sanitize inputs
-        const cleanInputPassword = (password || "").trim();
-        const cleanEnvPassword = (ADMIN_PASSWORD || "").trim();
-
-        // Check against Env Var OR a Temporary Backup (in case Env fails)
-        const BACKUP_PASSWORD = "LextalkAdmin2026!";
-
-        if (cleanInputPassword !== cleanEnvPassword && cleanInputPassword !== BACKUP_PASSWORD) {
-            console.log("Login failed. Input length:", cleanInputPassword.length, "Env length:", cleanEnvPassword.length);
-            return NextResponse.json({ error: "Invalid password" }, { status: 401 });
-        }
-
-        // Create JWT
         const secret = new TextEncoder().encode(JWT_SECRET);
-        const token = await new SignJWT({ role: "admin" })
+
+        const token = await new SignJWT({
+            id: user.id,
+            email: user.email,
+            role: user.role,
+            name: user.name
+        })
             .setProtectedHeader({ alg: "HS256" })
             .setIssuedAt()
             .setExpirationTime("24h")
@@ -36,7 +50,6 @@ export async function POST(request: Request) {
 
         const response = NextResponse.json({ success: true });
 
-        // Set secure cookie
         response.cookies.set("admin_token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
