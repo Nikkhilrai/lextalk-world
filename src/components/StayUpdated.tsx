@@ -6,11 +6,27 @@ import { Mail, ArrowRight, CheckCircle } from "lucide-react";
 export function StayUpdated() {
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (email) {
-            setIsSubmitted(true);
+    const handleSubscribe = async (formData: FormData) => {
+        setIsLoading(true);
+        setMessage("");
+
+        try {
+            const { subscribe } = await import("@/actions/newsletter");
+            const result = await subscribe(formData);
+
+            if (result.success) {
+                setIsSubmitted(true);
+                setEmail("");
+            } else {
+                setMessage(result.message || "Something went wrong.");
+            }
+        } catch (error) {
+            setMessage("Failed to subscribe. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -41,27 +57,34 @@ export function StayUpdated() {
 
                     {/* Email Form */}
                     {!isSubmitted ? (
-                        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto mb-4">
+                        <form action={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto mb-4">
                             <input
+                                name="email"
                                 type="email"
                                 placeholder="Email*"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 text-sm focus:outline-none focus:border-amber-500 transition-all duration-300"
+                                disabled={isLoading}
+                                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 text-sm focus:outline-none focus:border-amber-500 transition-all duration-300 disabled:opacity-50"
                             />
                             <button
                                 type="submit"
-                                className="px-6 py-3 bg-white text-slate-900 font-semibold text-sm rounded-lg hover:bg-amber-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                                disabled={isLoading}
+                                className="px-6 py-3 bg-white text-slate-900 font-semibold text-sm rounded-lg hover:bg-amber-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                Subscribe Now
+                                {isLoading ? "Subscribing..." : "Subscribe Now"}
                             </button>
                         </form>
                     ) : (
-                        <div className="flex items-center justify-center gap-2 text-green-400 mb-4 py-2">
+                        <div className="flex items-center justify-center gap-2 text-green-400 mb-4 py-2 bg-green-500/10 rounded-lg border border-green-500/20 max-w-lg mx-auto">
                             <CheckCircle className="w-5 h-5" />
                             <span className="text-sm font-medium">Thank you for subscribing!</span>
                         </div>
+                    )}
+
+                    {message && !isSubmitted && (
+                        <p className="text-red-400 text-sm mb-4">{message}</p>
                     )}
 
                     {/* Privacy Text */}

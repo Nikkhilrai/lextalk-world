@@ -73,3 +73,39 @@ model Advisor {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// Newsletter Subscriber Model
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    String   @default("Subscribed") // Subscribed, Unsubscribed
+  createdAt DateTime @default(now())
+}
+
+// Speaker Model
+model Speaker {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  bio       String?
+  image     String
+  linkedin  String?
+  twitter   String?
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Sponsor Model
+model Sponsor {
+  id        String   @id @default(cuid())
+  name      String
+  website   String?
+  image     String   // Logo
+  tier      String   // Platinum, Gold, Silver, Media Partner
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

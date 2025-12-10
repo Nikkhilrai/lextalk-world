@@ -45,7 +45,47 @@ export async function getLeadStats() {
                 totalLeads: 0,
                 todayLeads: 0,
                 thisWeekLeads: 0,
+                totalSubscribers: 0,
+                totalSpeakers: 0,
+                totalSponsors: 0,
             },
+        };
+    }
+}
+
+export async function getDashboardStats() {
+    try {
+        const [
+            totalLeads,
+            totalSubscribers,
+            totalSpeakers,
+            totalSponsors
+        ] = await Promise.all([
+            prisma.lead.count(),
+            prisma.subscriber.count(),
+            prisma.speaker.count(),
+            prisma.sponsor.count()
+        ]);
+
+        return {
+            success: true,
+            stats: {
+                totalLeads,
+                totalSubscribers,
+                totalSpeakers,
+                totalSponsors
+            }
+        };
+    } catch (error) {
+        console.error("Failed to get dashboard stats:", error);
+        return {
+            success: false,
+            stats: {
+                totalLeads: 0,
+                totalSubscribers: 0,
+                totalSpeakers: 0,
+                totalSponsors: 0
+            }
         };
     }
 }

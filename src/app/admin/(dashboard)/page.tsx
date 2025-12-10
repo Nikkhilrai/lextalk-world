@@ -3,26 +3,33 @@
 import { useState, useEffect } from "react";
 import { StatCard } from "@/components/admin/StatCard";
 import { AnalyticsWidget } from "@/components/admin/AnalyticsWidget";
-import { Users, TrendingUp, Calendar, ArrowRight } from "lucide-react";
-import { getLeadStats } from "@/actions/lead-stats";
+import { Users, TrendingUp, Calendar, ArrowRight, Mail, Mic, HeartHandshake } from "lucide-react";
+import { getLeadStats, getDashboardStats } from "@/actions/lead-stats"; // Added getDashboardStats
 import { getLeads } from "@/actions/lead";
 import Link from "next/link";
 
 export default function AdminDashboard() {
-    const [stats, setStats] = useState({ totalLeads: 0, todayLeads: 0, thisWeekLeads: 0 });
+    const [stats, setStats] = useState({
+        totalLeads: 0, todayLeads: 0, thisWeekLeads: 0,
+        totalSubscribers: 0, totalSpeakers: 0, totalSponsors: 0
+    });
     const [recentLeads, setRecentLeads] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const loadData = async () => {
-            const [statsResult, leadsResult] = await Promise.all([
+            const [leadStatsRes, dashStatsRes, leadsResult] = await Promise.all([
                 getLeadStats(),
+                getDashboardStats(),
                 getLeads()
             ]);
 
-            if (statsResult.success) {
-                setStats(statsResult.stats);
-            }
+            let mergedStats = { ...stats };
+            if (leadStatsRes.success) mergedStats = { ...mergedStats, ...leadStatsRes.stats };
+            if (dashStatsRes.success) mergedStats = { ...mergedStats, ...dashStatsRes.stats };
+
+            setStats(mergedStats);
+
             if (leadsResult.success && leadsResult.leads) {
                 setRecentLeads(leadsResult.leads.slice(0, 5)); // Latest 5
             }
@@ -47,7 +54,15 @@ export default function AdminDashboard() {
             {/* Lead Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard
-                    title="Total Registrations"
+                    title="Newsletter Subscribers"
+                    value={isLoading ? "..." : (stats as any).totalSubscribers?.toLocaleString() || "0"}
+                    trend="Active List"
+                    trendUp={true}
+                    icon={Mail} // Requires import
+                    color="purple"
+                />
+                <StatCard
+                    title="Total Leads"
                     value={isLoading ? "..." : stats.totalLeads.toLocaleString()}
                     trend={`${stats.thisWeekLeads} this week`}
                     trendUp={stats.thisWeekLeads > 0}
@@ -55,19 +70,19 @@ export default function AdminDashboard() {
                     color="amber"
                 />
                 <StatCard
-                    title="Today's Leads"
-                    value={isLoading ? "..." : stats.todayLeads.toString()}
-                    trend={stats.todayLeads > 0 ? "Active" : "No new leads"}
-                    trendUp={stats.todayLeads > 0}
-                    icon={Calendar}
+                    title="Confirmed Speakers"
+                    value={isLoading ? "..." : (stats as any).totalSpeakers?.toLocaleString() || "0"}
+                    trend="Global Experts"
+                    trendUp={true}
+                    icon={Mic} // Requires import
                     color="blue"
                 />
                 <StatCard
-                    title="This Week"
-                    value={isLoading ? "..." : stats.thisWeekLeads.toString()}
-                    trend="Last 7 days"
-                    trendUp={stats.thisWeekLeads > 0}
-                    icon={TrendingUp}
+                    title="Active Sponsors"
+                    value={isLoading ? "..." : (stats as any).totalSponsors?.toLocaleString() || "0"}
+                    trend="Partners"
+                    trendUp={true}
+                    icon={HeartHandshake} // Requires import
                     color="emerald"
                 />
             </div>
