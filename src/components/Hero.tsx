@@ -56,7 +56,7 @@ export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     return (
-        <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-36 md:pt-24 lg:pt-0 pb-2 md:pb-8 overflow-hidden bg-slate-900">
+        <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-40 md:pt-32 lg:pt-0 pb-2 md:pb-8 overflow-hidden bg-slate-900">
             {/* Video Background */}
             <div className="absolute inset-0 w-full h-full">
                 <video
