@@ -27,8 +27,8 @@ export function FloatingActions() {
 
     return (
         <>
-            {/* Container - Bottom Right (Higher) */}
-            <div className={`fixed bottom-20 right-4 sm:right-6 z-50 flex items-center gap-3 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+            {/* Container - Bottom Right (Vertical Stack) */}
+            <div className={`fixed bottom-20 right-4 sm:right-6 z-50 flex flex-col items-end gap-3 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
                 }`}>
 
                 {/* WhatsApp Button - Icon Only */}
