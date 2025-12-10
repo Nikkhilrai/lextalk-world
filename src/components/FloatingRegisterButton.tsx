@@ -31,15 +31,15 @@ export function FloatingRegisterButton() {
             >
                 <div className="relative">
                     {/* Realistic Water Drop Container */}
-                    <div className="relative px-6 py-3 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md border border-white/20 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.2)] overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.4),inset_0_1px_3px_rgba(255,255,255,0.5)]">
+                    <div className="relative px-6 py-3 bg-gradient-to-br from-white/90 to-white/50 backdrop-blur-md border border-white/60 rounded-full shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)]">
 
                         {/* Specular Highlight (The "Wet" Shine) */}
-                        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-white/50 blur-[1px] rounded-full pointer-events-none" />
+                        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1/2 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none" />
 
                         {/* Content */}
-                        <div className="relative flex items-center gap-2 text-white font-medium tracking-wide">
-                            <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold drop-shadow-sm">Register Now</span>
-                            <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center shadow-inner group-hover:bg-amber-400 transition-colors">
+                        <div className="relative flex items-center gap-2 text-slate-900 font-bold tracking-wide">
+                            <span className="text-[10px] sm:text-xs uppercase tracking-widest drop-shadow-sm">Register Now</span>
+                            <div className="w-5 h-5 rounded-full bg-slate-900 flex items-center justify-center shadow-lg group-hover:bg-amber-600 transition-colors">
                                 <ArrowRight className="w-3 h-3 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                             </div>
                         </div>
