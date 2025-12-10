@@ -1,128 +1,173 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { StatCard } from "@/components/admin/StatCard";
-import {
-    Users,
-    Ticket,
-    DollarSign,
-    TrendingUp,
-    MoreHorizontal,
-    Calendar
-} from "lucide-react";
-
-// Mock Data for Activity Feed
-const activities = [
-    { id: 1, user: "Sarah Johnson", action: "registered for", event: "Dubai 2026", time: "2 mins ago", avatar: "SJ" },
-    { id: 2, user: "Michael Chen", action: "purchased ticket", event: "VIP Access", time: "15 mins ago", avatar: "MC" },
-    { id: 3, user: "TechCorp Inc.", action: "requested sponsorship", event: "Mumbai Summit", time: "1 hour ago", avatar: "TC" },
-    { id: 4, user: "Emma Wilson", action: "submitted query", event: "Contact Form", time: "3 hours ago", avatar: "EW" },
-];
+import { Users, TrendingUp, Calendar, ArrowRight } from "lucide-react";
+import { getLeadStats } from "@/actions/lead-stats";
+import { getLeads } from "@/actions/lead";
+import Link from "next/link";
 
 export default function AdminDashboard() {
+    const [stats, setStats] = useState({ totalLeads: 0, todayLeads: 0, thisWeekLeads: 0 });
+    const [recentLeads, setRecentLeads] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const loadData = async () => {
+            const [statsResult, leadsResult] = await Promise.all([
+                getLeadStats(),
+                getLeads()
+            ]);
+
+            if (statsResult.success) {
+                setStats(statsResult.stats);
+            }
+            if (leadsResult.success && leadsResult.leads) {
+                setRecentLeads(leadsResult.leads.slice(0, 5)); // Latest 5
+            }
+            setIsLoading(false);
+        };
+        loadData();
+    }, []);
+
     return (
         <div className="space-y-8">
             {/* Page Header */}
             <div>
                 <h2 className="text-2xl font-bold text-white mb-2">Platform Overview</h2>
-                <p className="text-slate-400">Welcome back, here&apos;s what&apos;s happening today.</p>
+                <p className="text-slate-400">Welcome back, here&apos;s your real-time data.</p>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Real Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard
-                    title="Total Gross Sales"
-                    value="$35,260"
-                    trend="+4.2%"
-                    trendUp={true}
-                    icon={DollarSign}
-                    color="emerald"
-                />
-                <StatCard
-                    title="Active Users"
-                    value="3,218"
-                    trend="+6.5%"
-                    trendUp={true}
+                    title="Total Registrations"
+                    value={isLoading ? "..." : stats.totalLeads.toLocaleString()}
+                    trend={`${stats.thisWeekLeads} this week`}
+                    trendUp={stats.thisWeekLeads > 0}
                     icon={Users}
                     color="amber"
                 />
                 <StatCard
-                    title="Tickets Sold"
-                    value="1,284"
-                    trend="+12%"
-                    trendUp={true}
-                    icon={Ticket}
-                    color="purple"
+                    title="Today's Leads"
+                    value={isLoading ? "..." : stats.todayLeads.toString()}
+                    trend={stats.todayLeads > 0 ? "Active" : "No new leads"}
+                    trendUp={stats.todayLeads > 0}
+                    icon={Calendar}
+                    color="blue"
                 />
                 <StatCard
-                    title="Platform Fees"
-                    value="$2,720"
-                    trend="+1.6%"
-                    trendUp={true}
+                    title="This Week"
+                    value={isLoading ? "..." : stats.thisWeekLeads.toString()}
+                    trend="Last 7 days"
+                    trendUp={stats.thisWeekLeads > 0}
                     icon={TrendingUp}
-                    color="blue"
+                    color="emerald"
                 />
             </div>
 
-            {/* Charts Section - Using Visual Placeholders since no chart lib */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Chart Placeholder */}
-                <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6 relative overflow-hidden">
+            {/* Recent Activity Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Recent Registrations */}
+                <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
                     <div className="flex justify-between items-center mb-6">
-                        <h3 className="font-semibold text-white">Ticket Sales & Revenue</h3>
-                        <div className="flex gap-2">
-                            <button className="px-3 py-1 bg-slate-800 text-xs rounded-lg text-white hover:bg-slate-700">7D</button>
-                            <button className="px-3 py-1 bg-transparent text-xs rounded-lg text-slate-400 hover:bg-slate-800">1M</button>
-                            <button className="px-3 py-1 bg-transparent text-xs rounded-lg text-slate-400 hover:bg-slate-800">3M</button>
-                        </div>
+                        <h3 className="font-semibold text-white">Recent Registrations</h3>
+                        <Link href="/admin/leads" className="text-sm text-amber-500 hover:text-amber-400 flex items-center gap-1">
+                            View All <ArrowRight className="w-3 h-3" />
+                        </Link>
                     </div>
 
-                    {/* Visual CSS Chart Placeholder */}
-                    <div className="h-64 flex items-end justify-between gap-2 px-2">
-                        {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95].map((height, i) => (
-                            <div key={i} className="w-full bg-slate-800 rounded-t-sm relative group hover:bg-slate-700 transition-all" style={{ height: `${height}%` }}>
-                                <div
-                                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-500/50 to-amber-500/0 rounded-t-sm transition-all duration-500"
-                                    style={{ height: `${height / 1.5}%` }}
-                                />
-                                {/* Tooltip */}
-                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
-                                    ${height * 120}
+                    <div className="space-y-4">
+                        {isLoading ? (
+                            <div className="text-slate-500 text-center py-8">Loading...</div>
+                        ) : recentLeads.length === 0 ? (
+                            <div className="text-slate-500 text-center py-8">No registrations yet</div>
+                        ) : (
+                            recentLeads.map((lead) => (
+                                <div key={lead.id} className="flex gap-4 items-center">
+                                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-sm font-bold text-amber-500 shrink-0">
+                                        {lead.firstName.charAt(0)}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm text-white font-medium truncate">
+                                            {lead.firstName} {lead.lastName}
+                                        </p>
+                                        <p className="text-xs text-slate-500 truncate">{lead.email}</p>
+                                    </div>
+                                    <div className="text-right shrink-0">
+                                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${lead.status === 'New' ? 'bg-blue-500/10 text-blue-400' :
+                                                lead.status === 'Contacted' ? 'bg-amber-500/10 text-amber-400' :
+                                                    'bg-emerald-500/10 text-emerald-400'
+                                            }`}>
+                                            {lead.status}
+                                        </span>
+                                        <p className="text-xs text-slate-500 mt-1">
+                                            {new Date(lead.createdAt).toLocaleDateString()}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="flex justify-between mt-4 text-xs text-slate-500 border-t border-slate-800 pt-2">
-                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
-                        <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                            ))
+                        )}
                     </div>
                 </div>
 
-                {/* Activity Feed */}
+                {/* Quick Actions */}
                 <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <div className="flex justify-between items-center mb-6">
-                        <h3 className="font-semibold text-white">Activity Feed</h3>
-                        <button className="p-1 hover:bg-slate-800 rounded"><MoreHorizontal size={16} className="text-slate-400" /></button>
-                    </div>
+                    <h3 className="font-semibold text-white mb-6">Quick Actions</h3>
 
-                    <div className="space-y-6">
-                        {activities.map((activity) => (
-                            <div key={activity.id} className="flex gap-4">
-                                <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-300 shrink-0">
-                                    {activity.avatar}
-                                </div>
+                    <div className="space-y-3">
+                        <Link
+                            href="/admin/leads"
+                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
+                        >
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm text-slate-300">
-                                        <span className="font-medium text-white">{activity.user}</span> {activity.action} <span className="text-amber-500">{activity.event}</span>
-                                    </p>
-                                    <span className="text-xs text-slate-500">{activity.time}</span>
+                                    <p className="text-white font-medium">Manage Leads</p>
+                                    <p className="text-sm text-slate-400">View, export, and manage all registrations</p>
                                 </div>
+                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
                             </div>
-                        ))}
-                    </div>
+                        </Link>
 
-                    <button className="w-full mt-6 py-2 text-sm text-slate-400 hover:text-white border border-slate-800 rounded-lg hover:bg-slate-800 transition-all">
-                        View All Activity
-                    </button>
+                        <Link
+                            href="/admin/blog"
+                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
+                        >
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-white font-medium">Blog Management</p>
+                                    <p className="text-sm text-slate-400">Create and manage blog posts</p>
+                                </div>
+                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
+                            </div>
+                        </Link>
+
+                        <Link
+                            href="/admin/advisors"
+                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
+                        >
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-white font-medium">Advisory Board</p>
+                                    <p className="text-sm text-slate-400">Manage advisory board members</p>
+                                </div>
+                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
+                            </div>
+                        </Link>
+
+                        <Link
+                            href="/admin/awards"
+                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
+                        >
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-white font-medium">Award Management</p>
+                                    <p className="text-sm text-slate-400">Manage awards and nominations</p>
+                                </div>
+                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

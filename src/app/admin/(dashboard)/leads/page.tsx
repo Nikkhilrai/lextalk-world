@@ -1,10 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { LeadsTable } from "@/components/admin/LeadsTable";
 import { StatCard } from "@/components/admin/StatCard";
-import { Filter, Users, UserPlus, CheckCircle } from "lucide-react";
+import { Users, UserPlus, FileDown, TrendingUp } from "lucide-react";
+import { getLeadStats } from "@/actions/lead-stats";
 
 export default function LeadsPage() {
+    const [stats, setStats] = useState({
+        totalLeads: 0,
+        todayLeads: 0,
+        thisWeekLeads: 0,
+    });
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const loadStats = async () => {
+            const result = await getLeadStats();
+            if (result.success) {
+                setStats(result.stats);
+            }
+            setIsLoading(false);
+        };
+        loadStats();
+    }, []);
+
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-end">
@@ -12,36 +32,32 @@ export default function LeadsPage() {
                     <h2 className="text-2xl font-bold text-white mb-2">Lead Generation</h2>
                     <p className="text-slate-400">Manage and track potential attendees and sponsors.</p>
                 </div>
-                <button className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2">
-                    <Filter className="w-4 h-4" />
-                    Advanced Filters
-                </button>
             </div>
 
-            {/* Quick Stats for Leads */}
+            {/* Real Stats from Database */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard
                     title="Total Leads"
-                    value="1,248"
-                    trend="+12% this week"
-                    trendUp={true}
+                    value={isLoading ? "..." : stats.totalLeads.toLocaleString()}
+                    trend={`${stats.thisWeekLeads} this week`}
+                    trendUp={stats.thisWeekLeads > 0}
                     icon={Users}
                     color="blue"
                 />
                 <StatCard
                     title="New Leads (Today)"
-                    value="24"
-                    trend="High activity"
-                    trendUp={true}
+                    value={isLoading ? "..." : stats.todayLeads.toString()}
+                    trend={stats.todayLeads > 0 ? "Active" : "No new leads"}
+                    trendUp={stats.todayLeads > 0}
                     icon={UserPlus}
                     color="amber"
                 />
                 <StatCard
-                    title="Conversion Rate"
-                    value="18.2%"
-                    trend="+2.1%"
-                    trendUp={true}
-                    icon={CheckCircle}
+                    title="This Week"
+                    value={isLoading ? "..." : stats.thisWeekLeads.toString()}
+                    trend="Last 7 days"
+                    trendUp={stats.thisWeekLeads > 0}
+                    icon={TrendingUp}
                     color="emerald"
                 />
             </div>
