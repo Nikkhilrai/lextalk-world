@@ -13,9 +13,9 @@ export function Footer() {
 
             {/* Main Footer Content */}
             <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-8">
                     {/* Brand Column */}
-                    <div className="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-1 space-y-4 sm:space-y-6">
+                    <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 space-y-4 sm:space-y-6">
                         <div className="bg-white p-3 rounded-xl inline-block shadow-lg shadow-slate-900/20">
                             <Image
                                 src="/logo/Lextalk-Logo.png"
@@ -138,7 +138,7 @@ export function Footer() {
                     </div>
 
                     {/* Contact Info */}
-                    <div className="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-1">
+                    <div>
                         <h3 className="text-white font-serif font-bold text-base sm:text-lg mb-4 sm:mb-6 relative inline-block">
                             Contact
                             <span className="absolute -bottom-2 left-0 w-8 sm:w-12 h-1 bg-gradient-to-r from-amber-500 to-transparent rounded-full"></span>
@@ -148,16 +148,16 @@ export function Footer() {
                                 <div className="w-8 h-8 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
                                     <Mail size={14} className="sm:w-4 sm:h-4 text-amber-500" />
                                 </div>
-                                <a href="mailto:info@lextalkworld.com" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
-                                    info@lextalkworld.com
+                                <a href="mailto:abhishek@clickawaycreators.com" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
+                                    abhishek@clickawaycreators.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-3 group">
                                 <div className="w-8 h-8 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
                                     <Phone size={14} className="sm:w-4 sm:h-4 text-amber-500" />
                                 </div>
-                                <a href="tel:+1234567890" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
-                                    +1 (234) 567-890
+                                <a href="tel:+919811885302" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
+                                    +91 981 188 5302
                                 </a>
                             </li>
                             <li className="flex items-start gap-3 group">
@@ -169,6 +169,39 @@ export function Footer() {
                                 </span>
                             </li>
                         </ul>
+                    </div>
+
+                    {/* Global Legal Honors Awards */}
+                    <div>
+                        <h3 className="text-white font-serif font-bold text-base sm:text-lg mb-4 sm:mb-6 relative inline-block">
+                            Award Nominations
+                            <span className="absolute -bottom-2 left-0 w-8 sm:w-12 h-1 bg-gradient-to-r from-amber-500 to-transparent rounded-full"></span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-400 mb-3">
+                            For Nominations of Global Legal Honors Awards
+                        </p>
+                        <div className="space-y-3">
+                            <div>
+                                <p className="text-xs text-amber-500 font-medium">Kishan Chettri</p>
+                                <p className="text-xs text-slate-500">Customer Success Manager</p>
+                            </div>
+                            <div className="flex items-start gap-3 group">
+                                <div className="w-8 h-8 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
+                                    <Phone size={14} className="sm:w-4 sm:h-4 text-amber-500" />
+                                </div>
+                                <a href="tel:+918178539941" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
+                                    +91 817 853 9941
+                                </a>
+                            </div>
+                            <div className="flex items-start gap-3 group">
+                                <div className="w-8 h-8 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
+                                    <Mail size={14} className="sm:w-4 sm:h-4 text-amber-500" />
+                                </div>
+                                <a href="mailto:kishan@lextalkworld.in" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors pt-1.5">
+                                    kishan@lextalkworld.in
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
