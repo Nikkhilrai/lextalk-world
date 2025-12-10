@@ -261,6 +261,7 @@ export default function DubaiEventPage() {
                 </div>
 
                 {/* Luxury Background Elements */}
+                {/* Deployment Tracer: 2025-12-10 11:25 AM IST */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     {/* Elegant Gradient Orbs */}
                     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/15 via-amber-600/10 to-transparent rounded-full blur-[120px]" />
