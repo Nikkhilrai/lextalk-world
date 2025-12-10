@@ -26,24 +26,21 @@ export function FloatingRegisterButton() {
         <>
             <button
                 onClick={() => setIsRegisterOpen(true)}
-                className={`fixed bottom-8 right-8 z-50 group transition-all duration-500 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+                className={`fixed bottom-6 right-6 z-50 group transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
                     }`}
             >
-                <div className="relative flex items-center justify-center">
-                    {/* Water Drop / Glassmorphism Container */}
-                    <div className="relative px-8 py-4 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_32px_0_rgba(245,158,11,0.3)]">
+                <div className="relative">
+                    {/* Realistic Water Drop Container */}
+                    <div className="relative px-6 py-3 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md border border-white/20 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.2)] overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.4),inset_0_1px_3px_rgba(255,255,255,0.5)]">
 
-                        {/* Glossy Reflection Effect */}
-                        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent opacity-50 pointer-events-none" />
-
-                        {/* Inner Glow */}
-                        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] pointer-events-none" />
+                        {/* Specular Highlight (The "Wet" Shine) */}
+                        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-white/50 blur-[1px] rounded-full pointer-events-none" />
 
                         {/* Content */}
-                        <div className="relative flex items-center gap-3 text-white font-medium tracking-wide">
-                            <span className="text-sm uppercase tracking-widest font-bold">Register Now</span>
-                            <div className="w-8 h-8 rounded-full bg-amber-500/90 flex items-center justify-center shadow-lg group-hover:bg-amber-500 transition-colors">
-                                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                        <div className="relative flex items-center gap-2 text-white font-medium tracking-wide">
+                            <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold drop-shadow-sm">Register Now</span>
+                            <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center shadow-inner group-hover:bg-amber-400 transition-colors">
+                                <ArrowRight className="w-3 h-3 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                             </div>
                         </div>
                     </div>
