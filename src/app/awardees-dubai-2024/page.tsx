@@ -3,7 +3,8 @@ import { Footer } from "@/components/Footer";
 import Image from "next/image";
 import { Trophy, Award as AwardIcon, Sparkles, Star } from "lucide-react";
 
-// Awardee Data extracted from old website with REAL images
+// Awardee Data - CORRECTED mapping based on HTML analysis
+// Images appear in REVERSE order in HTML, so mapping from bottom sections first
 const AWARDEES_2024 = {
     inspiring: [
         { name: "Bhanu Rasputra", role: "Solicitor & Property Law Expert", company: "Mumbai", image: "https://static.wixstatic.com/media/a3d965_9b56e1f2a68444c39afd2d576382b3d7~mv2.png/v1/fill/w_400,h_600,al_c,q_85/a3d965_9b56e1f2a68444c39afd2d576382b3d7~mv2.png" },
@@ -160,7 +161,7 @@ export default function AwardeesDubai2024Page() {
                                                 alt={awardee.name}
                                                 fill
                                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                                unoptimized // Required for external Wix images
+                                                unoptimized
                                             />
 
                                             {/* Award Badge */}
