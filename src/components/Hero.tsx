@@ -44,7 +44,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
     return (
         <>
-            <div ref={ref} className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white leading-none">
+            <div ref={ref} className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white leading-none">
                 {count}{suffix}<span className="text-amber-500">+</span>
             </div>
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
@@ -56,7 +56,7 @@ export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     return (
-        <section className="relative min-h-[75svh] md:min-h-[100svh] flex items-start md:items-center pt-44 md:pt-28 lg:pt-24 pb-2 md:pb-8 overflow-hidden bg-slate-900">
+        <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-36 md:pt-24 lg:pt-0 pb-2 md:pb-8 overflow-hidden bg-slate-900">
             {/* Video Background */}
             <div className="absolute inset-0 w-full h-full">
                 <video
@@ -78,27 +78,27 @@ export function Hero() {
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     {/* Left Column: Content */}
-                    <div className="space-y-6 lg:space-y-8">
+                    <div className="space-y-5 lg:space-y-6">
                         {/* Main Headline */}
                         <div className="space-y-2">
                             {/* Eyebrow - The Global Legal Platform */}
-                            <div className="flex items-center gap-3 mb-4">
+                            <div className="flex items-center gap-3 mb-3">
                                 <div className="h-[1px] w-8 md:w-12 bg-amber-500/60"></div>
-                                <span className="text-amber-500 font-bold tracking-[0.2em] text-[10px] md:text-sm uppercase">The Global Legal Platform</span>
+                                <span className="text-amber-500 font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Global Legal Platform</span>
                             </div>
 
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-none tracking-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-none tracking-tight">
                                 The Global Stage
                                 <br />
                                 <span className="whitespace-nowrap">For Legal Minds to</span>
                             </h1>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif leading-none tracking-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-none tracking-tight">
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic pb-2">Connect, Lead and Innovate</span>
                             </h1>
                         </div>
 
                         {/* Subtitle with elegant styling */}
-                        <p className="text-base sm:text-lg md:text-xl text-slate-200 font-light md:max-w-xl leading-relaxed">
+                        <p className="text-sm sm:text-base md:text-lg text-slate-200 font-light md:max-w-xl leading-relaxed">
                             Conferences, content, and recognition for{" "}
                             <span className="font-medium text-amber-400">modern legal professionals</span>{" "}
                             worldwide.
@@ -108,14 +108,14 @@ export function Hero() {
                         <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
                             <button
                                 onClick={() => setIsRegisterOpen(true)}
-                                className="group flex-1 sm:flex-none px-6 sm:px-8 py-3.5 sm:py-4 bg-slate-900 text-white font-semibold rounded-xl shadow-xl shadow-slate-900/25 border-2 border-transparent hover:border-amber-500 hover:bg-slate-200 hover:text-slate-900 hover:shadow-2xl hover:shadow-slate-200/20 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
+                                className="group flex-1 sm:flex-none px-5 sm:px-7 py-3 sm:py-3.5 bg-slate-900 text-white font-semibold rounded-xl shadow-xl shadow-slate-900/25 border-2 border-transparent hover:border-amber-500 hover:bg-slate-200 hover:text-slate-900 hover:shadow-2xl hover:shadow-slate-200/20 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                             >
                                 Register Now
                                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
                             <Link
                                 href="#"
-                                className="group flex-1 sm:flex-none px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-slate-900 border-2 border-slate-200 font-semibold rounded-xl hover:border-amber-300 hover:bg-amber-50/50 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
+                                className="group flex-1 sm:flex-none px-5 sm:px-7 py-3 sm:py-3.5 bg-white text-slate-900 border-2 border-slate-200 font-semibold rounded-xl hover:border-amber-300 hover:bg-amber-50/50 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                             >
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-amber-100 rounded-full flex items-center justify-center group-hover:bg-amber-200 transition-colors">
                                     <Play className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600 ml-0.5" />
@@ -125,24 +125,24 @@ export function Hero() {
                         </div>
 
                         {/* Stats Row - Animated Counters */}
-                        <div className="pt-4 sm:pt-6 flex gap-4 sm:gap-8 md:gap-12 border-t border-slate-800/50">
+                        <div className="pt-4 sm:pt-5 flex gap-4 sm:gap-8 md:gap-12 border-t border-slate-800/50">
                             <div className="flex-1 space-y-1">
                                 <AnimatedCounter target={30} duration={1500} />
-                                <div className="text-xs sm:text-sm text-slate-400 font-medium uppercase tracking-widest">
+                                <div className="text-[10px] sm:text-xs text-slate-400 font-medium uppercase tracking-widest">
                                     Countries
                                 </div>
                             </div>
                             <div className="w-px bg-slate-700/50" />
                             <div className="flex-1 space-y-1">
                                 <AnimatedCounter target={5} suffix="K" duration={1500} />
-                                <div className="text-xs sm:text-sm text-slate-400 font-medium uppercase tracking-widest">
+                                <div className="text-[10px] sm:text-xs text-slate-400 font-medium uppercase tracking-widest">
                                     Delegates
                                 </div>
                             </div>
                             <div className="w-px bg-slate-700/50" />
                             <div className="flex-1 space-y-1">
                                 <AnimatedCounter target={100} duration={2000} />
-                                <div className="text-xs sm:text-sm text-slate-400 font-medium uppercase tracking-widest">
+                                <div className="text-[10px] sm:text-xs text-slate-400 font-medium uppercase tracking-widest">
                                     Speakers
                                 </div>
                             </div>
