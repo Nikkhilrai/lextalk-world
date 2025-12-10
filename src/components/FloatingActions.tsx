@@ -22,42 +22,42 @@ export function FloatingActions() {
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
-    // Common Button Styles for Water Drop Effect (High Contrast)
-    const buttonClasses = "relative px-6 py-3 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group";
-    const specularHighlight = <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1/2 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none" />;
+    // Common specular highlight for water drop effect
+    const specularHighlight = <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none" />;
 
     return (
         <>
-            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+            {/* Container - Bottom Center */}
+            <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
                 }`}>
 
                 {/* WhatsApp Button - Icon Only */}
                 <a
-                    href="https://wa.me/1234567890" // Placeholder
+                    href="https://wa.me/919811885302"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative p-3 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
+                    className="relative p-2 sm:p-2.5 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_25px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
                     aria-label="Contact on WhatsApp"
                 >
                     {specularHighlight}
                     <div className="relative flex items-center justify-center">
-                        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:bg-green-600 transition-colors">
-                            <MessageCircle className="w-5 h-5 text-white transition-transform duration-300" />
+                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:bg-green-600 transition-colors">
+                            <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white transition-transform duration-300" />
                         </div>
                     </div>
                 </a>
 
-                {/* Register Button */}
+                {/* Register Button - Smaller */}
                 <button
                     onClick={() => setIsRegisterOpen(true)}
-                    className={buttonClasses}
+                    className="relative px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_25px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
                 >
                     {specularHighlight}
-                    <div className="relative flex items-center gap-2 text-slate-900 font-bold tracking-wide">
-                        <div className="w-5 h-5 rounded-full bg-slate-900 flex items-center justify-center shadow-lg group-hover:bg-amber-600 transition-colors">
-                            <ArrowRight className="w-3 h-3 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                    <div className="relative flex items-center gap-1.5 sm:gap-2 text-slate-900 font-bold tracking-wide">
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-slate-900 flex items-center justify-center shadow-lg group-hover:bg-amber-600 transition-colors">
+                            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </div>
-                        <span className="text-[10px] sm:text-xs uppercase tracking-widest drop-shadow-sm">Register Now</span>
+                        <span className="text-[9px] sm:text-[10px] uppercase tracking-widest drop-shadow-sm">Register Now</span>
                     </div>
                 </button>
             </div>
