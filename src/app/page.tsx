@@ -9,6 +9,7 @@ import { WhoShouldJoin } from "@/components/WhoShouldJoin";
 import { FAQ } from "@/components/FAQ";
 import { StayUpdated } from "@/components/StayUpdated";
 import { Footer } from "@/components/Footer";
+import { FloatingRegisterButton } from "@/components/FloatingRegisterButton";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <FAQ />
       <StayUpdated />
       <Footer />
+      <FloatingRegisterButton />
     </main>
   );
 }
