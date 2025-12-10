@@ -16,6 +16,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const [mounted, setMounted] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
