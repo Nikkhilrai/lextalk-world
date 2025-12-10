@@ -31,19 +31,19 @@ export function FloatingActions() {
             <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
                 }`}>
 
-                {/* WhatsApp Button */}
+                {/* WhatsApp Button - Icon Only */}
                 <a
                     href="https://wa.me/1234567890" // Placeholder
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={buttonClasses}
+                    className="relative p-3 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
+                    aria-label="Contact on WhatsApp"
                 >
                     {specularHighlight}
-                    <div className="relative flex items-center gap-2 text-slate-900 font-bold tracking-wide">
-                        <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:bg-green-600 transition-colors">
-                            <MessageCircle className="w-3 h-3 text-white transition-transform duration-300" />
+                    <div className="relative flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:bg-green-600 transition-colors">
+                            <MessageCircle className="w-5 h-5 text-white transition-transform duration-300" />
                         </div>
-                        <span className="text-[10px] sm:text-xs uppercase tracking-widest drop-shadow-sm">WhatsApp</span>
                     </div>
                 </a>
 
