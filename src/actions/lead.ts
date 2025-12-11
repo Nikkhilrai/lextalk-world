@@ -100,6 +100,74 @@ async function sendNotificationEmail(data: any) {
     }
 }
 
+async function sendConfirmationEmail(data: any) {
+    try {
+        await resend.emails.send({
+            from: "LexTalk World <noreply@lextalkworld.in>",
+            to: data.email,
+            subject: `Thank You for Your Interest in LexTalk World Summit! 🌟`,
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+                        <h1 style="color: white; margin: 0; font-size: 28px;">Thank You! 🎉</h1>
+                        <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your registration of interest has been received</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 30px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 10px 10px;">
+                        <p style="color: #1e293b; font-size: 16px; line-height: 1.6; margin-top: 0;">
+                            Dear <strong>${data.firstName}</strong>,
+                        </p>
+                        <p style="color: #475569; font-size: 15px; line-height: 1.8;">
+                            Thank you for expressing your interest in attending the <strong>LexTalk World Summit</strong>! 
+                            We're excited to have you join our global community of legal professionals.
+                        </p>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 20px 0;">
+                            <h3 style="color: #1e293b; margin: 0 0 15px 0; font-size: 16px;">Your Registration Details:</h3>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px 0; color: #64748b;">Conference:</td>
+                                    <td style="padding: 8px 0; color: #f59e0b; font-weight: 600;">${data.conference || "Not specified"}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: #64748b;">Joining As:</td>
+                                    <td style="padding: 8px 0; color: #1e293b; font-weight: 600;">${data.joinAs || "Not specified"}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <p style="color: #475569; font-size: 15px; line-height: 1.8;">
+                            Our team will review your information and get back to you shortly with more details about 
+                            the event, registration process, and exclusive early bird offers.
+                        </p>
+                        
+                        <div style="margin-top: 25px; text-align: center;">
+                            <a href="https://lextalkworld.in/dubai-2026" style="display: inline-block; background: #f59e0b; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                                Learn More About The Event →
+                            </a>
+                        </div>
+                        
+                        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 25px 0;" />
+                        
+                        <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+                            If you have any questions, feel free to reach out to us at 
+                            <a href="mailto:info@lextalkworld.in" style="color: #f59e0b;">info@lextalkworld.in</a>
+                        </p>
+                    </div>
+                    <div style="text-align: center; padding: 20px;">
+                        <p style="color: #94a3b8; font-size: 12px; margin: 0;">
+                            © 2026 LexTalk World. All rights reserved.<br/>
+                            <a href="https://lextalkworld.in" style="color: #94a3b8;">www.lextalkworld.in</a>
+                        </p>
+                    </div>
+                </div>
+            `,
+        });
+        console.log("Confirmation email sent to:", data.email);
+    } catch (error) {
+        console.error("Failed to send confirmation email:", error);
+    }
+}
+
 export async function createLead(data: any) {
     try {
         const lead = await prisma.lead.create({
@@ -119,6 +187,9 @@ export async function createLead(data: any) {
 
         // Send email notification (don't await to avoid slowing down the response)
         sendNotificationEmail(data);
+
+        // Send confirmation email to the lead
+        sendConfirmationEmail(data);
 
         revalidatePath("/admin/leads");
         return { success: true, lead };
