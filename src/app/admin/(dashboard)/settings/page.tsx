@@ -40,7 +40,7 @@ export default function SettingsPage() {
     const [showNewUserForm, setShowNewUserForm] = useState(false);
     const [newUser, setNewUser] = useState({ name: "", email: "", password: "", role: "admin" });
 
-    const isSuperAdmin = profile.role === "super_admin";
+    const isSuperAdmin = profile.role === "super_admin" || profile.role === "superadmin";
 
     useEffect(() => {
         const loadData = async () => {
@@ -370,8 +370,8 @@ export default function SettingsPage() {
                                             <td className="py-3 px-4 text-slate-400">{user.email}</td>
                                             <td className="py-3 px-4">
                                                 <span className={`px-2 py-1 text-xs rounded-full ${user.role === "super_admin"
-                                                        ? "bg-amber-500/20 text-amber-400"
-                                                        : "bg-slate-700 text-slate-300"
+                                                    ? "bg-amber-500/20 text-amber-400"
+                                                    : "bg-slate-700 text-slate-300"
                                                     }`}>
                                                     {user.role}
                                                 </span>

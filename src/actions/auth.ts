@@ -106,7 +106,7 @@ export async function getAllAdminUsers() {
     try {
         const admin = await getCurrentAdmin();
         if (!admin) return { success: false, error: "Unauthorized" };
-        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+        if (admin.role !== "super_admin" && admin.role !== "superadmin") return { success: false, error: "Permission denied" };
 
         const users = await prisma.adminUser.findMany({
             select: { id: true, name: true, email: true, role: true, createdAt: true },
@@ -124,7 +124,7 @@ export async function createAdminUser(data: { name: string; email: string; passw
     try {
         const admin = await getCurrentAdmin();
         if (!admin) return { success: false, error: "Unauthorized" };
-        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+        if (admin.role !== "super_admin" && admin.role !== "superadmin") return { success: false, error: "Permission denied" };
 
         // Check if email already exists
         const existing = await prisma.adminUser.findUnique({ where: { email: data.email } });
@@ -151,7 +151,7 @@ export async function deleteAdminUser(id: string) {
     try {
         const admin = await getCurrentAdmin();
         if (!admin) return { success: false, error: "Unauthorized" };
-        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+        if (admin.role !== "super_admin" && admin.role !== "superadmin") return { success: false, error: "Permission denied" };
         if (admin.id === id) return { success: false, error: "Cannot delete yourself" };
 
         await prisma.adminUser.delete({ where: { id } });
