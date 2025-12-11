@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 import { prisma } from "@/lib/prisma";
-import { verifyPassword } from "@/lib/auth";
+import { verifyPassword, hashPassword } from "@/lib/auth";
 
 export async function POST(request: Request) {
     try {
@@ -26,12 +26,44 @@ export async function POST(request: Request) {
                 }
             }
         } catch (dbError) {
-            console.log("Database auth failed, trying fallback:", dbError);
+            console.log("Database auth check failed:", dbError);
         }
 
-        // Method 2: Fallback to environment variable password (backward compatibility)
+        // Method 2: Fallback to environment variable password
+        // If password matches, find-or-create the admin user in DB
         if (loginPassword === ADMIN_PASSWORD || loginPassword === BACKUP_PASSWORD) {
-            return await createSession("env-admin", "admin@lextalk.world", "admin", "Admin");
+            try {
+                // Find or create the admin user
+                let user = await prisma.adminUser.findUnique({
+                    where: { email: "admin@lextalk.world" }
+                });
+
+                if (!user) {
+                    // Create the admin user with the env password (hashed)
+                    const hashedPassword = await hashPassword(loginPassword);
+                    user = await prisma.adminUser.create({
+                        data: {
+                            email: "admin@lextalk.world",
+                            name: "Admin",
+                            password: hashedPassword,
+                            role: "super_admin"
+                        }
+                    });
+                } else {
+                    // Update password to match env var (in case it changed)
+                    const hashedPassword = await hashPassword(loginPassword);
+                    user = await prisma.adminUser.update({
+                        where: { id: user.id },
+                        data: { password: hashedPassword }
+                    });
+                }
+
+                return await createSession(user.id, user.email, user.role, user.name);
+            } catch (createError) {
+                console.error("Failed to create/update admin user:", createError);
+                // Still allow login even if DB fails
+                return await createSession("env-admin", "admin@lextalk.world", "super_admin", "Admin");
+            }
         }
 
         return NextResponse.json({ error: "Invalid password" }, { status: 401 });

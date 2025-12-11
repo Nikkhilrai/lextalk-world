@@ -5,8 +5,8 @@ import { hashPassword, verifyPassword } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 
-// Helper to get current admin ID from token
-async function getCurrentAdminId() {
+// Helper to get current admin from token
+async function getCurrentAdmin() {
     const cookieStore = await cookies();
     const token = cookieStore.get("admin_token");
     if (!token) return null;
@@ -15,7 +15,12 @@ async function getCurrentAdminId() {
         const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key_change_me";
         const secret = new TextEncoder().encode(JWT_SECRET);
         const { payload } = await jwtVerify(token.value, secret);
-        return payload.id as string;
+        return {
+            id: payload.id as string,
+            role: payload.role as string,
+            email: payload.email as string,
+            name: payload.name as string | null
+        };
     } catch {
         return null;
     }
@@ -23,11 +28,11 @@ async function getCurrentAdminId() {
 
 export async function updateProfile(data: { name: string; email: string }) {
     try {
-        const adminId = await getCurrentAdminId();
-        if (!adminId) return { success: false, error: "Unauthorized" };
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
 
         await prisma.adminUser.update({
-            where: { id: adminId },
+            where: { id: admin.id },
             data: {
                 name: data.name,
                 email: data.email
@@ -43,18 +48,18 @@ export async function updateProfile(data: { name: string; email: string }) {
 
 export async function updatePassword(data: { current: string; new: string }) {
     try {
-        const adminId = await getCurrentAdminId();
-        if (!adminId) return { success: false, error: "Unauthorized" };
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
 
-        const admin = await prisma.adminUser.findUnique({ where: { id: adminId } });
-        if (!admin) return { success: false, error: "Admin not found" };
+        const dbAdmin = await prisma.adminUser.findUnique({ where: { id: admin.id } });
+        if (!dbAdmin) return { success: false, error: "Admin not found" };
 
-        const isValid = await verifyPassword(data.current, admin.password);
+        const isValid = await verifyPassword(data.current, dbAdmin.password);
         if (!isValid) return { success: false, error: "Incorrect current password" };
 
         const hashed = await hashPassword(data.new);
         await prisma.adminUser.update({
-            where: { id: adminId },
+            where: { id: admin.id },
             data: { password: hashed }
         });
 
@@ -67,15 +72,23 @@ export async function updatePassword(data: { current: string; new: string }) {
 
 export async function getAdminProfile() {
     try {
-        const adminId = await getCurrentAdminId();
-        if (!adminId) return { success: false, error: "Unauthorized" };
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
 
-        const admin = await prisma.adminUser.findUnique({
-            where: { id: adminId },
-            select: { name: true, email: true }
+        const dbAdmin = await prisma.adminUser.findUnique({
+            where: { id: admin.id },
+            select: { name: true, email: true, role: true }
         });
 
-        return { success: true, profile: admin };
+        if (!dbAdmin) {
+            // Fallback for env-admin case
+            return {
+                success: true,
+                profile: { name: admin.name || "Admin", email: admin.email, role: admin.role }
+            };
+        }
+
+        return { success: true, profile: dbAdmin };
     } catch (error) {
         return { success: false, error: "Failed to fetch profile" };
     }
@@ -85,4 +98,67 @@ export async function logout() {
     const cookieStore = await cookies();
     cookieStore.delete("admin_token");
     return { success: true };
+}
+
+// ==================== Admin User Management ====================
+
+export async function getAllAdminUsers() {
+    try {
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
+        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+
+        const users = await prisma.adminUser.findMany({
+            select: { id: true, name: true, email: true, role: true, createdAt: true },
+            orderBy: { createdAt: "asc" }
+        });
+
+        return { success: true, users };
+    } catch (error) {
+        console.error("Failed to fetch admin users:", error);
+        return { success: false, error: "Failed to fetch users" };
+    }
+}
+
+export async function createAdminUser(data: { name: string; email: string; password: string; role: string }) {
+    try {
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
+        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+
+        // Check if email already exists
+        const existing = await prisma.adminUser.findUnique({ where: { email: data.email } });
+        if (existing) return { success: false, error: "Email already exists" };
+
+        const hashedPassword = await hashPassword(data.password);
+        await prisma.adminUser.create({
+            data: {
+                name: data.name,
+                email: data.email,
+                password: hashedPassword,
+                role: data.role
+            }
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to create admin user:", error);
+        return { success: false, error: "Failed to create user" };
+    }
+}
+
+export async function deleteAdminUser(id: string) {
+    try {
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
+        if (admin.role !== "super_admin") return { success: false, error: "Permission denied" };
+        if (admin.id === id) return { success: false, error: "Cannot delete yourself" };
+
+        await prisma.adminUser.delete({ where: { id } });
+
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to delete admin user:", error);
+        return { success: false, error: "Failed to delete user" };
+    }
 }
