@@ -635,7 +635,11 @@ export default function DubaiEventPage() {
             <DubaiAdvisoryBoard />
 
             {/* ===================== SPONSORS ===================== */}
-            <section id="sponsors" className="py-20 md:py-28 bg-white relative overflow-hidden">
+            <section id="sponsors" className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
+                {/* Decorative Background Elements */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
+
                 <div className="container mx-auto px-4 relative z-10">
                     {/* Section Header */}
                     <div className="text-center mb-16">
@@ -647,15 +651,16 @@ export default function DubaiEventPage() {
                     </div>
 
                     {/* Presenting Sponsor */}
-                    <div className="mb-16">
-                        <div className="text-center mb-8">
-                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-slate-800 mb-2">
-                                Presenting Sponsor
-                            </h3>
-                            <div className="w-16 h-0.5 bg-amber-400 mx-auto" />
+                    <div className="mb-20">
+                        <div className="text-center mb-10">
+                            <div className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 shadow-lg shadow-amber-500/20 mb-4 transform hover:scale-105 transition-transform duration-300">
+                                <h3 className="text-lg md:text-xl font-serif font-bold text-white tracking-widest uppercase">
+                                    Presenting Sponsor
+                                </h3>
+                            </div>
                         </div>
                         <div className="flex justify-center">
-                            <div className="relative w-72 h-28 md:w-96 md:h-36 bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 p-6 border border-slate-100 hover:border-amber-200 group">
+                            <div className="relative w-72 h-32 md:w-96 md:h-40 bg-white rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 p-6 border border-slate-100 hover:border-amber-200 group transform hover:-translate-y-1">
                                 <Image
                                     src="/logo/mrs-logo.avif"
                                     alt="MRS Company - Presenting Sponsor"
@@ -668,19 +673,20 @@ export default function DubaiEventPage() {
 
                     {/* Diamond Sponsors */}
                     <div>
-                        <div className="text-center mb-8">
-                            <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-700 mb-2">
-                                Diamond Sponsors
-                            </h3>
-                            <div className="w-12 h-0.5 bg-slate-300 mx-auto" />
+                        <div className="text-center mb-10">
+                            <div className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 shadow-lg shadow-amber-500/20 mb-4 transform hover:scale-105 transition-transform duration-300">
+                                <h3 className="text-lg md:text-xl font-serif font-bold text-white tracking-widest uppercase">
+                                    Diamond Sponsors
+                                </h3>
+                            </div>
                         </div>
                         <div className="flex justify-center gap-8 flex-wrap">
-                            <div className="relative w-56 h-24 md:w-72 md:h-28 bg-gradient-to-br from-slate-50 to-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 p-4 border border-slate-100 hover:border-amber-200 group">
+                            <div className="relative w-64 h-28 md:w-80 md:h-32 bg-white rounded-xl shadow-lg hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-500 p-4 border border-slate-100 hover:border-amber-200 group transform hover:-translate-y-1">
                                 <Image
                                     src="/dubai-event/sponsors/CasedockerLogo.avif"
                                     alt="Case Docer - Diamond Sponsor"
                                     fill
-                                    className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+                                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
                         </div>
