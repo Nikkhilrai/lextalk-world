@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
-    LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket
+    LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
@@ -13,6 +13,8 @@ import { logout } from "@/actions/auth";
 const NAV_ITEMS = [
     { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { label: "Leads", href: "/admin/leads", icon: Users },
+    { label: "Conferences", href: "/admin/conferences", icon: Calendar },
+    { label: "Tickets", href: "/admin/tickets", icon: Ticket },
     { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
     { label: "Speakers", href: "/admin/speakers", icon: Mic },
     { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },

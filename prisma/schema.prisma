@@ -119,3 +119,68 @@ model AdminUser {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// Conference/Event Model
+model Conference {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  location    String       // City, Country
+  venue       String       // Venue name
+  description String?      @db.Text
+  startDate   DateTime
+  endDate     DateTime
+  status      String       @default("draft") // draft, active, completed, cancelled
+  imageUrl    String?
+  tickets     TicketType[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// Ticket Types for Conferences
+model TicketType {
+  id           String        @id @default(cuid())
+  conferenceId String
+  conference   Conference    @relation(fields: [conferenceId], references: [id], onDelete: Cascade)
+  type         String        // standard, premium, vip
+  name         String        // "Early Bird Standard", "VIP All Access", etc.
+  price        Float
+  currency     String        @default("USD")
+  maxQuantity  Int?          // null means unlimited
+  soldCount    Int           @default(0)
+  benefits     String?       @db.Text // JSON array or newline-separated
+  isActive     Boolean       @default(true)
+  orders       TicketOrder[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// Ticket Orders/Purchases
+model TicketOrder {
+  id           String     @id @default(cuid())
+  ticketTypeId String
+  ticketType   TicketType @relation(fields: [ticketTypeId], references: [id], onDelete: Cascade)
+  buyerName    String
+  buyerEmail   String
+  buyerPhone   String?
+  quantity     Int
+  totalAmount  Float
+  currency     String     @default("USD")
+  status       String     @default("pending") // pending, paid, cancelled, refunded
+  paymentId    String?    // External payment gateway reference
+  notes        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+// Login Attempts for Security
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  success   Boolean
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([email, createdAt])
+}
