@@ -1,3 +1,5 @@
-export { RegistrationsChart } from "./RegistrationsChart";
-export { LeadsByCountryChart } from "./LeadsByCountryChart";
-export { LeadsByTypeChart } from "./LeadsByTypeChart";
+export * from "./RegistrationsChart";
+export * from "./LeadsByCountryChart";
+export * from "./LeadsByTypeChart";
+export * from "./AudienceMetricsChart";
+export * from "./WorldMap";

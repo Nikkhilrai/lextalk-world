@@ -6,7 +6,6 @@ import {
     Bar,
     XAxis,
     YAxis,
-    CartesianGrid,
     Tooltip,
     ResponsiveContainer,
     Cell,
@@ -23,83 +22,57 @@ interface LeadsByCountryChartProps {
     limit?: number;
 }
 
-const COLORS = ["#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#ec4899", "#06b6d4", "#f97316", "#84cc16"];
+const COLORS = ["#405189", "#0ab39c", "#f7b84b", "#f06548", "#3577f1", "#6559cc"];
 
 export function LeadsByCountryChart({ leads, limit = 8 }: LeadsByCountryChartProps) {
     const chartData = useMemo(() => {
-        // Count leads by country
         const countryMap = new Map<string, number>();
-
         leads.forEach((lead) => {
             const country = lead.country || "Unknown";
             countryMap.set(country, (countryMap.get(country) || 0) + 1);
         });
 
-        // Convert to array and sort by count
-        const sortedData = Array.from(countryMap.entries())
+        return Array.from(countryMap.entries())
             .map(([country, count]) => ({
-                country: country.length > 15 ? country.substring(0, 12) + "..." : country,
+                country: country.length > 20 ? country.substring(0, 18) + "..." : country,
                 fullName: country,
                 count,
             }))
             .sort((a, b) => b.count - a.count)
             .slice(0, limit);
-
-        return sortedData;
     }, [leads, limit]);
 
-    const topCountry = chartData[0];
-
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-                <div>
-                    <h3 className="font-semibold text-white">Leads by Country</h3>
-                    <p className="text-sm text-slate-400">Top {limit} countries</p>
+        <div className="vz-card rounded-sm p-6 h-full">
+            <div className="flex justify-between items-center mb-6">
+                <h4 className="text-[16px] font-semibold text-white">Sessions by Countries</h4>
+                <div className="flex gap-1">
+                    <button className="text-[10px] px-2 py-0.5 bg-[#405189]/20 text-[#405189] rounded">ALL</button>
+                    <button className="text-[10px] px-2 py-0.5 text-[#878a99] hover:bg-[#2a304d] rounded">1M</button>
+                    <button className="text-[10px] px-2 py-0.5 text-[#878a99] hover:bg-[#2a304d] rounded">6M</button>
                 </div>
-                {topCountry && (
-                    <div className="text-right">
-                        <p className="text-sm font-medium text-amber-500">{topCountry.fullName}</p>
-                        <p className="text-xs text-slate-400">{topCountry.count} leads</p>
-                    </div>
-                )}
             </div>
 
-            <div className="h-64">
+            <div className="h-[350px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={chartData} layout="vertical">
-                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
-                        <XAxis
-                            type="number"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fill: "#64748b", fontSize: 12 }}
-                            allowDecimals={false}
-                        />
+                    <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
+                        <XAxis type="number" hide />
                         <YAxis
-                            type="category"
                             dataKey="country"
+                            type="category"
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fill: "#94a3b8", fontSize: 12 }}
+                            tick={{ fill: "#878a99", fontSize: 13 }}
                             width={100}
                         />
                         <Tooltip
-                            contentStyle={{
-                                backgroundColor: "#1e293b",
-                                border: "1px solid #334155",
-                                borderRadius: "8px",
-                                color: "#fff",
-                            }}
-                            formatter={(value: number, name: string, props: any) => [
-                                value,
-                                props.payload.fullName,
-                            ]}
-                            labelFormatter={() => ""}
+                            cursor={{ fill: "rgba(255,255,255,0.02)" }}
+                            contentStyle={{ backgroundColor: "#212529", border: "none" }}
+                            itemStyle={{ color: "#fff" }}
                         />
-                        <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                        <Bar dataKey="count" barSize={18} radius={[0, 4, 4, 0]}>
                             {chartData.map((entry, index) => (
-                                <Cell key={entry.country} fill={COLORS[index % COLORS.length]} />
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Bar>
                     </BarChart>

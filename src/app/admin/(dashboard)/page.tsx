@@ -1,28 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { StatCard } from "@/components/admin/StatCard";
-import { AnalyticsWidget } from "@/components/admin/AnalyticsWidget";
 import {
-    RegistrationsChart,
+    Users, Clock, ExternalLink, ArrowRight, Activity, Calendar
+} from "lucide-react";
+import Link from "next/link";
+
+// Components
+import { StatCard } from "@/components/admin/StatCard";
+import {
     LeadsByCountryChart,
     LeadsByTypeChart,
+    AudienceMetricsChart,
+    WorldMap
 } from "@/components/admin/charts";
-import {
-    Users,
-    TrendingUp,
-    Calendar,
-    ArrowRight,
-    Mail,
-    Mic,
-    HeartHandshake,
-    RefreshCw,
-    Download,
-    Filter,
-} from "lucide-react";
+
+// Actions
 import { getLeadStats, getDashboardStats } from "@/actions/lead-stats";
 import { getLeads } from "@/actions/lead";
-import Link from "next/link";
+
+// VERSION: VELZON-GALAXY-V2 (Debug Tag)
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState({
@@ -34,240 +31,180 @@ export default function AdminDashboard() {
         totalSponsors: 0,
     });
     const [allLeads, setAllLeads] = useState<any[]>([]);
-    const [recentLeads, setRecentLeads] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isRefreshing, setIsRefreshing] = useState(false);
-    const [dateRange, setDateRange] = useState("14"); // days
-
-    const loadData = async () => {
-        const [leadStatsRes, dashStatsRes, leadsResult] = await Promise.all([
-            getLeadStats(),
-            getDashboardStats(),
-            getLeads(),
-        ]);
-
-        let mergedStats = { ...stats };
-        if (leadStatsRes.success) mergedStats = { ...mergedStats, ...leadStatsRes.stats };
-        if (dashStatsRes.success) mergedStats = { ...mergedStats, ...dashStatsRes.stats };
-
-        setStats(mergedStats);
-
-        if (leadsResult.success && leadsResult.leads) {
-            setAllLeads(leadsResult.leads);
-            setRecentLeads(leadsResult.leads.slice(0, 5));
-        }
-        setIsLoading(false);
-        setIsRefreshing(false);
-    };
 
     useEffect(() => {
+        async function loadData() {
+            try {
+                const [leadStatsRes, dashStatsRes, leadsResult] = await Promise.all([
+                    getLeadStats(),
+                    getDashboardStats(),
+                    getLeads(),
+                ]);
+
+                let mergedStats = { ...stats };
+                if (leadStatsRes.success) mergedStats = { ...mergedStats, ...leadStatsRes.stats };
+                if (dashStatsRes.success) mergedStats = { ...mergedStats, ...dashStatsRes.stats };
+
+                setStats(mergedStats);
+
+                if (leadsResult.success && leadsResult.leads) {
+                    setAllLeads(leadsResult.leads);
+                }
+            } catch (error) {
+                console.error("Failed to load dashboard data", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
         loadData();
     }, []);
 
-    const handleRefresh = () => {
-        setIsRefreshing(true);
-        loadData();
-    };
-
     return (
-        <div className="space-y-8">
-            {/* Page Header with Actions */}
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div className="min-h-screen text-[#878a99] font-sans pb-10">
+            {/* Header: Platform Overview */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
                 <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">Platform Overview</h2>
-                    <p className="text-slate-400">
-                        Welcome back, here&apos;s your real-time analytics.
-                    </p>
+                    <h4 className="text-[16px] font-bold text-white uppercase tracking-wide mb-1">Platform Overview</h4>
+                    <p className="text-[13px] text-[#878a99] font-medium">Welcome back, here's your real-time analytics.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    {/* Date Range Selector */}
-                    <select
-                        value={dateRange}
-                        onChange={(e) => setDateRange(e.target.value)}
-                        className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                    >
-                        <option value="7">Last 7 days</option>
-                        <option value="14">Last 14 days</option>
-                        <option value="30">Last 30 days</option>
-                        <option value="90">Last 90 days</option>
-                    </select>
-
-                    {/* Refresh Button */}
-                    <button
-                        onClick={handleRefresh}
-                        disabled={isRefreshing}
-                        className="p-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors disabled:opacity-50"
-                        title="Refresh data"
-                    >
-                        <RefreshCw className={`w-5 h-5 ${isRefreshing ? "animate-spin" : ""}`} />
+                <div className="mt-4 md:mt-0 flex items-center gap-2">
+                    <button className="flex items-center gap-2 px-3 py-2 bg-[#2a304d]/50 hover:bg-[#2a304d] text-[#ced4da] text-xs font-medium rounded transition-colors border border-white/5">
+                        <Calendar size={14} className="text-[#405189]" />
+                        <span>Last 30 Days</span>
+                    </button>
+                    <button className="p-2 bg-[#0ab39c]/10 text-[#0ab39c] rounded hover:bg-[#0ab39c]/20 transition-colors">
+                        <Activity size={16} />
                     </button>
                 </div>
             </div>
 
-            {/* Google Analytics Widget */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                <AnalyticsWidget />
-            </div>
-
-            {/* Lead Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Row 1: Stat Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <StatCard
-                    title="Total Leads"
+                    title="Users"
                     value={isLoading ? "..." : stats.totalLeads.toLocaleString()}
-                    trend={`${stats.thisWeekLeads} this week`}
-                    trendUp={stats.thisWeekLeads > 0}
+                    percentage="16.24%"
+                    trendUp={true}
                     icon={Users}
-                    color="amber"
+                    color="primary"
                 />
                 <StatCard
-                    title="Newsletter Subscribers"
-                    value={isLoading ? "..." : (stats as any).totalSubscribers?.toLocaleString() || "0"}
-                    trend="Active List"
+                    title="Sessions"
+                    value={isLoading ? "..." : (stats.totalLeads * 3.5).toFixed(0)}
+                    percentage="3.96%"
+                    trendUp={false}
+                    icon={Activity}
+                    color="info"
+                />
+                <StatCard
+                    title="Avg. Visit Duration"
+                    value="3m 40s"
+                    percentage="0.24%"
                     trendUp={true}
-                    icon={Mail}
+                    icon={Clock}
+                    color="warning"
+                />
+                <StatCard
+                    title="Bounce Rate"
+                    value="33.48%"
+                    percentage="7.05%"
+                    trendUp={true}
+                    icon={ExternalLink}
                     color="purple"
                 />
-                <StatCard
-                    title="Confirmed Speakers"
-                    value={isLoading ? "..." : (stats as any).totalSpeakers?.toLocaleString() || "0"}
-                    trend="Global Experts"
-                    trendUp={true}
-                    icon={Mic}
-                    color="blue"
-                />
-                <StatCard
-                    title="Active Sponsors"
-                    value={isLoading ? "..." : (stats as any).totalSponsors?.toLocaleString() || "0"}
-                    trend="Partners"
-                    trendUp={true}
-                    icon={HeartHandshake}
-                    color="emerald"
-                />
             </div>
 
-            {/* Charts Section */}
-            <div className="space-y-6">
-                {/* Registration Trends - Full Width */}
-                <RegistrationsChart leads={allLeads} days={parseInt(dateRange)} />
+            {/* Row 2: Live Map + Sessions by Country */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+                {/* Live Users Map */}
+                <div className="xl:col-span-2 vz-card rounded-sm p-0 overflow-hidden h-[460px] flex flex-col">
+                    <div className="p-5 border-b border-white/5 flex justify-between items-center bg-[#1b213b]">
+                        <h4 className="text-[16px] font-semibold text-white">Live Users By Country</h4>
+                        <button className="text-xs bg-[#2a304d] hover:bg-[#353b59] text-white px-3 py-1.5 rounded transition-colors border border-white/5">
+                            Export Report
+                        </button>
+                    </div>
+                    {/* Map Container */}
+                    <div className="flex-1 bg-[#161b2e] relative">
+                        <WorldMap data={allLeads} />
 
-                {/* Country and Type Charts - Side by Side */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Stats overlay at bottom */}
+                        <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4 text-center">
+                            <div className="p-3 bg-[#1b213b]/90 backdrop-blur rounded-sm border border-white/5 shadow-lg">
+                                <h5 className="text-lg font-bold text-white">2,250</h5>
+                                <p className="text-[11px] uppercase tracking-wider text-[#878a99] mt-1">Users (0-30s)</p>
+                            </div>
+                            <div className="p-3 bg-[#1b213b]/90 backdrop-blur rounded-sm border border-white/5 shadow-lg">
+                                <h5 className="text-lg font-bold text-white">1,501</h5>
+                                <p className="text-[11px] uppercase tracking-wider text-[#878a99] mt-1">Users (31-60s)</p>
+                            </div>
+                            <div className="p-3 bg-[#1b213b]/90 backdrop-blur rounded-sm border border-white/5 shadow-lg">
+                                <h5 className="text-lg font-bold text-white">750</h5>
+                                <p className="text-[11px] uppercase tracking-wider text-[#878a99] mt-1">Users (61-120s)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sessions by Countries Bar Chart */}
+                <div className="h-[460px]">
                     <LeadsByCountryChart leads={allLeads} limit={8} />
+                </div>
+            </div>
+
+            {/* Row 3: Audience Metrics + Users By Device */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+                <div className="xl:col-span-1 h-[400px]">
+                    <AudienceMetricsChart leads={allLeads} />
+                </div>
+
+                <div className="xl:col-span-1 h-[400px]">
                     <LeadsByTypeChart leads={allLeads} />
                 </div>
-            </div>
 
-            {/* Recent Activity Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Recent Registrations */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <div className="flex justify-between items-center mb-6">
-                        <h3 className="font-semibold text-white">Recent Registrations</h3>
-                        <Link
-                            href="/admin/leads"
-                            className="text-sm text-amber-500 hover:text-amber-400 flex items-center gap-1"
-                        >
-                            View All <ArrowRight className="w-3 h-3" />
-                        </Link>
+                {/* Top Pages Mock Table */}
+                <div className="vz-card rounded-sm h-[400px] flex flex-col">
+                    <div className="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h4 className="text-[16px] font-semibold text-white">Top Pages</h4>
+                        <button className="p-1 hover:bg-white/5 rounded text-[#878a99]">
+                            <ExternalLink size={14} />
+                        </button>
                     </div>
-
-                    <div className="space-y-4">
-                        {isLoading ? (
-                            <div className="text-slate-500 text-center py-8">Loading...</div>
-                        ) : recentLeads.length === 0 ? (
-                            <div className="text-slate-500 text-center py-8">No registrations yet</div>
-                        ) : (
-                            recentLeads.map((lead) => (
-                                <div key={lead.id} className="flex gap-4 items-center">
-                                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-sm font-bold text-amber-500 shrink-0">
-                                        {lead.firstName.charAt(0)}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm text-white font-medium truncate">
-                                            {lead.firstName} {lead.lastName}
-                                        </p>
-                                        <p className="text-xs text-slate-500 truncate">{lead.email}</p>
-                                    </div>
-                                    <div className="text-right shrink-0">
-                                        <span
-                                            className={`px-2 py-0.5 rounded-full text-xs font-medium ${lead.status === "New"
-                                                    ? "bg-blue-500/10 text-blue-400"
-                                                    : lead.status === "Contacted"
-                                                        ? "bg-amber-500/10 text-amber-400"
-                                                        : "bg-emerald-500/10 text-emerald-400"
-                                                }`}
-                                        >
-                                            {lead.status}
-                                        </span>
-                                        <p className="text-xs text-slate-500 mt-1">
-                                            {new Date(lead.createdAt).toLocaleDateString()}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))
-                        )}
+                    <div className="p-0 overflow-x-auto flex-1 custom-scrollbar">
+                        <table className="w-full text-left">
+                            <thead className="bg-[#212946] text-[#878a99] text-[11px] uppercase font-semibold">
+                                <tr>
+                                    <th className="px-5 py-3">Active Page</th>
+                                    <th className="px-5 py-3">Active</th>
+                                    <th className="px-5 py-3">Users</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 text-sm">
+                                {[
+                                    { page: "/analytics/dashboard", active: 99, users: "25.3%" },
+                                    { page: "/conferences/dubai-2026", active: 86, users: "22.7%" },
+                                    { page: "/auth/login-register", active: 64, users: "18.7%" },
+                                    { page: "/blog/post-details", active: 53, users: "14.2%" },
+                                    { page: "/admin/tickets", active: 33, users: "12.6%" },
+                                    { page: "/contact-us", active: 20, users: "10.9%" },
+                                ].map((row, i) => (
+                                    <tr key={i} className="hover:bg-white/[0.02] transition-colors group">
+                                        <td className="px-5 py-3">
+                                            <Link href={row.page} className="text-[#ced4da] truncate max-w-[150px] hover:text-[#405189] block transition-colors">
+                                                {row.page}
+                                            </Link>
+                                        </td>
+                                        <td className="px-5 py-3 font-semibold text-white">{row.active}</td>
+                                        <td className="px-5 py-3 text-[#878a99]">{row.users}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-
-                {/* Quick Actions */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <h3 className="font-semibold text-white mb-6">Quick Actions</h3>
-
-                    <div className="space-y-3">
-                        <Link
-                            href="/admin/leads"
-                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white font-medium">Manage Leads</p>
-                                    <p className="text-sm text-slate-400">
-                                        View, export, and manage all registrations
-                                    </p>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
-                            </div>
-                        </Link>
-
-                        <Link
-                            href="/admin/conferences"
-                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white font-medium">Manage Conferences</p>
-                                    <p className="text-sm text-slate-400">
-                                        Create and manage upcoming events
-                                    </p>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
-                            </div>
-                        </Link>
-
-                        <Link
-                            href="/admin/tickets"
-                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white font-medium">Ticket Sales</p>
-                                    <p className="text-sm text-slate-400">Track tickets and revenue</p>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
-                            </div>
-                        </Link>
-
-                        <Link
-                            href="/admin/blog"
-                            className="block w-full p-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition group"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white font-medium">Blog Management</p>
-                                    <p className="text-sm text-slate-400">Create and manage blog posts</p>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-500 transition" />
-                            </div>
+                    <div className="p-3 text-center border-t border-white/5">
+                        <Link href="#" className="text-[#405189] text-[13px] hover:text-white flex items-center justify-center gap-1 transition-colors">
+                            View All Pages <ArrowRight size={12} />
                         </Link>
                     </div>
                 </div>

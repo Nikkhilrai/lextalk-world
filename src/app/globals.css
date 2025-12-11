@@ -3,24 +3,203 @@
 
 @theme {
   /* Professional font stack */
-  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-heading), Georgia, serif;
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-heading), "Outfit", sans-serif;
   --font-serif: var(--font-heading), Georgia, serif;
 
   /* Brand colors */
   --color-navy-900: #0f172a;
   --color-gold-500: #eab308;
 
+  /* Velzon Galaxy Theme Palette */
+  --color-vz-bg: #13192f;
+  --color-vz-card: #1b213b;
+  --color-vz-card-hover: #212946;
+  --color-vz-primary: #405189;
+  --color-vz-success: #0ab39c;
+  --color-vz-warning: #f7b84b;
+  --color-vz-danger: #f06548;
+  --color-vz-info: #3577f1;
+  --color-vz-purple: #6559cc;
+
+  /* Text Colors */
+  --color-vz-text: #878a99;
+  --color-vz-heading: #ced4da;
+  --color-vz-white: #ffffff;
+
   /* Animations */
   --animate-marquee: marquee 40s linear infinite;
   --animate-marquee-up: marquee-vertical-up 60s linear infinite;
   --animate-marquee-down: marquee-vertical-down 60s linear infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030712;
+    /* Richer dark background */
+    --foreground: #f8fafc;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* Elegant headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.font-serif {
+  font-family: var(--font-heading);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Smooth text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Velzon Utilities */
+.vz-card {
+  background-color: var(--color-vz-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
+.vz-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.glass-panel {
+  background-color: var(--color-vz-bg);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-bg {
+  background-color: var(--color-vz-bg);
+  background-image: none;
+  /* Removed mesh for cleaner look */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-enter {
+  animation: enter 0.7s ease-out forwards;
+}
+
+.group:hover .animate-shine {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-vertical-up {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-vertical-down {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-color-scheme: dark) {

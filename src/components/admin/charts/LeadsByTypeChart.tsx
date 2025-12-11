@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 interface Lead {
     id: string;
@@ -13,102 +13,80 @@ interface LeadsByTypeChartProps {
     leads: Lead[];
 }
 
-const COLORS = {
-    "Joining The Event": "#f59e0b",
-    "Speaking Opportunities": "#3b82f6",
-    "Sponsorship": "#10b981",
-    "Nominations": "#8b5cf6",
-    "Other": "#64748b",
-};
+const COLORS = ["#405189", "#0ab39c", "#f7b84b", "#f06548"];
 
 export function LeadsByTypeChart({ leads }: LeadsByTypeChartProps) {
     const chartData = useMemo(() => {
         const typeMap = new Map<string, number>();
-
         leads.forEach((lead) => {
             const type = lead.joinAs || "Other";
             typeMap.set(type, (typeMap.get(type) || 0) + 1);
         });
 
-        return Array.from(typeMap.entries())
-            .map(([name, value]) => ({
-                name,
-                value,
-                color: COLORS[name as keyof typeof COLORS] || COLORS["Other"],
-            }))
+        // Limit to top 4 for cleaner UI
+        let data = Array.from(typeMap.entries())
+            .map(([name, value]) => ({ name, value }))
             .sort((a, b) => b.value - a.value);
+
+        if (data.length > 4) {
+            const other = data.slice(4).reduce((sum, item) => sum + item.value, 0);
+            data = data.slice(0, 4);
+            data.push({ name: "Other", value: other });
+        }
+
+        return data;
     }, [leads]);
 
-    const total = leads.length;
-
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="flex items-center justify-between mb-4">
-                <div>
-                    <h3 className="font-semibold text-white">Leads by Interest</h3>
-                    <p className="text-sm text-slate-400">Registration purpose</p>
-                </div>
-                <div className="text-right">
-                    <p className="text-2xl font-bold text-white">{total}</p>
-                    <p className="text-xs text-slate-400">Total leads</p>
-                </div>
+        <div className="vz-card rounded-sm p-6 h-full">
+            <div className="flex justify-between items-center mb-6">
+                <h4 className="text-[16px] font-semibold text-white">Users by Device</h4>
             </div>
 
-            <div className="h-64">
+            <div className="relative h-[250px] flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                         <Pie
                             data={chartData}
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={50}
-                            outerRadius={80}
+                            innerRadius={70}
+                            outerRadius={90}
                             paddingAngle={2}
                             dataKey="value"
+                            stroke="none"
                         >
                             {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
                         <Tooltip
-                            contentStyle={{
-                                backgroundColor: "#1e293b",
-                                border: "1px solid #334155",
-                                borderRadius: "8px",
-                                color: "#fff",
-                            }}
-                            formatter={(value: number) => [
-                                `${value} (${((value / total) * 100).toFixed(1)}%)`,
-                                "Leads",
-                            ]}
-                        />
-                        <Legend
-                            layout="vertical"
-                            align="right"
-                            verticalAlign="middle"
-                            iconType="circle"
-                            iconSize={8}
-                            wrapperStyle={{
-                                paddingLeft: "20px",
-                            }}
-                            formatter={(value) => (
-                                <span className="text-slate-300 text-xs">{value}</span>
-                            )}
+                            contentStyle={{ backgroundColor: "#212529", border: "none" }}
+                            itemStyle={{ color: "#fff" }}
                         />
                     </PieChart>
                 </ResponsiveContainer>
+
+                {/* Center Text (Mocking current interaction) */}
+                <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                    <span className="text-2xl font-bold text-white">{leads.length}</span>
+                    <span className="text-xs text-[#878a99]">Total Leads</span>
+                </div>
             </div>
 
-            {/* Stats below chart */}
-            <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-slate-800">
-                {chartData.slice(0, 4).map((item) => (
-                    <div key={item.name} className="flex items-center gap-2">
-                        <div
-                            className="w-2 h-2 rounded-full"
-                            style={{ backgroundColor: item.color }}
-                        />
-                        <span className="text-xs text-slate-400 truncate flex-1">{item.name}</span>
-                        <span className="text-xs font-medium text-white">{item.value}</span>
+            <div className="mt-6 space-y-3">
+                {chartData.map((item, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <div
+                                className="w-2.5 h-2.5 rounded-[2px]"
+                                style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                            />
+                            <span className="text-[13px] text-[#878a99]">{item.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="text-[13px] font-medium text-white">
+                                {((item.value / leads.length) * 100).toFixed(1)}%
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>

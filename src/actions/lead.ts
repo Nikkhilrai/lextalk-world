@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 
 // Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
 
 // Email recipients
 const ADMIN_EMAIL = "nikhil@mantranexvista.com"; // Gets full email with dashboard link

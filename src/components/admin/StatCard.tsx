@@ -1,46 +1,51 @@
-import { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { LucideIcon, ArrowUp, ArrowDown } from "lucide-react";
 
 interface StatCardProps {
     title: string;
     value: string;
-    trend?: string;
+    percentage?: string;
     trendUp?: boolean;
     icon: LucideIcon;
-    color?: "amber" | "blue" | "purple" | "emerald";
+    color: "primary" | "success" | "warning" | "danger" | "info" | "purple";
 }
 
-const colorMap = {
-    amber: "bg-amber-500/10 text-amber-500",
-    blue: "bg-blue-500/10 text-blue-500",
-    purple: "bg-purple-500/10 text-purple-500",
-    emerald: "bg-emerald-500/10 text-emerald-500",
+const COLOR_MAP = {
+    primary: "text-[#405189] bg-[#405189]/10",
+    success: "text-[#0ab39c] bg-[#0ab39c]/10",
+    warning: "text-[#f7b84b] bg-[#f7b84b]/10",
+    danger: "text-[#f06548] bg-[#f06548]/10",
+    info: "text-[#3577f1] bg-[#3577f1]/10",
+    purple: "text-[#6559cc] bg-[#6559cc]/10",
 };
 
-export function StatCard({ title, value, trend, trendUp, icon: Icon, color = "amber" }: StatCardProps) {
+export function StatCard({ title, value, percentage, trendUp, icon: Icon, color }: StatCardProps) {
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 relative overflow-hidden group hover:border-slate-700 transition-all duration-300">
-            {/* Background Glow */}
-            <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-10 -mr-16 -mt-16 transition-opacity group-hover:opacity-20 ${color.replace("text-", "bg-")}`} />
-
-            <div className="flex justify-between items-start mb-4">
-                <div className={cn("p-3 rounded-lg", colorMap[color])}>
-                    <Icon className="w-6 h-6" />
+        <div className="vz-card rounded-sm p-5 h-full relative overflow-hidden group">
+            <div className="flex justify-between items-start">
+                <div>
+                    <p className="text-[#878a99] uppercase text-[11px] font-semibold tracking-wider mb-2">{title}</p>
+                    <h4 className="text-2xl font-bold text-white mb-2">{value}</h4>
                 </div>
-                {trend && (
-                    <span className={cn(
-                        "text-xs font-medium px-2 py-1 rounded-full",
-                        trendUp
-                            ? "bg-emerald-500/10 text-emerald-400"
-                            : "bg-rose-500/10 text-rose-400"
-                    )}>
-                        {trend}
-                    </span>
-                )}
+                <div className={`p-3 rounded-lg ${COLOR_MAP[color]} flex items-center justify-center`}>
+                    <Icon size={22} className="stroke-[2px]" />
+                </div>
             </div>
 
-            <h3 className="text-slate-400 text-sm font-medium mb-1">{title}</h3>
-            <div className="text-2xl font-bold text-white">{value}</div>
+            {percentage && (
+                <div className="flex items-center gap-2 mt-2">
+                    <span
+                        className={`inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-medium ${trendUp ? "bg-[#0ab39c]/10 text-[#0ab39c]" : "bg-[#f06548]/10 text-[#f06548]"
+                            }`}
+                    >
+                        {trendUp ? <ArrowUp size={10} className="mr-0.5" /> : <ArrowDown size={10} className="mr-0.5" />}
+                        {percentage}
+                    </span>
+                    <span className="text-[#878a99] text-xs">vs. previous month</span>
+                </div>
+            )}
+
+            {/* Link Overlay */}
+            <a href="#" className="absolute inset-0 z-10 block" aria-label={`View details for ${title}`}></a>
         </div>
     );
 }

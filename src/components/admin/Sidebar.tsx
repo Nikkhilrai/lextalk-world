@@ -5,109 +5,130 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
-    LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar
+    LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar,
+    PieChart, Layers, Map as MapIcon, Shield
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
 
-const NAV_ITEMS = [
-    { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-    { label: "Leads", href: "/admin/leads", icon: Users },
-    { label: "Conferences", href: "/admin/conferences", icon: Calendar },
-    { label: "Tickets", href: "/admin/tickets", icon: Ticket },
-    { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
-    { label: "Speakers", href: "/admin/speakers", icon: Mic },
-    { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
-    { label: "Awards", href: "/admin/awards", icon: Trophy },
-    { label: "Blog", href: "/admin/blog", icon: BookOpen },
-    { label: "Advisors", href: "/admin/advisors", icon: Users },
-    { label: "Settings", href: "/admin/settings", icon: Settings },
+const NAV_GROUPS = [
+    {
+        title: "MENU",
+        items: [
+            { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+            { label: "Leads", href: "/admin/leads", icon: Users },
+            { label: "Analytics", href: "/admin", icon: PieChart },
+        ]
+    },
+    {
+        title: "APPS",
+        items: [
+            { label: "Conferences", href: "/admin/conferences", icon: Calendar },
+            { label: "Tickets", href: "/admin/tickets", icon: Ticket },
+            { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
+            { label: "Chat", href: "#", icon: Layers, badge: "New" }, // Placeholder
+        ]
+    },
+    {
+        title: "PAGES",
+        items: [
+            { label: "Speakers", href: "/admin/speakers", icon: Mic },
+            { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
+            { label: "Awards", href: "/admin/awards", icon: Trophy },
+            { label: "Blog", href: "/admin/blog", icon: BookOpen },
+            { label: "Authentication", href: "/admin/login", icon: Shield },
+        ]
+    }
 ];
 
 export function Sidebar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
 
+    // Initial state for mobile
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     return (
         <>
-            {/* Mobile Menu Button */}
+            {/* Mobile Toggle */}
             <button
                 onClick={toggleSidebar}
-                className="lg:hidden fixed top-4 right-4 z-50 p-2 bg-slate-800 text-white rounded-lg shadow-lg"
+                className="lg:hidden fixed top-3 left-4 z-50 p-2 text-white bg-[#405189] rounded shadow-lg"
             >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
 
-            {/* Sidebar Container */}
             <aside
-                className={`fixed top-0 left-0 z-40 h-screen w-64 bg-slate-900 border-r border-slate-800 transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-0 left-0 z-40 h-screen w-[250px] bg-[#13192f] border-r border-[#1b213b] transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
-                <div className="flex flex-col h-full bg-slate-900 border-r border-slate-800">
-                    {/* Logo Section */}
-                    <div className="p-6 border-b border-slate-800 flex justify-center">
-                        <Image
-                            src="/logo/Lextalk-Logo.png"
-                            alt="Lextalk World"
-                            width={140}
-                            height={40}
-                            className="h-8 w-auto object-contain"
-                        />
-                    </div>
+                {/* Logo */}
+                <div className="h-[70px] flex items-center justify-center border-b border-[#1b213b]">
+                    <Link href="/admin" className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded bg-[#405189] flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">L</span>
+                        </div>
+                        <span className="text-white font-bold text-xl tracking-wide">LEXTALK</span>
+                    </Link>
+                </div>
 
-                    {/* Navigation Links */}
-                    <nav className="flex-1 overflow-y-auto py-6 px-3 space-y-1">
-                        {NAV_ITEMS.map((item) => {
-                            const isActive = pathname === item.href;
-                            const Icon = item.icon;
+                <div className="h-[calc(100vh-70px)] overflow-y-auto hidden-scrollbar py-4">
+                    {NAV_GROUPS.map((group, idx) => (
+                        <div key={idx} className="mb-6">
+                            <div className="px-6 mb-2">
+                                <p className="text-[#878a99] text-[11px] font-semibold uppercase tracking-wider">{group.title}</p>
+                            </div>
+                            <ul className="space-y-1">
+                                {group.items.map((item) => {
+                                    const isActive = pathname === item.href;
+                                    const Icon = item.icon;
 
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 group relative ${isActive
-                                        ? "bg-gradient-to-r from-amber-500/10 to-amber-600/5 text-amber-500"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
-                                        }`}
-                                >
-                                    {isActive && (
-                                        <div className="absolute left-0 w-1 h-6 bg-amber-500 rounded-r-full" />
-                                    )}
-                                    <Icon
-                                        size={20}
-                                        className={`transition-colors ${isActive ? "text-amber-500" : "text-slate-500 group-hover:text-white"
-                                            }`}
-                                    />
-                                    {item.label}
-                                </Link>
-                            );
-                        })}
-                    </nav>
+                                    return (
+                                        <li key={item.label}>
+                                            <Link
+                                                href={item.href}
+                                                onClick={() => setIsOpen(false)}
+                                                className={`relative flex items-center gap-3 px-6 py-2.5 text-[14px] font-medium transition-colors ${isActive
+                                                        ? "text-white bg-[#1b213b] border-l-[3px] border-[#405189]"
+                                                        : "text-[#abb9e8] hover:text-white hover:bg-[#1b213b]/50 border-l-[3px] border-transparent"
+                                                    }`}
+                                            >
+                                                <Icon size={18} className={isActive ? "text-[#405189]" : "text-[#878a99]"} />
+                                                <span className="flex-1">{item.label}</span>
+                                                {(item as any).badge && (
+                                                    <span className="bg-[#f06548] text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+                                                        {(item as any).badge}
+                                                    </span>
+                                                )}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    ))}
 
-                    {/* Footer Section */}
-                    <div className="p-4 border-t border-slate-800">
+                    {/* Logout */}
+                    <div className="px-6 mt-8">
                         <button
                             onClick={async () => {
                                 await logout();
                                 window.location.href = "/admin/login";
                             }}
-                            className="flex items-center gap-3 w-full px-3 py-3 text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-400 rounded-lg transition-colors"
+                            className="flex items-center gap-3 text-[#f06548] hover:text-white hover:bg-[#f06548] px-4 py-2 rounded transition-all w-full text-sm font-medium border border-[#f06548]/30"
                         >
-                            <LogOut size={20} />
-                            Sign Out
+                            <LogOut size={16} />
+                            <span>Logout</span>
                         </button>
                     </div>
                 </div>
             </aside>
 
-            {/* Overlay for Mobile */}
+            {/* Overlay */}
             {isOpen && (
                 <div
+                    className="fixed inset-0 bg-[#000]/50 z-30 lg:hidden backdrop-blur-sm"
                     onClick={() => setIsOpen(false)}
-                    className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm lg:hidden"
                 />
             )}
         </>
