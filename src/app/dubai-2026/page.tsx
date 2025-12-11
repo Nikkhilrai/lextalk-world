@@ -677,7 +677,7 @@ export default function DubaiEventPage() {
                         <div className="flex justify-center gap-8 flex-wrap">
                             <div className="relative w-56 h-24 md:w-72 md:h-28 bg-gradient-to-br from-slate-50 to-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 p-4 border border-slate-100 hover:border-amber-200 group">
                                 <Image
-                                    src="/logo/case-docer-logo.png"
+                                    src="/dubai-event/sponsors/CasedockerLogo.avif"
                                     alt="Case Docer - Diamond Sponsor"
                                     fill
                                     className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
