@@ -635,60 +635,75 @@ export default function DubaiEventPage() {
             <DubaiAdvisoryBoard />
 
             {/* ===================== SPONSORS ===================== */}
-            <section id="sponsors" className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
-                {/* Decorative Background Elements */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
-
+            <section id="sponsors" className="py-20 md:py-28 bg-white relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
-                    {/* Section Header */}
+                    {/* Main Heading - Classic Serif */}
                     <div className="text-center mb-16">
-                        <span className="text-amber-600 font-bold tracking-[0.2em] text-sm uppercase">Our Partners</span>
-                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mt-3 mb-6">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1e293b] inline-block relative px-4">
                             Sponsors
+                            <div className="absolute bottom-1 left-0 w-full h-1 bg-[#1e293b] rounded-full opacity-20" />
+                            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#1e293b] rounded-full" />
                         </h2>
-                        <div className="w-20 h-1 bg-amber-500 mx-auto rounded-full" />
                     </div>
 
                     {/* Presenting Sponsor */}
-                    <div className="mb-20">
-                        <div className="text-center mb-10">
-                            <div className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 shadow-lg shadow-amber-500/20 mb-4 transform hover:scale-105 transition-transform duration-300">
-                                <h3 className="text-lg md:text-xl font-serif font-bold text-white tracking-widest uppercase">
+                    <div className="mb-20 flex flex-col items-center">
+                        {/* Gold Bar Header */}
+                        <div className="w-full max-w-lg mb-10">
+                            <div className="bg-gradient-to-r from-[#926F34] via-[#A88B4D] to-[#926F34] py-3 md:py-4 px-8 shadow-lg relative transform hover:scale-[1.02] transition-transform duration-300">
+                                {/* Thin gold borders top/bottom for extra detail */}
+                                <div className="absolute top-0.5 left-0 w-full h-[1px] bg-[#CDB073] opacity-50" />
+                                <div className="absolute bottom-0.5 left-0 w-full h-[1px] bg-[#75592A] opacity-50" />
+
+                                <h3 className="text-center text-xl md:text-2xl font-serif font-bold text-white tracking-wider uppercase drop-shadow-md">
                                     Presenting Sponsor
                                 </h3>
                             </div>
                         </div>
-                        <div className="flex justify-center">
-                            <div className="relative w-72 h-32 md:w-96 md:h-40 bg-white rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 p-6 border border-slate-100 hover:border-amber-200 group transform hover:-translate-y-1">
-                                <Image
-                                    src="/logo/mrs-logo.avif"
-                                    alt="MRS Company - Presenting Sponsor"
-                                    fill
-                                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                                />
-                            </div>
+
+                        {/* Large Logo */}
+                        <div className="relative w-80 h-40 md:w-[450px] md:h-52 transition-transform duration-500 hover:scale-105">
+                            <Image
+                                src="/logo/mrs-logo.avif"
+                                alt="MRS Company - Presenting Sponsor"
+                                fill
+                                className="object-contain drop-shadow-xl"
+                            />
                         </div>
                     </div>
 
                     {/* Diamond Sponsors */}
-                    <div>
-                        <div className="text-center mb-10">
-                            <div className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 shadow-lg shadow-amber-500/20 mb-4 transform hover:scale-105 transition-transform duration-300">
-                                <h3 className="text-lg md:text-xl font-serif font-bold text-white tracking-widest uppercase">
+                    <div className="flex flex-col items-center">
+                        {/* Gold Bar Header */}
+                        <div className="w-full max-w-lg mb-10">
+                            <div className="bg-gradient-to-r from-[#926F34] via-[#A88B4D] to-[#926F34] py-3 md:py-4 px-8 shadow-lg relative transform hover:scale-[1.02] transition-transform duration-300">
+                                <div className="absolute top-0.5 left-0 w-full h-[1px] bg-[#CDB073] opacity-50" />
+                                <div className="absolute bottom-0.5 left-0 w-full h-[1px] bg-[#75592A] opacity-50" />
+
+                                <h3 className="text-center text-xl md:text-2xl font-serif font-bold text-white tracking-wider uppercase drop-shadow-md">
                                     Diamond Sponsors
                                 </h3>
                             </div>
                         </div>
-                        <div className="flex justify-center gap-8 flex-wrap">
-                            <div className="relative w-64 h-28 md:w-80 md:h-32 bg-white rounded-xl shadow-lg hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-500 p-4 border border-slate-100 hover:border-amber-200 group transform hover:-translate-y-1">
-                                <Image
-                                    src="/dubai-event/sponsors/CasedockerLogo.avif"
-                                    alt="Case Docer - Diamond Sponsor"
-                                    fill
-                                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                                />
+
+                        {/* Logos Grid - Clean White Cards style from image */}
+                        <div className="flex justify-center gap-8 md:gap-12 flex-wrap">
+                            {/* Case Docer */}
+                            <div className="w-64 h-64 bg-white rounded-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 flex items-center justify-center p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src="/dubai-event/sponsors/CasedockerLogo.avif"
+                                        alt="Case Docker"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
                             </div>
+
+                            {/* Placeholders to match the 3-grid look if user wants (Lex Corp, Allcanza) 
+                                For now, I'll just keep Case Docker centered as per current state, 
+                                but styled exactly like the white square cards in the image 
+                            */}
                         </div>
                     </div>
                 </div>
