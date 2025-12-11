@@ -21,6 +21,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "LexTalk World | Global Legal Conference Platform",
   description: "The Global Authority on Legal Tech. Connect, Lead, and Innovate.",
+  icons: {
+    icon: "/favicon-v2.png",
+    shortcut: "/favicon-v2.png",
+    apple: "/favicon-v2.png",
+  },
 
 };
 
