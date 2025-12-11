@@ -634,6 +634,60 @@ export default function DubaiEventPage() {
             {/* ===================== ADVISORY BOARD ===================== */}
             <DubaiAdvisoryBoard />
 
+            {/* ===================== SPONSORS ===================== */}
+            <section id="sponsors" className="py-20 md:py-28 bg-white relative overflow-hidden">
+                <div className="container mx-auto px-4 relative z-10">
+                    {/* Section Header */}
+                    <div className="text-center mb-16">
+                        <span className="text-amber-600 font-bold tracking-[0.2em] text-sm uppercase">Our Partners</span>
+                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mt-3 mb-6">
+                            Sponsors
+                        </h2>
+                        <div className="w-20 h-1 bg-amber-500 mx-auto rounded-full" />
+                    </div>
+
+                    {/* Presenting Sponsor */}
+                    <div className="mb-16">
+                        <div className="text-center mb-8">
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-slate-800 mb-2">
+                                Presenting Sponsor
+                            </h3>
+                            <div className="w-16 h-0.5 bg-amber-400 mx-auto" />
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="relative w-72 h-28 md:w-96 md:h-36 bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 p-6 border border-slate-100 hover:border-amber-200 group">
+                                <Image
+                                    src="/logo/mrs-logo.avif"
+                                    alt="MRS Company - Presenting Sponsor"
+                                    fill
+                                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Diamond Sponsors */}
+                    <div>
+                        <div className="text-center mb-8">
+                            <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-700 mb-2">
+                                Diamond Sponsors
+                            </h3>
+                            <div className="w-12 h-0.5 bg-slate-300 mx-auto" />
+                        </div>
+                        <div className="flex justify-center gap-8 flex-wrap">
+                            <div className="relative w-56 h-24 md:w-72 md:h-28 bg-gradient-to-br from-slate-50 to-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 p-4 border border-slate-100 hover:border-amber-200 group">
+                                <Image
+                                    src="/logo/case-docer-logo.png"
+                                    alt="Case Docer - Diamond Sponsor"
+                                    fill
+                                    className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ===================== CTA SECTION ===================== */}
             <section className="py-20 md:py-24 bg-gradient-to-br from-[#0a0f1a] via-[#1a1f2e] to-[#0a0f1a] relative overflow-hidden">
                 {/* Background Pattern */}
