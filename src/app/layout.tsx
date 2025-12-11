@@ -3,7 +3,6 @@ import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/JsonLd";
-import { HelpWidget } from "@/components/HelpWidget";
 
 // Elegant, high-contrast serif for headings - authoritative and professional
 const playfair = Playfair_Display({
@@ -103,7 +102,6 @@ export default function RootLayout({
         className={`${playfair.variable} ${dmSans.variable} font-sans antialiased bg-slate-50 text-slate-900`}
       >
         {children}
-        <HelpWidget />
       </body>
     </html>
   );
