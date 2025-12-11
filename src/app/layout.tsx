@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title: "LexTalk World | Global Legal Conference Platform",
   description: "The Global Authority on Legal Tech. Connect, Lead, and Innovate.",
   icons: {
-    icon: "/logo/Lextalk-Logo.png",
-    shortcut: "/logo/Lextalk-Logo.png",
-    apple: "/logo/Lextalk-Logo.png",
+    icon: "/logo/favicon.png",
+    shortcut: "/logo/favicon.png",
+    apple: "/logo/favicon.png",
   },
 };
 
