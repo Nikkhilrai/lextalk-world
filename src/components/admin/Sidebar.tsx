@@ -8,6 +8,7 @@ import {
     LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket
 } from "lucide-react";
 import Image from "next/image";
+import { logout } from "@/actions/auth";
 
 const NAV_ITEMS = [
     { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -66,8 +67,8 @@ export function Sidebar() {
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
                                     className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 group relative ${isActive
-                                            ? "bg-gradient-to-r from-amber-500/10 to-amber-600/5 text-amber-500"
-                                            : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                                        ? "bg-gradient-to-r from-amber-500/10 to-amber-600/5 text-amber-500"
+                                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
                                         }`}
                                 >
                                     {isActive && (
@@ -87,7 +88,10 @@ export function Sidebar() {
                     {/* Footer Section */}
                     <div className="p-4 border-t border-slate-800">
                         <button
-                            onClick={() => {/* Implement logout logic later */ }}
+                            onClick={async () => {
+                                await logout();
+                                window.location.href = "/admin/login";
+                            }}
                             className="flex items-center gap-3 w-full px-3 py-3 text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-400 rounded-lg transition-colors"
                         >
                             <LogOut size={20} />

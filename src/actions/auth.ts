@@ -80,3 +80,9 @@ export async function getAdminProfile() {
         return { success: false, error: "Failed to fetch profile" };
     }
 }
+
+export async function logout() {
+    const cookieStore = await cookies();
+    cookieStore.delete("admin_token");
+    return { success: true };
+}
