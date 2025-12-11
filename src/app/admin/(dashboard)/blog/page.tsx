@@ -350,7 +350,7 @@ export default function BlogAdminPage() {
                                             <div className="flex items-center gap-3">
                                                 <div className="w-12 h-12 rounded-lg bg-slate-700 overflow-hidden flex-shrink-0">
                                                     {post.image && (
-                                                        <img src={post.image} alt="" className="w-full h-full object-cover" />
+                                                        <img src={post.image} alt={`Thumbnail for ${post.title}`} className="w-full h-full object-cover" />
                                                     )}
                                                 </div>
                                                 <div>
