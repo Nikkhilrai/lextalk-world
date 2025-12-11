@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Lock, Save, Shield, User, UserPlus, Trash2, Users } from "lucide-react";
+import { Lock, Save, Shield, User, UserPlus, Trash2, Users, Pencil, X } from "lucide-react";
 import {
     updateProfile,
     updatePassword,
     getAdminProfile,
     getAllAdminUsers,
     createAdminUser,
-    deleteAdminUser
+    deleteAdminUser,
+    updateAdminUser
 } from "@/actions/auth";
 
 interface AdminUser {
@@ -24,6 +25,9 @@ export default function SettingsPage() {
     const [isLoadingPassword, setIsLoadingPassword] = useState(false);
     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
     const [isCreatingUser, setIsCreatingUser] = useState(false);
+    const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
+    const [editForm, setEditForm] = useState({ name: "", email: "", password: "", role: "admin" });
+    const [isUpdatingUser, setIsUpdatingUser] = useState(false);
 
     // Profile State
     const [profile, setProfile] = useState({ name: "", email: "", role: "" });
@@ -133,6 +137,38 @@ export default function SettingsPage() {
         } else {
             alert(res.error || "Failed to delete user");
         }
+    };
+
+    const startEditUser = (user: AdminUser) => {
+        setEditingUser(user);
+        setEditForm({ name: user.name || "", email: user.email, password: "", role: user.role });
+    };
+
+    const handleUpdateUser = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!editingUser) return;
+        setIsUpdatingUser(true);
+
+        const updateData: { name?: string; email?: string; password?: string; role?: string } = {
+            name: editForm.name,
+            email: editForm.email,
+            role: editForm.role
+        };
+        if (editForm.password) updateData.password = editForm.password;
+
+        const res = await updateAdminUser(editingUser.id, updateData);
+        if (res.success) {
+            alert("User updated successfully!");
+            setEditingUser(null);
+            // Reload users
+            const usersRes = await getAllAdminUsers();
+            if (usersRes.success && usersRes.users) {
+                setAdminUsers(usersRes.users);
+            }
+        } else {
+            alert(res.error || "Failed to update user");
+        }
+        setIsUpdatingUser(false);
     };
 
     return (
@@ -376,15 +412,24 @@ export default function SettingsPage() {
                                                     {user.role}
                                                 </span>
                                             </td>
-                                            <td className="py-3 px-4 text-right">
+                                            <td className="py-3 px-4 text-right flex justify-end gap-1">
                                                 {user.email !== profile.email && (
-                                                    <button
-                                                        onClick={() => handleDeleteUser(user.id, user.email)}
-                                                        className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-                                                        title="Delete User"
-                                                    >
-                                                        <Trash2 size={16} />
-                                                    </button>
+                                                    <>
+                                                        <button
+                                                            onClick={() => startEditUser(user)}
+                                                            className="p-2 text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
+                                                            title="Edit User"
+                                                        >
+                                                            <Pencil size={16} />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeleteUser(user.id, user.email)}
+                                                            className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                                            title="Delete User"
+                                                        >
+                                                            <Trash2 size={16} />
+                                                        </button>
+                                                    </>
                                                 )}
                                             </td>
                                         </tr>
@@ -393,6 +438,82 @@ export default function SettingsPage() {
                             </table>
                         </div>
                     )}
+                </div>
+            )}
+
+            {/* Edit User Modal */}
+            {editingUser && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full max-w-md">
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-lg font-bold text-white">Edit Admin User</h3>
+                            <button
+                                onClick={() => setEditingUser(null)}
+                                className="p-2 text-slate-400 hover:text-white transition-colors"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <form onSubmit={handleUpdateUser} className="space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-slate-300">Name</label>
+                                <input
+                                    type="text"
+                                    value={editForm.name}
+                                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-slate-300">Email</label>
+                                <input
+                                    type="email"
+                                    value={editForm.email}
+                                    onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-slate-300">New Password <span className="text-slate-500">(leave blank to keep current)</span></label>
+                                <input
+                                    type="password"
+                                    value={editForm.password}
+                                    onChange={(e) => setEditForm({ ...editForm, password: e.target.value })}
+                                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
+                                    placeholder="••••••••"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-slate-300">Role</label>
+                                <select
+                                    value={editForm.role}
+                                    onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
+                                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
+                                >
+                                    <option value="admin">Admin</option>
+                                    <option value="super_admin">Super Admin</option>
+                                </select>
+                            </div>
+                            <div className="flex gap-2 pt-4">
+                                <button
+                                    type="submit"
+                                    disabled={isUpdatingUser}
+                                    className="flex-1 px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                                >
+                                    {isUpdatingUser ? "Updating..." : "Save Changes"}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setEditingUser(null)}
+                                    className="px-4 py-2 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             )}
         </div>

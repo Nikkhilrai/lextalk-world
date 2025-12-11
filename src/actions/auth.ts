@@ -162,3 +162,30 @@ export async function deleteAdminUser(id: string) {
         return { success: false, error: "Failed to delete user" };
     }
 }
+
+export async function updateAdminUser(id: string, data: { name?: string; email?: string; password?: string; role?: string }) {
+    try {
+        const admin = await getCurrentAdmin();
+        if (!admin) return { success: false, error: "Unauthorized" };
+        if (admin.role !== "super_admin" && admin.role !== "superadmin") return { success: false, error: "Permission denied" };
+
+        const updateData: { name?: string; email?: string; password?: string; role?: string } = {};
+
+        if (data.name) updateData.name = data.name;
+        if (data.email) updateData.email = data.email;
+        if (data.role) updateData.role = data.role;
+        if (data.password) {
+            updateData.password = await hashPassword(data.password);
+        }
+
+        await prisma.adminUser.update({
+            where: { id },
+            data: updateData
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to update admin user:", error);
+        return { success: false, error: "Failed to update user" };
+    }
+}
