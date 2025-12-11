@@ -150,7 +150,7 @@ async function sendConfirmationEmail(data: any) {
                         
                         <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
                             If you have any questions, feel free to reach out to us at 
-                            <a href="mailto:info@lextalkworld.in" style="color: #f59e0b;">info@lextalkworld.in</a>
+                            <a href="mailto:abhishek@clickawaycreators.com" style="color: #f59e0b;">abhishek@clickawaycreators.com</a>
                         </p>
                     </div>
                     <div style="text-align: center; padding: 20px;">
