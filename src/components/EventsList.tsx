@@ -7,7 +7,7 @@ import { MapPin, Calendar, ArrowRight, Users, Clock } from "lucide-react";
 const event = {
     city: "Dubai",
     month: "MAY",
-    days: "20-21",
+    days: "13-14",
     year: "2026",
     venue: "Dubai World Trade Centre",
     image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200&auto=format&fit=crop",

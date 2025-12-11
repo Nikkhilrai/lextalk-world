@@ -15,7 +15,7 @@ const availableEvents = [
         id: "dubai-2026",
         name: "LexTalk World Summit Dubai 2026",
         shortName: "Dubai 2026",
-        date: "March 15-17, 2026",
+        date: "May 13-14, 2026",
         location: "Dubai, UAE",
         venue: "Atlantis The Royal",
         image: "/dubai-event/event-bg.avif",
@@ -188,16 +188,16 @@ export default function TicketsPage() {
                                         onClick={() => event.status === "Open" && setSelectedEvent(event)}
                                         disabled={event.status !== "Open"}
                                         className={`flex-1 relative group rounded-2xl p-5 transition-all duration-300 ${selectedEvent.id === event.id
-                                                ? "bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-2 border-amber-500/50"
-                                                : event.status === "Open"
-                                                    ? "bg-white/5 border-2 border-transparent hover:border-white/20"
-                                                    : "bg-white/[0.02] border-2 border-transparent opacity-50 cursor-not-allowed"
+                                            ? "bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-2 border-amber-500/50"
+                                            : event.status === "Open"
+                                                ? "bg-white/5 border-2 border-transparent hover:border-white/20"
+                                                : "bg-white/[0.02] border-2 border-transparent opacity-50 cursor-not-allowed"
                                             }`}
                                     >
                                         {/* Event Status Badge */}
                                         <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold ${event.status === "Open"
-                                                ? "bg-emerald-500/20 text-emerald-400"
-                                                : "bg-slate-500/20 text-slate-400"
+                                            ? "bg-emerald-500/20 text-emerald-400"
+                                            : "bg-slate-500/20 text-slate-400"
                                             }`}>
                                             {event.status}
                                         </div>
@@ -323,8 +323,8 @@ export default function TicketsPage() {
 
                                         {/* Select Button */}
                                         <button className={`w-full py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${isSelected
-                                                ? 'bg-white text-slate-900 hover:bg-slate-100'
-                                                : `${classes.button} text-white shadow-lg`
+                                            ? 'bg-white text-slate-900 hover:bg-slate-100'
+                                            : `${classes.button} text-white shadow-lg`
                                             }`}>
                                             {isSelected ? (
                                                 <>

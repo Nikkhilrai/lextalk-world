@@ -233,7 +233,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                     <div className="space-y-4">
                                         <h3 className="text-lg font-serif text-slate-900 font-bold border-l-4 border-amber-500 pl-3">Conferences</h3>
                                         <div className="space-y-3 pl-4">
-                                            {['Dubai, May 20-21 2026', 'Mumbai, Dec 2026'].map((option) => (
+                                            {['Dubai, May 13-14 2026', 'Mumbai, Dec 2026'].map((option) => (
                                                 <label key={option} className="flex items-center gap-3 cursor-pointer group">
                                                     <div className="relative flex items-center justify-center w-4 h-4">
                                                         <input type="radio" name="conference" value={option} className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300" />
