@@ -4,6 +4,7 @@ import { X, ArrowRight, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { CountrySelect } from "@/components/CountrySelect";
+import { PhoneInput } from "@/components/PhoneInput";
 
 interface RegisterModalProps {
     isOpen: boolean;
@@ -15,6 +16,7 @@ import { createLead } from "@/actions/lead";
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const [mounted, setMounted] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState("");
+    const [contactNumber, setContactNumber] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -27,7 +29,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
             firstName: formData.get("firstName"),
             lastName: formData.get("lastName"),
             email: formData.get("email"),
-            contact: formData.get("contact"),
+            contact: contactNumber,
             organization: formData.get("organization"),
             designation: formData.get("designation"),
             country: selectedCountry || "International",
@@ -57,7 +59,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         if (!isOpen) {
             setTimeout(() => {
                 setIsSubmitted(false);
-                setSelectedCountry(""); // Optional: reset fields
+                setSelectedCountry("");
+                setContactNumber("");
             }, 300);
         }
     }, [isOpen]);
@@ -171,23 +174,13 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                     </div>
 
                                     <div className="relative group">
-                                        <input
-                                            type="tel"
-                                            name="contact"
+                                        <PhoneInput
                                             id="contact"
+                                            name="contact"
                                             required
-                                            className="peer w-full py-2 bg-transparent text-slate-900 border-b border-slate-300 focus:border-amber-500 transition-all outline-none placeholder-transparent text-base"
-                                            placeholder="Contact Number"
+                                            value={contactNumber}
+                                            onChange={setContactNumber}
                                         />
-                                        <label
-                                            htmlFor="contact"
-                                            className="absolute left-0 top-2 text-slate-400 text-base pointer-events-none transition-all duration-200
-                                            peer-placeholder-shown:top-2 peer-placeholder-shown:text-slate-400 peer-placeholder-shown:text-base
-                                            peer-focus:-top-4 peer-focus:text-xs peer-focus:text-amber-600 peer-focus:font-semibold
-                                            peer-[&:not(:placeholder-shown)]:-top-4 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-amber-600 peer-[&:not(:placeholder-shown)]:font-semibold"
-                                        >
-                                            Contact Number
-                                        </label>
                                     </div>
 
                                     <div className="relative group">

@@ -3,34 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { ChevronDown, Search, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// Comprehensive list of countries
-const COUNTRIES = [
-    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
-    "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
-    "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
-    "Denmark", "Djibouti", "Dominica", "Dominican Republic",
-    "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
-    "Fiji", "Finland", "France",
-    "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
-    "Haiti", "Honduras", "Hungary",
-    "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast",
-    "Jamaica", "Japan", "Jordan",
-    "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan",
-    "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
-    "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
-    "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway",
-    "Oman",
-    "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
-    "Qatar",
-    "Romania", "Russia", "Rwanda",
-    "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
-    "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
-    "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
-    "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
-    "Yemen",
-    "Zambia", "Zimbabwe"
-];
+import { COUNTRIES_DATA, Country, getCountryByName } from "@/lib/countries";
 
 interface CountrySelectProps {
     value?: string;
@@ -43,10 +16,17 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
     const [searchQuery, setSearchQuery] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
 
+    // Get selected country object from value (country name)
+    const selectedCountry = useMemo(() => {
+        return value ? getCountryByName(value) : undefined;
+    }, [value]);
+
     // Filter countries based on search
     const filteredCountries = useMemo(() => {
-        return COUNTRIES.filter(country =>
-            country.toLowerCase().includes(searchQuery.toLowerCase())
+        const query = searchQuery.toLowerCase();
+        return COUNTRIES_DATA.filter(country =>
+            country.name.toLowerCase().includes(query) ||
+            country.code.toLowerCase().includes(query)
         );
     }, [searchQuery]);
 
@@ -61,8 +41,8 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const handleSelect = (country: string) => {
-        onChange?.(country);
+    const handleSelect = (country: Country) => {
+        onChange?.(country.name);
         setIsOpen(false);
         setSearchQuery("");
     };
@@ -78,11 +58,16 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
                     "peer w-full py-2 bg-transparent border-b border-slate-300 transition-all text-sm sm:text-base flex items-center justify-between",
                     isOpen ? "border-amber-500" : "group-hover:border-slate-400"
                 )}>
-                    <span className={cn(
-                        value ? "text-slate-900" : "text-transparent"
-                    )}>
-                        {value || "Select Country"}
-                    </span>
+                    <div className="flex items-center gap-2">
+                        {selectedCountry && (
+                            <span className="text-lg leading-none">{selectedCountry.flag}</span>
+                        )}
+                        <span className={cn(
+                            value ? "text-slate-900" : "text-transparent"
+                        )}>
+                            {value || "Select Country"}
+                        </span>
+                    </div>
                     <ChevronDown className={cn(
                         "w-4 h-4 text-slate-400 transition-transform duration-200",
                         isOpen && "rotate-180 text-amber-500"
@@ -127,16 +112,17 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
                         {filteredCountries.length > 0 ? (
                             filteredCountries.map((country) => (
                                 <button
-                                    key={country}
+                                    key={country.code}
                                     type="button"
                                     onClick={() => handleSelect(country)}
                                     className={cn(
-                                        "w-full px-4 py-2 text-left text-sm hover:bg-amber-50 transition-colors flex items-center justify-between group/item",
-                                        value === country ? "bg-amber-50 text-amber-900 font-medium" : "text-slate-600"
+                                        "w-full px-4 py-2 text-left text-sm hover:bg-amber-50 transition-colors flex items-center gap-3 group/item",
+                                        selectedCountry?.code === country.code ? "bg-amber-50 text-amber-900 font-medium" : "text-slate-600"
                                     )}
                                 >
-                                    {country}
-                                    {value === country && (
+                                    <span className="text-lg leading-none">{country.flag}</span>
+                                    <span className="flex-1">{country.name}</span>
+                                    {selectedCountry?.code === country.code && (
                                         <Check className="w-3.5 h-3.5 text-amber-600" />
                                     )}
                                 </button>
