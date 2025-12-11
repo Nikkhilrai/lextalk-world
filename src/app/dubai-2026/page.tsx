@@ -635,75 +635,96 @@ export default function DubaiEventPage() {
             <DubaiAdvisoryBoard />
 
             {/* ===================== SPONSORS ===================== */}
-            <section id="sponsors" className="py-20 md:py-28 bg-white relative overflow-hidden">
+            <section id="sponsors" className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-kb from-amber-500/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-amber-500/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+
                 <div className="container mx-auto px-4 relative z-10">
-                    {/* Main Heading - Classic Serif */}
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1e293b] inline-block relative px-4">
+                    {/* Header - Premium Style */}
+                    <div className="text-center mb-20">
+                        <span className="text-amber-600 font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3 block">
+                            Our Strategic Partners
+                        </span>
+                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6">
                             Sponsors
-                            <div className="absolute bottom-1 left-0 w-full h-1 bg-[#1e293b] rounded-full opacity-20" />
-                            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#1e293b] rounded-full" />
                         </h2>
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400" />
+                            <div className="w-2 h-2 rounded-full bg-amber-500" />
+                            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400" />
+                        </div>
                     </div>
 
-                    {/* Presenting Sponsor */}
-                    <div className="mb-20 flex flex-col items-center">
-                        {/* Gold Bar Header */}
-                        <div className="w-full max-w-lg mb-10">
-                            <div className="bg-gradient-to-r from-[#926F34] via-[#A88B4D] to-[#926F34] py-3 md:py-4 px-8 shadow-lg relative transform hover:scale-[1.02] transition-transform duration-300">
-                                {/* Thin gold borders top/bottom for extra detail */}
-                                <div className="absolute top-0.5 left-0 w-full h-[1px] bg-[#CDB073] opacity-50" />
-                                <div className="absolute bottom-0.5 left-0 w-full h-[1px] bg-[#75592A] opacity-50" />
+                    {/* Presenting Sponsor - The "Hero" of Sponsors */}
+                    <div className="mb-24 relative">
+                        {/* Connecting Line */}
+                        <div className="absolute left-1/2 -top-10 bottom-0 w-px bg-gradient-to-b from-amber-500/20 via-amber-500/10 to-transparent -translate-x-1/2 pointer-events-none" />
 
-                                <h3 className="text-center text-xl md:text-2xl font-serif font-bold text-white tracking-wider uppercase drop-shadow-md">
-                                    Presenting Sponsor
-                                </h3>
+                        <div className="flex flex-col items-center relative z-10">
+                            {/* Category Badge */}
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-3 bg-white border border-amber-100 rounded-full shadow-[0_4px_20px_-2px_rgba(245,158,11,0.15)] backdrop-blur-sm group">
+                                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-50" />
+                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 uppercase tracking-widest group-hover:tracking-[0.15em] transition-all duration-500">
+                                        Presenting Sponsor
+                                    </h3>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Large Logo */}
-                        <div className="relative w-80 h-40 md:w-[450px] md:h-52 transition-transform duration-500 hover:scale-105">
-                            <Image
-                                src="/logo/mrs-logo.avif"
-                                alt="MRS Company - Presenting Sponsor"
-                                fill
-                                className="object-contain drop-shadow-xl"
-                            />
+                            {/* Premium Logo Showcase */}
+                            <div className="relative group perspective-1000">
+                                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-amber-600/5 rounded-3xl blur-xl transition-all duration-500 group-hover:bg-amber-500/10 group-hover:blur-2xl" />
+
+                                <div className="relative w-80 h-48 md:w-[500px] md:h-64 bg-white/60 backdrop-blur-md rounded-3xl border border-white/60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_-12px_rgba(217,119,6,0.15)] flex items-center justify-center p-8 transition-all duration-500 transform group-hover:-translate-y-2">
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/logo/mrs-logo.avif"
+                                            alt="MRS Company - Presenting Sponsor"
+                                            fill
+                                            className="object-contain filter transition-all duration-500"
+                                        />
+                                    </div>
+
+                                    {/* Shine Effect */}
+                                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     {/* Diamond Sponsors */}
-                    <div className="flex flex-col items-center">
-                        {/* Gold Bar Header */}
-                        <div className="w-full max-w-lg mb-10">
-                            <div className="bg-gradient-to-r from-[#926F34] via-[#A88B4D] to-[#926F34] py-3 md:py-4 px-8 shadow-lg relative transform hover:scale-[1.02] transition-transform duration-300">
-                                <div className="absolute top-0.5 left-0 w-full h-[1px] bg-[#CDB073] opacity-50" />
-                                <div className="absolute bottom-0.5 left-0 w-full h-[1px] bg-[#75592A] opacity-50" />
-
-                                <h3 className="text-center text-xl md:text-2xl font-serif font-bold text-white tracking-wider uppercase drop-shadow-md">
-                                    Diamond Sponsors
-                                </h3>
-                            </div>
-                        </div>
-
-                        {/* Logos Grid - Clean White Cards style from image */}
-                        <div className="flex justify-center gap-8 md:gap-12 flex-wrap">
-                            {/* Case Docer */}
-                            <div className="w-64 h-64 bg-white rounded-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 flex items-center justify-center p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/CasedockerLogo.avif"
-                                        alt="Case Docker"
-                                        fill
-                                        className="object-contain"
-                                    />
+                    <div className="relative">
+                        <div className="flex flex-col items-center relative z-10">
+                            {/* Category Badge */}
+                            <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest">
+                                        Diamond Sponsors
+                                    </h3>
                                 </div>
                             </div>
 
-                            {/* Placeholders to match the 3-grid look if user wants (Lex Corp, Allcanza) 
-                                For now, I'll just keep Case Docker centered as per current state, 
-                                but styled exactly like the white square cards in the image 
-                            */}
+                            {/* Logos Grid */}
+                            <div className="flex justify-center gap-8 md:gap-10 flex-wrap">
+                                {/* Case Docer */}
+                                <div className="group relative w-64 h-40 md:w-72 md:h-44">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
+
+                                    <div className="relative h-full w-full p-8 flex items-center justify-center">
+                                        <div className="relative w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100">
+                                            <Image
+                                                src="/dubai-event/sponsors/CasedockerLogo.avif"
+                                                alt="Case Docker"
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Placeholder for balance if needed */}
+                            </div>
                         </div>
                     </div>
                 </div>
