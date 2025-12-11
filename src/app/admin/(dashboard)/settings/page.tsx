@@ -59,7 +59,7 @@ export default function SettingsPage() {
             }
 
             // Load admin users if super_admin
-            if (profileRes.profile?.role === "super_admin") {
+            if (profileRes.profile?.role === "super_admin" || profileRes.profile?.role === "superadmin") {
                 setIsLoadingUsers(true);
                 const usersRes = await getAllAdminUsers();
                 if (usersRes.success && usersRes.users) {
