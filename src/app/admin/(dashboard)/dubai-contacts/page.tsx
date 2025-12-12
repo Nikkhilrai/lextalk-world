@@ -216,7 +216,7 @@ export default function DubaiContactsPage() {
         doc.setFontSize(10);
         doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 22);
 
-        const headers = [["Name", "Email", "Contact", "Country", "Organization", "Designation", "Attended", "Type"]];
+        const headers = [["Name", "Email", "Contact", "Country", "Organization", "Designation", "Attended", "Previous Event", "Type"]];
         const data = filteredContacts.map(c => [
             c.fullName,
             c.email,
@@ -225,6 +225,7 @@ export default function DubaiContactsPage() {
             c.organization,
             c.designation,
             c.previouslyAttended ? "Yes" : "No",
+            c.previousConference || "N/A",
             c.type
         ]);
 
