@@ -15,17 +15,14 @@ interface Contact {
     previouslyAttended: boolean;
     previousConference: string | null;
     type: "Speaker" | "Attendee" | "Sponsor" | "Potential";
+    linkedin?: string | null;
 }
 
-// Curated sample data for Dubai legal conference contacts - 75 professionals
+// Curated sample data for Dubai legal conference contacts - NOTE: This is SAMPLE/MOCK DATA for demonstration
 const SAMPLE_CONTACTS: Contact[] = [
-    // UAE/Dubai Law Firms
+    // UAE/Dubai Law Firms (Private Sector Only)
     { id: "1", fullName: "Ahmed Al Hammadi", email: "ahmed.alhammadi@legaldubai.ae", contact: "+971 50 123 4567", country: "UAE", organization: "Al Hammadi Law Firm", designation: "Managing Partner", previouslyAttended: true, previousConference: "Dubai Legal Week 2024", type: "Speaker" },
     { id: "2", fullName: "Mohammed Al Rashid", email: "m.alrashid@emirates-legal.ae", contact: "+971 56 345 6789", country: "UAE", organization: "Emirates Legal Advisors", designation: "Partner", previouslyAttended: false, previousConference: null, type: "Potential" },
-    { id: "3", fullName: "Khalid Al Mansoori", email: "khalid@difc-courts.ae", contact: "+971 50 789 0123", country: "UAE", organization: "DIFC Courts", designation: "Registrar", previouslyAttended: true, previousConference: "DIFC Legal Week 2024", type: "Speaker" },
-    { id: "4", fullName: "Abdullah bin Saeed", email: "abdullah@adgm.ae", contact: "+971 56 901 2345", country: "UAE", organization: "ADGM", designation: "Head of Legal", previouslyAttended: true, previousConference: "Abu Dhabi Legal Week 2024", type: "Attendee" },
-    { id: "5", fullName: "Dr. Hassan Al Mulla", email: "hassan.almulla@moj.gov.ae", contact: "+971 54 123 0987", country: "UAE", organization: "Ministry of Justice UAE", designation: "Legal Advisor", previouslyAttended: true, previousConference: "Government Legal Forum 2024", type: "Speaker" },
-    { id: "6", fullName: "Mariam Al Suwaidi", email: "mariam@dubaicourtslegal.ae", contact: "+971 55 456 7654", country: "UAE", organization: "Dubai Courts", designation: "Judge", previouslyAttended: true, previousConference: "Judicial Conference 2024", type: "Speaker" },
     { id: "7", fullName: "Saeed Al Dhaheri", email: "saeed@aldhaheri-legal.ae", contact: "+971 50 234 5678", country: "UAE", organization: "Al Dhaheri Law", designation: "Senior Partner", previouslyAttended: true, previousConference: "MENA Legal Summit 2023", type: "Attendee" },
     { id: "8", fullName: "Noura Al Ketbi", email: "noura@alketbi-advocates.ae", contact: "+971 55 345 6789", country: "UAE", organization: "Al Ketbi Advocates", designation: "Founding Partner", previouslyAttended: true, previousConference: "Women in Law Summit 2024", type: "Speaker" },
     { id: "9", fullName: "Omar Al Shamsi", email: "omar@shamsi-law.ae", contact: "+971 56 456 7890", country: "UAE", organization: "Al Shamsi Legal Consultants", designation: "Managing Partner", previouslyAttended: false, previousConference: null, type: "Potential" },
@@ -113,10 +110,6 @@ const SAMPLE_CONTACTS: Contact[] = [
     { id: "71", fullName: "John Martinez", email: "jmartinez@skadden.com", contact: "+1 212 735 3000", country: "USA", organization: "Skadden Arps", designation: "Partner - MENA", previouslyAttended: true, previousConference: "US-UAE Investment Summit 2024", type: "Speaker" },
     { id: "72", fullName: "Sarah O'Brien", email: "sobrien@sullivan.com", contact: "+1 212 558 4000", country: "USA", organization: "Sullivan & Cromwell", designation: "Partner", previouslyAttended: false, previousConference: null, type: "Potential" },
     { id: "73", fullName: "Carlos Rodriguez", email: "crodriguez@cuatrecasas.com", contact: "+34 93 290 55 00", country: "Spain", organization: "Cuatrecasas", designation: "Partner - LatAm", previouslyAttended: true, previousConference: "Spanish Legal Forum 2024", type: "Attendee" },
-
-    // Government & Regulatory
-    { id: "74", fullName: "Dr. Jamal Al Hosani", email: "jalhosani@sca.gov.ae", contact: "+971 2 627 7888", country: "UAE", organization: "SCA UAE", designation: "Director of Legal", previouslyAttended: true, previousConference: "Capital Markets Law 2024", type: "Speaker" },
-    { id: "75", fullName: "Fatima Al Blooshi", email: "falblooshi@centralbank.ae", contact: "+971 2 665 2220", country: "UAE", organization: "Central Bank UAE", designation: "Legal Counsel", previouslyAttended: true, previousConference: "Banking Regulation Forum 2024", type: "Attendee" },
 ];
 
 const TYPE_COLORS: Record<string, string> = {
@@ -420,6 +413,7 @@ export default function DubaiContactsPage() {
                                 <th className="px-4 py-3 font-semibold">Designation</th>
                                 <th className="px-4 py-3 font-semibold">Prev. Attended</th>
                                 <th className="px-4 py-3 font-semibold">Previous Event</th>
+                                <th className="px-4 py-3 font-semibold">LinkedIn</th>
                                 <th className="px-4 py-3 font-semibold">Type</th>
                             </tr>
                         </thead>
@@ -490,6 +484,15 @@ export default function DubaiContactsPage() {
                                         <span className="text-xs text-slate-300 truncate max-w-[150px] block" title={contact.previousConference || ""}>
                                             {contact.previousConference || "—"}
                                         </span>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        {contact.linkedin ? (
+                                            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#0ab39c] hover:underline text-xs">
+                                                View
+                                            </a>
+                                        ) : (
+                                            <span className="text-xs text-slate-500">—</span>
+                                        )}
                                     </td>
                                     <td className="px-4 py-3">
                                         <span className={`text-[10px] px-2 py-1 rounded border font-medium ${TYPE_COLORS[contact.type]}`}>
