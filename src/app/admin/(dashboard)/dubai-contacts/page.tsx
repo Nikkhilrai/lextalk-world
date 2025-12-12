@@ -342,6 +342,7 @@ export default function DubaiContactsPage() {
                                 <th className="px-4 py-3 font-semibold">Organization</th>
                                 <th className="px-4 py-3 font-semibold">Designation</th>
                                 <th className="px-4 py-3 font-semibold">Prev. Attended</th>
+                                <th className="px-4 py-3 font-semibold">Previous Event</th>
                                 <th className="px-4 py-3 font-semibold">Type</th>
                             </tr>
                         </thead>
@@ -399,6 +400,11 @@ export default function DubaiContactsPage() {
                                                 <span className="text-xs text-slate-500">No</span>
                                             </div>
                                         )}
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        <span className="text-xs text-slate-300 truncate max-w-[150px] block" title={contact.previousConference || ""}>
+                                            {contact.previousConference || "—"}
+                                        </span>
                                     </td>
                                     <td className="px-4 py-3">
                                         <span className={`text-[10px] px-2 py-1 rounded border font-medium ${TYPE_COLORS[contact.type]}`}>
