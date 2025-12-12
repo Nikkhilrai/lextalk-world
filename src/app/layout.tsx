@@ -84,6 +84,11 @@ export const metadata: Metadata = {
   verification: {
     google: "VGxkaVCom6ZjS705UYvw7oO6sontjb5B1YgMyQpQEFk",
   },
+  icons: {
+    icon: "/favicon/faviconlextalk-logo.svg",
+    shortcut: "/favicon/faviconlextalk-logo.svg",
+    apple: "/favicon/faviconlextalk-logo.svg",
+  },
 };
 
 export default function RootLayout({
