@@ -9,7 +9,6 @@ import { RegisterModal } from "@/components/RegisterModal";
 
 const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
     { name: "E-Meet", href: "#" },
     {
         name: "Conferences",

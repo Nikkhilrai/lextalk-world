@@ -184,3 +184,31 @@ model LoginAttempt {
 
   @@index([email, createdAt])
 }
+
+// About Page Content Model
+model AboutPage {
+  id               String   @id @default(cuid())
+  // Hero Section
+  heroTagline      String   @default("Connecting Legal Minds Worldwide")
+  heroTitle        String   @default("About LexTalk World")
+  heroSubtitle     String   @db.Text
+  // Stats Section (JSON array)
+  stats            String   @db.Text // JSON: [{number, suffix, label, icon}]
+  // Our Story Section
+  storyTitle       String   @default("Building Bridges Across the Global Legal Community")
+  storyContent     String   @db.Text
+  // Mission & Vision
+  missionTitle     String   @default("Our Mission")
+  missionContent   String   @db.Text
+  visionTitle      String   @default("Our Vision")
+  visionContent    String   @db.Text
+  // Core Values (JSON array)
+  values           String   @db.Text // JSON: [{icon, title, description, color}]
+  // Journey/Milestones (JSON array)
+  milestones       String   @db.Text // JSON: [{year, title, description}]
+  // Settings
+  isPublished      Boolean  @default(false)
+  showInNavbar     Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

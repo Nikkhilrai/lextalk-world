@@ -32,6 +32,7 @@ const NAV_GROUPS = [
     {
         title: "PAGES",
         items: [
+            { label: "About Page", href: "/admin/about", icon: FileText },
             { label: "Speakers", href: "/admin/speakers", icon: Mic },
             { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
             { label: "Awards", href: "/admin/awards", icon: Trophy },
