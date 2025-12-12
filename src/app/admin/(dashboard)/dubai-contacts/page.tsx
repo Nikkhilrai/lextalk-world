@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Download, Filter, Users, MapPin, Building2, Briefcase, Mail, Phone, CheckCircle, XCircle } from "lucide-react";
+import { Search, Download, Filter, Users, MapPin, Building2, Briefcase, Mail, Phone, CheckCircle, XCircle, FileSpreadsheet, FileText } from "lucide-react";
 
 interface Contact {
     id: string;
@@ -175,6 +175,60 @@ export default function DubaiContactsPage() {
         a.click();
     };
 
+    const handleExportExcel = async () => {
+        const XLSX = await import("xlsx");
+        const headers = ["Full Name", "Email", "Contact", "Country", "Organization", "Designation", "Previously Attended", "Previous Conference", "Type"];
+        const data = filteredContacts.map(c => ({
+            "Full Name": c.fullName,
+            "Email": c.email,
+            "Contact": c.contact,
+            "Country": c.country,
+            "Organization": c.organization,
+            "Designation": c.designation,
+            "Previously Attended": c.previouslyAttended ? "Yes" : "No",
+            "Previous Conference": c.previousConference || "N/A",
+            "Type": c.type
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(data, { header: headers });
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Contacts");
+        XLSX.writeFile(wb, "dubai_legal_contacts.xlsx");
+    };
+
+    const handleExportPDF = async () => {
+        const { default: jsPDF } = await import("jspdf");
+        const autoTable = (await import("jspdf-autotable")).default;
+
+        const doc = new jsPDF({ orientation: "landscape" });
+        doc.setFontSize(16);
+        doc.text("Dubai Legal Conference Contacts", 14, 15);
+        doc.setFontSize(10);
+        doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 22);
+
+        const headers = [["Name", "Email", "Contact", "Country", "Organization", "Designation", "Attended", "Type"]];
+        const data = filteredContacts.map(c => [
+            c.fullName,
+            c.email,
+            c.contact,
+            c.country,
+            c.organization,
+            c.designation,
+            c.previouslyAttended ? "Yes" : "No",
+            c.type
+        ]);
+
+        autoTable(doc, {
+            head: headers,
+            body: data,
+            startY: 28,
+            styles: { fontSize: 8 },
+            headStyles: { fillColor: [64, 81, 137] }
+        });
+
+        doc.save("dubai_legal_contacts.pdf");
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -188,13 +242,29 @@ export default function DubaiContactsPage() {
                         Potential speakers, attendees, and legal professionals for Dubai conferences
                     </p>
                 </div>
-                <button
-                    onClick={handleExportCSV}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#0ab39c] hover:bg-[#099c88] text-white rounded-lg font-medium transition-colors"
-                >
-                    <Download size={16} />
-                    Export CSV
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        onClick={handleExportCSV}
+                        className="flex items-center gap-2 px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                        <Download size={14} />
+                        CSV
+                    </button>
+                    <button
+                        onClick={handleExportExcel}
+                        className="flex items-center gap-2 px-3 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                        <FileSpreadsheet size={14} />
+                        Excel
+                    </button>
+                    <button
+                        onClick={handleExportPDF}
+                        className="flex items-center gap-2 px-3 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                        <FileText size={14} />
+                        PDF
+                    </button>
+                </div>
             </div>
 
             {/* Filters */}
