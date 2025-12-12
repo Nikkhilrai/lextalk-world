@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import {
-    Users, Clock, ExternalLink, ArrowRight, Activity, Calendar, RefreshCw
+    Users, Clock, ExternalLink, ArrowRight, Activity, Calendar, RefreshCw, Download
 } from "lucide-react";
 import Link from "next/link";
 
@@ -134,6 +134,85 @@ export default function AdminDashboard() {
         return { percentage: `${Math.abs(change).toFixed(1)}%`, up: change >= 0 };
     };
 
+    // Export Report as PDF
+    const handleExportReport = async () => {
+        const jsPDF = (await import("jspdf")).default;
+        const autoTable = (await import("jspdf-autotable")).default;
+        const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+        // Title
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.text("LexTalk World - Analytics Report", 14, 20);
+
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text(`Generated: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 14, 28);
+        doc.text(`Data Range: Last 30 Days`, 14, 34);
+
+        // Summary Stats
+        doc.setFontSize(14);
+        doc.setTextColor(40);
+        doc.text("Summary Statistics", 14, 48);
+
+        const summaryData = [
+            ["Active Users", analyticsData.activeUsers.toLocaleString()],
+            ["Total Sessions", analyticsData.sessions.toLocaleString()],
+            ["Page Views", analyticsData.pageViews.toLocaleString()],
+            ["New Users", analyticsData.newUsers.toLocaleString()],
+            ["Avg. Session Duration", analyticsData.avgSessionDuration],
+            ["Bounce Rate", analyticsData.bounceRate],
+            ["Total Leads", stats.totalLeads.toLocaleString()],
+        ];
+
+        autoTable(doc, {
+            startY: 52,
+            head: [["Metric", "Value"]],
+            body: summaryData,
+            theme: "striped",
+            headStyles: { fillColor: [64, 81, 137] },
+        });
+
+        // Top Countries
+        if (analyticsData.topCountries.length > 0) {
+            doc.setFontSize(14);
+            doc.text("Top Countries by Sessions", 14, (doc as any).lastAutoTable.finalY + 15);
+
+            autoTable(doc, {
+                startY: (doc as any).lastAutoTable.finalY + 19,
+                head: [["Country", "Sessions"]],
+                body: analyticsData.topCountries.map(c => [c.country, c.users.toLocaleString()]),
+                theme: "striped",
+                headStyles: { fillColor: [10, 179, 156] },
+            });
+        }
+
+        // Device Breakdown
+        if (analyticsData.deviceCategories.length > 0) {
+            doc.setFontSize(14);
+            doc.text("Sessions by Device", 14, (doc as any).lastAutoTable.finalY + 15);
+
+            autoTable(doc, {
+                startY: (doc as any).lastAutoTable.finalY + 19,
+                head: [["Device", "Sessions"]],
+                body: analyticsData.deviceCategories.map(d => [d.device, d.users.toLocaleString()]),
+                theme: "striped",
+                headStyles: { fillColor: [247, 184, 75] },
+            });
+        }
+
+        // Footer
+        const pageCount = doc.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text(`LexTalk World Analytics Report - Page ${i} of ${pageCount}`, 14, 290);
+        }
+
+        doc.save(`lextalk_analytics_report_${new Date().toISOString().split('T')[0]}.pdf`);
+    };
+
     return (
         <div className="min-h-screen text-[#878a99] font-sans pb-10">
             {/* Header: Platform Overview */}
@@ -218,13 +297,17 @@ export default function AdminDashboard() {
                                 </span>
                             )}
                         </div>
-                        <button className="text-xs bg-[#2a304d] hover:bg-[#353b59] text-white px-3 py-1.5 rounded transition-colors border border-white/5">
+                        <button
+                            onClick={handleExportReport}
+                            className="flex items-center gap-2 text-xs bg-[#2a304d] hover:bg-[#353b59] text-white px-3 py-1.5 rounded transition-colors border border-white/5"
+                        >
+                            <Download size={14} />
                             Export Report
                         </button>
                     </div>
                     {/* Map Container */}
                     <div className="flex-1 bg-[#161b2e] relative">
-                        <WorldMap data={allLeads} />
+                        <WorldMap data={allLeads} countryData={analyticsData.topCountries} />
 
                         {/* Stats overlay at bottom - Now using REAL data */}
                         <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-4 text-center">

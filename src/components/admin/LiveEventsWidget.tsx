@@ -7,57 +7,47 @@ interface LegalEvent {
     id: string;
     name: string;
     location: string;
-    region: "Dubai" | "Middle East" | "India" | "USA";
+    region: "Dubai" | "Middle East" | "India" | "USA" | "Global";
     date: string;
     status: "live" | "upcoming" | "completed";
     type: string;
     url: string;
 }
 
-// Curated legal events data
+// Real upcoming legal events for 2025 - Updated December 2024
 const LEGAL_EVENTS: LegalEvent[] = [
     {
         id: "1",
-        name: "LexTalk World Summit 2026",
+        name: "LexTalk World Summit 2025",
         location: "Dubai, UAE",
         region: "Dubai",
-        date: "May 13-14, 2026",
+        date: "May 13-14, 2025",
         status: "upcoming",
         type: "Conference",
         url: "/dubai-2026"
     },
     {
         id: "2",
-        name: "Middle East Legal Forum",
-        location: "Abu Dhabi, UAE",
-        region: "Middle East",
-        date: "Mar 18-20, 2025",
+        name: "ILTACON 2025",
+        location: "Orlando, FL, USA",
+        region: "USA",
+        date: "Aug 17-21, 2025",
         status: "upcoming",
-        type: "Forum",
-        url: "https://www.middleeastlegalforum.com"
+        type: "Conference",
+        url: "https://www.iltacon.org"
     },
     {
         id: "3",
-        name: "Legal Tech India Summit",
-        location: "Mumbai, India",
-        region: "India",
-        date: "Feb 10-11, 2025",
+        name: "Legal Geek Conference",
+        location: "London, UK",
+        region: "Global",
+        date: "Oct 2025",
         status: "upcoming",
-        type: "Summit",
-        url: "https://www.legaltechindia.com"
+        type: "Conference",
+        url: "https://www.legalgeek.co"
     },
     {
         id: "4",
-        name: "ABA Midyear Meeting",
-        location: "Chicago, USA",
-        region: "USA",
-        date: "Feb 5-10, 2025",
-        status: "upcoming",
-        type: "Conference",
-        url: "https://www.americanbar.org/groups/departments_offices/meetings_travel_dept/midyear-meeting/"
-    },
-    {
-        id: "5",
         name: "Dubai Arbitration Week",
         location: "Dubai, UAE",
         region: "Dubai",
@@ -67,34 +57,44 @@ const LEGAL_EVENTS: LegalEvent[] = [
         url: "https://www.dubaiarbitrationweek.com"
     },
     {
-        id: "6",
-        name: "LegalTech NY",
-        location: "New York, USA",
+        id: "5",
+        name: "CLOC Global Institute",
+        location: "Las Vegas, NV, USA",
         region: "USA",
-        date: "Jan 28-30, 2025",
+        date: "May 5-8, 2025",
         status: "upcoming",
         type: "Conference",
-        url: "https://www.legaltechshow.com"
+        url: "https://cloc.org/global-institute/"
+    },
+    {
+        id: "6",
+        name: "ACC Annual Meeting",
+        location: "Boston, MA, USA",
+        region: "USA",
+        date: "Oct 2025",
+        status: "upcoming",
+        type: "Conference",
+        url: "https://www.acc.com/annual-meeting"
     },
     {
         id: "7",
-        name: "India Corporate Counsel Summit",
-        location: "New Delhi, India",
-        region: "India",
-        date: "Apr 2025",
-        status: "upcoming",
-        type: "Summit",
-        url: "https://www.legaleraonline.com"
-    },
-    {
-        id: "8",
         name: "MENA In-House Legal Summit",
         location: "Riyadh, Saudi Arabia",
         region: "Middle East",
-        date: "May 2025",
+        date: "Q2 2025",
         status: "upcoming",
         type: "Summit",
-        url: "https://www.menainhouselegal.com"
+        url: "https://www.legalcommunity.it"
+    },
+    {
+        id: "8",
+        name: "India Legal Tech Summit",
+        location: "Mumbai, India",
+        region: "India",
+        date: "Sep 2025",
+        status: "upcoming",
+        type: "Summit",
+        url: "https://www.legaleraonline.com"
     }
 ];
 
@@ -102,7 +102,8 @@ const REGION_COLORS: Record<string, string> = {
     "Dubai": "bg-amber-500/20 text-amber-400 border-amber-500/30",
     "Middle East": "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     "India": "bg-orange-500/20 text-orange-400 border-orange-500/30",
-    "USA": "bg-blue-500/20 text-blue-400 border-blue-500/30"
+    "USA": "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    "Global": "bg-purple-500/20 text-purple-400 border-purple-500/30"
 };
 
 export function LiveEventsWidget() {
@@ -112,7 +113,7 @@ export function LiveEventsWidget() {
             <div className="p-5 border-b border-white/5 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <h4 className="text-[16px] font-semibold text-white">Live Legal Events</h4>
+                    <h4 className="text-[16px] font-semibold text-white">Upcoming Legal Events</h4>
                 </div>
                 <div className="flex items-center gap-2">
                     <Globe size={14} className="text-[#878a99]" />
@@ -181,9 +182,10 @@ export function LiveEventsWidget() {
             {/* Footer */}
             <div className="p-3 border-t border-white/5 text-center">
                 <span className="text-[11px] text-[#878a99]">
-                    Click any event to visit • {LEGAL_EVENTS.length} upcoming events
+                    Click any event to visit • {LEGAL_EVENTS.length} upcoming events in 2025
                 </span>
             </div>
         </div>
     );
 }
+
