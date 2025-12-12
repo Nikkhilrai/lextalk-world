@@ -24,21 +24,51 @@ interface AudienceMetricsChartProps {
 
 export function AudienceMetricsChart({ leads }: AudienceMetricsChartProps) {
     const chartData = useMemo(() => {
-        // Mocking "Last Year" data for visual comparison since we don't have it
-        // and grouping real data by month
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const currentYear = new Date().getFullYear();
+        const lastYear = currentYear - 1;
+
+        // Initialize data structure
+        const monthlyData: Record<string, { current: number; last: number }> = {};
+        months.forEach(month => {
+            monthlyData[month] = { current: 0, last: 0 };
+        });
+
+        // Group leads by month
+        leads.forEach(lead => {
+            if (!lead.createdAt) return;
+            const date = new Date(lead.createdAt);
+            const year = date.getFullYear();
+            const monthIndex = date.getMonth();
+            const monthName = months[monthIndex];
+
+            if (year === currentYear) {
+                monthlyData[monthName].current += 1;
+            } else if (year === lastYear) {
+                monthlyData[monthName].last += 1;
+            }
+        });
 
         return months.map(month => ({
             name: month,
-            "Last Year": Math.floor(Math.random() * 50) + 10, // Mock
-            "Current Year": Math.floor(Math.random() * 80) + 20, // Mock/Real hybrid
+            "Last Year": monthlyData[month].last,
+            "Current Year": monthlyData[month].current,
         }));
     }, [leads]);
+
+    // Calculate total for summary
+    const totalCurrentYear = chartData.reduce((sum, d) => sum + d["Current Year"], 0);
+    const totalLastYear = chartData.reduce((sum, d) => sum + d["Last Year"], 0);
 
     return (
         <div className="vz-card rounded-sm p-6 h-full">
             <div className="flex items-center justify-between mb-6">
-                <h4 className="text-[16px] font-semibold text-white">Audiences Metrics</h4>
+                <div>
+                    <h4 className="text-[16px] font-semibold text-white">Audiences Metrics</h4>
+                    <p className="text-xs text-[#878a99] mt-1">
+                        {totalCurrentYear} leads this year | {totalLastYear} last year
+                    </p>
+                </div>
                 <div className="flex gap-2">
                     <button className="text-xs bg-[#2a304d] text-white px-2 py-1 rounded">ALL</button>
                     <button className="text-xs text-[#878a99] hover:bg-[#2a304d] px-2 py-1 rounded">1M</button>
@@ -47,7 +77,7 @@ export function AudienceMetricsChart({ leads }: AudienceMetricsChartProps) {
                 </div>
             </div>
 
-            <div className="h-[350px] w-full">
+            <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData} barCategoryGap="20%">
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -77,3 +107,4 @@ export function AudienceMetricsChart({ leads }: AudienceMetricsChartProps) {
         </div>
     );
 }
+
