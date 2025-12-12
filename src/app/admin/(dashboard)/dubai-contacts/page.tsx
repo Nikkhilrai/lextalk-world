@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Download, Filter, Users, MapPin, Building2, Briefcase, Mail, Phone, CheckCircle, XCircle, FileSpreadsheet, FileText } from "lucide-react";
+import { Search, Download, Filter, Users, MapPin, Building2, Briefcase, Mail, Phone, CheckCircle, XCircle, FileSpreadsheet, FileText, Send, X } from "lucide-react";
+import { sendInvitations, sendTestInvitation } from "@/actions/invitation";
 
 interface Contact {
     id: string;
@@ -130,6 +131,15 @@ export default function DubaiContactsPage() {
     const [filterType, setFilterType] = useState<string>("all");
     const [filterAttended, setFilterAttended] = useState<string>("all");
 
+    // Email invitation state
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [showEmailModal, setShowEmailModal] = useState(false);
+    const [emailSubject, setEmailSubject] = useState("You're Invited to LexTalk World Summit 2026!");
+    const [emailMessage, setEmailMessage] = useState("");
+    const [isSending, setIsSending] = useState(false);
+    const [sendProgress, setSendProgress] = useState({ sent: 0, total: 0 });
+    const [sendResult, setSendResult] = useState<{ sent: number; failed: number } | null>(null);
+
     const filteredContacts = useMemo(() => {
         return SAMPLE_CONTACTS.filter(contact => {
             // Search filter
@@ -229,6 +239,53 @@ export default function DubaiContactsPage() {
         doc.save("dubai_legal_contacts.pdf");
     };
 
+    // Selection handlers
+    const toggleSelect = (id: string) => {
+        const newSet = new Set(selectedIds);
+        if (newSet.has(id)) {
+            newSet.delete(id);
+        } else {
+            newSet.add(id);
+        }
+        setSelectedIds(newSet);
+    };
+
+    const toggleSelectAll = () => {
+        if (selectedIds.size === filteredContacts.length) {
+            setSelectedIds(new Set());
+        } else {
+            setSelectedIds(new Set(filteredContacts.map(c => c.id)));
+        }
+    };
+
+    const handleSendInvitations = async () => {
+        const selected = filteredContacts.filter(c => selectedIds.has(c.id));
+        if (selected.length === 0) return;
+
+        setIsSending(true);
+        setSendProgress({ sent: 0, total: selected.length });
+        setSendResult(null);
+
+        const contacts = selected.map(c => ({
+            fullName: c.fullName,
+            email: c.email,
+            organization: c.organization
+        }));
+
+        const result = await sendInvitations(contacts, emailSubject, emailMessage);
+
+        setSendResult({ sent: result.sent, failed: result.failed });
+        setIsSending(false);
+
+        if (result.success) {
+            setSelectedIds(new Set());
+            setTimeout(() => {
+                setShowEmailModal(false);
+                setSendResult(null);
+            }, 2000);
+        }
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -263,6 +320,17 @@ export default function DubaiContactsPage() {
                     >
                         <FileText size={14} />
                         PDF
+                    </button>
+                    <button
+                        onClick={() => setShowEmailModal(true)}
+                        disabled={selectedIds.size === 0}
+                        className="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-600 disabled:cursor-not-allowed text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                        <Send size={14} />
+                        Send Invitation
+                        {selectedIds.size > 0 && (
+                            <span className="bg-white/20 px-1.5 py-0.5 rounded text-xs">{selectedIds.size}</span>
+                        )}
                     </button>
                 </div>
             </div>
@@ -335,6 +403,14 @@ export default function DubaiContactsPage() {
                     <table className="w-full">
                         <thead className="bg-slate-800/50">
                             <tr className="text-left text-xs uppercase tracking-wider text-slate-400">
+                                <th className="px-3 py-3 w-10">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedIds.size === filteredContacts.length && filteredContacts.length > 0}
+                                        onChange={toggleSelectAll}
+                                        className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+                                    />
+                                </th>
                                 <th className="px-4 py-3 font-semibold">Full Name</th>
                                 <th className="px-4 py-3 font-semibold">Email</th>
                                 <th className="px-4 py-3 font-semibold">Contact</th>
@@ -348,7 +424,15 @@ export default function DubaiContactsPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-800">
                             {filteredContacts.map((contact) => (
-                                <tr key={contact.id} className="hover:bg-slate-800/30 transition-colors">
+                                <tr key={contact.id} className={`hover:bg-slate-800/30 transition-colors ${selectedIds.has(contact.id) ? 'bg-amber-500/5' : ''}`}>
+                                    <td className="px-3 py-3">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedIds.has(contact.id)}
+                                            onChange={() => toggleSelect(contact.id)}
+                                            className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+                                        />
+                                    </td>
                                     <td className="px-4 py-3">
                                         <div className="font-medium text-white">{contact.fullName}</div>
                                     </td>
@@ -426,8 +510,86 @@ export default function DubaiContactsPage() {
                 {/* Footer */}
                 <div className="px-4 py-3 border-t border-slate-800 text-sm text-slate-400">
                     Showing {filteredContacts.length} of {SAMPLE_CONTACTS.length} contacts
+                    {selectedIds.size > 0 && <span className="ml-2 text-amber-400">• {selectedIds.size} selected</span>}
                 </div>
             </div>
+
+            {/* Email Modal */}
+            {showEmailModal && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-lg">
+                        <div className="flex items-center justify-between p-5 border-b border-slate-800">
+                            <div>
+                                <h3 className="text-lg font-bold text-white">Send Invitations</h3>
+                                <p className="text-sm text-slate-400 mt-1">
+                                    Sending to {selectedIds.size} contact{selectedIds.size !== 1 ? 's' : ''}
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setShowEmailModal(false)}
+                                className="p-2 text-slate-400 hover:text-white transition-colors"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <div className="p-5 space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Subject</label>
+                                <input
+                                    type="text"
+                                    value={emailSubject}
+                                    onChange={(e) => setEmailSubject(e.target.value)}
+                                    className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Custom Message (Optional)</label>
+                                <textarea
+                                    value={emailMessage}
+                                    onChange={(e) => setEmailMessage(e.target.value)}
+                                    placeholder="Add a personalized message to the invitation..."
+                                    rows={4}
+                                    className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none"
+                                />
+                            </div>
+
+                            {sendResult && (
+                                <div className={`p-4 rounded-lg ${sendResult.failed > 0 ? 'bg-red-500/10 border border-red-500/30' : 'bg-green-500/10 border border-green-500/30'}`}>
+                                    <p className={sendResult.failed > 0 ? 'text-red-400' : 'text-green-400'}>
+                                        ✓ {sendResult.sent} sent{sendResult.failed > 0 && `, ${sendResult.failed} failed`}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="flex gap-3 p-5 border-t border-slate-800">
+                            <button
+                                onClick={() => setShowEmailModal(false)}
+                                disabled={isSending}
+                                className="flex-1 px-4 py-2.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 text-white rounded-lg font-medium transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleSendInvitations}
+                                disabled={isSending}
+                                className="flex-1 px-4 py-2.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                            >
+                                {isSending ? (
+                                    <>Sending...</>
+                                ) : (
+                                    <>
+                                        <Send size={16} />
+                                        Send Invitations
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
