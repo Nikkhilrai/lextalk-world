@@ -1,6 +1,7 @@
 "use client";
 
-import { Calendar, MapPin, Radio, Globe } from "lucide-react";
+import { Calendar, MapPin, Radio, Globe, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 interface LegalEvent {
     id: string;
@@ -10,6 +11,7 @@ interface LegalEvent {
     date: string;
     status: "live" | "upcoming" | "completed";
     type: string;
+    url: string;
 }
 
 // Curated legal events data
@@ -21,7 +23,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "Dubai",
         date: "May 13-14, 2026",
         status: "upcoming",
-        type: "Conference"
+        type: "Conference",
+        url: "/dubai-2026"
     },
     {
         id: "2",
@@ -30,7 +33,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "Middle East",
         date: "Mar 18-20, 2025",
         status: "upcoming",
-        type: "Forum"
+        type: "Forum",
+        url: "https://www.middleeastlegalforum.com"
     },
     {
         id: "3",
@@ -39,7 +43,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "India",
         date: "Feb 10-11, 2025",
         status: "upcoming",
-        type: "Summit"
+        type: "Summit",
+        url: "https://www.legaltechindia.com"
     },
     {
         id: "4",
@@ -48,7 +53,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "USA",
         date: "Feb 5-10, 2025",
         status: "upcoming",
-        type: "Conference"
+        type: "Conference",
+        url: "https://www.americanbar.org/groups/departments_offices/meetings_travel_dept/midyear-meeting/"
     },
     {
         id: "5",
@@ -57,7 +63,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "Dubai",
         date: "Nov 2025",
         status: "upcoming",
-        type: "Week"
+        type: "Week",
+        url: "https://www.dubaiarbitrationweek.com"
     },
     {
         id: "6",
@@ -66,7 +73,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "USA",
         date: "Jan 28-30, 2025",
         status: "upcoming",
-        type: "Conference"
+        type: "Conference",
+        url: "https://www.legaltechshow.com"
     },
     {
         id: "7",
@@ -75,7 +83,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "India",
         date: "Apr 2025",
         status: "upcoming",
-        type: "Summit"
+        type: "Summit",
+        url: "https://www.legaleraonline.com"
     },
     {
         id: "8",
@@ -84,7 +93,8 @@ const LEGAL_EVENTS: LegalEvent[] = [
         region: "Middle East",
         date: "May 2025",
         status: "upcoming",
-        type: "Summit"
+        type: "Summit",
+        url: "https://www.menainhouselegal.com"
     }
 ];
 
@@ -114,16 +124,22 @@ export function LiveEventsWidget() {
             <div className="flex-1 overflow-y-auto custom-scrollbar">
                 <div className="divide-y divide-white/5">
                     {LEGAL_EVENTS.map((event) => (
-                        <div
+                        <Link
                             key={event.id}
-                            className="p-4 hover:bg-white/[0.02] transition-colors group"
+                            href={event.url}
+                            target={event.url.startsWith("http") ? "_blank" : "_self"}
+                            rel={event.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                            className="p-4 hover:bg-white/[0.03] transition-colors group block cursor-pointer"
                         >
                             <div className="flex items-start justify-between gap-3">
                                 <div className="flex-1 min-w-0">
                                     {/* Event Name */}
-                                    <h5 className="text-[14px] font-medium text-white truncate group-hover:text-[#0ab39c] transition-colors">
-                                        {event.name}
-                                    </h5>
+                                    <div className="flex items-center gap-2">
+                                        <h5 className="text-[14px] font-medium text-white truncate group-hover:text-[#0ab39c] transition-colors">
+                                            {event.name}
+                                        </h5>
+                                        <ExternalLink size={12} className="text-[#878a99] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                                    </div>
 
                                     {/* Location & Date */}
                                     <div className="flex items-center gap-3 mt-1.5 text-[12px] text-[#878a99]">
@@ -157,7 +173,7 @@ export function LiveEventsWidget() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
@@ -165,7 +181,7 @@ export function LiveEventsWidget() {
             {/* Footer */}
             <div className="p-3 border-t border-white/5 text-center">
                 <span className="text-[11px] text-[#878a99]">
-                    Showing {LEGAL_EVENTS.length} upcoming legal events
+                    Click any event to visit • {LEGAL_EVENTS.length} upcoming events
                 </span>
             </div>
         </div>
