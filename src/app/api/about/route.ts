@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 // Default About Page content
 const defaultContent = {
+    id: "default",
     heroTagline: "Connecting Legal Minds Worldwide",
     heroTitle: "About LexTalk World",
     heroSubtitle: "We are a global platform dedicated to connecting legal professionals, fostering innovation, and shaping the future of the legal industry through world-class conferences, awards, and networking opportunities.",
@@ -33,48 +34,110 @@ const defaultContent = {
     ]),
     isPublished: false,
     showInNavbar: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
 };
+
+// Check if AboutPage table exists
+async function tableExists() {
+    try {
+        // Try a simple query - if table doesn't exist, it will throw
+        await prisma.$queryRaw`SELECT 1 FROM "AboutPage" LIMIT 1`;
+        return true;
+    } catch (error: any) {
+        // Table doesn't exist
+        return false;
+    }
+}
 
 // GET About page content
 export async function GET() {
     try {
-        let aboutPage = await prisma.aboutPage.findFirst();
+        // Check if table exists first
+        const exists = await tableExists();
 
-        // If no content exists, create with defaults
+        if (!exists) {
+            // Return default content if table doesn't exist
+            console.log("AboutPage table doesn't exist, returning defaults");
+            return NextResponse.json(defaultContent);
+        }
+
+        let aboutPage = await (prisma as any).aboutPage.findFirst();
+
+        // If no content exists, try to create with defaults
         if (!aboutPage) {
-            aboutPage = await prisma.aboutPage.create({
-                data: defaultContent,
-            });
+            try {
+                aboutPage = await (prisma as any).aboutPage.create({
+                    data: {
+                        heroTagline: defaultContent.heroTagline,
+                        heroTitle: defaultContent.heroTitle,
+                        heroSubtitle: defaultContent.heroSubtitle,
+                        stats: defaultContent.stats,
+                        storyTitle: defaultContent.storyTitle,
+                        storyContent: defaultContent.storyContent,
+                        missionTitle: defaultContent.missionTitle,
+                        missionContent: defaultContent.missionContent,
+                        visionTitle: defaultContent.visionTitle,
+                        visionContent: defaultContent.visionContent,
+                        values: defaultContent.values,
+                        milestones: defaultContent.milestones,
+                        isPublished: defaultContent.isPublished,
+                        showInNavbar: defaultContent.showInNavbar,
+                    },
+                });
+            } catch (createError) {
+                // If create fails, return defaults
+                return NextResponse.json(defaultContent);
+            }
         }
 
         return NextResponse.json(aboutPage);
     } catch (error) {
         console.error("Error fetching about page:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch about page content" },
-            { status: 500 }
-        );
+        // Return defaults on any error
+        return NextResponse.json(defaultContent);
     }
 }
 
 // PUT Update About page content
 export async function PUT(request: NextRequest) {
     try {
+        const exists = await tableExists();
+
+        if (!exists) {
+            return NextResponse.json(
+                { error: "Database table not yet created. Please run prisma db push first." },
+                { status: 503 }
+            );
+        }
+
         const body = await request.json();
 
-        let aboutPage = await prisma.aboutPage.findFirst();
+        let aboutPage = await (prisma as any).aboutPage.findFirst();
 
         if (!aboutPage) {
             // Create new
-            aboutPage = await prisma.aboutPage.create({
+            aboutPage = await (prisma as any).aboutPage.create({
                 data: {
-                    ...defaultContent,
-                    ...body,
+                    heroTagline: body.heroTagline || defaultContent.heroTagline,
+                    heroTitle: body.heroTitle || defaultContent.heroTitle,
+                    heroSubtitle: body.heroSubtitle || defaultContent.heroSubtitle,
+                    stats: body.stats || defaultContent.stats,
+                    storyTitle: body.storyTitle || defaultContent.storyTitle,
+                    storyContent: body.storyContent || defaultContent.storyContent,
+                    missionTitle: body.missionTitle || defaultContent.missionTitle,
+                    missionContent: body.missionContent || defaultContent.missionContent,
+                    visionTitle: body.visionTitle || defaultContent.visionTitle,
+                    visionContent: body.visionContent || defaultContent.visionContent,
+                    values: body.values || defaultContent.values,
+                    milestones: body.milestones || defaultContent.milestones,
+                    isPublished: body.isPublished ?? false,
+                    showInNavbar: body.showInNavbar ?? false,
                 },
             });
         } else {
             // Update existing
-            aboutPage = await prisma.aboutPage.update({
+            aboutPage = await (prisma as any).aboutPage.update({
                 where: { id: aboutPage.id },
                 data: body,
             });
@@ -93,12 +156,36 @@ export async function PUT(request: NextRequest) {
 // POST Create/Reset About page with defaults
 export async function POST() {
     try {
+        const exists = await tableExists();
+
+        if (!exists) {
+            return NextResponse.json(
+                { error: "Database table not yet created. Please run prisma db push first." },
+                { status: 503 }
+            );
+        }
+
         // Delete existing
-        await prisma.aboutPage.deleteMany();
+        await (prisma as any).aboutPage.deleteMany();
 
         // Create with defaults
-        const aboutPage = await prisma.aboutPage.create({
-            data: defaultContent,
+        const aboutPage = await (prisma as any).aboutPage.create({
+            data: {
+                heroTagline: defaultContent.heroTagline,
+                heroTitle: defaultContent.heroTitle,
+                heroSubtitle: defaultContent.heroSubtitle,
+                stats: defaultContent.stats,
+                storyTitle: defaultContent.storyTitle,
+                storyContent: defaultContent.storyContent,
+                missionTitle: defaultContent.missionTitle,
+                missionContent: defaultContent.missionContent,
+                visionTitle: defaultContent.visionTitle,
+                visionContent: defaultContent.visionContent,
+                values: defaultContent.values,
+                milestones: defaultContent.milestones,
+                isPublished: false,
+                showInNavbar: false,
+            },
         });
 
         return NextResponse.json(aboutPage, { status: 201 });
