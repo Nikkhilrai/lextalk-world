@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Download, Filter, Building2, Mail, Phone, Globe, Linkedin, ExternalLink, Users, Target, ChevronDown } from "lucide-react";
+import { Search, Download, Filter, Building2, Mail, Phone, Globe, Linkedin, ExternalLink, Users, Target, ChevronDown, FileSpreadsheet, FileText } from "lucide-react";
 
 // Research Contact Interface
 interface ResearchContact {
@@ -209,6 +209,82 @@ export default function DubaiContactsResearchPage() {
         link.click();
     };
 
+    // Export Excel
+    const handleExportExcel = async () => {
+        const XLSX = await import("xlsx");
+        const headers = ["Full Name", "Job Title", "Company", "Country", "City", "Email", "Email Type", "Email Note", "Phone", "LinkedIn", "Website", "Sponsor Potential", "Rationale", "Category", "Sources"];
+        const rows = filteredContacts.map(c => ({
+            "Full Name": c.fullName || "(General Contact)",
+            "Job Title": c.jobTitle,
+            "Company": c.company,
+            "Country": c.country,
+            "City": c.city || "",
+            "Email": c.email,
+            "Email Type": c.emailType,
+            "Email Note": c.emailNote || "",
+            "Phone": c.phone || "",
+            "LinkedIn": c.linkedin || "",
+            "Website": c.website,
+            "Sponsor Potential": c.sponsorPotential,
+            "Rationale": c.sponsorRationale,
+            "Category": c.category,
+            "Sources": c.source.join("; ")
+        }));
+        const worksheet = XLSX.utils.json_to_sheet(rows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Research Contacts");
+        XLSX.writeFile(workbook, `lextalk_research_contacts_${new Date().toISOString().split('T')[0]}.xlsx`);
+    };
+
+    // Export PDF
+    const handleExportPDF = async () => {
+        const jsPDF = (await import("jspdf")).default;
+        const autoTable = (await import("jspdf-autotable")).default;
+        const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+
+        // Title
+        doc.setFontSize(16);
+        doc.setTextColor(40);
+        doc.text("LexTalk World - Contact Research", 14, 15);
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text(`Generated: ${new Date().toLocaleDateString()} | Total Contacts: ${filteredContacts.length}`, 14, 22);
+
+        // Table
+        const headers = [["Name", "Title", "Company", "Country", "Email", "Phone", "Potential", "Category"]];
+        const rows = filteredContacts.map(c => [
+            c.fullName || "(General)",
+            c.jobTitle.substring(0, 30),
+            c.company.substring(0, 25),
+            c.country,
+            c.email.substring(0, 30),
+            c.phone || "-",
+            c.sponsorPotential,
+            c.category
+        ]);
+
+        autoTable(doc, {
+            head: headers,
+            body: rows,
+            startY: 28,
+            styles: { fontSize: 7, cellPadding: 1.5 },
+            headStyles: { fillColor: [59, 130, 246], textColor: 255, fontStyle: "bold" },
+            alternateRowStyles: { fillColor: [245, 247, 250] },
+            columnStyles: {
+                0: { cellWidth: 35 },
+                1: { cellWidth: 35 },
+                2: { cellWidth: 30 },
+                3: { cellWidth: 20 },
+                4: { cellWidth: 45 },
+                5: { cellWidth: 30 },
+                6: { cellWidth: 18 },
+                7: { cellWidth: 22 }
+            }
+        });
+
+        doc.save(`lextalk_research_contacts_${new Date().toISOString().split('T')[0]}.pdf`);
+    };
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
             <div className="max-w-[1800px] mx-auto">
@@ -278,7 +354,15 @@ export default function DubaiContactsResearchPage() {
                         </div>
                         <button onClick={handleExportCSV} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">
                             <Download size={16} />
-                            Export CSV
+                            CSV
+                        </button>
+                        <button onClick={handleExportExcel} className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg transition-colors">
+                            <FileSpreadsheet size={16} />
+                            Excel
+                        </button>
+                        <button onClick={handleExportPDF} className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg transition-colors">
+                            <FileText size={16} />
+                            PDF
                         </button>
                     </div>
                 </div>
