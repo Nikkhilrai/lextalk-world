@@ -47,6 +47,7 @@ export default function AdminDashboard() {
         bounceRate: "0%",
         topCountries: [] as { country: string; users: number }[],
         topPages: [] as { page: string; views: number }[],
+        deviceCategories: [] as { device: string; users: number }[],
     });
     const [realTimeUsers, setRealTimeUsers] = useState(0);
 
@@ -97,6 +98,7 @@ export default function AdminDashboard() {
                     bounceRate: `${bounceRateCalc.toFixed(1)}%`,
                     topCountries: data.topCountries,
                     topPages: data.topPages,
+                    deviceCategories: data.deviceCategories || [],
                 });
             }
 
@@ -244,7 +246,11 @@ export default function AdminDashboard() {
 
                 {/* Sessions by Countries Bar Chart */}
                 <div className="h-[460px]">
-                    <LeadsByCountryChart leads={allLeads} limit={8} />
+                    <LeadsByCountryChart
+                        leads={allLeads}
+                        analyticsCountries={analyticsData.topCountries}
+                        limit={10}
+                    />
                 </div>
             </div>
 
@@ -255,7 +261,10 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className="xl:col-span-1 h-[400px]">
-                    <LeadsByTypeChart leads={allLeads} />
+                    <LeadsByTypeChart
+                        leads={allLeads}
+                        deviceData={analyticsData.deviceCategories}
+                    />
                 </div>
 
                 {/* Live Legal Events */}

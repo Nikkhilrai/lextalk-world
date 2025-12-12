@@ -21,14 +21,15 @@ export interface AnalyticsData {
     newUsers: number;
     topPages: { page: string; views: number }[];
     topCountries: { country: string; users: number }[];
+    deviceCategories: { device: string; users: number }[];
 }
 
 export async function getAnalyticsData(): Promise<{ success: boolean; data: AnalyticsData | null; error?: string }> {
     try {
-        // Get basic metrics for last 7 days
+        // Get basic metrics for last 30 days
         const [metricsResponse] = await analyticsDataClient.runReport({
             property: `properties/${PROPERTY_ID}`,
-            dateRanges: [{ startDate: "7daysAgo", endDate: "today" }],
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
             metrics: [
                 { name: "activeUsers" },
                 { name: "screenPageViews" },
@@ -40,21 +41,30 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
         // Get top pages
         const [pagesResponse] = await analyticsDataClient.runReport({
             property: `properties/${PROPERTY_ID}`,
-            dateRanges: [{ startDate: "7daysAgo", endDate: "today" }],
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
             dimensions: [{ name: "pagePath" }],
             metrics: [{ name: "screenPageViews" }],
-            limit: 5,
+            limit: 10,
             orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
         });
 
-        // Get top countries
+        // Get top countries (increased limit to 10)
         const [countriesResponse] = await analyticsDataClient.runReport({
             property: `properties/${PROPERTY_ID}`,
-            dateRanges: [{ startDate: "7daysAgo", endDate: "today" }],
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
             dimensions: [{ name: "country" }],
-            metrics: [{ name: "activeUsers" }],
-            limit: 5,
-            orderBys: [{ metric: { metricName: "activeUsers" }, desc: true }],
+            metrics: [{ name: "sessions" }],
+            limit: 10,
+            orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+        });
+
+        // Get device categories
+        const [devicesResponse] = await analyticsDataClient.runReport({
+            property: `properties/${PROPERTY_ID}`,
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+            dimensions: [{ name: "deviceCategory" }],
+            metrics: [{ name: "sessions" }],
+            orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
         });
 
         const metrics = metricsResponse.rows?.[0]?.metricValues || [];
@@ -69,6 +79,11 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
             users: parseInt(row.metricValues?.[0]?.value || "0"),
         }));
 
+        const deviceCategories = (devicesResponse.rows || []).map(row => ({
+            device: row.dimensionValues?.[0]?.value || "Unknown",
+            users: parseInt(row.metricValues?.[0]?.value || "0"),
+        }));
+
         return {
             success: true,
             data: {
@@ -78,6 +93,7 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
                 newUsers: parseInt(metrics[3]?.value || "0"),
                 topPages,
                 topCountries,
+                deviceCategories,
             },
         };
     } catch (error: any) {
@@ -104,3 +120,4 @@ export async function getRealTimeUsers(): Promise<{ success: boolean; count: num
         return { success: false, count: 0 };
     }
 }
+
