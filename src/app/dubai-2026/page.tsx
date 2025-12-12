@@ -706,12 +706,12 @@ export default function DubaiEventPage() {
                             </div>
 
                             {/* Logos Grid */}
-                            <div className="flex justify-center gap-8 md:gap-10 flex-wrap">
+                            <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Case Docer */}
-                                <div className="group relative w-56 h-32 md:w-64 md:h-36">
+                                <div className="group relative w-40 h-24 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
-                                    <div className="relative h-full w-full p-8 flex items-center justify-center">
+                                    <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
                                         <div className="relative w-full h-full">
                                             <Image
                                                 src="/dubai-event/sponsors/CasedockerLogo.avif"
@@ -724,13 +724,13 @@ export default function DubaiEventPage() {
                                 </div>
 
                                 {/* Lex Corp */}
-                                <div className="group relative w-56 h-32 md:w-64 md:h-36">
+                                <div className="group relative w-40 h-24 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
-                                    <div className="relative h-full w-full p-8 flex items-center justify-center">
+                                    <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
                                         <div className="relative w-full h-full">
                                             <Image
-                                                src="/dubai-event/sponsors/Lex Corp Logo.avif"
+                                                src="/dubai-event/sponsors/Lex_Corp_Logo.avif"
                                                 alt="Lex Corp"
                                                 fill
                                                 className="object-contain"
