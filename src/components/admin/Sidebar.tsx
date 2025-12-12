@@ -36,7 +36,7 @@ const NAV_GROUPS = [
             { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
             { label: "Awards", href: "/admin/awards", icon: Trophy },
             { label: "Blog", href: "/admin/blog", icon: BookOpen },
-            { label: "Authentication", href: "/admin/login", icon: Shield },
+            { label: "Authentication", href: "/admin/settings", icon: Shield },
         ]
     }
 ];
@@ -89,8 +89,8 @@ export function Sidebar() {
                                                 href={item.href}
                                                 onClick={() => setIsOpen(false)}
                                                 className={`relative flex items-center gap-3 px-6 py-2.5 text-[14px] font-medium transition-colors ${isActive
-                                                        ? "text-white bg-[#1b213b] border-l-[3px] border-[#405189]"
-                                                        : "text-[#abb9e8] hover:text-white hover:bg-[#1b213b]/50 border-l-[3px] border-transparent"
+                                                    ? "text-white bg-[#1b213b] border-l-[3px] border-[#405189]"
+                                                    : "text-[#abb9e8] hover:text-white hover:bg-[#1b213b]/50 border-l-[3px] border-transparent"
                                                     }`}
                                             >
                                                 <Icon size={18} className={isActive ? "text-[#405189]" : "text-[#878a99]"} />
