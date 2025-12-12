@@ -723,7 +723,21 @@ export default function DubaiEventPage() {
                                     </div>
                                 </div>
 
-                                {/* Placeholder for balance if needed */}
+                                {/* Lex Corp */}
+                                <div className="group relative w-56 h-32 md:w-64 md:h-36">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
+
+                                    <div className="relative h-full w-full p-8 flex items-center justify-center">
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/dubai-event/sponsors/Lex Corp Logo.avif"
+                                                alt="Lex Corp"
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
