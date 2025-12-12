@@ -341,7 +341,7 @@ export default function DubaiEventPage() {
                             </div>
 
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-2 leading-tight drop-shadow-2xl">
-                                Dubai World Trade Centre
+                                Dubai
                             </h2>
 
                             <div className="flex items-center gap-2 text-slate-300">

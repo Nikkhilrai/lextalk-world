@@ -18,7 +18,7 @@ const upcomingConferences = [
         country: "UAE",
         region: "Middle East",
         date: "May 13-14, 2026",
-        venue: "Dubai World Trade Centre",
+        venue: "Dubai",
         image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
         status: "Open",
         featured: true,

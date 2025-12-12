@@ -9,7 +9,7 @@ const event = {
     month: "MAY",
     days: "13-14",
     year: "2026",
-    venue: "Dubai World Trade Centre",
+    venue: "Dubai",
     image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200&auto=format&fit=crop",
     status: "Registrations Open",
     region: "Middle East",
@@ -23,7 +23,7 @@ export function EventsList() {
             month: "MAY",
             days: "13-14",
             year: "2026",
-            venue: "Dubai World Trade Centre",
+            venue: "Dubai",
             // image: "https://images.unsplash.com/photo-1512453979798-5ea90b7cad11?q=80&w=1200&auto=format&fit=crop", // Old broken link?
             image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop", // New Dubai Skyline
             status: "Registrations Open",
