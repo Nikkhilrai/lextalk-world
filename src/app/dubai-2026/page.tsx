@@ -699,7 +699,7 @@ export default function DubaiEventPage() {
                             {/* Category Badge */}
                             <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
                                 <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest whitespace-nowrap">
                                         Diamond Sponsors
                                     </h3>
                                 </div>
@@ -708,7 +708,7 @@ export default function DubaiEventPage() {
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Case Docer */}
-                                <div className="group relative w-40 h-24 md:w-64 md:h-36 shrink-0">
+                                <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
                                     <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
@@ -724,7 +724,7 @@ export default function DubaiEventPage() {
                                 </div>
 
                                 {/* Lex Corp */}
-                                <div className="group relative w-40 h-24 md:w-64 md:h-36 shrink-0">
+                                <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
                                     <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
