@@ -14,6 +14,7 @@ import {
     AudienceMetricsChart,
     WorldMap
 } from "@/components/admin/charts";
+import { LiveEventsWidget } from "@/components/admin/LiveEventsWidget";
 
 // Actions
 import { getLeadStats, getDashboardStats } from "@/actions/lead-stats";
@@ -163,50 +164,9 @@ export default function AdminDashboard() {
                     <LeadsByTypeChart leads={allLeads} />
                 </div>
 
-                {/* Top Pages Mock Table */}
-                <div className="vz-card rounded-sm h-[400px] flex flex-col">
-                    <div className="p-5 border-b border-white/5 flex justify-between items-center">
-                        <h4 className="text-[16px] font-semibold text-white">Top Pages</h4>
-                        <button className="p-1 hover:bg-white/5 rounded text-[#878a99]">
-                            <ExternalLink size={14} />
-                        </button>
-                    </div>
-                    <div className="p-0 overflow-x-auto flex-1 custom-scrollbar">
-                        <table className="w-full text-left">
-                            <thead className="bg-[#212946] text-[#878a99] text-[11px] uppercase font-semibold">
-                                <tr>
-                                    <th className="px-5 py-3">Active Page</th>
-                                    <th className="px-5 py-3">Active</th>
-                                    <th className="px-5 py-3">Users</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5 text-sm">
-                                {[
-                                    { page: "/analytics/dashboard", active: 99, users: "25.3%" },
-                                    { page: "/conferences/dubai-2026", active: 86, users: "22.7%" },
-                                    { page: "/auth/login-register", active: 64, users: "18.7%" },
-                                    { page: "/blog/post-details", active: 53, users: "14.2%" },
-                                    { page: "/admin/tickets", active: 33, users: "12.6%" },
-                                    { page: "/contact-us", active: 20, users: "10.9%" },
-                                ].map((row, i) => (
-                                    <tr key={i} className="hover:bg-white/[0.02] transition-colors group">
-                                        <td className="px-5 py-3">
-                                            <Link href={row.page} className="text-[#ced4da] truncate max-w-[150px] hover:text-[#405189] block transition-colors">
-                                                {row.page}
-                                            </Link>
-                                        </td>
-                                        <td className="px-5 py-3 font-semibold text-white">{row.active}</td>
-                                        <td className="px-5 py-3 text-[#878a99]">{row.users}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="p-3 text-center border-t border-white/5">
-                        <Link href="#" className="text-[#405189] text-[13px] hover:text-white flex items-center justify-center gap-1 transition-colors">
-                            View All Pages <ArrowRight size={12} />
-                        </Link>
-                    </div>
+                {/* Live Legal Events */}
+                <div className="xl:col-span-1 h-[400px]">
+                    <LiveEventsWidget />
                 </div>
             </div>
         </div>
