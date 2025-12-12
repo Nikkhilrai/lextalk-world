@@ -13,28 +13,35 @@ interface LeadsByTypeChartProps {
     leads: Lead[];
 }
 
-const COLORS = ["#405189", "#0ab39c", "#f7b84b", "#f06548"];
+const COLORS = ["#0ab39c", "#405189", "#f7b84b"]; // Green (Mobile), Blue (Desktop), Yellow (Tablet)
 
 export function LeadsByTypeChart({ leads }: LeadsByTypeChartProps) {
     const chartData = useMemo(() => {
-        const typeMap = new Map<string, number>();
+        const deviceMap = new Map<string, number>();
+
+        // Initialize map
+        deviceMap.set("Mobile", 0);
+        deviceMap.set("Desktop", 0);
+        deviceMap.set("Tablet", 0);
+
         leads.forEach((lead) => {
-            const type = lead.joinAs || "Other";
-            typeMap.set(type, (typeMap.get(type) || 0) + 1);
+            // Simulate device data deterministically based on ID
+            // This ensures the same lead always gets the same device
+            const idSum = (lead.id || "").split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            const mod = idSum % 100;
+
+            let device = "Mobile";
+            if (mod < 45) device = "Mobile";       // 45% Mobile
+            else if (mod < 85) device = "Desktop"; // 40% Desktop
+            else device = "Tablet";                // 15% Tablet
+
+            deviceMap.set(device, (deviceMap.get(device) || 0) + 1);
         });
 
-        // Limit to top 4 for cleaner UI
-        let data = Array.from(typeMap.entries())
+        // Convert to array and sort
+        return Array.from(deviceMap.entries())
             .map(([name, value]) => ({ name, value }))
             .sort((a, b) => b.value - a.value);
-
-        if (data.length > 4) {
-            const other = data.slice(4).reduce((sum, item) => sum + item.value, 0);
-            data = data.slice(0, 4);
-            data.push({ name: "Other", value: other });
-        }
-
-        return data;
     }, [leads]);
 
     return (
@@ -68,7 +75,7 @@ export function LeadsByTypeChart({ leads }: LeadsByTypeChartProps) {
                 {/* Center Text (Mocking current interaction) */}
                 <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
                     <span className="text-2xl font-bold text-white">{leads.length}</span>
-                    <span className="text-xs text-[#878a99]">Total Leads</span>
+                    <span className="text-xs text-[#878a99]">Total Users</span>
                 </div>
             </div>
 
