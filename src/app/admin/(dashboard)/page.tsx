@@ -12,7 +12,8 @@ import {
     LeadsByCountryChart,
     LeadsByTypeChart,
     AudienceMetricsChart,
-    WorldMap
+    WorldMap,
+    TrafficSourcesChart
 } from "@/components/admin/charts";
 import { LiveEventsWidget } from "@/components/admin/LiveEventsWidget";
 
@@ -48,6 +49,7 @@ export default function AdminDashboard() {
         topCountries: [] as { country: string; users: number }[],
         topPages: [] as { page: string; views: number }[],
         deviceCategories: [] as { device: string; users: number }[],
+        trafficSources: [] as { source: string; sessions: number }[],
     });
     const [realTimeUsers, setRealTimeUsers] = useState(0);
 
@@ -99,6 +101,7 @@ export default function AdminDashboard() {
                     topCountries: data.topCountries,
                     topPages: data.topPages,
                     deviceCategories: data.deviceCategories || [],
+                    trafficSources: data.trafficSources || [],
                 });
             }
 
@@ -337,8 +340,8 @@ export default function AdminDashboard() {
                 </div>
             </div>
 
-            {/* Row 3: Audience Metrics + Users By Device */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+            {/* Row 3: Audience Metrics + Users By Device + Traffic Sources */}
+            <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 mb-6">
                 <div className="xl:col-span-1 h-[400px]">
                     <AudienceMetricsChart leads={allLeads} />
                 </div>
@@ -348,6 +351,11 @@ export default function AdminDashboard() {
                         leads={allLeads}
                         deviceData={analyticsData.deviceCategories}
                     />
+                </div>
+
+                {/* Traffic Sources */}
+                <div className="xl:col-span-1 h-[400px]">
+                    <TrafficSourcesChart data={analyticsData.trafficSources} />
                 </div>
 
                 {/* Live Legal Events */}

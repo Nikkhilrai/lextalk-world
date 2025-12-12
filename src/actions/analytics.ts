@@ -22,6 +22,7 @@ export interface AnalyticsData {
     topPages: { page: string; views: number }[];
     topCountries: { country: string; users: number }[];
     deviceCategories: { device: string; users: number }[];
+    trafficSources: { source: string; sessions: number }[];
 }
 
 export async function getAnalyticsData(): Promise<{ success: boolean; data: AnalyticsData | null; error?: string }> {
@@ -84,6 +85,21 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
             users: parseInt(row.metricValues?.[0]?.value || "0"),
         }));
 
+        // Get traffic sources
+        const [sourcesResponse] = await analyticsDataClient.runReport({
+            property: `properties/${PROPERTY_ID}`,
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+            dimensions: [{ name: "sessionSource" }],
+            metrics: [{ name: "sessions" }],
+            limit: 10,
+            orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+        });
+
+        const trafficSources = (sourcesResponse.rows || []).map(row => ({
+            source: row.dimensionValues?.[0]?.value || "(direct)",
+            sessions: parseInt(row.metricValues?.[0]?.value || "0"),
+        }));
+
         return {
             success: true,
             data: {
@@ -94,6 +110,7 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
                 topPages,
                 topCountries,
                 deviceCategories,
+                trafficSources,
             },
         };
     } catch (error: any) {
