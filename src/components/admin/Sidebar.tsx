@@ -35,6 +35,7 @@ const NAV_GROUPS = [
             { label: "Speakers", href: "/admin/speakers", icon: Mic },
             { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
             { label: "Awards", href: "/admin/awards", icon: Trophy },
+            { label: "Dubai Contacts", href: "/admin/dubai-contacts", icon: Users },
             { label: "Blog", href: "/admin/blog", icon: BookOpen },
             { label: "Authentication", href: "/admin/settings", icon: Shield },
         ]
