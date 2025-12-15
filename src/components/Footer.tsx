@@ -31,7 +31,9 @@ export function Footer() {
                         {/* Social Links */}
                         <div className="flex gap-2 sm:gap-3 pt-2">
                             <Link
-                                href="#"
+                                href="https://www.linkedin.com/company/lextalkworld-apac-me/posts/?feedView=all"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
                             >
                                 <Linkedin size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
