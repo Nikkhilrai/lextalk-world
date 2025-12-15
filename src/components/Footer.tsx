@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
 
 export function Footer() {
     return (
@@ -37,22 +37,36 @@ export function Footer() {
                                 <Linkedin size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
                             </Link>
                             <Link
-                                href="#"
+                                href="https://x.com/LextalkWorldME"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
                             >
                                 <Twitter size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
                             </Link>
                             <Link
-                                href="#"
+                                href="https://www.facebook.com/profile.php?id=61585120593750"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
                             >
                                 <Facebook size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
                             </Link>
                             <Link
-                                href="#"
+                                href="https://www.instagram.com/lextalkworldapacandme/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
                             >
                                 <Instagram size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                            </Link>
+                            <Link
+                                href="https://www.youtube.com/@LextalkWorldAPACandME"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                            >
+                                <Youtube size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
                             </Link>
                         </div>
                     </div>
