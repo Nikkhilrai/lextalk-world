@@ -139,7 +139,7 @@ export function DubaiAdvisoryBoard() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full border border-slate-200">
                             <Globe size={14} className="text-amber-500" />
                             <span className="text-xs font-bold text-slate-600 uppercase tracking-[0.1em] md:tracking-[0.15em]">
-                                Asia & Middle East Chapter
+                                APAC and Middle East
                             </span>
                         </div>
                     </div>
@@ -253,8 +253,8 @@ export function DubaiAdvisoryBoard() {
                                     setTimeout(() => setIsAutoPlaying(true), 10000);
                                 }}
                                 className={`rounded-full transition-all duration-300 ${idx === centerIndex
-                                        ? 'w-8 h-2 bg-amber-500'
-                                        : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
+                                    ? 'w-8 h-2 bg-amber-500'
+                                    : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
                                     }`}
                                 aria-label={`Go to member ${idx + 1}`}
                             />
