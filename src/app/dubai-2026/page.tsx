@@ -676,7 +676,12 @@ export default function DubaiEventPage() {
                             <div className="relative group perspective-1000">
                                 <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-amber-600/5 rounded-3xl blur-xl transition-all duration-500 group-hover:bg-amber-500/10 group-hover:blur-2xl" />
 
-                                <div className="relative w-64 h-36 md:w-[400px] md:h-52 bg-white/60 backdrop-blur-md rounded-3xl border border-white/60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_-12px_rgba(217,119,6,0.15)] flex items-center justify-center p-8 transition-all duration-500 transform group-hover:-translate-y-2">
+                                <a
+                                    href="https://www.mrsprofessional.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative w-64 h-36 md:w-[400px] md:h-52 bg-white/60 backdrop-blur-md rounded-3xl border border-white/60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_-12px_rgba(217,119,6,0.15)] flex items-center justify-center p-8 transition-all duration-500 transform group-hover:-translate-y-2 block"
+                                >
                                     <div className="relative w-full h-full">
                                         <Image
                                             src="/logo/mrs-logo.avif"
@@ -688,7 +693,7 @@ export default function DubaiEventPage() {
 
                                     {/* Shine Effect */}
                                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -711,7 +716,12 @@ export default function DubaiEventPage() {
                                 <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
-                                    <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
+                                    <a
+                                        href="https://www.casedocker.com/landing/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-4 md:p-8 flex items-center justify-center block"
+                                    >
                                         <div className="relative w-full h-full">
                                             <Image
                                                 src="/dubai-event/sponsors/CasedockerLogo.avif"
@@ -720,14 +730,19 @@ export default function DubaiEventPage() {
                                                 className="object-contain"
                                             />
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 {/* Lex Corp */}
                                 <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
 
-                                    <div className="relative h-full w-full p-4 md:p-8 flex items-center justify-center">
+                                    <a
+                                        href="https://home.lexcorp.org.in/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-4 md:p-8 flex items-center justify-center block"
+                                    >
                                         <div className="relative w-full h-full">
                                             <Image
                                                 src="/dubai-event/sponsors/Lex_Corp_Logo.avif"
@@ -736,7 +751,7 @@ export default function DubaiEventPage() {
                                                 className="object-contain"
                                             />
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
