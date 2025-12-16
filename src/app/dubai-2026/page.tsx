@@ -634,6 +634,212 @@ export default function DubaiEventPage() {
             {/* ===================== ADVISORY BOARD ===================== */}
             <DubaiAdvisoryBoard />
 
+            {/* ===================== TESTIMONIALS ===================== */}
+            <section id="testimonials" className="py-20 md:py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+                {/* Background Elements */}
+                <div className="absolute inset-0">
+                    <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[150px]" />
+                    <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px]" />
+                    <div
+                        className="absolute inset-0 opacity-[0.02]"
+                        style={{
+                            backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                            backgroundSize: '50px 50px'
+                        }}
+                    />
+                </div>
+
+                <div className="container mx-auto px-4 relative z-10">
+                    {/* Header */}
+                    <div className="text-center mb-12 md:mb-20">
+                        <span className="text-amber-400 font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3 block">
+                            What People Say
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-white mb-4 md:mb-6">
+                            Voices from Our{" "}
+                            <span className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                                Community
+                            </span>
+                        </h2>
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400" />
+                            <div className="w-2 h-2 rounded-full bg-amber-500" />
+                            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400" />
+                        </div>
+                    </div>
+
+                    {/* Testimonials Grid */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
+                        {/* Testimonial 1 - Featured/Large */}
+                        <div className="md:col-span-2 lg:col-span-2 group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-10 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
+                            {/* Quote Icon */}
+                            <div className="absolute top-4 right-4 md:top-8 md:right-8">
+                                <svg className="w-12 h-12 md:w-20 md:h-20 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                </svg>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
+                                {/* Profile Image */}
+                                <div className="shrink-0">
+                                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px]">
+                                        <div className="w-full h-full rounded-2xl bg-slate-800 overflow-hidden">
+                                            <Image
+                                                src="/testimonials/jorge-barona.jpg"
+                                                alt="Jorge Barona"
+                                                width={96}
+                                                height={96}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex-1">
+                                    <p className="text-white/80 text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
+                                        "A truly enriching event. Congratulations to the organizers for a seamless and engaging experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table. It was an honor to contribute to the discussion and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!"
+                                    </p>
+
+                                    <div className="flex items-center gap-3">
+                                        <div>
+                                            <h4 className="font-bold text-white text-base md:text-lg">Jorge Barona</h4>
+                                            <p className="text-amber-400 text-xs md:text-sm font-medium">Jorge Barona ILC</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Testimonial 2 */}
+                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
+                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
+                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                </svg>
+                            </div>
+
+                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
+                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
+                                        <Image
+                                            src="/testimonials/christopher-bowen.jpg"
+                                            alt="Christopher Bowen"
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-white text-sm md:text-base">Christopher Bowen</h4>
+                                    <p className="text-amber-400 text-xs font-medium">Corporate Counsel</p>
+                                    <p className="text-white/50 text-xs">Google LLC</p>
+                                </div>
+                            </div>
+
+                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                                "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available."
+                            </p>
+                        </div>
+
+                        {/* Testimonial 3 */}
+                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
+                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
+                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                </svg>
+                            </div>
+
+                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
+                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
+                                        <Image
+                                            src="/testimonials/javier-amuchastegui.jpg"
+                                            alt="Javier Amuchástegui"
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-white text-sm md:text-base">Javier Amuchástegui</h4>
+                                    <p className="text-amber-400 text-xs font-medium">Serving Immigrants</p>
+                                </div>
+                            </div>
+
+                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                                "Great event! Everything was perfect!"
+                            </p>
+                        </div>
+
+                        {/* Testimonial 4 */}
+                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
+                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
+                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                </svg>
+                            </div>
+
+                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
+                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
+                                        <Image
+                                            src="/testimonials/enrique-eguiarte.jpg"
+                                            alt="Enrique Eguiarte"
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-white text-sm md:text-base">Enrique Eguiarte</h4>
+                                    <p className="text-amber-400 text-xs font-medium">Head Legal</p>
+                                    <p className="text-white/50 text-xs">Ticsa Grupo EPM</p>
+                                </div>
+                            </div>
+
+                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                                "Wonderful event and such an amazing opportunity to connect with quite professional colleagues."
+                            </p>
+                        </div>
+
+                        {/* Testimonial 5 */}
+                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
+                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
+                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                </svg>
+                            </div>
+
+                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
+                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
+                                        <Image
+                                            src="/testimonials/alejandro-espejo.jpg"
+                                            alt="Alejandro Espejo"
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-white text-sm md:text-base">Alejandro Espejo</h4>
+                                    <p className="text-amber-400 text-xs font-medium">Legal Manager Latam</p>
+                                    <p className="text-white/50 text-xs">Nordex Group</p>
+                                </div>
+                            </div>
+
+                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                                "Great experience!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ===================== SPONSORS ===================== */}
             <section id="sponsors" className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
                 {/* Background Decor */}
