@@ -883,19 +883,7 @@ export default function DubaiEventPage() {
                     </div>
                 </div>
 
-                {/* CSS for Marquee Animation */}
-                <style jsx>{`
-                    @keyframes marquee {
-                        0% { transform: translateX(0); }
-                        100% { transform: translateX(-50%); }
-                    }
-                    .animate-marquee {
-                        animation: marquee 30s linear infinite;
-                    }
-                    .animate-marquee:hover {
-                        animation-play-state: paused;
-                    }
-                `}</style>
+
             </section>
 
             {/* ===================== SPONSORS ===================== */}
@@ -1063,23 +1051,7 @@ export default function DubaiEventPage() {
 
             <Footer />
 
-            {/* Custom Animations */}
-            <style jsx global>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-20px); }
-                }
-                .animate-float {
-                    animation: float 6s ease-in-out infinite;
-                }
-                @keyframes marquee {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-33.333%); }
-                }
-                .animate-marquee {
-                    animation: marquee 30s linear infinite;
-                }
-            `}</style>
+
         </main>
     );
 }
