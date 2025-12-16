@@ -685,7 +685,7 @@ export default function DubaiEventPage() {
                                     <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px]">
                                         <div className="w-full h-full rounded-2xl bg-slate-800 overflow-hidden">
                                             <Image
-                                                src="/testimonials/jorge-barona.jpg"
+                                                src="/testimonials/Jorge Barona_edited.avif"
                                                 alt="Jorge Barona"
                                                 width={96}
                                                 height={96}
@@ -722,7 +722,7 @@ export default function DubaiEventPage() {
                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
                                     <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
                                         <Image
-                                            src="/testimonials/christopher-bowen.jpg"
+                                            src="/testimonials/Monique Ferraro.avif"
                                             alt="Christopher Bowen"
                                             width={64}
                                             height={64}
@@ -754,7 +754,7 @@ export default function DubaiEventPage() {
                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
                                     <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
                                         <Image
-                                            src="/testimonials/javier-amuchastegui.jpg"
+                                            src="/testimonials/Javier.avif"
                                             alt="Javier Amuchástegui"
                                             width={64}
                                             height={64}
@@ -785,7 +785,7 @@ export default function DubaiEventPage() {
                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
                                     <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
                                         <Image
-                                            src="/testimonials/enrique-eguiarte.jpg"
+                                            src="/testimonials/Enrique Eguiarte .avif"
                                             alt="Enrique Eguiarte"
                                             width={64}
                                             height={64}
@@ -817,7 +817,7 @@ export default function DubaiEventPage() {
                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
                                     <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
                                         <Image
-                                            src="/testimonials/alejandro-espejo.jpg"
+                                            src="/testimonials/Alejandro Espejo.avif"
                                             alt="Alejandro Espejo"
                                             width={64}
                                             height={64}
