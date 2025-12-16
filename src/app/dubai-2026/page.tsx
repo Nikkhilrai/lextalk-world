@@ -635,209 +635,267 @@ export default function DubaiEventPage() {
             <DubaiAdvisoryBoard />
 
             {/* ===================== TESTIMONIALS ===================== */}
-            <section id="testimonials" className="py-20 md:py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-                {/* Background Elements */}
+            <section id="testimonials" className="py-20 md:py-32 bg-[#0a0a0f] relative overflow-hidden">
+                {/* Animated Background */}
                 <div className="absolute inset-0">
-                    <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[150px]" />
-                    <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px]" />
-                    <div
-                        className="absolute inset-0 opacity-[0.02]"
-                        style={{
-                            backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                            backgroundSize: '50px 50px'
-                        }}
-                    />
+                    {/* Gradient Glow */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/20 via-amber-500/5 to-transparent blur-[100px]" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-blue-600/10 to-transparent rounded-full blur-[120px]" />
+                    <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-tl from-purple-600/10 to-transparent rounded-full blur-[100px]" />
+
+                    {/* Animated Lines */}
+                    <div className="absolute inset-0 overflow-hidden opacity-20">
+                        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent animate-pulse" />
+                        <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent animate-pulse" style={{ animationDelay: '1s' }} />
+                    </div>
+
+                    {/* Floating Orbs */}
+                    <div className="absolute top-20 right-20 w-2 h-2 bg-amber-500/40 rounded-full animate-ping" />
+                    <div className="absolute top-40 left-40 w-1 h-1 bg-white/30 rounded-full animate-pulse" />
+                    <div className="absolute bottom-32 right-1/3 w-1.5 h-1.5 bg-amber-400/50 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
                 </div>
 
                 <div className="container mx-auto px-4 relative z-10">
-                    {/* Header */}
+                    {/* Header with Animated Badge */}
                     <div className="text-center mb-12 md:mb-20">
-                        <span className="text-amber-400 font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3 block">
-                            What People Say
-                        </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-white mb-4 md:mb-6">
-                            Voices from Our{" "}
-                            <span className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                                Community
+                        <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-amber-500/20 border border-amber-500/30 rounded-full mb-6 backdrop-blur-sm">
+                            <div className="flex -space-x-2">
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-[#0a0a0f]">JB</div>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-[#0a0a0f]">CB</div>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-[#0a0a0f]">+3</div>
+                            </div>
+                            <span className="text-amber-400 text-sm font-medium">Trusted by Legal Leaders Worldwide</span>
+                        </div>
+
+                        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-4 md:mb-6">
+                            What Our{" "}
+                            <span className="relative inline-block">
+                                <span className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 bg-clip-text text-transparent">
+                                    Community
+                                </span>
+                                <svg className="absolute -bottom-2 left-0 w-full" height="12" viewBox="0 0 200 12" preserveAspectRatio="none">
+                                    <path d="M0 8 Q 50 0, 100 8 T 200 8" stroke="url(#gold-gradient)" strokeWidth="3" fill="none" strokeLinecap="round" />
+                                    <defs>
+                                        <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stopColor="#F59E0B" />
+                                            <stop offset="50%" stopColor="#FBBF24" />
+                                            <stop offset="100%" stopColor="#F59E0B" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
                             </span>
+                            {" "}Says
                         </h2>
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400" />
-                            <div className="w-2 h-2 rounded-full bg-amber-500" />
-                            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400" />
+                        <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto">
+                            Hear from legal professionals who've experienced the LexTalk difference
+                        </p>
+                    </div>
+
+                    {/* Featured Testimonial - Spotlight */}
+                    <div className="max-w-5xl mx-auto mb-12 md:mb-20">
+                        <div className="relative group">
+                            {/* Glow Effect */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
+
+                            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 md:p-12 border border-white/10 overflow-hidden">
+                                {/* Decorative Elements */}
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full blur-3xl" />
+                                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full blur-2xl" />
+
+                                {/* Large Quote Mark */}
+                                <div className="absolute top-4 left-4 md:top-8 md:left-8">
+                                    <svg className="w-16 h-16 md:w-24 md:h-24 text-amber-500/10" fill="currentColor" viewBox="0 0 32 32">
+                                        <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                    </svg>
+                                </div>
+
+                                <div className="relative z-10 flex flex-col lg:flex-row gap-6 md:gap-10 items-center lg:items-start">
+                                    {/* Profile Section */}
+                                    <div className="shrink-0 text-center lg:text-left">
+                                        <div className="relative inline-block">
+                                            {/* Animated Ring */}
+                                            <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 opacity-50 animate-spin" style={{ animationDuration: '8s' }} />
+                                            <div className="absolute -inset-2 rounded-full bg-[#0a0a0f]" />
+                                            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-amber-500/50">
+                                                <Image
+                                                    src="/testimonials/Jorge Barona_edited.avif"
+                                                    alt="Jorge Barona"
+                                                    width={128}
+                                                    height={128}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            {/* Verified Badge */}
+                                            <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center border-4 border-[#0a0a0f]">
+                                                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4">
+                                            <h3 className="text-white font-bold text-xl md:text-2xl">Jorge Barona</h3>
+                                            <p className="text-amber-400 text-sm font-medium">Jorge Barona ILC</p>
+                                            {/* Stars */}
+                                            <div className="flex justify-center lg:justify-start gap-1 mt-2">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <svg key={i} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Quote */}
+                                    <div className="flex-1">
+                                        <p className="text-white/90 text-base md:text-xl lg:text-2xl leading-relaxed font-light italic">
+                                            "A truly enriching event. Congratulations to the organizers for a seamless and engaging experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table.
+                                            <span className="text-amber-400"> It was an honor to contribute to the discussion</span> and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!"
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Testimonials Grid */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
-                        {/* Testimonial 1 - Featured/Large */}
-                        <div className="md:col-span-2 lg:col-span-2 group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-10 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
-                            {/* Quote Icon */}
-                            <div className="absolute top-4 right-4 md:top-8 md:right-8">
-                                <svg className="w-12 h-12 md:w-20 md:h-20 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
-                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
-                                </svg>
-                            </div>
+                    {/* Scrolling Testimonials Row */}
+                    <div className="relative">
+                        {/* Fade Edges */}
+                        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10 pointer-events-none" />
+                        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10 pointer-events-none" />
 
-                            <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
-                                {/* Profile Image */}
-                                <div className="shrink-0">
-                                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px]">
-                                        <div className="w-full h-full rounded-2xl bg-slate-800 overflow-hidden">
-                                            <Image
-                                                src="/testimonials/Jorge Barona_edited.avif"
-                                                alt="Jorge Barona"
-                                                width={96}
-                                                height={96}
-                                                className="w-full h-full object-cover"
-                                            />
+                        {/* Marquee Container */}
+                        <div className="overflow-hidden">
+                            <div className="flex gap-4 md:gap-6 animate-marquee hover:pause">
+                                {/* Testimonial Cards - First Set */}
+                                {[
+                                    { name: "Christopher Bowen", role: "Corporate Counsel", company: "Google LLC", image: "/testimonials/Monique Ferraro.avif", quote: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available." },
+                                    { name: "Javier Amuchástegui", role: "Founder", company: "Serving Immigrants", image: "/testimonials/Javier.avif", quote: "Great event! Everything was perfect!" },
+                                    { name: "Enrique Eguiarte", role: "Head Legal", company: "Ticsa Grupo EPM", image: "/testimonials/Enrique Eguiarte .avif", quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues." },
+                                    { name: "Alejandro Espejo", role: "Legal Manager Latam", company: "Nordex Group", image: "/testimonials/Alejandro Espejo.avif", quote: "Great experience!" },
+                                ].map((testimonial, index) => (
+                                    <div key={index} className="shrink-0 w-[280px] md:w-[350px]">
+                                        <div className="h-full bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-white/10 hover:border-amber-500/30 transition-all duration-500 group">
+                                            {/* Top Section */}
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="relative">
+                                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-amber-500/30 group-hover:border-amber-500 transition-colors">
+                                                        <Image
+                                                            src={testimonial.image}
+                                                            alt={testimonial.name}
+                                                            width={56}
+                                                            height={56}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="text-white font-bold text-sm md:text-base truncate">{testimonial.name}</h4>
+                                                    <p className="text-amber-400 text-xs font-medium">{testimonial.role}</p>
+                                                    <p className="text-white/40 text-xs truncate">{testimonial.company}</p>
+                                                </div>
+                                            </div>
+
+                                            {/* Quote */}
+                                            <div className="relative">
+                                                <svg className="absolute -top-2 -left-1 w-6 h-6 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                                </svg>
+                                                <p className="text-white/70 text-xs md:text-sm leading-relaxed pl-4">
+                                                    "{testimonial.quote}"
+                                                </p>
+                                            </div>
+
+                                            {/* Stars */}
+                                            <div className="flex gap-0.5 mt-4">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                ))}
 
-                                <div className="flex-1">
-                                    <p className="text-white/80 text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
-                                        "A truly enriching event. Congratulations to the organizers for a seamless and engaging experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table. It was an honor to contribute to the discussion and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!"
-                                    </p>
-
-                                    <div className="flex items-center gap-3">
-                                        <div>
-                                            <h4 className="font-bold text-white text-base md:text-lg">Jorge Barona</h4>
-                                            <p className="text-amber-400 text-xs md:text-sm font-medium">Jorge Barona ILC</p>
+                                {/* Duplicate for seamless loop */}
+                                {[
+                                    { name: "Christopher Bowen", role: "Corporate Counsel", company: "Google LLC", image: "/testimonials/Monique Ferraro.avif", quote: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available." },
+                                    { name: "Javier Amuchástegui", role: "Founder", company: "Serving Immigrants", image: "/testimonials/Javier.avif", quote: "Great event! Everything was perfect!" },
+                                    { name: "Enrique Eguiarte", role: "Head Legal", company: "Ticsa Grupo EPM", image: "/testimonials/Enrique Eguiarte .avif", quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues." },
+                                    { name: "Alejandro Espejo", role: "Legal Manager Latam", company: "Nordex Group", image: "/testimonials/Alejandro Espejo.avif", quote: "Great experience!" },
+                                ].map((testimonial, index) => (
+                                    <div key={`dup-${index}`} className="shrink-0 w-[280px] md:w-[350px]">
+                                        <div className="h-full bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-white/10 hover:border-amber-500/30 transition-all duration-500 group">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="relative">
+                                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border-2 border-amber-500/30 group-hover:border-amber-500 transition-colors">
+                                                        <Image
+                                                            src={testimonial.image}
+                                                            alt={testimonial.name}
+                                                            width={56}
+                                                            height={56}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="text-white font-bold text-sm md:text-base truncate">{testimonial.name}</h4>
+                                                    <p className="text-amber-400 text-xs font-medium">{testimonial.role}</p>
+                                                    <p className="text-white/40 text-xs truncate">{testimonial.company}</p>
+                                                </div>
+                                            </div>
+                                            <div className="relative">
+                                                <svg className="absolute -top-2 -left-1 w-6 h-6 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
+                                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
+                                                </svg>
+                                                <p className="text-white/70 text-xs md:text-sm leading-relaxed pl-4">
+                                                    "{testimonial.quote}"
+                                                </p>
+                                            </div>
+                                            <div className="flex gap-0.5 mt-4">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
+                    </div>
 
-                        {/* Testimonial 2 */}
-                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
-                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
-                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
-                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
-                                </svg>
+                    {/* Stats Row */}
+                    <div className="mt-12 md:mt-20 flex flex-wrap justify-center gap-8 md:gap-16">
+                        {[
+                            { number: "500+", label: "Attendees" },
+                            { number: "98%", label: "Satisfaction" },
+                            { number: "50+", label: "Countries" },
+                        ].map((stat, i) => (
+                            <div key={i} className="text-center">
+                                <p className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">{stat.number}</p>
+                                <p className="text-white/50 text-xs md:text-sm uppercase tracking-wider mt-1">{stat.label}</p>
                             </div>
-
-                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
-                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
-                                        <Image
-                                            src="/testimonials/Monique Ferraro.avif"
-                                            alt="Christopher Bowen"
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white text-sm md:text-base">Christopher Bowen</h4>
-                                    <p className="text-amber-400 text-xs font-medium">Corporate Counsel</p>
-                                    <p className="text-white/50 text-xs">Google LLC</p>
-                                </div>
-                            </div>
-
-                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                                "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available."
-                            </p>
-                        </div>
-
-                        {/* Testimonial 3 */}
-                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
-                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
-                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
-                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
-                                </svg>
-                            </div>
-
-                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
-                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
-                                        <Image
-                                            src="/testimonials/Javier.avif"
-                                            alt="Javier Amuchástegui"
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white text-sm md:text-base">Javier Amuchástegui</h4>
-                                    <p className="text-amber-400 text-xs font-medium">Serving Immigrants</p>
-                                </div>
-                            </div>
-
-                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                                "Great event! Everything was perfect!"
-                            </p>
-                        </div>
-
-                        {/* Testimonial 4 */}
-                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
-                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
-                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
-                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
-                                </svg>
-                            </div>
-
-                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
-                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
-                                        <Image
-                                            src="/testimonials/Enrique Eguiarte .avif"
-                                            alt="Enrique Eguiarte"
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white text-sm md:text-base">Enrique Eguiarte</h4>
-                                    <p className="text-amber-400 text-xs font-medium">Head Legal</p>
-                                    <p className="text-white/50 text-xs">Ticsa Grupo EPM</p>
-                                </div>
-                            </div>
-
-                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                                "Wonderful event and such an amazing opportunity to connect with quite professional colleagues."
-                            </p>
-                        </div>
-
-                        {/* Testimonial 5 */}
-                        <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-5 md:p-8 border border-white/10 hover:border-amber-500/30 transition-all duration-500">
-                            <div className="absolute top-3 right-3 md:top-6 md:right-6">
-                                <svg className="w-8 h-8 md:w-12 md:h-12 text-amber-500/20" fill="currentColor" viewBox="0 0 32 32">
-                                    <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
-                                </svg>
-                            </div>
-
-                            <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px] shrink-0">
-                                    <div className="w-full h-full rounded-xl bg-slate-800 overflow-hidden">
-                                        <Image
-                                            src="/testimonials/Alejandro Espejo.avif"
-                                            alt="Alejandro Espejo"
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white text-sm md:text-base">Alejandro Espejo</h4>
-                                    <p className="text-amber-400 text-xs font-medium">Legal Manager Latam</p>
-                                    <p className="text-white/50 text-xs">Nordex Group</p>
-                                </div>
-                            </div>
-
-                            <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                                "Great experience!"
-                            </p>
-                        </div>
+                        ))}
                     </div>
                 </div>
+
+                {/* CSS for Marquee Animation */}
+                <style jsx>{`
+                    @keyframes marquee {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-marquee {
+                        animation: marquee 30s linear infinite;
+                    }
+                    .animate-marquee:hover {
+                        animation-play-state: paused;
+                    }
+                `}</style>
             </section>
 
             {/* ===================== SPONSORS ===================== */}
