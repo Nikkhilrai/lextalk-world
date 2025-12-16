@@ -310,8 +310,8 @@ export default function AboutPage() {
                                     <div className="col-span-7 space-y-3 md:space-y-4">
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-36 sm:h-48 md:h-56 group">
                                             <Image
-                                                src="/dubai-event/gallery/1.avif"
-                                                alt="LexTalk World Conference"
+                                                src="/about/Networking_edited.avif"
+                                                alt="Networking at LexTalk World"
                                                 width={400}
                                                 height={300}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -319,8 +319,8 @@ export default function AboutPage() {
                                         </div>
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-48 sm:h-56 md:h-72 group">
                                             <Image
-                                                src="/dubai-event/gallery/2.avif"
-                                                alt="Networking at LexTalk"
+                                                src="/about/5.jpg"
+                                                alt="LexTalk World Conference"
                                                 width={400}
                                                 height={350}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -330,7 +330,7 @@ export default function AboutPage() {
                                     <div className="col-span-5 space-y-3 md:space-y-4 pt-8 md:pt-12">
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-48 sm:h-56 md:h-72 group">
                                             <Image
-                                                src="/dubai-event/gallery/3.avif"
+                                                src="/about/Recognitions.avif"
                                                 alt="Award Ceremony"
                                                 width={300}
                                                 height={350}
@@ -339,7 +339,7 @@ export default function AboutPage() {
                                         </div>
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-36 sm:h-48 md:h-56 group">
                                             <Image
-                                                src="/dubai-event/gallery/4.avif"
+                                                src="/about/speaker.jpg"
                                                 alt="Speaker Session"
                                                 width={300}
                                                 height={300}
