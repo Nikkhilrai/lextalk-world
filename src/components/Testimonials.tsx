@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
     {
@@ -12,7 +13,6 @@ const testimonials = [
         image: "/testimonials/Alejandro Espejo.avif",
         quote: "LexTalk World transformed how I approach legal networking. The connections I made led to three major cross-border collaborations that have reshaped our international strategy.",
         rating: 5,
-        featured: true,
     },
     {
         id: 2,
@@ -22,7 +22,6 @@ const testimonials = [
         image: "/testimonials/Javier.avif",
         quote: "As a speaker at multiple LexTalk events, I've witnessed firsthand the platform's ability to bridge cultural and jurisdictional divides. It's where global legal minds converge.",
         rating: 5,
-        featured: false,
     },
     {
         id: 3,
@@ -32,7 +31,6 @@ const testimonials = [
         image: "/testimonials/Jorge Barona_edited.avif",
         quote: "The Dubai conference exceeded all expectations. LexTalk's curation of speakers and attendees created an environment where meaningful discussions happened organically.",
         rating: 5,
-        featured: false,
     },
     {
         id: 4,
@@ -42,18 +40,25 @@ const testimonials = [
         image: "/testimonials/Monique Ferraro.avif",
         quote: "LexTalk brings a level of insight, dynamism, and thoughtfulness to legal conferences that gets to the very heart of what our community needs.",
         rating: 5,
-        featured: false,
     },
+    {
+        id: 5,
+        name: "Christopher Bowen",
+        title: "Chief Legal Officer",
+        company: "Global FinTech Corp",
+        image: "/testimonials/Monique Ferraro.avif", // Using placeholder as requested previously
+        quote: "In 25 years of legal practice, few platforms have matched LexTalk's caliber of thought leadership. Essential for any forward-thinking legal executive.",
+        rating: 5,
+    }
 ];
 
 function StarRating({ rating }: { rating: number }) {
     return (
-        <div className="flex gap-1">
+        <div className="flex gap-1 justify-center">
             {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                     key={i}
-                    className={`w-4 h-4 ${i < rating ? "fill-amber-400 text-amber-400" : "text-slate-600"
-                        }`}
+                    className={`w-3.5 h-3.5 ${i < rating ? "fill-amber-400 text-amber-400" : "text-slate-600"}`}
                 />
             ))}
         </div>
@@ -61,161 +66,196 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export function Testimonials() {
-    const featuredTestimonial = testimonials.find((t) => t.featured);
-    const otherTestimonials = testimonials.filter((t) => !t.featured);
+    const [activeIndex, setActiveIndex] = useState(2); // Start with middle item
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    // Auto-play functionality
+    useEffect(() => {
+        if (!isAutoPlaying) return;
+        const interval = setInterval(() => {
+            handleNext();
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [activeIndex, isAutoPlaying]);
+
+    const handlePrev = () => {
+        setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+        setIsAutoPlaying(false);
+    };
+
+    const handleNext = () => {
+        setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+        setIsAutoPlaying(false);
+    };
+
+    const getCardStyle = (index: number) => {
+        const diff = (index - activeIndex + testimonials.length) % testimonials.length;
+        const center = 0;
+        const left1 = testimonials.length - 1;
+        const right1 = 1;
+
+        // Active Card (Center)
+        if (index === activeIndex) {
+            return {
+                transform: "translateX(0) scale(1)",
+                zIndex: 30,
+                opacity: 1,
+                filter: "blur(0px)",
+                visibility: "visible" as const,
+            };
+        }
+        // Left Neighbor
+        else if (diff === left1 || (index === activeIndex - 1)) {
+            return {
+                transform: "translateX(-40%) scale(0.85)",
+                zIndex: 20,
+                opacity: 0.6,
+                filter: "blur(2px)",
+                visibility: "visible" as const,
+            };
+        }
+        // Right Neighbor
+        else if (diff === right1 || (index === activeIndex + 1)) {
+            return {
+                transform: "translateX(40%) scale(0.85)",
+                zIndex: 20,
+                opacity: 0.6,
+                filter: "blur(2px)",
+                visibility: "visible" as const,
+            };
+        }
+        // Hidden/Far Cards
+        else {
+            return {
+                transform: "translateX(0) scale(0.5)",
+                zIndex: 10,
+                opacity: 0,
+                filter: "blur(10px)",
+                visibility: "hidden" as const,
+                pointerEvents: "none" as const,
+            };
+        }
+    };
 
     return (
-        <section className="py-14 md:py-20 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 opacity-30">
+        <section className="py-20 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 relative overflow-hidden">
+            {/* Background elements */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-600/10 rounded-full blur-[100px]" />
             </div>
 
-            {/* Subtle Grid Pattern */}
-            <div
-                className="absolute inset-0 opacity-[0.03]"
-                style={{
-                    backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`,
-                    backgroundSize: "32px 32px",
-                }}
-            />
-
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Section Header */}
-                <div className="text-center mb-10 md:mb-12">
-                    {/* Badge */}
-                    <div className="flex justify-center mb-6">
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-bold text-amber-400 tracking-[0.15em] uppercase border border-amber-500/30 rounded-full bg-amber-500/10">
-                            <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse" />
-                            Testimonials
-                        </span>
-                    </div>
-
-                    {/* Heading */}
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white leading-tight mb-3">
-                        What Our{" "}
-                        <span className="text-amber-400 italic">Community</span>{" "}
-                        Says
+            <div className="container mx-auto px-4 relative z-10">
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <span className="inline-block py-1 px-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold tracking-widest uppercase mb-4">
+                        Testimonials
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
+                        Client <span className="text-amber-400 italic">Experiences</span>
                     </h2>
-
-                    {/* Divider */}
-                    <div className="flex items-center justify-center gap-3 mt-6">
-                        <div className="w-12 h-px bg-gradient-to-r from-transparent to-amber-500/50" />
-                        <div className="w-2 h-2 rounded-full bg-amber-500" />
-                        <div className="w-12 h-px bg-gradient-to-l from-transparent to-amber-500/50" />
-                    </div>
-
-                    <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto mt-4 leading-relaxed">
-                        Hear from legal professionals who have experienced the power of
-                        global connection at LexTalk World events.
+                    <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                        Global legal leaders share their LexTalk World experience
                     </p>
                 </div>
 
-                {/* Featured Testimonial */}
-                {featuredTestimonial && (
-                    <div className="max-w-3xl mx-auto mb-10 relative">
-                        {/* Large Quote Mark */}
-                        <div className="absolute -top-4 -left-2 md:-left-8 z-0">
-                            <Quote className="w-14 h-14 md:w-20 md:h-20 text-amber-500/10 transform rotate-180" />
-                        </div>
+                {/* Carousel Container */}
+                <div className="relative max-w-6xl mx-auto h-[450px] md:h-[400px] flex items-center justify-center">
 
-                        <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700/50 shadow-xl shadow-black/20">
-                            {/* Glow Effect */}
-                            <div className="absolute -inset-px bg-gradient-to-r from-amber-500/20 via-transparent to-amber-500/20 rounded-3xl blur-sm opacity-50" />
+                    {/* Navigation Buttons (Absolute) */}
+                    <button
+                        onClick={handlePrev}
+                        className="absolute left-0 md:left-4 z-40 p-3 bg-white/5 hover:bg-amber-500 text-white/50 hover:text-white rounded-full backdrop-blur-sm transition-all duration-300 border border-white/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] hidden md:block"
+                    >
+                        <ChevronLeft className="w-6 h-6" />
+                    </button>
 
-                            <div className="relative z-10">
-                                {/* Rating */}
-                                <div className="flex justify-center mb-4">
-                                    <StarRating rating={featuredTestimonial.rating} />
-                                </div>
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-0 md:right-4 z-40 p-3 bg-white/5 hover:bg-amber-500 text-white/50 hover:text-white rounded-full backdrop-blur-sm transition-all duration-300 border border-white/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] hidden md:block"
+                    >
+                        <ChevronRight className="w-6 h-6" />
+                    </button>
 
-                                {/* Quote */}
-                                <blockquote className="text-lg md:text-xl text-white font-serif leading-relaxed text-center mb-6">
-                                    "{featuredTestimonial.quote}"
-                                </blockquote>
+                    {/* Cards */}
+                    <div className="relative w-full h-full flex items-center justify-center perspective-1000">
+                        {testimonials.map((testimonial, index) => {
+                            const style = getCardStyle(index);
+                            return (
+                                <div
+                                    key={testimonial.id}
+                                    className="absolute w-[90%] md:w-[60%] lg:w-[50%] transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+                                    style={style}
+                                >
+                                    <div className={`relative bg-[#1c1c28] rounded-[2rem] p-8 md:p-10 border shadow-2xl ${index === activeIndex
+                                            ? "border-amber-500/30 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] bg-gradient-to-br from-[#232332] to-[#15151e]"
+                                            : "border-white/5 opacity-50 grayscale-[0.5]"
+                                        }`}>
 
-                                {/* Author */}
-                                <div className="flex flex-col items-center">
-                                    {/* Profile Image */}
-                                    <div className="relative w-14 h-14 mb-3">
-                                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full blur-sm opacity-60" />
-                                        <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-amber-400/50">
-                                            <Image
-                                                src={featuredTestimonial.image}
-                                                alt={featuredTestimonial.name}
-                                                fill
-                                                className="object-cover"
-                                            />
+                                        {/* Glow behind active card */}
+                                        {index === activeIndex && (
+                                            <div className="absolute -inset-px bg-gradient-to-r from-amber-500/20 via-transparent to-amber-500/20 rounded-[2rem] blur-xl opacity-50 -z-10" />
+                                        )}
+
+                                        {/* Quote Icon */}
+                                        <div className="text-center mb-6">
+                                            <Quote className="w-10 h-10 md:w-12 md:h-12 text-amber-500/20 mx-auto fill-amber-500/10" />
+                                        </div>
+
+                                        {/* Quote Text */}
+                                        <blockquote className="text-center mb-8">
+                                            <p className={`font-serif text-lg md:text-xl leading-relaxed ${index === activeIndex ? "text-white" : "text-slate-400"
+                                                }`}>
+                                                "{testimonial.quote}"
+                                            </p>
+                                        </blockquote>
+
+                                        {/* Author Info */}
+                                        <div className="flex flex-col items-center gap-3">
+                                            {/* Avatar */}
+                                            <div className={`relative rounded-full overflow-hidden border-2 ${index === activeIndex ? "w-16 h-16 border-amber-500" : "w-12 h-12 border-slate-600"
+                                                } transition-all duration-500`}>
+                                                <Image
+                                                    src={testimonial.image}
+                                                    alt={testimonial.name}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+
+                                            <div className="text-center">
+                                                <h4 className={`font-bold ${index === activeIndex ? "text-white text-lg" : "text-slate-300 text-base"
+                                                    }`}>
+                                                    {testimonial.name}
+                                                </h4>
+                                                <p className="text-amber-500 text-xs font-medium tracking-wide uppercase mb-2">
+                                                    {testimonial.title}
+                                                </p>
+                                                <StarRating rating={testimonial.rating} />
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <h4 className="text-base font-bold text-white">
-                                        {featuredTestimonial.name}
-                                    </h4>
-                                    <p className="text-amber-400 font-medium text-sm">
-                                        {featuredTestimonial.title}
-                                    </p>
-                                    <p className="text-slate-500 text-sm">
-                                        {featuredTestimonial.company}
-                                    </p>
                                 </div>
-                            </div>
-                        </div>
+                            );
+                        })}
                     </div>
-                )}
+                </div>
 
-                {/* Supporting Testimonials Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 max-w-5xl mx-auto">
-                    {otherTestimonials.map((testimonial, index) => (
-                        <div
-                            key={testimonial.id}
-                            className="group relative"
-                            style={{ animationDelay: `${index * 100}ms` }}
-                        >
-                            <div className="relative h-full bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-slate-700/50 hover:border-amber-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/5">
-                                {/* Small Quote Icon */}
-                                <Quote className="w-6 h-6 text-amber-500/20 mb-2 transform rotate-180" />
-
-                                {/* Rating */}
-                                <div className="mb-2">
-                                    <StarRating rating={testimonial.rating} />
-                                </div>
-
-                                {/* Quote */}
-                                <blockquote className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
-                                    "{testimonial.quote}"
-                                </blockquote>
-
-                                {/* Author */}
-                                <div className="flex items-center gap-3 mt-auto pt-3 border-t border-slate-700/50">
-                                    {/* Profile Image */}
-                                    <div className="relative w-10 h-10 shrink-0">
-                                        <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full opacity-50 group-hover:opacity-80 transition-opacity" />
-                                        <div className="relative w-full h-full rounded-full overflow-hidden border border-amber-500/30">
-                                            <Image
-                                                src={testimonial.image}
-                                                alt={testimonial.name}
-                                                fill
-                                                className="object-cover"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-white font-semibold text-sm">
-                                            {testimonial.name}
-                                        </h4>
-                                        <p className="text-amber-400/80 text-xs">
-                                            {testimonial.title}
-                                        </p>
-                                        <p className="text-slate-500 text-xs">
-                                            {testimonial.company}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                {/* Dot Indicators */}
+                <div className="flex justify-center gap-2 mt-8">
+                    {testimonials.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => {
+                                setActiveIndex(i);
+                                setIsAutoPlaying(false);
+                            }}
+                            className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex
+                                    ? "w-8 bg-amber-500"
+                                    : "w-2 bg-slate-700 hover:bg-slate-600"
+                                }`}
+                            aria-label={`Go to slide ${i + 1}`}
+                        />
                     ))}
                 </div>
             </div>
