@@ -6,6 +6,7 @@ import { SupportingAssociations } from "@/components/SupportingAssociations";
 import { MediaPartners } from "@/components/MediaPartners";
 import { AdvisoryBoard } from "@/components/AdvisoryBoard";
 import { WhoShouldJoin } from "@/components/WhoShouldJoin";
+import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { StayUpdated } from "@/components/StayUpdated";
 import { Footer } from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
       <EventsList />
       <AdvisoryBoard />
       <WhoShouldJoin />
+      <Testimonials />
       <SupportingAssociations />
       <MediaPartners />
       <FAQ />
