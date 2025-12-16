@@ -6,7 +6,7 @@ import Link from "next/link";
 import { EventNavbar } from "@/components/EventNavbar";
 import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
-import TestimonialsCarousel from "./TestimonialsCarousel";
+
 import {
     Calendar, MapPin, Users, Award, Mic, BookOpen,
     ArrowRight, Download, Handshake, GraduationCap,
@@ -635,8 +635,6 @@ export default function DubaiEventPage() {
             {/* ===================== ADVISORY BOARD ===================== */}
             <DubaiAdvisoryBoard />
 
-            {/* ===================== TESTIMONIALS ===================== */}
-            <TestimonialsCarousel />
 
             {/* ===================== SPONSORS ===================== */}
             <section id="sponsors" className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
