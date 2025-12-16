@@ -282,10 +282,10 @@ export default function AboutPage() {
 
                                 <div className="space-y-4 text-slate-600 leading-relaxed text-sm md:text-base">
                                     <p className="text-base md:text-lg font-medium text-slate-700">
-                                        We don't just organize events—we curate the future of the legal profession.
+                                        At LexTalk World, we don't just organize events—we curate the future of the legal profession.
                                     </p>
                                     <p>
-                                        From the bustling hubs of India and Singapore to the regulatory powerhouses of Dubai and New York, LexTalk World provides the space where high-stakes networking meets high-level strategy.
+                                        Bridging the gap between traditional jurisprudence and the digital-first era, we have evolved into the global heartbeat for legal professionals. From the bustling hubs of India and Singapore to the regulatory powerhouses of Dubai and New York, we provide the space where high-stakes networking meets high-level strategy.
                                     </p>
                                 </div>
 
@@ -663,8 +663,11 @@ export default function AboutPage() {
                         <p className="text-white/60 text-base md:text-xl mb-3 md:mb-4">
                             The legal landscape is changing fast.
                         </p>
-                        <p className="text-white/80 text-base md:text-xl mb-8 md:mb-12 max-w-2xl mx-auto">
+                        <p className="text-white/80 text-base md:text-xl mb-4 max-w-2xl mx-auto">
                             To navigate AI, global regulations, and new risks, you need more than knowledge—<strong className="text-amber-400">you need a tribe.</strong> LexTalk World is that tribe.
+                        </p>
+                        <p className="text-white/70 text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto italic">
+                            Join us, not just as an attendee, but as a stakeholder in the global legal evolution.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
