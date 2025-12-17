@@ -135,23 +135,23 @@ export function NominationForm() {
     const stepLabels = ["Terms", "Personal", "Professional", "Expertise", "Essays", "Payment"];
 
     return (
-        <div className="bg-slate-50 py-8">
-            <div className="max-w-3xl mx-auto px-4">
-                {/* Compact Header */}
-                <div className="text-center mb-6">
-                    <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1">
-                        Global Legal Honour <span className="text-amber-500">2026</span> Dubai
-                    </h1>
-                    <p className="text-slate-500 text-sm">Award Nomination Form</p>
-                </div>
+        <div className="bg-slate-50">
+            {/* Dark Header for Navbar Contrast */}
+            <div className="bg-slate-900 pt-28 pb-12 text-center">
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
+                    Global Legal Honour <span className="text-amber-500">2026</span> Dubai
+                </h1>
+                <p className="text-slate-400 text-sm">Award Nomination Form</p>
+            </div>
 
+            <div className="max-w-3xl mx-auto px-4 -mt-6">
                 {/* Progress Steps - Compact */}
                 <div className="flex items-center justify-between mb-6 bg-white rounded-lg p-3 shadow-sm">
                     {stepLabels.map((label, i) => (
                         <div key={i} className="flex items-center">
                             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${i + 1 < step ? 'bg-teal-500 text-white' :
-                                    i + 1 === step ? 'bg-amber-500 text-white' :
-                                        'bg-slate-100 text-slate-400'
+                                i + 1 === step ? 'bg-amber-500 text-white' :
+                                    'bg-slate-100 text-slate-400'
                                 }`}>
                                 {i + 1 < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
                             </div>
