@@ -137,7 +137,7 @@ export function NominationForm() {
     return (
         <div className="bg-slate-50">
             {/* Header */}
-            <div className="bg-slate-900 pt-24 pb-10 text-center">
+            <div className="bg-slate-900 pt-32 pb-10 text-center">
                 <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
                     Global Legal Honour <span className="text-amber-500">2026</span> Dubai
                 </h1>
