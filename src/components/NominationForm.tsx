@@ -7,6 +7,7 @@ import * as z from "zod";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, Check, Award, ArrowRight, Star, Trophy } from "lucide-react";
+import Image from "next/image";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
@@ -134,50 +135,67 @@ export function NominationForm() {
     const stepLabels = ["Terms", "Personal", "Professional", "Expertise", "Essays", "Payment"];
 
     return (
-        <div className="bg-slate-900 min-h-screen">
-            {/* Header */}
-            <div className="pt-32 pb-8 text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-4">
-                    <Trophy className="w-4 h-4 text-amber-400" />
-                    <span className="text-amber-400 text-xs font-semibold tracking-wider uppercase">Award Nomination</span>
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+            {/* Header with Logo */}
+            <div className="pt-28 pb-6 text-center">
+                <div className="flex justify-center mb-6">
+                    <Image src="/logo/Lextalk-Logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
                 </div>
-                <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
-                    Global Legal Honour <span className="text-amber-500">2026</span> Dubai
+                <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-800 mb-2">
+                    Global Legal Honour <span className="text-amber-600">2026</span> Dubai
                 </h1>
-                <p className="text-slate-400">Dubai Award Nomination Form</p>
+                <p className="text-slate-500">Dubai Award Nomination Form</p>
             </div>
 
-            {/* Progress Steps */}
-            <div className="max-w-4xl mx-auto px-4 mb-6">
-                <div className="bg-slate-800/50 backdrop-blur rounded-xl p-4 border border-slate-700/50">
-                    <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm text-slate-400">Step {step} of {totalSteps}</span>
-                        <span className="text-sm text-amber-400 font-medium">{Math.round((step / totalSteps) * 100)}%</span>
-                    </div>
-                    <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden mb-4">
-                        <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 transition-all duration-500" style={{ width: `${(step / totalSteps) * 100}%` }} />
-                    </div>
-                    <div className="flex justify-between">
+            {/* Beautiful Progress Bar */}
+            <div className="max-w-4xl mx-auto px-4 mb-8">
+                <div className="bg-white rounded-2xl shadow-lg shadow-amber-100/50 p-6 border border-amber-100">
+                    {/* Step Labels */}
+                    <div className="flex justify-between items-center mb-4">
                         {stepLabels.map((label, i) => (
-                            <div key={i} className="flex flex-col items-center">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mb-1 transition-all ${i + 1 < step ? 'bg-amber-500 text-slate-900' :
-                                        i + 1 === step ? 'bg-amber-500 text-slate-900 ring-4 ring-amber-500/30' :
-                                            'bg-slate-700 text-slate-400'
+                            <div key={i} className="flex flex-col items-center flex-1">
+                                <div className={`relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${i + 1 < step
+                                        ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-lg shadow-amber-300/50'
+                                        : i + 1 === step
+                                            ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl shadow-amber-400/50 ring-4 ring-amber-100 scale-110'
+                                            : 'bg-slate-100 text-slate-400'
                                     }`}>
-                                    {i + 1 < step ? <Check className="w-4 h-4" /> : i + 1}
+                                    {i + 1 < step ? <Check className="w-5 h-5" /> : i + 1}
                                 </div>
-                                <span className={`text-xs hidden md:block ${i + 1 <= step ? 'text-amber-400' : 'text-slate-500'}`}>{label}</span>
+                                <span className={`text-xs mt-2 font-medium hidden md:block ${i + 1 <= step ? 'text-amber-600' : 'text-slate-400'
+                                    }`}>{label}</span>
                             </div>
                         ))}
+                    </div>
+
+                    {/* Connecting Lines Progress */}
+                    <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 rounded-full transition-all duration-500 ease-out"
+                            style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}
+                        />
+                        {/* Animated shimmer */}
+                        <div
+                            className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"
+                            style={{ left: `${((step - 1) / (totalSteps - 1)) * 100 - 5}%` }}
+                        />
+                    </div>
+
+                    <div className="flex justify-between mt-3">
+                        <span className="text-sm text-slate-500">Step {step} of {totalSteps}</span>
+                        <span className="text-sm font-semibold text-amber-600">{Math.round((step / totalSteps) * 100)}% Complete</span>
                     </div>
                 </div>
             </div>
 
             {/* Form Card */}
             <div className="max-w-4xl mx-auto px-4 pb-12">
-                <div className="bg-slate-800/50 backdrop-blur rounded-2xl border border-slate-700/50 overflow-hidden">
-                    <div className="bg-slate-800 px-6 py-4 border-b border-slate-700/50">
-                        <h2 className="text-lg font-semibold text-white">Step {step}: {stepLabels[step - 1]}</h2>
+                <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100">
+                    <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-4">
+                        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-sm">{step}</span>
+                            {stepLabels[step - 1]}
+                        </h2>
                     </div>
 
                     <div className="p-6 md:p-8">
@@ -187,44 +205,44 @@ export function NominationForm() {
                                 {/* STEP 1: FULL TERMS & CONDITIONS */}
                                 {step === 1 && (
                                     <div className="space-y-6">
-                                        <p className="text-slate-400 text-sm">All fields marked with <span className="text-amber-400">*</span> are required.</p>
+                                        <p className="text-slate-500 text-sm">All fields marked with <span className="text-red-500">*</span> are required.</p>
 
-                                        <div className="bg-slate-900/50 rounded-xl border border-slate-700/50 p-6 max-h-[500px] overflow-y-auto custom-scrollbar space-y-6">
+                                        <div className="bg-slate-50 rounded-xl border border-slate-200 p-6 max-h-[450px] overflow-y-auto space-y-6">
                                             {/* Step 1 */}
                                             <div className="space-y-3">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                                                        <span className="text-slate-900 text-xs font-bold">1</span>
+                                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md">
+                                                        <span className="text-white text-xs font-bold">1</span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold">Terms & Conditions</h3>
+                                                    <h3 className="text-slate-800 font-semibold">Terms & Conditions</h3>
                                                 </div>
-                                                <ul className="ml-9 space-y-2 text-slate-300 text-sm">
+                                                <ul className="ml-9 space-y-2 text-slate-600 text-sm">
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>All awardees are required to be physically or virtually present at the event to receive the Award. In case the Awardee is not able to attend, they can send a person on their behalf.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>Filling in the nomination form only does not ensure that you will be selected for the Award.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>The Awardees will be selected on the basis of parameters set by our Awards Committee and will be intimated accordingly.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
-                                                        <span>In case you do not win the award nomination, the nomination fee <span className="text-amber-400 font-semibold">USD 50</span> is completely refundable.</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
+                                                        <span>In case you do not win the award nomination, the nomination fee <span className="text-amber-600 font-semibold">USD 50</span> is completely refundable.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>All Awardees will need to book the Awardee pass to attend the conference and receive their award.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>The decision of the Awards Committee will be final and binding.</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-amber-400 mt-0.5">•</span>
+                                                        <span className="text-amber-500 mt-0.5">•</span>
                                                         <span>LexTalk World and Legal Honour are brought to you by Canada-based firm; ClickAway Creators (A division of CAC Media & Events) which reserves the right to make any changes to the event.</span>
                                                     </li>
                                                 </ul>
@@ -233,48 +251,48 @@ export function NominationForm() {
                                             {/* Step 2 */}
                                             <div className="space-y-2">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                                                        <span className="text-slate-900 text-xs font-bold">2</span>
+                                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md">
+                                                        <span className="text-white text-xs font-bold">2</span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold">Evaluation Process</h3>
+                                                    <h3 className="text-slate-800 font-semibold">Evaluation Process</h3>
                                                 </div>
-                                                <p className="ml-9 text-slate-300 text-sm">Based on your answers and our own research, our Awards Committee rates you on different parameters such as the overall reach, impact on the legal industry, knowledge and market demand, innovative ideas and suggestions, futuristic spirit and approach, etc.</p>
+                                                <p className="ml-9 text-slate-600 text-sm">Based on your answers and our own research, our Awards Committee rates you on different parameters such as the overall reach, impact on the legal industry, knowledge and market demand, innovative ideas and suggestions, futuristic spirit and approach, etc.</p>
                                             </div>
 
                                             {/* Step 3 */}
                                             <div className="space-y-2">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                                                        <span className="text-slate-900 text-xs font-bold">3</span>
+                                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md">
+                                                        <span className="text-white text-xs font-bold">3</span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold">Scoring & Scorecard</h3>
+                                                    <h3 className="text-slate-800 font-semibold">Scoring & Scorecard</h3>
                                                 </div>
-                                                <p className="ml-9 text-slate-300 text-sm">Once the Awards Committee completes the evaluation, they will share a detailed scorecard with each nominee via email. They follow a scoring procedure and give you a score out of 100. The cut-off to qualify is <span className="text-amber-400 font-semibold">80 points out of 100</span>.</p>
+                                                <p className="ml-9 text-slate-600 text-sm">Once the Awards Committee completes the evaluation, they will share a detailed scorecard with each nominee via email. They follow a scoring procedure and give you a score out of 100. The cut-off to qualify is <span className="text-amber-600 font-semibold">80 points out of 100</span>.</p>
                                             </div>
 
                                             {/* Step 4 */}
                                             <div className="space-y-3">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                                                        <span className="text-slate-900 text-xs font-bold">4</span>
+                                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md">
+                                                        <span className="text-white text-xs font-bold">4</span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold">Outcome</h3>
+                                                    <h3 className="text-slate-800 font-semibold">Outcome</h3>
                                                 </div>
                                                 <div className="ml-9 space-y-3">
-                                                    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-                                                        <p className="text-emerald-400 font-semibold mb-2 flex items-center gap-2">
+                                                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                                                        <p className="text-emerald-700 font-semibold mb-2 flex items-center gap-2">
                                                             <Trophy className="w-4 h-4" /> Winner
                                                         </p>
-                                                        <p className="text-slate-300 text-sm mb-3">We will reach out to you to confirm you as a winner at the LexTalk World conference and get you signed up for the Awardee pass.</p>
-                                                        <div className="text-sm space-y-1">
-                                                            <p className="text-slate-400">Middle East Conference Pass Fees:</p>
-                                                            <p className="text-slate-300">• Standard Virtual Awardee Pass: <span className="text-amber-400 font-semibold">USD 800</span></p>
-                                                            <p className="text-slate-300">• Standard In-Person Awardee Pass: <span className="text-amber-400 font-semibold">USD 1200</span></p>
+                                                        <p className="text-slate-600 text-sm mb-3">We will reach out to you to confirm you as a winner at the LexTalk World conference and get you signed up for the Awardee pass.</p>
+                                                        <div className="text-sm space-y-1 bg-white/50 rounded-lg p-3">
+                                                            <p className="text-slate-500">Middle East Conference Pass Fees:</p>
+                                                            <p className="text-slate-700">• Standard Virtual Awardee Pass: <span className="text-amber-600 font-semibold">USD 800</span></p>
+                                                            <p className="text-slate-700">• Standard In-Person Awardee Pass: <span className="text-amber-600 font-semibold">USD 1200</span></p>
                                                         </div>
                                                     </div>
-                                                    <div className="bg-slate-700/30 border border-slate-600/30 rounded-lg p-4">
-                                                        <p className="text-slate-300 font-semibold mb-1">Fail to make the cut</p>
-                                                        <p className="text-slate-400 text-sm">We will issue a full refund of the nomination fee (USD 50).</p>
+                                                    <div className="bg-slate-100 border border-slate-200 rounded-xl p-4">
+                                                        <p className="text-slate-700 font-semibold mb-1">Fail to make the cut</p>
+                                                        <p className="text-slate-500 text-sm">We will issue a full refund of the nomination fee (USD 50).</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -282,31 +300,31 @@ export function NominationForm() {
                                             {/* Step 5 */}
                                             <div className="space-y-2">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                                                        <span className="text-slate-900 text-xs font-bold">5</span>
+                                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md">
+                                                        <span className="text-white text-xs font-bold">5</span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold">Event Day</h3>
+                                                    <h3 className="text-slate-800 font-semibold">Event Day</h3>
                                                 </div>
-                                                <p className="ml-9 text-slate-300 text-sm">You attend the event, accept the award, and be a part of great sessions, while also networking with your peers!</p>
+                                                <p className="ml-9 text-slate-600 text-sm">You attend the event, accept the award, and be a part of great sessions, while also networking with your peers!</p>
                                             </div>
 
                                             {/* Benefits Grid */}
-                                            <div className="border-t border-slate-700/50 pt-6">
-                                                <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-                                                    <Star className="w-4 h-4 text-amber-400" />
+                                            <div className="border-t border-slate-200 pt-6">
+                                                <h3 className="text-slate-800 font-semibold mb-4 flex items-center gap-2">
+                                                    <Star className="w-4 h-4 text-amber-500" />
                                                     Standard Awardee Pass Benefits
                                                 </h3>
                                                 <div className="grid md:grid-cols-3 gap-4">
-                                                    <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
-                                                        <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider mb-3">Pre-Conference</p>
-                                                        <ul className="space-y-2 text-slate-300 text-xs">
+                                                    <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                                                        <p className="text-amber-600 text-xs font-semibold uppercase tracking-wider mb-3">Pre-Conference</p>
+                                                        <ul className="space-y-2 text-slate-600 text-xs">
                                                             <li>• Opportunity to write an article; promoted on social media and website</li>
                                                             <li>• Article in Jurisprudence e-Magazine by Global Lawyers Association</li>
                                                         </ul>
                                                     </div>
-                                                    <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
-                                                        <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider mb-3">During Conference</p>
-                                                        <ul className="space-y-2 text-slate-300 text-xs">
+                                                    <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                                                        <p className="text-amber-600 text-xs font-semibold uppercase tracking-wider mb-3">During Conference</p>
+                                                        <ul className="space-y-2 text-slate-600 text-xs">
                                                             <li>• Announcement of Awardees for each category</li>
                                                             <li>• Full event participation with networking</li>
                                                             <li>• Awardees listing in event show guide</li>
@@ -314,9 +332,9 @@ export function NominationForm() {
                                                             <li>• Award plaque from Guest of Honor</li>
                                                         </ul>
                                                     </div>
-                                                    <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
-                                                        <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider mb-3">Post-Conference</p>
-                                                        <ul className="space-y-2 text-slate-300 text-xs">
+                                                    <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                                                        <p className="text-amber-600 text-xs font-semibold uppercase tracking-wider mb-3">Post-Conference</p>
+                                                        <ul className="space-y-2 text-slate-600 text-xs">
                                                             <li>• Social Media Announcement</li>
                                                             <li>• Dedicated Section on Website</li>
                                                             <li>• E-certification for all Awardees</li>
@@ -328,11 +346,11 @@ export function NominationForm() {
                                         </div>
 
                                         {/* Acceptance Checkbox */}
-                                        <label className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${watch("acceptedTerms") ? 'border-amber-500 bg-amber-500/10' : 'border-slate-600 hover:border-slate-500 bg-slate-800/30'}`}>
-                                            <input type="checkbox" {...register("acceptedTerms")} className="w-5 h-5 rounded bg-slate-700 border-slate-600 text-amber-500 focus:ring-amber-500" />
-                                            <span className="text-white">I have read all the details and wish to proceed with nominations. <span className="text-amber-400">*</span></span>
+                                        <label className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${watch("acceptedTerms") ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300 bg-white'}`}>
+                                            <input type="checkbox" {...register("acceptedTerms")} className="w-5 h-5 rounded border-slate-300 text-amber-500 focus:ring-amber-500" />
+                                            <span className="text-slate-700">I have read all the details and wish to proceed with nominations. <span className="text-red-500">*</span></span>
                                         </label>
-                                        {errors.acceptedTerms && <p className="text-red-400 text-sm">{errors.acceptedTerms.message}</p>}
+                                        {errors.acceptedTerms && <p className="text-red-500 text-sm">{errors.acceptedTerms.message}</p>}
                                     </div>
                                 )}
 
@@ -355,20 +373,20 @@ export function NominationForm() {
                                 {step === 3 && (
                                     <div className="space-y-6">
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-300 mb-3">Nominate As <span className="text-amber-400">*</span></label>
+                                            <label className="block text-sm font-medium text-slate-700 mb-3">Nominate As <span className="text-red-500">*</span></label>
                                             <div className="grid grid-cols-2 gap-4">
                                                 {["Individual", "Company or Firm"].map(v => (
-                                                    <label key={v} className={`relative flex items-center justify-center p-5 rounded-xl border-2 cursor-pointer transition-all ${nominateAs === v ? 'border-amber-500 bg-amber-500/10' : 'border-slate-600 hover:border-slate-500 bg-slate-800/30'}`}>
+                                                    <label key={v} className={`relative flex items-center justify-center p-5 rounded-xl border-2 cursor-pointer transition-all ${nominateAs === v ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300 bg-white'}`}>
                                                         <input type="radio" value={v} {...register("nominateAs")} className="sr-only" />
-                                                        <span className={`font-semibold ${nominateAs === v ? 'text-amber-400' : 'text-slate-300'}`}>{v}</span>
-                                                        {nominateAs === v && <CheckCircle2 className="absolute top-3 right-3 w-5 h-5 text-amber-400" />}
+                                                        <span className={`font-semibold ${nominateAs === v ? 'text-amber-600' : 'text-slate-600'}`}>{v}</span>
+                                                        {nominateAs === v && <CheckCircle2 className="absolute top-3 right-3 w-5 h-5 text-amber-500" />}
                                                     </label>
                                                 ))}
                                             </div>
                                         </div>
 
                                         {nominateAs === "Individual" && (
-                                            <div className="space-y-4 p-4 bg-slate-800/30 rounded-xl border border-slate-700/50">
+                                            <div className="space-y-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
                                                 <Select label="Choose the option that describes you best" required options={INDIVIDUAL_ROLES} {...register("individualRole")} />
                                                 {individualRole === "None of the above" && <Input label="Please specify" required {...register("individualRoleOther")} />}
                                                 <div className="grid md:grid-cols-2 gap-4">
@@ -384,7 +402,7 @@ export function NominationForm() {
                                         )}
 
                                         {nominateAs === "Company or Firm" && (
-                                            <div className="space-y-4 p-4 bg-slate-800/30 rounded-xl border border-slate-700/50">
+                                            <div className="space-y-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
                                                 <Select label="Choose the option that describes you best" required options={FIRM_TYPES} {...register("firmType")} />
                                                 {firmType === "None of the above" && <Input label="Please specify" required {...register("firmTypeOther")} />}
                                             </div>
@@ -416,29 +434,29 @@ export function NominationForm() {
                                 {step === 4 && (
                                     <div className="space-y-4">
                                         <div className="flex items-center justify-between">
-                                            <label className="text-sm font-medium text-slate-300">Select up to 3 Practice Areas <span className="text-amber-400">*</span></label>
-                                            <span className={`text-sm font-semibold px-3 py-1 rounded-full ${watchPracticeAreas.length === 3 ? 'bg-amber-500/20 text-amber-400' : 'bg-slate-700 text-slate-400'}`}>{watchPracticeAreas.length}/3</span>
+                                            <label className="text-sm font-medium text-slate-700">Select up to 3 Practice Areas <span className="text-red-500">*</span></label>
+                                            <span className={`text-sm font-semibold px-3 py-1 rounded-full ${watchPracticeAreas.length === 3 ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500'}`}>{watchPracticeAreas.length}/3</span>
                                         </div>
-                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-h-[350px] overflow-y-auto p-2 bg-slate-900/50 rounded-xl border border-slate-700/50">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-h-[350px] overflow-y-auto p-2 bg-slate-50 rounded-xl border border-slate-200">
                                             {PRACTICE_AREAS.map(area => {
                                                 const isSelected = watchPracticeAreas.includes(area);
                                                 const isDisabled = watchPracticeAreas.length >= 3 && !isSelected;
                                                 return (
-                                                    <label key={area} className={`flex items-center gap-2 p-3 rounded-lg text-sm cursor-pointer transition-all ${isSelected ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : isDisabled ? 'text-slate-600 cursor-not-allowed' : 'text-slate-300 hover:bg-slate-700/50 border border-transparent'}`}>
+                                                    <label key={area} className={`flex items-center gap-2 p-3 rounded-lg text-sm cursor-pointer transition-all ${isSelected ? 'bg-amber-100 text-amber-700 border border-amber-300' : isDisabled ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-amber-50 border border-transparent'}`}>
                                                         <input type="checkbox" checked={isSelected} disabled={isDisabled}
                                                             onChange={(e) => {
                                                                 if (e.target.checked && watchPracticeAreas.length < 3) setValue("practiceAreas", [...watchPracticeAreas, area]);
                                                                 else if (!e.target.checked) setValue("practiceAreas", watchPracticeAreas.filter(x => x !== area));
                                                             }} className="sr-only" />
-                                                        <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 ${isSelected ? 'bg-amber-500' : 'border border-slate-500'}`}>
-                                                            {isSelected && <Check className="w-3 h-3 text-slate-900" />}
+                                                        <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 ${isSelected ? 'bg-amber-500' : 'border border-slate-300'}`}>
+                                                            {isSelected && <Check className="w-3 h-3 text-white" />}
                                                         </div>
                                                         <span className="truncate">{area}</span>
                                                     </label>
                                                 );
                                             })}
                                         </div>
-                                        {errors.practiceAreas && <p className="text-red-400 text-sm">{errors.practiceAreas.message}</p>}
+                                        {errors.practiceAreas && <p className="text-red-500 text-sm">{errors.practiceAreas.message}</p>}
                                     </div>
                                 )}
 
@@ -450,11 +468,11 @@ export function NominationForm() {
                                         <TextArea label="How Innovative is your approach?" required hint="Share examples of your innovative approach that benefited your clients or company." {...register("essayInnovation")} error={errors.essayInnovation?.message} />
                                         <TextArea label="How do you keep yourself Future-Proof?" required hint="Discuss your efforts for continuous professional development and adapting to new technologies." {...register("essayFuture")} error={errors.essayFuture?.message} />
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-300 mb-2">Upload Documents <span className="text-slate-500">(Optional)</span></label>
-                                            <div className="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-amber-500/50 transition-colors cursor-pointer bg-slate-800/30">
-                                                <UploadCloud className="w-8 h-8 mx-auto text-slate-500 mb-2" />
-                                                <p className="text-slate-400 text-sm">Click to browse or drag files here</p>
-                                                <p className="text-slate-600 text-xs mt-1">PDF, DOC, DOCX up to 10MB</p>
+                                            <label className="block text-sm font-medium text-slate-700 mb-2">Upload Documents <span className="text-slate-400">(Optional)</span></label>
+                                            <div className="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-amber-400 transition-colors cursor-pointer bg-slate-50">
+                                                <UploadCloud className="w-8 h-8 mx-auto text-slate-400 mb-2" />
+                                                <p className="text-slate-500 text-sm">Click to browse or drag files here</p>
+                                                <p className="text-slate-400 text-xs mt-1">PDF, DOC, DOCX up to 10MB</p>
                                                 <input type="file" className="hidden" {...register("files")} accept=".pdf,.doc,.docx" />
                                             </div>
                                         </div>
@@ -462,18 +480,18 @@ export function NominationForm() {
                                 )}
 
                                 {/* Navigation */}
-                                <div className="flex justify-between pt-6 border-t border-slate-700/50">
+                                <div className="flex justify-between pt-6 border-t border-slate-100">
                                     {step > 1 ? (
-                                        <button type="button" onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-700/50 transition-colors font-medium">
+                                        <button type="button" onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors font-medium">
                                             <ChevronLeft className="w-4 h-4" /> Back
                                         </button>
                                     ) : <div />}
                                     {step < 5 ? (
-                                        <button type="button" onClick={handleNext} className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold hover:shadow-lg hover:shadow-amber-500/25 transition-all">
+                                        <button type="button" onClick={handleNext} className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:shadow-lg hover:shadow-amber-300/50 transition-all">
                                             Continue <ChevronRight className="w-4 h-4" />
                                         </button>
                                     ) : (
-                                        <button type="submit" disabled={isSubmitting} className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold hover:shadow-lg hover:shadow-amber-500/25 transition-all disabled:opacity-50">
+                                        <button type="submit" disabled={isSubmitting} className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:shadow-lg hover:shadow-amber-300/50 transition-all disabled:opacity-50">
                                             {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                                             {isSubmitting ? "Submitting..." : "Submit & Pay $50"}
                                         </button>
@@ -483,70 +501,63 @@ export function NominationForm() {
                         ) : step === 6 && !isComplete ? (
                             <div>
                                 <div className="text-center mb-8">
-                                    <div className="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-amber-500/30">
-                                        <Trophy className="w-8 h-8 text-amber-400" />
+                                    <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                        <Trophy className="w-8 h-8 text-amber-600" />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">Nomination Fee: $50.00 USD</h3>
-                                    <p className="text-slate-400">Fully refundable if not selected</p>
+                                    <h3 className="text-2xl font-bold text-slate-800 mb-2">Nomination Fee: $50.00 USD</h3>
+                                    <p className="text-slate-500">Fully refundable if not selected</p>
                                 </div>
                                 {clientSecret && stripePromise ? (
-                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night', variables: { colorPrimary: '#f59e0b' } } }}>
+                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
                                         <PaymentForm onSuccess={() => setIsComplete(true)} />
                                     </Elements>
-                                ) : <p className="text-center text-red-400">Payment error. Contact support.</p>}
+                                ) : <p className="text-center text-red-500">Payment error. Contact support.</p>}
                             </div>
                         ) : (
                             <div className="text-center py-12">
-                                <div className="w-20 h-20 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
-                                    <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+                                <div className="w-20 h-20 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                    <CheckCircle2 className="w-10 h-10 text-emerald-600" />
                                 </div>
-                                <h2 className="text-2xl font-bold text-white mb-3">Nomination Submitted!</h2>
-                                <p className="text-slate-400 max-w-md mx-auto mb-8">Thank you for your nomination. Our Awards Committee will review your application and contact you via email.</p>
-                                <a href="/dubai-2026" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold">Back to Event Page</a>
+                                <h2 className="text-2xl font-bold text-slate-800 mb-3">Nomination Submitted!</h2>
+                                <p className="text-slate-500 max-w-md mx-auto mb-8">Thank you for your nomination. Our Awards Committee will review your application and contact you via email.</p>
+                                <a href="/dubai-2026" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold">Back to Event Page</a>
                             </div>
                         )}
                     </div>
                 </div>
 
-                <p className="text-center text-slate-600 text-xs mt-8">© 2024 LexTalk World. All rights reserved.</p>
+                <p className="text-center text-slate-400 text-xs mt-8">© 2024 LexTalk World. All rights reserved.</p>
             </div>
-
-            <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.3); border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(245,158,11,0.5); }
-      `}</style>
         </div>
     );
 }
 
-// --- FORM COMPONENTS (Website Theme) ---
+// --- FORM COMPONENTS (Light Theme) ---
 const Input = ({ label, required, error, ...props }: any) => (
     <div>
-        <label className="block text-sm font-medium text-slate-300 mb-1.5">{label} {required && <span className="text-amber-400">*</span>}</label>
-        <input className={`w-full px-4 py-3 rounded-lg bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-600'} text-white placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all`} {...props} />
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+        <label className="block text-sm font-medium text-slate-700 mb-1.5">{label} {required && <span className="text-red-500">*</span>}</label>
+        <input className={`w-full px-4 py-3 rounded-lg bg-white border ${error ? 'border-red-400' : 'border-slate-300'} text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all`} {...props} />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );
 
 const Select = ({ label, required, options, error, ...props }: any) => (
     <div>
-        <label className="block text-sm font-medium text-slate-300 mb-1.5">{label} {required && <span className="text-amber-400">*</span>}</label>
-        <select className={`w-full px-4 py-3 rounded-lg bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-600'} text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all`} {...props}>
-            <option value="" className="bg-slate-900">Select</option>
-            {options.map((o: string) => <option key={o} value={o} className="bg-slate-900">{o}</option>)}
+        <label className="block text-sm font-medium text-slate-700 mb-1.5">{label} {required && <span className="text-red-500">*</span>}</label>
+        <select className={`w-full px-4 py-3 rounded-lg bg-white border ${error ? 'border-red-400' : 'border-slate-300'} text-slate-800 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all`} {...props}>
+            <option value="">Select</option>
+            {options.map((o: string) => <option key={o} value={o}>{o}</option>)}
         </select>
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );
 
 const TextArea = ({ label, required, error, hint, ...props }: any) => (
     <div>
-        <label className="block text-sm font-medium text-slate-300 mb-1">{label} {required && <span className="text-amber-400">*</span>}</label>
-        {hint && <p className="text-slate-500 text-xs mb-2">{hint}</p>}
-        <textarea rows={4} className={`w-full px-4 py-3 rounded-lg bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-600'} text-white placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all resize-none`} {...props} />
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+        <label className="block text-sm font-medium text-slate-700 mb-1">{label} {required && <span className="text-red-500">*</span>}</label>
+        {hint && <p className="text-slate-400 text-xs mb-2">{hint}</p>}
+        <textarea rows={4} className={`w-full px-4 py-3 rounded-lg bg-white border ${error ? 'border-red-400' : 'border-slate-300'} text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all resize-none`} {...props} />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );
 
@@ -569,11 +580,11 @@ function PaymentForm({ onSuccess }: { onSuccess: () => void }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <PaymentElement />
-            <button disabled={!stripe || loading} className="w-full py-4 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold text-lg hover:shadow-lg hover:shadow-amber-500/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+            <button disabled={!stripe || loading} className="w-full py-4 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg hover:shadow-lg hover:shadow-amber-300/50 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trophy className="w-5 h-5" />}
                 {loading ? "Processing..." : "Pay $50.00 USD"}
             </button>
-            {msg && <p className="text-red-400 text-center text-sm">{msg}</p>}
+            {msg && <p className="text-red-500 text-center text-sm">{msg}</p>}
         </form>
     );
 }
