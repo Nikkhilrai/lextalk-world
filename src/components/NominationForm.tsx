@@ -1,241 +1,359 @@
 "use client";
 
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, ChevronRight, ChevronLeft } from "lucide-react";
 
-// Initialize Stripe outside to avoid recreation
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
+// --- Zod Schema Definitions ---
+const baseSchema = z.object({
+    type: z.enum(["Individual", "Firm"]),
+    category: z.string().min(1, "Please select a category"),
+
+    // Nominator (Contact)
+    nominatorEmail: z.string().email(),
+    nominatorPhone: z.string().optional(),
+
+    // Nominee Basic
+    nomineeName: z.string().min(2, "Name required"),
+    nomineeEmail: z.string().email(),
+
+    // Conditional Fields (merged into formResponse)
+    details: z.object({
+        // Individual Specific
+        profession: z.string().optional(),
+        education: z.string().optional(),
+        university: z.string().optional(),
+        barDate: z.string().optional(),
+
+        // Firm Specific
+        firmType: z.string().optional(),
+        organizationName: z.string().optional(),
+        designation: z.string().optional(),
+        website: z.string().optional(),
+
+        // Common
+        addressCountry: z.string().min(1, "Country required"),
+        practiceAreas: z.array(z.string()).max(3, "Select up to 3"),
+
+        // Essay
+        reach: z.string().min(10, "Please elaborate"),
+        achievements: z.string().min(10, "Please elaborate"),
+        innovation: z.string().min(10, "Please elaborate"),
+        futureProof: z.string().min(10, "Please elaborate"),
+    })
+});
+
+type FormValues = z.infer<typeof baseSchema>;
+
 export function NominationForm() {
-    const [step, setStep] = useState<"form" | "payment" | "success">("form");
-    const [isLoading, setIsLoading] = useState(false);
-    const [nominationId, setNominationId] = useState<string | null>(null);
+    const [step, setStep] = useState(1);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
-    const [formData, setFormData] = useState({
-        nominatorName: "",
-        nominatorEmail: "",
-        nominatorPhone: "",
-        nomineeName: "",
-        nomineeEmail: "",
-        nomineeCompany: "",
-        nomineeRole: "",
-        nomineeLinkedin: "",
-        category: "",
-        reason: "",
+    const [nominationId, setNominationId] = useState<string | null>(null);
+
+    const { register, handleSubmit, watch, setValue, trigger, formState: { errors, isSubmitting } } = useForm<FormValues>({
+        resolver: zodResolver(baseSchema),
+        defaultValues: {
+            type: "Individual",
+            details: {
+                practiceAreas: []
+            }
+        }
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const watchType = watch("type");
+    const watchFirmType = watch("details.firmType");
+    const watchPracticeAreas = watch("details.practiceAreas") || [];
+
+    const handleNext = async () => {
+        // Validate current step fields
+        let isValid = false;
+        if (step === 1) {
+            isValid = await trigger(["type", "category", "nominatorEmail", "nomineeName", "nomineeEmail"]);
+        } else if (step === 2) {
+            // Validate details based on type
+            const fields: any[] = ["details.addressCountry", "details.practiceAreas"];
+            if (watchType === "Individual") {
+                fields.push("details.profession", "details.education", "details.barDate");
+            } else {
+                fields.push("details.firmType", "details.organizationName");
+            }
+            isValid = await trigger(fields);
+        } else if (step === 3) {
+            isValid = await trigger(["details.reach", "details.achievements", "details.innovation", "details.futureProof"]);
+        }
+
+        if (isValid) setStep(prev => prev + 1);
     };
 
-    const handleSubmitDetails = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
-            // 1. Create Nomination
+            // 1. Submit Data
+            // Map flat details to nested "formResponse" for DB
+            const payload = {
+                type: data.type,
+                category: data.category,
+                nominatorEmail: data.nominatorEmail,
+                nominatorPhone: data.nominatorPhone,
+                nomineeName: data.nomineeName,
+                nomineeEmail: data.nomineeEmail,
+                formResponse: data.details
+            };
+
             const res = await fetch("/api/nominate", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload)
             });
-            const data = await res.json();
+            const resData = await res.json();
+            if (!res.ok) throw new Error(resData.error);
 
-            if (!res.ok) throw new Error(data.error);
+            setNominationId(resData.nominationId);
 
-            setNominationId(data.nominationId);
-
-            // 2. Create Payment Intent
+            // 2. Get Payment Intent
             const payRes = await fetch("/api/create-payment-intent", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nominationId: data.nominationId }),
+                body: JSON.stringify({ nominationId: resData.nominationId })
             });
             const payData = await payRes.json();
-
-            if (!payRes.ok) throw new Error(payData.error);
-
             setClientSecret(payData.clientSecret);
-            setStep("payment");
-        } catch (error) {
-            console.error(error);
-            alert("Something went wrong. Please try again.");
-        } finally {
-            setIsLoading(false);
+
+            setStep(4); // Move to Payment
+        } catch (err) {
+            console.error(err);
+            alert("Submission failed. Please try again.");
         }
     };
 
     return (
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
-            {step === "form" && (
-                <div className="p-8 md:p-12">
-                    <h2 className="text-2xl font-serif font-bold text-slate-900 mb-6">Nomination Details</h2>
-                    <form onSubmit={handleSubmitDetails} className="space-y-6">
-                        {/* Nominator */}
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-2">Your Details (Nominator)</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <Input label="Full Name" name="nominatorName" value={formData.nominatorName} onChange={handleChange} required />
-                                <Input label="Email Address" type="email" name="nominatorEmail" value={formData.nominatorEmail} onChange={handleChange} required />
-                                <Input label="Phone Number" name="nominatorPhone" value={formData.nominatorPhone} onChange={handleChange} />
-                            </div>
-                        </div>
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            {/* Progress Bar */}
+            <div className="bg-slate-50 border-b border-slate-100 p-4">
+                <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
+                    <span>Step {step} of 4</span>
+                    <span>Completion</span>
+                </div>
+                <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-full bg-amber-500 transition-all duration-500" style={{ width: `${step * 25}%` }} />
+                </div>
+            </div>
 
-                        {/* Nominee */}
-                        <div className="space-y-4 pt-4">
-                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-2">Nominee Details</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <Input label="Nominee Name" name="nomineeName" value={formData.nomineeName} onChange={handleChange} required />
-                                <Input label="Nominee Email" type="email" name="nomineeEmail" value={formData.nomineeEmail} onChange={handleChange} required />
-                                <Input label="Company / Firm" name="nomineeCompany" value={formData.nomineeCompany} onChange={handleChange} required />
-                                <Input label="Designation / Role" name="nomineeRole" value={formData.nomineeRole} onChange={handleChange} required />
-                            </div>
-                            <Input label="LinkedIn Profile URL" type="url" name="nomineeLinkedin" value={formData.nomineeLinkedin} onChange={handleChange} />
-                        </div>
+            <div className="p-8 md:p-12">
+                {step < 4 ? (
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
-                        {/* Nomination Info */}
-                        <div className="space-y-4 pt-4">
-                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-2">Award Details</h3>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Award Category <span className="text-red-500">*</span></label>
-                                <select
-                                    name="category"
-                                    value={formData.category}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                                >
-                                    <option value="">Select a category</option>
-                                    <option value="Lifetime Achievement">Lifetime Achievement</option>
-                                    <option value="Legal Innovator of the Year">Legal Innovator of the Year</option>
-                                    <option value="Best Law Firm">Best Law Firm</option>
-                                    <option value="General Counsel of the Year">General Counsel of the Year</option>
-                                    <option value="Rising Star">Rising Star</option>
-                                </select>
-                            </div>
+                        {/* --- STEP 1: BASIC INFO --- */}
+                        {step === 1 && (
+                            <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
+                                <h2 className="text-2xl font-serif font-bold text-slate-900">Let's Get Started</h2>
 
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Reason for Nomination <span className="text-red-500">*</span></label>
-                                <textarea
-                                    name="reason"
-                                    value={formData.reason}
-                                    onChange={handleChange}
-                                    required
-                                    rows={4}
-                                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                                    placeholder="Describe why this person/firm deserves the award..."
-                                />
-                            </div>
-                        </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="col-span-full">
+                                        <label className="block text-sm font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Nominate As <span className="text-red-500">*</span></label>
+                                        <div className="flex gap-4">
+                                            {["Individual", "Firm"].map((val) => (
+                                                <label key={val} className={`flex-1 p-4 border rounded-xl cursor-pointer transition-all ${watchType === val ? 'border-amber-500 bg-amber-50 text-amber-900 font-bold ring-1 ring-amber-500' : 'border-slate-200 hover:border-slate-300'}`}>
+                                                    <input type="radio" value={val} {...register("type")} className="sr-only" />
+                                                    <div className="text-center">{val}</div>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
 
-                        <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                            <div className="text-sm text-slate-500">
-                                Nomination Fee: <span className="font-bold text-slate-900">$100 USD</span>
+                                    <Input label="Category" {...register("category")} error={errors.category?.message} placeholder="e.g. Rising Star" />
+
+                                    <div className="col-span-full border-t border-slate-100 pt-6 mt-2">
+                                        <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Contact Information</h3>
+                                    </div>
+
+                                    <Input label="Your Email (Nominator)" type="email" {...register("nominatorEmail")} error={errors.nominatorEmail?.message} />
+                                    <Input label="Phone (Optional)" {...register("nominatorPhone")} />
+
+                                    <Input label="Nominee Name" {...register("nomineeName")} error={errors.nomineeName?.message} />
+                                    <Input label="Nominee Email" type="email" {...register("nomineeEmail")} error={errors.nomineeEmail?.message} />
+                                </div>
                             </div>
-                            <button
-                                type="submit"
-                                disabled={isLoading}
-                                className="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full transition-colors disabled:opacity-50 flex items-center gap-2"
-                            >
-                                {isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : null}
-                                Proceed to Payment
-                            </button>
+                        )}
+
+                        {/* --- STEP 2: DETAILS (CONDITIONAL) --- */}
+                        {step === 2 && (
+                            <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
+                                <h2 className="text-2xl font-serif font-bold text-slate-900">
+                                    {watchType === "Individual" ? "Professional Background" : "Organization Details"}
+                                </h2>
+
+                                {watchType === "Individual" ? (
+                                    <div className="space-y-4">
+                                        <Select label="Current Role" {...register("details.profession")} options={["Independent Lawyer", "Law Firm Partner", "In-House Counsel", "Legal Tech Expert", "Other"]} error={errors.details?.profession?.message} />
+                                        <Input label="Highest Education" {...register("details.education")} error={errors.details?.education?.message} />
+                                        <Input label="University/Institute" {...register("details.university")} />
+                                        <Input label="Year Called to Bar" type="number" {...register("details.barDate")} error={errors.details?.barDate?.message} />
+                                    </div>
+                                ) : (
+                                    <div className="space-y-4">
+                                        <Select label="Organization Type" {...register("details.firmType")} options={["Law Firm", "In-House Dept", "Legal Tech Company"]} error={errors.details?.firmType?.message} />
+                                        <Input label="Organization Name" {...register("details.organizationName")} error={errors.details?.organizationName?.message} />
+                                        <Input label="Website URL" {...register("details.website")} />
+                                    </div>
+                                )}
+
+                                <div className="pt-6 border-t border-slate-100">
+                                    <Select label="Country" {...register("details.addressCountry")} options={["United Arab Emirates", "United Kingdom", "United States", "India", "Singapore", "Saudi Arabia", "Other"]} error={errors.details?.addressCountry?.message} />
+
+                                    <div className="mt-4">
+                                        <label className="block text-sm font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Key Practice Areas (Select up to 3)</label>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+                                            {["Banking & Finance", "M&A", "Dispute Resolution", "Real Estate", "Technology (TMT)", "Intellectual Property", "Litigation", "Compliance", "Tax"].map(area => (
+                                                <label key={area} className="flex items-center gap-2 text-sm p-3 border rounded-lg hover:bg-slate-50 cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        value={area}
+                                                        checked={watchPracticeAreas.includes(area)}
+                                                        onChange={(e) => {
+                                                            const current = watchPracticeAreas;
+                                                            if (e.target.checked) {
+                                                                if (current.length < 3) setValue("details.practiceAreas", [...current, area]);
+                                                            } else {
+                                                                setValue("details.practiceAreas", current.filter(x => x !== area));
+                                                            }
+                                                        }}
+                                                        className="rounded text-amber-500 focus:ring-amber-500"
+                                                    />
+                                                    {area}
+                                                </label>
+                                            ))}
+                                        </div>
+                                        {errors.details?.practiceAreas && <p className="text-red-500 text-xs mt-1">{errors.details?.practiceAreas.message}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* --- STEP 3: ESSAY --- */}
+                        {step === 3 && (
+                            <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
+                                <h2 className="text-2xl font-serif font-bold text-slate-900">Your Story</h2>
+                                <p className="text-slate-500">Please provide detailed answers. These play a crucial role in the judging process.</p>
+
+                                <TextArea label="Tell us about your overall reach as a legal professional" {...register("details.reach")} error={errors.details?.reach?.message} />
+                                <TextArea label="What are your key achievements and impact on the industry?" {...register("details.achievements")} error={errors.details?.achievements?.message} />
+                                <TextArea label="How innovative is your approach?" {...register("details.innovation")} error={errors.details?.innovation?.message} />
+                                <TextArea label="How do you keep yourself future-proof?" {...register("details.futureProof")} error={errors.details?.futureProof?.message} />
+                            </div>
+                        )}
+
+                        {/* Actions */}
+                        <div className="flex justify-between pt-8 border-t border-slate-100">
+                            {step > 1 ? (
+                                <button type="button" onClick={() => setStep(s => s - 1)} className="btn-secondary flex items-center gap-2">
+                                    <ChevronLeft size={16} /> Back
+                                </button>
+                            ) : <div />}
+
+                            {step < 3 ? (
+                                <button type="button" onClick={handleNext} className="btn-primary flex items-center gap-2">
+                                    Next <ChevronRight size={16} />
+                                </button>
+                            ) : (
+                                <button type="submit" disabled={isSubmitting} className="btn-primary flex items-center gap-2">
+                                    {isSubmitting ? <Loader2 className="animate-spin" /> : "Proceed to Payment"}
+                                </button>
+                            )}
                         </div>
                     </form>
-                </div>
-            )}
-
-            {step === "payment" && clientSecret && (
-                <div className="p-8 md:p-12">
-                    <h2 className="text-2xl font-serif font-bold text-slate-900 mb-6">Complete Payment</h2>
-                    <p className="text-slate-500 mb-8">Please enter your card details to finalize the nomination.</p>
-
-                    <Elements stripe={stripePromise} options={{ clientSecret }}>
-                        <PaymentForm onSuccess={() => setStep("success")} />
-                    </Elements>
-                </div>
-            )}
-
-            {step === "success" && (
-                <div className="p-12 text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle2 className="w-8 h-8 text-green-600" />
+                ) : (
+                    /* --- STEP 4: PAYMENT --- */
+                    <div className="animate-in zoom-in fade-in duration-300">
+                        <h2 className="text-2xl font-serif font-bold text-slate-900 mb-6">Secure Payment</h2>
+                        {clientSecret && (
+                            <Elements stripe={stripePromise} options={{ clientSecret }}>
+                                <PaymentForm onSuccess={() => setStep(5)} />
+                            </Elements>
+                        )}
                     </div>
-                    <h2 className="text-3xl font-serif font-bold text-slate-900 mb-4">Nomination Submitted!</h2>
-                    <p className="text-slate-500 mb-8">
-                        Thank you for your submission. We have received your nomination and payment. <br />
-                        A confirmation email has been sent to <strong>{formData.nominatorEmail}</strong>.
-                    </p>
-                    <button
-                        onClick={() => window.location.href = "/awards"}
-                        className="px-6 py-2 border border-slate-300 text-slate-700 font-bold rounded-full hover:bg-slate-50 transition-colors"
-                    >
-                        Return to Awards
-                    </button>
-                </div>
-            )}
+                )}
+
+                {/* --- SUCCESS --- */}
+                {step === 5 && (
+                    <div className="text-center py-10 animate-in zoom-in fade-in">
+                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <CheckCircle2 className="w-10 h-10 text-green-600" />
+                        </div>
+                        <h2 className="text-3xl font-serif font-bold text-slate-900 mb-2">Nomination Received!</h2>
+                        <p className="text-slate-500 mb-8">Your application has been securely submitted. Good luck!</p>
+                        <a href="/" className="btn-secondary">Return Home</a>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
 
-// Payment Sub-Component
+// --- Sub Components ---
+
 function PaymentForm({ onSuccess }: { onSuccess: () => void }) {
     const stripe = useStripe();
     const elements = useElements();
-    const [message, setMessage] = useState<string | null>(null);
-    const [isProcessing, setIsProcessing] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!stripe || !elements) return;
-
-        setIsProcessing(true);
+        setLoading(true);
 
         const { error } = await stripe.confirmPayment({
             elements,
-            confirmParams: {
-                return_url: window.location.origin + "/awards", // Fallback
-            },
-            redirect: "if_required", // Prevent redirect if successful
+            confirmParams: { return_url: window.location.origin + "/awards" },
+            redirect: "if_required"
         });
 
-        if (error) {
-            setMessage(error.message ?? "Payment failed");
-            setIsProcessing(false);
-        } else {
-            // Success!
-            onSuccess();
-        }
+        if (error) setMsg(error.message || "Payment Failed");
+        else onSuccess();
+        setLoading(false);
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <PaymentElement />
-            <div className="mt-6">
-                <button
-                    disabled={isProcessing || !stripe || !elements}
-                    className="w-full py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-amber-500/25 disabled:opacity-50 flex justify-center items-center gap-2"
-                >
-                    {isProcessing ? <Loader2 className="animate-spin" /> : "Pay $100.00"}
-                </button>
-            </div>
-            {message && <div className="mt-4 text-red-500 text-sm text-center">{message}</div>}
+            <button disabled={!stripe || loading} className="w-full mt-6 px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full transition-all shadow-lg hover:shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed text-lg flex justify-center items-center">
+                {loading ? <Loader2 className="animate-spin mx-auto" /> : "Pay $100.00"}
+            </button>
+            {msg && <p className="text-red-500 mt-4 text-center">{msg}</p>}
         </form>
     );
 }
 
-// Input Helper
-function Input({ label, ...props }: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
-    return (
-        <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-                {label} {props.required && <span className="text-red-500">*</span>}
-            </label>
-            <input
-                {...props}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all placeholder:text-slate-400"
-            />
-        </div>
-    );
-}
+const labelClass = "block text-sm font-bold text-slate-700 mb-1.5 uppercase tracking-wide";
+const inputClass = "w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all placeholder:text-slate-400 bg-white";
+
+const Input = ({ label, error, ...props }: any) => (
+    <div>
+        <label className={labelClass}>{label} {props.required && <span className="text-red-500">*</span>}</label>
+        <input className={`${inputClass} ${error ? 'border-red-500' : ''}`} {...props} />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+    </div>
+);
+
+const TextArea = ({ label, error, ...props }: any) => (
+    <div>
+        <label className={labelClass}>{label}</label>
+        <textarea rows={4} className={`${inputClass} ${error ? 'border-red-500' : ''}`} {...props} />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+    </div>
+);
+
+const Select = ({ label, options, error, ...props }: any) => (
+    <div>
+        <label className={labelClass}>{label}</label>
+        <select className={`${inputClass} ${error ? 'border-red-500' : ''}`} {...props}>
+            <option value="">Select...</option>
+            {options.map((o: string) => <option key={o} value={o}>{o}</option>)}
+        </select>
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+    </div>
+);

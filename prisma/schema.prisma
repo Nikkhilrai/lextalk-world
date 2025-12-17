@@ -215,20 +215,18 @@ model AboutPage {
 // Award Nomination Model
 model Nomination {
   id              String   @id @default(cuid())
-  // Nominator Details
-  nominatorName   String
+  // Core Info
+  type            String   @default("Individual") // "Individual" | "Firm"
+  category        String
+  
+  // Dynamic Form Data (Education, Bar, Practice Areas, Essay, Address, etc.)
+  formResponse    Json?
+  
+  // Contact (Indexed for search)
   nominatorEmail  String
   nominatorPhone  String?
-  
-  // Nominee Details
   nomineeName     String
   nomineeEmail    String
-  nomineeCompany  String
-  nomineeRole     String
-  nomineeLinkedin String?
-  
-  category        String
-  reason          String   @db.Text
   
   status          String   @default("PENDING_PAYMENT") // PENDING_PAYMENT, PAID, COMPLETED
   paymentId       String?  @unique // Link to Payment model

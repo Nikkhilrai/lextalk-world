@@ -5,20 +5,17 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         const {
-            nominatorName,
+            type,
+            category,
             nominatorEmail,
             nominatorPhone,
             nomineeName,
             nomineeEmail,
-            nomineeCompany,
-            nomineeRole,
-            nomineeLinkedin,
-            category,
-            reason,
+            formResponse,
         } = body;
 
         // Basic validation
-        if (!nominatorName || !nominatorEmail || !nomineeName || !category) {
+        if (!type || !category || !nominatorEmail || !nomineeName) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
@@ -28,16 +25,13 @@ export async function POST(req: Request) {
         // Create Nomination Record (Pending Payment)
         const nomination = await prisma.nomination.create({
             data: {
-                nominatorName,
+                type,
+                category,
                 nominatorEmail,
                 nominatorPhone,
                 nomineeName,
                 nomineeEmail,
-                nomineeCompany,
-                nomineeRole,
-                nomineeLinkedin,
-                category,
-                reason,
+                formResponse: formResponse ?? {},
                 status: "PENDING_PAYMENT",
             },
         });
