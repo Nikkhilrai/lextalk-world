@@ -8,7 +8,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Loader2, CheckCircle2, ChevronRight, ChevronLeft } from "lucide-react";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
 // --- Zod Schema Definitions ---
 const baseSchema = z.object({
@@ -311,10 +312,15 @@ export function NominationForm() {
                     /* --- STEP 4: PAYMENT --- */
                     <div className="animate-in zoom-in fade-in duration-300">
                         <h2 className="text-2xl font-serif font-bold text-slate-900 mb-6">Secure Payment</h2>
-                        {clientSecret && (
+                        {clientSecret && stripePromise ? (
                             <Elements stripe={stripePromise} options={{ clientSecret }}>
                                 <PaymentForm onSuccess={() => setStep(5)} />
                             </Elements>
+                        ) : clientSecret && (
+                            <div className="p-6 bg-red-50 text-center rounded-xl border border-red-100">
+                                <p className="text-red-600 font-bold mb-2">Configuration Error</p>
+                                <p className="text-sm text-red-500">Stripe Publishable Key is missing. Please check your settings.</p>
+                            </div>
                         )}
                     </div>
                 )}
