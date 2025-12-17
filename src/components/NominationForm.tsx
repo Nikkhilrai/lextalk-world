@@ -136,15 +136,15 @@ export function NominationForm() {
 
     return (
         <div className="bg-slate-50">
-            {/* Dark Header for Navbar Contrast */}
-            <div className="bg-slate-900 pt-28 pb-12 text-center">
+            {/* Header */}
+            <div className="bg-slate-900 pt-24 pb-10 text-center">
                 <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
                     Global Legal Honour <span className="text-amber-500">2026</span> Dubai
                 </h1>
                 <p className="text-slate-400 text-sm">Award Nomination Form</p>
             </div>
 
-            <div className="max-w-3xl mx-auto px-4 -mt-6">
+            <div className="max-w-3xl mx-auto px-4 py-6">
                 {/* Progress Steps - Compact */}
                 <div className="flex items-center justify-between mb-6 bg-white rounded-lg p-3 shadow-sm">
                     {stepLabels.map((label, i) => (
