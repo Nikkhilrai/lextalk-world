@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, FileText, Award, User, Briefcase, Building2, MapPin, Scale, Sparkles, CreditCard } from "lucide-react";
+import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, Check } from "lucide-react";
 import Image from "next/image";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
@@ -52,16 +52,32 @@ const PRACTICE_AREAS = [
     "Real Estate", "Media and Entertainment", "Sports", "Other"
 ];
 
-const COUNTRIES = ["United Arab Emirates", "United States", "United Kingdom", "India", "Singapore", "Saudi Arabia", "Canada", "Australia", "Germany", "France", "Netherlands", "Switzerland", "Japan", "China", "South Korea", "Brazil", "Mexico", "South Africa", "Nigeria", "Kenya", "Egypt", "Other"];
+const COUNTRIES = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+    "Bahrain", "Bangladesh", "Belarus", "Belgium", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei",
+    "Bulgaria", "Burkina Faso", "Cambodia", "Cameroon", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Croatia",
+    "Cuba", "Cyprus", "Czech Republic", "Denmark", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Estonia", "Ethiopia",
+    "Finland", "France", "Georgia", "Germany", "Ghana", "Greece", "Guatemala", "Honduras", "Hong Kong", "Hungary",
+    "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
+    "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Latvia", "Lebanon", "Libya", "Lithuania", "Luxembourg",
+    "Macau", "Malaysia", "Maldives", "Malta", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro",
+    "Morocco", "Myanmar", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Nigeria", "North Macedonia", "Norway", "Oman",
+    "Pakistan", "Palestine", "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania",
+    "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea",
+    "Spain", "Sri Lanka", "Sudan", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
+    "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+    "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe", "Other"
+];
 
 // --- SCHEMA ---
 const nominationSchema = z.object({
-    acceptedTerms: z.literal(true, { errorMap: () => ({ message: "You must accept the terms" }) }),
+    acceptedTerms: z.literal(true, { errorMap: () => ({ message: "This field is required." }) }),
 
-    fullName: z.string().min(2, "Full name is required"),
+    firstName: z.string().min(1, "This field is required."),
+    lastName: z.string().min(1, "This field is required."),
     email: z.string().email("Valid email required"),
-    phone: z.string().min(5, "Phone number required"),
-    dob: z.string().min(1, "Date of birth required"),
+    phone: z.string().min(5, "This field is required."),
+    dob: z.string().min(1, "This field is required."),
 
     nominateAs: z.enum(["Individual", "Company or Firm"]),
 
@@ -87,12 +103,12 @@ const nominationSchema = z.object({
     awardsReceived: z.string().optional(),
 
     // Address
-    addressCity: z.string().min(1, "City required"),
-    addressState: z.string().min(1, "State/Province required"),
-    addressCountry: z.string().min(1, "Country required"),
+    addressCity: z.string().min(1, "This field is required."),
+    addressState: z.string().min(1, "This field is required."),
+    addressCountry: z.string().min(1, "This field is required."),
 
     // Practice Areas
-    practiceAreas: z.array(z.string()).min(1, "Select at least 1").max(3, "Maximum 3"),
+    practiceAreas: z.array(z.string()).min(1, "Select at least 1 area").max(3, "Maximum 3 areas"),
 
     // Essays
     essayReach: z.string().min(10, "Please provide more detail"),
@@ -105,19 +121,11 @@ const nominationSchema = z.object({
 
 type FormValues = z.infer<typeof nominationSchema>;
 
-const STEPS = [
-    { id: 1, name: "Terms", icon: FileText },
-    { id: 2, name: "Personal", icon: User },
-    { id: 3, name: "Details", icon: Briefcase },
-    { id: 4, name: "Expertise", icon: Scale },
-    { id: 5, name: "Essays", icon: Sparkles },
-    { id: 6, name: "Payment", icon: CreditCard },
-];
-
 export function NominationForm() {
     const [step, setStep] = useState(1);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [isComplete, setIsComplete] = useState(false);
+    const totalSteps = 6;
 
     const { register, handleSubmit, watch, trigger, setValue, formState: { errors, isSubmitting } } = useForm<FormValues>({
         resolver: zodResolver(nominationSchema),
@@ -130,18 +138,11 @@ export function NominationForm() {
     const watchPracticeAreas = watch("practiceAreas") || [];
 
     const handleNext = async () => {
-        let fields: any[] = [];
+        let fields: (keyof FormValues)[] = [];
         if (step === 1) fields = ["acceptedTerms"];
-        if (step === 2) fields = ["fullName", "email", "phone", "dob"];
+        if (step === 2) fields = ["firstName", "lastName", "email", "phone", "dob"];
         if (step === 3) {
             fields = ["nominateAs", "addressCity", "addressState", "addressCountry"];
-            if (nominateAs === "Individual") {
-                fields.push("individualRole");
-                if (individualRole === "None of the above") fields.push("individualRoleOther");
-            } else {
-                fields.push("firmType");
-                if (firmType === "None of the above") fields.push("firmTypeOther");
-            }
         }
         if (step === 4) fields = ["practiceAreas"];
         if (step === 5) fields = ["essayReach", "essayAchievements", "essayInnovation", "essayFuture"];
@@ -157,7 +158,7 @@ export function NominationForm() {
                 category: "Global Legal Honour 2026",
                 nominatorEmail: data.email,
                 nominatorPhone: data.phone,
-                nomineeName: data.fullName,
+                nomineeName: `${data.firstName} ${data.lastName}`,
                 nomineeEmail: data.email,
                 formResponse: data
             };
@@ -177,106 +178,119 @@ export function NominationForm() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
-            <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen bg-white">
+            {/* Header with Logo */}
+            <div className="bg-gradient-to-r from-[#1a3a4a] to-[#2d5a6e] py-6">
+                <div className="max-w-3xl mx-auto px-4">
+                    <Image
+                        src="/images/dubai-2026/glh-logo.png"
+                        alt="Global Legal Honour 2026"
+                        width={400}
+                        height={100}
+                        className="mx-auto"
+                    />
+                </div>
+            </div>
 
-                {/* Header */}
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
-                        <Award className="w-4 h-4 text-amber-400" />
-                        <span className="text-amber-400 text-sm font-bold uppercase tracking-wider">Global Legal Honour 2026</span>
+            {/* Progress Bar */}
+            <div className="bg-gray-100 border-b">
+                <div className="max-w-3xl mx-auto px-4 py-3">
+                    <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+                        <span>Step {step} of {totalSteps}</span>
+                        <span>{Math.round((step / totalSteps) * 100)}% Complete</span>
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">Nomination Application</h1>
-                    <p className="text-slate-400">Dubai, United Arab Emirates</p>
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div
+                            className="h-full bg-[#21b573] transition-all duration-300"
+                            style={{ width: `${(step / totalSteps) * 100}%` }}
+                        />
+                    </div>
                 </div>
+            </div>
 
-                {/* Progress Steps */}
-                <div className="flex items-center justify-center gap-1 mb-8 overflow-x-auto pb-2">
-                    {STEPS.map((s, i) => {
-                        const Icon = s.icon;
-                        const isActive = step === s.id;
-                        const isCompleted = step > s.id;
-                        return (
-                            <div key={s.id} className="flex items-center">
-                                <div className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${isActive ? 'bg-amber-500 text-slate-900' : isCompleted ? 'bg-green-500/20 text-green-400' : 'bg-slate-800 text-slate-500'}`}>
-                                    {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
-                                    <span className="text-xs font-bold hidden md:block">{s.name}</span>
-                                </div>
-                                {i < STEPS.length - 1 && <div className={`w-4 h-0.5 mx-1 ${isCompleted ? 'bg-green-500' : 'bg-slate-700'}`} />}
-                            </div>
-                        );
-                    })}
-                </div>
+            {/* Main Form Container */}
+            <div className="max-w-3xl mx-auto px-4 py-8">
+                <div className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
 
-                {/* Main Card */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-
-                    {/* Card Header */}
-                    <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/5 border-b border-white/10 px-8 py-4">
-                        <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                            {step === 1 && <><FileText className="w-5 h-5 text-amber-400" /> Terms & Conditions</>}
-                            {step === 2 && <><User className="w-5 h-5 text-amber-400" /> Personal Details</>}
-                            {step === 3 && <><Briefcase className="w-5 h-5 text-amber-400" /> Professional Details</>}
-                            {step === 4 && <><Scale className="w-5 h-5 text-amber-400" /> Key Practice Areas</>}
-                            {step === 5 && <><Sparkles className="w-5 h-5 text-amber-400" /> Your Story</>}
-                            {step === 6 && <><CreditCard className="w-5 h-5 text-amber-400" /> Secure Payment</>}
+                    {/* Page Header */}
+                    <div className="bg-[#f7f7f7] border-b px-6 py-4">
+                        <h2 className="text-xl font-semibold text-gray-800">
+                            {step === 1 && "Terms & Conditions"}
+                            {step === 2 && "Personal Details"}
+                            {step === 3 && "Nominate As"}
+                            {step === 4 && "Key Practice Areas"}
+                            {step === 5 && "Tell Us About Yourself"}
+                            {step === 6 && "Payment"}
                         </h2>
                     </div>
 
-                    <div className="p-6 md:p-10">
+                    <div className="p-6">
                         {!isComplete && step < 6 ? (
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
                                 {/* STEP 1: TERMS */}
                                 {step === 1 && (
-                                    <div className="space-y-6 animate-in fade-in slide-in-from-right duration-300">
-                                        <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700 max-h-64 overflow-y-auto text-sm text-slate-300 space-y-3">
-                                            <p className="font-bold text-white">Important Information:</p>
-                                            <ul className="list-disc list-inside space-y-2 text-slate-400">
-                                                <li>All fields marked with * are required and must be filled.</li>
-                                                <li>All awardees must be physically or virtually present to receive the Award.</li>
+                                    <div className="space-y-6">
+                                        <div className="bg-[#f9f9f9] border border-gray-200 rounded-lg p-5 text-sm text-gray-700 space-y-3">
+                                            <p className="font-semibold text-gray-900">Please read the following carefully before proceeding:</p>
+                                            <ol className="list-decimal list-inside space-y-2 text-gray-600">
+                                                <li>All fields marked with <span className="text-red-500">*</span> are required and must be filled.</li>
+                                                <li>All awardees must be physically or virtually present to receive the Award. If not, the Award shall not be handed over.</li>
                                                 <li>Filling the nomination form does not ensure selection for the Award.</li>
                                                 <li>If you do not win, the nomination fee (USD 50) is fully refundable.</li>
-                                                <li>Winners will be notified via email and must book an Awardee Pass.</li>
-                                                <li>Standard Virtual Awardee Pass: USD 800</li>
-                                                <li>Standard In-Person Awardee Pass: USD 1200</li>
-                                                <li>The decision of the Awards Committee is final.</li>
-                                            </ul>
+                                                <li>Winners will be notified via email to the address provided and must book an Awardee Pass.</li>
+                                                <li><strong>Standard Virtual Awardee Pass:</strong> USD 800</li>
+                                                <li><strong>Standard In-Person Awardee Pass:</strong> USD 1200</li>
+                                                <li>The decision of the Awards Committee is final and cannot be contested.</li>
+                                            </ol>
                                         </div>
 
-                                        <label className={`flex items-start gap-4 p-5 rounded-xl border-2 cursor-pointer transition-all ${watch("acceptedTerms") ? 'border-amber-500 bg-amber-500/10' : 'border-slate-700 hover:border-slate-600 bg-slate-800/30'}`}>
-                                            <input type="checkbox" {...register("acceptedTerms")} className="w-5 h-5 mt-0.5 rounded text-amber-500 focus:ring-amber-500 bg-slate-700 border-slate-600" />
-                                            <span className="text-white font-medium">I have read all the details and wish to proceed with nominations.</span>
+                                        <label className="flex items-start gap-3 cursor-pointer group">
+                                            <input
+                                                type="checkbox"
+                                                {...register("acceptedTerms")}
+                                                className="w-5 h-5 mt-0.5 rounded border-gray-300 text-[#21b573] focus:ring-[#21b573]"
+                                            />
+                                            <span className="text-gray-700">
+                                                I have read all the details and wish to proceed with nominations.
+                                                <span className="text-red-500 ml-1">*</span>
+                                            </span>
                                         </label>
-                                        {errors.acceptedTerms && <p className="text-red-400 text-sm">{errors.acceptedTerms.message}</p>}
+                                        {errors.acceptedTerms && <p className="text-red-500 text-sm">{errors.acceptedTerms.message}</p>}
                                     </div>
                                 )}
 
-                                {/* STEP 2: PERSONAL */}
+                                {/* STEP 2: PERSONAL DETAILS */}
                                 {step === 2 && (
-                                    <div className="space-y-5 animate-in fade-in slide-in-from-right duration-300">
+                                    <div className="space-y-5">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            <Input label="Full Name *" placeholder="Enter your full name" {...register("fullName")} error={errors.fullName?.message} />
-                                            <Input label="Email Address *" type="email" placeholder="you@example.com" {...register("email")} error={errors.email?.message} />
-                                            <Input label="Mobile Number *" placeholder="+1 555 123 4567" {...register("phone")} error={errors.phone?.message} />
-                                            <Input label="Date of Birth *" type="date" {...register("dob")} error={errors.dob?.message} />
+                                            <FormInput label="First Name" required {...register("firstName")} error={errors.firstName?.message} />
+                                            <FormInput label="Last Name" required {...register("lastName")} error={errors.lastName?.message} />
                                         </div>
+                                        <FormInput label="E-mail" type="email" required placeholder="ex: myname@example.com" {...register("email")} error={errors.email?.message} />
+                                        <FormInput label="Mobile Number" required placeholder="+1 (XXX) XXX-XXXX" {...register("phone")} error={errors.phone?.message} helperText="Please enter a valid phone number." />
+                                        <FormInput label="Date of Birth" type="date" required {...register("dob")} error={errors.dob?.message} />
                                     </div>
                                 )}
 
-                                {/* STEP 3: DETAILS */}
+                                {/* STEP 3: NOMINATE AS */}
                                 {step === 3 && (
-                                    <div className="space-y-6 animate-in fade-in slide-in-from-right duration-300">
-
-                                        {/* Nominate As */}
+                                    <div className="space-y-6">
+                                        {/* Nominate As Radio */}
                                         <div>
-                                            <label className={labelClass}>Nominate As *</label>
-                                            <div className="grid grid-cols-2 gap-4">
+                                            <label className="block text-sm font-medium text-gray-700 mb-3">
+                                                Nominate As <span className="text-red-500">*</span>
+                                            </label>
+                                            <div className="space-y-2">
                                                 {["Individual", "Company or Firm"].map(v => (
-                                                    <label key={v} className={`flex items-center justify-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${nominateAs === v ? 'border-amber-500 bg-amber-500/10 text-white' : 'border-slate-700 bg-slate-800/30 text-slate-400 hover:border-slate-600'}`}>
-                                                        {v === "Individual" ? <User className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
-                                                        <input type="radio" value={v} {...register("nominateAs")} className="sr-only" />
-                                                        <span className="font-bold">{v}</span>
+                                                    <label key={v} className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                                        <input
+                                                            type="radio"
+                                                            value={v}
+                                                            {...register("nominateAs")}
+                                                            className="w-4 h-4 text-[#21b573] focus:ring-[#21b573] border-gray-300"
+                                                        />
+                                                        <span className="text-gray-700">{v}</span>
                                                     </label>
                                                 ))}
                                             </div>
@@ -284,57 +298,90 @@ export function NominationForm() {
 
                                         {/* Individual Branch */}
                                         {nominateAs === "Individual" && (
-                                            <div className="space-y-4 p-5 rounded-xl bg-slate-800/30 border border-slate-700">
-                                                <Select label="Choose the option that describes you best *" {...register("individualRole")} options={INDIVIDUAL_ROLES} error={errors.individualRole?.message} />
+                                            <div className="space-y-5 pt-4 border-t">
+                                                <FormSelect
+                                                    label="Choose the option that describes you the best"
+                                                    required
+                                                    options={INDIVIDUAL_ROLES}
+                                                    {...register("individualRole")}
+                                                    error={errors.individualRole?.message}
+                                                />
                                                 {individualRole === "None of the above" && (
-                                                    <Input label="Please specify *" placeholder="Enter your role" {...register("individualRoleOther")} error={errors.individualRoleOther?.message} />
+                                                    <FormInput label="If it's None of the Above, Write It Here" required {...register("individualRoleOther")} error={errors.individualRoleOther?.message} />
                                                 )}
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                    <Input label="Highest Education" placeholder="e.g. LLB, JD, BCL" {...register("highestEducation")} />
-                                                    <Input label="University/Institute" placeholder="Name of institution" {...register("educationInstitute")} />
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                    <FormInput label="Highest Education" placeholder="e.g. LLB, JD, BCL" {...register("highestEducation")} />
+                                                    <FormInput label="University/Institute where highest education was achieved" {...register("educationInstitute")} />
                                                 </div>
-                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                    <Select label="Dual Qualified?" {...register("dualQualified")} options={["Yes", "No"]} />
-                                                    <Input label="Year Called to Bar" placeholder="e.g. 2010" {...register("barYear")} />
-                                                    <Input label="Which Bar?" placeholder="e.g. NY Bar" {...register("barName")} />
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                                    <FormSelect label="Are you Dual Qualified?" options={["Yes", "No"]} {...register("dualQualified")} />
+                                                    <FormInput label="Year Called to Bar" type="number" placeholder="YYYY" {...register("barYear")} />
+                                                    <FormInput label="Which Bar?" placeholder="e.g. NY Bar" {...register("barName")} />
                                                 </div>
                                             </div>
                                         )}
 
                                         {/* Firm Branch */}
                                         {nominateAs === "Company or Firm" && (
-                                            <div className="space-y-4 p-5 rounded-xl bg-slate-800/30 border border-slate-700">
-                                                <Select label="Choose the type that describes you best *" {...register("firmType")} options={FIRM_TYPES} error={errors.firmType?.message} />
+                                            <div className="space-y-5 pt-4 border-t">
+                                                <FormSelect
+                                                    label="Choose the option that describes you the best"
+                                                    required
+                                                    options={FIRM_TYPES}
+                                                    {...register("firmType")}
+                                                    error={errors.firmType?.message}
+                                                />
                                                 {firmType === "None of the above" && (
-                                                    <Input label="Please specify *" placeholder="Enter your organization type" {...register("firmTypeOther")} error={errors.firmTypeOther?.message} />
+                                                    <FormInput label="If it's None of the Above, Write It Here" required {...register("firmTypeOther")} error={errors.firmTypeOther?.message} />
                                                 )}
                                             </div>
                                         )}
 
                                         {/* Common Fields */}
                                         {nominateAs && (
-                                            <div className="space-y-4">
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                    <Input label="Organization/Firm Name" placeholder="Name of your company" {...register("orgName")} />
-                                                    <Input label="Current Position/Designation" placeholder="e.g. Partner" {...register("currentPosition")} />
+                                            <div className="space-y-5 pt-4 border-t">
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                    <FormInput label="Organization/Firm/Company Name" {...register("orgName")} />
+                                                    <FormInput label="Current Position/Designation" {...register("currentPosition")} />
                                                 </div>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                    <Select label="Time in Current Position" {...register("positionTenure")} options={TENURE_OPTIONS} />
-                                                    <Select label="Total Years in Practice/Business" {...register("totalYearsPractice")} options={TENURE_OPTIONS} />
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                            Time in current position
+                                                        </label>
+                                                        <div className="space-y-2">
+                                                            {TENURE_OPTIONS.map(opt => (
+                                                                <label key={opt} className="flex items-center gap-2 text-sm">
+                                                                    <input type="radio" value={opt} {...register("positionTenure")} className="w-4 h-4 text-[#21b573] focus:ring-[#21b573]" />
+                                                                    <span className="text-gray-600">{opt}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                            Total Years in Practice/Business
+                                                        </label>
+                                                        <div className="space-y-2">
+                                                            {TENURE_OPTIONS.map(opt => (
+                                                                <label key={opt} className="flex items-center gap-2 text-sm">
+                                                                    <input type="radio" value={opt} {...register("totalYearsPractice")} className="w-4 h-4 text-[#21b573] focus:ring-[#21b573]" />
+                                                                    <span className="text-gray-600">{opt}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <Input label="Website (Optional)" placeholder="www.yourfirm.com" {...register("website")} />
-                                                <Input label="Previous Awards Received (Optional)" placeholder="List any previous legal awards" {...register("awardsReceived")} />
+                                                <FormInput label="Website" placeholder="https://www.example.com" {...register("website")} />
+                                                <FormInput label="Previous Legal Awards Received (if any)" {...register("awardsReceived")} />
 
                                                 {/* Address */}
-                                                <div className="pt-4 border-t border-slate-700">
-                                                    <div className="flex items-center gap-2 mb-4">
-                                                        <MapPin className="w-4 h-4 text-amber-400" />
-                                                        <span className="text-sm font-bold text-white uppercase tracking-wider">Address</span>
-                                                    </div>
-                                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                        <Input label="City *" placeholder="City" {...register("addressCity")} error={errors.addressCity?.message} />
-                                                        <Input label="State/Province *" placeholder="State" {...register("addressState")} error={errors.addressState?.message} />
-                                                        <Select label="Country *" {...register("addressCountry")} options={COUNTRIES} error={errors.addressCountry?.message} />
+                                                <div className="pt-4 border-t">
+                                                    <h3 className="text-sm font-medium text-gray-700 mb-4">Address</h3>
+                                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                                        <FormInput label="City" required {...register("addressCity")} error={errors.addressCity?.message} />
+                                                        <FormInput label="State / Province" required {...register("addressState")} error={errors.addressState?.message} />
+                                                        <FormSelect label="Country" required options={COUNTRIES} {...register("addressCountry")} error={errors.addressCountry?.message} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -344,75 +391,85 @@ export function NominationForm() {
 
                                 {/* STEP 4: PRACTICE AREAS */}
                                 {step === 4 && (
-                                    <div className="space-y-4 animate-in fade-in slide-in-from-right duration-300">
-                                        <p className="text-slate-400">Select your <span className="text-amber-400 font-bold">Top 3</span> Key Practice Areas:</p>
-                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-h-80 overflow-y-auto p-2">
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <label className="text-sm font-medium text-gray-700">
+                                                Select your Key Practice Areas (max 3) <span className="text-red-500">*</span>
+                                            </label>
+                                            <span className="text-sm text-gray-500">{watchPracticeAreas.length}/3 selected</span>
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[400px] overflow-y-auto border rounded-lg p-4 bg-gray-50">
                                             {PRACTICE_AREAS.map(area => {
                                                 const isSelected = watchPracticeAreas.includes(area);
+                                                const isDisabled = watchPracticeAreas.length >= 3 && !isSelected;
                                                 return (
-                                                    <label key={area} className={`flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all text-sm ${isSelected ? 'border-amber-500 bg-amber-500/20 text-white' : 'border-slate-700 bg-slate-800/30 text-slate-400 hover:border-slate-600'}`}>
+                                                    <label
+                                                        key={area}
+                                                        className={`flex items-center gap-2 p-2 rounded text-sm cursor-pointer transition-colors ${isSelected ? 'bg-[#21b573]/10 text-[#21b573]' : isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'}`}
+                                                    >
                                                         <input
                                                             type="checkbox"
-                                                            value={area}
                                                             checked={isSelected}
+                                                            disabled={isDisabled}
                                                             onChange={(e) => {
-                                                                const current = watchPracticeAreas;
-                                                                if (e.target.checked && current.length < 3) {
-                                                                    setValue("practiceAreas", [...current, area]);
+                                                                if (e.target.checked && watchPracticeAreas.length < 3) {
+                                                                    setValue("practiceAreas", [...watchPracticeAreas, area]);
                                                                 } else if (!e.target.checked) {
-                                                                    setValue("practiceAreas", current.filter(x => x !== area));
+                                                                    setValue("practiceAreas", watchPracticeAreas.filter(x => x !== area));
                                                                 }
                                                             }}
-                                                            className="sr-only"
+                                                            className="w-4 h-4 rounded border-gray-300 text-[#21b573] focus:ring-[#21b573]"
                                                         />
-                                                        <div className={`w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-amber-500 border-amber-500' : 'border-slate-600'}`}>
-                                                            {isSelected && <CheckCircle2 className="w-3 h-3 text-white" />}
-                                                        </div>
                                                         <span>{area}</span>
                                                     </label>
                                                 );
                                             })}
                                         </div>
-                                        <p className="text-xs text-slate-500">Selected: {watchPracticeAreas.length}/3</p>
-                                        {errors.practiceAreas && <p className="text-red-400 text-sm">{errors.practiceAreas.message}</p>}
+                                        {errors.practiceAreas && <p className="text-red-500 text-sm">{errors.practiceAreas.message}</p>}
                                     </div>
                                 )}
 
                                 {/* STEP 5: ESSAYS */}
                                 {step === 5 && (
-                                    <div className="space-y-6 animate-in fade-in slide-in-from-right duration-300">
-                                        <TextArea
-                                            label="Tell us about your Overall Reach as a Legal Professional *"
-                                            hint="Include details about your Education, Experience, Key Practice Areas, and examples of important cases or disputes."
+                                    <div className="space-y-6">
+                                        <FormTextArea
+                                            label="Tell us about your Overall Reach as a Legal Professional"
+                                            required
+                                            hint="Include details about your Education, Experience, Key Practice Areas and examples of important cases or disputes."
                                             {...register("essayReach")}
                                             error={errors.essayReach?.message}
                                         />
-                                        <TextArea
-                                            label="Tell us about your Achievements and Industry Impact *"
+                                        <FormTextArea
+                                            label="Tell us about your Achievements and Industry Impact"
+                                            required
                                             hint="Include details and examples pertaining to your achievements and their impacts."
                                             {...register("essayAchievements")}
                                             error={errors.essayAchievements?.message}
                                         />
-                                        <TextArea
-                                            label="How Innovative is your approach? *"
-                                            hint="Share examples of your innovative approach that benefited your clients or company."
+                                        <FormTextArea
+                                            label="How Innovative is your approach?"
+                                            required
+                                            hint="Share examples of your innovative approach of handling legal matters that benefited your clients or your company."
                                             {...register("essayInnovation")}
                                             error={errors.essayInnovation?.message}
                                         />
-                                        <TextArea
-                                            label="How do you keep yourself Future-Proof? *"
-                                            hint="Discuss your efforts for continuous professional development and adapting to new technologies."
+                                        <FormTextArea
+                                            label="How do you keep yourself Future-Proof?"
+                                            required
+                                            hint="Discuss your efforts for continuous professional development, adapting to new technologies, and keeping yourself relevant in the changing landscape of the legal industry."
                                             {...register("essayFuture")}
                                             error={errors.essayFuture?.message}
                                         />
 
                                         {/* File Upload */}
-                                        <div className="pt-4 border-t border-slate-700">
-                                            <label className={labelClass}>Upload Documents (CV/Profile)</label>
-                                            <div className="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center hover:border-amber-500/50 transition-all cursor-pointer bg-slate-800/20">
-                                                <UploadCloud className="w-10 h-10 mx-auto text-slate-500 mb-3" />
-                                                <p className="text-slate-400 text-sm">Click to browse or drag files here</p>
-                                                <p className="text-slate-600 text-xs mt-1">PDF, DOC, DOCX up to 10MB</p>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                Upload Documents (CV/Profile) - Optional
+                                            </label>
+                                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-[#21b573] transition-colors cursor-pointer bg-gray-50">
+                                                <UploadCloud className="w-8 h-8 mx-auto text-gray-400 mb-2" />
+                                                <p className="text-gray-600 text-sm">Click to browse or drag files here</p>
+                                                <p className="text-gray-400 text-xs mt-1">PDF, DOC, DOCX up to 10MB</p>
                                                 <input type="file" className="hidden" {...register("files")} accept=".pdf,.doc,.docx" />
                                             </div>
                                         </div>
@@ -420,96 +477,137 @@ export function NominationForm() {
                                 )}
 
                                 {/* Navigation */}
-                                <div className="flex justify-between pt-6 border-t border-slate-700">
+                                <div className="flex justify-between pt-6 border-t">
                                     {step > 1 ? (
-                                        <button type="button" onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-600 text-slate-300 hover:bg-slate-800 transition-all font-bold">
+                                        <button
+                                            type="button"
+                                            onClick={() => setStep(s => s - 1)}
+                                            className="flex items-center gap-2 px-6 py-2.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+                                        >
                                             <ChevronLeft className="w-4 h-4" /> Back
                                         </button>
                                     ) : <div />}
 
                                     {step < 5 ? (
-                                        <button type="button" onClick={handleNext} className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all">
+                                        <button
+                                            type="button"
+                                            onClick={handleNext}
+                                            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#21b573] text-white font-medium hover:bg-[#1a9560] transition-colors"
+                                        >
                                             Next <ChevronRight className="w-4 h-4" />
                                         </button>
                                     ) : (
-                                        <button type="submit" disabled={isSubmitting} className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold shadow-lg shadow-green-500/25 hover:shadow-green-500/40 transition-all">
-                                            {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <CreditCard className="w-4 h-4" />}
-                                            {isSubmitting ? "Processing..." : "Proceed to Payment"}
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#21b573] text-white font-medium hover:bg-[#1a9560] transition-colors disabled:opacity-50"
+                                        >
+                                            {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+                                            {isSubmitting ? "Submitting..." : "Submit & Pay"}
                                         </button>
                                     )}
                                 </div>
                             </form>
                         ) : step === 6 && !isComplete ? (
                             /* PAYMENT STEP */
-                            <div className="animate-in zoom-in duration-300">
+                            <div>
                                 <div className="text-center mb-8">
-                                    <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <CreditCard className="w-8 h-8 text-amber-400" />
+                                    <div className="w-16 h-16 bg-[#21b573]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <CheckCircle2 className="w-8 h-8 text-[#21b573]" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">Nomination Fee: $50.00</h3>
-                                    <p className="text-slate-400 text-sm">Fully refundable if not selected</p>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Nomination Fee: $50.00 USD</h3>
+                                    <p className="text-gray-500 text-sm">This fee is fully refundable if you are not selected.</p>
                                 </div>
 
                                 {clientSecret && stripePromise ? (
-                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night', variables: { colorPrimary: '#f59e0b' } } }}>
+                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
                                         <PaymentForm onSuccess={() => setIsComplete(true)} />
                                     </Elements>
                                 ) : (
-                                    <div className="text-center p-6 bg-red-500/10 border border-red-500/20 rounded-xl">
-                                        <p className="text-red-400">Payment configuration error. Please contact support.</p>
+                                    <div className="text-center p-6 bg-red-50 border border-red-200 rounded-lg">
+                                        <p className="text-red-600">Payment configuration error. Please contact support.</p>
                                     </div>
                                 )}
                             </div>
                         ) : (
                             /* SUCCESS */
-                            <div className="text-center py-12 animate-in zoom-in duration-300">
-                                <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <CheckCircle2 className="w-10 h-10 text-green-400" />
+                            <div className="text-center py-12">
+                                <div className="w-20 h-20 bg-[#21b573]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <CheckCircle2 className="w-10 h-10 text-[#21b573]" />
                                 </div>
-                                <h2 className="text-3xl font-serif font-bold text-white mb-3">Nomination Submitted!</h2>
-                                <p className="text-slate-400 max-w-md mx-auto mb-8">Thank you for your application. Our Awards Committee will review your nomination and get back to you soon.</p>
-                                <a href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 text-white font-bold hover:bg-slate-700 transition-all">Return Home</a>
+                                <h2 className="text-2xl font-semibold text-gray-800 mb-3">Nomination Submitted Successfully!</h2>
+                                <p className="text-gray-600 max-w-md mx-auto mb-8">
+                                    Thank you for your nomination. Our Awards Committee will review your application and contact you via email.
+                                </p>
+                                <a
+                                    href="/dubai-2026"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#21b573] text-white font-medium hover:bg-[#1a9560] transition-colors"
+                                >
+                                    Back to Event Page
+                                </a>
                             </div>
                         )}
                     </div>
                 </div>
 
                 {/* Footer */}
-                <p className="text-center text-slate-600 text-xs mt-8">© LexTalk World. All rights reserved. Powered by LexTalk.</p>
+                <p className="text-center text-gray-400 text-xs mt-6">
+                    © 2024 LexTalk World. All rights reserved.
+                </p>
             </div>
         </div>
     );
 }
 
-// --- COMPONENTS ---
-const labelClass = "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2";
-
-const Input = ({ label, error, hint, ...props }: any) => (
+// --- FORM COMPONENTS ---
+const FormInput = ({ label, required, error, helperText, ...props }: any) => (
     <div>
-        {label && <label className={labelClass}>{label}</label>}
-        <input className={`w-full px-4 py-3 rounded-xl bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-700'} text-white placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all`} {...props} />
-        {hint && <p className="text-slate-500 text-xs mt-1">{hint}</p>}
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+        {label && (
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+        )}
+        <input
+            className={`w-full px-3 py-2 rounded-lg border ${error ? 'border-red-500' : 'border-gray-300'} text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-[#21b573] focus:border-[#21b573] outline-none transition-colors`}
+            {...props}
+        />
+        {helperText && <p className="text-gray-500 text-xs mt-1">{helperText}</p>}
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );
 
-const TextArea = ({ label, error, hint, ...props }: any) => (
+const FormSelect = ({ label, required, options, error, ...props }: any) => (
     <div>
-        {label && <label className={labelClass}>{label}</label>}
-        <textarea rows={4} className={`w-full px-4 py-3 rounded-xl bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-700'} text-white placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all resize-none`} {...props} />
-        {hint && <p className="text-slate-500 text-xs mt-1">{hint}</p>}
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
-    </div>
-);
-
-const Select = ({ label, options, error, ...props }: any) => (
-    <div>
-        {label && <label className={labelClass}>{label}</label>}
-        <select className={`w-full px-4 py-3 rounded-xl bg-slate-800/50 border ${error ? 'border-red-500' : 'border-slate-700'} text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all appearance-none`} {...props}>
-            <option value="" className="bg-slate-900">Select...</option>
-            {options.map((o: string) => <option key={o} value={o} className="bg-slate-900">{o}</option>)}
+        {label && (
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+        )}
+        <select
+            className={`w-full px-3 py-2 rounded-lg border ${error ? 'border-red-500' : 'border-gray-300'} text-gray-800 focus:ring-2 focus:ring-[#21b573] focus:border-[#21b573] outline-none transition-colors bg-white`}
+            {...props}
+        >
+            <option value="">Please Select</option>
+            {options.map((o: string) => <option key={o} value={o}>{o}</option>)}
         </select>
-        {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+    </div>
+);
+
+const FormTextArea = ({ label, required, error, hint, ...props }: any) => (
+    <div>
+        {label && (
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+        )}
+        {hint && <p className="text-gray-500 text-xs mb-2">{hint}</p>}
+        <textarea
+            rows={5}
+            className={`w-full px-3 py-2 rounded-lg border ${error ? 'border-red-500' : 'border-gray-300'} text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-[#21b573] focus:border-[#21b573] outline-none transition-colors resize-none`}
+            {...props}
+        />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );
 
@@ -536,11 +634,14 @@ function PaymentForm({ onSuccess }: { onSuccess: () => void }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <PaymentElement />
-            <button disabled={!stripe || loading} className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold text-lg shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            <button
+                disabled={!stripe || loading}
+                className="w-full py-3 rounded-lg bg-[#21b573] text-white font-medium text-lg hover:bg-[#1a9560] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
-                {loading ? "Processing..." : "Pay $50.00"}
+                {loading ? "Processing..." : "Pay $50.00 USD"}
             </button>
-            {msg && <p className="text-red-400 text-center text-sm">{msg}</p>}
+            {msg && <p className="text-red-500 text-center text-sm">{msg}</p>}
         </form>
     );
 }
