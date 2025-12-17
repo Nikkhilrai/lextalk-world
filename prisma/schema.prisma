@@ -208,7 +208,46 @@ model AboutPage {
   milestones       String   @db.Text // JSON: [{year, title, description}]
   // Settings
   isPublished      Boolean  @default(false)
-  showInNavbar     Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+// Award Nomination Model
+model Nomination {
+  id              String   @id @default(cuid())
+  // Nominator Details
+  nominatorName   String
+  nominatorEmail  String
+  nominatorPhone  String?
+  
+  // Nominee Details
+  nomineeName     String
+  nomineeEmail    String
+  nomineeCompany  String
+  nomineeRole     String
+  nomineeLinkedin String?
+  
+  category        String
+  reason          String   @db.Text
+  
+  status          String   @default("PENDING_PAYMENT") // PENDING_PAYMENT, PAID, COMPLETED
+  paymentId       String?  @unique // Link to Payment model
+  payment         Payment? @relation(fields: [paymentId], references: [id])
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Payment Transaction Model
+model Payment {
+  id              String      @id @default(cuid())
+  amount          Float
+  currency        String      @default("USD")
+  stripePaymentId String?     @unique // Stripe PaymentIntent ID
+  status          String      @default("pending") // pending, succeeded, failed
+  
+  nomination      Nomination?
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }

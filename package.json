@@ -13,6 +13,8 @@
     "@google-analytics/data": "^5.2.1",
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.6.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/pg": "^8.15.6",
     "bcryptjs": "^3.0.3",
@@ -34,6 +36,7 @@
     "react-tooltip": "^5.30.0",
     "recharts": "^3.5.1",
     "resend": "^6.6.0",
+    "stripe": "^20.1.0",
     "tailwind-merge": "^3.4.0",
     "xlsx": "^0.18.5"
   },
