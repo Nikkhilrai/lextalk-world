@@ -23,7 +23,11 @@ const navLinks = [
     { name: "Blog", href: "/blog" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+    variant?: "default" | "light";
+}
+
+export function Navbar({ variant = "default" }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -74,7 +78,11 @@ export function Navbar() {
                             >
                                 <Link
                                     href={link.href}
-                                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled ? "text-slate-700 hover:text-amber-600" : "text-white/90 hover:text-amber-400"
+                                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled
+                                        ? "text-slate-700 hover:text-amber-600"
+                                        : variant === "light"
+                                            ? "text-slate-800 hover:text-amber-600"
+                                            : "text-white/90 hover:text-amber-400"
                                         }`}
                                 >
                                     {link.name}
@@ -118,7 +126,7 @@ export function Navbar() {
 
                     {/* Mobile/Tablet Menu Button */}
                     <button
-                        className={`lg:hidden p-2 ${isScrolled ? "text-slate-900" : "text-white"}`}
+                        className={`lg:hidden p-2 ${isScrolled || variant === "light" ? "text-slate-900" : "text-white"}`}
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

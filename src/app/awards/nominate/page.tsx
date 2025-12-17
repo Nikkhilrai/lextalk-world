@@ -10,10 +10,8 @@ export const metadata = {
 export default function NominatePage() {
     return (
         <main className="min-h-screen">
-            {/* Dark background extends behind navbar */}
-            <div className="bg-slate-900">
-                <Navbar />
-            </div>
+            {/* Navbar with light variant for dark text on light background */}
+            <Navbar variant="light" />
             <NominationForm />
             <Footer />
         </main>

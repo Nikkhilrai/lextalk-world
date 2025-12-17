@@ -137,7 +137,7 @@ export function NominationForm() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
             {/* Header with Logo */}
-            <div className="pt-28 pb-6 text-center">
+            <div className="pt-40 pb-6 text-center">
                 <div className="flex justify-center mb-6">
                     <Image src="/logo/Lextalk-Logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
                 </div>
@@ -155,10 +155,10 @@ export function NominationForm() {
                         {stepLabels.map((label, i) => (
                             <div key={i} className="flex flex-col items-center flex-1">
                                 <div className={`relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${i + 1 < step
-                                        ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-lg shadow-amber-300/50'
-                                        : i + 1 === step
-                                            ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl shadow-amber-400/50 ring-4 ring-amber-100 scale-110'
-                                            : 'bg-slate-100 text-slate-400'
+                                    ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-lg shadow-amber-300/50'
+                                    : i + 1 === step
+                                        ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl shadow-amber-400/50 ring-4 ring-amber-100 scale-110'
+                                        : 'bg-slate-100 text-slate-400'
                                     }`}>
                                     {i + 1 < step ? <Check className="w-5 h-5" /> : i + 1}
                                 </div>
