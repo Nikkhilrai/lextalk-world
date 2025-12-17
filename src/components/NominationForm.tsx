@@ -27,12 +27,15 @@ const baseSchema = z.object({
     details: z.object({
         // Individual Specific
         profession: z.string().optional(),
+        professionOther: z.string().optional(),
         education: z.string().optional(),
         university: z.string().optional(),
         barDate: z.string().optional(),
+        barName: z.string().optional(),
 
         // Firm Specific
         firmType: z.string().optional(),
+        firmTypeOther: z.string().optional(),
         organizationName: z.string().optional(),
         designation: z.string().optional(),
         website: z.string().optional(),
@@ -188,15 +191,54 @@ export function NominationForm() {
 
                                 {watchType === "Individual" ? (
                                     <div className="space-y-4">
-                                        <Select label="Current Role" {...register("details.profession")} options={["Independent Lawyer", "Law Firm Partner", "In-House Counsel", "Legal Tech Expert", "Other"]} error={errors.details?.profession?.message} />
+                                        <Select
+                                            label="Current Role"
+                                            {...register("details.profession")}
+                                            options={[
+                                                "Independent Lawyer/Advocate",
+                                                "Lawyer in a Law Firm",
+                                                "In-House Lawyer",
+                                                "Compliance Expert",
+                                                "IP Expert",
+                                                "Data Privacy/Cyber Security Professional",
+                                                "Legal Tech Expert",
+                                                "Government Official/Representative",
+                                                "Legal Business Consultant",
+                                                "None of the above"
+                                            ]}
+                                            error={errors.details?.profession?.message}
+                                        />
+                                        {watch("details.profession") === "None of the above" && (
+                                            <Input label="Please Specify" {...register("details.professionOther")} placeholder="Write it here..." />
+                                        )}
+
                                         <Input label="Highest Education" {...register("details.education")} error={errors.details?.education?.message} />
                                         <Input label="University/Institute" {...register("details.university")} />
-                                        <Input label="Year Called to Bar" type="number" {...register("details.barDate")} error={errors.details?.barDate?.message} />
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <Input label="Year Called to Bar" type="number" {...register("details.barDate")} error={errors.details?.barDate?.message} />
+                                            <Input label="Which Bar?" {...register("details.barName")} />
+                                        </div>
                                     </div>
                                 ) : (
                                     <div className="space-y-4">
-                                        <Select label="Organization Type" {...register("details.firmType")} options={["Law Firm", "In-House Dept", "Legal Tech Company"]} error={errors.details?.firmType?.message} />
+                                        <Select
+                                            label="Organization Type"
+                                            {...register("details.firmType")}
+                                            options={[
+                                                "Law Firm",
+                                                "In-House Legal Department",
+                                                "Legal Tech Company",
+                                                "None of the above"
+                                            ]}
+                                            error={errors.details?.firmType?.message}
+                                        />
+                                        {watch("details.firmType") === "None of the above" && (
+                                            <Input label="Please Specify" {...register("details.firmTypeOther")} placeholder="Write it here..." />
+                                        )}
+
                                         <Input label="Organization Name" {...register("details.organizationName")} error={errors.details?.organizationName?.message} />
+                                        <Input label="Current Position/Designation" {...register("details.designation")} />
                                         <Input label="Website URL" {...register("details.website")} />
                                     </div>
                                 )}
