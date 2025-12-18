@@ -28,6 +28,18 @@ export function Footer() {
                         <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-xs">
                             The premier global platform connecting legal minds through conferences, content, and recognition.
                         </p>
+
+                        {/* Organisation Info */}
+                        <div className="grid grid-cols-2 gap-4 pt-2">
+                            <div className="space-y-1">
+                                <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Organised by</p>
+                                <p className="text-sm text-slate-200 font-semibold">ClickAway Creators LLP</p>
+                            </div>
+                            <div className="space-y-1">
+                                <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Managed by</p>
+                                <p className="text-sm text-slate-200 font-semibold">MantranexVista</p>
+                            </div>
+                        </div>
                         {/* Social Links */}
                         <div className="flex gap-2 sm:gap-3 pt-2">
                             <Link
@@ -203,20 +215,9 @@ export function Footer() {
             <div className="relative border-t border-slate-800/50 bg-slate-950/50 backdrop-blur-sm">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-                        <div className="flex flex-col items-center sm:items-start space-y-2">
-                            <p className="text-xs sm:text-sm text-slate-500">
-                                © {new Date().getFullYear()} LexTalk World. All rights reserved.
-                            </p>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 text-[10px] sm:text-xs text-slate-600">
-                                <span className="flex items-center gap-1.5">
-                                    Organised by <span className="text-slate-400 font-medium">ClickAway Creators LLP</span>
-                                </span>
-                                <span className="hidden sm:inline text-slate-800">|</span>
-                                <span className="flex items-center gap-1.5">
-                                    Managed by <span className="text-slate-400 font-medium">MantranexVista</span>
-                                </span>
-                            </div>
-                        </div>
+                        <p className="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
+                            © {new Date().getFullYear()} LexTalk World. All rights reserved.
+                        </p>
                         <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm">
                             <Link href="/privacy" className="text-slate-500 hover:text-amber-500 transition-colors">
                                 Privacy Policy
