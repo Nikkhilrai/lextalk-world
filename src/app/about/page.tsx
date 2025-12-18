@@ -557,17 +557,17 @@ export default function AboutPage() {
                                 </div>
                             </div>
 
-                            {/* Global Legal Honors */}
+                            {/* Global Legal Awards */}
                             <div>
                                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-full mb-4 md:mb-6">
                                     <Award size={14} className="text-amber-600 md:w-4 md:h-4" />
                                     <span className="text-xs md:text-sm text-amber-700 font-semibold">Recognition</span>
                                 </div>
                                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-800 mb-4 md:mb-6">
-                                    Global Legal Honors
+                                    Global Legal Awards
                                 </h2>
                                 <p className="text-slate-600 mb-6 md:mb-8 text-sm md:text-base">
-                                    Through the prestigious Global Legal Honors Awards, we celebrate the industry's unsung heroes—from seasoned General Counsels to disruptive LegalTech innovators.
+                                    Through the prestigious Global Legal Awards, we celebrate the industry's unsung heroes—from seasoned General Counsels to disruptive LegalTech innovators.
                                 </p>
 
                                 <div className="relative bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl md:rounded-3xl p-6 md:p-10 overflow-hidden">
@@ -586,7 +586,7 @@ export default function AboutPage() {
                                         <Award className="w-12 h-12 md:w-16 md:h-16 text-white/90 mb-4 md:mb-6" />
                                         <h3 className="font-bold text-xl md:text-3xl text-white mb-2 md:mb-3">Nominate Today</h3>
                                         <p className="text-white/80 text-sm md:text-base mb-6 md:mb-8">
-                                            Know someone who deserves recognition? Submit a nomination for the next Global Legal Honors Awards.
+                                            Know someone who deserves recognition? Submit a nomination for the next Global Legal Awards.
                                         </p>
                                         <Link
                                             href="/awardees"

@@ -112,7 +112,7 @@ export function NominationForm() {
         try {
             const payload = {
                 type: data.nominateAs,
-                category: "Global Legal Honour 2026",
+                category: "Global Legal Awards 2026",
                 nominatorEmail: data.email,
                 nominatorPhone: data.phone,
                 nomineeName: `${data.firstName} ${data.lastName}`,
@@ -142,7 +142,7 @@ export function NominationForm() {
                     <Image src="/logo/Lextalk-Logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-800 mb-2">
-                    Global Legal Honour <span className="text-amber-600">2026</span> Dubai
+                    Global Legal Awards <span className="text-amber-600">2026</span> Dubai
                 </h1>
                 <p className="text-slate-500">Dubai Award Nomination Form</p>
             </div>

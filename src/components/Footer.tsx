@@ -200,7 +200,7 @@ export function Footer() {
 
                         {/* Award Nominations - Merged */}
                         <div className="mt-6 pt-4 border-t border-slate-800">
-                            <p className="text-xs text-amber-500 font-medium mb-2">Global Legal Honors Awards</p>
+                            <p className="text-xs text-amber-500 font-medium mb-2">Global Legal Awards</p>
                             <p className="text-xs text-slate-500 mb-2">Kishan Chhetry, Customer Success Manager</p>
                             <div className="space-y-1">
                                 <a href="tel:+918178539941" className="text-xs text-slate-400 hover:text-amber-500 block">+91 817 853 9941</a>
