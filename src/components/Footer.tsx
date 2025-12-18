@@ -203,7 +203,7 @@ export function Footer() {
                             <p className="text-xs text-amber-500 font-medium mb-2">Global Legal Honour</p>
                             <p className="text-xs text-slate-500 mb-2">Kishan Chhetry, Customer Success Manager</p>
                             <div className="space-y-1">
-                                <a href="tel:+918178539941" className="text-xs text-slate-400 hover:text-amber-500 block">+91 817 853 9941</a>
+                                <a href="tel:+919311899545" className="text-xs text-slate-400 hover:text-amber-500 block">+91 931 189 9545</a>
                                 <a href="mailto:kishan@lextalkworld.in" className="text-xs text-slate-400 hover:text-amber-500 block">kishan@lextalkworld.in</a>
                             </div>
                         </div>
