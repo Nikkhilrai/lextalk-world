@@ -761,6 +761,46 @@ export default function DubaiEventPage() {
                 </div>
             </section >
 
+            {/* ===================== PLATINUM SPONSORS ===================== */}
+            <section className="py-20 bg-white relative overflow-hidden border-t border-slate-100">
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col items-center relative z-10">
+                        {/* Category Badge */}
+                        <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
+                            <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
+                                <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest whitespace-nowrap">
+                                    Platinum Sponsors
+                                </h3>
+                            </div>
+                        </div>
+
+                        {/* Logos Grid */}
+                        <div className="flex justify-center">
+                            {/* Platinum Sponsor */}
+                            <div className="group relative w-40 h-24 md:w-72 md:h-40 shrink-0">
+                                <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
+
+                                <a
+                                    href="https://www.amadi.io/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative h-full w-full p-4 md:p-8 flex items-center justify-center block"
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/dubai-event/sponsors/Amadi.jpg"
+                                            alt="Amadi"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ===================== CTA SECTION ===================== */}
             < section className="py-20 md:py-24 bg-gradient-to-br from-[#0a0f1a] via-[#1a1f2e] to-[#0a0f1a] relative overflow-hidden" >
                 {/* Background Pattern */}
