@@ -38,45 +38,45 @@ export default async function BlogPostPage({
 
             <article>
                 {/* Header Section */}
-                <header className="pt-32 pb-12 md:pt-40 md:pb-16 bg-slate-50 border-b border-slate-100">
+                <header className="pt-24 pb-8 md:pt-28 md:pb-10 bg-slate-50 border-b border-slate-100">
                     <div className="container mx-auto px-4">
-                        <div className="max-w-3xl mx-auto text-center">
+                        <div className="max-w-4xl mx-auto text-center">
                             {/* Back Link */}
                             <Link
                                 href="/blog"
-                                className="inline-flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors mb-8 font-medium text-sm group"
+                                className="inline-flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors mb-5 font-medium text-sm group"
                             >
-                                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
                                 Back to Blog
                             </Link>
 
                             {/* Meta Info */}
-                            <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+                            <div className="flex flex-wrap items-center justify-center gap-3 mb-4 text-xs">
                                 {post.readTime && (
-                                    <span className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
-                                        <Clock size={16} />
+                                    <span className="flex items-center gap-1 text-slate-500 font-medium">
+                                        <Clock size={14} />
                                         {post.readTime}
                                     </span>
                                 )}
-                                <span className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
-                                    <Calendar size={16} />
+                                <span className="flex items-center gap-1 text-slate-500 font-medium">
+                                    <Calendar size={14} />
                                     {new Date(post.createdAt).toLocaleDateString("en-US", {
-                                        month: "long",
+                                        month: "short",
                                         day: "numeric",
                                         year: "numeric"
                                     })}
                                 </span>
                             </div>
 
-                            {/* Title */}
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight tracking-tight">
+                            {/* Title - Smaller, more readable */}
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 mb-6 leading-snug">
                                 {post.title}
                             </h1>
 
-                            {/* Author */}
-                            <div className="flex items-center justify-center gap-3">
+                            {/* Author - Compact */}
+                            <div className="flex items-center justify-center gap-2">
                                 {post.authorImage ? (
-                                    <div className="w-12 h-12 rounded-full overflow-hidden relative border border-slate-200 shadow-sm">
+                                    <div className="w-9 h-9 rounded-full overflow-hidden relative border border-slate-200">
                                         <Image
                                             src={post.authorImage}
                                             alt={post.author}
@@ -85,23 +85,22 @@ export default async function BlogPostPage({
                                         />
                                     </div>
                                 ) : (
-                                    <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200">
-                                        <User size={20} className="text-slate-400" />
+                                    <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200">
+                                        <User size={16} className="text-slate-400" />
                                     </div>
                                 )}
                                 <div className="text-left">
-                                    <p className="text-slate-900 font-bold text-base">{post.author}</p>
-                                    <p className="text-slate-500 text-xs uppercase tracking-wide">Author</p>
+                                    <p className="text-slate-900 font-semibold text-sm">{post.author}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </header>
 
-                {/* Featured Image */}
-                <div className="container mx-auto px-4 -mt-8 md:-mt-12 mb-12 md:mb-16 relative z-10">
-                    <div className="max-w-5xl mx-auto">
-                        <div className="relative aspect-[21/9] md:aspect-[2/1] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-100">
+                {/* Featured Image - Smaller */}
+                <div className="container mx-auto px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="relative aspect-[16/8] md:aspect-[21/9] rounded-xl overflow-hidden shadow-lg border border-slate-100">
                             <Image
                                 src={post.image}
                                 alt={post.title}
@@ -113,17 +112,20 @@ export default async function BlogPostPage({
                     </div>
                 </div>
 
-                {/* Content */}
-                <div className="container mx-auto px-4 pb-20">
-                    <div className="max-w-[720px] mx-auto text-justify">
-                        <div className="prose prose-lg md:prose-xl prose-slate 
-                            prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900
-                            prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
+                {/* Content - Optimized for reading */}
+                <div className="container mx-auto px-4 pb-12">
+                    <div className="max-w-[800px] mx-auto">
+                        <div className="prose prose-slate max-w-none
+                            prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 prose-headings:mt-8 prose-headings:mb-4
+                            prose-h2:text-xl prose-h2:md:text-2xl
+                            prose-h3:text-lg prose-h3:md:text-xl
+                            prose-p:text-base prose-p:text-slate-700 prose-p:leading-7 prose-p:mb-4 prose-p:text-left
                             prose-a:text-amber-600 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline
-                            prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8
-                            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-700
-                            prose-strong:text-slate-900 prose-strong:font-bold
-                            prose-li:text-slate-700
+                            prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
+                            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 prose-blockquote:text-sm prose-blockquote:my-6
+                            prose-strong:text-slate-900 prose-strong:font-semibold
+                            prose-li:text-slate-700 prose-li:text-base prose-li:my-1
+                            prose-ul:my-4 prose-ol:my-4
                         ">
                             <ReactMarkdown>{post.content}</ReactMarkdown>
                         </div>
