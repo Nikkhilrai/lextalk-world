@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Default About Page content
+// Default About Page content - matches actual website
 const defaultContent = {
     id: "default",
-    heroTagline: "Connecting Legal Minds Worldwide",
-    heroTitle: "About LexTalk World",
-    heroSubtitle: "We are a global platform dedicated to connecting legal professionals, fostering innovation, and shaping the future of the legal industry through world-class conferences, awards, and networking opportunities.",
+    heroTagline: "APAC & Middle East Chapter",
+    heroTitle: "More Than Conferences. We Are the Future of Law.",
+    heroSubtitle: "Bridging the gap between traditional jurisprudence and the digital-first era, we are the global heartbeat for legal professionals.",
     stats: JSON.stringify([
+        { number: 1500, suffix: "+", label: "Legal Minds Connected", icon: "Users" },
         { number: 10, suffix: "+", label: "Countries Reached", icon: "Globe" },
-        { number: 5000, suffix: "+", label: "Legal Professionals Connected", icon: "Users" },
-        { number: 50, suffix: "+", label: "Conferences & Events", icon: "Calendar" },
-        { number: 100, suffix: "+", label: "Industry Partners", icon: "Building" },
+        { number: 19, suffix: ".6%", label: "APAC Legal AI CAGR", icon: "TrendingUp" },
+        { number: 103, suffix: "%", label: "HKIAC Dispute Growth", icon: "Scale" },
     ]),
-    storyTitle: "Building Bridges Across the Global Legal Community",
-    storyContent: "LexTalk World was founded with a singular vision: to create a global platform that connects legal professionals, celebrates excellence, and drives innovation in the legal industry.\n\nWhat started as a small conference in Mumbai has grown into an international movement, bringing together thousands of lawyers, corporate counsel, legal tech innovators, and industry leaders from over 50 countries.\n\nToday, we are proud to host world-class conferences in Dubai, Singapore, and major legal hubs around the world, while our E-Meet platform enables continuous virtual networking and knowledge sharing.",
+    storyTitle: "Curating the Future of the Legal Profession",
+    storyContent: "At LexTalk World, we don't just organize events—we curate the future of the legal profession.\n\nBridging the gap between traditional jurisprudence and the digital-first era, we have evolved into the global heartbeat for legal professionals. From the bustling hubs of India and Singapore to the regulatory powerhouses of Dubai and New York, we provide the space where high-stakes networking meets high-level strategy.",
     missionTitle: "Our Mission",
     missionContent: "To empower legal professionals worldwide by creating unparalleled opportunities for learning, networking, and recognition. We strive to be the bridge that connects diverse legal communities and accelerates professional growth.",
     visionTitle: "Our Vision",
@@ -32,8 +32,8 @@ const defaultContent = {
         { year: "2023", title: "Legal Tech Innovation", description: "Launched E-Meet platform for virtual legal networking" },
         { year: "2025", title: "Dubai World Summit", description: "Hosting our largest event yet with 500+ global delegates" },
     ]),
-    isPublished: false,
-    showInNavbar: false,
+    isPublished: true,
+    showInNavbar: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
 };
