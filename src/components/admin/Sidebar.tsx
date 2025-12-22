@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
     LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar,
-    PieChart, Layers, Map as MapIcon, Shield, Target
+    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
@@ -39,6 +39,7 @@ const NAV_GROUPS = [
             { label: "Dubai Contacts", href: "/admin/dubai-contacts", icon: Users },
             { label: "Contact Research", href: "/admin/dubai-contacts-research", icon: Target },
             { label: "Blog", href: "/admin/blog", icon: BookOpen },
+            { label: "Comments", href: "/admin/comments", icon: MessageCircle },
             { label: "Authentication", href: "/admin/settings", icon: Shield },
         ]
     }

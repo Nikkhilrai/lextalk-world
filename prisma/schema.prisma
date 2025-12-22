@@ -46,6 +46,34 @@ model BlogPost {
   updatedAt   DateTime @updatedAt
 }
 
+// Blog Category Model
+model BlogCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  color     String   @default("#F59E0B") // Amber default
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Blog Comment Model
+model BlogComment {
+  id        String   @id @default(cuid())
+  postId    String
+  postSlug  String   // For easier querying
+  name      String
+  email     String
+  content   String   @db.Text
+  approved  Boolean  @default(false) // Requires admin approval
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([postSlug])
+  @@index([email])
+}
+
 // Award Model (for future use)
 model Award {
   id          String   @id @default(cuid())

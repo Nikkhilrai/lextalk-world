@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import BlogComments from "@/components/BlogComments";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -49,11 +50,8 @@ export default async function BlogPostPage({
                                 Back to Blog
                             </Link>
 
-                            {/* Meta & Category */}
+                            {/* Meta Info */}
                             <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-                                <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold uppercase rounded-full tracking-wide">
-                                    {post.category}
-                                </span>
                                 {post.readTime && (
                                     <span className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
                                         <Clock size={16} />
@@ -148,6 +146,9 @@ export default async function BlogPostPage({
                                 </button>
                             </div>
                         </div>
+
+                        {/* Comments Section */}
+                        <BlogComments postSlug={post.slug} postId={post.id} />
                     </div>
                 </div>
             </article>

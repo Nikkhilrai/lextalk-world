@@ -6,7 +6,8 @@ import {
     BookOpen, Plus, Search, Edit, Trash2, Eye, EyeOff,
     Star, StarOff, Calendar, MoreHorizontal, X, Save,
     Image as ImageIcon, FileText, Upload, CheckCircle,
-    Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code
+    Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code,
+    Settings
 } from "lucide-react";
 
 interface BlogPost {
@@ -25,13 +26,14 @@ interface BlogPost {
     createdAt: string;
 }
 
-const categories = [
-    "Legal Tech",
-    "Industry Insights",
-    "Events",
-    "Interviews",
-    "Opinion",
-];
+interface BlogCategory {
+    id: string;
+    name: string;
+    slug: string;
+    color: string;
+    order: number;
+}
+
 
 export default function BlogAdminPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -58,6 +60,13 @@ export default function BlogAdminPage() {
     const authorFileInputRef = useRef<HTMLInputElement>(null);
     const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
 
+    // Category management state
+    const [categories, setCategories] = useState<BlogCategory[]>([]);
+    const [showCategoryModal, setShowCategoryModal] = useState(false);
+    const [newCategoryName, setNewCategoryName] = useState("");
+    const [newCategoryColor, setNewCategoryColor] = useState("#F59E0B");
+    const [savingCategory, setSavingCategory] = useState(false);
+
     // Fetch posts
     const fetchPosts = async () => {
         try {
@@ -73,7 +82,57 @@ export default function BlogAdminPage() {
 
     useEffect(() => {
         fetchPosts();
+        fetchCategories();
     }, []);
+
+    // Fetch categories
+    const fetchCategories = async () => {
+        try {
+            const res = await fetch("/api/blog/categories");
+            const data = await res.json();
+            setCategories(data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    };
+
+    // Add category
+    const handleAddCategory = async () => {
+        if (!newCategoryName.trim()) return;
+        setSavingCategory(true);
+        try {
+            const res = await fetch("/api/blog/categories", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: newCategoryName, color: newCategoryColor }),
+            });
+            if (res.ok) {
+                fetchCategories();
+                setNewCategoryName("");
+                setNewCategoryColor("#F59E0B");
+            } else {
+                const err = await res.json();
+                alert(err.error || "Failed to add category");
+            }
+        } catch (error) {
+            console.error("Error adding category:", error);
+        } finally {
+            setSavingCategory(false);
+        }
+    };
+
+    // Delete category
+    const handleDeleteCategory = async (id: string) => {
+        if (!confirm("Delete this category?")) return;
+        try {
+            const res = await fetch(`/api/blog/categories?id=${id}`, { method: "DELETE" });
+            if (res.ok) {
+                fetchCategories();
+            }
+        } catch (error) {
+            console.error("Error deleting category:", error);
+        }
+    };
 
     // Handle image upload
     const handleImageUpload = async (file: File, isAuthor: boolean = false) => {
@@ -281,13 +340,22 @@ export default function BlogAdminPage() {
                     <h2 className="text-2xl font-bold text-white mb-2">Blog Management</h2>
                     <p className="text-slate-400">Create and manage blog posts.</p>
                 </div>
-                <button
-                    onClick={() => openModal()}
-                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2"
-                >
-                    <Plus className="w-4 h-4" />
-                    New Post
-                </button>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setShowCategoryModal(true)}
+                        className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg border border-slate-700 transition-all flex items-center gap-2"
+                    >
+                        <Settings className="w-4 h-4" />
+                        Manage Categories
+                    </button>
+                    <button
+                        onClick={() => openModal()}
+                        className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2"
+                    >
+                        <Plus className="w-4 h-4" />
+                        New Post
+                    </button>
+                </div>
             </div>
 
             {/* Stats */}
@@ -681,7 +749,7 @@ export default function BlogAdminPage() {
                                         className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                                     >
                                         {categories.map((cat) => (
-                                            <option key={cat} value={cat}>{cat}</option>
+                                            <option key={cat.id} value={cat.name}>{cat.name}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -797,6 +865,73 @@ export default function BlogAdminPage() {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Category Management Modal */}
+            {showCategoryModal && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-900 rounded-2xl border border-slate-800 w-full max-w-md">
+                        <div className="flex items-center justify-between p-6 border-b border-slate-800">
+                            <h3 className="text-xl font-bold text-white">Manage Categories</h3>
+                            <button onClick={() => setShowCategoryModal(false)} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400">
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <div className="p-6 space-y-4">
+                            {/* Add New Category */}
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={newCategoryName}
+                                    onChange={(e) => setNewCategoryName(e.target.value)}
+                                    placeholder="New category name"
+                                    className="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                />
+                                <input
+                                    type="color"
+                                    value={newCategoryColor}
+                                    onChange={(e) => setNewCategoryColor(e.target.value)}
+                                    className="w-12 h-10 bg-slate-800 border border-slate-700 rounded-lg cursor-pointer"
+                                    title="Category color"
+                                />
+                                <button
+                                    onClick={handleAddCategory}
+                                    disabled={savingCategory || !newCategoryName.trim()}
+                                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg disabled:opacity-50 flex items-center gap-2"
+                                >
+                                    {savingCategory ? (
+                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    ) : (
+                                        <Plus size={16} />
+                                    )}
+                                </button>
+                            </div>
+
+                            {/* Category List */}
+                            <div className="space-y-2 max-h-64 overflow-y-auto">
+                                {categories.map((cat) => (
+                                    <div key={cat.id} className="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                                        <div className="flex items-center gap-3">
+                                            <div
+                                                className="w-4 h-4 rounded-full"
+                                                style={{ backgroundColor: cat.color }}
+                                            />
+                                            <span className="text-white font-medium">{cat.name}</span>
+                                        </div>
+                                        <button
+                                            onClick={() => handleDeleteCategory(cat.id)}
+                                            className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+                                            title="Delete category"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
