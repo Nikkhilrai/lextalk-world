@@ -5,7 +5,8 @@ import { StatCard } from "@/components/admin/StatCard";
 import {
     BookOpen, Plus, Search, Edit, Trash2, Eye, EyeOff,
     Star, StarOff, Calendar, MoreHorizontal, X, Save,
-    Image as ImageIcon, FileText, Upload, CheckCircle
+    Image as ImageIcon, FileText, Upload, CheckCircle,
+    Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code
 } from "lucide-react";
 
 interface BlogPost {
@@ -55,6 +56,7 @@ export default function BlogAdminPage() {
     const [uploadingAuthor, setUploadingAuthor] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const authorFileInputRef = useRef<HTMLInputElement>(null);
+    const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
 
     // Fetch posts
     const fetchPosts = async () => {
@@ -238,11 +240,34 @@ export default function BlogAdminPage() {
         setEditingPost(null);
     };
 
-    // Filter posts
     const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Insert markdown formatting at cursor position
+    const insertMarkdown = (prefix: string, suffix: string = '', placeholder: string = '') => {
+        const textarea = contentTextareaRef.current;
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selectedText = formData.content.substring(start, end);
+        const textToInsert = selectedText || placeholder;
+
+        const before = formData.content.substring(0, start);
+        const after = formData.content.substring(end);
+
+        const newContent = before + prefix + textToInsert + suffix + after;
+        setFormData({ ...formData, content: newContent });
+
+        // Set cursor position after the inserted text
+        setTimeout(() => {
+            textarea.focus();
+            const newCursorPos = start + prefix.length + textToInsert.length + suffix.length;
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+        }, 0);
+    };
 
     const publishedCount = posts.filter(p => p.published).length;
     const draftCount = posts.filter(p => !p.published).length;
@@ -458,16 +483,113 @@ export default function BlogAdminPage() {
                                 />
                             </div>
 
-                            {/* Content */}
+                            {/* Content with Formatting Toolbar */}
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">Content *</label>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Content * (Markdown supported)</label>
+
+                                {/* Formatting Toolbar */}
+                                <div className="flex flex-wrap items-center gap-1 p-2 bg-slate-800 border border-slate-700 border-b-0 rounded-t-lg">
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('**', '**', 'bold text')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Bold (Ctrl+B)"
+                                    >
+                                        <Bold size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('*', '*', 'italic text')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Italic (Ctrl+I)"
+                                    >
+                                        <Italic size={16} />
+                                    </button>
+
+                                    <div className="w-px h-6 bg-slate-700 mx-1" />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n# ', '', 'Heading 1')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Heading 1"
+                                    >
+                                        <Heading1 size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n## ', '', 'Heading 2')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Heading 2"
+                                    >
+                                        <Heading2 size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n### ', '', 'Heading 3')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Heading 3"
+                                    >
+                                        <Heading3 size={16} />
+                                    </button>
+
+                                    <div className="w-px h-6 bg-slate-700 mx-1" />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('[', '](https://)', 'link text')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Insert Link"
+                                    >
+                                        <Link2 size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n> ', '', 'quote')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Blockquote"
+                                    >
+                                        <Quote size={16} />
+                                    </button>
+
+                                    <div className="w-px h-6 bg-slate-700 mx-1" />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n- ', '', 'list item')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Bullet List"
+                                    >
+                                        <List size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('\n1. ', '', 'list item')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Numbered List"
+                                    >
+                                        <ListOrdered size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => insertMarkdown('`', '`', 'code')}
+                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                        title="Inline Code"
+                                    >
+                                        <Code size={16} />
+                                    </button>
+
+                                    <span className="ml-auto text-xs text-slate-500">Markdown supported</span>
+                                </div>
+
                                 <textarea
+                                    ref={contentTextareaRef}
                                     required
-                                    rows={8}
+                                    rows={12}
                                     value={formData.content}
                                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none"
-                                    placeholder="Full blog content (supports markdown)..."
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-b-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none font-mono text-sm"
+                                    placeholder="Write your blog content here...&#10;&#10;Use the toolbar above or write markdown directly:&#10;# Heading 1&#10;## Heading 2&#10;**bold** *italic*&#10;[link](url)&#10;> blockquote"
                                 />
                             </div>
 
