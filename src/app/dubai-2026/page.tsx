@@ -730,6 +730,7 @@ export default function DubaiEventPage() {
                                                 alt="Case Docker"
                                                 fill
                                                 className="object-contain"
+                                                sizes="(max-width: 768px) 128px, 256px"
                                             />
                                         </div>
                                     </a>
@@ -751,6 +752,7 @@ export default function DubaiEventPage() {
                                                 alt="Lex Corp"
                                                 fill
                                                 className="object-contain"
+                                                sizes="(max-width: 768px) 128px, 256px"
                                             />
                                         </div>
                                     </a>
@@ -788,6 +790,7 @@ export default function DubaiEventPage() {
                                                 alt="Amadi"
                                                 fill
                                                 className="object-contain"
+                                                sizes="(max-width: 768px) 160px, 300px"
                                             />
                                         </div>
                                     </a>
