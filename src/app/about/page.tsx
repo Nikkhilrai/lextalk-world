@@ -56,6 +56,11 @@ interface Partner {
     logo: string;
 }
 
+interface AboutImage {
+    src: string;
+    alt: string;
+}
+
 interface AboutContent {
     heroTagline: string;
     heroTitle: string;
@@ -72,6 +77,7 @@ interface AboutContent {
     advisoryBoard: AdvisoryMember[];
     pastSpeakers: Speaker[];
     partners: Partner[];
+    aboutImages: AboutImage[];
 }
 
 // Note: advisoryBoard, pastSpeakers, partners now come from CMS
@@ -172,6 +178,7 @@ export default function AboutPage() {
                     advisoryBoard: typeof data.advisoryBoard === "string" ? JSON.parse(data.advisoryBoard) : data.advisoryBoard || [],
                     pastSpeakers: typeof data.pastSpeakers === "string" ? JSON.parse(data.pastSpeakers) : data.pastSpeakers || [],
                     partners: typeof data.partners === "string" ? JSON.parse(data.partners) : data.partners || [],
+                    aboutImages: typeof data.aboutImages === "string" ? JSON.parse(data.aboutImages) : data.aboutImages || [],
                 });
                 setLoading(false);
             })
@@ -191,6 +198,12 @@ export default function AboutPage() {
     const advisoryBoard = content?.advisoryBoard || [];
     const pastSpeakers = content?.pastSpeakers || [];
     const partners = content?.partners || [];
+    const aboutImages = content?.aboutImages || [
+        { src: "/about/Networking_edited.avif", alt: "Networking at LexTalk World" },
+        { src: "/about/5.jpg", alt: "LexTalk World Conference" },
+        { src: "/about/Recognitions.avif", alt: "Award Ceremony" },
+        { src: "/about/speaker.jpg", alt: "Speaker Session" },
+    ];
 
     return (
         <main className="min-h-screen bg-slate-50 overflow-x-hidden">
@@ -375,8 +388,8 @@ export default function AboutPage() {
                                     <div className="col-span-7 space-y-3 md:space-y-4">
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-36 sm:h-48 md:h-56 group">
                                             <Image
-                                                src="/about/Networking_edited.avif"
-                                                alt="Networking at LexTalk World"
+                                                src={aboutImages[0]?.src || "/about/Networking_edited.avif"}
+                                                alt={aboutImages[0]?.alt || "Networking at LexTalk World"}
                                                 width={400}
                                                 height={300}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -384,8 +397,8 @@ export default function AboutPage() {
                                         </div>
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-48 sm:h-56 md:h-72 group">
                                             <Image
-                                                src="/about/5.jpg"
-                                                alt="LexTalk World Conference"
+                                                src={aboutImages[1]?.src || "/about/5.jpg"}
+                                                alt={aboutImages[1]?.alt || "LexTalk World Conference"}
                                                 width={400}
                                                 height={350}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -395,8 +408,8 @@ export default function AboutPage() {
                                     <div className="col-span-5 space-y-3 md:space-y-4 pt-8 md:pt-12">
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-48 sm:h-56 md:h-72 group">
                                             <Image
-                                                src="/about/Recognitions.avif"
-                                                alt="Award Ceremony"
+                                                src={aboutImages[2]?.src || "/about/Recognitions.avif"}
+                                                alt={aboutImages[2]?.alt || "Award Ceremony"}
                                                 width={300}
                                                 height={350}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -404,8 +417,8 @@ export default function AboutPage() {
                                         </div>
                                         <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-36 sm:h-48 md:h-56 group">
                                             <Image
-                                                src="/about/speaker.jpg"
-                                                alt="Speaker Session"
+                                                src={aboutImages[3]?.src || "/about/speaker.jpg"}
+                                                alt={aboutImages[3]?.alt || "Speaker Session"}
                                                 width={300}
                                                 height={300}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

@@ -43,6 +43,11 @@ interface Partner {
     logo: string;
 }
 
+interface AboutImage {
+    src: string;
+    alt: string;
+}
+
 interface AboutContent {
     id?: string;
     heroTagline: string;
@@ -60,6 +65,7 @@ interface AboutContent {
     advisoryBoard: AdvisoryMember[];
     pastSpeakers: Speaker[];
     partners: Partner[];
+    aboutImages: AboutImage[];
     isPublished: boolean;
     showInNavbar: boolean;
 }
@@ -101,6 +107,7 @@ export default function AboutManagement() {
                 advisoryBoard: typeof data.advisoryBoard === "string" ? JSON.parse(data.advisoryBoard) : data.advisoryBoard || [],
                 pastSpeakers: typeof data.pastSpeakers === "string" ? JSON.parse(data.pastSpeakers) : data.pastSpeakers || [],
                 partners: typeof data.partners === "string" ? JSON.parse(data.partners) : data.partners || [],
+                aboutImages: typeof data.aboutImages === "string" ? JSON.parse(data.aboutImages) : data.aboutImages || [],
             });
         } catch (error) {
             console.error("Error fetching content:", error);
@@ -127,6 +134,7 @@ export default function AboutManagement() {
                     advisoryBoard: JSON.stringify(content.advisoryBoard),
                     pastSpeakers: JSON.stringify(content.pastSpeakers),
                     partners: JSON.stringify(content.partners),
+                    aboutImages: JSON.stringify(content.aboutImages),
                 }),
             });
 
@@ -294,6 +302,14 @@ export default function AboutManagement() {
         const newPartners = [...content.partners];
         newPartners[index] = { ...newPartners[index], [field]: value };
         setContent({ ...content, partners: newPartners });
+    };
+
+    // About Images handlers
+    const updateAboutImage = (index: number, field: keyof AboutImage, value: string) => {
+        if (!content) return;
+        const newImages = [...content.aboutImages];
+        newImages[index] = { ...newImages[index], [field]: value };
+        setContent({ ...content, aboutImages: newImages });
     };
 
     if (loading) {
@@ -630,6 +646,42 @@ export default function AboutManagement() {
                         <Plus size={16} />
                         Add Partner
                     </button>
+                </div>
+            </Section>
+
+            {/* About Section Images */}
+            <Section id="aboutImages" title="📷 About Section Images">
+                <div className="space-y-4">
+                    <p className="text-xs text-[#878a99] mb-4">These 4 images appear in the About Story section gallery. Enter the image URL path (e.g., /about/image.avif)</p>
+                    {content.aboutImages?.map((image, index) => (
+                        <div key={index} className="p-3 bg-[#1a1f36] rounded-lg">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="text-white text-sm font-medium">Image {index + 1}</span>
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-xs text-[#878a99] mb-1">Image URL</label>
+                                    <input
+                                        type="text"
+                                        value={image.src}
+                                        onChange={(e) => updateAboutImage(index, "src", e.target.value)}
+                                        className="w-full px-2 py-1 bg-[#0f1322] border border-white/10 rounded text-white text-sm"
+                                        placeholder="/about/image.avif"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs text-[#878a99] mb-1">Alt Text</label>
+                                    <input
+                                        type="text"
+                                        value={image.alt}
+                                        onChange={(e) => updateAboutImage(index, "alt", e.target.value)}
+                                        className="w-full px-2 py-1 bg-[#0f1322] border border-white/10 rounded text-white text-sm"
+                                        placeholder="Image description"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </Section>
 
