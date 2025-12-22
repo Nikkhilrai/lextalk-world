@@ -155,10 +155,15 @@ export default function AboutPage() {
 
     useEffect(() => {
         setIsVisible(true);
-        // Fetch content from CMS
-        fetch("/api/about")
+        // Fetch content from CMS - use absolute URL for production
+        const baseUrl = typeof window !== 'undefined'
+            ? window.location.origin
+            : 'https://lextalkworld.in';
+
+        fetch(`${baseUrl}/api/about`, { cache: 'no-store' })
             .then(res => res.json())
             .then(data => {
+                console.log('CMS Data loaded:', data);
                 setContent({
                     ...data,
                     stats: typeof data.stats === "string" ? JSON.parse(data.stats) : data.stats || [],
