@@ -64,6 +64,8 @@ export function Hero() {
                     loop
                     muted={true}
                     playsInline
+                    preload="metadata"
+                    poster="/dubai-event/why-attend/Networking_edited.avif"
                     className="object-cover w-full h-full"
                 >
                     <source src="/lextalk-hero.mp4" type="video/mp4" />
