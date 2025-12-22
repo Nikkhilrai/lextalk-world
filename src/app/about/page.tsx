@@ -9,18 +9,52 @@ import {
     Globe, Users, Award, Target, Lightbulb, Cpu,
     Scale, ArrowRight, Sparkles,
     Building, CheckCircle2, TrendingUp, Landmark,
-    Zap, Briefcase, ChevronRight, Quote
+    Zap, Briefcase, ChevronRight, Quote, Heart
 } from "lucide-react";
 
-// Company Stats
-const stats = [
-    { number: "1,500+", label: "Legal Minds Connected", icon: Users },
-    { number: "10+", label: "Countries Reached", icon: Globe },
-    { number: "19.6%", label: "APAC Legal AI CAGR", icon: TrendingUp },
-    { number: "103%", label: "HKIAC Dispute Growth", icon: Scale },
-];
+// Icon mapping for dynamic icons from CMS
+const iconMap: { [key: string]: any } = {
+    Globe, Users, Award, Target, Lightbulb, Cpu,
+    Scale, TrendingUp, Building, Landmark, Zap, Heart
+};
 
-// Advisory Board Members
+// Types for CMS content
+interface Stat {
+    number: number;
+    suffix: string;
+    label: string;
+    icon: string;
+}
+
+interface Value {
+    icon: string;
+    title: string;
+    description: string;
+    color: string;
+}
+
+interface Milestone {
+    year: string;
+    title: string;
+    description: string;
+}
+
+interface AboutContent {
+    heroTagline: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    stats: Stat[];
+    storyTitle: string;
+    storyContent: string;
+    missionTitle: string;
+    missionContent: string;
+    visionTitle: string;
+    visionContent: string;
+    values: Value[];
+    milestones: Milestone[];
+}
+
+// Hardcoded data that's NOT in CMS yet
 const advisoryBoard = [
     { name: "Piyush Gupta", role: "Head Counsel", company: "Etihad Airways", initials: "PG" },
     { name: "Nandini Nair", role: "Global GC", company: "L&T Technology Services", initials: "NN" },
@@ -29,7 +63,6 @@ const advisoryBoard = [
     { name: "Dr. Lalit Bhasin", role: "President", company: "Society of Indian Law Firms", initials: "LB" },
 ];
 
-// Past Speakers
 const pastSpeakers = [
     { name: "Hon'ble Justice N. Kotiswar Singh", role: "Supreme Court of India" },
     { name: "R. Venkataramany", role: "Attorney General of India" },
@@ -38,7 +71,6 @@ const pastSpeakers = [
     { name: "Dr. Yasser Abo Ismail", role: "GC & Compliance Officer, Schindler Group" },
 ];
 
-// Why APAC & Middle East
 const whyWeAreHere = [
     {
         icon: Cpu,
@@ -69,7 +101,6 @@ const whyWeAreHere = [
     },
 ];
 
-// Partners
 const partners = [
     { name: "MRS Business Professionals Consulting", logo: "/logo/mrs-logo.avif" },
     { name: "Dahua Technology", logo: "/dubai-event/sponsors/dahua.avif" },
@@ -77,11 +108,10 @@ const partners = [
 ];
 
 // Animated Counter Component
-function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: string; suffix?: string; duration?: number }) {
+function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
     const [count, setCount] = useState(0);
     const [hasAnimated, setHasAnimated] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
-    const numericValue = parseInt(target.replace(/[^0-9]/g, '')) || 0;
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -89,11 +119,11 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: str
                 if (entries[0].isIntersecting && !hasAnimated) {
                     setHasAnimated(true);
                     let start = 0;
-                    const increment = numericValue / (duration / 50);
+                    const increment = target / (duration / 50);
                     const timer = setInterval(() => {
                         start += increment;
-                        if (start >= numericValue) {
-                            setCount(numericValue);
+                        if (start >= target) {
+                            setCount(target);
                             clearInterval(timer);
                         } else {
                             setCount(Math.floor(start));
@@ -109,24 +139,47 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: str
         }
 
         return () => observer.disconnect();
-    }, [numericValue, duration, hasAnimated]);
-
-    const displayValue = target.includes('%') ? `${count}%` : target.includes('+') ? `${count}+` : `${count}`;
+    }, [target, duration, hasAnimated]);
 
     return (
         <span ref={ref}>
-            {hasAnimated ? displayValue : target}
+            {hasAnimated ? `${count}${suffix}` : `${target}${suffix}`}
         </span>
     );
 }
 
 export default function AboutPage() {
     const [isVisible, setIsVisible] = useState(false);
-    const [activeSection, setActiveSection] = useState(0);
+    const [content, setContent] = useState<AboutContent | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setIsVisible(true);
+        // Fetch content from CMS
+        fetch("/api/about")
+            .then(res => res.json())
+            .then(data => {
+                setContent({
+                    ...data,
+                    stats: typeof data.stats === "string" ? JSON.parse(data.stats) : data.stats || [],
+                    values: typeof data.values === "string" ? JSON.parse(data.values) : data.values || [],
+                    milestones: typeof data.milestones === "string" ? JSON.parse(data.milestones) : data.milestones || [],
+                });
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to load about content:", err);
+                setLoading(false);
+            });
     }, []);
+
+    // Default values while loading
+    const heroTagline = content?.heroTagline || "APAC & Middle East Chapter";
+    const heroTitle = content?.heroTitle || "More Than Conferences. We Are the Future of Law.";
+    const heroSubtitle = content?.heroSubtitle || "Bridging the gap between traditional jurisprudence and the digital-first era, we are the global heartbeat for legal professionals.";
+    const storyTitle = content?.storyTitle || "Curating the Future of the Legal Profession";
+    const storyContent = content?.storyContent || "At LexTalk World, we don't just organize events—we curate the future of the legal profession.\n\nBridging the gap between traditional jurisprudence and the digital-first era, we have evolved into the global heartbeat for legal professionals.";
+    const stats = content?.stats || [];
 
     return (
         <main className="min-h-screen bg-slate-50 overflow-x-hidden">
@@ -172,10 +225,10 @@ export default function AboutPage() {
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/5 border border-white/10 rounded-full mb-6 md:mb-8 backdrop-blur-sm">
                             <Globe size={14} className="text-amber-400 md:w-4 md:h-4" />
-                            <span className="text-xs md:text-sm text-white/80 font-medium tracking-wide">APAC & Middle East Chapter</span>
+                            <span className="text-xs md:text-sm text-white/80 font-medium tracking-wide">{heroTagline}</span>
                         </div>
 
-                        {/* Main Title */}
+                        {/* Main Title - Split for styling */}
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white leading-tight mb-4 md:mb-6">
                             More Than Conferences.
                             <br className="hidden sm:block" />
@@ -189,8 +242,7 @@ export default function AboutPage() {
 
                         {/* Subtitle */}
                         <p className="text-base sm:text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl mx-auto mb-8 md:mb-12 px-4">
-                            Bridging the gap between traditional jurisprudence and the digital-first era,
-                            we are the global heartbeat for legal professionals.
+                            {heroSubtitle}
                         </p>
 
                         {/* CTA Buttons */}
@@ -227,34 +279,37 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ========== STATS SECTION ========== */}
+            {/* ========== STATS SECTION (from CMS) ========== */}
             <section className="py-12 md:py-20 bg-slate-50 -mt-1">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
-                        {stats.map((stat, index) => (
-                            <div
-                                key={index}
-                                className="group relative bg-white rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-amber-200 transition-all duration-500 text-center overflow-hidden hover:-translate-y-1"
-                            >
-                                {/* Hover Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {stats.map((stat, index) => {
+                            const IconComponent = iconMap[stat.icon] || Globe;
+                            return (
+                                <div
+                                    key={index}
+                                    className="group relative bg-white rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-amber-200 transition-all duration-500 text-center overflow-hidden hover:-translate-y-1"
+                                >
+                                    {/* Hover Gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                <div className="relative z-10">
-                                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-5 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                                        <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-amber-600" />
+                                    <div className="relative z-10">
+                                        <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-5 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-sm">
+                                            <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-amber-600" />
+                                        </div>
+                                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-1 md:mb-2 font-serif">
+                                            <AnimatedCounter target={stat.number} suffix={stat.suffix} />
+                                        </h3>
+                                        <p className="text-xs sm:text-sm text-slate-500 font-medium">{stat.label}</p>
                                     </div>
-                                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-1 md:mb-2 font-serif">
-                                        <AnimatedCounter target={stat.number} />
-                                    </h3>
-                                    <p className="text-xs sm:text-sm text-slate-500 font-medium">{stat.label}</p>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
 
-            {/* ========== ABOUT SECTION ========== */}
+            {/* ========== ABOUT SECTION (from CMS) ========== */}
             <section className="py-16 md:py-28 bg-white relative overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-gradient-to-bl from-amber-100/50 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
@@ -281,12 +336,11 @@ export default function AboutPage() {
                                 </h2>
 
                                 <div className="space-y-4 text-slate-600 leading-relaxed text-sm md:text-base">
-                                    <p className="text-base md:text-lg font-medium text-slate-700">
-                                        At LexTalk World, we don't just organize events—we curate the future of the legal profession.
-                                    </p>
-                                    <p>
-                                        Bridging the gap between traditional jurisprudence and the digital-first era, we have evolved into the global heartbeat for legal professionals. From the bustling hubs of India and Singapore to the regulatory powerhouses of Dubai and New York, we provide the space where high-stakes networking meets high-level strategy.
-                                    </p>
+                                    {storyContent.split('\n\n').map((paragraph, i) => (
+                                        <p key={i} className={i === 0 ? "text-base md:text-lg font-medium text-slate-700" : ""}>
+                                            {paragraph}
+                                        </p>
+                                    ))}
                                 </div>
 
                                 <div className="mt-6 md:mt-10 grid grid-cols-2 gap-3 md:gap-4">
