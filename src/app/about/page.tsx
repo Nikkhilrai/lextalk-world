@@ -39,6 +39,23 @@ interface Milestone {
     description: string;
 }
 
+interface AdvisoryMember {
+    name: string;
+    role: string;
+    company: string;
+    initials: string;
+}
+
+interface Speaker {
+    name: string;
+    role: string;
+}
+
+interface Partner {
+    name: string;
+    logo: string;
+}
+
 interface AboutContent {
     heroTagline: string;
     heroTitle: string;
@@ -52,25 +69,14 @@ interface AboutContent {
     visionContent: string;
     values: Value[];
     milestones: Milestone[];
+    advisoryBoard: AdvisoryMember[];
+    pastSpeakers: Speaker[];
+    partners: Partner[];
 }
 
-// Hardcoded data that's NOT in CMS yet
-const advisoryBoard = [
-    { name: "Piyush Gupta", role: "Head Counsel", company: "Etihad Airways", initials: "PG" },
-    { name: "Nandini Nair", role: "Global GC", company: "L&T Technology Services", initials: "NN" },
-    { name: "Sameet Gambhir", role: "SVP & Global Head – Legal", company: "Uflex", initials: "SG" },
-    { name: "Monica Romelina Sijabat", role: "Founder", company: "MRS Business Professionals", initials: "MS" },
-    { name: "Dr. Lalit Bhasin", role: "President", company: "Society of Indian Law Firms", initials: "LB" },
-];
+// Note: advisoryBoard, pastSpeakers, partners now come from CMS
 
-const pastSpeakers = [
-    { name: "Hon'ble Justice N. Kotiswar Singh", role: "Supreme Court of India" },
-    { name: "R. Venkataramany", role: "Attorney General of India" },
-    { name: "The Late Adrian Tan", role: "President, Law Society of Singapore" },
-    { name: "Chehade Kahi", role: "GC Legal, Emirates Petroleum" },
-    { name: "Dr. Yasser Abo Ismail", role: "GC & Compliance Officer, Schindler Group" },
-];
-
+// whyWeAreHere is still hardcoded (complex design element)
 const whyWeAreHere = [
     {
         icon: Cpu,
@@ -99,12 +105,6 @@ const whyWeAreHere = [
         gradient: "from-emerald-500 to-teal-600",
         bgGradient: "from-emerald-500/10 to-teal-500/5",
     },
-];
-
-const partners = [
-    { name: "MRS Business Professionals Consulting", logo: "/logo/mrs-logo.avif" },
-    { name: "Dahua Technology", logo: "/dubai-event/sponsors/dahua.avif" },
-    { name: "CaseDocker", logo: "/dubai-event/sponsors/CasedockerLogo.avif" },
 ];
 
 // Animated Counter Component
@@ -169,6 +169,9 @@ export default function AboutPage() {
                     stats: typeof data.stats === "string" ? JSON.parse(data.stats) : data.stats || [],
                     values: typeof data.values === "string" ? JSON.parse(data.values) : data.values || [],
                     milestones: typeof data.milestones === "string" ? JSON.parse(data.milestones) : data.milestones || [],
+                    advisoryBoard: typeof data.advisoryBoard === "string" ? JSON.parse(data.advisoryBoard) : data.advisoryBoard || [],
+                    pastSpeakers: typeof data.pastSpeakers === "string" ? JSON.parse(data.pastSpeakers) : data.pastSpeakers || [],
+                    partners: typeof data.partners === "string" ? JSON.parse(data.partners) : data.partners || [],
                 });
                 setLoading(false);
             })
@@ -185,6 +188,9 @@ export default function AboutPage() {
     const storyTitle = content?.storyTitle || "Curating the Future of the Legal Profession";
     const storyContent = content?.storyContent || "At LexTalk World, we don't just organize events—we curate the future of the legal profession.\n\nBridging the gap between traditional jurisprudence and the digital-first era, we have evolved into the global heartbeat for legal professionals.";
     const stats = content?.stats || [];
+    const advisoryBoard = content?.advisoryBoard || [];
+    const pastSpeakers = content?.pastSpeakers || [];
+    const partners = content?.partners || [];
 
     return (
         <main className="min-h-screen bg-slate-50 overflow-x-hidden">
