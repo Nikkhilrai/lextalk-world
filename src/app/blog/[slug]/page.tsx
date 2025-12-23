@@ -1,12 +1,13 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import BlogComments from "@/components/BlogComments";
+import ShareButtons from "@/components/ShareButtons";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { Clock, ArrowLeft, Share2, Facebook, Twitter, Linkedin, Calendar, User } from "lucide-react";
+import { Clock, ArrowLeft, Calendar, User } from "lucide-react";
 import { Metadata } from "next";
 
 // For SSG (optional but good for performance if using generateStaticParams)
@@ -185,23 +186,7 @@ export default async function BlogPostPage({
                         </div>
 
                         {/* Share Links */}
-                        <div className="mt-16 pt-8 border-t border-slate-100">
-                            <h3 className="text-lg font-serif font-bold text-slate-900 mb-4 text-center">Share this article</h3>
-                            <div className="flex items-center justify-center gap-3">
-                                <button className="p-3 bg-slate-50 hover:bg-[#1877F2] hover:text-white rounded-full transition-all duration-300 text-slate-600 shadow-sm hover:shadow-md hover:-translate-y-1">
-                                    <Facebook size={20} />
-                                </button>
-                                <button className="p-3 bg-slate-50 hover:bg-[#000000] hover:text-white rounded-full transition-all duration-300 text-slate-600 shadow-sm hover:shadow-md hover:-translate-y-1">
-                                    <Twitter size={20} />
-                                </button>
-                                <button className="p-3 bg-slate-50 hover:bg-[#0A66C2] hover:text-white rounded-full transition-all duration-300 text-slate-600 shadow-sm hover:shadow-md hover:-translate-y-1">
-                                    <Linkedin size={20} />
-                                </button>
-                                <button className="p-3 bg-slate-50 hover:bg-emerald-500 hover:text-white rounded-full transition-all duration-300 text-slate-600 shadow-sm hover:shadow-md hover:-translate-y-1">
-                                    <Share2 size={20} />
-                                </button>
-                            </div>
-                        </div>
+                        <ShareButtons title={post.title} slug={post.slug} />
 
                         {/* Comments Section */}
                         <BlogComments postSlug={post.slug} postId={post.id} />

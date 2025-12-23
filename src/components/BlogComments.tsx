@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MessageCircle, Send, User, CheckCircle } from "lucide-react";
+import { MessageCircle, Send, User, CheckCircle, ChevronDown } from "lucide-react";
 
 interface Comment {
     id: string;
@@ -26,6 +26,7 @@ export default function BlogComments({ postSlug, postId }: CommentsProps) {
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
+    const [showForm, setShowForm] = useState(false); // Only show form when clicked
 
     // Fetch approved comments
     useEffect(() => {
@@ -64,6 +65,7 @@ export default function BlogComments({ postSlug, postId }: CommentsProps) {
             if (res.ok) {
                 setSubmitted(true);
                 setContent("");
+                setShowForm(false);
             } else {
                 setError(data.error || "Failed to submit comment");
             }
@@ -92,10 +94,10 @@ export default function BlogComments({ postSlug, postId }: CommentsProps) {
                         </div>
                     </div>
                 </div>
-            ) : (
+            ) : showForm ? (
                 <form onSubmit={handleSubmit} className="bg-slate-50 rounded-xl p-6 mb-8 space-y-4">
                     <p className="text-sm text-slate-600 mb-4">
-                        Join the discussion! Please register with your email to leave a comment.
+                        Join the discussion! Please enter your details to leave a comment.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -139,24 +141,42 @@ export default function BlogComments({ postSlug, postId }: CommentsProps) {
                         <p className="text-red-600 text-sm">{error}</p>
                     )}
 
-                    <button
-                        type="submit"
-                        disabled={submitting}
-                        className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
-                    >
-                        {submitting ? (
-                            <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Submitting...
-                            </>
-                        ) : (
-                            <>
-                                <Send size={16} />
-                                Post Comment
-                            </>
-                        )}
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <button
+                            type="submit"
+                            disabled={submitting}
+                            className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
+                        >
+                            {submitting ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    Submitting...
+                                </>
+                            ) : (
+                                <>
+                                    <Send size={16} />
+                                    Post Comment
+                                </>
+                            )}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setShowForm(false)}
+                            className="px-4 py-3 text-slate-600 hover:text-slate-900 font-medium transition-colors"
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
+            ) : (
+                <button
+                    onClick={() => setShowForm(true)}
+                    className="w-full mb-8 py-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-600 hover:text-slate-900 font-medium transition-all flex items-center justify-center gap-2"
+                >
+                    <MessageCircle size={18} />
+                    Write a comment
+                    <ChevronDown size={16} />
+                </button>
             )}
 
             {/* Comments List */}

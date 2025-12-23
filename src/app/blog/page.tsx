@@ -237,8 +237,8 @@ export default function BlogPage() {
                                             key={cat}
                                             onClick={() => setSelectedCategory(cat)}
                                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === cat
-                                                    ? "bg-slate-900 text-white"
-                                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                                ? "bg-slate-900 text-white"
+                                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                                 }`}
                                         >
                                             {cat}
@@ -269,7 +269,7 @@ export default function BlogPage() {
                                             className="group block bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-amber-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
                                         >
                                             {/* Image */}
-                                            <div className="relative h-48 overflow-hidden">
+                                            <div className="relative aspect-video overflow-hidden">
                                                 <Image
                                                     src={post.image}
                                                     alt={post.title}
@@ -277,11 +277,6 @@ export default function BlogPage() {
                                                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
-                                                <div className="absolute top-3 left-3">
-                                                    <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-slate-700 text-[10px] font-bold uppercase rounded-full">
-                                                        {post.category}
-                                                    </span>
-                                                </div>
                                             </div>
 
                                             {/* Content */}
