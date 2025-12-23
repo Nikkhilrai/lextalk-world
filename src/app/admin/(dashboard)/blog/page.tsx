@@ -23,6 +23,8 @@ interface BlogPost {
     readTime?: string;
     featured: boolean;
     published: boolean;
+    tags?: string;
+    metaDescription?: string;
     createdAt: string;
 }
 
@@ -52,6 +54,8 @@ export default function BlogAdminPage() {
         readTime: "",
         featured: false,
         published: false,
+        tags: "",
+        metaDescription: "",
     });
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
@@ -275,6 +279,8 @@ export default function BlogAdminPage() {
                 readTime: post.readTime || "",
                 featured: post.featured,
                 published: post.published,
+                tags: post.tags || "",
+                metaDescription: post.metaDescription || "",
             });
         } else {
             setEditingPost(null);
@@ -289,6 +295,8 @@ export default function BlogAdminPage() {
                 readTime: "",
                 featured: false,
                 published: false,
+                tags: "",
+                metaDescription: "",
             });
         }
         setShowModal(true);
@@ -815,7 +823,49 @@ export default function BlogAdminPage() {
                                 </div>
                             </div>
 
-                            {/* Toggles */}
+                            {/* SEO Section */}
+                            <div className="border-t border-slate-800 pt-5 mt-2">
+                                <h4 className="text-sm font-semibold text-amber-500 mb-4 flex items-center gap-2">
+                                    📈 SEO Optimization
+                                </h4>
+
+                                {/* Tags */}
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                                        SEO Tags / Keywords
+                                        <span className="text-xs text-slate-500 ml-2">(comma separated)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={formData.tags}
+                                        onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                        placeholder="legal tech, AI, contracts, trade law, compliance"
+                                    />
+                                    <p className="text-xs text-slate-500 mt-1">
+                                        Add relevant keywords to help search engines find your article
+                                    </p>
+                                </div>
+
+                                {/* Meta Description */}
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                                        Meta Description
+                                        <span className="text-xs text-slate-500 ml-2">(for Google search results)</span>
+                                    </label>
+                                    <textarea
+                                        rows={2}
+                                        value={formData.metaDescription}
+                                        onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
+                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none"
+                                        placeholder="A brief 150-160 character description for search engine results..."
+                                        maxLength={160}
+                                    />
+                                    <p className="text-xs text-slate-500 mt-1">
+                                        {formData.metaDescription.length}/160 characters • Leave empty to use excerpt
+                                    </p>
+                                </div>
+                            </div>
                             <div className="flex items-center gap-6 pt-2">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input

@@ -30,20 +30,23 @@ model Lead {
 
 // Blog Post Model
 model BlogPost {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  excerpt     String
-  content     String
-  image       String
-  category    String
-  author      String
-  authorImage String?
-  readTime    String?
-  featured    Boolean  @default(false)
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  excerpt         String
+  content         String
+  image           String
+  category        String
+  author          String
+  authorImage     String?
+  readTime        String?
+  featured        Boolean  @default(false)
+  published       Boolean  @default(false)
+  // SEO Fields
+  tags            String?  // Comma-separated tags for SEO (e.g., "legal tech, AI, contracts")
+  metaDescription String?  // Custom meta description for search engines
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 // Blog Category Model

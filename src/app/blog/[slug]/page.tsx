@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Clock, ArrowLeft, Share2, Facebook, Twitter, Linkedin, Calendar, User } from "lucide-react";
+import { Metadata } from "next";
 
 // For SSG (optional but good for performance if using generateStaticParams)
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -16,6 +17,59 @@ async function getPost(slug: string) {
         where: { slug },
     });
     return post;
+}
+
+// Generate SEO metadata for each blog post
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await getPost(slug);
+
+    if (!post) {
+        return {
+            title: "Post Not Found | LexTalk World",
+        };
+    }
+
+    // Use metaDescription if available, otherwise use excerpt
+    const description = post.metaDescription || post.excerpt;
+
+    // Parse tags if available
+    const keywords = post.tags
+        ? post.tags.split(",").map((tag: string) => tag.trim())
+        : ["legal", "law", "conference", "legal tech"];
+
+    return {
+        title: `${post.title} | LexTalk World Blog`,
+        description: description,
+        keywords: keywords,
+        authors: [{ name: post.author }],
+        openGraph: {
+            title: post.title,
+            description: description,
+            type: "article",
+            publishedTime: post.createdAt.toISOString(),
+            modifiedTime: post.updatedAt.toISOString(),
+            authors: [post.author],
+            images: [
+                {
+                    url: post.image,
+                    width: 1200,
+                    height: 630,
+                    alt: post.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: description,
+            images: [post.image],
+        },
+    };
 }
 
 export default async function BlogPostPage({
@@ -97,10 +151,10 @@ export default async function BlogPostPage({
                     </div>
                 </header>
 
-                {/* Featured Image - Smaller */}
+                {/* Featured Image */}
                 <div className="container mx-auto px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10">
                     <div className="max-w-4xl mx-auto">
-                        <div className="relative aspect-[16/8] md:aspect-[21/9] rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-100">
                             <Image
                                 src={post.image}
                                 alt={post.title}
