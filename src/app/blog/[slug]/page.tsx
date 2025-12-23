@@ -169,7 +169,7 @@ export default async function BlogPostPage({
 
                 {/* Content - Optimized for reading */}
                 <div className="container mx-auto px-4 pb-12">
-                    <div className="max-w-[800px] mx-auto">
+                    <div className="max-w-[800px] mx-auto bg-white border border-slate-200 rounded-xl p-6 md:p-10 shadow-sm">
                         <div className="prose prose-slate max-w-none
                             prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 prose-headings:mt-8 prose-headings:mb-4
                             prose-h2:text-xl prose-h2:md:text-2xl
