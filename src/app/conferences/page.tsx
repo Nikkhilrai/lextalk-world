@@ -13,7 +13,7 @@ import {
 const upcomingConferences = [
     {
         id: "dubai-2026",
-        name: "LexTalk World Summit",
+        name: "LexTalk World Middle East",
         city: "Dubai",
         country: "UAE",
         region: "Middle East",
@@ -41,7 +41,7 @@ const upcomingConferences = [
     },
     {
         id: "mumbai-2026",
-        name: "LexTalk Asia Pacific Summit",
+        name: "LexTalk World APAC",
         city: "Mumbai",
         country: "India",
         region: "South Asia",
