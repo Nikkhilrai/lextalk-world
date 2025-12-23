@@ -700,33 +700,23 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
-                    {/* Platinum Sponsors - Premium Tier */}
+                    {/* Platinum Sponsors */}
                     <div className="relative">
-                        {/* Premium Glow Background */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-amber-50/50 via-amber-100/30 to-transparent rounded-3xl -m-8 blur-sm" />
-
                         <div className="flex flex-col items-center relative z-10">
-                            {/* Category Badge - Premium Style */}
+                            {/* Category Badge - Subtle amber accent */}
                             <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative">
-                                    {/* Glow effect */}
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-400/40 via-yellow-300/40 to-amber-400/40 rounded-full blur-md" />
-                                    <div className="relative px-10 py-3 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 rounded-full shadow-lg shadow-amber-500/20">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full animate-pulse" />
-                                        <h3 className="text-lg md:text-xl font-serif font-bold text-white uppercase tracking-widest whitespace-nowrap drop-shadow-sm">
-                                            ⭐ Platinum Sponsors ⭐
-                                        </h3>
-                                    </div>
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-white uppercase tracking-widest whitespace-nowrap">
+                                        Platinum Sponsors
+                                    </h3>
                                 </div>
                             </div>
 
                             {/* Logos Grid */}
                             <div className="flex justify-center">
-                                {/* Platinum Sponsor - Larger Card with Gold Border */}
-                                <div className="group relative w-48 h-28 md:w-80 md:h-44 shrink-0">
-                                    {/* Premium border glow */}
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 rounded-2xl opacity-50 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(245,158,11,0.3)] transition-all duration-500 group-hover:shadow-[0_20px_50px_-10px_rgba(245,158,11,0.4)] border-2 border-amber-300 group-hover:-translate-y-2" />
+                                {/* Platinum Sponsor - Slightly larger with amber border */}
+                                <div className="group relative w-44 h-26 md:w-72 md:h-40 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-xl border-2 border-amber-400 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.amadi.io/"
@@ -740,7 +730,7 @@ export default function DubaiEventPage() {
                                                 alt="Amadi"
                                                 fill
                                                 className="object-contain"
-                                                sizes="(max-width: 768px) 192px, 320px"
+                                                sizes="(max-width: 768px) 176px, 288px"
                                             />
                                         </div>
                                     </a>
