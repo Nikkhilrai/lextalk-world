@@ -106,7 +106,7 @@ export default async function BlogPostPage({
 
     return (
         <main className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-            <Navbar />
+            <Navbar variant="light" />
             <DarkModeToggle />
 
             <article>
