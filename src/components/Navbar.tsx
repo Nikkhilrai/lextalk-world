@@ -42,158 +42,184 @@ export function Navbar({ variant = "default" }: NavbarProps) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Determine colors based on variant and scroll state
+    const isDark = variant === "default" && !isScrolled;
+    const textColor = isDark ? "text-white/90" : "text-slate-700";
+    const hoverColor = isDark ? "hover:text-amber-400" : "hover:text-amber-600";
+    const underlineColor = isDark ? "bg-amber-400" : "bg-amber-600";
+
     return (
         <>
-            <nav
-                className={cn(
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-                    isScrolled
-                        ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
-                        : variant === "light"
-                            ? "bg-white/70 backdrop-blur-sm py-5"
-                            : "bg-transparent py-6"
-                )}
-            >
-                <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12 transition-transform group-hover:scale-105 flex items-center">
-                            <Image
-                                src="/logo/Lextalk-Logo.png"
-                                alt="Lextalk World"
-                                width={192}
-                                height={48}
-                                className="object-contain object-left w-full h-full"
-                                priority
-                            />
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation - Hidden on Mobile/Tablet */}
-                    <div className="hidden lg:flex items-center gap-6 xl:gap-10">
-                        {navLinks.map((link) => (
-                            <div
-                                key={link.name}
-                                className="relative"
-                                onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
-                                onMouseLeave={() => setOpenDropdown(null)}
-                            >
-                                <Link
-                                    href={link.href}
-                                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled
-                                        ? "text-slate-700 hover:text-amber-600"
-                                        : variant === "light"
-                                            ? "text-slate-800 hover:text-amber-600"
-                                            : "text-white/90 hover:text-amber-400"
-                                        }`}
-                                >
-                                    {link.name}
-                                    {link.hasDropdown && (
-                                        <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                    )}
-                                    <span className={`absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full ${isScrolled ? "bg-amber-600" : "bg-amber-400"}`} />
-                                </Link>
-
-                                {/* Dropdown Menu */}
-                                {link.hasDropdown && link.dropdownItems && (
-                                    <div className={cn(
-                                        "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
-                                        openDropdown === link.name
-                                            ? "opacity-100 translate-y-0 pointer-events-auto"
-                                            : "opacity-0 -translate-y-2 pointer-events-none"
-                                    )}>
-                                        <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
-                                            {link.dropdownItems.map((item) => (
-                                                <Link
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-600 transition-colors"
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                        <Link
-                            href="/tickets"
-                            target="_blank"
-                            className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
-                        >
-                            Secure Pass
-                        </Link>
-                    </div>
-
-                    {/* Mobile/Tablet Menu Button */}
-                    <button
-                        className={`lg:hidden p-2 ${isScrolled || variant === "light" ? "text-slate-900" : "text-white"}`}
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
-
-                {/* Mobile Menu - Vertical Dropdown (Right Aligned) */}
-                <div
+            {/* Floating Pill Navbar Container */}
+            <div className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-500">
+                <nav
                     className={cn(
-                        "absolute top-full right-3 w-52 bg-white/95 backdrop-blur-md rounded-xl shadow-lg lg:hidden overflow-hidden transition-all duration-300 ease-out border border-slate-100",
-                        isMobileMenuOpen
-                            ? "opacity-100 translate-y-1 pointer-events-auto"
-                            : "opacity-0 -translate-y-2 pointer-events-none"
+                        "mx-auto transition-all duration-500 ease-out",
+                        isScrolled
+                            ? "mt-0 max-w-full bg-white/95 backdrop-blur-xl shadow-lg shadow-slate-900/5 rounded-none border-b border-slate-100"
+                            : variant === "light"
+                                ? "mt-4 max-w-6xl bg-white/80 backdrop-blur-xl rounded-full shadow-lg shadow-slate-900/10 border border-white/50"
+                                : "mt-4 max-w-6xl bg-slate-900/30 backdrop-blur-xl rounded-full shadow-lg shadow-black/20 border border-white/10"
                     )}
                 >
-                    {/* Menu Links - Single Vertical Column */}
-                    <div className="flex flex-col py-2">
-                        {navLinks.map((link) => (
-                            <div key={link.name}>
-                                {link.hasDropdown ? (
-                                    <>
-                                        <button
-                                            className="w-full px-5 py-2.5 text-slate-700 font-medium text-sm hover:bg-amber-50 hover:text-amber-600 transition-all duration-200 border-b border-slate-50 flex items-center justify-between"
-                                            onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
-                                        >
-                                            {link.name}
+                    <div className={cn(
+                        "flex items-center justify-between transition-all duration-500",
+                        isScrolled ? "px-6 py-3" : "px-6 md:px-8 py-3"
+                    )}>
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-2 group">
+                            <div className="relative w-[130px] h-8 lg:w-[160px] lg:h-10 transition-transform group-hover:scale-105 flex items-center">
+                                <Image
+                                    src="/logo/Lextalk-Logo.png"
+                                    alt="Lextalk World"
+                                    width={160}
+                                    height={40}
+                                    className="object-contain object-left w-full h-full"
+                                    priority
+                                />
+                            </div>
+                        </Link>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden lg:flex items-center gap-1">
+                            {navLinks.map((link) => (
+                                <div
+                                    key={link.name}
+                                    className="relative"
+                                    onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
+                                    onMouseLeave={() => setOpenDropdown(null)}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        className={cn(
+                                            "relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-full flex items-center gap-1",
+                                            textColor,
+                                            hoverColor,
+                                            "hover:bg-white/10"
+                                        )}
+                                    >
+                                        {link.name}
+                                        {link.hasDropdown && (
                                             <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                        </button>
-                                        {openDropdown === link.name && link.dropdownItems && (
-                                            <div className="bg-slate-50">
+                                        )}
+                                    </Link>
+
+                                    {/* Dropdown Menu */}
+                                    {link.hasDropdown && link.dropdownItems && (
+                                        <div className={cn(
+                                            "absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200",
+                                            openDropdown === link.name
+                                                ? "opacity-100 translate-y-0 pointer-events-auto"
+                                                : "opacity-0 -translate-y-2 pointer-events-none"
+                                        )}>
+                                            <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
                                                 {link.dropdownItems.map((item) => (
                                                     <Link
                                                         key={item.name}
                                                         href={item.href}
-                                                        className="block px-8 py-2 text-sm text-slate-600 hover:text-amber-600 transition-colors"
-                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                        className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-600 transition-colors"
                                                     >
                                                         {item.name}
                                                     </Link>
                                                 ))}
                                             </div>
-                                        )}
-                                    </>
-                                ) : (
-                                    <Link
-                                        href={link.href}
-                                        className="px-5 py-2.5 text-slate-700 font-medium text-sm hover:bg-amber-50 hover:text-amber-600 transition-all duration-200 border-b border-slate-50 block"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* CTA Button */}
+                            <Link
+                                href="/tickets"
+                                target="_blank"
+                                className={cn(
+                                    "ml-4 px-5 py-2 text-sm font-bold tracking-wide rounded-full transition-all duration-300",
+                                    "bg-gradient-to-r from-amber-500 to-amber-600 text-white",
+                                    "hover:from-amber-600 hover:to-amber-700 hover:shadow-lg hover:shadow-amber-500/25 hover:scale-105"
                                 )}
-                            </div>
-                        ))}
-                        <Link
-                            href="/tickets"
-                            target="_blank"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="mx-3 mt-2 mb-2 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg text-sm text-center"
+                            >
+                                Secure Pass
+                            </Link>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className={cn(
+                                "lg:hidden p-2 rounded-full transition-colors",
+                                isDark ? "text-white hover:bg-white/10" : "text-slate-900 hover:bg-slate-100"
+                            )}
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
-                            Secure Pass
-                        </Link>
+                            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                        </button>
                     </div>
-                </div>
-            </nav>
+
+                    {/* Mobile Menu - Inside the pill */}
+                    <div
+                        className={cn(
+                            "lg:hidden overflow-hidden transition-all duration-300",
+                            isMobileMenuOpen ? "max-h-[400px] pb-4" : "max-h-0"
+                        )}
+                    >
+                        <div className="px-4 pt-2 space-y-1">
+                            {navLinks.map((link) => (
+                                <div key={link.name}>
+                                    {link.hasDropdown ? (
+                                        <>
+                                            <button
+                                                className={cn(
+                                                    "w-full px-4 py-2.5 text-left font-medium text-sm rounded-lg flex items-center justify-between transition-colors",
+                                                    isDark ? "text-white/90 hover:bg-white/10" : "text-slate-700 hover:bg-slate-100"
+                                                )}
+                                                onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
+                                            >
+                                                {link.name}
+                                                <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {openDropdown === link.name && link.dropdownItems && (
+                                                <div className="ml-4 mt-1 space-y-1">
+                                                    {link.dropdownItems.map((item) => (
+                                                        <Link
+                                                            key={item.name}
+                                                            href={item.href}
+                                                            className={cn(
+                                                                "block px-4 py-2 text-sm rounded-lg transition-colors",
+                                                                isDark ? "text-white/70 hover:text-white hover:bg-white/10" : "text-slate-600 hover:text-amber-600 hover:bg-amber-50"
+                                                            )}
+                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                        >
+                                                            {item.name}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <Link
+                                            href={link.href}
+                                            className={cn(
+                                                "block px-4 py-2.5 font-medium text-sm rounded-lg transition-colors",
+                                                isDark ? "text-white/90 hover:bg-white/10" : "text-slate-700 hover:bg-slate-100"
+                                            )}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    )}
+                                </div>
+                            ))}
+                            <Link
+                                href="/tickets"
+                                target="_blank"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block mx-2 mt-3 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-full text-sm text-center"
+                            >
+                                Secure Pass
+                            </Link>
+                        </div>
+                    </div>
+                </nav>
+            </div>
 
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
         </>
