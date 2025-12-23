@@ -2,6 +2,9 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import BlogComments from "@/components/BlogComments";
 import ShareButtons from "@/components/ShareButtons";
+import AuthorBio from "@/components/AuthorBio";
+import RelatedPosts from "@/components/RelatedPosts";
+import DarkModeToggle from "@/components/DarkModeToggle";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -18,6 +21,19 @@ async function getPost(slug: string) {
         where: { slug },
     });
     return post;
+}
+
+async function getRelatedPosts(category: string, currentSlug: string) {
+    const posts = await prisma.blogPost.findMany({
+        where: {
+            published: true,
+            category: category,
+            slug: { not: currentSlug },
+        },
+        take: 3,
+        orderBy: { createdAt: "desc" },
+    });
+    return posts;
 }
 
 // Generate SEO metadata for each blog post
@@ -85,15 +101,17 @@ export default async function BlogPostPage({
         notFound();
     }
 
-    return (
-        <main className="min-h-screen bg-white">
-            <Navbar />
+    // Fetch related posts by category
+    const relatedPosts = await getRelatedPosts(post.category, post.slug);
 
-            {/* Reading Progress Bar could go here */}
+    return (
+        <main className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+            <Navbar />
+            <DarkModeToggle />
 
             <article>
                 {/* Header Section */}
-                <header className="pt-24 pb-8 md:pt-28 md:pb-10 bg-slate-50 border-b border-slate-100">
+                <header className="pt-24 pb-8 md:pt-28 md:pb-10 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 transition-colors">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
                             {/* Back Link */}
@@ -155,7 +173,7 @@ export default async function BlogPostPage({
                 {/* Featured Image */}
                 <div className="container mx-auto px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10">
                     <div className="max-w-4xl mx-auto">
-                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
                             <Image
                                 src={post.image}
                                 alt={post.title}
@@ -169,17 +187,17 @@ export default async function BlogPostPage({
 
                 {/* Content - Optimized for reading */}
                 <div className="container mx-auto px-4 pb-12">
-                    <div className="max-w-[900px] mx-auto bg-white border border-slate-200 rounded-xl p-6 md:p-10 shadow-sm">
-                        <div className="prose prose-slate max-w-none
-                            prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 prose-headings:mt-8 prose-headings:mb-4
+                    <div className="max-w-[900px] mx-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-sm transition-colors">
+                        <div className="prose prose-slate dark:prose-invert max-w-none
+                            prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:mt-8 prose-headings:mb-4
                             prose-h2:text-xl prose-h2:md:text-2xl
                             prose-h3:text-lg prose-h3:md:text-xl
-                            prose-p:text-base prose-p:text-slate-700 prose-p:leading-7 prose-p:mb-4 prose-p:text-left
-                            prose-a:text-amber-600 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline
+                            prose-p:text-base prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-7 prose-p:mb-4 prose-p:text-left
+                            prose-a:text-amber-600 dark:prose-a:text-amber-400 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline
                             prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
-                            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 prose-blockquote:text-sm prose-blockquote:my-6
-                            prose-strong:text-slate-900 prose-strong:font-semibold
-                            prose-li:text-slate-700 prose-li:text-base prose-li:my-1
+                            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 dark:prose-blockquote:bg-amber-900/20 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300 prose-blockquote:text-sm prose-blockquote:my-6
+                            prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
+                            prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-1
                             prose-ul:my-4 prose-ol:my-4
                         ">
                             <ReactMarkdown>{post.content}</ReactMarkdown>
@@ -187,6 +205,21 @@ export default async function BlogPostPage({
 
                         {/* Share Links */}
                         <ShareButtons title={post.title} slug={post.slug} />
+
+                        {/* Author Bio */}
+                        <AuthorBio
+                            name={post.author}
+                            image={post.authorImage}
+                        />
+
+                        {/* Related Posts */}
+                        <RelatedPosts
+                            posts={relatedPosts.map(p => ({
+                                ...p,
+                                createdAt: p.createdAt.toISOString()
+                            }))}
+                            currentSlug={post.slug}
+                        />
 
                         {/* Comments Section */}
                         <BlogComments postSlug={post.slug} postId={post.id} />
