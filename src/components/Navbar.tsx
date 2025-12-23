@@ -50,8 +50,8 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                     isScrolled
                         ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
                         : variant === "light"
-                            ? "bg-white/80 backdrop-blur-sm py-4"
-                            : "bg-slate-900/20 backdrop-blur-sm py-5"
+                            ? "bg-white/70 backdrop-blur-sm py-5"
+                            : "bg-transparent py-6"
                 )}
             >
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
