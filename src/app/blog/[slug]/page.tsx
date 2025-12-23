@@ -117,7 +117,7 @@ export default async function BlogPostPage({
                             {/* Back Link */}
                             <Link
                                 href="/blog"
-                                className="inline-flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors mb-5 font-medium text-sm group"
+                                className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors mb-5 font-medium text-sm group"
                             >
                                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
                                 Back to Blog
@@ -126,12 +126,12 @@ export default async function BlogPostPage({
                             {/* Meta Info */}
                             <div className="flex flex-wrap items-center justify-center gap-3 mb-4 text-xs">
                                 {post.readTime && (
-                                    <span className="flex items-center gap-1 text-slate-500 font-medium">
+                                    <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium">
                                         <Clock size={14} />
                                         {post.readTime}
                                     </span>
                                 )}
-                                <span className="flex items-center gap-1 text-slate-500 font-medium">
+                                <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium">
                                     <Calendar size={14} />
                                     {new Date(post.createdAt).toLocaleDateString("en-US", {
                                         month: "short",
@@ -142,14 +142,14 @@ export default async function BlogPostPage({
                             </div>
 
                             {/* Title - Smaller, more readable */}
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 mb-6 leading-snug">
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-6 leading-snug">
                                 {post.title}
                             </h1>
 
                             {/* Author - Compact */}
                             <div className="flex items-center justify-center gap-2">
                                 {post.authorImage ? (
-                                    <div className="w-9 h-9 rounded-full overflow-hidden relative border border-slate-200">
+                                    <div className="w-9 h-9 rounded-full overflow-hidden relative border border-slate-200 dark:border-slate-600">
                                         <Image
                                             src={post.authorImage}
                                             alt={post.author}
@@ -158,12 +158,12 @@ export default async function BlogPostPage({
                                         />
                                     </div>
                                 ) : (
-                                    <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200">
-                                        <User size={16} className="text-slate-400" />
+                                    <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center border border-slate-200 dark:border-slate-600">
+                                        <User size={16} className="text-slate-400 dark:text-slate-300" />
                                     </div>
                                 )}
                                 <div className="text-left">
-                                    <p className="text-slate-900 font-semibold text-sm">{post.author}</p>
+                                    <p className="text-slate-900 dark:text-white font-semibold text-sm">{post.author}</p>
                                 </div>
                             </div>
                         </div>
