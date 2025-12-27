@@ -67,6 +67,7 @@ export default function BlogAdminPage() {
         published: false,
         tags: "",
         metaDescription: "",
+        publishDate: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
     });
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
@@ -448,6 +449,7 @@ export default function BlogAdminPage() {
                 published: post.published,
                 tags: post.tags || "",
                 metaDescription: post.metaDescription || "",
+                publishDate: post.createdAt ? new Date(post.createdAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
             });
         } else {
             setEditingPost(null);
@@ -464,6 +466,7 @@ export default function BlogAdminPage() {
                 published: false,
                 tags: "",
                 metaDescription: "",
+                publishDate: new Date().toISOString().split('T')[0],
             });
         }
         setShowModal(true);
@@ -1012,6 +1015,21 @@ export default function BlogAdminPage() {
                                         placeholder="5 min read"
                                     />
                                 </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-5">
+                                {/* Publish Date */}
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">Publish Date</label>
+                                    <input
+                                        type="date"
+                                        value={formData.publishDate}
+                                        onChange={(e) => setFormData({ ...formData, publishDate: e.target.value })}
+                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                    />
+                                </div>
+                                {/* Empty space for alignment or future use */}
+                                <div></div>
                             </div>
 
                             {/* SEO Section */}

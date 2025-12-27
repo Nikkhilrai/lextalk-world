@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
         const {
             title, excerpt, content, image, category, author,
             authorImage, readTime, featured, published,
-            tags, metaDescription
+            tags, metaDescription, publishDate
         } = body;
 
         // Generate slug from title
@@ -195,6 +195,9 @@ export async function POST(request: NextRequest) {
         // Auto-generate read time if not provided
         const autoReadTime = readTime || estimateReadTime(content);
 
+        // Parse publish date if provided
+        const createdAtDate = publishDate ? new Date(publishDate) : new Date();
+
         const post = await prisma.blogPost.create({
             data: {
                 title,
@@ -210,6 +213,7 @@ export async function POST(request: NextRequest) {
                 published: published || false,
                 tags: autoTags,
                 metaDescription: autoMetaDescription,
+                createdAt: createdAtDate,
             },
         });
 
