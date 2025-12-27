@@ -200,7 +200,49 @@ export default async function BlogPostPage({
                             prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-1
                             prose-ul:my-4 prose-ol:my-4
                         ">
-                            <ReactMarkdown>{post.content}</ReactMarkdown>
+                            <ReactMarkdown
+                                components={{
+                                    a: ({ href, children }) => (
+                                        <a
+                                            href={href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-amber-600 dark:text-amber-400 hover:text-amber-700 hover:underline break-words"
+                                        >
+                                            {children}
+                                        </a>
+                                    ),
+                                    p: ({ children }) => {
+                                        // Convert plain URLs in text to clickable links
+                                        if (typeof children === 'string') {
+                                            const urlRegex = /(https?:\/\/[^\s]+)/g;
+                                            const parts = children.split(urlRegex);
+                                            if (parts.length > 1) {
+                                                return (
+                                                    <p>
+                                                        {parts.map((part, i) =>
+                                                            urlRegex.test(part) ? (
+                                                                <a
+                                                                    key={i}
+                                                                    href={part}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-amber-600 dark:text-amber-400 hover:text-amber-700 hover:underline break-all"
+                                                                >
+                                                                    {part}
+                                                                </a>
+                                                            ) : part
+                                                        )}
+                                                    </p>
+                                                );
+                                            }
+                                        }
+                                        return <p>{children}</p>;
+                                    }
+                                }}
+                            >
+                                {post.content}
+                            </ReactMarkdown>
                         </div>
 
                         {/* Share Links */}
