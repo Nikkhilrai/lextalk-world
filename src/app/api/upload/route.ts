@@ -51,28 +51,43 @@ export async function POST(request: NextRequest) {
         const buffer = Buffer.from(bytes);
 
         if (isCloudinaryConfigured) {
-            // Upload to Cloudinary
-            const result = await new Promise((resolve, reject) => {
-                const uploadStream = cloudinary.uploader.upload_stream(
-                    { folder: `lextalk/${type}` },
-                    (error, result) => {
-                        if (error) reject(error);
-                        else resolve(result);
-                    }
-                );
-                uploadStream.end(buffer);
-            }) as any;
+            try {
+                // Convert buffer to base64 data URI for more reliable upload
+                const base64Data = buffer.toString('base64');
+                const mimeType = file.type;
+                const dataUri = `data:${mimeType};base64,${base64Data}`;
 
-            return NextResponse.json({
-                url: result.secure_url,
-                filename: result.public_id,
-                size: result.bytes,
-                type: result.format
-            });
+                // Upload to Cloudinary using base64 (more reliable than stream)
+                const result = await cloudinary.uploader.upload(dataUri, {
+                    folder: `lextalk/${type}`,
+                    resource_type: "image",
+                    transformation: [
+                        { quality: "auto:good" },
+                        { fetch_format: "auto" }
+                    ]
+                });
+
+                console.log("Cloudinary upload success:", result.secure_url);
+
+                return NextResponse.json({
+                    url: result.secure_url,
+                    filename: result.public_id,
+                    size: result.bytes,
+                    type: result.format
+                });
+
+            } catch (cloudinaryError: any) {
+                console.error("Cloudinary upload error:", cloudinaryError);
+                return NextResponse.json(
+                    { error: `Cloudinary upload failed: ${cloudinaryError.message || 'Unknown error'}` },
+                    { status: 500 }
+                );
+            }
 
         } else {
-            // Fallback to Local Storage
+            // Fallback to Local Storage (only works in development)
             console.log("Cloudinary credentials missing. Falling back to local storage.");
+            console.log("Note: Local storage will NOT work on Vercel/serverless deployments.");
 
             const ext = file.name.split(".").pop();
             const timestamp = Date.now();
@@ -95,10 +110,10 @@ export async function POST(request: NextRequest) {
             });
         }
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Upload error:", error);
         return NextResponse.json(
-            { error: "Failed to upload file" },
+            { error: `Failed to upload file: ${error.message || 'Unknown error'}` },
             { status: 500 }
         );
     }
