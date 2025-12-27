@@ -1,6 +1,61 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Helper function to auto-generate SEO tags from content
+function generateSeoTags(title: string, content: string, category: string): string {
+    // Extract key terms from title and content
+    const words = `${title} ${content}`.toLowerCase();
+
+    // Common legal/professional keywords to look for
+    const legalKeywords = [
+        'legal tech', 'law', 'lawyer', 'attorney', 'litigation', 'contract',
+        'compliance', 'regulation', 'court', 'arbitration', 'mediation',
+        'intellectual property', 'patent', 'trademark', 'copyright',
+        'corporate', 'merger', 'acquisition', 'startup', 'venture',
+        'ai', 'artificial intelligence', 'blockchain', 'technology',
+        'innovation', 'digital', 'automation', 'legal ops', 'legalops',
+        'in-house counsel', 'general counsel', 'law firm', 'practice',
+        'dispute resolution', 'international law', 'trade law',
+        'cybersecurity', 'data privacy', 'gdpr', 'compliance',
+        'esg', 'sustainability', 'governance', 'leadership'
+    ];
+
+    const foundKeywords: string[] = [];
+
+    // Find matching keywords
+    for (const keyword of legalKeywords) {
+        if (words.includes(keyword) && !foundKeywords.includes(keyword)) {
+            foundKeywords.push(keyword);
+        }
+    }
+
+    // Add category if not already included
+    if (!foundKeywords.includes(category.toLowerCase())) {
+        foundKeywords.unshift(category);
+    }
+
+    // Limit to 5-8 tags
+    return foundKeywords.slice(0, 8).join(', ');
+}
+
+// Helper function to auto-generate meta description
+function generateMetaDescription(title: string, excerpt: string): string {
+    // Use excerpt as base, truncate to ~155 characters for SEO
+    let description = excerpt.trim();
+
+    if (description.length > 155) {
+        description = description.substring(0, 152).trim() + '...';
+    } else if (description.length < 50) {
+        // If excerpt is too short, prepend title
+        description = `${title}. ${description}`;
+        if (description.length > 155) {
+            description = description.substring(0, 152).trim() + '...';
+        }
+    }
+
+    return description;
+}
+
 // GET all blog posts or single post by slug
 export async function GET(request: NextRequest) {
     try {
@@ -54,13 +109,21 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
 
-        const { title, excerpt, content, image, category, author, authorImage, readTime, featured, published } = body;
+        const {
+            title, excerpt, content, image, category, author,
+            authorImage, readTime, featured, published,
+            tags, metaDescription
+        } = body;
 
         // Generate slug from title
         const slug = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/(^-|-$)/g, "");
+
+        // Auto-generate SEO fields if not provided
+        const autoTags = tags || generateSeoTags(title, content, category);
+        const autoMetaDescription = metaDescription || generateMetaDescription(title, excerpt);
 
         const post = await prisma.blogPost.create({
             data: {
@@ -75,6 +138,8 @@ export async function POST(request: NextRequest) {
                 readTime: readTime || null,
                 featured: featured || false,
                 published: published || false,
+                tags: autoTags,
+                metaDescription: autoMetaDescription,
             },
         });
 
@@ -115,6 +180,16 @@ export async function PUT(request: NextRequest) {
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "-")
                 .replace(/(^-|-$)/g, "");
+        }
+
+        // Auto-generate SEO if content is changed but SEO fields are empty
+        if (data.content && data.title && data.category) {
+            if (!data.tags) {
+                data.tags = generateSeoTags(data.title, data.content, data.category);
+            }
+            if (!data.metaDescription && data.excerpt) {
+                data.metaDescription = generateMetaDescription(data.title, data.excerpt);
+            }
         }
 
         const post = await prisma.blogPost.update({
