@@ -36,6 +36,17 @@ interface BlogCategory {
     order: number;
 }
 
+interface BlogAuthor {
+    id: string;
+    name: string;
+    image?: string;
+    bio?: string;
+    role?: string;
+    email?: string;
+    linkedin?: string;
+    twitter?: string;
+}
+
 
 export default function BlogAdminPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -71,6 +82,21 @@ export default function BlogAdminPage() {
     const [newCategoryColor, setNewCategoryColor] = useState("#F59E0B");
     const [savingCategory, setSavingCategory] = useState(false);
 
+    // Author management state
+    const [authors, setAuthors] = useState<BlogAuthor[]>([]);
+    const [showAuthorModal, setShowAuthorModal] = useState(false);
+    const [editingAuthor, setEditingAuthor] = useState<BlogAuthor | null>(null);
+    const [authorFormData, setAuthorFormData] = useState({
+        name: "",
+        image: "",
+        bio: "",
+        role: "",
+        email: "",
+        linkedin: "",
+        twitter: "",
+    });
+    const [savingAuthor, setSavingAuthor] = useState(false);
+
     // Fetch posts
     const fetchPosts = async () => {
         try {
@@ -87,6 +113,7 @@ export default function BlogAdminPage() {
     useEffect(() => {
         fetchPosts();
         fetchCategories();
+        fetchAuthors();
     }, []);
 
     // Fetch categories
@@ -98,6 +125,85 @@ export default function BlogAdminPage() {
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
+    };
+
+    // Fetch authors
+    const fetchAuthors = async () => {
+        try {
+            const res = await fetch("/api/blog/authors");
+            const data = await res.json();
+            setAuthors(data);
+        } catch (error) {
+            console.error("Error fetching authors:", error);
+        }
+    };
+
+    // Add/Update author
+    const handleSaveAuthor = async () => {
+        if (!authorFormData.name.trim()) return;
+        setSavingAuthor(true);
+        try {
+            const method = editingAuthor ? "PUT" : "POST";
+            const body = editingAuthor
+                ? { id: editingAuthor.id, ...authorFormData }
+                : authorFormData;
+
+            const res = await fetch("/api/blog/authors", {
+                method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) {
+                fetchAuthors();
+                setShowAuthorModal(false);
+                setEditingAuthor(null);
+                setAuthorFormData({
+                    name: "", image: "", bio: "", role: "", email: "", linkedin: "", twitter: ""
+                });
+            } else {
+                const err = await res.json();
+                alert(err.error || "Failed to save author");
+            }
+        } catch (error) {
+            console.error("Error saving author:", error);
+        } finally {
+            setSavingAuthor(false);
+        }
+    };
+
+    // Delete author
+    const handleDeleteAuthor = async (id: string) => {
+        if (!confirm("Delete this author?")) return;
+        try {
+            const res = await fetch(`/api/blog/authors?id=${id}`, { method: "DELETE" });
+            if (res.ok) {
+                fetchAuthors();
+            }
+        } catch (error) {
+            console.error("Error deleting author:", error);
+        }
+    };
+
+    // Open author modal for edit
+    const openAuthorModal = (author?: BlogAuthor) => {
+        if (author) {
+            setEditingAuthor(author);
+            setAuthorFormData({
+                name: author.name,
+                image: author.image || "",
+                bio: author.bio || "",
+                role: author.role || "",
+                email: author.email || "",
+                linkedin: author.linkedin || "",
+                twitter: author.twitter || "",
+            });
+        } else {
+            setEditingAuthor(null);
+            setAuthorFormData({
+                name: "", image: "", bio: "", role: "", email: "", linkedin: "", twitter: ""
+            });
+        }
+        setShowAuthorModal(true);
     };
 
     // Add category
@@ -381,11 +487,18 @@ export default function BlogAdminPage() {
                 </div>
                 <div className="flex items-center gap-3">
                     <button
+                        onClick={() => openAuthorModal()}
+                        className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg border border-slate-700 transition-all flex items-center gap-2"
+                    >
+                        <Plus className="w-4 h-4" />
+                        Add Author
+                    </button>
+                    <button
                         onClick={() => setShowCategoryModal(true)}
                         className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg border border-slate-700 transition-all flex items-center gap-2"
                     >
                         <Settings className="w-4 h-4" />
-                        Manage Categories
+                        Categories
                     </button>
                     <button
                         onClick={() => openModal()}
@@ -803,19 +916,29 @@ export default function BlogAdminPage() {
                                 {/* Author */}
                                 <div>
                                     <label className="block text-sm font-medium text-slate-300 mb-2">Author *</label>
-                                    <input
-                                        type="text"
+                                    <select
                                         required
                                         value={formData.author}
-                                        onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                                        onChange={(e) => {
+                                            const selectedAuthor = authors.find(a => a.name === e.target.value);
+                                            setFormData({
+                                                ...formData,
+                                                author: e.target.value,
+                                                authorImage: selectedAuthor?.image || formData.authorImage
+                                            });
+                                        }}
                                         className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                                        placeholder="Author name"
-                                    />
+                                    >
+                                        <option value="">Select Author</option>
+                                        {authors.map((author) => (
+                                            <option key={author.id} value={author.name}>{author.name}</option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-5">
-                                {/* Author Image */}
+                                {/* Author Image (auto-filled from selected author) */}
                                 <div>
                                     <label className="block text-sm font-medium text-slate-300 mb-2">Author Image</label>
                                     <div className="flex gap-2">
@@ -831,7 +954,7 @@ export default function BlogAdminPage() {
                                             value={formData.authorImage}
                                             onChange={(e) => setFormData({ ...formData, authorImage: e.target.value })}
                                             className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                                            placeholder="https://... or /uploads/..."
+                                            placeholder="Auto-filled from author"
                                         />
                                         <button
                                             type="button"
@@ -1019,6 +1142,157 @@ export default function BlogAdminPage() {
                                     </div>
                                 ))}
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Author Modal */}
+            {showAuthorModal && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-900 rounded-2xl border border-slate-800 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+                        <div className="flex items-center justify-between p-6 border-b border-slate-800">
+                            <h3 className="text-xl font-bold text-white">
+                                {editingAuthor ? "Edit Author" : "Add New Author"}
+                            </h3>
+                            <button
+                                onClick={() => { setShowAuthorModal(false); setEditingAuthor(null); }}
+                                className="p-2 hover:bg-slate-800 rounded-lg text-slate-400"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <div className="p-6 space-y-4">
+                            {/* Author Name */}
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Name *</label>
+                                <input
+                                    type="text"
+                                    value={authorFormData.name}
+                                    onChange={(e) => setAuthorFormData({ ...authorFormData, name: e.target.value })}
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                    placeholder="Author name"
+                                />
+                            </div>
+
+                            {/* Author Role */}
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Role / Title</label>
+                                <input
+                                    type="text"
+                                    value={authorFormData.role}
+                                    onChange={(e) => setAuthorFormData({ ...authorFormData, role: e.target.value })}
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                    placeholder="e.g., Legal Tech Expert, Senior Editor"
+                                />
+                            </div>
+
+                            {/* Author Image */}
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Image URL</label>
+                                <input
+                                    type="text"
+                                    value={authorFormData.image}
+                                    onChange={(e) => setAuthorFormData({ ...authorFormData, image: e.target.value })}
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                    placeholder="https://... or /uploads/..."
+                                />
+                            </div>
+
+                            {/* Author Bio */}
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Bio</label>
+                                <textarea
+                                    rows={3}
+                                    value={authorFormData.bio}
+                                    onChange={(e) => setAuthorFormData({ ...authorFormData, bio: e.target.value })}
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none"
+                                    placeholder="Short author bio..."
+                                />
+                            </div>
+
+                            {/* Social Links */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">LinkedIn</label>
+                                    <input
+                                        type="text"
+                                        value={authorFormData.linkedin}
+                                        onChange={(e) => setAuthorFormData({ ...authorFormData, linkedin: e.target.value })}
+                                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                        placeholder="LinkedIn URL"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">Twitter</label>
+                                    <input
+                                        type="text"
+                                        value={authorFormData.twitter}
+                                        onChange={(e) => setAuthorFormData({ ...authorFormData, twitter: e.target.value })}
+                                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                        placeholder="Twitter URL"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Save Button */}
+                            <button
+                                onClick={handleSaveAuthor}
+                                disabled={savingAuthor || !authorFormData.name.trim()}
+                                className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg disabled:opacity-50 flex items-center justify-center gap-2"
+                            >
+                                {savingAuthor ? (
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                ) : (
+                                    <>
+                                        <Save size={18} />
+                                        {editingAuthor ? "Update Author" : "Add Author"}
+                                    </>
+                                )}
+                            </button>
+
+                            {/* Authors List */}
+                            {authors.length > 0 && (
+                                <div className="pt-4 border-t border-slate-700">
+                                    <h4 className="text-sm font-medium text-slate-400 mb-3">Existing Authors</h4>
+                                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                                        {authors.map((author) => (
+                                            <div key={author.id} className="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                                                <div className="flex items-center gap-3">
+                                                    {author.image ? (
+                                                        <img src={author.image} alt={author.name} className="w-8 h-8 rounded-full object-cover" />
+                                                    ) : (
+                                                        <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-sm">
+                                                            {author.name.charAt(0)}
+                                                        </div>
+                                                    )}
+                                                    <div>
+                                                        <span className="text-white font-medium">{author.name}</span>
+                                                        {author.role && <p className="text-xs text-slate-400">{author.role}</p>}
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <button
+                                                        onClick={() => openAuthorModal(author)}
+                                                        className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                                                        title="Edit author"
+                                                    >
+                                                        <Edit size={14} />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDeleteAuthor(author.id)}
+                                                        className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+                                                        title="Delete author"
+                                                    >
+                                                        <Trash2 size={14} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

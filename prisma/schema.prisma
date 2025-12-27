@@ -60,6 +60,20 @@ model BlogCategory {
   updatedAt DateTime @updatedAt
 }
 
+// Blog Author Model
+model BlogAuthor {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  image     String?
+  bio       String?  @db.Text
+  role      String?  // e.g., "Legal Tech Expert", "Senior Editor"
+  email     String?
+  linkedin  String?
+  twitter   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // Blog Comment Model
 model BlogComment {
   id        String   @id @default(cuid())
