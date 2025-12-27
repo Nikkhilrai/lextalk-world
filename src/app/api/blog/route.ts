@@ -58,12 +58,31 @@ function generateMetaDescription(title: string, excerpt: string): string {
 
 // Helper function to auto-format blog content with proper styling
 function autoFormatContent(content: string): string {
-    // Skip if content already has markdown formatting
-    if (content.includes('##') || content.includes('**')) {
+    // Skip if content already has proper markdown formatting
+    if (content.includes('## ') && content.includes('\n- ')) {
         return content;
     }
 
-    const lines = content.split('\n');
+    // Step 1: Pre-process - separate inline bullet points onto their own lines
+    // Match patterns like "• point 1 • point 2" or "- point 1 - point 2"
+    let processedContent = content
+        .replace(/\s*[•]\s*/g, '\n• ')  // Bullet points
+        .replace(/\s+[-–]\s+(?=[A-Z])/g, '\n- ')  // Dashes before capital letters (likely bullets)
+        .replace(/\s+[*]\s+(?=[A-Z])/g, '\n* ');  // Asterisks before capital letters
+
+    // Step 2: Separate URLs onto their own lines
+    // Match URLs and put them on separate lines
+    processedContent = processedContent.replace(
+        /(https?:\/\/[^\s]+)/g,
+        '\n$1\n'
+    );
+
+    // Step 3: Clean up excessive newlines
+    processedContent = processedContent
+        .replace(/\n{3,}/g, '\n\n')  // Max 2 newlines
+        .trim();
+
+    const lines = processedContent.split('\n');
     const formattedLines: string[] = [];
 
     // Important keywords to highlight (make bold)
@@ -76,6 +95,7 @@ function autoFormatContent(content: string): string {
     ];
 
     let prevLineEmpty = true;
+    let inSourcesSection = false;
 
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i].trim();
@@ -86,7 +106,35 @@ function autoFormatContent(content: string): string {
             continue;
         }
 
-        // Detect headings: short lines (< 80 chars) that look like titles
+        // Detect "Sources Referred" section
+        if (line.toLowerCase().includes('sources referred') ||
+            line.toLowerCase().includes('references') ||
+            line.toLowerCase().includes('source:')) {
+            inSourcesSection = true;
+            if (!line.startsWith('#')) {
+                line = `## ${line}`;
+            }
+            formattedLines.push(line);
+            prevLineEmpty = false;
+            continue;
+        }
+
+        // Format URLs in sources section as list items
+        if (inSourcesSection && line.match(/^https?:\/\//)) {
+            formattedLines.push(`- ${line}`);
+            prevLineEmpty = false;
+            continue;
+        }
+
+        // Convert inline bullet markers to proper markdown bullets
+        if (line.startsWith('•') || line.startsWith('*') || line.startsWith('·')) {
+            line = '- ' + line.substring(1).trim();
+            formattedLines.push(line);
+            prevLineEmpty = false;
+            continue;
+        }
+
+        // Detect headings: short lines (<80 chars) that look like titles
         const isShortLine = line.length < 80;
         const hasNoPeriod = !line.endsWith('.');
         const hasTitleCase = line.split(' ').filter(w => w.length > 3).some(w => w[0] === w[0].toUpperCase());
@@ -95,7 +143,8 @@ function autoFormatContent(content: string): string {
         if (isLikelyHeading && !line.startsWith('#')) {
             // Make it a heading (## for H2)
             line = `## ${line}`;
-        } else {
+            inSourcesSection = false; // Reset if new section
+        } else if (!line.startsWith('-') && !line.startsWith('#')) {
             // Bold important phrases in regular paragraphs
             for (const keyword of importantKeywords) {
                 const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
