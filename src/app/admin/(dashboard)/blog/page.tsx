@@ -7,7 +7,7 @@ import {
     Star, StarOff, Calendar, MoreHorizontal, X, Save,
     Image as ImageIcon, FileText, Upload, CheckCircle,
     Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code,
-    Settings
+    Settings, Wand2
 } from "lucide-react";
 
 interface BlogPost {
@@ -264,6 +264,37 @@ export default function BlogAdminPage() {
         }
     };
 
+    // Reformat post content with auto-formatting
+    const handleReformat = async (post: BlogPost) => {
+        if (!confirm("This will auto-format the content with headings and bold keywords. Continue?")) return;
+
+        try {
+            const res = await fetch("/api/blog", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: post.id,
+                    title: post.title,
+                    content: post.content,
+                    category: post.category,
+                    excerpt: post.excerpt,
+                    reformat: true, // Force reformat
+                }),
+            });
+
+            if (res.ok) {
+                fetchPosts();
+                alert("Post reformatted successfully!");
+            } else {
+                const err = await res.json();
+                alert(err.error || "Failed to reformat post");
+            }
+        } catch (error) {
+            console.error("Error reformatting post:", error);
+            alert("Failed to reformat post");
+        }
+    };
+
     // Open modal for new/edit
     const openModal = (post?: BlogPost) => {
         if (post) {
@@ -495,6 +526,13 @@ export default function BlogAdminPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center justify-end gap-2">
+                                                <button
+                                                    onClick={() => handleReformat(post)}
+                                                    className="p-2 text-slate-400 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition-colors"
+                                                    title="Auto-format content"
+                                                >
+                                                    <Wand2 size={16} />
+                                                </button>
                                                 <button
                                                     onClick={() => openModal(post)}
                                                     className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
