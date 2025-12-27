@@ -96,6 +96,8 @@ export default function BlogAdminPage() {
         twitter: "",
     });
     const [savingAuthor, setSavingAuthor] = useState(false);
+    const [uploadingAuthorImage, setUploadingAuthorImage] = useState(false);
+    const authorImageInputRef = useRef<HTMLInputElement>(null);
 
     // Fetch posts
     const fetchPosts = async () => {
@@ -204,6 +206,34 @@ export default function BlogAdminPage() {
             });
         }
         setShowAuthorModal(true);
+    };
+
+    // Handle author image upload
+    const handleAuthorImageUpload = async (file: File) => {
+        setUploadingAuthorImage(true);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("type", "authors");
+
+            const res = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                setAuthorFormData(prev => ({ ...prev, image: data.url }));
+            } else {
+                const error = await res.json();
+                alert(error.error || "Failed to upload image");
+            }
+        } catch (error) {
+            console.error("Upload error:", error);
+            alert("Failed to upload image");
+        } finally {
+            setUploadingAuthorImage(false);
+        }
     };
 
     // Add category
@@ -1190,14 +1220,47 @@ export default function BlogAdminPage() {
 
                             {/* Author Image */}
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">Image URL</label>
-                                <input
-                                    type="text"
-                                    value={authorFormData.image}
-                                    onChange={(e) => setAuthorFormData({ ...authorFormData, image: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                                    placeholder="https://... or /uploads/..."
-                                />
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Profile Image</label>
+                                <div className="flex gap-2">
+                                    <input
+                                        ref={authorImageInputRef}
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) handleAuthorImageUpload(file);
+                                        }}
+                                    />
+                                    <input
+                                        type="text"
+                                        value={authorFormData.image}
+                                        onChange={(e) => setAuthorFormData({ ...authorFormData, image: e.target.value })}
+                                        className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                                        placeholder="Image URL or upload →"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => authorImageInputRef.current?.click()}
+                                        disabled={uploadingAuthorImage}
+                                        className="px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-colors flex items-center gap-2 disabled:opacity-50"
+                                    >
+                                        {uploadingAuthorImage ? (
+                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        ) : (
+                                            <>
+                                                <Upload size={16} />
+                                                Upload
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                                {authorFormData.image && (
+                                    <div className="mt-2 flex items-center gap-2">
+                                        <img src={authorFormData.image} alt="Preview" className="w-10 h-10 rounded-full object-cover" />
+                                        <span className="text-xs text-slate-400 truncate">{authorFormData.image}</span>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Author Bio */}
