@@ -285,7 +285,14 @@ export async function PUT(request: NextRequest) {
 
         // Handle publishDate -> createdAt conversion
         if (data.publishDate) {
-            data.createdAt = new Date(data.publishDate);
+            try {
+                const parsedDate = new Date(data.publishDate);
+                if (!isNaN(parsedDate.getTime())) {
+                    data.createdAt = parsedDate;
+                }
+            } catch (e) {
+                console.error("Date parsing error:", e);
+            }
             delete data.publishDate;
         }
 
@@ -297,6 +304,7 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json(post);
     } catch (error: any) {
         console.error("Error updating post:", error);
+        console.error("Error details:", JSON.stringify(error, null, 2));
 
         if (error.code === "P2025") {
             return NextResponse.json(
@@ -306,7 +314,7 @@ export async function PUT(request: NextRequest) {
         }
 
         return NextResponse.json(
-            { error: "Failed to update post" },
+            { error: `Failed to update post: ${error.message || 'Unknown error'}` },
             { status: 500 }
         );
     }
