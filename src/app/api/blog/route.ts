@@ -283,6 +283,12 @@ export async function PUT(request: NextRequest) {
             data.readTime = estimateReadTime(data.content);
         }
 
+        // Handle publishDate -> createdAt conversion
+        if (data.publishDate) {
+            data.createdAt = new Date(data.publishDate);
+            delete data.publishDate;
+        }
+
         const post = await prisma.blogPost.update({
             where: { id },
             data,
