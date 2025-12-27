@@ -42,9 +42,19 @@ export async function POST(request: NextRequest) {
         }
 
         // Check if Cloudinary is configured
-        const isCloudinaryConfigured = process.env.CLOUDINARY_CLOUD_NAME &&
-            process.env.CLOUDINARY_API_KEY &&
-            process.env.CLOUDINARY_API_SECRET;
+        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+        const apiKey = process.env.CLOUDINARY_API_KEY;
+        const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+        const isCloudinaryConfigured = cloudName && apiKey && apiSecret;
+
+        // Log which env vars are present (for debugging)
+        console.log("Cloudinary config check:", {
+            hasCloudName: !!cloudName,
+            hasApiKey: !!apiKey,
+            hasApiSecret: !!apiSecret,
+            isConfigured: isCloudinaryConfigured
+        });
 
         // Convert file to buffer
         const bytes = await file.arrayBuffer();
@@ -85,9 +95,24 @@ export async function POST(request: NextRequest) {
             }
 
         } else {
+            // In production (Vercel), local storage doesn't work
+            // Return helpful error message
+            const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL;
+
+            if (isProduction) {
+                const missing = [];
+                if (!cloudName) missing.push('CLOUDINARY_CLOUD_NAME');
+                if (!apiKey) missing.push('CLOUDINARY_API_KEY');
+                if (!apiSecret) missing.push('CLOUDINARY_API_SECRET');
+
+                return NextResponse.json(
+                    { error: `Cloudinary not configured. Missing environment variables: ${missing.join(', ')}. Please add them in Vercel Dashboard → Settings → Environment Variables.` },
+                    { status: 500 }
+                );
+            }
+
             // Fallback to Local Storage (only works in development)
-            console.log("Cloudinary credentials missing. Falling back to local storage.");
-            console.log("Note: Local storage will NOT work on Vercel/serverless deployments.");
+            console.log("Cloudinary credentials missing. Using local storage (dev only).");
 
             const ext = file.name.split(".").pop();
             const timestamp = Date.now();
