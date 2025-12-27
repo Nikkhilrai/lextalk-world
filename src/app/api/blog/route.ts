@@ -56,6 +56,70 @@ function generateMetaDescription(title: string, excerpt: string): string {
     return description;
 }
 
+// Helper function to auto-format blog content with proper styling
+function autoFormatContent(content: string): string {
+    // Skip if content already has markdown formatting
+    if (content.includes('##') || content.includes('**')) {
+        return content;
+    }
+
+    const lines = content.split('\n');
+    const formattedLines: string[] = [];
+
+    // Important keywords to highlight (make bold)
+    const importantKeywords = [
+        'key takeaway', 'important', 'note', 'conclusion', 'summary',
+        'research shows', 'studies suggest', 'experts say', 'according to',
+        'best practice', 'recommendation', 'insight', 'challenge',
+        'opportunity', 'innovation', 'transformation', 'disruption',
+        'strategy', 'approach', 'solution', 'framework', 'model'
+    ];
+
+    let prevLineEmpty = true;
+
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i].trim();
+
+        if (!line) {
+            formattedLines.push('');
+            prevLineEmpty = true;
+            continue;
+        }
+
+        // Detect headings: short lines (< 80 chars) that look like titles
+        const isShortLine = line.length < 80;
+        const hasNoPeriod = !line.endsWith('.');
+        const hasTitleCase = line.split(' ').filter(w => w.length > 3).some(w => w[0] === w[0].toUpperCase());
+        const isLikelyHeading = isShortLine && hasNoPeriod && hasTitleCase && prevLineEmpty;
+
+        if (isLikelyHeading && !line.startsWith('#')) {
+            // Make it a heading (## for H2)
+            line = `## ${line}`;
+        } else {
+            // Bold important phrases in regular paragraphs
+            for (const keyword of importantKeywords) {
+                const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+                if (regex.test(line)) {
+                    line = line.replace(regex, '**$1**');
+                }
+            }
+        }
+
+        formattedLines.push(line);
+        prevLineEmpty = false;
+    }
+
+    return formattedLines.join('\n');
+}
+
+// Helper function to estimate read time
+function estimateReadTime(content: string): string {
+    const wordsPerMinute = 200;
+    const wordCount = content.split(/\s+/).filter(w => w.length > 0).length;
+    const minutes = Math.ceil(wordCount / wordsPerMinute);
+    return `${minutes} min read`;
+}
+
 // GET all blog posts or single post by slug
 export async function GET(request: NextRequest) {
     try {
@@ -125,17 +189,23 @@ export async function POST(request: NextRequest) {
         const autoTags = tags || generateSeoTags(title, content, category);
         const autoMetaDescription = metaDescription || generateMetaDescription(title, excerpt);
 
+        // Auto-format content (add headings, bold keywords)
+        const formattedContent = autoFormatContent(content);
+
+        // Auto-generate read time if not provided
+        const autoReadTime = readTime || estimateReadTime(content);
+
         const post = await prisma.blogPost.create({
             data: {
                 title,
                 slug,
                 excerpt,
-                content,
+                content: formattedContent,
                 image,
                 category,
                 author,
                 authorImage: authorImage || null,
-                readTime: readTime || null,
+                readTime: autoReadTime,
                 featured: featured || false,
                 published: published || false,
                 tags: autoTags,
