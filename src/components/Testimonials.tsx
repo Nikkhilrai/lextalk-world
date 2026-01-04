@@ -49,8 +49,20 @@ const testimonials = [
         image: "/testimonials/Monique Ferraro.avif",
         quote: "In 25 years of legal practice, few platforms have matched LexTalk's caliber of thought leadership. Essential for executives.",
         rating: 5,
+    },
+    {
+        id: 6,
+        name: "Sarah Jenkins",
+        title: "Partner",
+        company: "Jenkins & Co",
+        image: "/testimonials/Alejandro Espejo.avif",
+        quote: "A truly remarkable experience that brought together the best minds in the legal industry.",
+        rating: 5,
     }
 ];
+
+// Loop data to ensure enough items for a smooth circle (aiming for ~12 items)
+const displayTestimonials = [...testimonials, ...testimonials];
 
 function StarRating({ rating }: { rating: number }) {
     return (
@@ -58,7 +70,7 @@ function StarRating({ rating }: { rating: number }) {
             {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                     key={i}
-                    className={`w-4 h-4 shadow-sm ${i < rating ? "fill-amber-500 text-amber-500" : "text-slate-600"}`}
+                    className={`w-3 h-3 shadow-sm ${i < rating ? "fill-amber-500 text-amber-500" : "text-slate-600"}`}
                 />
             ))}
         </div>
@@ -69,10 +81,13 @@ export function Testimonials() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-    // Calculated constants for 3D layout
-    const itemCount = testimonials.length;
+    // Constants
+    const CARD_WIDTH = 300; // px
+    const itemCount = displayTestimonials.length;
     const theta = 360 / itemCount;
-    const radius = Math.round((280 / 2) / Math.tan(Math.PI / itemCount)); // Approximate radius based on card width
+    // Radius calculation: r = (w / 2) / tan(theta/2)
+    // For 12 items, theta=30, tan(15) ~ 0.26. r ~ 150/0.26 ~ 570px
+    const radius = Math.round((CARD_WIDTH / 2) / Math.tan(Math.PI / itemCount));
 
     const handlePrev = () => {
         setActiveIndex(prev => prev - 1);
@@ -88,16 +103,15 @@ export function Testimonials() {
         if (!isAutoPlaying) return;
         const interval = setInterval(() => {
             setActiveIndex(prev => prev + 1);
-        }, 5000);
+        }, 4000);
         return () => clearInterval(interval);
     }, [isAutoPlaying]);
 
     return (
-        <section className="py-24 bg-[#0B0F19] relative overflow-hidden border-t border-slate-900 perspective-1000">
-            {/* Styling for 3D Scene */}
+        <section className="py-20 bg-[#0B0F19] relative overflow-hidden border-t border-slate-900">
             <style jsx>{`
                 .scene {
-                    perspective: 1000px;
+                    perspective: 1200px;
                     transform-style: preserve-3d;
                 }
                 .carousel {
@@ -105,78 +119,69 @@ export function Testimonials() {
                     height: 100%;
                     position: absolute;
                     transform-style: preserve-3d;
-                    transition: transform 1s ease-out;
+                    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
                 }
                 .carousel-item {
                     position: absolute;
                     left: 50%;
                     top: 50%;
-                    /* width: 280px;  Card Width defined here */
-                    /* height: 400px; Card Height */
-                    margin-left: -140px; /* Half of width */
-                    margin-top: -200px;  /* Half of height */
+                    width: ${CARD_WIDTH}px;
+                    height: 380px;
+                    margin-left: -${CARD_WIDTH / 2}px;
+                    margin-top: -190px;
                     transform-style: preserve-3d;
-                    backface-visibility: hidden; /* Or visible if we want transparency */
+                    backface-visibility: hidden;
                 }
             `}</style>
 
-            {/* Ambient Background */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px] mix-blend-screen" />
-                <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-indigo-900/10 rounded-full blur-[100px] mix-blend-screen" />
-            </div>
-
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center mb-16">
-                    <span className="inline-block py-1 px-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-bold tracking-widest uppercase mb-4">
-                        Client Stories
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-                        Heard from the <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Industry</span>
+                <div className="text-center mb-10">
+                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-2">
+                        Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Experiences</span>
                     </h2>
+                    <p className="text-slate-400 text-sm tracking-wider uppercase">What Our Community Says</p>
                 </div>
 
-                {/* 3D Scene Container */}
-                <div className="scene relative w-full h-[450px] flex justify-center items-center overflow-visible">
-
+                {/* 3D Scene */}
+                <div className="scene relative w-full h-[400px] flex justify-center items-center overflow-hidden">
                     <div
                         className="carousel"
-                        style={{ transform: `rotateY(${activeIndex * -theta}deg)` }}
+                        style={{
+                            transform: `translateZ(-${radius}px) rotateY(${activeIndex * -theta}deg)`
+                        }}
                     >
-                        {testimonials.map((item, index) => {
-                            // Calculate rotation for this item
+                        {displayTestimonials.map((item, index) => {
                             const angle = theta * index;
 
-                            // Determine if active (modulo arithmetic handles negative activeIndex)
-                            // This purely helps with styling classes, logic is handled by parent rotation
-                            const effectiveIndex = ((activeIndex % itemCount) + itemCount) % itemCount;
-                            const isActive = index === effectiveIndex;
+                            // Determine activity for styling
+                            // Normalize activeIndex to positive 0...length-1
+                            const normalizedActive = ((activeIndex % itemCount) + itemCount) % itemCount;
+                            const isActive = index === normalizedActive;
 
                             return (
                                 <div
-                                    key={item.id}
-                                    className="carousel-item w-[280px] h-[400px] md:w-[320px] md:h-[420px] ml-[-140px] mt-[-200px] md:ml-[-160px] md:mt-[-210px] transition-all duration-500"
+                                    key={`${item.id}-${index}`}
+                                    className="carousel-item"
                                     style={{
-                                        transform: `rotateY(${angle}deg) translateZ(400px)` // translateZ pushes them out into circle
+                                        transform: `rotateY(${angle}deg) translateZ(${radius}px)`
                                     }}
                                 >
-                                    {/* Card Inner */}
-                                    <div className={`w-full h-full rounded-2xl p-6 flex flex-col items-center justify-center text-center border transition-all duration-500 group
+                                    <div className={`w-full h-full rounded-xl p-6 flex flex-col items-center justify-center text-center border transition-all duration-500
                                         ${isActive
-                                            ? "bg-slate-900 border-amber-500/50 shadow-[0_0_50px_rgba(245,158,11,0.2)] opacity-100 scale-100"
-                                            : "bg-slate-900/40 border-slate-800 opacity-60 scale-95 blur-[1px] grayscale-[50%]"
+                                            ? "bg-slate-900 border-amber-500 shadow-[0_0_40px_rgba(245,158,11,0.15)] opacity-100"
+                                            : "bg-slate-900/80 border-slate-800 opacity-40 grayscale-[80%]"
                                         }`}
                                     >
-                                        <div className="mb-6 transform transition-transform duration-700">
-                                            <Quote className={`w-8 h-8 fill-current ${isActive ? "text-amber-500" : "text-slate-600"}`} />
+                                        <div className="mb-4">
+                                            <Quote className={`w-6 h-6 ${isActive ? "text-amber-500" : "text-slate-600"}`} />
                                         </div>
 
-                                        <p className={`font-serif text-lg leading-relaxed mb-6 ${isActive ? "text-slate-200" : "text-slate-500"}`}>
+                                        <p className={`font-serif text-base leading-relaxed mb-6 line-clamp-4 ${isActive ? "text-slate-200" : "text-slate-500"}`}>
                                             "{item.quote}"
                                         </p>
 
-                                        <div className="mt-auto">
-                                            <div className={`relative w-16 h-16 rounded-full overflow-hidden border-2 mx-auto mb-3 ${isActive ? "border-amber-500" : "border-slate-700"}`}>
+                                        <div className="mt-auto flex flex-col items-center">
+                                            <div className={`relative w-12 h-12 rounded-full overflow-hidden border-2 mb-2 ${isActive ? "border-amber-500" : "border-slate-700"}`}>
                                                 <Image
                                                     src={item.image}
                                                     alt={item.name}
@@ -184,10 +189,10 @@ export function Testimonials() {
                                                     className="object-cover"
                                                 />
                                             </div>
-                                            <h4 className={`text-base font-bold ${isActive ? "text-white" : "text-slate-400"}`}>
+                                            <h4 className={`text-sm font-bold ${isActive ? "text-white" : "text-slate-400"}`}>
                                                 {item.name}
                                             </h4>
-                                            <p className="text-xs text-amber-500 font-bold uppercase tracking-wider">
+                                            <p className="text-[10px] text-amber-500 font-bold uppercase tracking-wider">
                                                 {item.company}
                                             </p>
 
@@ -200,19 +205,13 @@ export function Testimonials() {
                     </div>
                 </div>
 
-                {/* Navigation Buttons */}
-                <div className="flex justify-center gap-6 mt-12 relative z-20">
-                    <button
-                        onClick={handlePrev}
-                        className="p-4 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:bg-amber-600 transition-colors"
-                    >
-                        <ChevronLeft className="w-6 h-6" />
+                {/* Controls */}
+                <div className="flex justify-center gap-4 mt-8">
+                    <button onClick={handlePrev} className="p-3 rounded-full bg-slate-800 border border-slate-700 hover:border-amber-500 hover:text-amber-500 transition-colors">
+                        <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <button
-                        onClick={handleNext}
-                        className="p-4 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:bg-amber-600 transition-colors"
-                    >
-                        <ChevronRight className="w-6 h-6" />
+                    <button onClick={handleNext} className="p-3 rounded-full bg-slate-800 border border-slate-700 hover:border-amber-500 hover:text-amber-500 transition-colors">
+                        <ChevronRight className="w-5 h-5" />
                     </button>
                 </div>
             </div>
