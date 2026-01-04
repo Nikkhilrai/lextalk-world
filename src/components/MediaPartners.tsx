@@ -3,7 +3,6 @@
 import Image from "next/image";
 
 const partners = [
-    { name: "The Law Reporters", logo: "/media-partners/TLR New Logo WB.png" },
     { name: "Global IP Matrix", logo: "/media-partners/The global IP Matrix Logo.png" },
     { name: "LawBhoomi", logo: "/media-partners/Law Bhoomi logo.png" },
     { name: "Women's IP World", logo: "/media-partners/Women's IP World.png" },
@@ -64,6 +63,27 @@ export function MediaPartners() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* Exclusive Partner Section */}
+                <div className="mt-16 text-center">
+                    <h3 className="text-xl md:text-2xl font-serif font-bold text-[#1e2848] mb-8 relative inline-block">
+                        Exclusive Content and Podcast Partner
+                        <div className="absolute -bottom-2 left-0 right-0 h-1 bg-amber-400 rounded-full opacity-30"></div>
+                    </h3>
+
+                    <div className="flex justify-center">
+                        <div className="group bg-white rounded-xl p-6 flex items-center justify-center h-32 w-64 md:w-80 border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-indigo-100 hover:-translate-y-1">
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src="/media-partners/TLR New Logo WB.png"
+                                    alt="The Law Reporters"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
