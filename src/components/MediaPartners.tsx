@@ -73,7 +73,7 @@ export function MediaPartners() {
                     </h3>
 
                     <div className="flex justify-center">
-                        <div className="group bg-white rounded-xl p-6 flex items-center justify-center h-32 w-64 md:w-80 border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-indigo-100 hover:-translate-y-1">
+                        <div className="group bg-white rounded-xl p-4 flex items-center justify-center h-40 w-72 md:h-52 md:w-[28rem] border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-indigo-100 hover:-translate-y-1">
                             <div className="relative w-full h-full">
                                 <Image
                                     src="/media-partners/TLR New Logo WB.png"
