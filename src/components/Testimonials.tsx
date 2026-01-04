@@ -59,7 +59,7 @@ function StarRating({ rating }: { rating: number }) {
             {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                     key={i}
-                    className={`w-4 h-4 shadow-sm ${i < rating ? "fill-amber-400 text-amber-400 drop-shadow-[0_0_2px_rgba(251,191,36,0.5)]" : "text-slate-700"}`}
+                    className={`w-3.5 h-3.5 shadow-sm ${i < rating ? "fill-amber-400 text-amber-400 drop-shadow-[0_0_2px_rgba(251,191,36,0.5)]" : "text-slate-700"}`}
                 />
             ))}
         </div>
@@ -89,7 +89,6 @@ export function Testimonials() {
 
     const getCardStyle = (index: number) => {
         const length = testimonials.length;
-        // Calculate shortest distance in a circular array
         let diff = (index - activeIndex + length) % length;
         if (diff > length / 2) diff -= length;
 
@@ -103,11 +102,10 @@ export function Testimonials() {
                 visibility: "visible" as const,
             };
         }
-        // Immediate Neighbors (Left/Right)
+        // Immediate Neighbors
         else if (Math.abs(diff) === 1) {
-            // On mobile, hide neighbors partially to avoid clutter, or scale down more
             return {
-                transform: `translateX(${diff * 60}%) scale(0.8)`, // Increased spacing (was 40%)
+                transform: `translateX(${diff * 55}%) scale(0.75)`,
                 zIndex: 20,
                 opacity: 0.4,
                 filter: "blur(4px)",
@@ -127,7 +125,7 @@ export function Testimonials() {
     };
 
     return (
-        <section className="py-24 md:py-32 bg-[#0B0F19] relative overflow-hidden border-t border-slate-900">
+        <section className="py-24 bg-[#0B0F19] relative overflow-hidden border-t border-slate-900">
             {/* Ambient Background */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px] mix-blend-screen" />
@@ -135,7 +133,7 @@ export function Testimonials() {
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center mb-16">
+                <div className="text-center mb-24 md:mb-28">
                     <span className="inline-block py-1 px-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">
                         Client Stories
                     </span>
@@ -148,14 +146,14 @@ export function Testimonials() {
                 </div>
 
                 {/* 3D Carousel Container */}
-                <div className="relative max-w-5xl mx-auto h-[500px] flex items-center justify-center">
+                <div className="relative max-w-5xl mx-auto h-[400px] flex items-center justify-center">
 
                     {/* Navigation Buttons */}
-                    <button onClick={handlePrev} className="absolute left-2 md:-left-12 z-40 p-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110 backdrop-blur-md">
-                        <ChevronLeft className="w-6 h-6" />
+                    <button onClick={handlePrev} className="absolute left-2 md:-left-12 z-40 p-3 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110 backdrop-blur-md">
+                        <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <button onClick={handleNext} className="absolute right-2 md:-right-12 z-40 p-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110 backdrop-blur-md">
-                        <ChevronRight className="w-6 h-6" />
+                    <button onClick={handleNext} className="absolute right-2 md:-right-12 z-40 p-3 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110 backdrop-blur-md">
+                        <ChevronRight className="w-5 h-5" />
                     </button>
 
                     <div className="relative w-full h-full flex items-center justify-center">
@@ -169,7 +167,7 @@ export function Testimonials() {
                                     className="absolute w-[85%] md:w-[60%] lg:w-[50%] transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
                                     style={style}
                                 >
-                                    <div className={`relative rounded-[2.5rem] p-8 md:p-12 overflow-hidden transition-all duration-500 ${isActive
+                                    <div className={`relative rounded-[2rem] p-6 md:p-8 overflow-hidden transition-all duration-500 ${isActive
                                             ? "bg-slate-900/60 backdrop-blur-2xl border border-amber-500/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] shadow-amber-900/5"
                                             : "bg-slate-900/40 backdrop-blur-sm border border-slate-800"
                                         }`}>
@@ -181,15 +179,15 @@ export function Testimonials() {
 
                                         <div className="relative z-10 flex flex-col items-center text-center">
                                             {/* Quote Icon */}
-                                            <div className="mb-6 md:mb-8 transform transition-transform duration-700 delay-100">
-                                                <div className={`p-3 rounded-full bg-slate-800/50 ${isActive ? "text-amber-500" : "text-slate-600"}`}>
-                                                    <Quote className="w-8 h-8 md:w-10 md:h-10 fill-current" />
+                                            <div className="mb-4 md:mb-6 transform transition-transform duration-700 delay-100">
+                                                <div className={`p-2.5 rounded-full bg-slate-800/50 ${isActive ? "text-amber-500" : "text-slate-600"}`}>
+                                                    <Quote className="w-6 h-6 md:w-8 md:h-8 fill-current" />
                                                 </div>
                                             </div>
 
                                             {/* Text */}
-                                            <blockquote className="mb-8 md:mb-10">
-                                                <p className={`font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed ${isActive ? "text-slate-100" : "text-slate-500"
+                                            <blockquote className="mb-6 md:mb-8">
+                                                <p className={`font-serif text-lg md:text-xl lg:text-2xl leading-relaxed ${isActive ? "text-slate-100" : "text-slate-500"
                                                     }`}>
                                                     "{testimonial.quote}"
                                                 </p>
@@ -197,9 +195,9 @@ export function Testimonials() {
 
                                             {/* Author */}
                                             <div className="flex flex-col items-center">
-                                                <div className={`relative mb-4 transition-all duration-500 ${isActive
-                                                        ? "w-20 h-20 ring-4 ring-amber-500/20 shadow-lg"
-                                                        : "w-14 h-14 grayscale opacity-60"
+                                                <div className={`relative mb-3 transition-all duration-500 ${isActive
+                                                        ? "w-16 h-16 ring-4 ring-amber-500/20 shadow-lg"
+                                                        : "w-12 h-12 grayscale opacity-60"
                                                     } rounded-full overflow-hidden`}>
                                                     <Image
                                                         src={testimonial.image}
@@ -209,13 +207,13 @@ export function Testimonials() {
                                                     />
                                                 </div>
 
-                                                <h4 className={`text-lg font-bold mb-1 ${isActive ? "text-white" : "text-slate-600"
+                                                <h4 className={`text-base font-bold mb-1 ${isActive ? "text-white" : "text-slate-600"
                                                     }`}>{testimonial.name}</h4>
 
-                                                <p className="text-amber-500 text-xs font-bold uppercase tracking-wider mb-2">
+                                                <p className="text-amber-500 text-[10px] font-bold uppercase tracking-wider mb-1">
                                                     {testimonial.title}
                                                 </p>
-                                                <p className="text-slate-500 text-xs mb-4">
+                                                <p className="text-slate-500 text-[10px] mb-3">
                                                     {testimonial.company}
                                                 </p>
 
@@ -234,7 +232,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Pagination Dots */}
-                <div className="flex justify-center gap-3 mt-12">
+                <div className="flex justify-center gap-3 mt-8">
                     {testimonials.map((_, i) => (
                         <button
                             key={i}
