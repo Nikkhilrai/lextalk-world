@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 const partners = [
+    { name: "The Law Reporters", logo: "/media-partners/TLR New Logo WB.png" },
     { name: "Global IP Matrix", logo: "/media-partners/The global IP Matrix Logo.png" },
     { name: "LawBhoomi", logo: "/media-partners/Law Bhoomi logo.png" },
     { name: "Women's IP World", logo: "/media-partners/Women's IP World.png" },
