@@ -157,22 +157,11 @@ function PassDetails({ pass }: { pass: typeof passes[0] }) {
 
 export default function DubaiAwardeeConfirmationPage() {
     return (
-        <main className="min-h-screen bg-slate-50 pt-24">
+        <main className="min-h-screen bg-slate-50">
             <Navbar />
 
-            {/* Breadcrumb */}
-            <div className="bg-white border-b border-slate-100">
-                <div className="container mx-auto px-4 py-4">
-                    <nav className="flex items-center gap-2 text-sm">
-                        <Link href="/" className="text-blue-600 hover:underline">Home</Link>
-                        <span className="text-slate-400">/</span>
-                        <Link href="/dubai-awardee-confirmation-2026" className="text-blue-600 hover:underline">Dubai Awardee Pass 2026</Link>
-                    </nav>
-                </div>
-            </div>
-
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 sm:py-16">
+            <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-32 pb-12 sm:pt-40 sm:pb-16">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-4">
                         Dubai Awardee Confirmation <span className="text-amber-400">2026</span>
