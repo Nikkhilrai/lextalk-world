@@ -31,70 +31,73 @@ export default function CheckoutPage() {
 
     const handlePayment = async () => {
         setIsProcessing(true);
+        console.log("Starting Payment Flow...");
 
-        const res = await loadRazorpayScript();
+        try {
+            const res = await loadRazorpayScript();
 
-        if (!res) {
-            alert("Razorpay SDK failed to load. Are you online?");
+            if (!res) {
+                alert("Razorpay SDK failed to load. Are you online?");
+                setIsProcessing(false);
+                return;
+            }
+
+            const orderData = await fetch("/api/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: total, currency: "USD" }),
+            }).then((t) => {
+                if (!t.ok) throw new Error(`API Error: ${t.status} ${t.statusText}`);
+                return t.json();
+            });
+
+            console.log("Order Data Received:", orderData);
+
+            if (orderData.error) {
+                console.error("Order Creation Error:", orderData.error);
+                alert(`Payment Init Failed: ${orderData.error}`);
+                setIsProcessing(false);
+                return;
+            }
+
+            const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+            console.log("Debug: KeyID:", keyId);
+
+            if (!keyId && !orderData.mock) {
+                alert("Configuration Error: Missing Razorpay Key ID in Environment Variables.");
+                setIsProcessing(false);
+                return;
+            }
+
+            const options = {
+                key: keyId || "test_key_id",
+                amount: orderData.amount,
+                currency: orderData.currency,
+                name: "LexTalk World",
+                description: "Dubai Conference Pass 2026",
+                image: "https://lextalkworld.in/logo/Lextalk-Logo.png",
+                order_id: orderData.orderId,
+                handler: function (response: any) {
+                    clearCart();
+                    router.push("/payment-success");
+                },
+                prefill: {
+                    name: "LexTalk Delegate",
+                    email: "delegate@example.com",
+                    contact: "9999999999",
+                },
+                notes: { address: "Dubai Conference Office" },
+                theme: { color: "#0f172a" },
+            };
+
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+        } catch (err: any) {
+            console.error("Payment Handle Error:", err);
+            alert(`Client Error: ${err.message || "Unknown error"}`);
+        } finally {
             setIsProcessing(false);
-            return;
         }
-
-        // Create Order
-        const orderData = await fetch("/api/create-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: total, currency: "USD" }),
-        }).then((t) => t.json());
-
-        if (orderData.error) {
-            console.error("Order Creation Error:", orderData.error);
-            alert(`Payment Init Failed: ${orderData.error}`);
-            setIsProcessing(false);
-            return;
-        }
-
-        const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-        console.log("Debug: KeyID:", keyId, "Order:", orderData);
-
-        if (!keyId && !orderData.mock) {
-            alert("Configuration Error: Missing Razorpay Key ID in Environment Variables.");
-            setIsProcessing(false);
-            return;
-        }
-
-        const options = {
-            key: keyId || "test_key_id", // Enter the Key ID generated from the Dashboard
-            amount: orderData.amount,
-            currency: orderData.currency,
-            name: "LexTalk World",
-            description: "Dubai Conference Pass 2026",
-            image: "https://lextalkworld.in/logo/Lextalk-Logo.png", // Ensure this path is correct
-            order_id: orderData.orderId,
-            handler: function (response: any) {
-                // Validate payment at server - using mock success for now
-                // alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature);
-                clearCart();
-                router.push("/payment-success");
-            },
-            prefill: {
-                name: "LexTalk Delegate",
-                email: "delegate@example.com",
-                contact: "9999999999",
-            },
-            notes: {
-                address: "Dubai Conference Office",
-            },
-            theme: {
-                color: "#0f172a", // Slate-900
-            },
-        };
-
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
-        setIsProcessing(false);
     };
 
     if (items.length === 0) {
@@ -203,6 +206,10 @@ export default function CheckoutPage() {
                     </div>
 
                 </div>
+            </div>
+
+            <div className="text-center py-4 text-slate-300 text-xs">
+                v2.1 Debug Build - Razorpay Integration
             </div>
 
             <Footer />
