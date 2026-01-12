@@ -1,47 +1,90 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "@/components/CheckoutForm";
+import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ShieldCheck, Lock } from "lucide-react";
+import { ShieldCheck, Lock, CreditCard } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-// Make sure to call loadStripe outside of a component’s render to avoid
-// recreating the Stripe object on every render.
-const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_mock_key_for_ui_testing"
-);
+declare global {
+    interface Window {
+        Razorpay: any;
+    }
+}
 
 export default function CheckoutPage() {
-    const [clientSecret, setClientSecret] = useState("");
-    const { items, total } = useCart();
+    const { items, total, clearCart } = useCart();
+    const router = useRouter();
+    const [isProcessing, setIsProcessing] = useState(false);
 
-    useEffect(() => {
-        // Create PaymentIntent as soon as the page loads
-        if (total > 0) {
-            fetch("/api/create-payment-intent", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ items, amount: total }),
-            })
-                .then((res) => res.json())
-                .then((data) => setClientSecret(data.clientSecret));
-        }
-    }, [items, total]);
-
-    const appearance = {
-        theme: 'stripe' as const,
-        variables: {
-            colorPrimary: '#0f172a',
-        },
+    const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
     };
 
-    const options = {
-        clientSecret,
-        appearance,
+    const handlePayment = async () => {
+        setIsProcessing(true);
+
+        const res = await loadRazorpayScript();
+
+        if (!res) {
+            alert("Razorpay SDK failed to load. Are you online?");
+            setIsProcessing(false);
+            return;
+        }
+
+        // Create Order
+        const orderData = await fetch("/api/create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: total, currency: "USD" }),
+        }).then((t) => t.json());
+
+        if (orderData.error) {
+            alert(orderData.error);
+            setIsProcessing(false);
+            return;
+        }
+
+        const options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "test_key_id", // Enter the Key ID generated from the Dashboard
+            amount: orderData.amount,
+            currency: orderData.currency,
+            name: "LexTalk World",
+            description: "Dubai Conference Pass 2026",
+            image: "https://lextalkworld.in/logo/Lextalk-Logo.png", // Ensure this path is correct
+            order_id: orderData.orderId,
+            handler: function (response: any) {
+                // Validate payment at server - using mock success for now
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature);
+                clearCart();
+                router.push("/payment-success");
+            },
+            prefill: {
+                name: "LexTalk Delegate",
+                email: "delegate@example.com",
+                contact: "9999999999",
+            },
+            notes: {
+                address: "Dubai Conference Office",
+            },
+            theme: {
+                color: "#0f172a", // Slate-900
+            },
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+        setIsProcessing(false);
     };
 
     if (items.length === 0) {
@@ -75,7 +118,7 @@ export default function CheckoutPage() {
                                     <div key={item.id} className="flex justify-between items-start gap-4">
                                         <div className="flex gap-3">
                                             <div className="relative w-16 h-16 bg-slate-100 rounded-md overflow-hidden flex-shrink-0">
-                                                <img src={item.image} alt={item.name} className="object-cover w-full h-full" />
+                                                <Image src={item.image || ""} alt={item.name} fill className="object-contain p-1" />
                                             </div>
                                             <div>
                                                 <h3 className="font-semibold text-slate-900 text-sm sm:text-base">{item.name}</h3>
@@ -118,15 +161,34 @@ export default function CheckoutPage() {
                                 </div>
                             </div>
 
-                            {clientSecret ? (
-                                <Elements options={options} stripe={stripePromise}>
-                                    <CheckoutForm amount={total} />
-                                </Elements>
-                            ) : (
-                                <div className="flex items-center justify-center py-20">
-                                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
+                            <div className="space-y-6">
+                                <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg flex gap-3 text-blue-800">
+                                    <CreditCard className="flex-shrink-0" size={24} />
+                                    <div>
+                                        <h3 className="font-bold text-sm">Cards, UPI, Netbanking</h3>
+                                        <p className="text-xs mt-1">Pay securely using Razorpay standard checkout.</p>
+                                    </div>
                                 </div>
-                            )}
+
+                                <button
+                                    onClick={handlePayment}
+                                    disabled={isProcessing}
+                                    className="w-full py-4 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                >
+                                    {isProcessing ? (
+                                        <>
+                                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        `Pay $${total.toLocaleString()}`
+                                    )}
+                                </button>
+
+                                <p className="text-slate-400 text-xs text-center">
+                                    By proceeding, you agree to our Terms of Service and Privacy Policy.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
