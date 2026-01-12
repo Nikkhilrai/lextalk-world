@@ -109,6 +109,7 @@ export default function CheckoutPage() {
                                 {!paypalClientId ? (
                                     <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
                                         <strong>Configuration Required:</strong> PayPal Client ID is not set. Please add NEXT_PUBLIC_PAYPAL_CLIENT_ID to environment variables.
+                                        <br /><span className="text-xs text-yellow-600">(Debug: Key starts with: {paypalClientId ? paypalClientId.substring(0, 10) + "..." : "undefined"})</span>
                                     </div>
                                 ) : (
                                     <PayPalScriptProvider options={{
