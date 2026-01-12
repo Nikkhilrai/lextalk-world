@@ -1,65 +1,30 @@
 import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { prisma } from "@/lib/prisma";
 
-const NOMINATION_FEE_USD = 100; // $100.00
-
-export async function POST(req: Request) {
+export async function POST(request: Request) {
     try {
-        const { nominationId } = await req.json();
+        const { amount } = await request.json();
 
-        if (!nominationId) {
-            return NextResponse.json(
-                { error: "Nomination ID is required" },
-                { status: 400 }
-            );
+        if (!process.env.STRIPE_SECRET_KEY) {
+            console.warn("Stripe keys missing - returning mock client secret");
+            // Return a fast mock secret for UI testing if real Stripe is not connected
+            return NextResponse.json({ clientSecret: "mock_secret_for_ui_testing" });
         }
 
-        const nomination = await prisma.nomination.findUnique({
-            where: { id: nominationId },
-        });
-
-        if (!nomination) {
-            return NextResponse.json(
-                { error: "Nomination not found" },
-                { status: 404 }
-            );
-        }
-
-        // Create Payment Intent
+        // Create a PaymentIntent with the order amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: NOMINATION_FEE_USD * 100, // Cents
+            amount: Math.round(amount * 100), // Ensure integer cents
             currency: "usd",
-            metadata: {
-                nominationId: nomination.id,
-                nomineeName: nomination.nomineeName,
-            },
             automatic_payment_methods: {
                 enabled: true,
             },
         });
 
-        // Save Payment record locally
-        await prisma.payment.create({
-            data: {
-                amount: NOMINATION_FEE_USD,
-                currency: "usd",
-                stripePaymentId: paymentIntent.id,
-                status: "pending",
-                nomination: {
-                    connect: { id: nomination.id }
-                }
-            }
-        });
-
-        return NextResponse.json({
-            clientSecret: paymentIntent.client_secret,
-        });
-
+        return NextResponse.json({ clientSecret: paymentIntent.client_secret });
     } catch (error) {
-        console.error("Payment intent error:", error);
+        console.error("Internal Error:", error);
         return NextResponse.json(
-            { error: "Failed to create payment session" },
+            { error: "Error creating payment intent" },
             { status: 500 }
         );
     }

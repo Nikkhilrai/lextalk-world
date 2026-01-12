@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { CartProvider } from "@/contexts/CartContext";
-import { CartSidebar } from "@/components/CartSidebar";
 
 export const metadata: Metadata = {
     title: "Dubai Awardee Confirmation 2026 | LexTalk World",
@@ -18,9 +16,8 @@ export default function DubaiAwardeeLayout({
     children: React.ReactNode;
 }) {
     return (
-        <CartProvider>
+        <>
             {children}
-            <CartSidebar />
-        </CartProvider>
+        </>
     );
 }

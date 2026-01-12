@@ -3,11 +3,18 @@
 import { X, Minus, Plus, Trash2, Tag, ShieldCheck, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function CartSidebar() {
     const { items, isOpen, closeCart, updateQuantity, removeItem, total, itemCount } = useCart();
     const [promoCode, setPromoCode] = useState("");
+    const router = useRouter();
+
+    const handleCheckout = () => {
+        closeCart();
+        router.push("/checkout");
+    };
 
     if (!isOpen) return null;
 
@@ -136,7 +143,10 @@ export function CartSidebar() {
                         </div>
 
                         {/* Checkout Buttons */}
-                        <button className="w-full py-3.5 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+                        <button
+                            onClick={handleCheckout}
+                            className="w-full py-3.5 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+                        >
                             Checkout
                         </button>
                         <button
