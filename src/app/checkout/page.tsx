@@ -293,7 +293,32 @@ export default function CheckoutPage() {
                                                         if (actions.order) {
                                                             const order = await actions.order.capture();
                                                             console.log("PayPal Order Captured:", order);
-                                                            console.log("Customer Details:", customerDetails);
+
+                                                            // Get pass type from items
+                                                            const passType = items.map(i => i.name).join(", ");
+
+                                                            // Send confirmation email
+                                                            try {
+                                                                const emailRes = await fetch("/api/send-confirmation", {
+                                                                    method: "POST",
+                                                                    headers: { "Content-Type": "application/json" },
+                                                                    body: JSON.stringify({
+                                                                        customerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                        email: customerDetails.email,
+                                                                        phone: customerDetails.phone,
+                                                                        organization: customerDetails.organization,
+                                                                        designation: customerDetails.designation,
+                                                                        passType,
+                                                                        amount: total.toFixed(2),
+                                                                        transactionId: order.id,
+                                                                    }),
+                                                                });
+                                                                const emailData = await emailRes.json();
+                                                                console.log("Email Confirmation:", emailData);
+                                                            } catch (emailErr) {
+                                                                console.error("Email send error:", emailErr);
+                                                            }
+
                                                             clearCart();
                                                             router.push("/payment-success");
                                                         }
