@@ -20,7 +20,7 @@ const passes = [
         id: "standard-pass-dubai-2026",
         name: "Standard Pass",
         price: 1200,
-        image: "/passes/standard-pass.png",
+        image: "/passes/standard pass.webp",
         tier: "Standard",
         benefits: [
             "Full event access, networking sessions & panel discussions",
@@ -35,7 +35,7 @@ const passes = [
         id: "premium-pass-dubai-2026",
         name: "Premium Pass",
         price: 1500,
-        image: "/passes/premium-pass.png",
+        image: "/passes/premium pass.avif",
         tier: "Premium",
         benefits: [
             "All Standard Pass Benefits, PLUS:",
@@ -46,7 +46,7 @@ const passes = [
         id: "exclusive-pass-dubai-2026",
         name: "Exclusive Pass",
         price: 2000,
-        image: "/passes/exclusive-pass.png",
+        image: "/passes/Exclusive Pass.webp",
         tier: "Exclusive",
         benefits: [
             "All Premium Pass Benefits, PLUS:",
