@@ -4,13 +4,11 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, Check, Award, ArrowRight, Star, Trophy } from "lucide-react";
 import Image from "next/image";
 
-const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
+
 
 // --- OPTIONS ---
 const INDIVIDUAL_ROLES = [
@@ -83,8 +81,8 @@ type FormValues = z.infer<typeof nominationSchema>;
 
 export function NominationForm() {
     const [step, setStep] = useState(1);
-    const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [isComplete, setIsComplete] = useState(false);
+
     const totalSteps = 6;
 
     const { register, handleSubmit, watch, trigger, setValue, formState: { errors, isSubmitting } } = useForm<FormValues>({
@@ -122,9 +120,6 @@ export function NominationForm() {
             const res = await fetch("/api/nominate", { method: "POST", body: JSON.stringify(payload) });
             const json = await res.json();
             if (!res.ok) throw new Error(json.error);
-            const payRes = await fetch("/api/create-payment-intent", { method: "POST", body: JSON.stringify({ nominationId: json.nominationId }) });
-            const payJson = await payRes.json();
-            setClientSecret(payJson.clientSecret);
             setStep(6);
         } catch (err) {
             console.error(err);
@@ -507,11 +502,15 @@ export function NominationForm() {
                                     <h3 className="text-2xl font-bold text-slate-800 mb-2">Nomination Fee: $50.00 USD</h3>
                                     <p className="text-slate-500">Fully refundable if not selected</p>
                                 </div>
-                                {clientSecret && stripePromise ? (
-                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-                                        <PaymentForm onSuccess={() => setIsComplete(true)} />
-                                    </Elements>
-                                ) : <p className="text-center text-red-500">Payment error. Contact support.</p>}
+                                <div className="text-center p-8 bg-slate-50 rounded-xl border border-slate-200">
+                                    <p className="text-slate-600">Payment integration coming soon.</p>
+                                    <button
+                                        onClick={() => setIsComplete(true)}
+                                        className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
+                                    >
+                                        Simulate Success
+                                    </button>
+                                </div>
                             </div>
                         ) : (
                             <div className="text-center py-12">
@@ -561,30 +560,4 @@ const TextArea = ({ label, required, error, hint, ...props }: any) => (
     </div>
 );
 
-function PaymentForm({ onSuccess }: { onSuccess: () => void }) {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [loading, setLoading] = useState(false);
-    const [msg, setMsg] = useState("");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!stripe || !elements) return;
-        setLoading(true);
-        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: window.location.origin + "/awards" }, redirect: "if_required" });
-        if (error) setMsg(error.message || "Payment failed");
-        else onSuccess();
-        setLoading(false);
-    };
-
-    return (
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <PaymentElement />
-            <button disabled={!stripe || loading} className="w-full py-4 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg hover:shadow-lg hover:shadow-amber-300/50 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trophy className="w-5 h-5" />}
-                {loading ? "Processing..." : "Pay $50.00 USD"}
-            </button>
-            {msg && <p className="text-red-500 text-center text-sm">{msg}</p>}
-        </form>
-    );
-}
