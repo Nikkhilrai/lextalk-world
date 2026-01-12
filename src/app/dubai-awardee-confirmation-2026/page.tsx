@@ -75,7 +75,7 @@ function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void
     return (
         <div
             onClick={onOpen}
-            className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer group"
+            className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200/50 hover:-translate-y-1 active:scale-[0.98] transition-all duration-500 ease-out flex flex-col h-full cursor-pointer group"
         >
             {/* Pass Image */}
             <div className="relative aspect-video w-full bg-slate-100 overflow-hidden">
@@ -83,7 +83,7 @@ function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void
                     src={pass.image}
                     alt={pass.name}
                     fill
-                    className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                    className="object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
             </div>
