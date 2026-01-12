@@ -70,75 +70,68 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
     const shareText = `Check out the ${pass.name} for LexTalk World Dubai 2026!`;
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
             {/* Pass Image */}
-            <div className={`relative h-48 sm:h-56 bg-gradient-to-br ${pass.color} p-4 flex items-center justify-center`}>
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.3),transparent_70%)]" />
-                </div>
-                <div className="relative text-center">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                        <Image
-                            src="/logo/Lextalk-Logo-White.png"
-                            alt="LexTalk World"
-                            width={120}
-                            height={40}
-                            className="h-8 w-auto object-contain"
-                        />
-                    </div>
-                    <p className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase mb-1">Conference</p>
-                    <h3 className="text-white font-serif text-2xl sm:text-3xl font-bold mb-2">{pass.tier}</h3>
-                    <p className="text-amber-400 font-bold text-3xl sm:text-4xl">${pass.price.toLocaleString()}</p>
-                </div>
+            <div className="relative aspect-square w-full bg-slate-100">
+                <Image
+                    src={pass.image}
+                    alt={pass.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
             </div>
 
             {/* Pass Details */}
-            <div className="p-5 sm:p-6">
-                <h3 className="text-xl font-serif font-bold text-slate-900 mb-1">{pass.name}</h3>
-                <div className="w-10 h-0.5 bg-slate-200 mb-3" />
-                <p className="text-lg font-bold text-slate-700 mb-4">${pass.price.toLocaleString()}.00</p>
+            <div className="p-5 sm:p-6 flex flex-col flex-1">
+                <div className="flex-1">
+                    <h3 className="text-xl font-serif font-bold text-slate-900 mb-1">{pass.name}</h3>
+                    <div className="w-10 h-0.5 bg-amber-500/50 mb-3" />
+                    <p className="text-2xl font-bold text-slate-900 mb-4">${pass.price.toLocaleString()}.00</p>
+                </div>
 
                 {/* Add to Cart Button */}
                 <button
                     onClick={handleAddToCart}
-                    className="w-full py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors mb-4"
+                    className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg shadow-amber-500/20 mb-6"
                 >
                     Add to Cart
                 </button>
 
                 {/* Share Buttons */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-4 pt-4 border-t border-slate-100">
                     <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700 transition-colors"
+                        className="text-slate-400 hover:text-blue-600 transition-colors"
                     >
-                        <Facebook size={16} className="text-white" />
+                        <Facebook size={20} />
                     </a>
                     <a
                         href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(shareText)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition-colors"
+                        className="text-slate-400 hover:text-red-600 transition-colors"
                     >
-                        <Share2 size={16} className="text-white" />
+                        <Share2 size={20} />
                     </a>
                     <a
                         href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center hover:bg-green-700 transition-colors"
+                        className="text-slate-400 hover:text-green-600 transition-colors"
                     >
-                        <MessageCircle size={16} className="text-white" />
+                        <MessageCircle size={20} />
                     </a>
                     <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-slate-900 transition-colors"
+                        className="text-slate-400 hover:text-slate-900 transition-colors"
                     >
-                        <Twitter size={16} className="text-white" />
+                        <Twitter size={20} />
                     </a>
                 </div>
             </div>
@@ -164,7 +157,7 @@ function PassDetails({ pass }: { pass: typeof passes[0] }) {
 
 export default function DubaiAwardeeConfirmationPage() {
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen bg-slate-50 pt-24">
             <Navbar />
 
             {/* Breadcrumb */}
