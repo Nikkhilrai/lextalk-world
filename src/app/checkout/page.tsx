@@ -49,13 +49,22 @@ export default function CheckoutPage() {
 
         if (orderData.error) {
             console.error("Order Creation Error:", orderData.error);
-            alert(`Payment Failed: ${orderData.error}`);
+            alert(`Payment Init Failed: ${orderData.error}`);
+            setIsProcessing(false);
+            return;
+        }
+
+        const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+        console.log("Debug: KeyID:", keyId, "Order:", orderData);
+
+        if (!keyId && !orderData.mock) {
+            alert("Configuration Error: Missing Razorpay Key ID in Environment Variables.");
             setIsProcessing(false);
             return;
         }
 
         const options = {
-            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "test_key_id", // Enter the Key ID generated from the Dashboard
+            key: keyId || "test_key_id", // Enter the Key ID generated from the Dashboard
             amount: orderData.amount,
             currency: orderData.currency,
             name: "LexTalk World",

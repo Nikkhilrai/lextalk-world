@@ -26,7 +26,8 @@ export async function POST(request: Request) {
                 orderId: "order_mock_" + Date.now(),
                 currency: currency,
                 amount: options.amount,
-                mock: true
+                mock: true,
+                envVarCheck: "MISSING",
             });
         }
 
