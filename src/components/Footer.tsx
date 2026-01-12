@@ -173,12 +173,21 @@ export function Footer() {
                         </h3>
                         <ul className="space-y-3">
                             <li className="flex items-start gap-3 group">
-                                <div className="w-7 h-7 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
+                                <div className="w-7 h-7 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors mt-1">
                                     <Mail size={12} className="text-amber-500" />
                                 </div>
-                                <a href="mailto:abhishek@clickawaycreators.com" className="text-xs text-slate-400 hover:text-amber-500 transition-colors pt-1">
-                                    abhishek@clickawaycreators.com
-                                </a>
+                                <div className="flex flex-col gap-1 pt-1">
+                                    <a href="mailto:info@lextalk.world" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
+                                        info@lextalk.world
+                                    </a>
+                                    <a href="mailto:partnerships@lextalk.world" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
+                                        partnerships@lextalk.world
+                                    </a>
+                                    <div className="text-[10px] text-slate-600 font-medium my-0.5 uppercase tracking-wide">Or</div>
+                                    <a href="mailto:abhishek@clickawaycreators.com" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
+                                        abhishek@clickawaycreators.com
+                                    </a>
+                                </div>
                             </li>
                             <li className="flex items-start gap-3 group">
                                 <div className="w-7 h-7 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
@@ -188,12 +197,12 @@ export function Footer() {
                                     +91 981 188 5302
                                 </a>
                             </li>
-                            <li className="flex items-start gap-3 group">
+                            <li className="flex items-center gap-3 group">
                                 <div className="w-7 h-7 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 border border-slate-700 group-hover:border-amber-500 transition-colors">
                                     <MapPin size={12} className="text-amber-500" />
                                 </div>
-                                <span className="text-xs text-slate-400 pt-1 leading-relaxed">
-                                    101/48, EMAAR Palm Hills,<br />Sector 77, Gurgaon 122004,<br />Haryana, India
+                                <span className="text-xs text-slate-400 pt-0.5 leading-relaxed uppercase font-medium tracking-wide">
+                                    GURGAON, INDIA | Dubai, UAE
                                 </span>
                             </li>
                         </ul>
