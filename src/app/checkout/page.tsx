@@ -45,7 +45,7 @@ export default function CheckoutPage() {
             const orderData = await fetch("/api/create-order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: total, currency: "USD" }),
+                body: JSON.stringify({ amount: total, currency: "INR" }),
             }).then((t) => {
                 if (!t.ok) throw new Error(`API Error: ${t.status} ${t.statusText}`);
                 return t.json();
@@ -91,6 +91,10 @@ export default function CheckoutPage() {
             };
 
             const paymentObject = new window.Razorpay(options);
+            paymentObject.on("payment.failed", function (response: any) {
+                console.error("Razorpay Payment Failed:", response.error);
+                alert(`Payment Failed: ${response.error.description} (Code: ${response.error.code})`);
+            });
             paymentObject.open();
         } catch (err: any) {
             console.error("Payment Handle Error:", err);
