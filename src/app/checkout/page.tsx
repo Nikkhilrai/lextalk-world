@@ -7,102 +7,15 @@ import { Footer } from "@/components/Footer";
 import { ShieldCheck, Lock, CreditCard } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
-declare global {
-    interface Window {
-        Razorpay: any;
-    }
-}
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function CheckoutPage() {
     const { items, total, clearCart } = useCart();
     const router = useRouter();
     const [isProcessing, setIsProcessing] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const loadRazorpayScript = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = "https://checkout.razorpay.com/v1/checkout.js";
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
-
-    const handlePayment = async () => {
-        setIsProcessing(true);
-        console.log("Starting Payment Flow...");
-
-        try {
-            const res = await loadRazorpayScript();
-
-            if (!res) {
-                alert("Razorpay SDK failed to load. Are you online?");
-                setIsProcessing(false);
-                return;
-            }
-
-            const orderData = await fetch("/api/create-order", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: total, currency: "INR" }),
-            }).then((t) => {
-                if (!t.ok) throw new Error(`API Error: ${t.status} ${t.statusText}`);
-                return t.json();
-            });
-
-            console.log("Order Data Received:", orderData);
-
-            if (orderData.error) {
-                console.error("Order Creation Error:", orderData.error);
-                alert(`SYSTEM ERROR (v3.0): ${orderData.error}`);
-                setIsProcessing(false);
-                return;
-            }
-
-            const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-            console.log("Debug: KeyID:", keyId);
-
-            if (!keyId && !orderData.mock) {
-                alert("Configuration Error: Missing Razorpay Key ID in Environment Variables.");
-                setIsProcessing(false);
-                return;
-            }
-
-            const options = {
-                key: keyId || "test_key_id",
-                amount: orderData.amount,
-                currency: orderData.currency,
-                name: "LexTalk World",
-                description: "Dubai Conference Pass 2026",
-                image: "https://lextalkworld.in/logo/Lextalk-Logo.png",
-                order_id: orderData.orderId,
-                handler: function (response: any) {
-                    clearCart();
-                    router.push("/payment-success");
-                },
-                prefill: {
-                    name: "LexTalk Delegate",
-                    email: "delegate@example.com",
-                    contact: "9999999999",
-                },
-                notes: { address: "Dubai Conference Office" },
-                theme: { color: "#0f172a" },
-            };
-
-            const paymentObject = new window.Razorpay(options);
-            paymentObject.on("payment.failed", function (response: any) {
-                console.error("Razorpay Payment Failed:", response.error);
-                alert(`Payment Failed: ${response.error.description} (Code: ${response.error.code})`);
-            });
-            paymentObject.open();
-        } catch (err: any) {
-            console.error("Payment Handle Error:", err);
-            alert(`Client Error: ${err.message || "Unknown error"}`);
-        } finally {
-            setIsProcessing(false);
-        }
-    };
+    const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
     if (items.length === 0) {
         return (
@@ -174,7 +87,7 @@ export default function CheckoutPage() {
                                 <h1 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mb-2">Secure Payment</h1>
                                 <div className="flex items-center gap-2 text-slate-500">
                                     <Lock size={16} />
-                                    <span className="text-sm">Encrypted Transaction</span>
+                                    <span className="text-sm">Encrypted Transaction via PayPal</span>
                                 </div>
                             </div>
 
@@ -182,25 +95,66 @@ export default function CheckoutPage() {
                                 <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg flex gap-3 text-blue-800">
                                     <CreditCard className="flex-shrink-0" size={24} />
                                     <div>
-                                        <h3 className="font-bold text-sm">Cards, UPI, Netbanking</h3>
-                                        <p className="text-xs mt-1">Pay securely using Razorpay standard checkout.</p>
+                                        <h3 className="font-bold text-sm">PayPal & Credit Cards</h3>
+                                        <p className="text-xs mt-1">Pay securely with PayPal, Visa, Mastercard, or Amex.</p>
                                     </div>
                                 </div>
 
-                                <button
-                                    onClick={handlePayment}
-                                    disabled={isProcessing}
-                                    className="w-full py-4 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                                >
-                                    {isProcessing ? (
-                                        <>
-                                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                                            Processing...
-                                        </>
-                                    ) : (
-                                        `Pay $${total.toLocaleString()}`
-                                    )}
-                                </button>
+                                {error && (
+                                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                                        {error}
+                                    </div>
+                                )}
+
+                                {!paypalClientId ? (
+                                    <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
+                                        <strong>Configuration Required:</strong> PayPal Client ID is not set. Please add NEXT_PUBLIC_PAYPAL_CLIENT_ID to environment variables.
+                                    </div>
+                                ) : (
+                                    <PayPalScriptProvider options={{
+                                        clientId: paypalClientId,
+                                        currency: "USD",
+                                        intent: "capture"
+                                    }}>
+                                        <PayPalButtons
+                                            style={{ layout: "vertical", shape: "rect", label: "pay" }}
+                                            disabled={isProcessing}
+                                            forceReRender={[total]}
+                                            createOrder={(data, actions) => {
+                                                setIsProcessing(true);
+                                                setError(null);
+                                                return actions.order.create({
+                                                    intent: "CAPTURE",
+                                                    purchase_units: [
+                                                        {
+                                                            description: "LexTalk World - Dubai Conference Pass 2026",
+                                                            amount: {
+                                                                currency_code: "USD",
+                                                                value: total.toFixed(2),
+                                                            },
+                                                        },
+                                                    ],
+                                                });
+                                            }}
+                                            onApprove={async (data, actions) => {
+                                                if (actions.order) {
+                                                    const order = await actions.order.capture();
+                                                    console.log("PayPal Order Captured:", order);
+                                                    clearCart();
+                                                    router.push("/payment-success");
+                                                }
+                                            }}
+                                            onError={(err) => {
+                                                console.error("PayPal Error:", err);
+                                                setError("Payment failed. Please try again.");
+                                                setIsProcessing(false);
+                                            }}
+                                            onCancel={() => {
+                                                setIsProcessing(false);
+                                            }}
+                                        />
+                                    </PayPalScriptProvider>
+                                )}
 
                                 <p className="text-slate-400 text-xs text-center">
                                     By proceeding, you agree to our Terms of Service and Privacy Policy.
@@ -213,7 +167,7 @@ export default function CheckoutPage() {
             </div>
 
             <div className="text-center py-4 text-slate-300 text-xs">
-                v3.0 RELEASE - Razorpay Integration
+                v4.0 PayPal Integration
             </div>
 
             <Footer />
