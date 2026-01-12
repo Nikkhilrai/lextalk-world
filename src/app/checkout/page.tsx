@@ -55,7 +55,7 @@ export default function CheckoutPage() {
 
             if (orderData.error) {
                 console.error("Order Creation Error:", orderData.error);
-                alert(`Payment Init Failed: ${orderData.error}`);
+                alert(`SYSTEM ERROR (v3.0): ${orderData.error}`);
                 setIsProcessing(false);
                 return;
             }
@@ -209,7 +209,7 @@ export default function CheckoutPage() {
             </div>
 
             <div className="text-center py-4 text-slate-300 text-xs">
-                v2.1 Debug Build - Razorpay Integration
+                v3.0 RELEASE - Razorpay Integration
             </div>
 
             <Footer />
