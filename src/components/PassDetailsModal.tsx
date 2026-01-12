@@ -79,7 +79,7 @@ export function PassDetailsModal({ isOpen, onClose, pass }: PassDetailsModalProp
                                     src={pass.image}
                                     alt={pass.name}
                                     fill
-                                    className="object-cover"
+                                    className="object-contain"
                                 />
                             </div>
                         </div>
