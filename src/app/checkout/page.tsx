@@ -269,45 +269,100 @@ export default function CheckoutPage() {
                                                 currency: "USD",
                                                 intent: "capture"
                                             }}>
-                                                <PayPalButtons
-                                                    style={{ layout: "vertical", shape: "rect", label: "pay" }}
-                                                    disabled={isProcessing}
-                                                    forceReRender={[total]}
-                                                    createOrder={(data, actions) => {
-                                                        setIsProcessing(true);
-                                                        setError(null);
-                                                        return actions.order.create({
-                                                            intent: "CAPTURE",
-                                                            purchase_units: [
-                                                                {
-                                                                    description: `LexTalk World - Dubai Conference Pass 2026 - ${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                    amount: {
-                                                                        currency_code: "USD",
-                                                                        value: total.toFixed(2),
+                                                {/* Card Payment - PRIMARY */}
+                                                <div className="mb-4">
+                                                    <p className="text-sm font-medium text-slate-700 mb-2">Pay with Card (Recommended)</p>
+                                                    <PayPalButtons
+                                                        fundingSource="card"
+                                                        style={{ layout: "horizontal", shape: "rect", label: "pay", height: 50 }}
+                                                        disabled={isProcessing}
+                                                        forceReRender={[total]}
+                                                        createOrder={(data, actions) => {
+                                                            setIsProcessing(true);
+                                                            setError(null);
+                                                            return actions.order.create({
+                                                                intent: "CAPTURE",
+                                                                purchase_units: [
+                                                                    {
+                                                                        description: `LexTalk World - Dubai Conference Pass 2026 - ${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                        amount: {
+                                                                            currency_code: "USD",
+                                                                            value: total.toFixed(2),
+                                                                        },
                                                                     },
-                                                                },
-                                                            ],
-                                                        });
-                                                    }}
-                                                    onApprove={async (data, actions) => {
-                                                        if (actions.order) {
-                                                            const order = await actions.order.capture();
-                                                            console.log("PayPal Order Captured:", order);
-                                                            console.log("Customer Details:", customerDetails);
-                                                            // TODO: Save order to database with customerDetails
-                                                            clearCart();
-                                                            router.push("/payment-success");
-                                                        }
-                                                    }}
-                                                    onError={(err) => {
-                                                        console.error("PayPal Error:", err);
-                                                        setError("Payment failed. Please try again.");
-                                                        setIsProcessing(false);
-                                                    }}
-                                                    onCancel={() => {
-                                                        setIsProcessing(false);
-                                                    }}
-                                                />
+                                                                ],
+                                                            });
+                                                        }}
+                                                        onApprove={async (data, actions) => {
+                                                            if (actions.order) {
+                                                                const order = await actions.order.capture();
+                                                                console.log("PayPal Order Captured:", order);
+                                                                console.log("Customer Details:", customerDetails);
+                                                                clearCart();
+                                                                router.push("/payment-success");
+                                                            }
+                                                        }}
+                                                        onError={(err) => {
+                                                            console.error("PayPal Error:", err);
+                                                            setError("Payment failed. Please try again.");
+                                                            setIsProcessing(false);
+                                                        }}
+                                                        onCancel={() => {
+                                                            setIsProcessing(false);
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                {/* Divider */}
+                                                <div className="flex items-center gap-4 my-4">
+                                                    <div className="flex-1 h-px bg-slate-200"></div>
+                                                    <span className="text-xs text-slate-400">or</span>
+                                                    <div className="flex-1 h-px bg-slate-200"></div>
+                                                </div>
+
+                                                {/* PayPal Account - SECONDARY */}
+                                                <div>
+                                                    <p className="text-sm font-medium text-slate-500 mb-2">Pay with PayPal</p>
+                                                    <PayPalButtons
+                                                        fundingSource="paypal"
+                                                        style={{ layout: "horizontal", shape: "rect", label: "paypal", height: 45 }}
+                                                        disabled={isProcessing}
+                                                        forceReRender={[total]}
+                                                        createOrder={(data, actions) => {
+                                                            setIsProcessing(true);
+                                                            setError(null);
+                                                            return actions.order.create({
+                                                                intent: "CAPTURE",
+                                                                purchase_units: [
+                                                                    {
+                                                                        description: `LexTalk World - Dubai Conference Pass 2026 - ${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                        amount: {
+                                                                            currency_code: "USD",
+                                                                            value: total.toFixed(2),
+                                                                        },
+                                                                    },
+                                                                ],
+                                                            });
+                                                        }}
+                                                        onApprove={async (data, actions) => {
+                                                            if (actions.order) {
+                                                                const order = await actions.order.capture();
+                                                                console.log("PayPal Order Captured:", order);
+                                                                console.log("Customer Details:", customerDetails);
+                                                                clearCart();
+                                                                router.push("/payment-success");
+                                                            }
+                                                        }}
+                                                        onError={(err) => {
+                                                            console.error("PayPal Error:", err);
+                                                            setError("Payment failed. Please try again.");
+                                                            setIsProcessing(false);
+                                                        }}
+                                                        onCancel={() => {
+                                                            setIsProcessing(false);
+                                                        }}
+                                                    />
+                                                </div>
                                             </PayPalScriptProvider>
                                         )}
 
