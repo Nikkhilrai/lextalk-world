@@ -19,16 +19,11 @@ export async function POST(request: Request) {
             receipt: "receipt#" + Date.now(),
         };
 
-        if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID) {
-            console.warn("Razorpay keys missing - returning mock order ID");
-            // Return a mock order for UI testing if keys are missing
+        if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+            console.error("Razorpay keys missing on server");
             return NextResponse.json({
-                orderId: "order_mock_" + Date.now(),
-                currency: currency,
-                amount: options.amount,
-                mock: true,
-                envVarCheck: "MISSING",
-            });
+                error: "Server Configuration Error: Razorpay API keys not configured. Please add NEXT_PUBLIC_RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to environment variables."
+            }, { status: 500 });
         }
 
         const order = await instance.orders.create(options);
