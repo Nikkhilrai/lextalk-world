@@ -182,23 +182,7 @@ export default function DubaiAwardeeConfirmationPage() {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-16 sm:py-24 bg-white border-t border-slate-100">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mb-4">
-                        Questions About Passes?
-                    </h2>
-                    <p className="text-slate-600 mb-8 max-w-lg mx-auto leading-relaxed">
-                        Contact our team for assistance with pass selection or group bookings.
-                    </p>
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white font-medium rounded-full hover:bg-slate-800 transition-colors"
-                    >
-                        Contact Us
-                    </Link>
-                </div>
-            </section>
+
 
             <Footer />
 
