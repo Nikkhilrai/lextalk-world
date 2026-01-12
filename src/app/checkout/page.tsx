@@ -48,7 +48,8 @@ export default function CheckoutPage() {
         }).then((t) => t.json());
 
         if (orderData.error) {
-            alert(orderData.error);
+            console.error("Order Creation Error:", orderData.error);
+            alert(`Payment Failed: ${orderData.error}`);
             setIsProcessing(false);
             return;
         }
