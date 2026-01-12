@@ -74,7 +74,7 @@ export function PassDetailsModal({ isOpen, onClose, pass }: PassDetailsModalProp
                     <div className="flex flex-col md:flex-row">
                         {/* Left Column: Image */}
                         <div className="w-full md:w-1/2 bg-slate-100 p-6 sm:p-10 flex items-center justify-center min-h-[300px] md:min-h-full">
-                            <div className="relative w-full aspect-square max-w-md shadow-2xl rounded-xl overflow-hidden">
+                            <div className="relative w-full aspect-video max-w-md shadow-2xl rounded-xl overflow-hidden">
                                 <Image
                                     src={pass.image}
                                     alt={pass.name}

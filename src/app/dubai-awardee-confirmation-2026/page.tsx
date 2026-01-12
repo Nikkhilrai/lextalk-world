@@ -78,7 +78,7 @@ function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void
             className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer group"
         >
             {/* Pass Image */}
-            <div className="relative aspect-square w-full bg-slate-100 overflow-hidden">
+            <div className="relative aspect-video w-full bg-slate-100 overflow-hidden">
                 <Image
                     src={pass.image}
                     alt={pass.name}
