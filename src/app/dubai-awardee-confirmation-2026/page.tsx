@@ -87,14 +87,14 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
     const colors = tierColors[pass.tier as keyof typeof tierColors] || tierColors.Standard;
 
     return (
-        <div className={`relative bg-white rounded-2xl shadow-xl border ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col min-h-[700px] group`}>
+        <div className={`relative bg-white rounded-2xl shadow-xl border-2 ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 active:scale-[0.98] active:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/50 transition-all duration-300 flex flex-col min-h-[700px] group cursor-pointer`}>
             {/* Pass Image */}
-            <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
+            <div className="relative h-52 w-full overflow-hidden">
                 <Image
                     src={pass.image}
                     alt={pass.name}
                     fill
-                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {/* Tier Badge */}
