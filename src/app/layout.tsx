@@ -6,6 +6,7 @@ import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { CartSidebar } from "@/components/CartSidebar";
 import { ToastProvider } from "@/contexts/ToastContext";
+import { FloatingCartButton } from "@/components/FloatingCartButton";
 
 // Elegant, high-contrast serif for headings - authoritative and professional
 const playfair = Playfair_Display({
@@ -113,6 +114,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <CartSidebar />
+            <FloatingCartButton />
           </CartProvider>
         </ToastProvider>
       </body>
