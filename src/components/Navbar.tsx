@@ -25,9 +25,10 @@ const navLinks = [
 
 interface NavbarProps {
     variant?: "default" | "light";
+    minimal?: boolean;
 }
 
-export function Navbar({ variant = "default" }: NavbarProps) {
+export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -67,54 +68,67 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                         </div>
                     </Link>
 
-                    {/* Desktop Navigation - Hidden on Mobile/Tablet */}
-                    <div className="hidden lg:flex items-center gap-6 xl:gap-10">
-                        {navLinks.map((link) => (
-                            <div
-                                key={link.name}
-                                className="relative"
-                                onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
-                                onMouseLeave={() => setOpenDropdown(null)}
-                            >
-                                <Link
-                                    href={link.href}
-                                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled
-                                        ? "text-slate-700 hover:text-amber-600"
-                                        : variant === "light"
-                                            ? "text-slate-800 hover:text-amber-600"
-                                            : "text-white/90 hover:text-amber-400"
-                                        }`}
+                    {/* Desktop Navigation - Hidden on Mobile/Tablet and when minimal */}
+                    {!minimal && (
+                        <div className="hidden lg:flex items-center gap-6 xl:gap-10">
+                            {navLinks.map((link) => (
+                                <div
+                                    key={link.name}
+                                    className="relative"
+                                    onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
+                                    onMouseLeave={() => setOpenDropdown(null)}
                                 >
-                                    {link.name}
-                                    {link.hasDropdown && (
-                                        <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                    )}
-                                    <span className={`absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full ${isScrolled ? "bg-amber-600" : "bg-amber-400"}`} />
-                                </Link>
+                                    <Link
+                                        href={link.href}
+                                        className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled
+                                            ? "text-slate-700 hover:text-amber-600"
+                                            : variant === "light"
+                                                ? "text-slate-800 hover:text-amber-600"
+                                                : "text-white/90 hover:text-amber-400"
+                                            }`}
+                                    >
+                                        {link.name}
+                                        {link.hasDropdown && (
+                                            <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                        )}
+                                        <span className={`absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full ${isScrolled ? "bg-amber-600" : "bg-amber-400"}`} />
+                                    </Link>
 
-                                {/* Dropdown Menu */}
-                                {link.hasDropdown && link.dropdownItems && (
-                                    <div className={cn(
-                                        "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
-                                        openDropdown === link.name
-                                            ? "opacity-100 translate-y-0 pointer-events-auto"
-                                            : "opacity-0 -translate-y-2 pointer-events-none"
-                                    )}>
-                                        <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
-                                            {link.dropdownItems.map((item) => (
-                                                <Link
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-600 transition-colors"
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            ))}
+                                    {/* Dropdown Menu */}
+                                    {link.hasDropdown && link.dropdownItems && (
+                                        <div className={cn(
+                                            "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
+                                            openDropdown === link.name
+                                                ? "opacity-100 translate-y-0 pointer-events-auto"
+                                                : "opacity-0 -translate-y-2 pointer-events-none"
+                                        )}>
+                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
+                                                {link.dropdownItems.map((item) => (
+                                                    <Link
+                                                        key={item.name}
+                                                        href={item.href}
+                                                        className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-600 transition-colors"
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                                    )}
+                                </div>
+                            ))}
+                            <Link
+                                href="/tickets"
+                                target="_blank"
+                                className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
+                            >
+                                Secure Pass
+                            </Link>
+                        </div>
+                    )}
+
+                    {/* Minimal mode - just show Secure Pass button */}
+                    {minimal && (
                         <Link
                             href="/tickets"
                             target="_blank"
@@ -122,15 +136,17 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                         >
                             Secure Pass
                         </Link>
-                    </div>
+                    )}
 
-                    {/* Mobile/Tablet Menu Button */}
-                    <button
-                        className={`lg:hidden p-2 ${isScrolled || variant === "light" ? "text-slate-900" : "text-white"}`}
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    {/* Mobile/Tablet Menu Button - Hidden when minimal */}
+                    {!minimal && (
+                        <button
+                            className={`lg:hidden p-2 ${isScrolled || variant === "light" ? "text-slate-900" : "text-white"}`}
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    )}
                 </div>
 
                 {/* Mobile Menu - Vertical Dropdown (Right Aligned) */}
@@ -191,7 +207,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
         </>

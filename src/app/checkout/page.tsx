@@ -72,7 +72,7 @@ export default function CheckoutPage() {
     if (items.length === 0) {
         return (
             <div className="min-h-screen bg-slate-50 flex flex-col">
-                <Navbar />
+                <Navbar minimal />
                 <div className="flex-1 flex flex-col items-center justify-center p-4">
                     <h1 className="text-2xl font-bold text-slate-900 mb-4">Your cart is empty</h1>
                     <a href="/dubai-awardee-confirmation-2026" className="text-blue-600 hover:underline">
@@ -86,7 +86,7 @@ export default function CheckoutPage() {
 
     return (
         <main className="min-h-screen bg-slate-50">
-            <Navbar />
+            <Navbar minimal />
 
             <div className="pt-32 pb-16 container mx-auto px-4">
                 <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
