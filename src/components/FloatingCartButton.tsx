@@ -3,11 +3,17 @@
 import { ShoppingBag, ChevronRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function FloatingCartButton() {
     const { items, isOpen, openCart, total, itemCount } = useCart();
     const [isVisible, setIsVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
+    const pathname = usePathname();
+
+    // Pages where the cart button should be hidden
+    const hiddenPages = ["/checkout", "/payment-success"];
+    const shouldHide = hiddenPages.some(page => pathname?.startsWith(page));
 
     // Show button after items are added
     useEffect(() => {
@@ -25,8 +31,8 @@ export function FloatingCartButton() {
         }
     }, [itemCount]);
 
-    // Don't show if cart is open or no items
-    if (isOpen || itemCount === 0 || !isVisible) return null;
+    // Don't show if cart is open, no items, or on hidden pages
+    if (isOpen || itemCount === 0 || !isVisible || shouldHide) return null;
 
     return (
         <button
