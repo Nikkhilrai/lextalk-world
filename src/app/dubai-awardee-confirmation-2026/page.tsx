@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
 import { Facebook, Twitter, MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 // Pass data
 const passes = [
@@ -86,78 +87,92 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
     const colors = tierColors[pass.tier as keyof typeof tierColors] || tierColors.Standard;
 
     return (
-        <div className={`relative bg-white rounded-2xl shadow-xl border ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full group`}>
-            {/* Header with Gradient */}
-            <div className={`bg-gradient-to-r ${colors.gradient} p-6 pb-8 relative`}>
+        <div className={`relative bg-white rounded-2xl shadow-xl border ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col min-h-[700px] group`}>
+            {/* Pass Image */}
+            <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
+                <Image
+                    src={pass.image}
+                    alt={pass.name}
+                    fill
+                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
                 {/* Tier Badge */}
-                <div className={`absolute top-4 right-4 ${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider`}>
+                <div className={`absolute top-3 right-3 ${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider shadow-lg`}>
                     {pass.tier}
                 </div>
+            </div>
 
+            {/* Header with Gradient */}
+            <div className={`bg-gradient-to-r ${colors.gradient} px-6 py-4`}>
                 {/* Pass Name & Price */}
-                <h3 className="text-2xl font-serif font-bold text-white mb-1">{pass.name}</h3>
-                <div className="flex items-baseline gap-1 mt-3">
-                    <span className="text-4xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
+                <h3 className="text-xl font-serif font-bold text-white">{pass.name}</h3>
+                <div className="flex items-baseline gap-1 mt-1">
+                    <span className="text-3xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
                     <span className="text-white/60 text-sm">.00 USD</span>
                 </div>
             </div>
 
             {/* Benefits Section */}
-            <div className="p-6 flex-1 -mt-4 relative">
+            <div className="p-6 flex-1 flex flex-col">
                 {/* Benefits Card */}
-                <div className="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
-                    <h4 className={`font-bold text-sm uppercase tracking-wider mb-4 ${colors.accent}`}>
+                <div className="bg-slate-50 rounded-xl p-4 mb-4 border border-slate-100 flex-1">
+                    <h4 className={`font-bold text-sm uppercase tracking-wider mb-3 ${colors.accent}`}>
                         {pass.tier} Pass Benefits
                     </h4>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                         {pass.benefits.map((benefit, index) => (
-                            <li key={index} className="flex gap-3 text-sm text-slate-700">
+                            <li key={index} className="flex gap-2 text-sm text-slate-700">
                                 <span className={`flex-shrink-0 w-5 h-5 rounded-full ${colors.badge} flex items-center justify-center mt-0.5`}>
                                     <svg className="w-3 h-3 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                     </svg>
                                 </span>
-                                <span className="leading-relaxed">{benefit}</span>
+                                <span className="leading-snug">{benefit}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
 
-                {/* Add to Cart Button */}
-                <button
-                    onClick={handleAddToCart}
-                    className={`w-full py-4 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-xl hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg`}
-                >
-                    Add to Cart
-                </button>
+                {/* Button Section - Pushed to bottom */}
+                <div className="mt-auto">
 
-                {/* Share Buttons */}
-                <div className="flex items-center justify-center gap-4 pt-5 mt-5 border-t border-slate-100">
-                    <span className="text-xs text-slate-400 uppercase tracking-wider">Share</span>
-                    <a
-                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all"
+                    {/* Add to Cart Button */}
+                    <button
+                        onClick={handleAddToCart}
+                        className={`w-full py-4 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-xl hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg`}
                     >
-                        <Facebook size={14} />
-                    </a>
-                    <a
-                        href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-green-600 hover:text-white transition-all"
-                    >
-                        <MessageCircle size={14} />
-                    </a>
-                    <a
-                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all"
-                    >
-                        <Twitter size={14} />
-                    </a>
+                        Add to Cart
+                    </button>
+
+                    {/* Share Buttons */}
+                    <div className="flex items-center justify-center gap-4 pt-5 mt-5 border-t border-slate-100">
+                        <span className="text-xs text-slate-400 uppercase tracking-wider">Share</span>
+                        <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all"
+                        >
+                            <Facebook size={14} />
+                        </a>
+                        <a
+                            href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-green-600 hover:text-white transition-all"
+                        >
+                            <MessageCircle size={14} />
+                        </a>
+                        <a
+                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all"
+                        >
+                            <Twitter size={14} />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
