@@ -3,18 +3,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
-import Image from "next/image";
-import Link from "next/link";
-import { Facebook, Twitter, Share2, MessageCircle } from "lucide-react";
+import { Facebook, Twitter, MessageCircle } from "lucide-react";
 
 // Pass data
-
-import { useState } from "react";
-import { PassDetailsModal } from "@/components/PassDetailsModal";
-
-// ... imports remain the same ...
-
-// Pass data (keep existing passes array)
 const passes = [
     {
         id: "standard-pass-dubai-2026",
@@ -55,15 +46,13 @@ const passes = [
     },
 ];
 
-function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void }) {
+function PassCard({ pass }: { pass: typeof passes[0] }) {
     const { addItem } = useCart();
 
-    // ... share logic remains ...
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
     const shareText = `Check out the ${pass.name} for LexTalk World Dubai 2026!`;
 
-    const handleAddToCart = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent opening modal when clicking cart
+    const handleAddToCart = () => {
         addItem({
             id: pass.id,
             name: pass.name,
@@ -72,74 +61,102 @@ function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void
         });
     };
 
+    // Tier colors
+    const tierColors = {
+        Standard: {
+            gradient: "from-slate-800 to-slate-900",
+            badge: "bg-amber-500",
+            border: "border-amber-500/20",
+            accent: "text-amber-500",
+        },
+        Premium: {
+            gradient: "from-amber-600 to-amber-700",
+            badge: "bg-amber-400",
+            border: "border-amber-400/30",
+            accent: "text-amber-400",
+        },
+        Exclusive: {
+            gradient: "from-violet-600 to-purple-800",
+            badge: "bg-violet-400",
+            border: "border-violet-400/30",
+            accent: "text-violet-400",
+        },
+    };
+
+    const colors = tierColors[pass.tier as keyof typeof tierColors] || tierColors.Standard;
+
     return (
-        <div
-            onClick={onOpen}
-            className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200/50 hover:-translate-y-1 active:scale-[0.98] transition-all duration-500 ease-out flex flex-col h-full cursor-pointer group"
-        >
-            {/* Pass Image */}
-            <div className="relative aspect-video w-full bg-slate-100 overflow-hidden">
-                <Image
-                    src={pass.image}
-                    alt={pass.name}
-                    fill
-                    className="object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+        <div className={`relative bg-white rounded-2xl shadow-xl border ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full group`}>
+            {/* Header with Gradient */}
+            <div className={`bg-gradient-to-r ${colors.gradient} p-6 pb-8 relative`}>
+                {/* Tier Badge */}
+                <div className={`absolute top-4 right-4 ${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider`}>
+                    {pass.tier}
+                </div>
+
+                {/* Pass Name & Price */}
+                <h3 className="text-2xl font-serif font-bold text-white mb-1">{pass.name}</h3>
+                <div className="flex items-baseline gap-1 mt-3">
+                    <span className="text-4xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
+                    <span className="text-white/60 text-sm">.00 USD</span>
+                </div>
             </div>
 
-            {/* Pass Details */}
-            <div className="p-5 sm:p-6 flex flex-col flex-1">
-                <div className="flex-1">
-                    <h3 className="text-xl font-serif font-bold text-slate-900 mb-1">{pass.name}</h3>
-                    <div className="w-10 h-0.5 bg-amber-500/50 mb-3" />
-                    <p className="text-2xl font-bold text-slate-900 mb-4">${pass.price.toLocaleString()}.00</p>
+            {/* Benefits Section */}
+            <div className="p-6 flex-1 -mt-4 relative">
+                {/* Benefits Card */}
+                <div className="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
+                    <h4 className={`font-bold text-sm uppercase tracking-wider mb-4 ${colors.accent}`}>
+                        {pass.tier} Pass Benefits
+                    </h4>
+                    <ul className="space-y-3">
+                        {pass.benefits.map((benefit, index) => (
+                            <li key={index} className="flex gap-3 text-sm text-slate-700">
+                                <span className={`flex-shrink-0 w-5 h-5 rounded-full ${colors.badge} flex items-center justify-center mt-0.5`}>
+                                    <svg className="w-3 h-3 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                                <span className="leading-relaxed">{benefit}</span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 {/* Add to Cart Button */}
                 <button
                     onClick={handleAddToCart}
-                    className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg shadow-amber-500/20 mb-6 z-10 relative"
+                    className={`w-full py-4 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-xl hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg`}
                 >
                     Add to Cart
                 </button>
 
-                {/* Share Buttons - Stop propagation */}
-                <div
-                    className="flex items-center justify-center gap-4 pt-4 border-t border-slate-100"
-                    onClick={(e) => e.stopPropagation()}
-                >
+                {/* Share Buttons */}
+                <div className="flex items-center justify-center gap-4 pt-5 mt-5 border-t border-slate-100">
+                    <span className="text-xs text-slate-400 uppercase tracking-wider">Share</span>
                     <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-600 transition-colors"
+                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all"
                     >
-                        <Facebook size={20} />
-                    </a>
-                    <a
-                        href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(shareText)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-red-600 transition-colors"
-                    >
-                        <Share2 size={20} />
+                        <Facebook size={14} />
                     </a>
                     <a
                         href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-green-600 transition-colors"
+                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-green-600 hover:text-white transition-all"
                     >
-                        <MessageCircle size={20} />
+                        <MessageCircle size={14} />
                     </a>
                     <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-slate-900 transition-colors"
+                        className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all"
                     >
-                        <Twitter size={20} />
+                        <Twitter size={14} />
                     </a>
                 </div>
             </div>
@@ -148,8 +165,6 @@ function PassCard({ pass, onOpen }: { pass: typeof passes[0]; onOpen: () => void
 }
 
 export default function DubaiAwardeeConfirmationPage() {
-    const [selectedPass, setSelectedPass] = useState<typeof passes[0] | null>(null);
-
     return (
         <main className="min-h-screen bg-slate-50">
             <Navbar />
@@ -161,8 +176,7 @@ export default function DubaiAwardeeConfirmationPage() {
                         Dubai Awardee Confirmation <span className="text-amber-400">2026</span>
                     </h1>
                     <p className="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg">
-                        Select your pass to confirm your attendance at the LexTalk World Dubai 2026 Conference.
-                        Click on a pass to view detailed benefits.
+                        Choose the pass that best suits your needs. All benefits are listed below for easy comparison.
                     </p>
                 </div>
             </section>
@@ -175,23 +189,13 @@ export default function DubaiAwardeeConfirmationPage() {
                             <PassCard
                                 key={pass.id}
                                 pass={pass}
-                                onOpen={() => setSelectedPass(pass)}
                             />
                         ))}
                     </div>
                 </div>
             </section>
 
-
-
             <Footer />
-
-            {/* Modal */}
-            <PassDetailsModal
-                isOpen={!!selectedPass}
-                onClose={() => setSelectedPass(null)}
-                pass={selectedPass}
-            />
         </main>
     );
 }
