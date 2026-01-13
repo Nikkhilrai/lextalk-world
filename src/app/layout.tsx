@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { CartSidebar } from "@/components/CartSidebar";
+import { ToastProvider } from "@/contexts/ToastContext";
 
 // Elegant, high-contrast serif for headings - authoritative and professional
 const playfair = Playfair_Display({
@@ -108,10 +109,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${playfair.variable} ${dmSans.variable} font-sans antialiased bg-slate-50 text-slate-900`}
       >
-        <CartProvider>
-          {children}
-          <CartSidebar />
-        </CartProvider>
+        <ToastProvider>
+          <CartProvider>
+            {children}
+            <CartSidebar />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   );

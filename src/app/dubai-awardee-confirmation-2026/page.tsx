@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/contexts/ToastContext";
 import { Facebook, Twitter, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
@@ -49,6 +50,7 @@ const passes = [
 
 function PassCard({ pass }: { pass: typeof passes[0] }) {
     const { addItem } = useCart();
+    const { showToast } = useToast();
 
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
     const shareText = `Check out the ${pass.name} for LexTalk World Dubai 2026!`;
@@ -60,6 +62,7 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
             price: pass.price,
             image: pass.image,
         });
+        showToast(`${pass.name} added to cart!`);
     };
 
     // Tier colors
