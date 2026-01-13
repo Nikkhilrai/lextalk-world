@@ -126,7 +126,7 @@ export default function CheckoutPage() {
                                                 name="email"
                                                 value={customerDetails.email}
                                                 onChange={handleInputChange}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.email ? 'border-red-500' : 'border-slate-200'}`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.email ? 'border-red-500' : 'border-slate-200'}`}
                                                 placeholder="your@email.com"
                                             />
                                             {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
@@ -143,7 +143,7 @@ export default function CheckoutPage() {
                                                     name="firstName"
                                                     value={customerDetails.firstName}
                                                     onChange={handleInputChange}
-                                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.firstName ? 'border-red-500' : 'border-slate-200'}`}
+                                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.firstName ? 'border-red-500' : 'border-slate-200'}`}
                                                     placeholder="John"
                                                 />
                                                 {formErrors.firstName && <p className="text-red-500 text-xs mt-1">{formErrors.firstName}</p>}
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
                                                     name="lastName"
                                                     value={customerDetails.lastName}
                                                     onChange={handleInputChange}
-                                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.lastName ? 'border-red-500' : 'border-slate-200'}`}
+                                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.lastName ? 'border-red-500' : 'border-slate-200'}`}
                                                     placeholder="Doe"
                                                 />
                                                 {formErrors.lastName && <p className="text-red-500 text-xs mt-1">{formErrors.lastName}</p>}
@@ -172,7 +172,7 @@ export default function CheckoutPage() {
                                                 name="phone"
                                                 value={customerDetails.phone}
                                                 onChange={handleInputChange}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.phone ? 'border-red-500' : 'border-slate-200'}`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.phone ? 'border-red-500' : 'border-slate-200'}`}
                                                 placeholder="+1 (555) 123-4567"
                                             />
                                             {formErrors.phone && <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>}
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
                                                 name="organization"
                                                 value={customerDetails.organization}
                                                 onChange={handleInputChange}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.organization ? 'border-red-500' : 'border-slate-200'}`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.organization ? 'border-red-500' : 'border-slate-200'}`}
                                                 placeholder="Company / Law Firm"
                                             />
                                             {formErrors.organization && <p className="text-red-500 text-xs mt-1">{formErrors.organization}</p>}
@@ -202,7 +202,7 @@ export default function CheckoutPage() {
                                                 name="designation"
                                                 value={customerDetails.designation}
                                                 onChange={handleInputChange}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${formErrors.designation ? 'border-red-500' : 'border-slate-200'}`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white text-slate-900 ${formErrors.designation ? 'border-red-500' : 'border-slate-200'}`}
                                                 placeholder="Partner / Associate / CEO"
                                             />
                                             {formErrors.designation && <p className="text-red-500 text-xs mt-1">{formErrors.designation}</p>}
