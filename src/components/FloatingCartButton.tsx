@@ -11,9 +11,9 @@ export function FloatingCartButton() {
     const [isAnimating, setIsAnimating] = useState(false);
     const pathname = usePathname();
 
-    // Pages where the cart button should be hidden
-    const hiddenPages = ["/checkout", "/payment-success"];
-    const shouldHide = hiddenPages.some(page => pathname?.startsWith(page));
+    // Pages where the cart button should be visible
+    const allowedPages = ["/dubai-awardee-confirmation-2026", "/tickets"];
+    const isAllowedPage = allowedPages.some(page => pathname?.startsWith(page));
 
     // Show button after items are added
     useEffect(() => {
@@ -31,8 +31,8 @@ export function FloatingCartButton() {
         }
     }, [itemCount]);
 
-    // Don't show if cart is open, no items, or on hidden pages
-    if (isOpen || itemCount === 0 || !isVisible || shouldHide) return null;
+    // Don't show if cart is open, no items, or not on allowed pages
+    if (isOpen || itemCount === 0 || !isVisible || !isAllowedPage) return null;
 
     return (
         <button
