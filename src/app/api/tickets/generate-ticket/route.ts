@@ -47,8 +47,8 @@ export async function POST(request: NextRequest) {
 
         // Generate QR code as data URL
         const qrCodeDataUrl = await QRCode.toDataURL(qrData, {
-            width: 200,
-            margin: 2,
+            width: 250,
+            margin: 1,
         });
 
         // Create PDF
@@ -60,244 +60,357 @@ export async function POST(request: NextRequest) {
         const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
         const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-        // Colors
-        const darkBlue = rgb(0.04, 0.08, 0.18); // #0B1429
-        const gold = rgb(0.85, 0.75, 0.36); // #D9BF5C
+        // Colors - Professional palette
+        const darkBlue = rgb(0.12, 0.2, 0.35); // #1F3359
+        const lightBlue = rgb(0.24, 0.48, 0.85); // #3D7AD9
+        const gold = rgb(0.95, 0.76, 0.18); // #F2C32E
         const white = rgb(1, 1, 1);
-        const green = rgb(0.27, 0.71, 0.54); // #45B589
-        const lightGray = rgb(0.93, 0.93, 0.93);
+        const green = rgb(0.13, 0.69, 0.3); // #22AF4D
+        const lightGray = rgb(0.95, 0.96, 0.97);
+        const mediumGray = rgb(0.6, 0.62, 0.65);
+        const darkGray = rgb(0.3, 0.32, 0.35);
 
-        // Header background
+        // Load LexTalk logo
+        let logoImage;
+        try {
+            const logoPath = path.join(process.cwd(), "public", "logo", "Lextalk-Logo.png");
+            const logoBytes = await fs.readFile(logoPath);
+            logoImage = await pdfDoc.embedPng(logoBytes);
+        } catch (err) {
+            console.log("Logo not found, using text instead");
+        }
+
+        // Background - Light gradient effect
         page.drawRectangle({
             x: 0,
-            y: height - 100,
+            y: height - 120,
             width: width,
-            height: 100,
-            color: darkBlue,
+            height: 120,
+            color: lightGray,
         });
 
-        // LexTalk World title
-        page.drawText("LexTalk World", {
-            x: width / 2 - 80,
+        // Logo or Text
+        if (logoImage) {
+            const logoHeight = 35;
+            const logoWidth = logoImage.width * (logoHeight / logoImage.height);
+            page.drawImage(logoImage, {
+                x: 40,
+                y: height - 70,
+                width: logoWidth,
+                height: logoHeight,
+            });
+        } else {
+            page.drawText("LexTalk World", {
+                x: 40,
+                y: height - 60,
+                size: 24,
+                font: boldFont,
+                color: gold,
+            });
+        }
+
+        // E-TICKET label
+        page.drawText("E-TICKET", {
+            x: width - 100,
             y: height - 60,
-            size: 28,
-            font: boldFont,
-            color: gold,
+            size: 10,
+            font: regularFont,
+            color: mediumGray,
         });
 
-        // Payment Confirmed badge
-        const badgeY = height - 150;
+        // Payment Success Banner
         page.drawRectangle({
-            x: 60,
-            y: badgeY - 5,
-            width: width - 120,
-            height: 40,
+            x: 0,
+            y: height - 165,
+            width: width,
+            height: 45,
             color: green,
         });
 
-        page.drawText("✓ Payment Confirmed", {
-            x: width / 2 - 80,
-            y: badgeY + 8,
-            size: 18,
+        page.drawText("✓", {
+            x: 40,
+            y: height - 150,
+            size: 28,
             font: boldFont,
             color: white,
         });
 
-        // Conference Pass Title
-        page.drawText(`Your ${conferenceDetails?.name || "Dubai 2026"} Conference Pass`, {
-            x: 60,
-            y: badgeY - 40,
-            size: 24,
-            font: boldFont,
-            color: darkBlue,
-        });
-
-        // Pass type card
-        const cardY = badgeY - 90;
-        page.drawRectangle({
-            x: 60,
-            y: cardY - 160,
-            width: width - 120,
-            height: 160,
-            color: darkBlue,
-        });
-
-        // Pass header
-        page.drawRectangle({
-            x: 60,
-            y: cardY - 40,
-            width: width - 120,
-            height: 40,
-            color: rgb(0.1, 0.15, 0.25),
-        });
-
-        page.drawText("CONFERENCE PASS", {
-            x: 80,
-            y: cardY - 25,
+        page.drawText("PAYMENT SUCCESSFUL", {
+            x: 75,
+            y: height - 143,
             size: 16,
             font: boldFont,
-            color: gold,
-        });
-
-        page.drawText(passType.toUpperCase(), {
-            x: width - 220,
-            y: cardY - 25,
-            size: 16,
-            font: boldFont,
-            color: gold,
-        });
-
-        // Details in two columns
-        const detailY = cardY - 70;
-        const col1X = 80;
-        const col2X = width / 2 + 20;
-
-        // Left column
-        page.drawText("TICKET ID:", {
-            x: col1X,
-            y: detailY,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(ticketNumber, {
-            x: col1X,
-            y: detailY - 16,
-            size: 12,
-            font: regularFont,
             color: white,
         });
 
-        page.drawText("AMOUNT PAID:", {
-            x: col1X,
-            y: detailY - 45,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(`$${amount.toLocaleString()}`, {
-            x: col1X,
-            y: detailY - 61,
-            size: 12,
-            font: regularFont,
-            color: white,
-        });
-
-        page.drawText("ATTENDEE:", {
-            x: col1X,
-            y: detailY - 90,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(buyerName, {
-            x: col1X,
-            y: detailY - 106,
-            size: 12,
-            font: regularFont,
-            color: white,
-        });
-
-        // Right column
-        page.drawText("ORGANIZATION:", {
-            x: col2X,
-            y: detailY,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(organization || "N/A", {
-            x: col2X,
-            y: detailY - 16,
-            size: 12,
-            font: regularFont,
-            color: white,
-        });
-
-        page.drawText("DESIGNATION:", {
-            x: col2X,
-            y: detailY - 45,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(designation || "N/A", {
-            x: col2X,
-            y: detailY - 61,
-            size: 12,
-            font: regularFont,
-            color: white,
-        });
-
-        page.drawText("EMAIL:", {
-            x: col2X,
-            y: detailY - 90,
-            size: 10,
-            font: boldFont,
-            color: lightGray,
-        });
-        page.drawText(buyerEmail, {
-            x: col2X,
-            y: detailY - 106,
+        page.drawText("Booking Confirmed", {
+            x: 75,
+            y: height - 160,
             size: 11,
             font: regularFont,
             color: white,
         });
 
-        // Event details footer
-        const footerY = cardY - 145;
-        page.drawText("📍 Dubai, UAE  •  📅 2026", {
-            x: width / 2 - 100,
-            y: footerY,
-            size: 12,
+        // Main Card Shadow (subtle)
+        page.drawRectangle({
+            x: 58,
+            y: height - 722,
+            width: 484,
+            height: 520,
+            color: rgb(0.9, 0.9, 0.9),
+        });
+
+        // Main Card Background
+        page.drawRectangle({
+            x: 60,
+            y: height - 720,
+            width: 480,
+            height: 520,
+            color: white,
+        });
+
+        // Event Header - Gradient effect (dark to light blue)
+        page.drawRectangle({
+            x: 60,
+            y: height - 320,
+            width: 480,
+            height: 120,
+            color: darkBlue,
+        });
+
+        // Event Title
+        page.drawText("Dubai 2026 Legal Conference", {
+            x: 80,
+            y: height - 260,
+            size: 22,
+            font: boldFont,
+            color: white,
+        });
+
+        // Event Subtitle
+        page.drawText("Architecting Legal Sovereignty in a Disrupted World", {
+            x: 80,
+            y: height - 280,
+            size: 11,
             font: regularFont,
+            color: rgb(0.85, 0.87, 0.9),
+        });
+
+        // Date and Location
+        page.drawText("📅 May 13-14, 2026", {
+            x: 80,
+            y: height - 300,
+            size: 10,
+            font: regularFont,
+            color: white,
+        });
+
+        page.drawText("📍 Dubai International Conference Center", {
+            x: 240,
+            y: height - 300,
+            size: 10,
+            font: regularFont,
+            color: white,
+        });
+
+        // Ticket Details Section
+        const detailsY = height - 360;
+
+        // Left Column - Ticket Type
+        page.drawText("TICKET TYPE", {
+            x: 80,
+            y: detailsY,
+            size: 9,
+            font: regularFont,
+            color: mediumGray,
+        });
+
+        // Premium Pass Badge
+        page.drawRectangle({
+            x: 80,
+            y: detailsY - 35,
+            width: 140,
+            height: 28,
             color: gold,
         });
 
-        // QR Code section
-        const qrY = footerY - 100;
-        page.drawText("QR Code for Check-in:", {
-            x: 60,
-            y: qrY + 20,
-            size: 14,
+        page.drawText("⭐ " + passType.toUpperCase(), {
+            x: 88,
+            y: detailsY - 25,
+            size: 11,
             font: boldFont,
             color: darkBlue,
         });
 
-        // Embed QR code image
+        page.drawText(`$${amount.toLocaleString()} USD`, {
+            x: 80,
+            y: detailsY - 55,
+            size: 18,
+            font: boldFont,
+            color: darkGray,
+        });
+
+        // Right Column - Attendee Info
+        const rightColX = 310;
+
+        // Profile icon (circle)
+        page.drawCircle({
+            x: rightColX - 5,
+            y: detailsY - 10,
+            size: 18,
+            color: darkBlue,
+        });
+
+        page.drawText("👤", {
+            x: rightColX - 10,
+            y: detailsY - 17,
+            size: 16,
+            font: regularFont,
+            color: white,
+        });
+
+        page.drawText(buyerName, {
+            x: rightColX + 20,
+            y: detailsY - 5,
+            size: 14,
+            font: boldFont,
+            color: darkGray,
+        });
+
+        page.drawText(`🏢 ${organization || "N/A"}`, {
+            x: rightColX + 20,
+            y: detailsY - 22,
+            size: 9,
+            font: regularFont,
+            color: mediumGray,
+        });
+
+        page.drawText(designation || "Attendee", {
+            x: rightColX + 20,
+            y: detailsY - 37,
+            size: 9,
+            font: regularFont,
+            color: mediumGray,
+        });
+
+        page.drawText(`Booking ID`, {
+            x: rightColX + 20,
+            y: detailsY - 52,
+            size: 8,
+            font: regularFont,
+            color: mediumGray,
+        });
+
+        page.drawText(`#${ticketNumber}`, {
+            x: rightColX + 20,
+            y: detailsY - 65,
+            size: 10,
+            font: boldFont,
+            color: darkBlue,
+        });
+
+        // Divider line
+        page.drawRectangle({
+            x: 80,
+            y: detailsY - 100,
+            width: 440,
+            height: 1,
+            color: lightGray,
+        });
+
+        // QR Code Section
+        const qrY = detailsY - 130;
+
+        page.drawText("SCAN TO CHECK IN", {
+            x: 80,
+            y: qrY + 50,
+            size: 12,
+            font: boldFont,
+            color: darkBlue,
+        });
+
+        // QR Code with border
         const qrImageBytes = Buffer.from(qrCodeDataUrl.split(",")[1], "base64");
         const qrImage = await pdfDoc.embedPng(qrImageBytes);
+
+        // QR border
+        page.drawRectangle({
+            x: 77,
+            y: qrY - 153,
+            width: 156,
+            height: 156,
+            color: darkBlue,
+        });
+
         page.drawImage(qrImage, {
-            x: 60,
-            y: qrY - 180,
+            x: 80,
+            y: qrY - 150,
             width: 150,
             height: 150,
         });
 
-        // Instructions
-        page.drawText("Present this QR code at the venue for entry", {
-            x: 230,
-            y: qrY - 60,
+        // Check-in Instructions
+        page.drawText("Present this code at", {
+            x: 260,
+            y: qrY + 10,
             size: 11,
             font: regularFont,
-            color: rgb(0.3, 0.3, 0.3),
+            color: darkGray,
         });
 
-        // Footer text
-        page.drawText("Thank you for your registration. We look forward to seeing you!", {
-            x: 60,
-            y: 80,
-            size: 10,
+        page.drawText("registration desk", {
+            x: 260,
+            y: qrY - 5,
+            size: 11,
             font: regularFont,
-            color: rgb(0.4, 0.4, 0.4),
+            color: darkGray,
         });
 
-        page.drawText("For queries: support@lextalkworld.com", {
-            x: 60,
-            y: 60,
+        page.drawText(`📧 ${buyerEmail}`, {
+            x: 260,
+            y: qrY - 35,
             size: 9,
             font: regularFont,
-            color: rgb(0.5, 0.5, 0.5),
+            color: mediumGray,
+        });
+
+        const bookingDate = new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+
+        page.drawText(`Booking date: ${bookingDate}`, {
+            x: 260,
+            y: qrY - 50,
+            size: 9,
+            font: regularFont,
+            color: mediumGray,
+        });
+
+        // Footer Bar
+        page.drawRectangle({
+            x: 60,
+            y: height - 720,
+            width: 480,
+            height: 40,
+            color: darkBlue,
+        });
+
+        page.drawText("📧 support@lextalkworld.com", {
+            x: 80,
+            y: height - 705,
+            size: 9,
+            font: regularFont,
+            color: white,
+        });
+
+        page.drawText("Terms & Conditions", {
+            x: 400,
+            y: height - 705,
+            size: 9,
+            font: regularFont,
+            color: rgb(0.7, 0.75, 0.8),
         });
 
         // Save PDF
