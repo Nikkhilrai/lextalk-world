@@ -1,6 +1,69 @@
 import { NextRequest, NextResponse } from "next/server";
 import mammoth from "mammoth";
 
+// Helper function to convert HTML table to Markdown
+function convertTableToMarkdown(tableHtml: string): string {
+    try {
+        // Extract all rows
+        const rowMatches = tableHtml.match(/<tr[\s\S]*?<\/tr>/gi) || [];
+        if (rowMatches.length === 0) return '';
+
+        const rows: string[][] = [];
+
+        for (const rowHtml of rowMatches) {
+            // Extract cells (both th and td)
+            const cellMatches = rowHtml.match(/<t[hd][\s\S]*?<\/t[hd]>/gi) || [];
+            const cells: string[] = [];
+
+            for (const cellHtml of cellMatches) {
+                // Get cell content, remove HTML tags, clean up
+                let cellContent = cellHtml
+                    .replace(/<t[hd][^>]*>/gi, '')
+                    .replace(/<\/t[hd]>/gi, '')
+                    .replace(/<[^>]*>/g, '')
+                    .replace(/\n/g, ' ')
+                    .trim();
+                cells.push(cellContent);
+            }
+
+            if (cells.length > 0) {
+                rows.push(cells);
+            }
+        }
+
+        if (rows.length === 0) return '';
+
+        // Find max columns
+        const maxCols = Math.max(...rows.map(r => r.length));
+
+        // Normalize rows to have same number of columns
+        rows.forEach(row => {
+            while (row.length < maxCols) {
+                row.push('');
+            }
+        });
+
+        // Build Markdown table
+        let markdown = '\n';
+
+        // Header row
+        markdown += '| ' + rows[0].join(' | ') + ' |\n';
+
+        // Separator row
+        markdown += '|' + rows[0].map(() => ' --- ').join('|') + '|\n';
+
+        // Data rows
+        for (let i = 1; i < rows.length; i++) {
+            markdown += '| ' + rows[i].join(' | ') + ' |\n';
+        }
+
+        return markdown;
+    } catch (error) {
+        console.error('Error converting table:', error);
+        return '';
+    }
+}
+
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
@@ -39,7 +102,17 @@ export async function POST(request: NextRequest) {
         const warnings = result.messages;
 
         // Convert HTML to Markdown-like format for the blog editor
-        let markdownContent = htmlContent
+        // First, extract and preserve tables
+        const tables: string[] = [];
+        let htmlWithTablePlaceholders = htmlContent.replace(/<table[\s\S]*?<\/table>/gi, (match) => {
+            const index = tables.length;
+            // Convert table to Markdown
+            const markdownTable = convertTableToMarkdown(match);
+            tables.push(markdownTable);
+            return `___TABLE_PLACEHOLDER_${index}___`;
+        });
+
+        let markdownContent = htmlWithTablePlaceholders
             // Convert headings
             .replace(/<h1>(.*?)<\/h1>/gi, '\n# $1\n')
             .replace(/<h2>(.*?)<\/h2>/gi, '\n## $1\n')
@@ -63,7 +136,6 @@ export async function POST(request: NextRequest) {
             .replace(/<ol>/gi, '\n')
             .replace(/<\/ol>/gi, '\n')
             .replace(/<li>(.*?)<\/li>/gi, '- $1\n')
-            // Keep tables as HTML (they display well)
             // Convert links
             .replace(/<a href="(.*?)">(.*?)<\/a>/gi, '[$2]($1)')
             // Remove other tags but keep content
@@ -71,6 +143,11 @@ export async function POST(request: NextRequest) {
             // Clean up excessive whitespace
             .replace(/\n{3,}/g, '\n\n')
             .trim();
+
+        // Restore tables
+        tables.forEach((table, index) => {
+            markdownContent = markdownContent.replace(`___TABLE_PLACEHOLDER_${index}___`, `\n\n${table}\n\n`);
+        });
 
         // Extract potential title (first heading or first line)
         let suggestedTitle = "";
