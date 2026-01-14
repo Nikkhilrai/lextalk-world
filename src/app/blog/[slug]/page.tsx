@@ -10,6 +10,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import { Clock, ArrowLeft, Calendar, User } from "lucide-react";
 import { Metadata } from "next";
 
@@ -199,8 +201,13 @@ export default async function BlogPostPage({
                             prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
                             prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-1
                             prose-ul:my-4 prose-ol:my-4
+                            prose-table:border-collapse prose-table:w-full prose-table:my-6
+                            prose-th:bg-slate-100 dark:prose-th:bg-slate-700 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-slate-900 dark:prose-th:text-white prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600
+                            prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-td:text-slate-700 dark:prose-td:text-slate-300
+                            prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
                         ">
                             <ReactMarkdown
+                                rehypePlugins={[rehypeRaw, rehypeSanitize]}
                                 components={{
                                     a: ({ href, children }) => (
                                         <a
