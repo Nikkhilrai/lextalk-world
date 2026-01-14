@@ -25,8 +25,9 @@ const NAV_GROUPS = [
         items: [
             { label: "Conferences", href: "/admin/conferences", icon: Calendar },
             { label: "Tickets", href: "/admin/tickets", icon: Ticket },
+            { label: "Ticket Types", href: "/admin/ticket-types", icon: Layers },
             { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
-            { label: "Chat", href: "#", icon: Layers, badge: "New" }, // Placeholder
+            { label: "Chat", href: "#", icon: MessageCircle, badge: "New" }, // Placeholder
         ]
     },
     {
