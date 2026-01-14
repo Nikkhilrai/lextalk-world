@@ -7,7 +7,7 @@ import {
     Star, StarOff, Calendar, MoreHorizontal, X, Save,
     Image as ImageIcon, FileText, Upload, CheckCircle,
     Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code,
-    Settings, Wand2
+    Settings, Wand2, FileUp, Sparkles, Loader2
 } from "lucide-react";
 
 interface BlogPost {
@@ -99,6 +99,21 @@ export default function BlogAdminPage() {
     const [savingAuthor, setSavingAuthor] = useState(false);
     const [uploadingAuthorImage, setUploadingAuthorImage] = useState(false);
     const authorImageInputRef = useRef<HTMLInputElement>(null);
+
+    // Word upload state
+    const [showWordModal, setShowWordModal] = useState(false);
+    const [wordUploading, setWordUploading] = useState(false);
+    const [generatingSeo, setGeneratingSeo] = useState(false);
+    const [wordContent, setWordContent] = useState("");
+    const [wordSeo, setWordSeo] = useState<{
+        title: string;
+        excerpt: string;
+        metaDescription: string;
+        keywords: string;
+        category: string;
+        readTime: string;
+    } | null>(null);
+    const wordFileInputRef = useRef<HTMLInputElement>(null);
 
     // Fetch posts
     const fetchPosts = async () => {
@@ -502,8 +517,97 @@ export default function BlogAdminPage() {
         setTimeout(() => {
             textarea.focus();
             const newCursorPos = start + prefix.length + textToInsert.length + suffix.length;
-            textarea.setSelectionRange(newCursorPos, newCursorPos);
         }, 0);
+    };
+
+    // Handle Word file upload
+    const handleWordUpload = async (file: File) => {
+        setWordUploading(true);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch("/api/blog/upload-word", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                setWordContent(data.content);
+            } else {
+                const error = await res.json();
+                alert(error.error || "Failed to process Word file");
+            }
+        } catch (error) {
+            console.error("Error uploading Word file:", error);
+            alert("Failed to upload Word file");
+        } finally {
+            setWordUploading(false);
+        }
+    };
+
+    // Generate SEO metadata
+    const handleGenerateSeo = async () => {
+        if (!wordContent) return;
+        setGeneratingSeo(true);
+        try {
+            // Extract title from content (first heading or first line)
+            const titleMatch = wordContent.match(/^#\s+(.+)$/m);
+            const title = titleMatch ? titleMatch[1].trim() : wordContent.split('\n')[0].substring(0, 100);
+
+            const res = await fetch("/api/blog/generate-seo", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    content: wordContent,
+                    title,
+                    excerpt: "",
+                }),
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                setWordSeo(data.seo);
+            } else {
+                const error = await res.json();
+                alert(error.error || "Failed to generate SEO");
+            }
+        } catch (error) {
+            console.error("Error generating SEO:", error);
+            alert("Failed to generate SEO metadata");
+        } finally {
+            setGeneratingSeo(false);
+        }
+    };
+
+    // Create blog post from Word content
+    const handleCreateFromWord = () => {
+        if (!wordContent || !wordSeo) return;
+
+        // Pre-fill the form with extracted data
+        setFormData({
+            title: wordSeo.title,
+            excerpt: wordSeo.excerpt,
+            content: wordContent,
+            image: "",
+            category: wordSeo.category,
+            author: "",
+            authorImage: "",
+            readTime: wordSeo.readTime,
+            featured: false,
+            published: false,
+            tags: wordSeo.keywords,
+            metaDescription: wordSeo.metaDescription,
+            publishDate: new Date().toISOString().split('T')[0],
+        });
+
+        // Close Word modal and open post modal
+        setShowWordModal(false);
+        setWordContent("");
+        setWordSeo(null);
+        setEditingPost(null);
+        setShowModal(true);
     };
 
     const publishedCount = posts.filter(p => p.published).length;
@@ -519,6 +623,13 @@ export default function BlogAdminPage() {
                     <p className="text-slate-400">Create and manage blog posts.</p>
                 </div>
                 <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setShowWordModal(true)}
+                        className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2"
+                    >
+                        <FileUp className="w-4 h-4" />
+                        Upload Word
+                    </button>
                     <button
                         onClick={() => openAuthorModal()}
                         className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg border border-slate-700 transition-all flex items-center gap-2"
@@ -1373,6 +1484,177 @@ export default function BlogAdminPage() {
                                         ))}
                                     </div>
                                 </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Word Upload Modal */}
+            {showWordModal && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-900 rounded-2xl border border-slate-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+                        <div className="flex items-center justify-between p-6 border-b border-slate-800">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                                    <FileUp className="w-5 h-5 text-emerald-400" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-white">Upload Word Document</h3>
+                                    <p className="text-sm text-slate-400">Auto-generate SEO metadata from your content</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    setShowWordModal(false);
+                                    setWordContent("");
+                                    setWordSeo(null);
+                                }}
+                                className="p-2 hover:bg-slate-800 rounded-lg text-slate-400"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <div className="p-6 space-y-6">
+                            {/* File Upload Area */}
+                            {!wordContent && (
+                                <div
+                                    className="border-2 border-dashed border-slate-700 rounded-xl p-12 text-center hover:border-emerald-500/50 transition-colors cursor-pointer"
+                                    onDragOver={(e) => e.preventDefault()}
+                                    onDrop={async (e) => {
+                                        e.preventDefault();
+                                        const file = e.dataTransfer.files?.[0];
+                                        if (file) {
+                                            await handleWordUpload(file);
+                                        }
+                                    }}
+                                    onClick={() => wordFileInputRef.current?.click()}
+                                >
+                                    <input
+                                        type="file"
+                                        ref={wordFileInputRef}
+                                        onChange={async (e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                await handleWordUpload(file);
+                                            }
+                                        }}
+                                        accept=".docx,.doc"
+                                        className="hidden"
+                                    />
+                                    {wordUploading ? (
+                                        <div className="flex flex-col items-center gap-3">
+                                            <Loader2 className="w-12 h-12 text-emerald-400 animate-spin" />
+                                            <p className="text-slate-300">Processing document...</p>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <FileUp className="w-12 h-12 text-slate-500 mx-auto mb-4" />
+                                            <p className="text-lg text-white font-medium mb-2">
+                                                Drop your Word file here
+                                            </p>
+                                            <p className="text-sm text-slate-500">
+                                                or click to browse • Supports .docx files
+                                            </p>
+                                        </>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Content Preview & SEO */}
+                            {wordContent && (
+                                <>
+                                    {/* Generate SEO Button */}
+                                    {!wordSeo && (
+                                        <button
+                                            onClick={handleGenerateSeo}
+                                            disabled={generatingSeo}
+                                            className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                                        >
+                                            {generatingSeo ? (
+                                                <>
+                                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                                    Generating SEO...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Sparkles className="w-5 h-5" />
+                                                    Generate SEO Metadata
+                                                </>
+                                            )}
+                                        </button>
+                                    )}
+
+                                    {/* SEO Preview */}
+                                    {wordSeo && (
+                                        <div className="bg-slate-800/50 rounded-xl p-5 space-y-4 border border-slate-700">
+                                            <div className="flex items-center gap-2 text-emerald-400 mb-4">
+                                                <CheckCircle className="w-5 h-5" />
+                                                <span className="font-semibold">SEO Metadata Generated</span>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">SEO Title</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.title}</p>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Category</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.category}</p>
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Meta Description</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.metaDescription}</p>
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Keywords</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.keywords}</p>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Excerpt</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded line-clamp-2">{wordSeo.excerpt}</p>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Read Time</label>
+                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.readTime}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Content Preview */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-300 mb-2">Content Preview</label>
+                                        <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 max-h-64 overflow-y-auto">
+                                            <pre className="text-slate-300 text-sm whitespace-pre-wrap font-sans">
+                                                {wordContent.substring(0, 2000)}
+                                                {wordContent.length > 2000 && '...'}
+                                            </pre>
+                                        </div>
+                                    </div>
+
+                                    {/* Action Buttons */}
+                                    <div className="flex items-center gap-3 pt-4">
+                                        <button
+                                            onClick={() => {
+                                                setWordContent("");
+                                                setWordSeo(null);
+                                            }}
+                                            className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg transition-colors"
+                                        >
+                                            Upload Different File
+                                        </button>
+                                        <button
+                                            onClick={handleCreateFromWord}
+                                            disabled={!wordSeo}
+                                            className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            <Plus className="w-5 h-5" />
+                                            Create Blog Post
+                                        </button>
+                                    </div>
+                                </>
                             )}
                         </div>
                     </div>
