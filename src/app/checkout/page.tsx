@@ -294,6 +294,49 @@ export default function CheckoutPage() {
                                                             const order = await actions.order.capture();
                                                             console.log("PayPal Order Captured:", order);
 
+                                                            // Map cart item IDs to ticket type mapping
+                                                            const ticketTypeMap: Record<string, string> = {
+                                                                "standard-pass-dubai-2026": "standard",
+                                                                "premium-pass-dubai-2026": "premium",
+                                                                "exclusive-pass-dubai-2026": "exclusive",
+                                                            };
+
+                                                            // Save each ticket order to database
+                                                            try {
+                                                                for (const item of items) {
+                                                                    const ticketTypeSlug = ticketTypeMap[item.id];
+                                                                    if (!ticketTypeSlug) continue;
+
+                                                                    // Fetch ticket type ID from database
+                                                                    const ticketTypeRes = await fetch(`/api/tickets/get-type?slug=dubai-2026&type=${ticketTypeSlug}`);
+                                                                    if (!ticketTypeRes.ok) {
+                                                                        console.error("Failed to fetch ticket type ID");
+                                                                        continue;
+                                                                    }
+                                                                    const { ticketTypeId } = await ticketTypeRes.json();
+
+                                                                    // Create ticket order
+                                                                    await fetch("/api/tickets/create-order", {
+                                                                        method: "POST",
+                                                                        headers: { "Content-Type": "application/json" },
+                                                                        body: JSON.stringify({
+                                                                            ticketTypeId,
+                                                                            buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                            buyerEmail: customerDetails.email,
+                                                                            buyerPhone: customerDetails.phone,
+                                                                            buyerOrganization: customerDetails.organization,
+                                                                            buyerDesignation: customerDetails.designation,
+                                                                            quantity: item.quantity,
+                                                                            totalAmount: item.price * item.quantity,
+                                                                            currency: "USD",
+                                                                            paymentId: order.id,
+                                                                        }),
+                                                                    });
+                                                                }
+                                                            } catch (err) {
+                                                                console.error("Error saving ticket orders:", err);
+                                                            }
+
                                                             // TODO: Enable email confirmation when Resend is configured
                                                             // const passType = items.map(i => i.name).join(", ");
                                                             // try {
