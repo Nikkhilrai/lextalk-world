@@ -301,7 +301,9 @@ export default function CheckoutPage() {
                                                                 "exclusive-pass-dubai-2026": "exclusive",
                                                             };
 
-                                                            // Save each ticket order to database
+                                                            const ticketNumbers: string[] = [];
+
+                                                            // Save each ticket order to database and generate tickets
                                                             try {
                                                                 for (const item of items) {
                                                                     const ticketTypeSlug = ticketTypeMap[item.id];
@@ -316,7 +318,7 @@ export default function CheckoutPage() {
                                                                     const { ticketTypeId } = await ticketTypeRes.json();
 
                                                                     // Create ticket order
-                                                                    await fetch("/api/tickets/create-order", {
+                                                                    const orderRes = await fetch("/api/tickets/create-order", {
                                                                         method: "POST",
                                                                         headers: { "Content-Type": "application/json" },
                                                                         body: JSON.stringify({
@@ -332,6 +334,38 @@ export default function CheckoutPage() {
                                                                             paymentId: order.id,
                                                                         }),
                                                                     });
+
+                                                                    if (!orderRes.ok) {
+                                                                        console.error("Failed to create order");
+                                                                        continue;
+                                                                    }
+
+                                                                    const { order: createdOrder } = await orderRes.json();
+
+                                                                    // Generate PDF ticket
+                                                                    const ticketRes = await fetch("/api/tickets/generate-ticket", {
+                                                                        method: "POST",
+                                                                        headers: { "Content-Type": "application/json" },
+                                                                        body: JSON.stringify({
+                                                                            orderId: createdOrder.id,
+                                                                            buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                            buyerEmail: customerDetails.email,
+                                                                            organization: customerDetails.organization,
+                                                                            designation: customerDetails.designation,
+                                                                            passType: item.name,
+                                                                            amount: item.price * item.quantity,
+                                                                            conferenceDetails: {
+                                                                                name: "Dubai 2026",
+                                                                                location: "Dubai, UAE",
+                                                                                year: 2026,
+                                                                            },
+                                                                        }),
+                                                                    });
+
+                                                                    if (ticketRes.ok) {
+                                                                        const { ticketNumber } = await ticketRes.json();
+                                                                        ticketNumbers.push(ticketNumber);
+                                                                    }
                                                                 }
                                                             } catch (err) {
                                                                 console.error("Error saving ticket orders:", err);
@@ -347,7 +381,7 @@ export default function CheckoutPage() {
                                                             // }
 
                                                             clearCart();
-                                                            router.push("/payment-success");
+                                                            router.push(`/payment-success?tickets=${ticketNumbers.join(",")}`);
                                                         }
                                                     }}
                                                     onError={(err) => {

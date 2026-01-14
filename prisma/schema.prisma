@@ -214,6 +214,9 @@ model TicketOrder {
   status       String     @default("pending") // pending, paid, cancelled, refunded
   paymentId    String?    // External payment gateway reference
   notes        String?
+  ticketNumber String?    // Unique ticket ID (e.g., LTW-2026-ABC123)
+  ticketPdfUrl String?    // URL to generated PDF ticket
+  qrCodeData   String?    // Encrypted data for QR code verification
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 }
