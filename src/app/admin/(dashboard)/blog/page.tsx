@@ -9,6 +9,7 @@ import {
     Bold, Italic, Heading1, Heading2, Heading3, Link2, Quote, List, ListOrdered, Code,
     Settings, Wand2, FileUp, Sparkles, Loader2
 } from "lucide-react";
+import RichTextEditor from "@/components/RichTextEditor";
 
 interface BlogPost {
     id: string;
@@ -854,113 +855,13 @@ export default function BlogAdminPage() {
                                 />
                             </div>
 
-                            {/* Content with Formatting Toolbar */}
+                            {/* Content with Rich Text Editor */}
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">Content * (Markdown supported)</label>
-
-                                {/* Formatting Toolbar */}
-                                <div className="flex flex-wrap items-center gap-1 p-2 bg-slate-800 border border-slate-700 border-b-0 rounded-t-lg">
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('**', '**', 'bold text')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Bold (Ctrl+B)"
-                                    >
-                                        <Bold size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('*', '*', 'italic text')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Italic (Ctrl+I)"
-                                    >
-                                        <Italic size={16} />
-                                    </button>
-
-                                    <div className="w-px h-6 bg-slate-700 mx-1" />
-
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n# ', '', 'Heading 1')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Heading 1"
-                                    >
-                                        <Heading1 size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n## ', '', 'Heading 2')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Heading 2"
-                                    >
-                                        <Heading2 size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n### ', '', 'Heading 3')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Heading 3"
-                                    >
-                                        <Heading3 size={16} />
-                                    </button>
-
-                                    <div className="w-px h-6 bg-slate-700 mx-1" />
-
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('[', '](https://)', 'link text')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Insert Link"
-                                    >
-                                        <Link2 size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n> ', '', 'quote')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Blockquote"
-                                    >
-                                        <Quote size={16} />
-                                    </button>
-
-                                    <div className="w-px h-6 bg-slate-700 mx-1" />
-
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n- ', '', 'list item')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Bullet List"
-                                    >
-                                        <List size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('\n1. ', '', 'list item')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Numbered List"
-                                    >
-                                        <ListOrdered size={16} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => insertMarkdown('`', '`', 'code')}
-                                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-                                        title="Inline Code"
-                                    >
-                                        <Code size={16} />
-                                    </button>
-
-                                    <span className="ml-auto text-xs text-slate-500">Markdown supported</span>
-                                </div>
-
-                                <textarea
-                                    ref={contentTextareaRef}
-                                    required
-                                    rows={12}
-                                    value={formData.content}
-                                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-b-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-none font-mono text-sm"
-                                    placeholder="Write your blog content here...&#10;&#10;Use the toolbar above or write markdown directly:&#10;# Heading 1&#10;## Heading 2&#10;**bold** *italic*&#10;[link](url)&#10;> blockquote"
+                                <label className="block text-sm font-medium text-slate-300 mb-2">Content *</label>
+                                <RichTextEditor
+                                    content={formData.content}
+                                    onChange={(html) => setFormData({ ...formData, content: html })}
+                                    placeholder="Write your blog content here..."
                                 />
                             </div>
 
