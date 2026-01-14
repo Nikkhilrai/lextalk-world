@@ -1586,38 +1586,78 @@ export default function BlogAdminPage() {
                                         </button>
                                     )}
 
-                                    {/* SEO Preview */}
+                                    {/* SEO Fields - Editable */}
                                     {wordSeo && (
                                         <div className="bg-slate-800/50 rounded-xl p-5 space-y-4 border border-slate-700">
-                                            <div className="flex items-center gap-2 text-emerald-400 mb-4">
-                                                <CheckCircle className="w-5 h-5" />
-                                                <span className="font-semibold">SEO Metadata Generated</span>
+                                            <div className="flex items-center justify-between mb-4">
+                                                <div className="flex items-center gap-2 text-emerald-400">
+                                                    <CheckCircle className="w-5 h-5" />
+                                                    <span className="font-semibold">SEO Metadata (Editable)</span>
+                                                </div>
+                                                <span className="text-xs text-slate-500">Paste your ChatGPT output below</span>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-4">
-                                                <div>
+                                                <div className="col-span-2">
                                                     <label className="block text-xs font-medium text-slate-400 mb-1">SEO Title</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.title}</p>
+                                                    <input
+                                                        type="text"
+                                                        value={wordSeo.title}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, title: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                                        placeholder="Enter SEO-optimized title..."
+                                                    />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-medium text-slate-400 mb-1">Category</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.category}</p>
-                                                </div>
-                                                <div className="col-span-2">
-                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Meta Description</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.metaDescription}</p>
-                                                </div>
-                                                <div className="col-span-2">
-                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Keywords</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.keywords}</p>
-                                                </div>
-                                                <div>
-                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Excerpt</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded line-clamp-2">{wordSeo.excerpt}</p>
+                                                    <input
+                                                        type="text"
+                                                        value={wordSeo.category}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, category: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                                        placeholder="Constitutional Law, Legal Tech, etc."
+                                                    />
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-medium text-slate-400 mb-1">Read Time</label>
-                                                    <p className="text-white text-sm bg-slate-800 p-2 rounded">{wordSeo.readTime}</p>
+                                                    <input
+                                                        type="text"
+                                                        value={wordSeo.readTime}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, readTime: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                                        placeholder="5 min read"
+                                                    />
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Meta Description (150-160 chars)</label>
+                                                    <textarea
+                                                        rows={2}
+                                                        value={wordSeo.metaDescription}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, metaDescription: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none"
+                                                        placeholder="Paste your meta description from ChatGPT..."
+                                                    />
+                                                    <span className="text-xs text-slate-500">{wordSeo.metaDescription.length}/160 chars</span>
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Keywords/Tags (comma-separated)</label>
+                                                    <input
+                                                        type="text"
+                                                        value={wordSeo.keywords}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, keywords: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                                        placeholder="legal tech, constitutional law, FCRA..."
+                                                    />
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <label className="block text-xs font-medium text-slate-400 mb-1">Excerpt</label>
+                                                    <textarea
+                                                        rows={3}
+                                                        value={wordSeo.excerpt}
+                                                        onChange={(e) => setWordSeo({ ...wordSeo, excerpt: e.target.value })}
+                                                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none"
+                                                        placeholder="Brief summary of the article..."
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

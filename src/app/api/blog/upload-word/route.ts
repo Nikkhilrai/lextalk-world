@@ -1,69 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import mammoth from "mammoth";
 
-// Helper function to convert HTML table to Markdown
-function convertTableToMarkdown(tableHtml: string): string {
-    try {
-        // Extract all rows
-        const rowMatches = tableHtml.match(/<tr[\s\S]*?<\/tr>/gi) || [];
-        if (rowMatches.length === 0) return '';
-
-        const rows: string[][] = [];
-
-        for (const rowHtml of rowMatches) {
-            // Extract cells (both th and td)
-            const cellMatches = rowHtml.match(/<t[hd][\s\S]*?<\/t[hd]>/gi) || [];
-            const cells: string[] = [];
-
-            for (const cellHtml of cellMatches) {
-                // Get cell content, remove HTML tags, clean up
-                let cellContent = cellHtml
-                    .replace(/<t[hd][^>]*>/gi, '')
-                    .replace(/<\/t[hd]>/gi, '')
-                    .replace(/<[^>]*>/g, '')
-                    .replace(/\n/g, ' ')
-                    .trim();
-                cells.push(cellContent);
-            }
-
-            if (cells.length > 0) {
-                rows.push(cells);
-            }
-        }
-
-        if (rows.length === 0) return '';
-
-        // Find max columns
-        const maxCols = Math.max(...rows.map(r => r.length));
-
-        // Normalize rows to have same number of columns
-        rows.forEach(row => {
-            while (row.length < maxCols) {
-                row.push('');
-            }
-        });
-
-        // Build Markdown table
-        let markdown = '\n';
-
-        // Header row
-        markdown += '| ' + rows[0].join(' | ') + ' |\n';
-
-        // Separator row
-        markdown += '|' + rows[0].map(() => ' --- ').join('|') + '|\n';
-
-        // Data rows
-        for (let i = 1; i < rows.length; i++) {
-            markdown += '| ' + rows[i].join(' | ') + ' |\n';
-        }
-
-        return markdown;
-    } catch (error) {
-        console.error('Error converting table:', error);
-        return '';
-    }
-}
-
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
@@ -101,75 +38,101 @@ export async function POST(request: NextRequest) {
         const htmlContent = result.value;
         const warnings = result.messages;
 
-        // Convert HTML to Markdown-like format for the blog editor
-        // First, extract and preserve tables
+        // Convert HTML to Markdown while preserving tables as styled HTML
+        // First, extract and preserve tables with styling
         const tables: string[] = [];
         let htmlWithTablePlaceholders = htmlContent.replace(/<table[\s\S]*?<\/table>/gi, (match) => {
             const index = tables.length;
-            // Convert table to Markdown
-            const markdownTable = convertTableToMarkdown(match);
-            tables.push(markdownTable);
-            return `___TABLE_PLACEHOLDER_${index}___`;
+            // Add styling to table for better display
+            const styledTable = match
+                .replace(/<table/gi, '<table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #f8fafc; border-radius: 8px; overflow: hidden;"')
+                .replace(/<tr/gi, '<tr style="border-bottom: 1px solid #e2e8f0;"')
+                .replace(/<th/gi, '<th style="padding: 12px 16px; text-align: left; background: #1e293b; color: white; font-weight: 600;"')
+                .replace(/<td/gi, '<td style="padding: 12px 16px; border-bottom: 1px solid #e2e8f0;"');
+            tables.push(styledTable);
+            return `\n\n___TABLE_${index}___\n\n`;
         });
 
+        // Convert rest of HTML to Markdown
         let markdownContent = htmlWithTablePlaceholders
             // Convert headings
-            .replace(/<h1>(.*?)<\/h1>/gi, '\n# $1\n')
-            .replace(/<h2>(.*?)<\/h2>/gi, '\n## $1\n')
-            .replace(/<h3>(.*?)<\/h3>/gi, '\n### $1\n')
-            .replace(/<h4>(.*?)<\/h4>/gi, '\n#### $1\n')
+            .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n# $1\n')
+            .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n')
+            .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n')
+            .replace(/<h4[^>]*>(.*?)<\/h4>/gi, '\n#### $1\n')
             // Convert bold and italic
-            .replace(/<strong>(.*?)<\/strong>/gi, '**$1**')
-            .replace(/<b>(.*?)<\/b>/gi, '**$1**')
-            .replace(/<em>(.*?)<\/em>/gi, '*$1*')
-            .replace(/<i>(.*?)<\/i>/gi, '*$1*')
+            .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '**$1**')
+            .replace(/<b[^>]*>(.*?)<\/b>/gi, '**$1**')
+            .replace(/<em[^>]*>(.*?)<\/em>/gi, '*$1*')
+            .replace(/<i[^>]*>(.*?)<\/i>/gi, '*$1*')
             // Convert underline
-            .replace(/<u>(.*?)<\/u>/gi, '_$1_')
+            .replace(/<u[^>]*>(.*?)<\/u>/gi, '_$1_')
             // Convert paragraphs
-            .replace(/<p>/gi, '\n')
+            .replace(/<p[^>]*>/gi, '\n')
             .replace(/<\/p>/gi, '\n')
             // Convert line breaks
             .replace(/<br\s*\/?>/gi, '\n')
             // Convert lists
-            .replace(/<ul>/gi, '\n')
+            .replace(/<ul[^>]*>/gi, '\n')
             .replace(/<\/ul>/gi, '\n')
-            .replace(/<ol>/gi, '\n')
+            .replace(/<ol[^>]*>/gi, '\n')
             .replace(/<\/ol>/gi, '\n')
-            .replace(/<li>(.*?)<\/li>/gi, '- $1\n')
+            .replace(/<li[^>]*>(.*?)<\/li>/gi, '- $1\n')
             // Convert links
-            .replace(/<a href="(.*?)">(.*?)<\/a>/gi, '[$2]($1)')
+            .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '[$2]($1)')
             // Remove other tags but keep content
             .replace(/<[^>]*>/g, '')
+            // Decode HTML entities
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
             // Clean up excessive whitespace
             .replace(/\n{3,}/g, '\n\n')
             .trim();
 
-        // Restore tables
+        // Restore tables as HTML
         tables.forEach((table, index) => {
-            markdownContent = markdownContent.replace(`___TABLE_PLACEHOLDER_${index}___`, `\n\n${table}\n\n`);
+            markdownContent = markdownContent.replace(`___TABLE_${index}___`, `\n\n${table}\n\n`);
         });
 
-        // Extract potential title (first heading or first line)
+        // Extract potential title (first heading or first line) - clean it up
         let suggestedTitle = "";
         const titleMatch = markdownContent.match(/^#\s+(.+)$/m);
         if (titleMatch) {
-            suggestedTitle = titleMatch[1].trim();
+            suggestedTitle = titleMatch[1]
+                .replace(/\*\*/g, '')  // Remove bold markdown
+                .replace(/\*/g, '')     // Remove italic markdown
+                .replace(/_/g, '')      // Remove underline
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert links to text
+                .trim();
         } else {
-            // Use first line as title
-            const firstLine = markdownContent.split('\n')[0];
-            if (firstLine && firstLine.length < 200) {
-                suggestedTitle = firstLine.replace(/[#*_]/g, '').trim();
+            // Use first non-empty line as title
+            const lines = markdownContent.split('\n').filter(l => l.trim());
+            if (lines[0]) {
+                suggestedTitle = lines[0]
+                    .replace(/[#*_\[\]\(\)]/g, '')
+                    .substring(0, 100)
+                    .trim();
             }
         }
 
         // Extract first paragraph for excerpt
-        const paragraphs = markdownContent.split('\n\n').filter(p =>
-            p.trim() &&
-            !p.startsWith('#') &&
-            p.length > 50
-        );
+        const paragraphs = markdownContent
+            .split('\n\n')
+            .filter(p =>
+                p.trim() &&
+                !p.startsWith('#') &&
+                !p.startsWith('<table') &&
+                p.length > 50
+            );
         const suggestedExcerpt = paragraphs[0]
-            ? paragraphs[0].replace(/[#*_\[\]\(\)]/g, '').substring(0, 200).trim() + '...'
+            ? paragraphs[0]
+                .replace(/[#*_\[\]\(\)]/g, '')
+                .replace(/<[^>]*>/g, '')
+                .substring(0, 250)
+                .trim() + '...'
             : '';
 
         return NextResponse.json({
@@ -180,6 +143,7 @@ export async function POST(request: NextRequest) {
             suggestedExcerpt,
             warnings: warnings.map(w => w.message),
             fileName: file.name,
+            tableCount: tables.length,
         });
 
     } catch (error) {
