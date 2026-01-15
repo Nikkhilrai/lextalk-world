@@ -141,12 +141,26 @@ export async function GET(
         page.drawText("ATTENDEE", { x: leftX, y: detailY - 120, size: 9, font: boldFont, color: mediumGray });
         page.drawText(order.buyerName, { x: leftX, y: detailY - 138, size: 12, font: regularFont, color: darkText });
 
+        // Parse Organization and Designation from notes
+        let organization = "N/A";
+        let designation = "N/A";
+
+        if (order.notes) {
+            const parts = order.notes.split(" at ");
+            if (parts.length >= 2) {
+                designation = parts[0];
+                organization = parts.slice(1).join(" at ");
+            } else {
+                organization = order.notes;
+            }
+        }
+
         // Right Col
         page.drawText("ORGANIZATION", { x: rightX, y: detailY, size: 9, font: boldFont, color: mediumGray });
-        page.drawText("N/A", { x: rightX, y: detailY - 18, size: 12, font: regularFont, color: darkText }); // Missing in DB
+        page.drawText(organization, { x: rightX, y: detailY - 18, size: 12, font: regularFont, color: darkText });
 
         page.drawText("DESIGNATION", { x: rightX, y: detailY - 60, size: 9, font: boldFont, color: mediumGray });
-        page.drawText("N/A", { x: rightX, y: detailY - 78, size: 12, font: regularFont, color: darkText }); // Missing in DB
+        page.drawText(designation, { x: rightX, y: detailY - 78, size: 12, font: regularFont, color: darkText });
 
         page.drawText("EMAIL", { x: rightX, y: detailY - 120, size: 9, font: boldFont, color: mediumGray });
         page.drawText(order.buyerEmail, { x: rightX, y: detailY - 138, size: 11, font: regularFont, color: darkText });
