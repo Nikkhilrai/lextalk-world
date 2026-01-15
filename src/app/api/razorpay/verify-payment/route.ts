@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
                             buyerDesignation: customerDetails.designation,
                             quantity: item.quantity,
                             totalAmount: item.price * item.quantity,
-                            currency: "INR",
+                            currency: "USD",
                             paymentId: razorpay_payment_id,
                         }),
                     }
@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
                                     designation: customerDetails.designation,
                                     passType: item.name,
                                     amount: item.price * item.quantity,
-                                    currency: "INR",
+                                    currency: "USD",
                                     paymentId: razorpay_payment_id,
                                     orderDate: new Date().toISOString(),
                                 }),

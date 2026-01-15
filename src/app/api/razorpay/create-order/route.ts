@@ -9,7 +9,7 @@ const razorpay = new Razorpay({
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { amount, currency = "INR", cartItems } = body;
+        const { amount, currency = "USD", cartItems } = body;
 
         if (!amount || amount <= 0) {
             return NextResponse.json(

@@ -280,7 +280,7 @@ export default function CheckoutPage() {
                                                             headers: { "Content-Type": "application/json" },
                                                             body: JSON.stringify({
                                                                 amount: total,
-                                                                currency: "INR",
+                                                                currency: "USD",
                                                                 cartItems: items,
                                                             }),
                                                         });
@@ -346,7 +346,7 @@ export default function CheckoutPage() {
                                                 disabled={isProcessing || !razorpayLoaded}
                                                 className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-700 hover:to-orange-700 transition-all font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                {isProcessing ? "Processing..." : `Pay ₹${total.toLocaleString("en-IN")}`}
+                                                {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)}`}
                                             </button>
 
                                             <button
