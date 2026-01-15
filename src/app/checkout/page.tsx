@@ -363,22 +363,36 @@ export default function CheckoutPage() {
                                                                     });
 
                                                                     if (ticketRes.ok) {
-                                                                        const { ticketNumber } = await ticketRes.json();
+                                                                        const { ticketNumber, ticketUrl } = await ticketRes.json();
                                                                         ticketNumbers.push(ticketNumber);
+
+                                                                        // Send email receipt with ticket PDF
+                                                                        try {
+                                                                            await fetch("/api/tickets/email-receipt", {
+                                                                                method: "POST",
+                                                                                headers: { "Content-Type": "application/json" },
+                                                                                body: JSON.stringify({
+                                                                                    ticketNumber,
+                                                                                    ticketPdfUrl: ticketUrl,
+                                                                                    buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                                    buyerEmail: customerDetails.email,
+                                                                                    organization: customerDetails.organization,
+                                                                                    designation: customerDetails.designation,
+                                                                                    passType: item.name,
+                                                                                    amount: item.price * item.quantity,
+                                                                                    currency: "USD",
+                                                                                    paymentId: order.id,
+                                                                                    orderDate: new Date().toISOString(),
+                                                                                }),
+                                                                            });
+                                                                        } catch (emailErr) {
+                                                                            console.error("Email send error:", emailErr);
+                                                                        }
                                                                     }
                                                                 }
                                                             } catch (err) {
                                                                 console.error("Error saving ticket orders:", err);
                                                             }
-
-                                                            // TODO: Enable email confirmation when Resend is configured
-                                                            // const passType = items.map(i => i.name).join(", ");
-                                                            // try {
-                                                            //     const emailRes = await fetch("/api/send-confirmation", {...});
-                                                            //     console.log("Email Confirmation:", await emailRes.json());
-                                                            // } catch (emailErr) {
-                                                            //     console.error("Email send error:", emailErr);
-                                                            // }
 
                                                             clearCart();
                                                             router.push(`/payment-success?tickets=${ticketNumbers.join(",")}`);
