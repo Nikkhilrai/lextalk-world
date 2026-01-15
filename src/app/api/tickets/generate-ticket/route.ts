@@ -71,10 +71,10 @@ export async function POST(request: NextRequest) {
         const mediumGray = rgb(0.6, 0.62, 0.65);
         const darkText = rgb(0.15, 0.17, 0.2);
 
-        // Load LexTalk logo
+        // Load logo
         let logoImage;
         try {
-            const logoPath = path.join(process.cwd(), "public", "logo", "Lextalk-Logo.png");
+            const logoPath = path.join(process.cwd(), "public", "logo", "mysticverse logo ticket.png");
             const logoBytes = await fs.readFile(logoPath);
             logoImage = await pdfDoc.embedPng(logoBytes);
         } catch (err) {
