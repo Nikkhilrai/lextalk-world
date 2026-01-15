@@ -8,9 +8,10 @@ import fs from "fs/promises";
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { ticketNumber: string } }
+    props: { params: Promise<{ ticketNumber: string }> }
 ) {
     try {
+        const params = await props.params;
         const ticketNumber = params.ticketNumber;
 
         // 1. Fetch Order
