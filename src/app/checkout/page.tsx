@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ShieldCheck, Lock, CreditCard, ChevronRight, ChevronLeft, User, Building2, Phone, Mail } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Script from "next/script";
 
 interface CustomerDetails {
     email: string;
@@ -33,8 +33,7 @@ export default function CheckoutPage() {
         designation: "",
     });
     const [formErrors, setFormErrors] = useState<Partial<CustomerDetails>>({});
-
-    const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+    const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
     const validateForm = (): boolean => {
         const errors: Partial<CustomerDetails> = {};
@@ -243,177 +242,125 @@ export default function CheckoutPage() {
                                         <Lock size={16} />
                                         <span className="text-sm">Encrypted Transaction via PayPal</span>
                                     </div>
+                                    {step === 2 && (
+                                        <div className="space-y-6">
+                                            <Script
+                                                src="https://checkout.razorpay.com/v1/checkout.js"
+                                                onLoad={() => setRazorpayLoaded(true)}
+                                            />
 
-                                    <div className="space-y-6">
-                                        <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg flex gap-3 text-blue-800">
-                                            <CreditCard className="flex-shrink-0" size={24} />
-                                            <div>
-                                                <h3 className="font-bold text-sm">PayPal & Credit Cards</h3>
-                                                <p className="text-xs mt-1">Pay securely with PayPal, Visa, Mastercard, or Amex.</p>
+                                            <div className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg">
+                                                <CreditCard className="text-blue-600" size={32} />
+                                                <div>
+                                                    <h3 className="font-bold text-sm">Secure Payment</h3>
+                                                    <p className="text-xs mt-1">Pay securely with UPI, Cards, NetBanking, or Wallets via Razorpay</p>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {error && (
-                                            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                                                {error}
-                                            </div>
-                                        )}
+                                            {error && (
+                                                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                                                    {error}
+                                                </div>
+                                            )}
 
-                                        {!paypalClientId ? (
-                                            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
-                                                <strong>Configuration Required:</strong> PayPal Client ID is not set.
-                                            </div>
-                                        ) : (
-                                            <PayPalScriptProvider options={{
-                                                clientId: paypalClientId,
-                                                currency: "USD",
-                                                intent: "capture"
-                                            }}>
-                                                <PayPalButtons
-                                                    style={{ layout: "vertical", shape: "rect", label: "pay" }}
-                                                    disabled={isProcessing}
-                                                    forceReRender={[total]}
-                                                    createOrder={(data, actions) => {
-                                                        setIsProcessing(true);
-                                                        setError(null);
-                                                        return actions.order.create({
-                                                            intent: "CAPTURE",
-                                                            purchase_units: [
-                                                                {
-                                                                    description: `LexTalk World - Dubai Conference Pass 2026 - ${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                    amount: {
-                                                                        currency_code: "USD",
-                                                                        value: total.toFixed(2),
-                                                                    },
-                                                                },
-                                                            ],
+                                            <button
+                                                onClick={async () => {
+                                                    if (!razorpayLoaded) {
+                                                        setError("Payment system is loading, please wait...");
+                                                        return;
+                                                    }
+
+                                                    setIsProcessing(true);
+                                                    setError(null);
+
+                                                    try {
+                                                        // Create Razorpay order
+                                                        const orderRes = await fetch("/api/razorpay/create-order", {
+                                                            method: "POST",
+                                                            headers: { "Content-Type": "application/json" },
+                                                            body: JSON.stringify({
+                                                                amount: total,
+                                                                currency: "INR",
+                                                                cartItems: items,
+                                                            }),
                                                         });
-                                                    }}
-                                                    onApprove={async (data, actions) => {
-                                                        if (actions.order) {
-                                                            const order = await actions.order.capture();
-                                                            console.log("PayPal Order Captured:", order);
 
-                                                            // Map cart item IDs to ticket type mapping
-                                                            const ticketTypeMap: Record<string, string> = {
-                                                                "standard-pass-dubai-2026": "standard",
-                                                                "premium-pass-dubai-2026": "premium",
-                                                                "exclusive-pass-dubai-2026": "exclusive",
-                                                            };
+                                                        const orderData = await orderRes.json();
+                                                        if (!orderRes.ok) throw new Error(orderData.error);
 
-                                                            const ticketNumbers: string[] = [];
-
-                                                            // Save each ticket order to database and generate tickets
-                                                            try {
-                                                                for (const item of items) {
-                                                                    const ticketTypeSlug = ticketTypeMap[item.id];
-                                                                    if (!ticketTypeSlug) continue;
-
-                                                                    // Fetch ticket type ID from database
-                                                                    const ticketTypeRes = await fetch(`/api/tickets/get-type?slug=dubai-2026&type=${ticketTypeSlug}`);
-                                                                    if (!ticketTypeRes.ok) {
-                                                                        console.error("Failed to fetch ticket type ID");
-                                                                        continue;
-                                                                    }
-                                                                    const { ticketTypeId } = await ticketTypeRes.json();
-
-                                                                    // Create ticket order
-                                                                    const orderRes = await fetch("/api/tickets/create-order", {
+                                                        // Initialize Razorpay
+                                                        const options = {
+                                                            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                                                            amount: orderData.amount,
+                                                            currency: orderData.currency,
+                                                            name: "LexTalk World",
+                                                            description: `Dubai 2026 Conference Pass - ${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                            order_id: orderData.orderId,
+                                                            prefill: {
+                                                                name: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                email: customerDetails.email,
+                                                                contact: customerDetails.phone,
+                                                            },
+                                                            handler: async function (response: any) {
+                                                                try {
+                                                                    // Verify payment
+                                                                    const verifyRes = await fetch("/api/razorpay/verify-payment", {
                                                                         method: "POST",
                                                                         headers: { "Content-Type": "application/json" },
                                                                         body: JSON.stringify({
-                                                                            ticketTypeId,
-                                                                            buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                            buyerEmail: customerDetails.email,
-                                                                            buyerPhone: customerDetails.phone,
-                                                                            buyerOrganization: customerDetails.organization,
-                                                                            buyerDesignation: customerDetails.designation,
-                                                                            quantity: item.quantity,
-                                                                            totalAmount: item.price * item.quantity,
-                                                                            currency: "USD",
-                                                                            paymentId: order.id,
+                                                                            ...response,
+                                                                            customerDetails,
+                                                                            cartItems: items,
                                                                         }),
                                                                     });
 
-                                                                    if (!orderRes.ok) {
-                                                                        console.error("Failed to create order");
-                                                                        continue;
-                                                                    }
+                                                                    const result = await verifyRes.json();
+                                                                    if (!verifyRes.ok) throw new Error(result.error);
 
-                                                                    const { order: createdOrder } = await orderRes.json();
-
-                                                                    // Generate PDF ticket
-                                                                    const ticketRes = await fetch("/api/tickets/generate-ticket", {
-                                                                        method: "POST",
-                                                                        headers: { "Content-Type": "application/json" },
-                                                                        body: JSON.stringify({
-                                                                            orderId: createdOrder.id,
-                                                                            buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                            buyerEmail: customerDetails.email,
-                                                                            organization: customerDetails.organization,
-                                                                            designation: customerDetails.designation,
-                                                                            passType: item.name,
-                                                                            amount: item.price * item.quantity,
-                                                                            conferenceDetails: {
-                                                                                name: "Dubai 2026",
-                                                                                location: "Dubai, UAE",
-                                                                                year: 2026,
-                                                                            },
-                                                                        }),
-                                                                    });
-
-                                                                    if (ticketRes.ok) {
-                                                                        const { ticketNumber, ticketUrl } = await ticketRes.json();
-                                                                        ticketNumbers.push(ticketNumber);
-
-                                                                        // Send email receipt with ticket PDF
-                                                                        try {
-                                                                            await fetch("/api/tickets/email-receipt", {
-                                                                                method: "POST",
-                                                                                headers: { "Content-Type": "application/json" },
-                                                                                body: JSON.stringify({
-                                                                                    ticketNumber,
-                                                                                    ticketPdfUrl: ticketUrl,
-                                                                                    buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                                    buyerEmail: customerDetails.email,
-                                                                                    organization: customerDetails.organization,
-                                                                                    designation: customerDetails.designation,
-                                                                                    passType: item.name,
-                                                                                    amount: item.price * item.quantity,
-                                                                                    currency: "USD",
-                                                                                    paymentId: order.id,
-                                                                                    orderDate: new Date().toISOString(),
-                                                                                }),
-                                                                            });
-                                                                        } catch (emailErr) {
-                                                                            console.error("Email send error:", emailErr);
-                                                                        }
-                                                                    }
+                                                                    clearCart();
+                                                                    router.push(`/payment-success?tickets=${result.ticketNumbers.join(",")}`);
+                                                                } catch (err: any) {
+                                                                    console.error("Payment verification error:", err);
+                                                                    setError(err.message || "Payment verification failed");
+                                                                    setIsProcessing(false);
                                                                 }
-                                                            } catch (err) {
-                                                                console.error("Error saving ticket orders:", err);
-                                                            }
+                                                            },
+                                                            modal: {
+                                                                ondismiss: function () {
+                                                                    setIsProcessing(false);
+                                                                },
+                                                            },
+                                                            theme: {
+                                                                color: "#D97706",
+                                                            },
+                                                        };
 
-                                                            clearCart();
-                                                            router.push(`/payment-success?tickets=${ticketNumbers.join(",")}`);
-                                                        }
-                                                    }}
-                                                    onError={(err) => {
-                                                        console.error("PayPal Error:", err);
-                                                        setError("Payment failed. Please try again.");
+                                                        const razorpay = new (window as any).Razorpay(options);
+                                                        razorpay.open();
+                                                    } catch (err: any) {
+                                                        console.error("Payment error:", err);
+                                                        setError(err.message || "Failed to initiate payment");
                                                         setIsProcessing(false);
-                                                    }}
-                                                    onCancel={() => {
-                                                        setIsProcessing(false);
-                                                    }}
-                                                />
-                                            </PayPalScriptProvider>
-                                        )}
+                                                    }
+                                                }}
+                                                disabled={isProcessing || !razorpayLoaded}
+                                                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-700 hover:to-orange-700 transition-all font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {isProcessing ? "Processing..." : `Pay ₹${total.toLocaleString("en-IN")}`}
+                                            </button>
 
-                                        <p className="text-slate-400 text-xs text-center">
-                                            By proceeding, you agree to our Terms of Service and Privacy Policy.
-                                        </p>
-                                    </div>
+                                            <button
+                                                onClick={handleBackToDetails}
+                                                className="w-full py-4 px-6 rounded-lg border-2 border-slate-300 text-slate-900 hover:bg-slate-50 transition-all font-semibold flex items-center justify-center gap-2"
+                                            >
+                                                <ChevronLeft size={20} /> Back to Details
+                                            </button>
+
+                                            <p className="text-slate-400 text-xs text-center">
+                                                By proceeding, you agree to our Terms of Service and Privacy Policy.
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
