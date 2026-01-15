@@ -28,7 +28,7 @@ function SuccessContent() {
                             <a
                                 key={ticket}
                                 href={`/api/tickets/${ticket}/download`}
-                                download
+                                download={`${ticket}.pdf`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-between px-5 py-4 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:border-amber-400/50 transition-all group"
