@@ -27,7 +27,7 @@ function SuccessContent() {
                         {tickets.map((ticket, index) => (
                             <a
                                 key={ticket}
-                                href={`/tickets/${ticket}.pdf`}
+                                href={`/api/tickets/${ticket}/download`}
                                 download
                                 target="_blank"
                                 rel="noopener noreferrer"
