@@ -394,17 +394,25 @@ export async function POST(request: NextRequest) {
 
         // Save PDF
         const pdfBytes = await pdfDoc.save();
+
+        // In Vercel/Serverless, we cannot rely on local file system persistence.
+        // Instead of writing to disk, we point the URL to our dynamic download API.
+        // The download API generates the PDF on-demand.
+
+        /* 
         const fileName = `${ticketNumber}.pdf`;
         const filePath = path.join(process.cwd(), "public", "tickets", fileName);
+        await fs.writeFile(filePath, pdfBytes); 
+        */
 
-        await fs.writeFile(filePath, pdfBytes);
+        const downloadUrl = `/api/tickets/${ticketNumber}/download`;
 
         // Update order in database
         await prisma.ticketOrder.update({
             where: { id: orderId },
             data: {
                 ticketNumber,
-                ticketPdfUrl: `/tickets/${fileName}`,
+                ticketPdfUrl: downloadUrl,
                 qrCodeData: qrData,
             },
         });
@@ -412,7 +420,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
             success: true,
             ticketNumber,
-            ticketUrl: `/tickets/${fileName}`,
+            ticketUrl: downloadUrl,
             qrCodeData: qrData,
         });
     } catch (error) {
