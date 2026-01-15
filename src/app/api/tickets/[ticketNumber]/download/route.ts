@@ -30,26 +30,15 @@ export async function GET(
         const { width, height } = page.getSize();
 
         // Load fonts
-        const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-        const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-        // Colors
-        const darkNavy = rgb(0.04, 0.08, 0.18);
-        const mediumNavy = rgb(0.12, 0.16, 0.28);
-        const gold = rgb(0.95, 0.76, 0.18);
-        const darkGold = rgb(0.82, 0.65, 0.15);
-        const white = rgb(1, 1, 1);
-        const green = rgb(0.27, 0.71, 0.54);
-        const lightGray = rgb(0.95, 0.96, 0.97);
-        const mediumGray = rgb(0.6, 0.62, 0.65);
-        const darkText = rgb(0.15, 0.17, 0.2);
+        const fontTitle = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
+        const fontBody = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        const fontBodyBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
         // Load logo
         let logoImage;
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in"; // Fallback to prod URL
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
 
         try {
-            // Try fetching via HTTP which is safer in serverless than FS
             const logoRes = await fetch(`${baseUrl}/logo/lextalkworld_logo.png`);
             if (logoRes.ok) {
                 const logoArrayBuffer = await logoRes.arrayBuffer();
@@ -59,7 +48,6 @@ export async function GET(
             }
         } catch (err) {
             console.error("Logo fetch error:", err);
-            // Fallback: Try FS if fetch fails (e.g. localhost)
             try {
                 const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld_logo.png");
                 const logoBytes = await fs.readFile(logoPath);
@@ -69,131 +57,165 @@ export async function GET(
             }
         }
 
-        // --- PDF DRAWING LOGIC (Sanitized) ---
+        // --- PDF DRAWING LOGIC (Redesigned) ---
 
-        // Top Header
-        page.drawRectangle({ x: 0, y: height - 100, width, height: 100, color: darkNavy });
+        // Config
+        const margin = 50;
+        const contentWidth = width - (margin * 2);
 
-        // Pattern
-        for (let i = 0; i < 10; i++) {
-            page.drawRectangle({
-                x: i * 60, y: height - 100, width: 30, height: 100,
-                color: rgb(0.06, 0.1, 0.2), opacity: 0.3
-            });
-        }
+        // Colors
+        const deepNavy = rgb(0.05, 0.1, 0.2); // Brand Navy
+        const richGold = rgb(0.85, 0.65, 0.13); // Brighter Gold
+        const offWhite = rgb(0.98, 0.98, 0.97);
+        const textDark = rgb(0.1, 0.1, 0.1);
+        const textGrey = rgb(0.3, 0.3, 0.3);
+
+        // -- Background --
+        page.drawRectangle({ x: 0, y: 0, width, height, color: rgb(0.97, 0.97, 0.97) });
+
+        // -- Ticket Container (Card) --
+        const cardHeight = 600;
+        const cardY = (height - cardHeight) / 2;
+
+        // Shadow
+        page.drawRectangle({
+            x: margin + 4, y: cardY - 4,
+            width: contentWidth, height: cardHeight,
+            color: rgb(0.85, 0.85, 0.85)
+        });
+
+        // Main Card
+        page.drawRectangle({
+            x: margin, y: cardY,
+            width: contentWidth, height: cardHeight,
+            color: offWhite,
+            borderColor: deepNavy,
+            borderWidth: 1.5,
+        });
+
+        // -- Header Section --
+        const headerHeight = 140;
+        page.drawRectangle({
+            x: margin, y: cardY + cardHeight - headerHeight,
+            width: contentWidth, height: headerHeight,
+            color: deepNavy
+        });
 
         // Logo
         if (logoImage) {
-            const logoHeight = 40;
-            const logoWidth = logoImage.width * (logoHeight / logoImage.height);
+            const logoH = 50;
+            const logoW = logoImage.width * (logoH / logoImage.height);
             page.drawImage(logoImage, {
-                x: width / 2 - logoWidth / 2, y: height - 70, width: logoWidth, height: logoHeight
-            });
-        } else {
-            page.drawText("LexTalk World", {
-                x: width / 2 - 80, y: height - 60, size: 24, font: boldFont, color: gold
+                x: (width - logoW) / 2,
+                y: cardY + cardHeight - 65,
+                width: logoW, height: logoH
             });
         }
 
-        // Badge
-        const badgeY = height - 145;
-        page.drawRectangle({ x: 80, y: badgeY - 5, width: width - 160, height: 40, color: green });
-
-        page.drawText("Payment Confirmed", { // Removed Checkmark
-            x: width / 2 - 85, y: badgeY + 8, size: 18, font: boldFont, color: white
+        // Conference Title
+        page.drawText("DUBAI 2026", {
+            x: width / 2 - 58, y: cardY + cardHeight - 100,
+            size: 18, font: fontTitle, color: richGold
+        });
+        page.drawText("GLOBAL LEGAL CONFERENCE", {
+            x: width / 2 - 80, y: cardY + cardHeight - 120,
+            size: 10, font: fontBody, color: rgb(0.8, 0.8, 0.8)
         });
 
-        // Title
-        page.drawText("Your Dubai 2026", { x: width / 2 - 100, y: badgeY - 50, size: 24, font: boldFont, color: darkText });
-        page.drawText("Conference Pass", { x: width / 2 - 90, y: badgeY - 75, size: 24, font: boldFont, color: darkText });
+        // -- Pass Type Strip --
+        const passType = order.ticketType.name.replace(" Pass", "").toUpperCase();
+        page.drawRectangle({
+            x: margin, y: cardY + cardHeight - 165,
+            width: contentWidth, height: 35,
+            color: richGold
+        });
 
-        // Card
-        const cardY = badgeY - 120;
-        // Shadow
-        page.drawRectangle({ x: 62, y: cardY - 282, width: width - 124, height: 280, color: rgb(0.85, 0.85, 0.85) });
-        // Main
-        page.drawRectangle({ x: 60, y: cardY - 280, width: width - 120, height: 280, color: mediumNavy });
-        // Gold Strip
-        page.drawRectangle({ x: 60, y: cardY - 40, width: width - 120, height: 40, color: gold });
-        page.drawRectangle({ x: 60, y: cardY - 40, width: (width - 120) / 2, height: 40, color: darkGold, opacity: 0.3 });
+        const drawCenteredText = (text: string, y: number, size: number, font: any, color: any) => {
+            const textWidth = font.widthOfTextAtSize(text, size);
+            page.drawText(text, { x: (width - textWidth) / 2, y, size, font, color });
+        };
 
-        page.drawText("CONFERENCE PASS", { x: 80, y: cardY - 25, size: 14, font: boldFont, color: darkNavy });
+        drawCenteredText(`${passType} PASS`, cardY + cardHeight - 158, 14, fontBodyBold, deepNavy);
 
-        // Pass Type
-        const passType = order.ticketType.name.replace(" Pass", ""); // Clean up name
-        page.drawText(passType.toUpperCase(), { x: width - 230, y: cardY - 25, size: 14, font: boldFont, color: darkNavy });
+        // -- Content Area --
+        const detailsStart = cardY + cardHeight - 220;
 
-        // Details Background
-        page.drawRectangle({ x: 60, y: cardY - 280, width: width - 120, height: 240, color: lightGray });
+        // Attendee Name
+        drawCenteredText(order.buyerName.toUpperCase(), detailsStart, 22, fontTitle, textDark);
 
-        // Details
-        const detailY = cardY - 75;
-        const leftX = 80;
-        const rightX = width / 2 + 20;
-
-        // Left Col
-        page.drawText("TICKET ID", { x: leftX, y: detailY, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(ticketNumber, { x: leftX, y: detailY - 18, size: 12, font: regularFont, color: darkText });
-
-        page.drawText("AMOUNT PAID", { x: leftX, y: detailY - 60, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(`$${order.totalAmount.toLocaleString()}`, { x: leftX, y: detailY - 78, size: 12, font: regularFont, color: darkText });
-
-        page.drawText("ATTENDEE", { x: leftX, y: detailY - 120, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(order.buyerName, { x: leftX, y: detailY - 138, size: 12, font: regularFont, color: darkText });
-
-        // Parse Organization and Designation from notes
-        let organization = "N/A";
-        let designation = "N/A";
-
+        // Role & Org Logic
+        let roleLine = "Legal Professional";
         if (order.notes) {
             const parts = order.notes.split(" at ");
             if (parts.length >= 2) {
-                designation = parts[0];
-                organization = parts.slice(1).join(" at ");
+                // Combine clearly
+                const desg = parts[0];
+                const org = parts.slice(1).join(" at ");
+                roleLine = `${desg} | ${org}`;
             } else {
-                organization = order.notes;
+                roleLine = order.notes;
             }
         }
 
-        // Right Col
-        page.drawText("ORGANIZATION", { x: rightX, y: detailY, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(organization, { x: rightX, y: detailY - 18, size: 12, font: regularFont, color: darkText });
+        // Truncate if insanely long
+        if (roleLine.length > 60) roleLine = roleLine.substring(0, 57) + "...";
+        const roleSize = roleLine.length > 40 ? 10 : 12;
 
-        page.drawText("DESIGNATION", { x: rightX, y: detailY - 60, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(designation, { x: rightX, y: detailY - 78, size: 12, font: regularFont, color: darkText });
+        drawCenteredText(roleLine, detailsStart - 25, roleSize, fontBody, textGrey);
 
-        page.drawText("EMAIL", { x: rightX, y: detailY - 120, size: 9, font: boldFont, color: mediumGray });
-        page.drawText(order.buyerEmail, { x: rightX, y: detailY - 138, size: 11, font: regularFont, color: darkText });
+        // Divider
+        page.drawLine({
+            start: { x: margin + 60, y: detailsStart - 50 },
+            end: { x: width - margin - 60, y: detailsStart - 50 },
+            color: rgb(0.9, 0.9, 0.9), thickness: 1
+        });
 
-        // Footer Bar
-        page.drawRectangle({ x: 60, y: cardY - 280, width: width - 120, height: 35, color: mediumNavy });
-        page.drawText("Dubai, UAE | 2026", { x: width / 2 - 50, y: cardY - 265, size: 12, font: regularFont, color: gold }); // Removed Emojis
+        // -- Info Grid --
+        const gridY = detailsStart - 85;
+        const leftColX = margin + 40;
+        const rightColX = width / 2 + 20;
+        const rowHeight = 45;
 
-        // QR Code
-        const qrY = cardY - 330;
-        page.drawText("QR Code for Check-in:", { x: 60, y: qrY + 10, size: 14, font: boldFont, color: darkText });
+        // Helper for label/value
+        const drawField = (label: string, value: string, x: number, y: number) => {
+            page.drawText(label, { x, y, size: 8, font: fontBodyBold, color: deepNavy });
+            page.drawText(value, { x, y: y - 15, size: 11, font: fontBody, color: textDark });
+        };
 
-        // Generate QR on fly
-        const qrData = Buffer.from(JSON.stringify({
-            ticketNumber,
-            orderId: order.id,
-            buyerEmail: order.buyerEmail,
-            passType: order.ticketType.name,
-            timestamp: new Date().toISOString()
-        })).toString("base64");
+        drawField("TICKET ID", ticketNumber, leftColX, gridY);
+        drawField("DATE", "March 1-2, 2026", rightColX, gridY);
 
-        const qrCodeDataUrl = await QRCode.toDataURL(qrData, { width: 200, margin: 1 });
+        drawField("VENUE", "Dubai, UAE", leftColX, gridY - rowHeight);
+        drawField("PRICE", `$${order.totalAmount.toLocaleString()}`, rightColX, gridY - rowHeight);
+
+        drawField("EMAIL", order.buyerEmail, leftColX, gridY - (rowHeight * 2));
+        // Status
+        page.drawText("STATUS", { x: rightColX, y: gridY - (rowHeight * 2), size: 8, font: fontBodyBold, color: deepNavy });
+        page.drawText("Confirmed", { x: rightColX, y: gridY - (rowHeight * 2) - 15, size: 11, font: fontBodyBold, color: rgb(0.1, 0.6, 0.3) });
+
+        // -- QR Code --
+        const qrSize = 110;
+        const qrY = cardY + 50;
+
+        const qrUrl = `https://lextalkworld.in/verify/${ticketNumber}`;
+        const qrCodeDataUrl = await QRCode.toDataURL(qrUrl, { width: 300, margin: 1 });
         const qrImageBytes = Buffer.from(qrCodeDataUrl.split(",")[1], "base64");
         const qrImage = await pdfDoc.embedPng(qrImageBytes);
 
-        page.drawImage(qrImage, { x: 80, y: qrY - 180, width: 180, height: 180 });
-
-        // Instructions
-        page.drawText("Please present this QR code at the registration desk for seamless entry.", {
-            x: 280, y: qrY - 80, size: 10, font: regularFont, color: mediumGray
+        page.drawImage(qrImage, {
+            x: (width - qrSize) / 2,
+            y: qrY,
+            width: qrSize, height: qrSize
         });
-        page.drawText("Ensure your screen brightness is turned up.", {
-            x: 280, y: qrY - 100, size: 10, font: regularFont, color: mediumGray
+
+        drawCenteredText("Scan to verify details", qrY - 15, 9, fontBody, textGrey);
+
+        // Footer in Card
+        page.drawText("LexTalk World Conference", {
+            x: margin + 10, y: cardY + 10, size: 7, font: fontBody, color: rgb(0.6, 0.6, 0.6)
+        });
+        page.drawText(`${ticketNumber}`, {
+            x: width - margin - 80, y: cardY + 10, size: 7, font: fontBody, color: rgb(0.6, 0.6, 0.6)
         });
 
         // 3. Return Buffer
