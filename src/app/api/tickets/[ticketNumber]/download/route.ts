@@ -45,12 +45,27 @@ export async function GET(
 
         // Load logo
         let logoImage;
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in"; // Fallback to prod URL
+
         try {
-            const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld_logo.png");
-            const logoBytes = await fs.readFile(logoPath);
-            logoImage = await pdfDoc.embedPng(logoBytes);
+            // Try fetching via HTTP which is safer in serverless than FS
+            const logoRes = await fetch(`${baseUrl}/logo/lextalkworld_logo.png`);
+            if (logoRes.ok) {
+                const logoArrayBuffer = await logoRes.arrayBuffer();
+                logoImage = await pdfDoc.embedPng(logoArrayBuffer);
+            } else {
+                console.warn(`Failed to fetch logo from ${baseUrl}: ${logoRes.status}`);
+            }
         } catch (err) {
-            console.log("Logo not found");
+            console.error("Logo fetch error:", err);
+            // Fallback: Try FS if fetch fails (e.g. localhost)
+            try {
+                const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld_logo.png");
+                const logoBytes = await fs.readFile(logoPath);
+                logoImage = await pdfDoc.embedPng(logoBytes);
+            } catch (fsErr) {
+                console.error("Logo FS error:", fsErr);
+            }
         }
 
         // --- PDF DRAWING LOGIC (Sanitized) ---
@@ -169,7 +184,7 @@ export async function GET(
         // 3. Return Buffer
         const pdfBytes = await pdfDoc.save();
 
-        return new NextResponse(pdfBytes, {
+        return new NextResponse(Buffer.from(pdfBytes), {
             headers: {
                 "Content-Type": "application/pdf",
                 "Content-Disposition": `attachment; filename="${ticketNumber}.pdf"`
@@ -178,6 +193,6 @@ export async function GET(
 
     } catch (error) {
         console.error("Error generating PDF:", error);
-        return NextResponse.json({ error: "Failed to generate PDF" }, { status: 500 });
+        return NextResponse.json({ error: "Failed to generate PDF", details: String(error) }, { status: 500 });
     }
 }
