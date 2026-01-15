@@ -10,6 +10,26 @@ function SuccessContent() {
     const ticketsParam = searchParams.get("tickets");
     const tickets = ticketsParam ? ticketsParam.split(",").filter(Boolean) : [];
 
+    const handleDownload = async (ticketId: string) => {
+        try {
+            const response = await fetch(`/api/tickets/${ticketId}/download`);
+            if (!response.ok) throw new Error("Download failed");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${ticketId}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error("Download error:", error);
+            alert("Failed to download ticket. Please try again.");
+        }
+    };
+
     return (
         <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 max-w-lg w-full text-center border border-slate-100">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
@@ -25,19 +45,16 @@ function SuccessContent() {
                     <h2 className="text-lg font-bold text-slate-900 mb-4">Your Tickets</h2>
                     <div className="space-y-3">
                         {tickets.map((ticket, index) => (
-                            <a
+                            <button
                                 key={ticket}
-                                href={`/api/tickets/${ticket}/download`}
-                                download={`${ticket}.pdf`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-between px-5 py-4 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:border-amber-400/50 transition-all group"
+                                onClick={() => handleDownload(ticket)}
+                                className="w-full flex items-center justify-between px-5 py-4 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:border-amber-400/50 transition-all group cursor-pointer"
                             >
                                 <span className="font-medium text-slate-700 text-sm">Ticket #{ticket}</span>
                                 <span className="flex items-center gap-2 text-amber-600 font-bold text-sm group-hover:underline">
                                     <Download size={16} /> Download PDF
                                 </span>
-                            </a>
+                            </button>
                         ))}
                     </div>
                 </div>
