@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
             color: green,
         });
 
-        page.drawText("✓ Payment Confirmed", {
+        page.drawText("Payment Confirmed", {
             x: width / 2 - 85,
             y: badgeY + 8,
             size: 18,
@@ -328,8 +328,8 @@ export async function POST(request: NextRequest) {
             color: mediumNavy,
         });
 
-        page.drawText("📍 Dubai, UAE  •  📅 2026", {
-            x: width / 2 - 90,
+        page.drawText("Dubai, UAE | 2026", {
+            x: width / 2 - 50,
             y: cardY - 265,
             size: 12,
             font: regularFont,
