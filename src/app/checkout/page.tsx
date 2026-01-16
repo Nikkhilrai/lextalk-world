@@ -240,7 +240,7 @@ export default function CheckoutPage() {
 
                                     <div className="flex items-center gap-2 text-slate-500 mb-6">
                                         <Lock size={16} />
-                                        <span className="text-sm">Encrypted Transaction via PayPal</span>
+                                        <span className="text-sm">Encrypted Transaction via Razorpay</span>
                                     </div>
                                     {step === 2 && (
                                         <div className="space-y-6">
@@ -249,11 +249,11 @@ export default function CheckoutPage() {
                                                 onLoad={() => setRazorpayLoaded(true)}
                                             />
 
-                                            <div className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg">
+                                            <div className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg bg-slate-50">
                                                 <CreditCard className="text-blue-600" size={32} />
                                                 <div>
-                                                    <h3 className="font-bold text-sm">Secure Payment</h3>
-                                                    <p className="text-xs mt-1">Pay securely with UPI, Cards, NetBanking, or Wallets via Razorpay</p>
+                                                    <h3 className="font-bold text-base text-slate-900">Secure Payment</h3>
+                                                    <p className="text-sm text-slate-700 mt-1">Pay securely with UPI, Cards, NetBanking, or Wallets via Razorpay</p>
                                                 </div>
                                             </div>
 
