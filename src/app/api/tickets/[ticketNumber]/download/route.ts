@@ -29,8 +29,8 @@ export async function GET(
         const page = pdfDoc.addPage([595, 842]); // A4
         const { width, height } = page.getSize();
 
-        // Load fonts
-        const fontTitle = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
+        // Load fonts - Switching to Modern Sans-Serif (Helvetica) for a cleaner "New" look
+        const fontTitle = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
         const fontBody = await pdfDoc.embedFont(StandardFonts.Helvetica);
         const fontBodyBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
@@ -43,158 +43,171 @@ export async function GET(
             if (logoRes.ok) {
                 const logoArrayBuffer = await logoRes.arrayBuffer();
                 logoImage = await pdfDoc.embedPng(logoArrayBuffer);
-            } else {
-                console.warn(`Failed to fetch logo from ${baseUrl}: ${logoRes.status}`);
             }
         } catch (err) {
-            console.error("Logo fetch error:", err);
             try {
                 const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld_logo.png");
                 const logoBytes = await fs.readFile(logoPath);
                 logoImage = await pdfDoc.embedPng(logoBytes);
-            } catch (fsErr) {
-                console.error("Logo FS error:", fsErr);
-            }
+            } catch (fsErr) { /* ignore */ }
         }
 
-        // --- PDF DRAWING LOGIC (Redesigned) ---
+        // --- PDF DRAWING LOGIC (Modern Premium) ---
 
         // Config
-        const margin = 50;
+        const margin = 40;
         const contentWidth = width - (margin * 2);
 
         // Colors
-        const deepNavy = rgb(0.05, 0.1, 0.2); // Brand Navy
-        const richGold = rgb(0.85, 0.65, 0.13); // Brighter Gold
-        const offWhite = rgb(0.98, 0.98, 0.97);
-        const textDark = rgb(0.1, 0.1, 0.1);
-        const textGrey = rgb(0.3, 0.3, 0.3);
+        const brandNavy = rgb(0.05, 0.1, 0.25); // Slightly richer navy
+        const brandGold = rgb(0.85, 0.7, 0.2); // Metallic Gold
+        const lightGold = rgb(0.98, 0.95, 0.85); // Background tint
+        const white = rgb(1, 1, 1);
+        const textDark = rgb(0.1, 0.1, 0.15);
+        const textGrey = rgb(0.4, 0.4, 0.45);
 
         // -- Background --
-        page.drawRectangle({ x: 0, y: 0, width, height, color: rgb(0.97, 0.97, 0.97) });
+        // Clean white page
+        page.drawRectangle({ x: 0, y: 0, width, height, color: white });
 
         // -- Ticket Container (Card) --
-        const cardHeight = 600;
+        const cardHeight = 650;
         const cardY = (height - cardHeight) / 2;
 
-        // Shadow
+        // Drop Shadow
         page.drawRectangle({
-            x: margin + 4, y: cardY - 4,
+            x: margin + 8, y: cardY - 8,
             width: contentWidth, height: cardHeight,
-            color: rgb(0.85, 0.85, 0.85)
+            color: rgb(0.9, 0.9, 0.9)
         });
 
-        // Main Card
+        // Main Card Body
         page.drawRectangle({
             x: margin, y: cardY,
             width: contentWidth, height: cardHeight,
-            color: offWhite,
-            borderColor: deepNavy,
-            borderWidth: 1.5,
+            color: white,
+            borderColor: brandNavy,
+            borderWidth: 2,
         });
 
-        // -- Header Section --
-        const headerHeight = 140;
+        // -- Watermark (Logo in BG) --
+        if (logoImage) {
+            const wmSize = 300;
+            const wmOpacity = 0.05; // Very subtle
+            page.drawImage(logoImage, {
+                x: (width - wmSize) / 2,
+                y: cardY + (cardHeight - wmSize * (logoImage.height / logoImage.width)) / 2 + 50,
+                width: wmSize,
+                height: wmSize * (logoImage.height / logoImage.width),
+                opacity: wmOpacity
+            });
+        }
+
+        // -- Modern Header Section --
+        const headerHeight = 160;
         page.drawRectangle({
             x: margin, y: cardY + cardHeight - headerHeight,
             width: contentWidth, height: headerHeight,
-            color: deepNavy
+            color: brandNavy
         });
 
-        // Logo
+        // Logo Centered
         if (logoImage) {
-            const logoH = 50;
+            const logoH = 60;
             const logoW = logoImage.width * (logoH / logoImage.height);
             page.drawImage(logoImage, {
                 x: (width - logoW) / 2,
-                y: cardY + cardHeight - 65,
+                y: cardY + cardHeight - 80,
                 width: logoW, height: logoH
             });
         }
 
+        // Top Accent Line
+        page.drawLine({
+            start: { x: margin, y: cardY + cardHeight - headerHeight },
+            end: { x: width - margin, y: cardY + cardHeight - headerHeight },
+            color: brandGold, thickness: 4
+        });
+
         // Conference Title
-        page.drawText("DUBAI 2026", {
-            x: width / 2 - 58, y: cardY + cardHeight - 100,
-            size: 18, font: fontTitle, color: richGold
-        });
-        page.drawText("GLOBAL LEGAL CONFERENCE", {
-            x: width / 2 - 80, y: cardY + cardHeight - 120,
-            size: 10, font: fontBody, color: rgb(0.8, 0.8, 0.8)
-        });
-
-        // -- Pass Type Strip --
-        const passType = order.ticketType.name.replace(" Pass", "").toUpperCase();
-        page.drawRectangle({
-            x: margin, y: cardY + cardHeight - 165,
-            width: contentWidth, height: 35,
-            color: richGold
-        });
-
         const drawCenteredText = (text: string, y: number, size: number, font: any, color: any) => {
             const textWidth = font.widthOfTextAtSize(text, size);
             page.drawText(text, { x: (width - textWidth) / 2, y, size, font, color });
         };
 
-        drawCenteredText(`${passType} PASS`, cardY + cardHeight - 158, 14, fontBodyBold, deepNavy);
+        drawCenteredText("DUBAI 2026", cardY + cardHeight - 120, 22, fontTitle, brandGold);
+        drawCenteredText("GLOBAL LEGAL CONFERENCE", cardY + cardHeight - 140, 10, fontBody, rgb(0.8, 0.8, 0.9));
 
-        // -- Content Area --
-        const detailsStart = cardY + cardHeight - 220;
+        // -- Pass Type Badge (Floating) --
+        const passType = order.ticketType.name.replace(" Pass", "").toUpperCase();
 
-        // Attendee Name
-        drawCenteredText(order.buyerName.toUpperCase(), detailsStart, 22, fontTitle, textDark);
+        // Gold Box
+        page.drawRectangle({
+            x: width / 2 - 100, y: cardY + cardHeight - headerHeight - 20,
+            width: 200, height: 40,
+            color: brandGold,
+            borderColor: brandNavy, borderWidth: 1
+        });
 
-        // Role & Org Logic
+        drawCenteredText(`${passType} PASS`, cardY + cardHeight - headerHeight - 12, 14, fontBodyBold, brandNavy);
+
+        // -- Attendee Details --
+        const detailsStart = cardY + cardHeight - 280;
+
+        // Name (Modern & BIG)
+        drawCenteredText(order.buyerName.toUpperCase(), detailsStart, 26, fontTitle, textDark);
+
+        // Role & Org
         let roleLine = "Legal Professional";
         if (order.notes) {
             const parts = order.notes.split(" at ");
             if (parts.length >= 2) {
-                // Combine clearly
-                const desg = parts[0];
-                const org = parts.slice(1).join(" at ");
-                roleLine = `${desg} | ${org}`;
+                roleLine = `${parts[0]} | ${parts.slice(1).join(" at ")}`;
             } else {
                 roleLine = order.notes;
             }
         }
+        if (roleLine.length > 55) roleLine = roleLine.substring(0, 52) + "...";
+        drawCenteredText(roleLine, detailsStart - 30, 12, fontBody, textGrey);
 
-        // Truncate if insanely long
-        if (roleLine.length > 60) roleLine = roleLine.substring(0, 57) + "...";
-        const roleSize = roleLine.length > 40 ? 10 : 12;
-
-        drawCenteredText(roleLine, detailsStart - 25, roleSize, fontBody, textGrey);
-
-        // Divider
+        // Separator
         page.drawLine({
-            start: { x: margin + 60, y: detailsStart - 50 },
-            end: { x: width - margin - 60, y: detailsStart - 50 },
+            start: { x: margin + 80, y: detailsStart - 60 },
+            end: { x: width - margin - 80, y: detailsStart - 60 },
             color: rgb(0.9, 0.9, 0.9), thickness: 1
         });
 
-        // -- Info Grid --
-        const gridY = detailsStart - 85;
-        const leftColX = margin + 40;
-        const rightColX = width / 2 + 20;
-        const rowHeight = 45;
+        // -- Info Grid (Modern Layout) --
+        const gridY = detailsStart - 100;
+        const col1X = margin + 50;
+        const col2X = width / 2 + 30;
+        const labelColor = brandNavy;
+        const valueColor = textDark;
 
-        // Helper for label/value
-        const drawField = (label: string, value: string, x: number, y: number) => {
-            page.drawText(label, { x, y, size: 8, font: fontBodyBold, color: deepNavy });
-            page.drawText(value, { x, y: y - 15, size: 11, font: fontBody, color: textDark });
+        const drawLabelValue = (label: string, value: string, x: number, y: number) => {
+            page.drawText(label, { x, y, size: 8, font: fontBodyBold, color: labelColor });
+            page.drawText(value, { x, y: y - 16, size: 12, font: fontBody, color: valueColor });
         };
 
-        drawField("TICKET ID", ticketNumber, leftColX, gridY);
-        drawField("DATE", "March 1-2, 2026", rightColX, gridY);
+        drawLabelValue("TICKET ID", ticketNumber, col1X, gridY);
+        drawLabelValue("DATE", "March 1-2, 2026", col2X, gridY);
 
-        drawField("VENUE", "Dubai, UAE", leftColX, gridY - rowHeight);
-        drawField("PRICE", `$${order.totalAmount.toLocaleString()}`, rightColX, gridY - rowHeight);
+        drawLabelValue("VENUE", "Dubai, UAE", col1X, gridY - 50);
+        drawLabelValue("PRICE", `$${order.totalAmount.toLocaleString()}`, col2X, gridY - 50);
 
-        drawField("EMAIL", order.buyerEmail, leftColX, gridY - (rowHeight * 2));
-        // Status
-        page.drawText("STATUS", { x: rightColX, y: gridY - (rowHeight * 2), size: 8, font: fontBodyBold, color: deepNavy });
-        page.drawText("Confirmed", { x: rightColX, y: gridY - (rowHeight * 2) - 15, size: 11, font: fontBodyBold, color: rgb(0.1, 0.6, 0.3) });
+        drawLabelValue("EMAIL", order.buyerEmail, col1X, gridY - 100);
 
-        // -- QR Code --
-        const qrSize = 110;
+        // Status Badge
+        page.drawText("STATUS", { x: col2X, y: gridY - 100, size: 8, font: fontBodyBold, color: labelColor });
+        page.drawRectangle({
+            x: col2X, y: gridY - 100 - 18, width: 80, height: 20,
+            color: rgb(0.9, 1, 0.9)
+        });
+        page.drawText("CONFIRMED", { x: col2X + 5, y: gridY - 100 - 14, size: 10, font: fontBodyBold, color: rgb(0, 0.6, 0.2) });
+
+
+        // -- QR Code (Footer) --
+        const qrSize = 100;
         const qrY = cardY + 50;
 
         const qrUrl = `https://lextalkworld.in/verify/${ticketNumber}`;
@@ -210,17 +223,13 @@ export async function GET(
 
         drawCenteredText("Scan to verify details", qrY - 15, 9, fontBody, textGrey);
 
-        // Footer in Card
-        page.drawText("LexTalk World Conference", {
-            x: margin + 10, y: cardY + 10, size: 7, font: fontBody, color: rgb(0.6, 0.6, 0.6)
-        });
-        page.drawText(`${ticketNumber}`, {
-            x: width - margin - 80, y: cardY + 10, size: 7, font: fontBody, color: rgb(0.6, 0.6, 0.6)
+        // Footer Bar
+        page.drawRectangle({
+            x: margin, y: cardY, width: contentWidth, height: 10, color: brandNavy
         });
 
-        // 3. Return Buffer
+        // Return Buffer
         const pdfBytes = await pdfDoc.save();
-
         return new NextResponse(Buffer.from(pdfBytes), {
             headers: {
                 "Content-Type": "application/pdf",
