@@ -34,6 +34,28 @@ export default function CheckoutPage() {
     });
     const [formErrors, setFormErrors] = useState<Partial<CustomerDetails>>({});
     const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+    const [inrRate, setInrRate] = useState<number | null>(null);
+    const [loadingRate, setLoadingRate] = useState(true);
+
+    // Fetch INR exchange rate on mount
+    useEffect(() => {
+        const fetchExchangeRate = async () => {
+            try {
+                const res = await fetch("/api/currency/convert");
+                const data = await res.json();
+                setInrRate(data.rate);
+            } catch (error) {
+                console.error("Failed to fetch exchange rate:", error);
+                setInrRate(83.5); // Fallback rate
+            } finally {
+                setLoadingRate(false);
+            }
+        };
+        fetchExchangeRate();
+    }, []);
+
+    // Calculate INR total
+    const inrTotal = inrRate ? Math.round(total * inrRate) : null;
 
     const validateForm = (): boolean => {
         const errors: Partial<CustomerDetails> = {};
@@ -263,91 +285,186 @@ export default function CheckoutPage() {
                                                 </div>
                                             )}
 
-                                            <button
-                                                onClick={async () => {
-                                                    if (!razorpayLoaded) {
-                                                        setError("Payment system is loading, please wait...");
-                                                        return;
-                                                    }
+                                            {/* Payment Options */}
+                                            <div className="space-y-4">
+                                                <p className="text-sm font-medium text-slate-600 text-center">Choose your payment method:</p>
 
-                                                    setIsProcessing(true);
-                                                    setError(null);
+                                                {/* International Payment (USD) */}
+                                                <button
+                                                    onClick={async () => {
+                                                        if (!razorpayLoaded) {
+                                                            setError("Payment system is loading, please wait...");
+                                                            return;
+                                                        }
 
-                                                    try {
-                                                        // Create Razorpay order
-                                                        const orderRes = await fetch("/api/razorpay/create-order", {
-                                                            method: "POST",
-                                                            headers: { "Content-Type": "application/json" },
-                                                            body: JSON.stringify({
-                                                                amount: total,
-                                                                currency: "USD",
-                                                                cartItems: items,
-                                                            }),
-                                                        });
+                                                        setIsProcessing(true);
+                                                        setError(null);
 
-                                                        const orderData = await orderRes.json();
-                                                        if (!orderRes.ok) throw new Error(orderData.error);
+                                                        try {
+                                                            const orderRes = await fetch("/api/razorpay/create-order", {
+                                                                method: "POST",
+                                                                headers: { "Content-Type": "application/json" },
+                                                                body: JSON.stringify({
+                                                                    amount: total,
+                                                                    currency: "USD",
+                                                                    cartItems: items,
+                                                                }),
+                                                            });
 
-                                                        // Initialize Razorpay
-                                                        const options = {
-                                                            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                                                            amount: orderData.amount,
-                                                            currency: orderData.currency,
-                                                            name: "LexTalk World",
-                                                            description: `Dubai 2026 Conference Pass - ${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                            order_id: orderData.orderId,
-                                                            prefill: {
-                                                                name: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                                                                email: customerDetails.email,
-                                                                contact: customerDetails.phone,
-                                                            },
-                                                            handler: async function (response: any) {
-                                                                try {
-                                                                    // Verify payment
-                                                                    const verifyRes = await fetch("/api/razorpay/verify-payment", {
-                                                                        method: "POST",
-                                                                        headers: { "Content-Type": "application/json" },
-                                                                        body: JSON.stringify({
-                                                                            ...response,
-                                                                            customerDetails,
-                                                                            cartItems: items,
-                                                                        }),
-                                                                    });
+                                                            const orderData = await orderRes.json();
+                                                            if (!orderRes.ok) throw new Error(orderData.error);
 
-                                                                    const result = await verifyRes.json();
-                                                                    if (!verifyRes.ok) throw new Error(result.error);
-
-                                                                    clearCart();
-                                                                    router.push(`/payment-success?tickets=${result.ticketNumbers.join(",")}`);
-                                                                } catch (err: any) {
-                                                                    console.error("Payment verification error:", err);
-                                                                    setError(err.message || "Payment verification failed");
-                                                                    setIsProcessing(false);
-                                                                }
-                                                            },
-                                                            modal: {
-                                                                ondismiss: function () {
-                                                                    setIsProcessing(false);
+                                                            const options = {
+                                                                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                                                                amount: orderData.amount,
+                                                                currency: orderData.currency,
+                                                                name: "LexTalk World",
+                                                                description: `Dubai 2026 Conference Pass - ${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                order_id: orderData.orderId,
+                                                                prefill: {
+                                                                    name: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                    email: customerDetails.email,
+                                                                    contact: customerDetails.phone,
                                                                 },
-                                                            },
-                                                            theme: {
-                                                                color: "#D97706",
-                                                            },
-                                                        };
+                                                                handler: async function (response: any) {
+                                                                    try {
+                                                                        const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                                                                            method: "POST",
+                                                                            headers: { "Content-Type": "application/json" },
+                                                                            body: JSON.stringify({
+                                                                                ...response,
+                                                                                customerDetails,
+                                                                                cartItems: items,
+                                                                            }),
+                                                                        });
 
-                                                        const razorpay = new (window as any).Razorpay(options);
-                                                        razorpay.open();
-                                                    } catch (err: any) {
-                                                        console.error("Payment error:", err);
-                                                        setError(err.message || "Failed to initiate payment");
-                                                        setIsProcessing(false);
-                                                    }
-                                                }}
-                                                disabled={isProcessing || !razorpayLoaded}
-                                                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-700 hover:to-orange-700 transition-all font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)}`}
-                                            </button>
+                                                                        const result = await verifyRes.json();
+                                                                        if (!verifyRes.ok) throw new Error(result.error);
+
+                                                                        clearCart();
+                                                                        router.push(`/payment-success?tickets=${result.ticketNumbers.join(",")}`);
+                                                                    } catch (err: any) {
+                                                                        setError(err.message || "Payment verification failed");
+                                                                        setIsProcessing(false);
+                                                                    }
+                                                                },
+                                                                modal: { ondismiss: () => setIsProcessing(false) },
+                                                                theme: { color: "#D97706" },
+                                                            };
+
+                                                            const razorpay = new (window as any).Razorpay(options);
+                                                            razorpay.open();
+                                                        } catch (err: any) {
+                                                            setError(err.message || "Failed to initiate payment");
+                                                            setIsProcessing(false);
+                                                        }
+                                                    }}
+                                                    disabled={isProcessing || !razorpayLoaded}
+                                                    className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                                                >
+                                                    <span className="text-xl">🌍</span>
+                                                    <div className="text-left">
+                                                        <span className="block text-base">{isProcessing ? "Processing..." : `Pay $${total.toLocaleString()} USD`}</span>
+                                                        <span className="block text-xs text-blue-200">International Cards</span>
+                                                    </div>
+                                                </button>
+
+                                                {/* Divider */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex-1 h-px bg-slate-200"></div>
+                                                    <span className="text-slate-400 text-sm">or</span>
+                                                    <div className="flex-1 h-px bg-slate-200"></div>
+                                                </div>
+
+                                                {/* India Payment (INR with UPI) */}
+                                                <button
+                                                    onClick={async () => {
+                                                        if (!razorpayLoaded || !inrTotal) {
+                                                            setError("Payment system is loading, please wait...");
+                                                            return;
+                                                        }
+
+                                                        setIsProcessing(true);
+                                                        setError(null);
+
+                                                        try {
+                                                            const orderRes = await fetch("/api/razorpay/create-order", {
+                                                                method: "POST",
+                                                                headers: { "Content-Type": "application/json" },
+                                                                body: JSON.stringify({
+                                                                    amount: inrTotal,
+                                                                    currency: "INR",
+                                                                    cartItems: items,
+                                                                }),
+                                                            });
+
+                                                            const orderData = await orderRes.json();
+                                                            if (!orderRes.ok) throw new Error(orderData.error);
+
+                                                            const options = {
+                                                                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                                                                amount: orderData.amount,
+                                                                currency: orderData.currency,
+                                                                name: "LexTalk World",
+                                                                description: `Dubai 2026 Conference Pass - ${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                order_id: orderData.orderId,
+                                                                prefill: {
+                                                                    name: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                                                    email: customerDetails.email,
+                                                                    contact: customerDetails.phone,
+                                                                },
+                                                                handler: async function (response: any) {
+                                                                    try {
+                                                                        const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                                                                            method: "POST",
+                                                                            headers: { "Content-Type": "application/json" },
+                                                                            body: JSON.stringify({
+                                                                                ...response,
+                                                                                customerDetails,
+                                                                                cartItems: items,
+                                                                            }),
+                                                                        });
+
+                                                                        const result = await verifyRes.json();
+                                                                        if (!verifyRes.ok) throw new Error(result.error);
+
+                                                                        clearCart();
+                                                                        router.push(`/payment-success?tickets=${result.ticketNumbers.join(",")}`);
+                                                                    } catch (err: any) {
+                                                                        setError(err.message || "Payment verification failed");
+                                                                        setIsProcessing(false);
+                                                                    }
+                                                                },
+                                                                modal: { ondismiss: () => setIsProcessing(false) },
+                                                                theme: { color: "#16a34a" },
+                                                            };
+
+                                                            const razorpay = new (window as any).Razorpay(options);
+                                                            razorpay.open();
+                                                        } catch (err: any) {
+                                                            setError(err.message || "Failed to initiate payment");
+                                                            setIsProcessing(false);
+                                                        }
+                                                    }}
+                                                    disabled={isProcessing || !razorpayLoaded || loadingRate}
+                                                    className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 transition-all font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                                                >
+                                                    <span className="text-xl">🇮🇳</span>
+                                                    <div className="text-left">
+                                                        <span className="block text-base">
+                                                            {isProcessing ? "Processing..." : loadingRate ? "Loading..." : `Pay ₹${inrTotal?.toLocaleString()} INR`}
+                                                        </span>
+                                                        <span className="block text-xs text-green-200">UPI, Cards, NetBanking, Wallets</span>
+                                                    </div>
+                                                </button>
+
+                                                {/* Exchange Rate Info */}
+                                                {inrRate && (
+                                                    <p className="text-xs text-slate-400 text-center">
+                                                        Live rate: 1 USD = ₹{inrRate.toFixed(2)} INR
+                                                    </p>
+                                                )}
+                                            </div>
 
                                             <button
                                                 onClick={handleBackToDetails}
