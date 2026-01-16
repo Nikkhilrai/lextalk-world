@@ -46,7 +46,7 @@ export async function GET(
             }
         } catch (err) { /* ignore */ }
 
-        // --- PDF DRAWING LOGIC (Professional Polish) ---
+        // --- PDF DRAWING LOGIC (Professional Layout v3) ---
 
         // Config
         const margin = 40;
@@ -64,7 +64,7 @@ export async function GET(
         page.drawRectangle({ x: 0, y: 0, width, height, color: white });
 
         // -- Ticket Container (Card) --
-        const cardHeight = 650;
+        const cardHeight = 720; // Increased height to prevent overlap
         const cardY = (height - cardHeight) / 2;
 
         // Drop Shadow
@@ -118,7 +118,7 @@ export async function GET(
         drawCenteredText("DUBAI 2026", cardY + cardHeight - 110, 20, fontTitle, brandGold);
         drawCenteredText("GLOBAL LEGAL CONFERENCE", cardY + cardHeight - 128, 9, fontBody, rgb(0.8, 0.8, 0.9));
 
-        // -- Pass Type Badge (Attached to Header Line) --
+        // -- Pass Type Badge (Split Line) --
         const passType = order.ticketType.name.replace(" Pass", "").toUpperCase();
 
         // Badge Dimensions
@@ -127,12 +127,12 @@ export async function GET(
         const badgeX = (width - badgeW) / 2;
         const badgeY = cardY + cardHeight - headerHeight - (badgeH / 2); // Split the line
 
-        // Draw Badge Background (Solid Gold)
+        // Draw Badge Background
         page.drawRectangle({
             x: badgeX, y: badgeY,
             width: badgeW, height: badgeH,
             color: brandGold,
-            borderColor: white, borderWidth: 2 // White border to separate from blue/white
+            borderColor: white, borderWidth: 2
         });
 
         drawCenteredText(`${passType} PASS`, badgeY + 11, 14, fontBodyBold, brandNavy);
@@ -150,10 +150,10 @@ export async function GET(
         }
 
         // -- Main Content Area --
-        const contentStartY = badgeY - 60;
+        const contentStartY = badgeY - 70; // Push content down a bit
 
         // Name
-        drawCenteredText(order.buyerName.toUpperCase(), contentStartY, 28, fontTitle, textDark);
+        drawCenteredText(order.buyerName.toUpperCase(), contentStartY, 26, fontTitle, textDark);
 
         // Role & Org
         let roleLine = "Attendee";
@@ -166,20 +166,20 @@ export async function GET(
             }
         }
         if (roleLine.length > 50) roleLine = roleLine.substring(0, 48) + "...";
-        drawCenteredText(roleLine, contentStartY - 30, 14, fontBody, textGrey);
+        drawCenteredText(roleLine, contentStartY - 30, 13, fontBody, textGrey);
 
         // Divider
         page.drawLine({
-            start: { x: margin + 70, y: contentStartY - 70 },
-            end: { x: width - margin - 70, y: contentStartY - 70 },
+            start: { x: margin + 70, y: contentStartY - 60 },
+            end: { x: width - margin - 70, y: contentStartY - 60 },
             color: rgb(0.9, 0.9, 0.9), thickness: 1
         });
 
         // -- Details Grid --
-        const gridY = contentStartY - 120;
+        const gridY = contentStartY - 110;
         const col1X = margin + 50;
         const col2X = width / 2 + 30;
-        const rowSpacing = 60;
+        const rowSpacing = 55; // Reduced from 60
 
         const drawLabelValue = (label: string, value: string, x: number, y: number) => {
             page.drawText(label, { x, y, size: 8, font: fontBodyBold, color: labelColor });
@@ -197,18 +197,18 @@ export async function GET(
         // Row 3
         drawLabelValue("EMAIL", order.buyerEmail, col1X, gridY - (rowSpacing * 2));
 
-        // Status (Fixed Overlap)
+        // Status Row (Grid Row 3 right side)
         const statusY = gridY - (rowSpacing * 2);
         page.drawText("STATUS", { x: col2X, y: statusY, size: 8, font: fontBodyBold, color: labelColor });
 
         const badgeWidth = 90;
         const badgeRecH = 24;
-        const badgeRecY = statusY - 26; // More space below label
+        const badgeRecY = statusY - 26;
 
+        // Draw Status Badge
         page.drawRectangle({
             x: col2X, y: badgeRecY, width: badgeWidth, height: badgeRecH,
-            color: rgb(0.85, 1, 0.85), // Soft Green
-            // No border logic for rectangles in pdf-lib easily, but standard rect is fine
+            color: rgb(0.85, 1, 0.85),
         });
 
         const statusText = "CONFIRMED";
@@ -220,8 +220,8 @@ export async function GET(
         });
 
         // -- QR Code Area --
-        const qrY = cardY + 60;
-        const qrSize = 110;
+        const qrSize = 100;
+        const qrY = cardY + 40;
 
         const qrUrl = `https://lextalkworld.in/verify/${ticketNumber}`;
         const qrCodeDataUrl = await QRCode.toDataURL(qrUrl, { width: 300, margin: 1 });
@@ -234,11 +234,11 @@ export async function GET(
             width: qrSize, height: qrSize
         });
 
-        drawCenteredText("Scan to verify details", qrY - 20, 9, fontBody, textGrey);
+        drawCenteredText("Scan to verify details", qrY - 15, 9, fontBody, textGrey);
 
         // Bottom Bar
         page.drawRectangle({
-            x: margin, y: cardY, width: contentWidth, height: 12, color: brandNavy
+            x: margin, y: cardY, width: contentWidth, height: 10, color: brandNavy
         });
 
         // Return Buffer
