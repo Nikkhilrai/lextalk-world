@@ -169,7 +169,7 @@ export async function POST(request: NextRequest) {
                                     <td>
                                         <h3 style="margin: 0 0 10px; font-size: 16px; color: #92400E; font-weight: 600;">Event Details</h3>
                                         <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Event:</strong> Dubai 2026 Legal Conference</p>
-                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Dates:</strong> March 1-2, 2026</p>
+                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Dates:</strong> May 13-14, 2026</p>
                                         <p style="margin: 0; color: #78350F; font-size: 14px;"><strong>Venue:</strong> Dubai, UAE</p>
                                     </td>
                                 </tr>

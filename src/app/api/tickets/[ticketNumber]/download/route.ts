@@ -188,7 +188,7 @@ export async function GET(
 
         // Row 1
         drawLabelValue("TICKET ID", ticketNumber, col1X, gridY);
-        drawLabelValue("DATE", "March 1-2, 2026", col2X, gridY);
+        drawLabelValue("DATE", "May 13-14, 2026", col2X, gridY);
 
         // Row 2
         drawLabelValue("VENUE", "Dubai, UAE", col1X, gridY - rowSpacing);
