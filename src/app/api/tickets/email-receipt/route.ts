@@ -1,7 +1,6 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import fs from "fs/promises";
-import path from "path";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder_key");
 
@@ -31,16 +30,30 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Read ticket PDF
-        const pdfPath = path.join(process.cwd(), "public", ticketPdfUrl);
-        const pdfBuffer = await fs.readFile(pdfPath);
-        const pdfBase64 = pdfBuffer.toString("base64");
+        // Fetch PDF from dynamic download endpoint
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
+        let pdfBase64 = "";
+
+        try {
+            const pdfResponse = await fetch(`${baseUrl}/api/tickets/${ticketNumber}/download`);
+            if (pdfResponse.ok) {
+                const pdfBuffer = await pdfResponse.arrayBuffer();
+                pdfBase64 = Buffer.from(pdfBuffer).toString("base64");
+            } else {
+                console.error("Failed to fetch PDF:", pdfResponse.status);
+            }
+        } catch (pdfErr) {
+            console.error("Error fetching PDF for email:", pdfErr);
+        }
 
         const formattedDate = new Date(orderDate || Date.now()).toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
             year: "numeric"
         });
+
+        // Currency symbol
+        const currencySymbol = currency === "INR" ? "₹" : "$";
 
         // Create HTML email template
         const htmlEmail = `
@@ -99,7 +112,7 @@ export async function POST(request: NextRequest) {
                                 </tr>
                                 <tr>
                                     <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #6B7280; font-size: 14px;">Payment Method</td>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px;">PayPal</td>
+                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px;">Razorpay</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 12px 20px; color: #6B7280; font-size: 14px;">Payment Reference</td>
@@ -117,11 +130,11 @@ export async function POST(request: NextRequest) {
                                 <tr>
                                     <td style="padding: 15px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px; font-weight: 500;">${passType}</td>
                                     <td style="padding: 15px 20px; border-bottom: 1px solid #E5E7EB; color: #6B7280; font-size: 14px; text-align: center;">x 1</td>
-                                    <td style="padding: 15px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px; text-align: right; font-weight: 500;">$${amount.toLocaleString()}</td>
+                                    <td style="padding: 15px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px; text-align: right; font-weight: 500;">${currencySymbol}${amount?.toLocaleString()}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="padding: 15px 20px; color: #1F2937; font-size: 15px; font-weight: 600;">Total</td>
-                                    <td style="padding: 15px 20px; color: #1F2937; font-size: 16px; font-weight: 700; text-align: right;">$${amount.toLocaleString()} ${currency}</td>
+                                    <td style="padding: 15px 20px; color: #1F2937; font-size: 16px; font-weight: 700; text-align: right;">${currencySymbol}${amount?.toLocaleString()} ${currency}</td>
                                 </tr>
                             </table>
 
@@ -154,10 +167,10 @@ export async function POST(request: NextRequest) {
                             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; background-color: #FEF3C7; border: 1px solid #F59E0B; border-radius: 6px; padding: 20px;">
                                 <tr>
                                     <td>
-                                        <h3 style="margin: 0 0 10px; font-size: 16px; color: #92400E; font-weight: 600;">📅 Event Details</h3>
+                                        <h3 style="margin: 0 0 10px; font-size: 16px; color: #92400E; font-weight: 600;">Event Details</h3>
                                         <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Event:</strong> Dubai 2026 Legal Conference</p>
-                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Dates:</strong> May 13-14, 2026</p>
-                                        <p style="margin: 0; color: #78350F; font-size: 14px;"><strong>Venue:</strong> Dubai International Conference Center, UAE</p>
+                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Dates:</strong> March 1-2, 2026</p>
+                                        <p style="margin: 0; color: #78350F; font-size: 14px;"><strong>Venue:</strong> Dubai, UAE</p>
                                     </td>
                                 </tr>
                             </table>
@@ -166,7 +179,7 @@ export async function POST(request: NextRequest) {
                             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; background-color: #DBEAFE; border: 1px solid #3B82F6; border-radius: 6px; padding: 20px;">
                                 <tr>
                                     <td>
-                                        <h3 style="margin: 0 0 10px; font-size: 16px; color: #1E40AF; font-weight: 600;">🎫 Your Conference Pass</h3>
+                                        <h3 style="margin: 0 0 10px; font-size: 16px; color: #1E40AF; font-weight: 600;">Your Conference Pass</h3>
                                         <p style="margin: 0; color: #1E3A8A; font-size: 14px; line-height: 22px;">
                                             Your conference pass is attached to this email as a PDF. Please download and save it to your device. 
                                             You'll need to present the QR code on your ticket at the registration desk for entry.
@@ -212,24 +225,31 @@ export async function POST(request: NextRequest) {
 </html>
         `;
 
-        // Send email with Resend
-        const { data, error } = await resend.emails.send({
+        // Prepare email options
+        const emailOptions: any = {
             from: "LexTalk World <noreply@lextalk.world>",
             to: [buyerEmail],
             subject: `Payment Confirmation - Dubai 2026 Conference Pass (${ticketNumber})`,
             html: htmlEmail,
-            attachments: [
+        };
+
+        // Attach PDF if we got it
+        if (pdfBase64) {
+            emailOptions.attachments = [
                 {
                     filename: `${ticketNumber}.pdf`,
                     content: pdfBase64,
                 },
-            ],
-        });
+            ];
+        }
+
+        // Send email with Resend
+        const { data, error } = await resend.emails.send(emailOptions);
 
         if (error) {
             console.error("Error sending email:", error);
             return NextResponse.json(
-                { error: "Failed to send email" },
+                { error: "Failed to send email", details: error },
                 { status: 500 }
             );
         }
