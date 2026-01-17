@@ -14,6 +14,7 @@ import {
 interface TicketOrder {
     id: string;
     ticketTypeId: string;
+    ticketNumber: string | null;
     buyerName: string;
     buyerEmail: string;
     buyerPhone: string | null;
@@ -194,13 +195,13 @@ export default function TicketsPage() {
                     <table className="w-full">
                         <thead className="bg-[#212946] text-[#878a99] text-xs uppercase font-semibold">
                             <tr>
+                                <th className="px-6 py-3 text-left">Ticket #</th>
                                 <th className="px-6 py-3 text-left">Buyer</th>
-                                <th className="px-6 py-3 text-left">Conference</th>
-                                <th className="px-6 py-3 text-left">Ticket</th>
-                                <th className="px-6 py-3 text-center">Qty</th>
+                                <th className="px-6 py-3 text-left">Pass Type</th>
                                 <th className="px-6 py-3 text-right">Amount</th>
                                 <th className="px-6 py-3 text-center">Status</th>
-                                <th className="px-6 py-3 text-right">Date</th>
+                                <th className="px-6 py-3 text-center">Date</th>
+                                <th className="px-6 py-3 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5 text-sm">
@@ -220,18 +221,25 @@ export default function TicketsPage() {
                                 filteredOrders.map((order) => (
                                     <tr key={order.id} className="hover:bg-white/[0.02] transition-colors">
                                         <td className="px-6 py-4">
+                                            {order.ticketNumber ? (
+                                                <span className="font-mono text-xs text-[#0ab39c] bg-[#0ab39c]/10 px-2 py-1 rounded">
+                                                    {order.ticketNumber}
+                                                </span>
+                                            ) : (
+                                                <span className="text-[#878a99] text-xs">-</span>
+                                            )}
+                                        </td>
+                                        <td className="px-6 py-4">
                                             <div>
                                                 <p className="font-medium text-white">{order.buyerName}</p>
                                                 <p className="text-xs text-[#878a99]">{order.buyerEmail}</p>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 text-[#ced4da]">{order.ticketType.conference.name}</td>
                                         <td className="px-6 py-4">
                                             <span className="px-2 py-0.5 bg-[#2a304d] text-[#abb9e8] text-xs rounded border border-white/5">
                                                 {order.ticketType.name}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-center text-[#ced4da]">{order.quantity}</td>
                                         <td className="px-6 py-4 text-right font-medium text-[#ced4da]">
                                             {formatCurrency(order.totalAmount, order.currency)}
                                         </td>
@@ -246,8 +254,22 @@ export default function TicketsPage() {
                                                 <option value="cancelled">Cancelled</option>
                                             </select>
                                         </td>
-                                        <td className="px-6 py-4 text-right text-[#878a99] text-xs">
+                                        <td className="px-6 py-4 text-center text-[#878a99] text-xs">
                                             {new Date(order.createdAt).toLocaleDateString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            {order.ticketNumber ? (
+                                                <a
+                                                    href={`/api/tickets/${order.ticketNumber}/download`}
+                                                    target="_blank"
+                                                    className="inline-flex items-center gap-1 px-2 py-1 bg-[#405189]/20 text-[#abb9e8] text-xs rounded hover:bg-[#405189]/40 transition-colors"
+                                                >
+                                                    <Download className="w-3 h-3" />
+                                                    PDF
+                                                </a>
+                                            ) : (
+                                                <span className="text-[#878a99] text-xs">-</span>
+                                            )}
                                         </td>
                                     </tr>
                                 ))
