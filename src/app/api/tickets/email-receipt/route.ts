@@ -227,7 +227,7 @@ export async function POST(request: NextRequest) {
 
         // Prepare email options
         const emailOptions: any = {
-            from: "LexTalk World <noreply@lextalk.world>",
+            from: "LexTalk World <noreply@lextalkworld.in>",
             to: [buyerEmail],
             subject: `Payment Confirmation - Dubai 2026 Conference Pass (${ticketNumber})`,
             html: htmlEmail,
