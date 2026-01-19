@@ -6,22 +6,14 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { RegisterModal } from "@/components/RegisterModal";
+import { getAwardEvents } from "@/actions/awardee";
 
-const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "E-Meet", href: "#" },
-    {
-        name: "Conferences",
-        href: "#",
-        hasDropdown: true,
-        dropdownItems: [
-            { name: "Upcoming Conferences", href: "/conferences" },
-        ]
-    },
-    { name: "Awardees", href: "/awardees" },
-    { name: "Sponsor", href: "#" },
-    { name: "Blog", href: "/blog" },
-];
+interface NavLink {
+    name: string;
+    href: string;
+    hasDropdown?: boolean;
+    dropdownItems?: { name: string; href: string }[];
+}
 
 interface NavbarProps {
     variant?: "default" | "light";
@@ -33,6 +25,21 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+    const [dynamicNavLinks, setDynamicNavLinks] = useState<NavLink[]>([
+        { name: "Home", href: "/" },
+        { name: "E-Meet", href: "#" },
+        {
+            name: "Conferences",
+            href: "#",
+            hasDropdown: true,
+            dropdownItems: [
+                { name: "Upcoming Conferences", href: "/conferences" },
+            ]
+        },
+        { name: "Awardees", href: "/awardees" },
+        { name: "Sponsor", href: "#" },
+        { name: "Blog", href: "/blog" },
+    ]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,6 +47,36 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
         };
 
         window.addEventListener("scroll", handleScroll);
+
+        // Fetch award events
+        const fetchEvents = async () => {
+            try {
+                const res = await getAwardEvents();
+                if (res.success && res.events.length > 0) {
+                    const awardItems = res.events
+                        .filter((e: any) => e.isActive)
+                        .map((e: any) => ({
+                            name: `Awardees ${e.name}`,
+                            href: `/awardees/${e.slug}`
+                        }));
+
+                    setDynamicNavLinks(prev => prev.map(link => {
+                        if (link.name === "Awardees") {
+                            return {
+                                ...link,
+                                hasDropdown: true,
+                                dropdownItems: awardItems
+                            };
+                        }
+                        return link;
+                    }));
+                }
+            } catch (error) {
+                console.error("Failed to fetch nav events:", error);
+            }
+        };
+        fetchEvents();
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -71,7 +108,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                     {/* Desktop Navigation - Hidden on Mobile/Tablet and when minimal */}
                     {!minimal && (
                         <div className="hidden lg:flex items-center gap-6 xl:gap-10">
-                            {navLinks.map((link) => (
+                            {dynamicNavLinks.map((link) => (
                                 <div
                                     key={link.name}
                                     className="relative"
@@ -80,18 +117,23 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                 >
                                     <Link
                                         href={link.href}
-                                        className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1 ${isScrolled
-                                            ? "text-slate-700 hover:text-amber-600"
-                                            : variant === "light"
-                                                ? "text-slate-800 hover:text-amber-600"
-                                                : "text-white/90 hover:text-amber-400"
-                                            }`}
+                                        className={cn(
+                                            "relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1",
+                                            isScrolled
+                                                ? "text-slate-700 hover:text-amber-600"
+                                                : variant === "light"
+                                                    ? "text-slate-800 hover:text-amber-600"
+                                                    : "text-white/90 hover:text-amber-400"
+                                        )}
                                     >
                                         {link.name}
                                         {link.hasDropdown && (
-                                            <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                            <ChevronDown size={14} className={cn("transition-transform duration-200", openDropdown === link.name && "rotate-180")} />
                                         )}
-                                        <span className={`absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full ${isScrolled ? "bg-amber-600" : "bg-amber-400"}`} />
+                                        <span className={cn(
+                                            "absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full",
+                                            isScrolled ? "bg-amber-600" : "bg-amber-400"
+                                        )} />
                                     </Link>
 
                                     {/* Dropdown Menu */}
@@ -102,12 +144,12 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                                 ? "opacity-100 translate-y-0 pointer-events-auto"
                                                 : "opacity-0 -translate-y-2 pointer-events-none"
                                         )}>
-                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
+                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[240px] py-2">
                                                 {link.dropdownItems.map((item) => (
                                                     <Link
-                                                        key={item.name}
+                                                        key={item.href}
                                                         href={item.href}
-                                                        className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-600 transition-colors"
+                                                        className="block px-6 py-3 text-[#1e3a8a] hover:text-[#fbbf24] font-serif text-[15px] font-medium transition-colors text-center"
                                                     >
                                                         {item.name}
                                                     </Link>
@@ -141,7 +183,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                     {/* Mobile/Tablet Menu Button - Hidden when minimal */}
                     {!minimal && (
                         <button
-                            className={`lg:hidden p-2 ${isScrolled || variant === "light" ? "text-slate-900" : "text-white"}`}
+                            className={cn("lg:hidden p-2", isScrolled || variant === "light" ? "text-slate-900" : "text-white")}
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -152,15 +194,15 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                 {/* Mobile Menu - Vertical Dropdown (Right Aligned) */}
                 <div
                     className={cn(
-                        "absolute top-full right-3 w-52 bg-white/95 backdrop-blur-md rounded-xl shadow-lg lg:hidden overflow-hidden transition-all duration-300 ease-out border border-slate-100",
+                        "absolute top-full right-3 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-lg lg:hidden overflow-hidden transition-all duration-300 ease-out border border-slate-100",
                         isMobileMenuOpen
                             ? "opacity-100 translate-y-1 pointer-events-auto"
                             : "opacity-0 -translate-y-2 pointer-events-none"
                     )}
                 >
                     {/* Menu Links - Single Vertical Column */}
-                    <div className="flex flex-col py-2">
-                        {navLinks.map((link) => (
+                    <div className="flex flex-col py-2 max-h-[80vh] overflow-y-auto">
+                        {dynamicNavLinks.map((link) => (
                             <div key={link.name}>
                                 {link.hasDropdown ? (
                                     <>
@@ -169,13 +211,13 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                             onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
                                         >
                                             {link.name}
-                                            <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                            <ChevronDown size={14} className={cn("transition-transform duration-200", openDropdown === link.name && "rotate-180")} />
                                         </button>
                                         {openDropdown === link.name && link.dropdownItems && (
                                             <div className="bg-slate-50">
                                                 {link.dropdownItems.map((item) => (
                                                     <Link
-                                                        key={item.name}
+                                                        key={item.href}
                                                         href={item.href}
                                                         className="block px-8 py-2 text-sm text-slate-600 hover:text-amber-600 transition-colors"
                                                         onClick={() => setIsMobileMenuOpen(false)}
