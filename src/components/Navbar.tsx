@@ -18,7 +18,7 @@ const navLinks = [
             { name: "Upcoming Conferences", href: "/conferences" },
         ]
     },
-    { name: "Awardees", href: "/awards" },
+    { name: "Awardees", href: "/awardees" },
     { name: "Sponsor", href: "#" },
     { name: "Blog", href: "/blog" },
 ];
