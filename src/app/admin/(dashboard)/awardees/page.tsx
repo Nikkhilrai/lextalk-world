@@ -49,6 +49,56 @@ interface Awardee {
     };
 }
 
+const compressImage = async (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = document.createElement("img");
+            img.src = event.target?.result as string;
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                let width = img.width;
+                let height = img.height;
+                const MAX_WIDTH = 800; // Resize to max 800px width
+                const MAX_HEIGHT = 800;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d");
+                ctx?.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        reject(new Error("Compression failed"));
+                        return;
+                    }
+                    // Force JPEG for better compression
+                    const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, ".jpg"), {
+                        type: "image/jpeg",
+                        lastModified: Date.now(),
+                    });
+                    resolve(compressedFile);
+                }, "image/jpeg", 0.7); // 70% quality
+            };
+            img.onerror = (err) => reject(err);
+        };
+        reader.onerror = (err) => reject(err);
+    });
+};
+
 export default function AwardeesPage() {
     const [events, setEvents] = useState<AwardEvent[]>([]);
     const [awardees, setAwardees] = useState<Awardee[]>([]);
@@ -660,14 +710,18 @@ export default function AwardeesPage() {
                                                     const file = e.target.files?.[0];
                                                     if (!file) return;
 
-                                                    // Use existing loading state logic or simpler approach here
-                                                    const formData = new FormData();
-                                                    formData.append("file", file);
-                                                    formData.append("type", "awardees"); // Organize in Cloudinary/Folder
-
                                                     try {
-                                                        // Show loading indicator on button (simplified)
-                                                        e.target.parentElement!.innerHTML = "<span>Uploading...</span>";
+                                                        const label = e.target.parentElement;
+                                                        if (label) label.innerHTML = "<span>Compressing...</span>";
+
+                                                        // Compress image before upload
+                                                        const compressedFile = await compressImage(file);
+
+                                                        if (label) label.innerHTML = "<span>Uploading...</span>";
+
+                                                        const formData = new FormData();
+                                                        formData.append("file", compressedFile);
+                                                        formData.append("type", "awardees");
 
                                                         const res = await fetch("/api/upload", {
                                                             method: "POST",
@@ -680,9 +734,18 @@ export default function AwardeesPage() {
 
                                                         setNewAwardee({ ...newAwardee, image: data.url });
                                                     } catch (err: any) {
+                                                        console.error(err);
                                                         alert("Upload failed: " + err.message);
                                                     } finally {
-                                                        // Reset button text (will happen naturally on re-render but consistent experience is good)
+                                                        // Reset button text
+                                                        const label = e.target.parentElement?.parentElement?.querySelector('label');
+                                                        if (label) {
+                                                            // Force re-render of label content by briefly clearing input or just let React handle it on next render cycle 
+                                                            // but simpler to just set state to trigger re-render if needed, 
+                                                            // or manually reset innerHTML to match the original JSX structure if state doesn't update immediately.
+                                                            // However, since we updated state (setNewAwardee), React should re-render the component 
+                                                            // and the label will revert to "Upload Image" because of the JSX logic.
+                                                        }
                                                     }
                                                 }}
                                             />
