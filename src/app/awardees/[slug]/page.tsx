@@ -110,9 +110,9 @@ export default async function AwardeesEventPage({ params }: Props) {
                                         {(awardees as any[]).map((awardee) => (
                                             <div
                                                 key={awardee.id}
-                                                className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100"
+                                                className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
                                             >
-                                                {/* Photo */}
+                                                {/* Photo Container */}
                                                 <div className="aspect-[3/4] relative bg-slate-100 overflow-hidden">
                                                     {awardee.image ? (
                                                         <Image
@@ -137,49 +137,46 @@ export default async function AwardeesEventPage({ params }: Props) {
                                                             href={awardee.linkedin}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="absolute top-3 right-3 p-2 bg-[#0077b5] text-white rounded-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#006097]"
+                                                            className="absolute top-3 right-3 p-2 bg-[#0077b5] text-white rounded-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#006097] z-20"
                                                         >
                                                             <Linkedin className="w-4 h-4" />
                                                         </a>
                                                     )}
 
-                                                    {/* Golden Frame Effect on Hover */}
-                                                    <div className="absolute inset-0 border-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                                    {/* Bio Overlay - Only over image now */}
+                                                    {awardee.bio && (
+                                                        <div className="absolute inset-0 bg-[#1e2952]/95 p-6 flex flex-col justify-center items-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                                            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                                                                <p className="text-white/90 text-sm leading-relaxed line-clamp-[10]">
+                                                                    {awardee.bio}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
 
-                                                {/* Info */}
-                                                <div className="p-6 text-center">
-                                                    <h3 className="text-lg font-serif font-bold text-[#1e2952] mb-1 group-hover:text-[#cfa45a] transition-colors leading-tight">
+                                                {/* Info - Always Visible Below */}
+                                                <div className="p-5 text-center bg-white relative z-20">
+                                                    <h3 className="text-lg font-serif font-bold text-[#1e2952] mb-1 leading-tight">
                                                         {awardee.name}
                                                     </h3>
                                                     {awardee.designation && (
-                                                        <p className="text-xs font-semibold uppercase tracking-wider text-[#cfa45a] mb-2 line-clamp-2">
+                                                        <p className="text-xs font-bold uppercase tracking-wide text-[#b08d55] mb-1.5 line-clamp-2">
                                                             {awardee.designation}
                                                         </p>
                                                     )}
                                                     {awardee.organization && (
-                                                        <p className="text-sm text-slate-500 font-medium line-clamp-1">
+                                                        <p className="text-sm text-slate-600 font-medium line-clamp-1">
                                                             {awardee.organization}
                                                         </p>
                                                     )}
                                                     {awardee.country && (
-                                                        <div className="flex items-center justify-center gap-1.5 mt-3 text-xs text-slate-400">
+                                                        <div className="flex items-center justify-center gap-1.5 mt-3 text-xs text-slate-500">
                                                             <MapPin className="w-3 h-3" />
                                                             <span>{awardee.country}</span>
                                                         </div>
                                                     )}
                                                 </div>
-
-                                                {/* Bio Tooltip - improved to slide up like a card reveal */}
-                                                {awardee.bio && (
-                                                    <div className="absolute inset-0 bg-[#1e2952]/95 p-6 flex flex-col justify-center items-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                                                            <p className="text-white/90 text-sm leading-relaxed line-clamp-[10]">
-                                                                {awardee.bio}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                )}
                                             </div>
                                         ))}
                                     </div>
