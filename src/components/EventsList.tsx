@@ -149,11 +149,11 @@ export function EventsList() {
                                 {/* Description or Highlights */}
                                 {event.highlights ? (
                                     <div className="mb-4 sm:mb-5 flex-grow">
-                                        <p className="text-xs sm:text-sm font-bold text-slate-800 mb-2">Event Highlights:</p>
-                                        <ul className="grid grid-cols-1 gap-1.5">
+                                        <p className="text-[10px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Event Highlights:</p>
+                                        <ul className="grid grid-cols-2 gap-x-2 gap-y-2">
                                             {event.highlights.map((highlight: string, i: number) => (
-                                                <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                                                <li key={i} className="flex items-start gap-1.5 text-[10px] sm:text-xs text-slate-600 font-medium leading-tight">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1 shrink-0" />
                                                     <span>{highlight}</span>
                                                 </li>
                                             ))}
