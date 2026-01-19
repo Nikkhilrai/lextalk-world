@@ -183,8 +183,8 @@ export default function AwardeesPage() {
                 <button
                     onClick={() => setActiveTab("events")}
                     className={`pb-3 px-1 text-sm font-medium transition-colors ${activeTab === "events"
-                            ? "text-[#0ab39c] border-b-2 border-[#0ab39c]"
-                            : "text-[#878a99] hover:text-[#ced4da]"
+                        ? "text-[#0ab39c] border-b-2 border-[#0ab39c]"
+                        : "text-[#878a99] hover:text-[#ced4da]"
                         }`}
                 >
                     Award Events ({events.length})
@@ -192,8 +192,8 @@ export default function AwardeesPage() {
                 <button
                     onClick={() => setActiveTab("awardees")}
                     className={`pb-3 px-1 text-sm font-medium transition-colors ${activeTab === "awardees"
-                            ? "text-[#0ab39c] border-b-2 border-[#0ab39c]"
-                            : "text-[#878a99] hover:text-[#ced4da]"
+                        ? "text-[#0ab39c] border-b-2 border-[#0ab39c]"
+                        : "text-[#878a99] hover:text-[#ced4da]"
                         }`}
                 >
                     Awardees ({awardees.length})
@@ -253,8 +253,8 @@ export default function AwardeesPage() {
                                             </td>
                                             <td className="px-6 py-4 text-center">
                                                 <span className={`px-2 py-0.5 text-xs rounded ${event.isActive
-                                                        ? "bg-[#0ab39c]/10 text-[#0ab39c]"
-                                                        : "bg-[#878a99]/10 text-[#878a99]"
+                                                    ? "bg-[#0ab39c]/10 text-[#0ab39c]"
+                                                    : "bg-[#878a99]/10 text-[#878a99]"
                                                     }`}>
                                                     {event.isActive ? "Active" : "Inactive"}
                                                 </span>
@@ -567,16 +567,81 @@ export default function AwardeesPage() {
                                     className="w-full px-3 py-2 bg-[#2a304d] border border-white/10 rounded text-white"
                                 />
                             </div>
+
+                            {/* Image Upload */}
                             <div>
-                                <label className="text-sm text-[#ced4da] block mb-1">Photo URL</label>
-                                <input
-                                    type="text"
-                                    value={newAwardee.image}
-                                    onChange={(e) => setNewAwardee({ ...newAwardee, image: e.target.value })}
-                                    placeholder="https://..."
-                                    className="w-full px-3 py-2 bg-[#2a304d] border border-white/10 rounded text-white"
-                                />
+                                <label className="text-sm text-[#ced4da] block mb-1">Photo</label>
+                                <div className="space-y-3">
+                                    {/* Preview */}
+                                    {newAwardee.image && (
+                                        <div className="relative w-20 h-20 rounded overflow-hidden border border-white/10">
+                                            <Image
+                                                src={newAwardee.image}
+                                                alt="Preview"
+                                                fill
+                                                className="object-cover"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setNewAwardee({ ...newAwardee, image: "" })}
+                                                className="absolute top-0 right-0 bg-red-500 text-white p-0.5"
+                                            >
+                                                <Trash2 size={12} />
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    <div className="flex gap-2 items-center">
+                                        <label className="flex-1 cursor-pointer bg-[#2a304d] hover:bg-[#353b59] border border-dashed border-white/20 rounded px-3 py-2 text-sm text-[#ced4da] flex items-center justify-center gap-2 transition-colors">
+                                            <Upload size={14} />
+                                            <span>Upload Image</span>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                className="hidden"
+                                                onChange={async (e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (!file) return;
+
+                                                    // Use existing loading state logic or simpler approach here
+                                                    const formData = new FormData();
+                                                    formData.append("file", file);
+                                                    formData.append("type", "awardees"); // Organize in Cloudinary/Folder
+
+                                                    try {
+                                                        // Show loading indicator on button (simplified)
+                                                        e.target.parentElement!.innerHTML = "<span>Uploading...</span>";
+
+                                                        const res = await fetch("/api/upload", {
+                                                            method: "POST",
+                                                            body: formData,
+                                                        });
+
+                                                        const data = await res.json();
+
+                                                        if (!res.ok) throw new Error(data.error || "Upload failed");
+
+                                                        setNewAwardee({ ...newAwardee, image: data.url });
+                                                    } catch (err: any) {
+                                                        alert("Upload failed: " + err.message);
+                                                    } finally {
+                                                        // Reset button text (will happen naturally on re-render but consistent experience is good)
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                        <span className="text-xs text-[#878a99]">OR</span>
+                                        <input
+                                            type="text"
+                                            value={newAwardee.image || ""}
+                                            onChange={(e) => setNewAwardee({ ...newAwardee, image: e.target.value })}
+                                            placeholder="https://..."
+                                            className="flex-[2] px-3 py-2 bg-[#2a304d] border border-white/10 rounded text-white text-sm"
+                                        />
+                                    </div>
+                                </div>
                             </div>
+
                             <div>
                                 <label className="text-sm text-[#ced4da] block mb-1">Bio</label>
                                 <textarea
