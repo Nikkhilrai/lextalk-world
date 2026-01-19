@@ -19,8 +19,8 @@ export default async function AwardeesEventPage({ params }: Props) {
     }
 
     const categoryOrder = [
-        "Leading Individuals",
         "Inspiring Individuals",
+        "Leading Individuals",
         "Excellence in Law",
         "Rising Star",
         "Legal Innovation",
@@ -97,13 +97,25 @@ export default async function AwardeesEventPage({ params }: Props) {
                         <div className="space-y-20">
                             {sortedCategories.map(([category, awardees]) => (
                                 <div key={category}>
-                                    {/* Category Header */}
-                                    <div className="flex items-center gap-4 mb-10">
-                                        <div className="h-px bg-slate-200 flex-1" />
-                                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#1e2952] uppercase tracking-wide text-center px-4">
-                                            {category}
-                                        </h2>
-                                        <div className="h-px bg-slate-200 flex-1" />
+                                    {/* Premium Category Header */}
+                                    <div className="flex items-center justify-center gap-4 md:gap-8 mb-16 relative">
+                                        <div className="hidden md:block h-[2px] w-24 bg-gradient-to-l from-[#cfa45a] to-transparent rounded-full" />
+
+                                        <div className="text-center relative">
+                                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#1e2952] uppercase tracking-[0.1em] relative z-10 px-4">
+                                                {category}
+                                            </h2>
+                                            {/* Decorative Underline Element */}
+                                            <div className="mt-4 flex justify-center items-center gap-2 opacity-80">
+                                                <div className="w-1.5 h-1.5 rotate-45 border border-[#cfa45a]" />
+                                                <div className="w-12 h-[1px] bg-[#cfa45a]" />
+                                                <div className="w-2 h-2 rotate-45 bg-[#cfa45a]" />
+                                                <div className="w-12 h-[1px] bg-[#cfa45a]" />
+                                                <div className="w-1.5 h-1.5 rotate-45 border border-[#cfa45a]" />
+                                            </div>
+                                        </div>
+
+                                        <div className="hidden md:block h-[2px] w-24 bg-gradient-to-r from-[#cfa45a] to-transparent rounded-full" />
                                     </div>
 
                                     {/* Awardees Grid - Premium Dark Design */}
