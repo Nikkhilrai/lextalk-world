@@ -297,3 +297,43 @@ model Payment {
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 }
+
+// Award Event Model (e.g., Dubai 2024, New York 2025, etc.)
+model AwardEvent {
+  id          String    @id @default(cuid())
+  name        String    // "Dubai 2024", "New York 2025", etc.
+  slug        String    @unique // "dubai-2024", "new-york-2025"
+  location    String    // "Dubai, UAE"
+  year        Int       // 2024, 2025
+  date        DateTime? // Event date
+  description String?   @db.Text
+  image       String?   // Cover image for the event
+  isActive    Boolean   @default(true)
+  order       Int       @default(0) // For ordering in lists
+  awardees    Awardee[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Awardee Model
+model Awardee {
+  id           String     @id @default(cuid())
+  name         String
+  designation  String?    // "Senior Partner", "Managing Director"
+  organization String?    // "Law Firm Name"
+  category     String     // "Inspiring Individuals", "Excellence in Law", "Rising Star"
+  bio          String?    @db.Text
+  image        String?    // Profile photo
+  country      String?
+  linkedin     String?
+  email        String?
+  order        Int        @default(0) // For ordering within category
+  isPublished  Boolean    @default(true)
+  eventId      String
+  event        AwardEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([eventId])
+  @@index([category])
+}
