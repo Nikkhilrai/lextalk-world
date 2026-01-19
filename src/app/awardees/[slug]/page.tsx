@@ -21,6 +21,7 @@ export default async function AwardeesEventPage({ params }: Props) {
     const categoryOrder = [
         "Inspiring Individuals",
         "Leading Individuals",
+        "Emerging Individuals",
         "Excellence in Law",
         "Rising Star",
         "Legal Innovation",
@@ -119,7 +120,7 @@ export default async function AwardeesEventPage({ params }: Props) {
                                     </div>
 
                                     {/* Awardees Grid - Premium Dark Design */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                                         {(awardees as any[]).map((awardee) => (
                                             <div
                                                 key={awardee.id}

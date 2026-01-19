@@ -179,6 +179,7 @@ export default function AwardeesPage() {
 
     const CATEGORIES = [
         "Leading Individuals",
+        "Emerging Individuals",
         "Inspiring Individuals",
         "Excellence in Law",
         "Rising Star",
