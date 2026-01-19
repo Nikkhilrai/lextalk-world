@@ -16,10 +16,10 @@ import {
 
 // Key Highlights Data
 const highlights = [
-    { icon: Users, number: "500+", label: "Global Attendees" },
-    { icon: Award, number: "100+", label: "Selected Awardees" },
-    { icon: Mic, number: "100+", label: "Renowned Speakers" },
-    { icon: BookOpen, number: "20+", label: "Learning Sessions" },
+    { icon: Users, number: "800+", label: "Global Legal Professionals" },
+    { icon: Mic, number: "70+", label: "Renowned Speakers" },
+    { icon: Award, number: "100+", label: "Awardees" },
+    { icon: Building, number: "30+", label: "Exhibitors" },
 ];
 
 // Navigation Tabs

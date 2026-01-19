@@ -28,10 +28,16 @@ export function EventsList() {
             image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop", // New Dubai Skyline
             status: "Registrations Open",
             region: "Middle East",
-            description: "Join 500+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
+            description: "Join 800+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
+            highlights: [
+                "800+ Global Legal Professionals",
+                "70+ Renowned Speakers",
+                "100+ Awardees",
+                "30+ Exhibitors"
+            ],
             link: "/dubai-2026",
             agendaLink: "/dubai-2026#agenda",
-            stats: { delegates: "500+", type: "Conference" }
+            stats: { delegates: "800+", type: "Conference" }
         },
         {
             city: "Mumbai",
@@ -86,7 +92,7 @@ export function EventsList() {
 
                 {/* Event Cards Container - Grid Layout - Optimized Sizes */}
                 <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto px-2 sm:px-0">
-                    {events.map((event, index) => (
+                    {events.map((event: any, index) => (
                         <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:border-amber-500/30 hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full">
 
                             {/* Image Section (Top) - Balanced Height */}
@@ -140,10 +146,24 @@ export function EventsList() {
                                     {event.venue}
                                 </p>
 
-                                {/* Description */}
-                                <p className="text-slate-600 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm flex-grow line-clamp-2 sm:line-clamp-3">
-                                    {event.description}
-                                </p>
+                                {/* Description or Highlights */}
+                                {event.highlights ? (
+                                    <div className="mb-4 sm:mb-5 flex-grow">
+                                        <p className="text-xs sm:text-sm font-bold text-slate-800 mb-2">Event Highlights:</p>
+                                        <ul className="grid grid-cols-1 gap-1.5">
+                                            {event.highlights.map((highlight: string, i: number) => (
+                                                <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                                                    <span>{highlight}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    <p className="text-slate-600 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm flex-grow line-clamp-2 sm:line-clamp-3">
+                                        {event.description}
+                                    </p>
+                                )}
 
                                 {/* Stats Row - Compact */}
                                 <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-5 pb-4 sm:pb-5 border-b border-slate-100">
