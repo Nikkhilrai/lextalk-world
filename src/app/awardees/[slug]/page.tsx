@@ -105,31 +105,38 @@ export default async function AwardeesEventPage({ params }: Props) {
                                         <div className="h-px bg-slate-200 flex-1" />
                                     </div>
 
-                                    {/* Awardees Grid */}
+                                    {/* Awardees Grid - Premium Dark Design */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                                         {(awardees as any[]).map((awardee) => (
                                             <div
                                                 key={awardee.id}
-                                                className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+                                                className="group relative bg-[#0f172a] rounded-sm overflow-hidden border border-[#cfa45a]/30 hover:border-[#cfa45a] transition-all duration-500 hover:shadow-[0_0_20px_rgba(207,164,90,0.1)]"
                                             >
+                                                {/* Decorative Corner Accents */}
+                                                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                                                 {/* Photo Container */}
-                                                <div className="aspect-[3/4] relative bg-slate-100 overflow-hidden">
+                                                <div className="aspect-[3/4] relative overflow-hidden bg-[#1e293b]">
                                                     {awardee.image ? (
                                                         <Image
                                                             src={awardee.image}
                                                             alt={awardee.name}
                                                             fill
-                                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[0.2] group-hover:grayscale-0"
                                                         />
                                                     ) : (
                                                         <div className="absolute inset-0 flex items-center justify-center">
-                                                            <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center">
-                                                                <span className="text-3xl font-serif font-bold text-slate-400">
+                                                            <div className="w-20 h-20 rounded-full bg-[#1e293b] border border-[#cfa45a]/20 flex items-center justify-center">
+                                                                <span className="text-3xl font-serif font-bold text-[#cfa45a]/50">
                                                                     {awardee.name.charAt(0)}
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     )}
+
+                                                    {/* Gradient Overlay for Text Contrast at Bottom of Image */}
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-60" />
 
                                                     {/* LinkedIn Overlay */}
                                                     {awardee.linkedin && (
@@ -137,43 +144,43 @@ export default async function AwardeesEventPage({ params }: Props) {
                                                             href={awardee.linkedin}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="absolute top-3 right-3 p-2 bg-[#0077b5] text-white rounded-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#006097] z-20"
+                                                            className="absolute top-3 right-3 p-2 bg-[#cfa45a] text-[#0f172a] rounded-sm opacity-0 transform -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-white z-20"
                                                         >
                                                             <Linkedin className="w-4 h-4" />
                                                         </a>
                                                     )}
 
-                                                    {/* Bio Overlay - Only over image now */}
+                                                    {/* Bio Overlay - Slide Up */}
                                                     {awardee.bio && (
-                                                        <div className="absolute inset-0 bg-[#1e2952]/95 p-6 flex flex-col justify-center items-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                                                            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                                                                <p className="text-white/90 text-sm leading-relaxed line-clamp-[10]">
-                                                                    {awardee.bio}
+                                                        <div className="absolute inset-0 bg-[#0f172a]/95 p-6 flex flex-col justify-center items-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10 border-t border-[#cfa45a]/30">
+                                                            <div className="overflow-y-auto max-h-full scrollbar-hide">
+                                                                <p className="text-[#e2e8f0] text-sm leading-relaxed font-light font-serif italic">
+                                                                    "{awardee.bio}"
                                                                 </p>
                                                             </div>
                                                         </div>
                                                     )}
                                                 </div>
 
-                                                {/* Info - Always Visible Below */}
-                                                <div className="p-5 text-center bg-white relative z-20">
-                                                    <h3 className="text-lg font-serif font-bold text-[#1e2952] mb-1 leading-tight">
+                                                {/* Info Section - Dark Theme */}
+                                                <div className="p-6 text-center bg-[#0f172a] relative z-20 border-t border-[#cfa45a]/10">
+                                                    <h3 className="text-xl font-serif font-bold text-white mb-3 tracking-wide group-hover:text-[#cfa45a] transition-colors">
                                                         {awardee.name}
                                                     </h3>
+
+                                                    {/* Designation - Full Text, No Truncation */}
                                                     {awardee.designation && (
-                                                        <p className="text-xs font-bold uppercase tracking-wide text-[#b08d55] mb-1.5 line-clamp-2">
+                                                        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#cfa45a] mb-2 leading-relaxed">
                                                             {awardee.designation}
                                                         </p>
                                                     )}
+
+                                                    {/* Organization */}
                                                     {awardee.organization && (
-                                                        <p className="text-sm text-slate-600 font-medium line-clamp-1">
-                                                            {awardee.organization}
-                                                        </p>
-                                                    )}
-                                                    {awardee.country && (
-                                                        <div className="flex items-center justify-center gap-1.5 mt-3 text-xs text-slate-500">
-                                                            <MapPin className="w-3 h-3" />
-                                                            <span>{awardee.country}</span>
+                                                        <div className="mt-3 pt-3 border-t border-white/5 inline-block w-full">
+                                                            <p className="text-sm text-slate-400 font-light tracking-wide">
+                                                                {awardee.organization}
+                                                            </p>
                                                         </div>
                                                     )}
                                                 </div>
