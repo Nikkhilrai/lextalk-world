@@ -19,6 +19,7 @@ export default async function AwardeesEventPage({ params }: Props) {
     }
 
     const categoryOrder = [
+        "Leading Individuals",
         "Inspiring Individuals",
         "Excellence in Law",
         "Rising Star",
