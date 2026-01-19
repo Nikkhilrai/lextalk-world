@@ -13,7 +13,11 @@ import {
     getAwardees,
     deleteAwardEvent,
     deleteAwardee,
-    getAwardeeStats
+    getAwardeeStats,
+    createAwardEvent,
+    updateAwardEvent,
+    createAwardee,
+    updateAwardee
 } from "@/actions/awardee";
 
 interface AwardEvent {
@@ -33,6 +37,10 @@ interface Awardee {
     organization: string | null;
     category: string;
     image: string | null;
+    bio: string | null;
+    country: string | null;
+    linkedin: string | null;
+    eventId: string;
     isPublished: boolean;
     event: {
         name: string;
@@ -48,8 +56,14 @@ export default function AwardeesPage() {
     const [activeTab, setActiveTab] = useState<"events" | "awardees">("events");
     const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
+
+    // Modal & Edit States
     const [showAddEventModal, setShowAddEventModal] = useState(false);
+    const [editingEventId, setEditingEventId] = useState<string | null>(null);
+
     const [showAddAwardeeModal, setShowAddAwardeeModal] = useState(false);
+    const [editingAwardeeId, setEditingAwardeeId] = useState<string | null>(null);
+
     const [stats, setStats] = useState({ totalEvents: 0, totalAwardees: 0, eventsByYear: [] });
 
     // New Event Form
@@ -268,13 +282,22 @@ export default function AwardeesPage() {
                                                     >
                                                         <Eye className="w-4 h-4" />
                                                     </Link>
-                                                    <Link
-                                                        href={`/admin/awardees/${event.slug}/edit`}
+                                                    <button
+                                                        onClick={() => {
+                                                            setEditingEventId(event.id);
+                                                            setNewEvent({
+                                                                name: event.name,
+                                                                slug: event.slug,
+                                                                location: event.location,
+                                                                year: event.year,
+                                                            });
+                                                            setShowAddEventModal(true);
+                                                        }}
                                                         className="p-1.5 text-[#f7b84b] hover:bg-[#f7b84b]/10 rounded transition-colors"
                                                         title="Edit"
                                                     >
                                                         <Edit2 className="w-4 h-4" />
-                                                    </Link>
+                                                    </button>
                                                     <button
                                                         onClick={() => handleDeleteEvent(event.id)}
                                                         className="p-1.5 text-[#f06548] hover:bg-[#f06548]/10 rounded transition-colors"
@@ -360,7 +383,23 @@ export default function AwardeesPage() {
                                             </div>
                                             {/* Actions overlay */}
                                             <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button className="p-1.5 bg-[#3577f1] rounded text-white hover:bg-[#2b66d6]">
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingAwardeeId(awardee.id);
+                                                        setNewAwardee({
+                                                            name: awardee.name,
+                                                            designation: awardee.designation || "",
+                                                            organization: awardee.organization || "",
+                                                            category: awardee.category,
+                                                            bio: awardee.bio || "",
+                                                            image: awardee.image || "",
+                                                            country: awardee.country || "",
+                                                            eventId: awardee.eventId,
+                                                        });
+                                                        setShowAddAwardeeModal(true);
+                                                    }}
+                                                    className="p-1.5 bg-[#3577f1] rounded text-white hover:bg-[#2b66d6]"
+                                                >
                                                     <Edit2 className="w-3 h-3" />
                                                 </button>
                                                 <button
@@ -387,19 +426,25 @@ export default function AwardeesPage() {
                 </div>
             )}
 
-            {/* Add Event Modal */}
+            {/* Add/Edit Event Modal */}
             {showAddEventModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="bg-[#1b213b] rounded-lg w-full max-w-md border border-white/10">
                         <div className="p-4 border-b border-white/5">
-                            <h3 className="text-lg font-semibold text-white">Add Award Event</h3>
+                            <h3 className="text-lg font-semibold text-white">
+                                {editingEventId ? "Edit Award Event" : "Add Award Event"}
+                            </h3>
                         </div>
                         <form
                             onSubmit={async (e) => {
                                 e.preventDefault();
-                                const { createAwardEvent } = await import("@/actions/awardee");
-                                await createAwardEvent(newEvent);
+                                if (editingEventId) {
+                                    await updateAwardEvent(editingEventId, newEvent);
+                                } else {
+                                    await createAwardEvent(newEvent);
+                                }
                                 setShowAddEventModal(false);
+                                setEditingEventId(null);
                                 setNewEvent({ name: "", slug: "", location: "", year: new Date().getFullYear() });
                                 fetchData();
                             }}
@@ -413,7 +458,7 @@ export default function AwardeesPage() {
                                     onChange={(e) => setNewEvent({
                                         ...newEvent,
                                         name: e.target.value,
-                                        slug: e.target.value.toLowerCase().replace(/\s+/g, "-")
+                                        slug: editingEventId ? newEvent.slug : e.target.value.toLowerCase().replace(/\s+/g, "-")
                                     })}
                                     placeholder="Dubai 2024"
                                     required
@@ -455,7 +500,11 @@ export default function AwardeesPage() {
                             <div className="flex gap-3 pt-2">
                                 <button
                                     type="button"
-                                    onClick={() => setShowAddEventModal(false)}
+                                    onClick={() => {
+                                        setShowAddEventModal(false);
+                                        setEditingEventId(null);
+                                        setNewEvent({ name: "", slug: "", location: "", year: new Date().getFullYear() });
+                                    }}
                                     className="flex-1 px-4 py-2 border border-white/10 text-[#ced4da] rounded hover:bg-white/5"
                                 >
                                     Cancel
@@ -464,7 +513,7 @@ export default function AwardeesPage() {
                                     type="submit"
                                     className="flex-1 px-4 py-2 bg-[#0ab39c] text-white rounded hover:bg-[#099885]"
                                 >
-                                    Create Event
+                                    {editingEventId ? "Update Event" : "Create Event"}
                                 </button>
                             </div>
                         </form>
@@ -472,12 +521,14 @@ export default function AwardeesPage() {
                 </div>
             )}
 
-            {/* Add Awardee Modal */}
+            {/* Add/Edit Awardee Modal */}
             {showAddAwardeeModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
                     <div className="bg-[#1b213b] rounded-lg w-full max-w-lg border border-white/10 my-8">
                         <div className="p-4 border-b border-white/5">
-                            <h3 className="text-lg font-semibold text-white">Add Awardee</h3>
+                            <h3 className="text-lg font-semibold text-white">
+                                {editingAwardeeId ? "Edit Awardee" : "Add Awardee"}
+                            </h3>
                         </div>
                         <form
                             onSubmit={async (e) => {
@@ -486,9 +537,15 @@ export default function AwardeesPage() {
                                     alert("Please select an event");
                                     return;
                                 }
-                                const { createAwardee } = await import("@/actions/awardee");
-                                await createAwardee(newAwardee);
+
+                                if (editingAwardeeId) {
+                                    await updateAwardee(editingAwardeeId, newAwardee);
+                                } else {
+                                    await createAwardee(newAwardee);
+                                }
+
                                 setShowAddAwardeeModal(false);
+                                setEditingAwardeeId(null);
                                 setNewAwardee({
                                     name: "", designation: "", organization: "",
                                     category: "Inspiring Individuals", bio: "", image: "", country: "", eventId: ""
@@ -655,7 +712,14 @@ export default function AwardeesPage() {
                             <div className="flex gap-3 pt-2">
                                 <button
                                     type="button"
-                                    onClick={() => setShowAddAwardeeModal(false)}
+                                    onClick={() => {
+                                        setShowAddAwardeeModal(false);
+                                        setEditingAwardeeId(null);
+                                        setNewAwardee({
+                                            name: "", designation: "", organization: "",
+                                            category: "Inspiring Individuals", bio: "", image: "", country: "", eventId: ""
+                                        });
+                                    }}
                                     className="flex-1 px-4 py-2 border border-white/10 text-[#ced4da] rounded hover:bg-white/5"
                                 >
                                     Cancel
@@ -664,7 +728,7 @@ export default function AwardeesPage() {
                                     type="submit"
                                     className="flex-1 px-4 py-2 bg-[#0ab39c] text-white rounded hover:bg-[#099885]"
                                 >
-                                    Add Awardee
+                                    {editingAwardeeId ? "Update Awardee" : "Add Awardee"}
                                 </button>
                             </div>
                         </form>
