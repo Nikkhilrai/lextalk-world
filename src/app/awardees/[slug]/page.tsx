@@ -40,154 +40,144 @@ export default async function AwardeesEventPage({ params }: Props) {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-16 overflow-hidden">
-                {/* Background */}
-                <div className="absolute inset-0 bg-gradient-to-b from-amber-900/20 via-transparent to-transparent" />
-                {event.image && (
-                    <div className="absolute inset-0">
+            <section className="relative pt-40 pb-20 overflow-hidden">
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[#1e2952]/90 z-10" />
+                    {event.image ? (
                         <Image
                             src={event.image}
                             alt={event.name}
                             fill
-                            className="object-cover opacity-10"
+                            className="object-cover"
                         />
-                    </div>
-                )}
+                    ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#1e2952] to-[#0f172a]" />
+                    )}
+                </div>
 
-                <div className="container mx-auto px-4 relative z-10">
-                    {/* Back Link */}
-                    <Link
-                        href="/awardees"
-                        className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        <span>All Events</span>
-                    </Link>
-
-                    <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full mb-6">
-                            <Award className="w-4 h-4 text-amber-400" />
-                            <span className="text-amber-400 text-sm font-medium">{event.year} Awardees</span>
-                        </div>
-
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                            {event.name}
+                <div className="container mx-auto px-4 relative z-20 text-center">
+                    {/* Title Banner */}
+                    <div className="bg-[#141b35] py-6 px-4 md:px-12 mx-auto max-w-4xl border-y-4 border-[#cfa45a] shadow-2xl mb-12 transform hover:scale-[1.01] transition-transform duration-500">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#cfa45a] uppercase tracking-wider leading-tight">
+                            Lex-Falcon Awardees <span className="block md:inline">{event.name}</span>
                         </h1>
+                    </div>
 
-                        <div className="flex flex-wrap items-center gap-6 text-gray-400">
-                            <div className="flex items-center gap-2">
-                                <MapPin className="w-5 h-5 text-amber-500" />
-                                <span>{event.location}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Users className="w-5 h-5 text-amber-500" />
-                                <span>{event.awardees.length} Distinguished Awardees</span>
-                            </div>
+                    {/* Description Text */}
+                    <p className="text-gray-200 text-base md:text-lg leading-relaxed max-w-4xl mx-auto font-light">
+                        The Lex-Falcon Global Awards are prestigious honors presented by LexTalk World Conference to recognize excellence and innovation in the legal industry. These awards celebrate outstanding achievements across various categories, including individuals, organizations, and initiatives that have made significant contributions to the legal profession. Whether it’s groundbreaking legal research, impactful advocacy, or innovative legal tech solutions, the Lex-Falcon Global Awards highlight the best and brightest in the legal field.
+                    </p>
+
+                    {/* Event Details */}
+                    <div className="flex justify-center items-center gap-6 mt-8 text-[#cfa45a]/80 text-sm font-medium uppercase tracking-widest">
+                        <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
                         </div>
-
-                        {event.description && (
-                            <p className="text-gray-400 mt-6 max-w-2xl">
-                                {event.description}
-                            </p>
-                        )}
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#cfa45a]/40" />
+                        <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4" />
+                            <span>{event.awardees.length} Awardees</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Awardees by Category */}
-            <section className="py-16">
+            <section className="py-20 bg-slate-50">
                 <div className="container mx-auto px-4">
                     {sortedCategories.length === 0 ? (
                         <div className="text-center py-20">
-                            <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold text-gray-400">No awardees added yet</h3>
-                            <p className="text-gray-500 mt-2">Check back soon!</p>
+                            <Users className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                            <h3 className="text-xl font-semibold text-slate-500">No awardees added yet</h3>
                         </div>
                     ) : (
                         <div className="space-y-20">
                             {sortedCategories.map(([category, awardees]) => (
                                 <div key={category}>
                                     {/* Category Header */}
-                                    <div className="text-center mb-12">
-                                        <div className="inline-block">
-                                            <h2 className="text-3xl md:text-4xl font-bold tracking-wider uppercase">
-                                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
-                                                    {category}
-                                                </span>
-                                            </h2>
-                                            <div className="h-1 w-24 mx-auto mt-4 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full" />
-                                        </div>
+                                    <div className="flex items-center gap-4 mb-10">
+                                        <div className="h-px bg-slate-200 flex-1" />
+                                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#1e2952] uppercase tracking-wide text-center px-4">
+                                            {category}
+                                        </h2>
+                                        <div className="h-px bg-slate-200 flex-1" />
                                     </div>
 
                                     {/* Awardees Grid */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                                         {(awardees as any[]).map((awardee) => (
                                             <div
                                                 key={awardee.id}
-                                                className="group relative bg-gradient-to-b from-white/5 to-transparent rounded-xl overflow-hidden border border-white/10 hover:border-amber-500/30 transition-all duration-300"
+                                                className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100"
                                             >
                                                 {/* Photo */}
-                                                <div className="aspect-[3/4] relative bg-gradient-to-br from-gray-800 to-gray-900">
+                                                <div className="aspect-[3/4] relative bg-slate-100 overflow-hidden">
                                                     {awardee.image ? (
                                                         <Image
                                                             src={awardee.image}
                                                             alt={awardee.name}
                                                             fill
-                                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
                                                         />
                                                     ) : (
                                                         <div className="absolute inset-0 flex items-center justify-center">
-                                                            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500/20 to-amber-700/20 flex items-center justify-center">
-                                                                <span className="text-4xl font-bold text-amber-500/50">
+                                                            <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center">
+                                                                <span className="text-3xl font-serif font-bold text-slate-400">
                                                                     {awardee.name.charAt(0)}
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     )}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent" />
 
-                                                    {/* LinkedIn */}
+                                                    {/* LinkedIn Overlay */}
                                                     {awardee.linkedin && (
                                                         <a
                                                             href={awardee.linkedin}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="absolute top-4 right-4 p-2 bg-[#0077B5] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                                                            className="absolute top-3 right-3 p-2 bg-[#0077b5] text-white rounded-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#006097]"
                                                         >
-                                                            <Linkedin className="w-4 h-4 text-white" />
+                                                            <Linkedin className="w-4 h-4" />
                                                         </a>
                                                     )}
+
+                                                    {/* Golden Frame Effect on Hover */}
+                                                    <div className="absolute inset-0 border-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                                                 </div>
 
                                                 {/* Info */}
-                                                <div className="p-5">
-                                                    <h3 className="text-lg font-bold text-white mb-1">
+                                                <div className="p-6 text-center">
+                                                    <h3 className="text-lg font-serif font-bold text-[#1e2952] mb-1 group-hover:text-[#cfa45a] transition-colors leading-tight">
                                                         {awardee.name}
                                                     </h3>
                                                     {awardee.designation && (
-                                                        <p className="text-sm text-amber-400 mb-1">
+                                                        <p className="text-xs font-semibold uppercase tracking-wider text-[#cfa45a] mb-2 line-clamp-2">
                                                             {awardee.designation}
                                                         </p>
                                                     )}
                                                     {awardee.organization && (
-                                                        <p className="text-sm text-gray-400">
+                                                        <p className="text-sm text-slate-500 font-medium line-clamp-1">
                                                             {awardee.organization}
                                                         </p>
                                                     )}
                                                     {awardee.country && (
-                                                        <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                                                        <div className="flex items-center justify-center gap-1.5 mt-3 text-xs text-slate-400">
                                                             <MapPin className="w-3 h-3" />
-                                                            {awardee.country}
-                                                        </p>
+                                                            <span>{awardee.country}</span>
+                                                        </div>
                                                     )}
                                                 </div>
 
-                                                {/* Bio Tooltip on Hover */}
+                                                {/* Bio Tooltip - improved to slide up like a card reveal */}
                                                 {awardee.bio && (
-                                                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#0B1120] to-[#0B1120]/95 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                                        <p className="text-sm text-gray-300 line-clamp-4">
-                                                            {awardee.bio}
-                                                        </p>
+                                                    <div className="absolute inset-0 bg-[#1e2952]/95 p-6 flex flex-col justify-center items-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                                                            <p className="text-white/90 text-sm leading-relaxed line-clamp-[10]">
+                                                                {awardee.bio}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 )}
                                             </div>
