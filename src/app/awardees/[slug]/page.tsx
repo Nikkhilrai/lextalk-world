@@ -110,77 +110,74 @@ export default async function AwardeesEventPage({ params }: Props) {
                                         {(awardees as any[]).map((awardee) => (
                                             <div
                                                 key={awardee.id}
-                                                className="group relative bg-[#0f172a] rounded-sm overflow-hidden border border-[#cfa45a]/30 hover:border-[#cfa45a] transition-all duration-500 hover:shadow-[0_0_20px_rgba(207,164,90,0.1)]"
+                                                className="group relative bg-[#0f172a] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/5"
                                             >
-                                                {/* Decorative Corner Accents */}
-                                                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#cfa45a] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                                {/* Photo Container */}
-                                                <div className="aspect-[3/4] relative overflow-hidden bg-[#1e293b]">
+                                                {/* Full Photo Container */}
+                                                <div className="aspect-[3/4] relative overflow-hidden">
                                                     {awardee.image ? (
                                                         <Image
                                                             src={awardee.image}
                                                             alt={awardee.name}
                                                             fill
-                                                            className="object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[0.2] group-hover:grayscale-0"
+                                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                         />
                                                     ) : (
-                                                        <div className="absolute inset-0 flex items-center justify-center">
-                                                            <div className="w-20 h-20 rounded-full bg-[#1e293b] border border-[#cfa45a]/20 flex items-center justify-center">
-                                                                <span className="text-3xl font-serif font-bold text-[#cfa45a]/50">
-                                                                    {awardee.name.charAt(0)}
-                                                                </span>
-                                                            </div>
+                                                        <div className="absolute inset-0 bg-[#1e293b] flex items-center justify-center">
+                                                            <span className="text-4xl font-serif font-bold text-[#cfa45a]/30">
+                                                                {awardee.name.charAt(0)}
+                                                            </span>
                                                         </div>
                                                     )}
 
-                                                    {/* Gradient Overlay for Text Contrast at Bottom of Image */}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-60" />
+                                                    {/* Permanent Gradient Overlay for Text Readability */}
+                                                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#050a14] via-[#050a14]/80 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
 
-                                                    {/* LinkedIn Overlay */}
+                                                    {/* LinkedIn Badge (Top Right) */}
                                                     {awardee.linkedin && (
                                                         <a
                                                             href={awardee.linkedin}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="absolute top-3 right-3 p-2 bg-[#cfa45a] text-[#0f172a] rounded-sm opacity-0 transform -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-white z-20"
+                                                            className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-md text-white rounded-full hover:bg-[#0077b5] hover:text-white transition-all duration-300 transform translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-30"
                                                         >
                                                             <Linkedin className="w-4 h-4" />
                                                         </a>
                                                     )}
 
-                                                    {/* Bio Overlay - Slide Up */}
+                                                    {/* Info Overlay (Bottom) */}
+                                                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20 flex flex-col justify-end transition-transform duration-500 group-hover:-translate-y-2">
+                                                        <div className="transform transition-all duration-500 translate-y-0 group-hover:translate-y-[-5px]">
+                                                            <h3 className="text-xl md:text-2xl font-serif font-bold text-white mb-1 leading-tight text-shadow-sm">
+                                                                {awardee.name}
+                                                            </h3>
+
+                                                            {/* Designation */}
+                                                            {(awardee.designation || awardee.organization) && (
+                                                                <div className="flex flex-col gap-0.5 mt-2">
+                                                                    {awardee.designation && (
+                                                                        <p className="text-[#cfa45a] text-xs font-bold uppercase tracking-wider">
+                                                                            {awardee.designation}
+                                                                        </p>
+                                                                    )}
+                                                                    {awardee.organization && (
+                                                                        <p className="text-slate-300 text-xs font-medium opacity-90">
+                                                                            {awardee.organization}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Bio Slide-Up Overlay (Reveals on Hover) */}
                                                     {awardee.bio && (
-                                                        <div className="absolute inset-0 bg-[#0f172a]/95 p-6 flex flex-col justify-center items-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10 border-t border-[#cfa45a]/30">
-                                                            <div className="overflow-y-auto max-h-full scrollbar-hide">
-                                                                <p className="text-[#e2e8f0] text-sm leading-relaxed font-light font-serif italic">
+                                                        <div className="absolute inset-0 bg-[#0f172a]/95 p-6 flex items-center justify-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20">
+                                                            <div className="overflow-y-auto max-h-full scrollbar-hide py-2">
+                                                                <div className="w-8 h-0.5 bg-[#cfa45a] mx-auto mb-4 rounded-full" />
+                                                                <p className="text-slate-200 text-sm leading-relaxed font-light italic">
                                                                     "{awardee.bio}"
                                                                 </p>
                                                             </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                {/* Info Section - Dark Theme */}
-                                                <div className="p-6 text-center bg-[#0f172a] relative z-20 border-t border-[#cfa45a]/10">
-                                                    <h3 className="text-xl font-serif font-bold text-white mb-3 tracking-wide group-hover:text-[#cfa45a] transition-colors">
-                                                        {awardee.name}
-                                                    </h3>
-
-                                                    {/* Designation - Full Text, No Truncation */}
-                                                    {awardee.designation && (
-                                                        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#cfa45a] mb-2 leading-relaxed">
-                                                            {awardee.designation}
-                                                        </p>
-                                                    )}
-
-                                                    {/* Organization */}
-                                                    {awardee.organization && (
-                                                        <div className="mt-3 pt-3 border-t border-white/5 inline-block w-full">
-                                                            <p className="text-sm text-slate-400 font-light tracking-wide">
-                                                                {awardee.organization}
-                                                            </p>
                                                         </div>
                                                     )}
                                                 </div>
