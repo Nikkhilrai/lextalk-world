@@ -69,25 +69,25 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
                 aria-label="Download Agenda"
             >
                 {/* Outer glow rings - subtle */}
-                <div className="absolute inset-0 rounded-lg bg-amber-400/20 blur-md animate-pulse"></div>
-                <div className="absolute inset-0 rounded-lg bg-amber-500/15 blur-lg animate-ping"></div>
+                <div className="absolute inset-0 rounded-lg bg-amber-400/30 blur-md animate-pulse"></div>
+                <div className="absolute inset-0 rounded-lg bg-amber-500/20 blur-lg animate-ping"></div>
 
-                {/* Main Button - Transparent Glass Bubble Effect */}
-                <div className="relative px-5 py-3 bg-gradient-to-br from-amber-400/30 via-amber-500/25 to-amber-600/30 backdrop-blur-2xl border border-amber-300/40 rounded-lg shadow-[0_8px_20px_-5px_rgba(251,191,36,0.3),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_30px_-5px_rgba(251,191,36,0.5),inset_0_2px_5px_rgba(255,255,255,0.8)] group-hover:from-amber-500/35 group-hover:to-amber-700/35">
+                {/* Main Button - Premium Glass Bubble Effect */}
+                <div className="relative px-6 py-3.5 bg-gradient-to-br from-amber-500/85 via-amber-600/80 to-amber-700/85 backdrop-blur-md border border-white/20 rounded-lg shadow-[0_8px_25px_-5px_rgba(245,158,11,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_35px_-5px_rgba(245,158,11,0.6),inset_0_1px_1px_rgba(255,255,255,0.6)] group-hover:from-amber-500/90 group-hover:to-amber-700/90">
 
-                    {/* Specular highlight - water drop shine */}
-                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-70 blur-[1px] rounded-full pointer-events-none"></div>
+                    {/* Specular highlight - glass shine */}
+                    <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-white/20 to-transparent rounded-t-lg pointer-events-none"></div>
 
                     {/* Content */}
-                    <div className="relative flex items-center gap-2 text-white font-semibold tracking-wide">
-                        <div className="w-5 h-5 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:bg-white/40 transition-all">
-                            <Download className="w-3 h-3 text-white drop-shadow-md" />
+                    <div className="relative flex items-center gap-2.5 text-white font-bold tracking-wide text-sm md:text-base shadow-sm">
+                        <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-inner group-hover:bg-white/30 transition-all border border-white/20">
+                            <Download className="w-3.5 h-3.5 text-white" />
                         </div>
-                        <span className="text-sm drop-shadow-md">Download Agenda</span>
+                        <span className="drop-shadow-sm">Download Agenda</span>
                     </div>
 
-                    {/* Inner glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/15 rounded-lg pointer-events-none"></div>
+                    {/* Inner bottom glow */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/10 to-transparent rounded-b-lg pointer-events-none"></div>
                 </div>
             </button>
 
@@ -228,6 +228,7 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
                                                         name="phone"
                                                         id="phone"
                                                         required
+                                                        dropdownDirection="up"
                                                     />
                                                 )}
                                             />

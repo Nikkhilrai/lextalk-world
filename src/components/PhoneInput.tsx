@@ -11,9 +11,10 @@ interface PhoneInputProps {
     name?: string;
     id?: string;
     required?: boolean;
+    dropdownDirection?: "up" | "down";
 }
 
-export function PhoneInput({ value, onChange, name, id, required }: PhoneInputProps) {
+export function PhoneInput({ value, onChange, name, id, required, dropdownDirection = "down" }: PhoneInputProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCountry, setSelectedCountry] = useState<Country>(DEFAULT_COUNTRY);
@@ -78,7 +79,10 @@ export function PhoneInput({ value, onChange, name, id, required }: PhoneInputPr
 
                     {/* Dropdown */}
                     {isOpen && (
-                        <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-100 z-50 animate-in fade-in zoom-in-95 duration-100 max-h-64 flex flex-col">
+                        <div className={cn(
+                            "absolute left-0 w-72 bg-white rounded-xl shadow-xl border border-slate-100 z-50 animate-in fade-in zoom-in-95 duration-100 max-h-64 flex flex-col",
+                            dropdownDirection === "up" ? "bottom-full mb-2" : "top-full mt-2"
+                        )}>
                             {/* Search Bar */}
                             <div className="p-3 border-b border-slate-100 sticky top-0 bg-white rounded-t-xl z-10">
                                 <div className="relative">
