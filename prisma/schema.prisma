@@ -337,3 +337,22 @@ model Awardee {
   @@index([eventId])
   @@index([category])
 }
+
+// Agenda Download Lead Capture
+model AgendaDownload {
+  id           String   @id @default(cuid())
+  fullName     String
+  email        String
+  designation  String
+  organization String
+  phone        String
+  eventSlug    String   // e.g., "dubai-2026", "houston-2026"
+  agendaUrl    String?  // URL to the uploaded agenda PDF
+  downloaded   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([eventSlug])
+  @@index([createdAt])
+}

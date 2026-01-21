@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, Check, Award, ArrowRight, Star, Trophy } from "lucide-react";
+import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, UploadCloud, Check, Award, ArrowRight, Star, Trophy, CreditCard, Lock } from "lucide-react";
 import Image from "next/image";
+import Script from "next/script";
 
 
 
@@ -83,6 +84,21 @@ export function NominationForm() {
     const [step, setStep] = useState(1);
     const [isComplete, setIsComplete] = useState(false);
 
+    // Payment State
+    const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+    const [inrRate, setInrRate] = useState<number | null>(null);
+    const [nominationId, setNominationId] = useState<string | null>(null);
+    const [processingPayment, setProcessingPayment] = useState(false);
+    const [paymentError, setPaymentError] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Fetch exchange rate
+        fetch("/api/currency/convert")
+            .then(res => res.json())
+            .then(data => setInrRate(data.rate))
+            .catch(() => setInrRate(84.0)); // Fallback
+    }, []);
+
     const totalSteps = 6;
 
     const { register, handleSubmit, watch, trigger, setValue, formState: { errors, isSubmitting } } = useForm<FormValues>({
@@ -120,6 +136,7 @@ export function NominationForm() {
             const res = await fetch("/api/nominate", { method: "POST", body: JSON.stringify(payload) });
             const json = await res.json();
             if (!res.ok) throw new Error(json.error);
+            setNominationId(json.nominationId);
             setStep(6);
         } catch (err) {
             console.error(err);
@@ -495,6 +512,10 @@ export function NominationForm() {
                             </form>
                         ) : step === 6 && !isComplete ? (
                             <div>
+                                <Script
+                                    src="https://checkout.razorpay.com/v1/checkout.js"
+                                    onLoad={() => setRazorpayLoaded(true)}
+                                />
                                 <div className="text-center mb-8">
                                     <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                         <Trophy className="w-8 h-8 text-amber-600" />
@@ -502,14 +523,147 @@ export function NominationForm() {
                                     <h3 className="text-2xl font-bold text-slate-800 mb-2">Nomination Fee: $50.00 USD</h3>
                                     <p className="text-slate-500">Fully refundable if not selected</p>
                                 </div>
-                                <div className="text-center p-8 bg-slate-50 rounded-xl border border-slate-200">
-                                    <p className="text-slate-600">Payment integration coming soon.</p>
-                                    <button
-                                        onClick={() => setIsComplete(true)}
-                                        className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
-                                    >
-                                        Simulate Success
-                                    </button>
+
+                                <div className="bg-slate-50 rounded-xl border border-slate-200 p-6">
+                                    <div className="flex items-center gap-2 text-slate-500 mb-6 justify-center">
+                                        <Lock size={16} />
+                                        <span className="text-sm">Secure Payment via Razorpay</span>
+                                    </div>
+
+                                    {paymentError && (
+                                        <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded border border-red-200 text-center">
+                                            {paymentError}
+                                        </div>
+                                    )}
+
+                                    <div className="space-y-4 max-w-md mx-auto">
+                                        {/* International (USD) */}
+                                        <button
+                                            onClick={async () => {
+                                                if (!razorpayLoaded) return;
+                                                setProcessingPayment(true);
+                                                setPaymentError(null);
+                                                try {
+                                                    // Create Order
+                                                    const orderRes = await fetch("/api/razorpay/create-order", {
+                                                        method: "POST",
+                                                        headers: { "Content-Type": "application/json" },
+                                                        body: JSON.stringify({ amount: 50, currency: "USD", cartItems: [] }) // Empty cart items for simple payment
+                                                    });
+                                                    const orderData = await orderRes.json();
+                                                    if (!orderRes.ok) throw new Error(orderData.error);
+
+                                                    const options = {
+                                                        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                                                        amount: orderData.amount,
+                                                        currency: orderData.currency,
+                                                        name: "LexTalk World",
+                                                        description: "Nomination Fee - Global Legal Honour",
+                                                        order_id: orderData.orderId,
+                                                        handler: async function (response: any) {
+                                                            try {
+                                                                await fetch("/api/razorpay/verify-nomination", {
+                                                                    method: "POST",
+                                                                    headers: { "Content-Type": "application/json" },
+                                                                    body: JSON.stringify({
+                                                                        ...response,
+                                                                        nominationId: nominationId,
+                                                                        nomineeName: `${watch("firstName")} ${watch("lastName")}`,
+                                                                        amount: 50,
+                                                                        currency: "USD"
+                                                                    })
+                                                                });
+                                                                setIsComplete(true);
+                                                            } catch (err) {
+                                                                setPaymentError("Payment verification failed. Please contact support.");
+                                                            }
+                                                        },
+                                                        theme: { color: "#F59E0B" }
+                                                    };
+                                                    const rzp = new (window as any).Razorpay(options);
+                                                    rzp.open();
+                                                } catch (err: any) {
+                                                    setPaymentError(err.message || "Payment failed");
+                                                } finally {
+                                                    setProcessingPayment(false);
+                                                }
+                                            }}
+                                            disabled={!razorpayLoaded || processingPayment}
+                                            className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-lg disabled:opacity-50 flex items-center justify-center gap-3"
+                                        >
+                                            <span className="text-xl">🌍</span>
+                                            <div className="text-left">
+                                                <span className="block text-base">{processingPayment ? "Processing..." : "Pay $50 USD"}</span>
+                                                <span className="block text-xs text-blue-200">International Cards</span>
+                                            </div>
+                                        </button>
+
+                                        {/* India (INR) */}
+                                        <button
+                                            onClick={async () => {
+                                                if (!razorpayLoaded || !inrRate) return;
+                                                setProcessingPayment(true);
+                                                setPaymentError(null);
+                                                const amountINR = Math.round(50 * inrRate);
+                                                try {
+                                                    // Create Order
+                                                    const orderRes = await fetch("/api/razorpay/create-order", {
+                                                        method: "POST",
+                                                        headers: { "Content-Type": "application/json" },
+                                                        body: JSON.stringify({ amount: amountINR, currency: "INR", cartItems: [] })
+                                                    });
+                                                    const orderData = await orderRes.json();
+                                                    if (!orderRes.ok) throw new Error(orderData.error);
+
+                                                    const options = {
+                                                        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                                                        amount: orderData.amount,
+                                                        currency: orderData.currency,
+                                                        name: "LexTalk World",
+                                                        description: "Nomination Fee - Global Legal Honour",
+                                                        order_id: orderData.orderId,
+                                                        handler: async function (response: any) {
+                                                            try {
+                                                                await fetch("/api/razorpay/verify-nomination", {
+                                                                    method: "POST",
+                                                                    headers: { "Content-Type": "application/json" },
+                                                                    body: JSON.stringify({
+                                                                        ...response,
+                                                                        nominationId: nominationId,
+                                                                        nomineeName: `${watch("firstName")} ${watch("lastName")}`,
+                                                                        amount: amountINR,
+                                                                        currency: "INR"
+                                                                    })
+                                                                });
+                                                                setIsComplete(true);
+                                                            } catch (err) {
+                                                                setPaymentError("Payment verification failed. Please contact support.");
+                                                            }
+                                                        },
+                                                        theme: { color: "#16a34a" }
+                                                    };
+                                                    const rzp = new (window as any).Razorpay(options);
+                                                    rzp.open();
+                                                } catch (err: any) {
+                                                    setPaymentError(err.message || "Payment failed");
+                                                } finally {
+                                                    setProcessingPayment(false);
+                                                }
+                                            }}
+                                            disabled={!razorpayLoaded || processingPayment || !inrRate}
+                                            className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 transition-all font-semibold shadow-lg disabled:opacity-50 flex items-center justify-center gap-3"
+                                        >
+                                            <span className="text-xl">🇮🇳</span>
+                                            <div className="text-left">
+                                                <span className="block text-base">{processingPayment ? "Processing..." : `Pay ₹${Math.round(50 * (inrRate || 84)).toLocaleString()} INR`}</span>
+                                                <span className="block text-xs text-green-200">UPI, Cards, NetBanking</span>
+                                            </div>
+                                        </button>
+
+                                        <p className="text-center text-xs text-slate-400 mt-4">
+                                            1 USD ≈ ₹{inrRate ? inrRate.toFixed(2) : '...'} INR
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         ) : (

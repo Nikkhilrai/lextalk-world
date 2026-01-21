@@ -6,6 +6,7 @@ import Link from "next/link";
 import { EventNavbar } from "@/components/EventNavbar";
 import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
+import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 
 import {
     Calendar, MapPin, Users, Award, Mic, BookOpen,
@@ -242,6 +243,7 @@ export default function DubaiEventPage() {
     return (
         <main className="min-h-screen bg-white">
             <EventNavbar />
+            <FloatingAgendaButton eventSlug="dubai-2026" />
 
             {/* ===================== HERO SECTION ===================== */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a15] pb-24 md:pb-48">

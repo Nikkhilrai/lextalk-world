@@ -42,7 +42,7 @@ export function EventNavbar() {
                         <Link href="/" className="relative">
                             <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12">
                                 <Image
-                                    src="/logo/Lextalk-Logo.png"
+                                    src="/logo/lextalkworld_logo.png"
                                     alt="Lextalk World"
                                     className="object-contain object-left w-full h-full"
                                     width={200}
