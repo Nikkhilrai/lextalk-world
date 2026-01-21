@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Download, X } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { PhoneInput } from "@/components/PhoneInput";
 
 interface AgendaFormData {
     fullName: string;
@@ -21,7 +22,7 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<AgendaFormData>();
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<AgendaFormData>();
 
     const onSubmit = async (data: AgendaFormData) => {
         setIsSubmitting(true);
@@ -68,25 +69,25 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
                 aria-label="Download Agenda"
             >
                 {/* Outer glow rings - subtle */}
-                <div className="absolute inset-0 rounded-full bg-amber-400/30 blur-md animate-pulse"></div>
-                <div className="absolute inset-0 rounded-full bg-amber-500/20 blur-lg animate-ping"></div>
+                <div className="absolute inset-0 rounded-lg bg-amber-400/20 blur-md animate-pulse"></div>
+                <div className="absolute inset-0 rounded-lg bg-amber-500/15 blur-lg animate-ping"></div>
 
-                {/* Main Button - Glass Water Bubble Effect */}
-                <div className="relative px-5 py-3 bg-gradient-to-br from-amber-400/95 via-amber-500/90 to-amber-600/95 backdrop-blur-xl border border-amber-300/60 rounded-full shadow-[0_8px_20px_-5px_rgba(251,191,36,0.4),inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_30px_-5px_rgba(251,191,36,0.6),inset_0_2px_5px_rgba(255,255,255,1)] group-hover:from-amber-500/95 group-hover:to-amber-700/95">
+                {/* Main Button - Transparent Glass Bubble Effect */}
+                <div className="relative px-5 py-3 bg-gradient-to-br from-amber-400/30 via-amber-500/25 to-amber-600/30 backdrop-blur-2xl border border-amber-300/40 rounded-lg shadow-[0_8px_20px_-5px_rgba(251,191,36,0.3),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_30px_-5px_rgba(251,191,36,0.5),inset_0_2px_5px_rgba(255,255,255,0.8)] group-hover:from-amber-500/35 group-hover:to-amber-700/35">
 
                     {/* Specular highlight - water drop shine */}
-                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none"></div>
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-70 blur-[1px] rounded-full pointer-events-none"></div>
 
                     {/* Content */}
                     <div className="relative flex items-center gap-2 text-white font-semibold tracking-wide">
-                        <div className="w-5 h-5 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:bg-white/30 transition-all">
+                        <div className="w-5 h-5 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:bg-white/40 transition-all">
                             <Download className="w-3 h-3 text-white drop-shadow-md" />
                         </div>
                         <span className="text-sm drop-shadow-md">Download Agenda</span>
                     </div>
 
                     {/* Inner glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/20 rounded-full pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/15 rounded-lg pointer-events-none"></div>
                 </div>
             </button>
 
@@ -210,17 +211,27 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
                                         {errors.organization && <p className="text-red-400 text-xs mt-1">{errors.organization.message}</p>}
                                     </div>
 
-                                    {/* Phone */}
+                                    {/* Phone with Country Picker */}
                                     <div className="md:col-span-2">
                                         <label className="block text-sm font-medium text-amber-400 mb-2">
                                             Phone *
                                         </label>
-                                        <input
-                                            {...register("phone", { required: "Phone is required" })}
-                                            type="tel"
-                                            className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition"
-                                            placeholder="+1 (555) 123-4567"
-                                        />
+                                        <div className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg focus-within:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/20 transition">
+                                            <Controller
+                                                name="phone"
+                                                control={control}
+                                                rules={{ required: "Phone is required" }}
+                                                render={({ field }) => (
+                                                    <PhoneInput
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        name="phone"
+                                                        id="phone"
+                                                        required
+                                                    />
+                                                )}
+                                            />
+                                        </div>
                                         {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
                                     </div>
                                 </div>
