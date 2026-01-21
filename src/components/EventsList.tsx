@@ -194,7 +194,7 @@ export function EventsList() {
                                             }`}
                                         aria-disabled={event.status === "Coming Soon"}
                                     >
-                                        {event.status === "Coming Soon" ? "Notify Me" : "Register Now"}
+                                        {event.status === "Coming Soon" ? "Notify Me" : "View Details"}
                                         {event.status !== "Coming Soon" && <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4" />}
                                     </Link>
                                     <Link
