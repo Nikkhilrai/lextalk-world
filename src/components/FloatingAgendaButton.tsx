@@ -61,21 +61,67 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
 
     return (
         <>
-            {/* Floating Button - Subtle Design */}
+            {/* Floating Button - Water Bubble Effect */}
             <button
                 onClick={() => setIsModalOpen(true)}
-                className="fixed left-6 bottom-8 z-50 group"
+                className="fixed left-6 bottom-8 z-50 group animate-popIn"
                 aria-label="Download Agenda"
             >
-                {/* Single subtle pulse ring */}
-                <div className="absolute inset-0 rounded-full bg-slate-400 opacity-20 animate-pulse"></div>
+                {/* Outer glow rings - subtle */}
+                <div className="absolute inset-0 rounded-full bg-amber-400/30 blur-md animate-pulse"></div>
+                <div className="absolute inset-0 rounded-full bg-amber-500/20 blur-lg animate-ping"></div>
 
-                {/* Main Button */}
-                <div className="relative bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 text-white px-5 py-3 rounded-full shadow-xl transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl flex items-center gap-2 border border-slate-600">
-                    <Download className="w-4 h-4" />
-                    <span className="font-semibold text-sm whitespace-nowrap">Download Agenda</span>
+                {/* Main Button - Glass Water Bubble Effect */}
+                <div className="relative px-5 py-3 bg-gradient-to-br from-amber-400/95 via-amber-500/90 to-amber-600/95 backdrop-blur-xl border border-amber-300/60 rounded-full shadow-[0_8px_20px_-5px_rgba(251,191,36,0.4),inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_30px_-5px_rgba(251,191,36,0.6),inset_0_2px_5px_rgba(255,255,255,1)] group-hover:from-amber-500/95 group-hover:to-amber-700/95">
+
+                    {/* Specular highlight - water drop shine */}
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none"></div>
+
+                    {/* Content */}
+                    <div className="relative flex items-center gap-2 text-white font-semibold tracking-wide">
+                        <div className="w-5 h-5 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:bg-white/30 transition-all">
+                            <Download className="w-3 h-3 text-white drop-shadow-md" />
+                        </div>
+                        <span className="text-sm drop-shadow-md">Download Agenda</span>
+                    </div>
+
+                    {/* Inner glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/20 rounded-full pointer-events-none"></div>
                 </div>
             </button>
+
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { transform: translateY(20px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.2s ease-out;
+                }
+                .animate-slideUp {
+                    animation: slideUp 0.3s ease-out;
+                }
+                @keyframes popIn {
+                    0% {
+                        transform: scale(0);
+                        opacity: 0;
+                    }
+                    50% {
+                        transform: scale(1.1);
+                    }
+                    100% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+                .animate-popIn {
+                    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                }
+            `}</style>
 
             {/* Modal */}
             {isModalOpen && (
@@ -212,11 +258,27 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
                     from { transform: translateY(20px); opacity: 0; }
                     to { transform: translateY(0); opacity: 1; }
                 }
+                @keyframes popIn {
+                    0% {
+                        transform: scale(0);
+                        opacity: 0;
+                    }
+                    50% {
+                        transform: scale(1.1);
+                    }
+                    100% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
                 .animate-fadeIn {
                     animation: fadeIn 0.2s ease-out;
                 }
                 .animate-slideUp {
                     animation: slideUp 0.3s ease-out;
+                }
+                .animate-popIn {
+                    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
                 }
             `}</style>
         </>
