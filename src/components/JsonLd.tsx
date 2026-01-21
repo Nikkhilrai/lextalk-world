@@ -5,7 +5,7 @@ export function OrganizationJsonLd() {
         name: 'LexTalk World',
         alternateName: 'Lextalk World',
         url: 'https://lextalkworld.in',
-        logo: 'https://lextalkworld.in/logo/Lextalk-Logo.png',
+        logo: 'https://lextalkworld.in/logo/favicon.png',
         description: 'LexTalk World is the Global Authority on Legal Tech, organizing premier legal conferences and connecting legal professionals worldwide.',
         sameAs: [
             // Add social media links here when available

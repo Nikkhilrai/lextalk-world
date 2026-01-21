@@ -61,10 +61,10 @@ export const metadata: Metadata = {
     description: "The Global Authority on Legal Tech. Join 500+ legal professionals from 30+ countries. Connect, Lead, and Innovate.",
     images: [
       {
-        url: "/logo/Lextalk-Logo.png",
-        width: 1200,
-        height: 630,
-        alt: "LexTalk World - Global Legal Conference Platform",
+        url: "/logo/favicon.png",
+        width: 512,
+        height: 512,
+        alt: "LexTalk World",
       },
     ],
   },
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LexTalk World | Global Legal Conference Platform",
     description: "The Global Authority on Legal Tech. Connect, Lead, and Innovate with legal professionals worldwide.",
-    images: ["/logo/Lextalk-Logo.png"],
+    images: ["/logo/favicon.png"],
   },
   robots: {
     index: true,
@@ -89,9 +89,12 @@ export const metadata: Metadata = {
     google: "VGxkaVCom6ZjS705UYvw7oO6sontjb5B1YgMyQpQEFk",
   },
   icons: {
-    icon: "/favicon/faviconlextalk-logo.svg",
-    shortcut: "/favicon/faviconlextalk-logo.svg",
-    apple: "/favicon/faviconlextalk-logo.svg",
+    icon: [
+      { url: "/favicon/faviconlextalk-logo.svg", type: "image/svg+xml" },
+      { url: "/logo/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/logo/favicon.png",
+    apple: "/logo/favicon.png",
   },
 };
 

@@ -236,7 +236,7 @@ export function Hero() {
                                 <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Dubai</h3>
                                 <div className="flex items-center gap-2 text-slate-300 text-xs lg:text-sm mb-3 lg:mb-4">
                                     <MapPin className="w-3 h-3 lg:w-4 lg:h-4" />
-                                    <span>Atlantis The Royal</span>
+                                    <span>Dubai, UAE</span>
                                 </div>
                                 <div className="flex items-center gap-2 lg:gap-3">
                                     <div className="flex -space-x-2">
