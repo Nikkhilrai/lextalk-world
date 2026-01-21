@@ -38,11 +38,14 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
 
             if (!response.ok) throw new Error(result.error || "Failed to submit");
 
-            // Download the agenda PDF using the streaming API
-            const downloadUrl = `/api/agenda/serve/${eventSlug}`;
+            // Direct download calculation
             const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = `${eventSlug}-agenda.pdf`;
+            // Add timestamp to prevent caching
+            link.href = `${result.agendaUrl}?t=${new Date().getTime()}`;
+            link.setAttribute('download', `${eventSlug}-agenda.pdf`);
+            link.setAttribute('target', '_blank'); // Fallback for some browsers
+            link.style.display = 'none';
+
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
