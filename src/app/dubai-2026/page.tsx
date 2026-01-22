@@ -849,14 +849,14 @@ export default function DubaiEventPage() {
 
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <Link
-                                href="https://lextalkworld.in/tickets"
+                                href="#register"
                                 className="group px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base md:text-lg rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-amber-500/30 hover:scale-105"
                             >
                                 Register Now
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                             <Link
-                                href="#contact"
+                                href="/contact"
                                 className="px-8 py-4 md:px-10 md:py-5 bg-transparent text-white font-bold text-base md:text-lg rounded-full border-2 border-white/20 hover:bg-white hover:text-slate-900 transition-all duration-300 hover:scale-105"
                             >
                                 Contact Us
