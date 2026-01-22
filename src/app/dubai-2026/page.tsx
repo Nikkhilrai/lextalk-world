@@ -829,7 +829,7 @@ export default function DubaiEventPage() {
             </section >
 
             {/* ===================== CTA SECTION ===================== */}
-            < section className="py-20 md:py-24 bg-gradient-to-br from-[#0a0f1a] via-[#1a1f2e] to-[#0a0f1a] relative overflow-hidden" >
+            < section id="register" className="py-20 md:py-24 bg-gradient-to-br from-[#0a0f1a] via-[#1a1f2e] to-[#0a0f1a] relative overflow-hidden" >
                 {/* Background Pattern */}
                 < div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
