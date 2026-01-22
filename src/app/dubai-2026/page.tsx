@@ -389,7 +389,7 @@ export default function DubaiEventPage() {
                     <div className={`flex flex-col sm:flex-row justify-center gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         {/* Secure Pass */}
                         <Link
-                            href="#register"
+                            href="https://lextalkworld.in/tickets"
                             className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-amber-600 rounded-lg border border-amber-500/30 hover:bg-amber-700 transition-all duration-300 w-auto"
                         >
                             <span className="text-white font-semibold text-sm tracking-wide">Secure Pass</span>
@@ -849,7 +849,7 @@ export default function DubaiEventPage() {
 
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <Link
-                                href="#register"
+                                href="https://lextalkworld.in/tickets"
                                 className="group px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base md:text-lg rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-amber-500/30 hover:scale-105"
                             >
                                 Register Now
