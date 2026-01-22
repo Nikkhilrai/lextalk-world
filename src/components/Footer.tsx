@@ -18,7 +18,7 @@ export function Footer() {
                     <div className="sm:col-span-2 lg:col-span-1 space-y-4 sm:space-y-6">
                         <div className="bg-white p-3 rounded-xl inline-block shadow-lg shadow-slate-900/20">
                             <Image
-                                src="/logo/Lextalk-Logo.png"
+                                src="/logo/lextalkworld_logo.png"
                                 alt="Lextalk World"
                                 width={180}
                                 height={60}
