@@ -96,75 +96,123 @@ export default function DubaiAwardsPage() {
             <EventNavbar />
 
             {/* ===================== HERO SECTION ===================== */}
-            <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-[#0a1628]">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/dubai-event/hero-bg.jpg"
-                        alt="LexTalk World Dubai Conference"
-                        fill
-                        className="object-cover opacity-40"
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/80 to-[#0a1628]" />
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a15]">
+                {/* Video Background */}
+                <div className="absolute inset-0 w-full h-full">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="object-cover w-full h-full"
+                    >
+                        <source src="/lextalk-hero.mp4" type="video/mp4" />
+                    </video>
+                    {/* Multi-layer gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/95 via-[#050a15]/80 to-[#050a15]" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-900/30 via-transparent to-amber-900/20" />
                 </div>
 
-                <div className="container mx-auto px-4 relative z-10 text-center py-20">
-                    <div className={`transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                        {/* LexTalk World Logo */}
-                        <div className="flex justify-center mb-6">
+                {/* Luxury Background Elements */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Elegant Gradient Orbs */}
+                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/15 via-amber-600/10 to-transparent rounded-full blur-[120px] animate-pulse" />
+                    <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-amber-400/10 via-orange-500/5 to-transparent rounded-full blur-[150px]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/5 to-transparent rounded-full" />
+                </div>
+
+                {/* Decorative Lines */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+                    <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+                </div>
+
+                {/* Content */}
+                <div className="relative z-30 container mx-auto px-4 text-center pt-24 md:pt-32 pb-32">
+
+                    {/* LexTalk World Logo - Animated Entry */}
+                    <div className={`flex justify-center mb-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <div className="relative">
+                            {/* Glow behind logo */}
+                            <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full scale-150" />
                             <Image
                                 src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
                                 alt="LexTalk World"
-                                width={280}
-                                height={80}
-                                className="h-16 md:h-20 w-auto"
+                                width={320}
+                                height={100}
+                                className="h-16 md:h-24 w-auto relative z-10"
+                                priority
                             />
                         </div>
+                    </div>
 
-                        {/* Location */}
-                        <h2 className="text-2xl md:text-3xl font-medium text-white mb-4">
+                    {/* Location Badge */}
+                    <div className={`mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <span className="inline-block px-6 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/80 text-lg md:text-xl font-medium tracking-wide">
                             Dubai, UAE
-                        </h2>
+                        </span>
+                    </div>
 
-                        {/* Main Title */}
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4">
-                            <span className="text-amber-400 italic font-light tracking-wide">LEGAL HONOR</span>
+                    {/* Main Title - LEGAL HONOR */}
+                    <div className={`mb-4 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">
+                                LEGAL HONOR
+                            </span>
                         </h1>
-                        <p className="text-2xl md:text-4xl text-white font-serif italic mb-10">
+                    </div>
+
+                    {/* Subtitle - Global Awards (Handwritten Style) */}
+                    <div className={`mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <p className="text-3xl md:text-5xl font-serif italic text-amber-400/90 tracking-wide">
                             Global Awards
                         </p>
+                    </div>
 
-                        {/* Action Buttons */}
-                        <div className="flex flex-wrap justify-center gap-4 mb-8">
-                            <Link
-                                href="https://www.lextalk.world/awardees-san-francisco-2025"
-                                target="_blank"
-                                className="px-6 py-3 bg-amber-500 text-slate-900 font-bold rounded-md hover:bg-amber-400 transition-colors"
-                            >
-                                Past Awardees
-                            </Link>
-                            <Link
-                                href="https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93"
-                                target="_blank"
-                                className="px-6 py-3 bg-transparent border-2 border-amber-500 text-amber-400 font-bold rounded-md hover:bg-amber-500/10 transition-colors"
-                            >
-                                Past Event Pictures
-                            </Link>
-                            <Link
-                                href="https://www.lextalk.world/past-conference"
-                                target="_blank"
-                                className="px-6 py-3 bg-transparent border-2 border-amber-500 text-amber-400 font-bold rounded-md hover:bg-amber-500/10 transition-colors"
-                            >
-                                Past Conferences
-                            </Link>
-                            <Link
-                                href="https://www.lextalk.world/pre-qualification-dubai-2026"
-                                target="_blank"
-                                className="px-6 py-3 bg-transparent border-2 border-amber-500 text-amber-400 font-bold rounded-md hover:bg-amber-500/10 transition-colors"
-                            >
-                                Check Your Eligibility
-                            </Link>
+                    {/* Action Buttons - Premium Styling */}
+                    <div className={`flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <Link
+                            href="https://www.lextalk.world/awardees-san-francisco-2025"
+                            target="_blank"
+                            className="group relative px-8 py-3.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-slate-900 font-bold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:scale-105"
+                        >
+                            {/* Shimmer Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                            <span className="relative z-10">Past Awardees</span>
+                        </Link>
+
+                        <Link
+                            href="https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93"
+                            target="_blank"
+                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        >
+                            Past Event Pictures
+                        </Link>
+
+                        <Link
+                            href="https://www.lextalk.world/past-conference"
+                            target="_blank"
+                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        >
+                            Past Conferences
+                        </Link>
+
+                        <Link
+                            href="https://www.lextalk.world/pre-qualification-dubai-2026"
+                            target="_blank"
+                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        >
+                            Check Your Eligibility
+                        </Link>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+                        <div className="flex flex-col items-center gap-2 animate-bounce">
+                            <span className="text-white/40 text-xs uppercase tracking-widest">Scroll</span>
+                            <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
+                                <div className="w-1.5 h-3 bg-amber-500/60 rounded-full animate-pulse" />
+                            </div>
                         </div>
                     </div>
                 </div>
