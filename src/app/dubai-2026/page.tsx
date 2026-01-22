@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 import { AgendaModal } from "@/components/AgendaModal";
+import { RegisterModal } from "@/components/RegisterModal";
 
 import {
     Calendar, MapPin, Users, Award, Mic, BookOpen,
@@ -199,6 +200,7 @@ export default function DubaiEventPage() {
     const [whoAttendsVisible, setWhoAttendsVisible] = useState(false);
     const [highlightsVisible, setHighlightsVisible] = useState(false);
     const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const whyAttendRef = useRef<HTMLDivElement>(null);
     const whoAttendsRef = useRef<HTMLDivElement>(null);
@@ -250,6 +252,10 @@ export default function DubaiEventPage() {
                 isOpen={isAgendaModalOpen}
                 onClose={() => setIsAgendaModalOpen(false)}
                 eventSlug="dubai-2026"
+            />
+            <RegisterModal
+                isOpen={isRegisterModalOpen}
+                onClose={() => setIsRegisterModalOpen(false)}
             />
 
             {/* ===================== HERO SECTION ===================== */}
@@ -848,13 +854,13 @@ export default function DubaiEventPage() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <Link
-                                href="https://lextalkworld.in/tickets"
-                                className="group px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base md:text-lg rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-amber-500/30 hover:scale-105"
+                            <button
+                                onClick={() => setIsRegisterModalOpen(true)}
+                                className="group px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base md:text-lg rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-amber-500/30 hover:scale-105 cursor-pointer"
                             >
                                 Register Now
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
+                            </button>
                             <Link
                                 href="/contact"
                                 className="px-8 py-4 md:px-10 md:py-5 bg-transparent text-white font-bold text-base md:text-lg rounded-full border-2 border-white/20 hover:bg-white hover:text-slate-900 transition-all duration-300 hover:scale-105"
