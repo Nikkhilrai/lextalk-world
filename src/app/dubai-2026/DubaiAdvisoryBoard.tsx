@@ -4,101 +4,70 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { Globe, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
 
-const boardMembers = [
-    {
-        name: "Dr. Lalit Bhasin",
-        role: "President",
-        company: "Society of Indian Law Firms, India",
-        image: "/advisory/Dr_ Lalit Bhasin.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Yasser Aboismail",
-        role: "Regional General Counsel",
-        company: "Director Legal, Commercial/Contracts and Compliance at Thales",
-        image: "/advisory/Yasser Aboismail.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Monica Romelina Sijabat",
-        role: "Professor",
-        company: "Faculty of Economics & Business, University of Indonesia",
-        image: "/advisory/Monica.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Karen Lee",
-        role: "Chair",
-        company: "Association of Corporate Counsel Australia Legal Technology and Innovation Committee",
-        image: "/advisory/KarenLee.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Gaurav Mediratta",
-        role: "Group General Counsel",
-        company: "Landmark Group",
-        image: "/advisory/Gaurav.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Dr. G.V. Rao",
-        role: "Senior Advocate, Supreme Court of India",
-        company: "Vice-President, Indian Society of International Law",
-        image: "/advisory/Dr_ G_V_ RAO.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Piyush Gupta",
-        role: "Head Counsel",
-        company: "Etihad Airways",
-        image: "/advisory/Piyush Gupta.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Raghvendra Verma",
-        role: "Chairman and Chapter Head Dubai",
-        company: "ICSI Middle East",
-        image: "/advisory/Raghvendra verma.avif",
-        linkedin: "#",
-    },
-    {
-        name: "Bhavin Mehta",
-        role: "VP - Global Anti-Corruption Compliance",
-        company: "Monitoring and Assurance, Mastercard, UAE",
-        image: "/advisory/Bhavin Mehta.avif",
-        linkedin: "#",
-    },
-];
+// Define the Advisor type
+interface Advisor {
+    id: string;
+    name: string;
+    role: string;
+    company: string;
+    image: string;
+    linkedin?: string | null;
+    order: number;
+}
 
 export function DubaiAdvisoryBoard() {
+    const [boardMembers, setBoardMembers] = useState<Advisor[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [centerIndex, setCenterIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+    // Fetch board members
+    useEffect(() => {
+        async function fetchAdvisors() {
+            try {
+                const response = await fetch('/api/advisors');
+                if (response.ok) {
+                    const data = await response.json();
+                    setBoardMembers(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch advisors:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchAdvisors();
+    }, []);
+
     // Auto-scroll functionality
     useEffect(() => {
-        if (!isAutoPlaying) return;
+        if (!isAutoPlaying || boardMembers.length === 0) return;
 
         const interval = setInterval(() => {
             setCenterIndex((prev) => (prev + 1) % boardMembers.length);
         }, 4000);
 
         return () => clearInterval(interval);
-    }, [isAutoPlaying]);
+    }, [isAutoPlaying, boardMembers.length]);
 
     const goToNext = useCallback(() => {
+        if (boardMembers.length === 0) return;
         setCenterIndex((prev) => (prev + 1) % boardMembers.length);
         setIsAutoPlaying(false);
         setTimeout(() => setIsAutoPlaying(true), 10000);
-    }, []);
+    }, [boardMembers.length]);
 
     const goToPrev = useCallback(() => {
+        if (boardMembers.length === 0) return;
         setCenterIndex((prev) => (prev - 1 + boardMembers.length) % boardMembers.length);
         setIsAutoPlaying(false);
         setTimeout(() => setIsAutoPlaying(true), 10000);
-    }, []);
+    }, [boardMembers.length]);
 
     // Calculate card styles based on position relative to center
     const getCardStyle = (index: number) => {
+        if (boardMembers.length === 0) return {};
+
         let offset = index - centerIndex;
 
         // Handle circular wrap-around
@@ -120,6 +89,14 @@ export function DubaiAdvisoryBoard() {
             translateX: offset * 200,
         };
     };
+
+    if (isLoading) {
+        return <div className="py-24 text-center">Loading Advisory Board...</div>;
+    }
+
+    if (boardMembers.length === 0) {
+        return null; // Return nothing if no members found
+    }
 
     return (
         <section className="relative py-16 md:py-24 lg:py-28 bg-white overflow-hidden">
