@@ -19,6 +19,7 @@ const upcomingConferences = [
         region: "Middle East",
         date: "May 13-14, 2026",
         venue: "Dubai",
+        duration: "2 Days",
         image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
         status: "Open",
         featured: true,
@@ -46,7 +47,8 @@ const upcomingConferences = [
         country: "India",
         region: "South Asia",
         date: "December 2026 (TBA)",
-        venue: "Taj Lands End, Mumbai",
+        venue: "Mumbai",
+        duration: "2 Days",
         image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop",
         status: "Coming Soon",
         featured: false,
@@ -229,7 +231,7 @@ export default function ConferencesPage() {
                                             </div>
                                             <div className="flex items-center gap-2 text-slate-600">
                                                 <Clock size={16} className="text-amber-500" />
-                                                <span className="text-sm font-medium">2-3 Days</span>
+                                                <span className="text-sm font-medium">{(event as any).duration}</span>
                                             </div>
                                         </div>
 
