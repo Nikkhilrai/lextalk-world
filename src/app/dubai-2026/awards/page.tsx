@@ -96,7 +96,7 @@ export default function DubaiAwardsPage() {
             <EventNavbar />
 
             {/* ===================== HERO SECTION ===================== */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a15]">
+            <section className="relative h-[80vh] min-h-[500px] max-h-[700px] flex items-center justify-center overflow-hidden bg-[#050a15]">
                 {/* Video Background */}
                 <div className="absolute inset-0 w-full h-full">
                     <video
@@ -109,162 +109,178 @@ export default function DubaiAwardsPage() {
                         <source src="/lextalk-hero.mp4" type="video/mp4" />
                     </video>
                     {/* Multi-layer gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/95 via-[#050a15]/80 to-[#050a15]" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-amber-900/30 via-transparent to-amber-900/20" />
-                </div>
-
-                {/* Luxury Background Elements */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {/* Elegant Gradient Orbs */}
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/15 via-amber-600/10 to-transparent rounded-full blur-[120px] animate-pulse" />
-                    <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-amber-400/10 via-orange-500/5 to-transparent rounded-full blur-[150px]" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/5 to-transparent rounded-full" />
-                </div>
-
-                {/* Decorative Lines */}
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
-                    <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/80 via-[#050a15]/60 to-[#050a15]/90" />
                 </div>
 
                 {/* Content */}
-                <div className="relative z-30 container mx-auto px-4 text-center pt-24 md:pt-32 pb-32">
+                <div className="relative z-30 container mx-auto px-4 text-center">
 
-                    {/* LexTalk World Logo - Animated Entry */}
-                    <div className={`flex justify-center mb-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative">
-                            {/* Glow behind logo */}
-                            <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full scale-150" />
-                            <Image
-                                src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
-                                alt="LexTalk World"
-                                width={320}
-                                height={100}
-                                className="h-16 md:h-24 w-auto relative z-10"
-                                priority
-                            />
-                        </div>
+                    {/* LexTalk World Logo */}
+                    <div className={`flex justify-center mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <Image
+                            src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                            alt="LexTalk World"
+                            width={280}
+                            height={80}
+                            className="h-14 md:h-20 w-auto"
+                            priority
+                        />
                     </div>
 
-                    {/* Location Badge */}
+                    {/* Location */}
                     <div className={`mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <span className="inline-block px-6 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/80 text-lg md:text-xl font-medium tracking-wide">
+                        <span className="text-white/90 text-xl md:text-2xl font-medium tracking-wide">
                             Dubai, UAE
                         </span>
                     </div>
 
-                    {/* Main Title - LEGAL HONOR */}
-                    <div className={`mb-4 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight">
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">
+                    {/* Main Title - LEGAL HONOR with Global Awards signature */}
+                    <div className={`relative inline-block mb-4 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif tracking-tight leading-none">
+                            <span className="font-bold italic text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-amber-600" style={{ textShadow: '0 0 60px rgba(245,158,11,0.3)' }}>
                                 LEGAL HONOR
                             </span>
                         </h1>
-                    </div>
-
-                    {/* Subtitle - Global Awards (Handwritten Style) */}
-                    <div className={`mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <p className="text-3xl md:text-5xl font-serif italic text-amber-400/90 tracking-wide">
+                        {/* Global Awards - Signature style positioned to the right */}
+                        <p className="text-2xl md:text-4xl lg:text-5xl font-serif italic text-amber-400 mt-2 md:mt-0 md:absolute md:-right-8 md:-bottom-8 lg:-right-12 lg:-bottom-10" style={{ fontFamily: 'cursive, Georgia, serif' }}>
                             Global Awards
                         </p>
                     </div>
 
-                    {/* Action Buttons - Premium Styling */}
-                    <div className={`flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    {/* Spacer for signature on mobile */}
+                    <div className="h-8 md:h-16" />
+                </div>
+            </section>
+
+            {/* ===================== ACTION BUTTONS - Below Hero ===================== */}
+            <section className="bg-[#050a15] py-8 border-t border-white/5">
+                <div className="container mx-auto px-4">
+                    <div className={`flex flex-wrap justify-center gap-3 md:gap-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <Link
                             href="https://www.lextalk.world/awardees-san-francisco-2025"
                             target="_blank"
-                            className="group relative px-8 py-3.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-slate-900 font-bold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:scale-105"
+                            className="px-6 py-3 bg-amber-500 text-slate-900 font-bold text-sm md:text-base rounded hover:bg-amber-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]"
                         >
-                            {/* Shimmer Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                            <span className="relative z-10">Past Awardees</span>
+                            Past Awardees
                         </Link>
-
                         <Link
                             href="https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93"
                             target="_blank"
-                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                            className="px-6 py-3 border-2 border-amber-500 text-amber-400 font-bold text-sm md:text-base rounded hover:bg-amber-500/10 transition-all duration-300"
                         >
                             Past Event Pictures
                         </Link>
-
                         <Link
                             href="https://www.lextalk.world/past-conference"
                             target="_blank"
-                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                            className="px-6 py-3 border-2 border-amber-500 text-amber-400 font-bold text-sm md:text-base rounded hover:bg-amber-500/10 transition-all duration-300"
                         >
                             Past Conferences
                         </Link>
-
                         <Link
                             href="https://www.lextalk.world/pre-qualification-dubai-2026"
                             target="_blank"
-                            className="px-8 py-3.5 bg-white/5 backdrop-blur-md border border-amber-500/40 text-amber-400 font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-500/60 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                            className="px-6 py-3 border-2 border-amber-500 text-amber-400 font-bold text-sm md:text-base rounded hover:bg-amber-500/10 transition-all duration-300"
                         >
                             Check Your Eligibility
                         </Link>
-                    </div>
-
-                    {/* Scroll Indicator */}
-                    <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                        <div className="flex flex-col items-center gap-2 animate-bounce">
-                            <span className="text-white/40 text-xs uppercase tracking-widest">Scroll</span>
-                            <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
-                                <div className="w-1.5 h-3 bg-amber-500/60 rounded-full animate-pulse" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
 
             {/* ===================== CELEBRATING LEGAL TRAILBLAZERS ===================== */}
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 max-w-4xl">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 text-center mb-10">
-                        Celebrating Legal Trailblazers
-                    </h2>
+            <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+                {/* Decorative Background */}
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-100/30 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100/20 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
 
-                    <div className="prose prose-lg max-w-none text-slate-700">
-                        <h3 className="text-xl font-bold text-slate-800 mb-4">Why Dubai's Legal Scene is Truly One of a Kind</h3>
-
-                        <p className="mb-6">
-                            Dubai is not just a place of legal precedent; it is a city forged by genuine grit, integrity, and non-stop innovation. It is known for its sheer resilience and global influence, and that spirit defines its legal community.
-                        </p>
-
-                        <p className="mb-6">
-                            Dubai is a magnet for top legal work, not just because of the number of attorneys, but because of its powerful economic drivers:
-                        </p>
-
-                        <ul className="space-y-4 mb-6 list-none pl-0">
-                            <li className="flex gap-3">
-                                <span className="font-bold text-slate-900">The Global Business Engine:</span>
-                                <span>As a world capital for international trade, finance, and increasingly, technology, Dubai generates a constant demand for sophisticated legal minds to handle massive M&A, complex international regulations, and global project financing.</span>
-                            </li>
-                            <li className="flex gap-3">
-                                <span className="font-bold text-slate-900">Innovation & IP Hub:</span>
-                                <span>Home to numerous free zones and tech incubators, this concentration of innovation fuels a boom in technology law, intellectual property, and specialised commercial cases.</span>
-                            </li>
-                            <li className="flex gap-3">
-                                <span className="font-bold text-slate-900">Global Trade Gateway:</span>
-                                <span>The vital ports and logistics infrastructure of Dubai ensure maritime and international trade law stays front and centre on local firms' desks.</span>
-                            </li>
-                        </ul>
-
-                        <p className="mb-6">
-                            Major international firms have certainly noticed, setting up shop and fiercely competing for the specialised work and top talent. The community here is vibrant and intensely competitive.
-                        </p>
-
-                        <p>
-                            What keeps lawyers here is a fantastic blend of challenging, high-level work and an exceptional lifestyle. It is a pragmatic, buzzing hub where law is directly tied to the commerce that runs the region—a world-class hub at the crossroads of East and West.
+                <div className="container mx-auto px-4 relative z-10">
+                    {/* Section Header */}
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 text-sm font-bold uppercase tracking-widest rounded-full mb-4">
+                            About The Awards
+                        </span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-4">
+                            Celebrating Legal <span className="text-amber-600">Trailblazers</span>
+                        </h2>
+                        <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                            Why Dubai's Legal Scene is Truly One of a Kind
                         </p>
                     </div>
 
-                    <div className="text-center mt-10">
+                    {/* Content Grid */}
+                    <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+                        {/* Left - Text Content */}
+                        <div className="space-y-6">
+                            <div className="bg-white p-8 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-slate-100">
+                                <p className="text-slate-700 text-lg leading-relaxed mb-6">
+                                    Dubai is not just a place of legal precedent; it is a city forged by genuine grit, integrity, and non-stop innovation. It is known for its sheer resilience and global influence, and that spirit defines its legal community.
+                                </p>
+                                <p className="text-slate-700 text-lg leading-relaxed">
+                                    Dubai is a magnet for top legal work, not just because of the number of attorneys, but because of its powerful economic drivers.
+                                </p>
+                            </div>
+
+                            <p className="text-slate-600 leading-relaxed px-2">
+                                Major international firms have certainly noticed, setting up shop and fiercely competing for the specialised work and top talent. What keeps lawyers here is a fantastic blend of challenging, high-level work and an exceptional lifestyle—a world-class hub at the crossroads of East and West.
+                            </p>
+                        </div>
+
+                        {/* Right - Feature Cards */}
+                        <div className="space-y-4">
+                            {/* Card 1 */}
+                            <div className="group bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-amber-200 transition-all duration-300">
+                                <div className="flex gap-4 items-start">
+                                    <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center shrink-0 group-hover:bg-amber-500 transition-colors">
+                                        <Globe className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">The Global Business Engine</h3>
+                                        <p className="text-slate-600 text-sm leading-relaxed">
+                                            As a world capital for international trade, finance, and technology, Dubai generates constant demand for sophisticated legal minds to handle massive M&A, complex international regulations, and global project financing.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 2 */}
+                            <div className="group bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-amber-200 transition-all duration-300">
+                                <div className="flex gap-4 items-start">
+                                    <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center shrink-0 group-hover:bg-amber-500 transition-colors">
+                                        <Lightbulb className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">Innovation & IP Hub</h3>
+                                        <p className="text-slate-600 text-sm leading-relaxed">
+                                            Home to numerous free zones and tech incubators, this concentration of innovation fuels a boom in technology law, intellectual property, and specialised commercial cases.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 3 */}
+                            <div className="group bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-amber-200 transition-all duration-300">
+                                <div className="flex gap-4 items-start">
+                                    <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center shrink-0 group-hover:bg-amber-500 transition-colors">
+                                        <Building className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">Global Trade Gateway</h3>
+                                        <p className="text-slate-600 text-sm leading-relaxed">
+                                            The vital ports and logistics infrastructure of Dubai ensure maritime and international trade law stays front and centre on local firms' desks.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="text-center mt-14">
                         <Link
                             href="https://www.lextalk.world/pre-qualification-dubai-2026"
                             target="_blank"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 text-slate-900 font-bold rounded-md hover:bg-amber-400 transition-colors"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 text-slate-900 font-bold rounded-lg hover:bg-amber-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                         >
                             Check Your Eligibility <ArrowRight className="w-5 h-5" />
                         </Link>
