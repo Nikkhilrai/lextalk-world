@@ -36,7 +36,7 @@ export function EventsList() {
                 "30+ Exhibitors"
             ],
             link: "/dubai-2026",
-            agendaLink: "/dubai-2026#agenda",
+            agendaLink: "/agendas/dubai-2026-agenda.pdf",
             stats: { delegates: "800+", type: "Conference" }
         },
         {
