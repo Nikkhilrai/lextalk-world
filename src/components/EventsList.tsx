@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Calendar, ArrowRight, Users, Clock } from "lucide-react";
+import { useState } from "react";
+import { AgendaModal } from "./AgendaModal";
 
 const event = {
     city: "Dubai",
@@ -17,6 +19,8 @@ const event = {
 };
 
 export function EventsList() {
+    const [selectedAgendaSlug, setSelectedAgendaSlug] = useState<string | null>(null);
+
     const events = [
         {
             city: "Dubai",
@@ -197,22 +201,27 @@ export function EventsList() {
                                         {event.status === "Coming Soon" ? "Notify Me" : "View Details"}
                                         {event.status !== "Coming Soon" && <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4" />}
                                     </Link>
-                                    <Link
-                                        href={event.agendaLink}
-                                        target={event.status !== "Coming Soon" ? "_blank" : undefined}
-                                        className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center ${event.status === "Coming Soon"
+                                    <button
+                                        onClick={() => setSelectedAgendaSlug("dubai-2026")}
+                                        disabled={event.status === "Coming Soon"}
+                                        className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon"
                                             ? "border-slate-100 text-slate-300 cursor-not-allowed hidden sm:flex"
                                             : "border-slate-200 text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 hidden sm:flex"
                                             }`}
                                     >
                                         Agenda
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-        </section>
+            <AgendaModal
+                isOpen={!!selectedAgendaSlug}
+                onClose={() => setSelectedAgendaSlug(null)}
+                eventSlug={selectedAgendaSlug || ""}
+            />
+        </section >
     );
 }

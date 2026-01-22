@@ -7,6 +7,7 @@ import { EventNavbar } from "@/components/EventNavbar";
 import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
+import { AgendaModal } from "@/components/AgendaModal";
 
 import {
     Calendar, MapPin, Users, Award, Mic, BookOpen,
@@ -197,6 +198,7 @@ export default function DubaiEventPage() {
     const [whyAttendVisible, setWhyAttendVisible] = useState(false);
     const [whoAttendsVisible, setWhoAttendsVisible] = useState(false);
     const [highlightsVisible, setHighlightsVisible] = useState(false);
+    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const whyAttendRef = useRef<HTMLDivElement>(null);
     const whoAttendsRef = useRef<HTMLDivElement>(null);
@@ -244,6 +246,11 @@ export default function DubaiEventPage() {
         <main className="min-h-screen bg-white">
             <EventNavbar />
             <FloatingAgendaButton eventSlug="dubai-2026" />
+            <AgendaModal
+                isOpen={isAgendaModalOpen}
+                onClose={() => setIsAgendaModalOpen(false)}
+                eventSlug="dubai-2026"
+            />
 
             {/* ===================== HERO SECTION ===================== */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a15] pb-24 md:pb-48">
@@ -373,14 +380,13 @@ export default function DubaiEventPage() {
                         </Link>
 
                         {/* Download Agenda */}
-                        <a
-                            href="/agendas/dubai-2026-agenda.pdf"
-                            target="_blank"
-                            className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-auto"
+                        <button
+                            onClick={() => setIsAgendaModalOpen(true)}
+                            className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-auto cursor-pointer"
                         >
                             <Download className="w-4 h-4 text-amber-400" />
                             <span className="text-white/90 group-hover:text-white font-medium text-sm">Download Agenda</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </section>
