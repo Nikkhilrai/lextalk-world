@@ -58,13 +58,13 @@ export default function ContactPage() {
         {
             icon: Phone,
             title: "Call Us",
-            details: ["+91 8178539941"],
+            details: ["+91 981 188 5302"],
             color: "bg-blue-500",
         },
         {
             icon: MapPin,
             title: "Visit Us",
-            details: ["101/48, EMAAR Palm Hills", "Sector 77, Gurgaon 122004, Haryana"],
+            details: ["GURGAON, INDIA", "Dubai, UAE"],
             color: "bg-emerald-500",
         },
         {
