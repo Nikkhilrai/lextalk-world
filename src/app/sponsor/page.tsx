@@ -166,14 +166,14 @@ export default function SponsorshipPage() {
                             subtitle="15+ Sectors"
                             items={["Law Firms", "SaaS & Tech", "Finance", "Fortune 500", "Compliance"]}
                             icon={Building2}
-                            image="/dubai-event/why-attend/Exhibition & Tech Demo.avif"
+                            image="/dubai-event/why-attend/One-to-One Meetings.avif"
                         />
                         <AudienceBox
                             title="Regions"
                             subtitle="20+ Countries"
                             items={["North America", "Europe", "Middle East", "Asia"]}
                             icon={Globe}
-                            image="/dubai-event/why-attend/International Visitors.avif"
+                            image="/dubai-event/why-attend/learning.avif"
                         />
                     </div>
 
