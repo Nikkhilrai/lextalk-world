@@ -1,139 +1,222 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Scale, Shield, FileText, AlertCircle } from "lucide-react";
+import { Scale } from "lucide-react";
 
 export const metadata = {
-    title: "Terms of Service | LexTalk World",
-    description: "Terms and conditions governing the use of LexTalk World website and services.",
+    title: "Terms & Conditions | LexTalk World",
+    description: "Terms and conditions governing the use of LexTalk World Services in Middle East & APAC Region.",
 };
 
 export default function TermsPage() {
-    const lastUpdated = "January 27, 2026";
-
     return (
         <main className="min-h-screen bg-slate-50">
             <Navbar />
 
             {/* Header */}
-            <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-slate-900 overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-[100px]" />
-                    <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-[80px]" />
-                </div>
-
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 rounded-full mb-6 border border-slate-700">
-                            <Scale size={14} className="text-amber-500" />
-                            <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">
-                                Legal Documentation
-                            </span>
+            <section className="bg-white border-b border-slate-200 pt-32 pb-12 md:pt-40 md:pb-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="inline-flex items-center gap-2 text-amber-600 mb-4 font-semibold uppercase tracking-wider text-sm">
+                            <Scale size={16} />
+                            <span>Legal Documentation</span>
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-                            Terms of Service
+                        <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-900 mb-6">
+                            Terms & Conditions
                         </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                            Please read these terms carefully before using our services.
+                        <p className="text-lg text-slate-600">
+                            LexTalk World — Middle East & APAC Region
                         </p>
+                        <div className="flex flex-wrap gap-4 mt-4 text-sm text-slate-500">
+                            <p>Effective Date: <span className="font-semibold text-slate-700">15th December 2025</span></p>
+                            <span className="hidden sm:inline">•</span>
+                            <p>Version: <span className="font-semibold text-slate-700">1.0</span></p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Content */}
-            <section className="py-16 md:py-20">
+            <section className="py-12 md:py-16">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-8 md:p-12 border border-slate-100">
-                        <div className="prose prose-slate prose-lg max-w-none">
-                            <div className="flex items-center gap-2 text-sm text-slate-500 mb-8 pb-8 border-b border-slate-100">
-                                <ClockIcon />
-                                <span>Last Updated: {lastUpdated}</span>
-                            </div>
+                    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12">
+                        <div className="prose prose-slate prose-lg max-w-none hover:prose-a:text-amber-600">
 
-                            <h3>1. Introduction</h3>
+                            <h3>1. Overview</h3>
                             <p>
-                                Welcome to LexTalk World ("we," "our," or "us"). By accessing or using our website,
-                                registering for our conferences, or using any of our services, you agree to be bound by these
-                                Terms of Service ("Terms"). If you disagree with any part of these terms, you may not access
-                                our services.
+                                These Terms & Conditions (“Agreement”) form a binding legal contract between you — as a visitor,
+                                participant, sponsor, speaker, award nominee, delegate, or other user (“you”, “your”, “Participant”)
+                                — and LexTalk World events and activities operating in the Middle East and Asia-Pacific (APAC)
+                                region, including but not limited to conferences, workshops, content sharing platforms,
+                                collaborations, and associated services (collectively “Services”).
+                            </p>
+                            <p>
+                                By accessing or participating in any LexTalk World Services in these regions, whether online, in-person, or hybrid, you accept and agree to comply with all terms in this Agreement and all applicable
+                                local, national, and international laws. If you do not agree to these Terms, do not use or access these
+                                Services.
+                            </p>
+                            <p>
+                                This Website may contain other proprietary notices and copyright information, the terms of which
+                                must be observed and followed. Information on this Website may contain technical inaccuracies or
+                                typographical errors.
                             </p>
 
-                            <h3>2. Conference Registration & Attendance</h3>
-                            <ul>
+                            <h3>2. Applicability and Acceptance</h3>
+                            <ol>
                                 <li>
-                                    <strong>Tickets:</strong> Conference tickets are subject to availability and must be purchased
-                                    through our official channels.
+                                    This Agreement applies to all forms of interactions and associations with LexTalk World in the
+                                    Middle East and APAC — including attendance, speaking engagements, sponsorships, award
+                                    nominations, exhibitor participation, content posting, networking, and digital platform
+                                    access.
                                 </li>
                                 <li>
-                                    <strong>Cancellations:</strong> Cancellation policies vary by event. Please refer to the specific
-                                    event page for details. Generally, tickets are non-refundable but may be transferable.
+                                    By engaging with any LexTalk World Services, you acknowledge that you have read,
+                                    understood, and agree to be legally bound by these Terms.
                                 </li>
                                 <li>
-                                    <strong>Code of Conduct:</strong> We are committed to providing a harassment-free conference
-                                    experience for everyone. All attendees, speakers, sponsors, and volunteers are required to
-                                    adhere to our code of conduct.
+                                    These Terms apply in addition to any event-specific rules, policies, or codes of conduct that
+                                    may be issued for specific conferences or programs.
                                 </li>
-                            </ul>
+                            </ol>
 
-                            <h3>3. Intellectual Property</h3>
+                            <h3>3. Changes to Terms</h3>
                             <p>
-                                The content, organization, graphics, design, compilation, and other matters related to our
-                                website and conferences are protected under applicable copyrights, trademarks, and other
-                                proprietary rights. You may not copy, redistribution, use or publication of any such matters
-                                or any part of the website without our express written permission.
+                                LexTalk World reserves the right to update, modify, suspend, or terminate this Agreement (in whole
+                                or in part) at any time and for any reason without prior notice. The latest version will be posted at an
+                                accessible location, and your continued use will signify acceptance of the updated Terms.
                             </p>
 
-                            <h3>4. User Content</h3>
+                            <h3>4. Intellectual Property</h3>
+                            <ol>
+                                <li>
+                                    <strong>Ownership.</strong> All content made available through LexTalk World — including but not limited to
+                                    text, images, graphics, logos, trademarks, event materials, recordings, speaker materials,
+                                    promotional material, and digital content — is the intellectual property of LexTalk World, its
+                                    affiliates, or its licensors.
+                                </li>
+                                <li>
+                                    <strong>Usage.</strong> You may view and download material for personal or internal use only, provided you
+                                    retain all copyright and proprietary notices.
+                                </li>
+                                <li>
+                                    <strong>Restrictions.</strong> Except with express written permission, no material may be copied,
+                                    reproduced, republished, distributed, displayed, transmitted, altered, or used commercially
+                                    in any form or by any means.
+                                </li>
+                            </ol>
+
+                            <h3>5. Trademarks</h3>
+                            <ol>
+                                <li>
+                                    LexTalk World, associated logos and taglines, and other marks are registered and
+                                    unregistered trademarks of their respective owners.
+                                </li>
+                                <li>
+                                    Your use of any LexTalk World trademarks without prior written authorization is strictly
+                                    prohibited.
+                                </li>
+                            </ol>
+
+                            <h3>6. External Links</h3>
                             <p>
-                                By posting, uploading, or submitting content to our blog or other interactive sections, you grant us
-                                a non-exclusive, royalty-free, perpetual, and worldwide license to use, modify, publicly perform,
-                                publicly display, reproduce, and distribute such content on and through our services.
+                                Some LexTalk World Services may contain links to third-party websites. LexTalk World does not
+                                endorse or have control over these sites’ content, practices, or privacy methods, and shall not be
+                                liable for any loss or damage arising from their use.
                             </p>
 
-                            <h3>5. Privacy Policy</h3>
+                            <h3>7. User Content and Submissions</h3>
+                            <ol>
+                                <li>
+                                    <strong>Ownership and License.</strong> Any information, messages, materials, or content you submit
+                                    (“Submissions”) via LexTalk World Services — such as comments, questions, ideas, bios,
+                                    photos, videos, or documents — become LexTalk World’s property and may be used,
+                                    modified, published, distributed, or otherwise processed for any purpose in any medium
+                                    without compensation to you.
+                                </li>
+                                <li>
+                                    You grant LexTalk World a worldwide, perpetual, royalty-free, non-exclusive, transferrable,
+                                    sublicensable license to use your Submissions.
+                                </li>
+                                <li>
+                                    You waive any moral rights or claims related to how LexTalk World uses your Submission.
+                                </li>
+                            </ol>
+
+                            <h3>8. Participation and Conduct</h3>
+                            <ol>
+                                <li>
+                                    Participants agree to behave professionally and respectfully in all interactions, whether in
+                                    person or online.
+                                </li>
+                                <li>
+                                    LexTalk World may in its discretion refuse access, terminate participation privileges, or take
+                                    other actions if your conduct is unlawful, abusive, offensive or in violation of these Terms.
+                                </li>
+                                <li>
+                                    You are responsible for your own equipment, internet access, travel arrangements, visas,
+                                    accommodation, and any other costs unless otherwise expressly agreed.
+                                </li>
+                            </ol>
+
+                            <h3>9. Fees, Registration, Cancellation & Refunds</h3>
+                            <ol>
+                                <li>
+                                    Event registration, nomination, sponsorship, or participation fees must be paid at the
+                                    published rates and in the manner specified.
+                                </li>
+                                <li>
+                                    Refunds and cancellations are subject to the policies communicated at the time of
+                                    registration — typically including administrative charges and time-based refund tiers.
+                                </li>
+                                <li>
+                                    In case LexTalk World cancels an event, full refunds will be processed. No refunds are
+                                    typically provided for postponements, travel issues, visa refusals, or personal circumstances
+                                    unless otherwise stated.
+                                </li>
+                            </ol>
+
+                            <h3>10. Liability and Disclaimers</h3>
+                            <ol>
+                                <li>
+                                    LexTalk World makes no representations or warranties regarding the accuracy, completeness,
+                                    reliability or suitability of materials or information provided through its Services.
+                                </li>
+                                <li>
+                                    You agree that your use of the Services is at your own risk. LexTalk World and its affiliates,
+                                    directors, officers, employees, agents, partners, sponsors and licensors are not liable for
+                                    damages (direct, indirect, incidental, consequential or punitive), including loss of data, loss of
+                                    profits, or personal injury arising from your participation.
+                                </li>
+                            </ol>
+
+                            <h3>11. Governing Law and Jurisdiction</h3>
                             <p>
-                                Your use of our services is also governed by our Privacy Policy. Please review our Privacy Policy,
-                                which also governs the Site and informs users of our data collection practices.
+                                This Agreement and any disputes arising from it shall be governed by and interpreted in accordance
+                                with the laws of the appropriate jurisdiction where LexTalk World is legally incorporated or operates,
+                                subject to compulsory local laws in India, without regard to conflicts-of-law principles.
                             </p>
 
-                            <h3>6. Limitation of Liability</h3>
+                            <h3>12. Severability</h3>
                             <p>
-                                In no event shall LexTalk World, nor its directors, employees, partners, agents, suppliers, or
-                                affiliates, be liable for any indirect, incidental, special, consequential or punitive damages,
-                                including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
+                                If any provision of this Agreement is held unenforceable or invalid under applicable law, that
+                                provision will be struck, and the remaining provisions will remain in full force and effect.
                             </p>
 
-                            <h3>7. Governing Law</h3>
+                            <h3>13. Contact and Notices</h3>
                             <p>
-                                These Terms shall be governed and construed in accordance with the laws of India and/or the United Arab Emirates,
-                                without regard to its conflict of law provisions.
+                                For questions or notices concerning these Terms, please contact:
                             </p>
-
-                            <h3>8. Contact Us</h3>
-                            <p>
-                                If you have any questions about these Terms, please contact us at:
-                            </p>
-                            <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 not-prose mt-6">
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600">
-                                            <MailIcon />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-semibold text-slate-900">Email</p>
-                                            <a href="mailto:info@lextalkworld.in" className="text-sm text-amber-600 hover:underline">info@lextalkworld.in</a>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
-                                            <PhoneIcon />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-semibold text-slate-900">Phone</p>
-                                            <a href="tel:+919811885302" className="text-sm text-slate-600 hover:text-blue-600 transition-colors">+91 981 188 5302</a>
-                                        </div>
-                                    </div>
+                            <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 not-prose mt-4">
+                                <p className="font-bold text-slate-900 mb-2">LexTalk World — Middle East & APAC Support</p>
+                                <div className="space-y-2 text-sm text-slate-700">
+                                    <p><span className="font-semibold w-20 inline-block">Email:</span> <a href="mailto:abhishek@clickawaycreators.com" className="text-amber-600 hover:underline">abhishek@clickawaycreators.com</a></p>
+                                    <p><span className="font-semibold w-20 inline-block">Phone:</span> <a href="tel:+919811885302" className="hover:text-amber-600 transition-colors">+91 981 188 5302</a></p>
+                                    <p className="flex items-start gap-1">
+                                        <span className="font-semibold w-20 inline-block shrink-0">Address:</span>
+                                        <span>101/48, EMAAR Palm Hills, Sector 77, Gurgaon 122004, Haryana, India</span>
+                                    </p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -141,31 +224,5 @@ export default function TermsPage() {
 
             <Footer />
         </main>
-    );
-}
-
-function ClockIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-        </svg>
-    );
-}
-
-function MailIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect width="20" height="16" x="2" y="4" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-        </svg>
-    );
-}
-
-function PhoneIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-        </svg>
     );
 }
