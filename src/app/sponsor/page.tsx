@@ -153,39 +153,41 @@ export default function SponsorshipPage() {
                         <p className="text-slate-400 text-lg max-w-2xl mx-auto">Access the decision-makers who shape the future of legal technology</p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         <AudienceBox
                             title="Audience Titles"
                             subtitle="350+ Decision Makers"
                             items={["GCs", "CLOs", "LegalOps Directors", "Innovation Heads", "ESG Leads"]}
                             icon={Users}
-                            color="bg-amber-500"
                         />
                         <AudienceBox
                             title="Industries"
                             subtitle="15+ Sectors"
                             items={["Law Firms", "SaaS & Tech", "Finance", "Fortune 500", "Compliance"]}
                             icon={Building2}
-                            color="bg-blue-500"
                         />
                         <AudienceBox
                             title="Regions"
                             subtitle="20+ Countries"
                             items={["North America", "Europe", "Middle East", "Asia"]}
                             icon={Globe}
-                            color="bg-emerald-500"
                         />
                     </div>
 
-                    <div className="mt-20 text-center max-w-4xl mx-auto bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700">
-                        <p className="text-xl md:text-2xl font-serif italic text-amber-100 mb-6">
-                            "97% of sponsors said LexTalk drove qualified leads and meaningful business connections."
-                        </p>
-                        <div className="flex flex-wrap justify-center items-center gap-8 text-slate-400 text-sm font-semibold uppercase tracking-wider">
-                            <span>Media Partners:</span>
-                            <span>Forbes</span>
-                            <span>LegalEra</span>
-                            <span>BusinessLine</span>
+                    <div className="mt-20 text-center max-w-5xl mx-auto">
+                        <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 md:p-12 rounded-2xl border border-slate-700/50 shadow-2xl">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+
+                            <p className="text-xl md:text-3xl font-serif text-white mb-8 leading-relaxed">
+                                "97% of sponsors said LexTalk drove <span className="text-amber-400">qualified leads</span> and meaningful business connections."
+                            </p>
+
+                            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+                                <span className="text-slate-400 text-sm font-semibold uppercase tracking-wider border-r border-slate-600 pr-6">Media Partners</span>
+                                <span className="font-serif text-xl text-white">Forbes</span>
+                                <span className="font-serif text-xl text-white">LegalEra</span>
+                                <span className="font-serif text-xl text-white">BusinessLine</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -321,21 +323,34 @@ function JourneyStep({ number, icon: Icon, title, desc, highlight }: any) {
     );
 }
 
-function AudienceBox({ title, subtitle, items, icon: Icon, color }: any) {
+function AudienceBox({ title, subtitle, items, icon: Icon }: any) {
     return (
-        <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-amber-500/50 transition-colors group">
-            <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center mb-6 text-white shadow-lg`}>
-                <Icon size={24} />
-            </div>
-            <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-1">{title}</h3>
-            <p className="text-2xl font-bold text-white mb-6 group-hover:text-amber-400 transition-colors">{subtitle}</p>
+        <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 hover:border-amber-500/30 flex flex-col items-center text-center h-full">
+            {/* Hover Gradient Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
 
-            <div className="flex flex-wrap gap-2">
-                {items.map((item: string, idx: number) => (
-                    <span key={idx} className="px-3 py-1 bg-slate-700/50 rounded-full text-xs text-slate-300 border border-slate-600">
-                        {item}
-                    </span>
-                ))}
+            <div className="relative z-10 flex flex-col items-center w-full h-full">
+                {/* Icon Circle */}
+                <div className="w-20 h-20 rounded-full border border-amber-500/30 bg-amber-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)]">
+                    <Icon size={32} className="text-amber-400" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-serif font-bold text-white mb-4 tracking-wide">{title}</h3>
+
+                {/* List Items - Clean Text */}
+                <div className="mb-8 flex-grow flex items-center justify-center w-full">
+                    <p className="text-slate-300 text-sm leading-relaxed max-w-[240px] font-light">
+                        {items.join(" • ")}
+                    </p>
+                </div>
+
+                {/* Stat - The Hero */}
+                <div className="mt-auto pt-6 border-t border-white/10 w-full">
+                    <p className="text-2xl md:text-3xl font-bold text-amber-400 font-serif">
+                        {subtitle}
+                    </p>
+                </div>
             </div>
         </div>
     );
