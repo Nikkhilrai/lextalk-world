@@ -52,7 +52,7 @@ export default function ContactPage() {
         {
             icon: Mail,
             title: "Email Us",
-            details: ["info@lextalk.world", "partnerships@lextalk.world"],
+            details: ["info@lextalkworld.in", "partnerships@lextalkworld.in"],
             color: "bg-amber-500",
         },
         {
