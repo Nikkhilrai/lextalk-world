@@ -11,6 +11,7 @@ export async function createContactMessage(data: {
     subject: string;
     message: string;
 }) {
+    console.log("createContactMessage called with:", data);
     try {
         const contactMessage = await prisma.contactMessage.create({
             data: {
@@ -24,6 +25,7 @@ export async function createContactMessage(data: {
             },
         });
 
+        console.log("Contact message created:", contactMessage.id);
         revalidatePath("/admin/contact-messages");
 
         return { success: true, id: contactMessage.id };
@@ -34,10 +36,12 @@ export async function createContactMessage(data: {
 }
 
 export async function getContactMessages() {
+    console.log("getContactMessages called");
     try {
         const messages = await prisma.contactMessage.findMany({
             orderBy: { createdAt: "desc" },
         });
+        console.log(`Fetched ${messages.length} messages`);
         return messages;
     } catch (error) {
         console.error("Error fetching contact messages:", error);
