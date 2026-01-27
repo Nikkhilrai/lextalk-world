@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { createContactMessage } from "@/actions/contact";
 import {
     Mail, Phone, MapPin, Clock, Send, ArrowRight,
     Linkedin, Twitter, Instagram, Globe, CheckCircle
@@ -24,24 +25,39 @@ export default function ContactPage() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-
-        // Reset form after showing success
-        setTimeout(() => {
-            setIsSubmitted(false);
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                company: "",
-                subject: "",
-                message: "",
+        try {
+            const result = await createContactMessage({
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone || undefined,
+                company: formData.company || undefined,
+                subject: formData.subject,
+                message: formData.message,
             });
-        }, 3000);
+
+            if (result.success) {
+                setIsSubmitted(true);
+                // Reset form after showing success
+                setTimeout(() => {
+                    setIsSubmitted(false);
+                    setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        company: "",
+                        subject: "",
+                        message: "",
+                    });
+                }, 3000);
+            } else {
+                alert("Failed to submit message. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
