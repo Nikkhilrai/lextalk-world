@@ -171,9 +171,9 @@ export default function SponsorshipPage() {
                         <AudienceBox
                             title="Regions"
                             subtitle="20+ Countries"
-                            items={["North America", "Europe", "Middle East", "Asia"]}
+                            items={["Middle East", "North America", "European Union", "Asia Pacific", "United Kingdom"]}
                             icon={Globe}
-                            image="/dubai-event/why-attend/learning.avif"
+                            image="/dubai-event/why-attend-slideshow/1.avif"
                         />
                     </div>
 
@@ -328,7 +328,7 @@ function JourneyStep({ number, icon: Icon, title, desc, highlight }: any) {
 
 function AudienceBox({ title, subtitle, items, icon: Icon, image }: any) {
     return (
-        <div className="group relative w-full h-72 rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:-translate-y-1">
+        <div className="group relative w-full h-64 rounded-xl overflow-hidden shadow-xl border border-amber-500/20 hover:border-amber-500/50 transition-all duration-500 hover:-translate-y-1">
             {/* Background Image with Dark Overlay */}
             <div className="absolute inset-0">
                 <Image
@@ -337,27 +337,29 @@ function AudienceBox({ title, subtitle, items, icon: Icon, image }: any) {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-slate-900/90 group-hover:bg-slate-900/80 transition-colors" />
+                <div className="absolute inset-0 bg-slate-900/85 group-hover:bg-slate-900/75 transition-colors" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
             </div>
 
-            <div className="relative z-10 flex flex-col h-full p-6 text-center justify-between">
-                <div>
-                    <div className="w-12 h-12 mx-auto rounded-full border border-amber-500/30 bg-amber-500/10 flex items-center justify-center backdrop-blur-sm mb-3 group-hover:bg-amber-500/20 transition-colors">
-                        <Icon size={20} className="text-amber-400" />
+            <div className="relative z-10 flex flex-col h-full p-5 text-center">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-full border border-amber-500/30 bg-amber-500/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_10px_-2px_rgba(245,158,11,0.3)]">
+                        <Icon size={16} className="text-amber-400" />
                     </div>
-                    <h3 className="text-lg font-serif font-bold text-white tracking-wide mb-1">{title}</h3>
-                    <p className="text-xs text-amber-500 font-bold uppercase tracking-widest opacity-80">{subtitle}</p>
+                    <h3 className="text-base font-serif font-bold text-white tracking-wide">{title}</h3>
                 </div>
 
-                <div className="flex items-center justify-center py-2">
-                    <p className="text-slate-300 text-sm leading-relaxed font-light max-w-[240px]">
+                <div className="flex-grow flex items-center justify-center mb-2">
+                    <p className="text-slate-300 text-xs leading-relaxed font-light max-w-[200px]">
                         {items.join(" • ")}
                     </p>
                 </div>
 
-                {/* Decorative Bottom Line */}
-                <div className="w-12 h-0.5 bg-amber-500/50 mx-auto rounded-full group-hover:w-24 transition-all duration-500" />
+                <div className="mt-auto pt-3 border-t border-white/10">
+                    <p className="text-xl font-bold text-amber-400 font-serif">
+                        {subtitle}
+                    </p>
+                </div>
             </div>
         </div>
     );
