@@ -25,6 +25,7 @@ export default function ContactMessagesPage() {
     const fetchMessages = async () => {
         setLoading(true);
         const data = await getContactMessages();
+        console.log("Fetched messages in admin:", data);
         setMessages(data as ContactMessage[]);
         setLoading(false);
     };
@@ -100,8 +101,8 @@ export default function ContactMessagesPage() {
                         key={status}
                         onClick={() => setFilter(status)}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === status
-                                ? "bg-amber-500 text-white"
-                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                            ? "bg-amber-500 text-white"
+                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                             }`}
                     >
                         {status === "all" ? "All" : status}
@@ -136,8 +137,8 @@ export default function ContactMessagesPage() {
                                     }
                                 }}
                                 className={`p-4 rounded-xl border cursor-pointer transition-all ${selectedMessage?.id === msg.id
-                                        ? "border-amber-500 bg-amber-50"
-                                        : "border-slate-200 bg-white hover:border-slate-300"
+                                    ? "border-amber-500 bg-amber-50"
+                                    : "border-slate-200 bg-white hover:border-slate-300"
                                     }`}
                             >
                                 <div className="flex justify-between items-start mb-2">
@@ -212,8 +213,8 @@ export default function ContactMessagesPage() {
                                 <button
                                     onClick={() => handleStatusChange(selectedMessage.id, "New")}
                                     className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${selectedMessage.status === "New"
-                                            ? "bg-blue-500 text-white"
-                                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                        ? "bg-blue-500 text-white"
+                                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                         }`}
                                 >
                                     New
@@ -221,8 +222,8 @@ export default function ContactMessagesPage() {
                                 <button
                                     onClick={() => handleStatusChange(selectedMessage.id, "Read")}
                                     className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${selectedMessage.status === "Read"
-                                            ? "bg-amber-500 text-white"
-                                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                        ? "bg-amber-500 text-white"
+                                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                         }`}
                                 >
                                     Read
@@ -230,8 +231,8 @@ export default function ContactMessagesPage() {
                                 <button
                                     onClick={() => handleStatusChange(selectedMessage.id, "Replied")}
                                     className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${selectedMessage.status === "Replied"
-                                            ? "bg-emerald-500 text-white"
-                                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                        ? "bg-emerald-500 text-white"
+                                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                         }`}
                                 >
                                     Replied
