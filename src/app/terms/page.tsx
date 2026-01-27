@@ -13,23 +13,29 @@ export default function TermsPage() {
             <Navbar />
 
             {/* Header */}
-            <section className="bg-white border-b border-slate-200 pt-32 pb-12 md:pt-40 md:pb-16">
-                <div className="container mx-auto px-4">
+            <section className="bg-slate-900 border-b border-slate-800 pt-32 pb-12 md:pt-40 md:pb-16 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-[100px]" />
+                    <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-[80px]" />
+                </div>
+
+                <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto">
-                        <div className="inline-flex items-center gap-2 text-amber-600 mb-4 font-semibold uppercase tracking-wider text-sm">
+                        <div className="inline-flex items-center gap-2 text-amber-500 mb-4 font-semibold uppercase tracking-wider text-sm">
                             <Scale size={16} />
                             <span>Legal Documentation</span>
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-900 mb-6">
+                        <h1 className="text-3xl md:text-5xl font-sans font-bold text-white mb-6">
                             Terms & Conditions
                         </h1>
-                        <p className="text-lg text-slate-600">
+                        <p className="text-lg text-slate-400">
                             LexTalk World — Middle East & APAC Region
                         </p>
-                        <div className="flex flex-wrap gap-4 mt-4 text-sm text-slate-500">
-                            <p>Effective Date: <span className="font-semibold text-slate-700">15th December 2025</span></p>
-                            <span className="hidden sm:inline">•</span>
-                            <p>Version: <span className="font-semibold text-slate-700">1.0</span></p>
+                        <div className="flex flex-wrap gap-4 mt-4 text-sm text-slate-400">
+                            <p>Effective Date: <span className="font-semibold text-slate-300">15th December 2025</span></p>
+                            <span className="hidden sm:inline opacity-50">•</span>
+                            <p>Version: <span className="font-semibold text-slate-300">1.0</span></p>
                         </div>
                     </div>
                 </div>
@@ -38,8 +44,8 @@ export default function TermsPage() {
             {/* Content */}
             <section className="py-12 md:py-16">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12">
-                        <div className="prose prose-slate prose-lg max-w-none hover:prose-a:text-amber-600">
+                    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12 font-sans">
+                        <div className="prose prose-slate prose-lg max-w-none hover:prose-a:text-amber-600 prose-headings:font-sans">
 
                             <h3>1. Overview</h3>
                             <p>
