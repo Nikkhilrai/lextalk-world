@@ -153,24 +153,27 @@ export default function SponsorshipPage() {
                         <p className="text-slate-400 text-lg max-w-2xl mx-auto">Access the decision-makers who shape the future of legal technology</p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                         <AudienceBox
                             title="Audience Titles"
                             subtitle="350+ Decision Makers"
                             items={["GCs", "CLOs", "LegalOps Directors", "Innovation Heads", "ESG Leads"]}
                             icon={Users}
+                            image="/dubai-event/why-attend/Networking_edited.avif"
                         />
                         <AudienceBox
                             title="Industries"
                             subtitle="15+ Sectors"
                             items={["Law Firms", "SaaS & Tech", "Finance", "Fortune 500", "Compliance"]}
                             icon={Building2}
+                            image="/dubai-event/why-attend/Exhibition & Tech Demo.avif"
                         />
                         <AudienceBox
                             title="Regions"
                             subtitle="20+ Countries"
                             items={["North America", "Europe", "Middle East", "Asia"]}
                             icon={Globe}
+                            image="/dubai-event/why-attend/International Visitors.avif"
                         />
                     </div>
 
@@ -323,31 +326,37 @@ function JourneyStep({ number, icon: Icon, title, desc, highlight }: any) {
     );
 }
 
-function AudienceBox({ title, subtitle, items, icon: Icon }: any) {
+function AudienceBox({ title, subtitle, items, icon: Icon, image }: any) {
     return (
-        <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 hover:border-amber-500/30 flex flex-col items-center text-center h-full">
-            {/* Hover Gradient Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+        <div className="group relative w-full h-80 rounded-xl overflow-hidden shadow-lg border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:-translate-y-1">
+            {/* Background Image with Dark Overlay */}
+            <div className="absolute inset-0">
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-slate-900/80 group-hover:bg-slate-900/70 transition-colors" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+            </div>
 
-            <div className="relative z-10 flex flex-col items-center w-full h-full">
-                {/* Icon Circle */}
-                <div className="w-20 h-20 rounded-full border border-amber-500/30 bg-amber-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)]">
-                    <Icon size={32} className="text-amber-400" />
+            <div className="relative z-10 flex flex-col h-full p-6 text-center">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full border border-amber-500/30 bg-amber-500/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_-3px_rgba(245,158,11,0.3)]">
+                        <Icon size={18} className="text-amber-400" />
+                    </div>
+                    <h3 className="text-lg font-serif font-bold text-white tracking-wide">{title}</h3>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-serif font-bold text-white mb-4 tracking-wide">{title}</h3>
-
-                {/* List Items - Clean Text */}
-                <div className="mb-8 flex-grow flex items-center justify-center w-full">
-                    <p className="text-slate-300 text-sm leading-relaxed max-w-[240px] font-light">
+                <div className="flex-grow flex items-center justify-center">
+                    <p className="text-slate-300 text-sm leading-relaxed font-light max-w-[220px]">
                         {items.join(" • ")}
                     </p>
                 </div>
 
-                {/* Stat - The Hero */}
-                <div className="mt-auto pt-6 border-t border-white/10 w-full">
-                    <p className="text-2xl md:text-3xl font-bold text-amber-400 font-serif">
+                <div className="mt-auto pt-4 border-t border-white/10">
+                    <p className="text-xl md:text-2xl font-bold text-amber-400 font-serif">
                         {subtitle}
                     </p>
                 </div>
