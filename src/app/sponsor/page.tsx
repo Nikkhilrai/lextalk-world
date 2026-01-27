@@ -153,59 +153,28 @@ export default function SponsorshipPage() {
                         <p className="text-slate-400 text-lg max-w-2xl mx-auto">Access the decision-makers who shape the future of legal technology</p>
                     </div>
 
-                    <div className="max-w-6xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden relative group">
-                        {/* Subtle background glow */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
-
-                        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 relative z-10">
-                            {/* Card 1 */}
-                            <div className="p-8 md:p-12 hover:bg-white/5 transition-colors text-center group/item">
-                                <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl rotate-3 flex items-center justify-center mb-6 group-hover/item:rotate-6 transition-transform border border-amber-500/20">
-                                    <Users className="text-amber-400" size={32} />
-                                </div>
-                                <h3 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-2">350+</h3>
-                                <p className="text-amber-500 font-bold uppercase tracking-widest text-xs mb-8">Decision Makers</p>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {["GCs", "CLOs", "LegalOps Directors", "Innovation Heads", "ESG Leads"].map((item, i) => (
-                                        <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-xs text-slate-300 border border-white/10">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Card 2 */}
-                            <div className="p-8 md:p-12 hover:bg-white/5 transition-colors text-center group/item">
-                                <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-2xl -rotate-3 flex items-center justify-center mb-6 group-hover/item:-rotate-6 transition-transform border border-blue-500/20">
-                                    <Building2 className="text-blue-400" size={32} />
-                                </div>
-                                <h3 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-2">15+</h3>
-                                <p className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-8">Sectors</p>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {["Law Firms", "SaaS & Tech", "Finance", "Fortune 500", "Compliance"].map((item, i) => (
-                                        <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-xs text-slate-300 border border-white/10">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Card 3 */}
-                            <div className="p-8 md:p-12 hover:bg-white/5 transition-colors text-center group/item">
-                                <div className="w-16 h-16 mx-auto bg-emerald-500/10 rounded-2xl rotate-3 flex items-center justify-center mb-6 group-hover/item:rotate-6 transition-transform border border-emerald-500/20">
-                                    <Globe className="text-emerald-400" size={32} />
-                                </div>
-                                <h3 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-2">20+</h3>
-                                <p className="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-8">Countries</p>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {["North America", "Europe", "Middle East", "Asia"].map((item, i) => (
-                                        <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-xs text-slate-300 border border-white/10">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                        <AudienceBox
+                            title="Audience Titles"
+                            subtitle="350+ Decision Makers"
+                            items={["GCs", "CLOs", "LegalOps Directors", "Innovation Heads", "ESG Leads"]}
+                            icon={Users}
+                            image="/dubai-event/why-attend/Networking_edited.avif"
+                        />
+                        <AudienceBox
+                            title="Industries"
+                            subtitle="15+ Sectors"
+                            items={["Law Firms", "SaaS & Tech", "Finance", "Fortune 500", "Compliance"]}
+                            icon={Building2}
+                            image="/dubai-event/why-attend/Exhibition & Tech Demo.avif"
+                        />
+                        <AudienceBox
+                            title="Regions"
+                            subtitle="20+ Countries"
+                            items={["North America", "Europe", "Middle East", "Asia"]}
+                            icon={Globe}
+                            image="/dubai-event/why-attend/International Visitors.avif"
+                        />
                     </div>
 
                     <div className="mt-20 text-center max-w-5xl mx-auto">
@@ -352,6 +321,43 @@ function JourneyStep({ number, icon: Icon, title, desc, highlight }: any) {
 
             <div className="text-xs font-bold text-slate-700 bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
                 {highlight}
+            </div>
+        </div>
+    );
+}
+
+function AudienceBox({ title, subtitle, items, icon: Icon, image }: any) {
+    return (
+        <div className="group relative w-full h-72 rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:-translate-y-1">
+            {/* Background Image with Dark Overlay */}
+            <div className="absolute inset-0">
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-slate-900/90 group-hover:bg-slate-900/80 transition-colors" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
+            </div>
+
+            <div className="relative z-10 flex flex-col h-full p-6 text-center justify-between">
+                <div>
+                    <div className="w-12 h-12 mx-auto rounded-full border border-amber-500/30 bg-amber-500/10 flex items-center justify-center backdrop-blur-sm mb-3 group-hover:bg-amber-500/20 transition-colors">
+                        <Icon size={20} className="text-amber-400" />
+                    </div>
+                    <h3 className="text-lg font-serif font-bold text-white tracking-wide mb-1">{title}</h3>
+                    <p className="text-xs text-amber-500 font-bold uppercase tracking-widest opacity-80">{subtitle}</p>
+                </div>
+
+                <div className="flex items-center justify-center py-2">
+                    <p className="text-slate-300 text-sm leading-relaxed font-light max-w-[240px]">
+                        {items.join(" • ")}
+                    </p>
+                </div>
+
+                {/* Decorative Bottom Line */}
+                <div className="w-12 h-0.5 bg-amber-500/50 mx-auto rounded-full group-hover:w-24 transition-all duration-500" />
             </div>
         </div>
     );
