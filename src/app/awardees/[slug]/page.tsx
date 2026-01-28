@@ -77,11 +77,6 @@ export default async function AwardeesEventPage({ params }: Props) {
                             <MapPin className="w-4 h-4" />
                             <span>{event.location}</span>
                         </div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#cfa45a]/40" />
-                        <div className="flex items-center gap-2">
-                            <Users className="w-4 h-4" />
-                            <span>{event.awardees.length} Awardees</span>
-                        </div>
                     </div>
                 </div>
             </section>
