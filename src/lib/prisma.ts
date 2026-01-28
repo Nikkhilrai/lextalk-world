@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+// Force reload
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 

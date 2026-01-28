@@ -306,3 +306,11 @@ h6 {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+.animate-marquee-slow {
+  animation: marquee 60s linear infinite;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}

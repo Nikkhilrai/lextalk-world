@@ -27,6 +27,7 @@ const NAV_GROUPS = [
             { label: "Tickets", href: "/admin/tickets", icon: Ticket },
             { label: "Ticket Types", href: "/admin/ticket-types", icon: Layers },
             { label: "Agenda Downloads", href: "/admin/agenda-downloads", icon: Download },
+            { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
             { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
