@@ -37,7 +37,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             ]
         },
         { name: "Awardees", href: "/awardees" },
-        { name: "Sponsor", href: "#" },
+        { name: "Sponsor", href: "/sponsor" },
         { name: "Blog", href: "/blog" },
     ]);
 
