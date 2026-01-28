@@ -151,7 +151,7 @@ export const TicketEmail = ({
                             Please save this email as your entry pass. Present this at the venue.
                         </Text>
                         <Text style={footerText}>
-                            For queries, contact us at info@lextalk.world
+                            For queries, contact us at info@lextalkworld.in
                         </Text>
                         <Hr style={hr} />
                         <Text style={copyright}>

@@ -384,7 +384,7 @@ export async function POST(request: NextRequest) {
             color: mediumGray,
         });
 
-        page.drawText("For any assistance, please contact our support team at info@lextalk.world", {
+        page.drawText("For any assistance, please contact our support team at info@lextalkworld.in", {
             x: 60,
             y: 85,
             size: 9,

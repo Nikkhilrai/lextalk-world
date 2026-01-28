@@ -191,7 +191,7 @@ export async function POST(request: NextRequest) {
                             <!-- Support Info -->
                             <p style="margin: 0 0 10px; font-size: 14px; color: #4B5563; line-height: 22px;">
                                 If you have any questions or need assistance, please don't hesitate to contact our support team at 
-                                <a href="mailto:info@lextalk.world" style="color: #3B82F6; text-decoration: none; font-weight: 500;">info@lextalk.world</a>
+                                <a href="mailto:info@lextalkworld.in" style="color: #3B82F6; text-decoration: none; font-weight: 500;">info@lextalkworld.in</a>
                             </p>
 
                             <p style="margin: 30px 0 0; font-size: 14px; color: #4B5563;">

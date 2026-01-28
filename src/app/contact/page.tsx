@@ -375,7 +375,7 @@ export default function ContactPage() {
                                         Our team is available during business hours for urgent inquiries.
                                     </p>
                                     <a
-                                        href="mailto:info@lextalk.world"
+                                        href="mailto:info@lextalkworld.in"
                                         className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 text-white font-semibold rounded-full hover:bg-amber-400 transition-colors"
                                     >
                                         <Mail size={16} />

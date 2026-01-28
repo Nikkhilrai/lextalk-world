@@ -177,11 +177,11 @@ export function Footer() {
                                     <Mail size={12} className="text-amber-500" />
                                 </div>
                                 <div className="flex flex-col gap-1 pt-1">
-                                    <a href="mailto:info@lextalk.world" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
-                                        info@lextalk.world
+                                    <a href="mailto:info@lextalkworld.in" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
+                                        info@lextalkworld.in
                                     </a>
-                                    <a href="mailto:partnerships@lextalk.world" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
-                                        partnerships@lextalk.world
+                                    <a href="mailto:partnerships@lextalkworld.in" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
+                                        partnerships@lextalkworld.in
                                     </a>
                                     <div className="text-[10px] text-slate-600 font-medium my-0.5 uppercase tracking-wide">Or</div>
                                     <a href="mailto:abhishek@clickawaycreators.com" className="text-xs text-slate-400 hover:text-amber-500 transition-colors">
