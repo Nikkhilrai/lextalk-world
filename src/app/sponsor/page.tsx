@@ -673,7 +673,7 @@ export default function SponsorshipPage() {
                                 { name: "Winnow", logo: "/sponsor/Sponsor logo/Winnow.jpg" },
                                 { name: "TRCM", logo: "/sponsor/Sponsor logo/Trcm.jpg" },
                                 { name: "Consejeras MX", logo: "/sponsor/Sponsor logo/consejeras mx.jpg" },
-                                { name: "Juarez", logo: "/sponsor/Sponsor logo/jarez.jpg" },
+                                { name: "Juarez", logo: "/sponsor/Sponsor logo/juarez.jpg" },
                                 { name: "Thielmann", logo: "/sponsor/Sponsor logo/thielmann.jpg" },
                                 { name: "Littler", logo: "/sponsor/Sponsor logo/littler.jpg" },
                                 { name: "Arrow", logo: "/sponsor/Sponsor logo/arrow.jpg" },

@@ -16,7 +16,7 @@ export const SPONSORS = [
     { name: "Arrow", logo: "/sponsor/Sponsor logo/arrow.jpg" },
     { name: "Consejeras MX", logo: "/sponsor/Sponsor logo/consejeras mx.jpg" },
     { name: "Contact Force", logo: "/sponsor/Sponsor logo/contact force.jpg" },
-    { name: "Jarez", logo: "/sponsor/Sponsor logo/jarez.jpg" },
+    { name: "Juarez", logo: "/sponsor/Sponsor logo/juarez.jpg" },
     { name: "Littler", logo: "/sponsor/Sponsor logo/littler.jpg" },
     { name: "Mundial", logo: "/sponsor/Sponsor logo/mundial.jpg" },
     { name: "Stellantis", logo: "/sponsor/Sponsor logo/stellantis.jpg" },
