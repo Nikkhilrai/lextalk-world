@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Globe, Users, MessageSquare, Award } from "lucide-react";
 
@@ -24,7 +27,27 @@ const VALUE_POINTS = [
     },
 ];
 
+const ROTATING_IMAGES = [
+    { src: "/images/why-attend/delegate1.jpg", alt: "Senior legal professionals at LexTalk World" },
+    { src: "/images/why-attend/delegate2.jpg", alt: "Networking at LexTalk World conference" },
+    { src: "/images/why-attend/delegate3.jpg", alt: "Legal leaders in discussion" },
+    { src: "/images/why-attend/delegate4.jpg", alt: "Award ceremony at LexTalk World" },
+    { src: "/images/why-attend/delegate5.jpg", alt: "Panel discussion with senior counsel" },
+    { src: "/images/why-attend/delegate6.jpg", alt: "Executive networking session" },
+    { src: "/images/why-attend/delegate7.webp", alt: "One-on-one meetings" },
+    { src: "/images/why-attend/delegate8.jpg", alt: "Global legal community gathering" },
+];
+
 export default function WhyAttend() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % ROTATING_IMAGES.length);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
             {/* Subtle Background Texture */}
@@ -70,36 +93,24 @@ export default function WhyAttend() {
                         </div>
                     </div>
 
-                    {/* Right Column: Image Collage */}
+                    {/* Right Column: Auto-Rotating Image */}
                     <div className="relative lg:sticky lg:top-24">
-                        <div className="grid grid-cols-2 gap-4">
-                            {/* Large Featured Image */}
-                            <div className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
-                                <Image
-                                    src="/dubai-event/why-attend/Networking_edited.avif"
-                                    alt="Senior legal professionals networking at LexTalk World"
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
-                            </div>
-                            {/* Smaller Images */}
-                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
-                                <Image
-                                    src="/dubai-event/why-attend/Recognition.avif"
-                                    alt="Award recognition at LexTalk World"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
-                                <Image
-                                    src="/dubai-event/why-attend/One-to-One Meetings.avif"
-                                    alt="One-to-one meetings between legal leaders"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                            {ROTATING_IMAGES.map((image, idx) => (
+                                <div
+                                    key={idx}
+                                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? "opacity-100" : "opacity-0"
+                                        }`}
+                                >
+                                    <Image
+                                        src={image.src}
+                                        alt={image.alt}
+                                        fill
+                                        className="object-cover"
+                                        priority={idx === 0}
+                                    />
+                                </div>
+                            ))}
                         </div>
                         {/* Subtle Decorative Element */}
                         <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl -z-10 pointer-events-none" />
