@@ -93,22 +93,30 @@ export default function WhyAttend() {
                         </div>
                     </div>
 
-                    {/* Right Column: Auto-Rotating Image with Premium Treatment */}
+                    {/* Right Column: Layered Image with Editorial Depth */}
                     <div className="relative lg:sticky lg:top-24">
-                        {/* Offset Gold Background Plate */}
-                        <div className="absolute -bottom-4 -right-4 inset-0 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-2xl" />
+                        {/* Secondary Image Layer (Low Opacity, Offset) */}
+                        <div className="absolute top-6 -left-4 right-4 bottom-0 rounded-2xl overflow-hidden opacity-20">
+                            <Image
+                                src={ROTATING_IMAGES[(currentIndex + 1) % ROTATING_IMAGES.length].src}
+                                alt=""
+                                fill
+                                className="object-cover scale-105"
+                            />
+                        </div>
 
-                        {/* Main Image Container with Thin Gold Frame */}
+                        {/* Main Image Container */}
                         <div className="relative">
-                            {/* Thin Gold Accent Frame */}
-                            <div className="absolute -inset-[3px] rounded-2xl bg-gradient-to-br from-amber-400/60 via-amber-500/40 to-amber-600/60" />
+                            {/* Soft Gold Corner Accents */}
+                            <div className="absolute -top-3 -left-3 w-16 h-16 border-l-2 border-t-2 border-amber-400/50 rounded-tl-xl pointer-events-none" />
+                            <div className="absolute -bottom-3 -right-3 w-16 h-16 border-r-2 border-b-2 border-amber-400/50 rounded-br-xl pointer-events-none" />
 
                             {/* Image Area */}
-                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 ring-1 ring-slate-200/50">
+                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-900/5">
                                 {ROTATING_IMAGES.map((image, idx) => (
                                     <div
                                         key={idx}
-                                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? "opacity-100" : "opacity-0"
+                                        className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${idx === currentIndex ? "opacity-100" : "opacity-0"
                                             }`}
                                     >
                                         <Image
@@ -124,8 +132,7 @@ export default function WhyAttend() {
                         </div>
 
                         {/* Subtle Ambient Glow */}
-                        <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-amber-500/8 rounded-full blur-3xl -z-10 pointer-events-none" />
-                        <div className="absolute -top-6 -left-6 w-32 h-32 bg-slate-900/5 rounded-full blur-2xl -z-10 pointer-events-none" />
+                        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-amber-500/6 rounded-full blur-3xl -z-10 pointer-events-none" />
                     </div>
                 </div>
             </div>
