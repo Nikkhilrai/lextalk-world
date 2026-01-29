@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight } from "lucide-react";
+import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles } from "lucide-react";
 
 const COMPANY_LOGOS = [
     { name: "Google", src: "/images/social-proof/google.jpg" },
@@ -51,13 +51,13 @@ function Countdown() {
     if (!isMounted) return null;
 
     return (
-        <div className="flex items-center justify-center gap-4 md:gap-8 mt-12 animate-in fade-in slide-in-from-top-4 duration-1000">
+        <div className="inline-flex items-center justify-center gap-3 md:gap-5 bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl px-6 py-4 md:px-8 md:py-5 shadow-xl">
             <TimeUnit value={timeLeft.days} label="Days" />
-            <div className="text-amber-500/50 text-2xl font-light mb-5 font-serif">:</div>
+            <div className="text-amber-500/40 text-xl font-light">:</div>
             <TimeUnit value={timeLeft.hours} label="Hours" />
-            <div className="text-amber-500/50 text-2xl font-light mb-5 font-serif">:</div>
+            <div className="text-amber-500/40 text-xl font-light">:</div>
             <TimeUnit value={timeLeft.minutes} label="Mins" />
-            <div className="text-amber-500/50 text-2xl font-light mb-5 font-serif">:</div>
+            <div className="text-amber-500/40 text-xl font-light">:</div>
             <TimeUnit value={timeLeft.seconds} label="Secs" />
         </div>
     );
@@ -65,11 +65,11 @@ function Countdown() {
 
 function TimeUnit({ value, label }: { value: number; label: string }) {
     return (
-        <div className="flex flex-col items-center">
-            <span className="text-2xl md:text-3xl font-serif font-bold text-white mb-1">
+        <div className="flex flex-col items-center min-w-[48px]">
+            <span className="text-3xl md:text-4xl font-serif font-bold text-white tabular-nums">
                 {String(value).padStart(2, '0')}
             </span>
-            <span className="text-[10px] md:text-xs font-semibold text-amber-500/80 uppercase tracking-widest">
+            <span className="text-[10px] md:text-xs font-semibold text-amber-500 uppercase tracking-wider mt-1">
                 {label}
             </span>
         </div>
@@ -80,64 +80,69 @@ export default function Hero() {
     return (
         <>
             {/* Hero Section */}
-            <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-slate-950 text-white">
-                <div className="absolute inset-0 z-0 text-center">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/90 to-slate-900" />
-                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3" />
+            <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+                {/* Premium Background Effects */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-amber-500/5 rounded-full blur-[150px]" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
+                    <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
                 </div>
 
-                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-4xl">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-8">
-                        <span className="w-2 h-2 bg-amber-500 rounded-full" />
-                        <span className="text-amber-500 text-xs font-semibold tracking-[0.2em] uppercase">
+                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-5xl">
+                    {/* Premium Eyebrow Badge */}
+                    <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-8 backdrop-blur-sm">
+                        <Sparkles size={14} className="text-amber-400" />
+                        <span className="text-amber-400 text-xs font-bold tracking-[0.2em] uppercase">
                             Dubai 2026 · May 13–14
                         </span>
                     </div>
 
-                    <h1 className="font-serif leading-[1.05] mb-8">
-                        <span className="block text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight">
+                    {/* Main Heading */}
+                    <h1 className="font-serif leading-[1.05] mb-6">
+                        <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
                             Dubai Delegate Registration
                         </span>
-                        <span className="block text-4xl md:text-5xl lg:text-6xl font-normal text-amber-500 mt-4 tracking-tight">
+                        <span className="block text-3xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-clip-text text-transparent mt-3 tracking-tight">
                             LexTalk World 2026
                         </span>
                     </h1>
 
-                    <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                    {/* Subheading */}
+                    <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
                         Join senior legal leaders, General Counsel, Partners, and Legal Innovators
                         for two days of insight, networking, and global perspectives.
                     </p>
 
-                    <div className="flex flex-col items-center gap-4">
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                            <Link
-                                href="#pricing"
-                                className="px-10 py-4 bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all font-bold text-sm uppercase tracking-wide rounded-full shadow-lg shadow-amber-500/20"
-                            >
-                                Reserve Your Seat
-                            </Link>
-                            <Link
-                                href="#agenda"
-                                className="px-10 py-4 border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all font-medium text-sm uppercase tracking-wide rounded-full flex items-center gap-3"
-                            >
-                                View Conference Agenda
-                                <ArrowRight size={16} strokeWidth={2} />
-                            </Link>
-                        </div>
-                        {/* Countdown Timer with Urgency Text */}
-                        <div className="pt-10 text-center">
-                            <p className="text-amber-500/90 text-sm font-medium tracking-wide mb-1">
-                                (Limited seats | Early confirmation recommended)
-                            </p>
-                            <p className="text-white text-base font-bold uppercase tracking-widest mb-4">
-                                Early Bird Offers End Soon:
-                            </p>
-                            <Countdown />
-                        </div>
+                    {/* CTA Buttons */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                        <Link
+                            href="#pricing"
+                            className="group px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 hover:to-amber-500 transition-all font-bold text-sm uppercase tracking-wide rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105"
+                        >
+                            Reserve Your Seat
+                        </Link>
+                        <Link
+                            href="#agenda"
+                            className="group px-8 py-4 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm"
+                        >
+                            View Conference Agenda
+                            <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-x-10 gap-y-5 pt-12 mt-16 border-t border-slate-800/60">
+                    {/* Countdown Section */}
+                    <div className="pt-6">
+                        <p className="text-amber-500/80 text-xs font-medium tracking-wider mb-2">
+                            Limited seats · Early confirmation recommended
+                        </p>
+                        <p className="text-white/90 text-sm font-bold uppercase tracking-widest mb-6">
+                            Early Bird Offers End Soon
+                        </p>
+                        <Countdown />
+                    </div>
+
+                    {/* Meta Stats Row */}
+                    <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-14 mt-12 border-t border-white/5">
                         <MetaItem icon={Users} label="800+ Delegates" />
                         <MetaItem icon={Mic2} label="100+ Speakers" />
                         <MetaItem icon={LayoutGrid} label="20+ Sessions" />
@@ -148,44 +153,48 @@ export default function Hero() {
             </section>
 
             {/* Social Proof Section */}
-            <section className="py-20 md:py-28 bg-white overflow-hidden relative">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.03),transparent_70%)]" />
+            <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden relative">
+                {/* Subtle Pattern */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.04),transparent_60%)]" />
 
                 <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200/50 rounded-full mb-4">
-                            <span className="w-2 h-2 bg-amber-500 rounded-full" />
-                            <span className="text-xs font-semibold text-amber-700 uppercase tracking-wider">
+                    {/* Section Header */}
+                    <div className="text-center mb-14">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100/80 border border-amber-200/50 rounded-full mb-4">
+                            <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
+                            <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
                                 Trusted By Industry Leaders
                             </span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 tracking-tight">
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 tracking-tight">
                             Participants from Leading Companies
                         </h2>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-20 max-w-6xl mx-auto">
+                    {/* Logo Grid - Clean, No Grayscale */}
+                    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-6 max-w-6xl mx-auto mb-16">
                         {COMPANY_LOGOS.map((company, idx) => (
                             <div
                                 key={idx}
-                                className="w-32 md:w-36 h-16 md:h-20 relative flex items-center justify-center bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-300 grayscale hover:grayscale-0 group p-4"
+                                className="aspect-[3/2] relative flex items-center justify-center bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-lg hover:border-amber-300/60 transition-all duration-300 group overflow-hidden"
                             >
                                 <Image
                                     src={company.src}
                                     alt={company.name}
                                     fill
-                                    className="object-contain p-3 transition-all duration-500 group-hover:scale-110"
+                                    className="object-contain p-3 md:p-4 transition-transform duration-300 group-hover:scale-105"
                                 />
                             </div>
                         ))}
                     </div>
 
-                    <div className="border-t border-slate-100 pt-16 mt-16">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 max-w-5xl mx-auto">
-                            <StatItem value="800+" label="Attendees" />
-                            <StatItem value="100+" label="Speakers" />
-                            <StatItem value="20+" label="Sessions" />
-                            <StatItem value="2" label="Days" />
+                    {/* Stats Grid */}
+                    <div className="bg-slate-900 rounded-2xl p-8 md:p-12 shadow-xl">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                            <StatItem value="800+" label="Attendees" light />
+                            <StatItem value="100+" label="Speakers" light />
+                            <StatItem value="20+" label="Sessions" light />
+                            <StatItem value="2" label="Days" light />
                         </div>
                     </div>
                 </div>
@@ -196,20 +205,22 @@ export default function Hero() {
 
 function MetaItem({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
     return (
-        <div className="flex items-center gap-2.5">
-            <Icon size={18} strokeWidth={2} className="text-amber-500" />
-            <span className="text-slate-400 text-sm font-medium tracking-wide">{label}</span>
+        <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                <Icon size={16} strokeWidth={2} className="text-amber-500" />
+            </div>
+            <span className="text-slate-300 text-sm font-medium">{label}</span>
         </div>
     );
 }
 
-function StatItem({ value, label }: { value: string; label: string }) {
+function StatItem({ value, label, light = false }: { value: string; label: string; light?: boolean }) {
     return (
         <div className="text-center">
-            <p className="text-4xl md:text-5xl font-serif font-bold text-slate-900 tracking-tight mb-2">
+            <p className={`text-4xl md:text-5xl font-serif font-bold tracking-tight mb-2 ${light ? "text-white" : "text-slate-900"}`}>
                 {value}
             </p>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-[0.2em]">
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] ${light ? "text-amber-500" : "text-slate-500"}`}>
                 {label}
             </p>
         </div>
