@@ -93,27 +93,39 @@ export default function WhyAttend() {
                         </div>
                     </div>
 
-                    {/* Right Column: Auto-Rotating Image */}
+                    {/* Right Column: Auto-Rotating Image with Premium Treatment */}
                     <div className="relative lg:sticky lg:top-24">
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                            {ROTATING_IMAGES.map((image, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? "opacity-100" : "opacity-0"
-                                        }`}
-                                >
-                                    <Image
-                                        src={image.src}
-                                        alt={image.alt}
-                                        fill
-                                        className="object-cover"
-                                        priority={idx === 0}
-                                    />
-                                </div>
-                            ))}
+                        {/* Offset Gold Background Plate */}
+                        <div className="absolute -bottom-4 -right-4 inset-0 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-2xl" />
+
+                        {/* Main Image Container with Thin Gold Frame */}
+                        <div className="relative">
+                            {/* Thin Gold Accent Frame */}
+                            <div className="absolute -inset-[3px] rounded-2xl bg-gradient-to-br from-amber-400/60 via-amber-500/40 to-amber-600/60" />
+
+                            {/* Image Area */}
+                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 ring-1 ring-slate-200/50">
+                                {ROTATING_IMAGES.map((image, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? "opacity-100" : "opacity-0"
+                                            }`}
+                                    >
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            fill
+                                            className="object-cover"
+                                            priority={idx === 0}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        {/* Subtle Decorative Element */}
-                        <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl -z-10 pointer-events-none" />
+
+                        {/* Subtle Ambient Glow */}
+                        <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-amber-500/8 rounded-full blur-3xl -z-10 pointer-events-none" />
+                        <div className="absolute -top-6 -left-6 w-32 h-32 bg-slate-900/5 rounded-full blur-2xl -z-10 pointer-events-none" />
                     </div>
                 </div>
             </div>
