@@ -36,7 +36,7 @@ export default function SponsorshipPage() {
                         <span className="text-amber-500">Become a LexTalk World Partner</span>
                     </h1>
                     <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 font-light">
-                        Join 350+ legal leaders showcase your expertise and drive real growth.
+                        Join 500+ legal leaders showcase your expertise and drive real growth.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -236,7 +236,7 @@ export default function SponsorshipPage() {
                                         </div>
 
                                         <h3 className="text-5xl md:text-6xl font-bold font-serif text-white mb-3">
-                                            350<span className="text-amber-400">+</span>
+                                            500<span className="text-amber-400">+</span>
                                         </h3>
                                         <p className="text-2xl font-semibold text-white mb-4">Decision Makers</p>
 
