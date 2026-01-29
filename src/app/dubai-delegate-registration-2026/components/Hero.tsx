@@ -177,20 +177,38 @@ export default function Hero() {
                     </div>
 
                     {/* Logo Grid - Clean, No Grayscale */}
-                    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-6 max-w-6xl mx-auto mb-16">
-                        {COMPANY_LOGOS.map((company, idx) => (
-                            <div
-                                key={idx}
-                                className="aspect-[3/2] relative flex items-center justify-center bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-lg hover:border-amber-300/60 transition-all duration-300 group overflow-hidden"
-                            >
-                                <Image
-                                    src={company.src}
-                                    alt={company.name}
-                                    fill
-                                    className="object-contain p-3 md:p-4 transition-transform duration-300 group-hover:scale-105"
-                                />
-                            </div>
-                        ))}
+                    {/* Logo Carousel - Infinite Scroll */}
+                    <div className="relative mt-8 mb-16 overflow-hidden">
+                        {/* Gradient Masks for Fade Effect */}
+                        <div className="absolute left-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-r from-slate-50 to-transparent pointer-events-none" />
+                        <div className="absolute right-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-l from-slate-50 to-transparent pointer-events-none" />
+
+                        <div className="flex animate-marquee hover:[animation-play-state:paused] gap-4 py-4 w-max">
+                            {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((company, idx) => (
+                                <div
+                                    key={idx}
+                                    className="w-32 md:w-36 aspect-[4/3] relative flex-shrink-0 flex items-center justify-center bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-lg hover:border-amber-300/60 transition-all duration-300 group overflow-hidden"
+                                >
+                                    <Image
+                                        src={company.src}
+                                        alt={company.name}
+                                        fill
+                                        className="object-contain p-4 md:p-5 transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Custom Style for Marquee Animation */}
+                        <style jsx>{`
+                            @keyframes marquee {
+                                0% { transform: translateX(0); }
+                                100% { transform: translateX(-50%); }
+                            }
+                            .animate-marquee {
+                                animation: marquee 60s linear infinite;
+                            }
+                        `}</style>
                     </div>
 
                     {/* Stats Grid */}
