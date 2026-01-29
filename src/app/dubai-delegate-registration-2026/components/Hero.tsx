@@ -80,22 +80,22 @@ export default function Hero() {
     return (
         <>
             {/* Hero Section */}
-            <section className="relative pt-40 pb-28 md:pt-56 md:pb-40 overflow-hidden bg-slate-950 text-white">
+            <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-slate-950 text-white">
                 <div className="absolute inset-0 z-0 text-center">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/90 to-slate-900" />
                     <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3" />
                     <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3" />
                 </div>
 
-                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-5xl">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-10">
+                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-4xl">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-8">
                         <span className="w-2 h-2 bg-amber-500 rounded-full" />
                         <span className="text-amber-500 text-xs font-semibold tracking-[0.2em] uppercase">
                             Dubai 2026 · May 13–14
                         </span>
                     </div>
 
-                    <h1 className="font-serif leading-[1.05] mb-10">
+                    <h1 className="font-serif leading-[1.05] mb-8">
                         <span className="block text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight">
                             Dubai Delegate Registration
                         </span>
@@ -104,7 +104,7 @@ export default function Hero() {
                         </span>
                     </h1>
 
-                    <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-14 leading-relaxed font-light">
+                    <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                         Join senior legal leaders, General Counsel, Partners, and Legal Innovators
                         for two days of insight, networking, and global perspectives.
                     </p>
@@ -125,8 +125,14 @@ export default function Hero() {
                                 <ArrowRight size={16} strokeWidth={2} />
                             </Link>
                         </div>
-                        {/* Countdown Timer placed below button */}
-                        <div className="pt-4">
+                        {/* Countdown Timer with Urgency Text */}
+                        <div className="pt-10 text-center">
+                            <p className="text-amber-500/90 text-sm font-medium tracking-wide mb-1">
+                                (Limited seats | Early confirmation recommended)
+                            </p>
+                            <p className="text-white text-base font-bold uppercase tracking-widest mb-4">
+                                Early Bird Offers End Soon:
+                            </p>
                             <Countdown />
                         </div>
                     </div>
