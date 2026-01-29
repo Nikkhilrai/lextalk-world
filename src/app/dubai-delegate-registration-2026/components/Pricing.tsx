@@ -287,7 +287,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                                 required
                                 value={formData.firstName}
                                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                             />
                         </div>
                         <div>
@@ -297,7 +297,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                                 required
                                 value={formData.lastName}
                                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                             />
                         </div>
                     </div>
@@ -308,7 +308,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         />
                     </div>
                     <div>
@@ -317,7 +317,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         />
                     </div>
                     <div>
@@ -326,7 +326,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             type="text"
                             value={formData.organization}
                             onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         />
                     </div>
                     <div>
@@ -335,7 +335,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             type="text"
                             value={formData.designation}
                             onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         />
                     </div>
                     <div>
@@ -345,7 +345,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             required
                             value={formData.country}
                             onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         />
                     </div>
 
@@ -488,8 +488,8 @@ export default function Pricing() {
                         <button
                             onClick={() => setActiveTab("individual")}
                             className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "individual"
-                                    ? "bg-slate-900 text-white"
-                                    : "text-slate-600 hover:text-slate-900"
+                                ? "bg-slate-900 text-white"
+                                : "text-slate-600 hover:text-slate-900"
                                 }`}
                         >
                             <User size={16} />
@@ -498,8 +498,8 @@ export default function Pricing() {
                         <button
                             onClick={() => setActiveTab("team")}
                             className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "team"
-                                    ? "bg-slate-900 text-white"
-                                    : "text-slate-600 hover:text-slate-900"
+                                ? "bg-slate-900 text-white"
+                                : "text-slate-600 hover:text-slate-900"
                                 }`}
                         >
                             <Users size={16} />
