@@ -100,10 +100,10 @@ export default function Hero() {
                     {/* Main Heading */}
                     <h1 className="font-serif leading-[1.05] mb-6">
                         <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-                            Dubai Delegate Registration
+                            LexTalk World Conference & Exhibition
                         </span>
                         <span className="block text-3xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-clip-text text-transparent mt-3 tracking-tight">
-                            LexTalk World 2026
+                            Connect With Senior Legal Decision-Makers Shaping the Future of Law
                         </span>
                     </h1>
 
