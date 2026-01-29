@@ -98,14 +98,19 @@ export default function Hero() {
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="font-serif leading-[1.05] mb-6">
-                        <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-                            LexTalk World Conference & Exhibition
+                    <h1 className="font-serif leading-tight mb-6">
+                        <span className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
+                            LexTalk World{" "}
                         </span>
-                        <span className="block text-3xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-clip-text text-transparent mt-3 tracking-tight">
-                            Connect With Senior Legal Decision-Makers Shaping the Future of Law
+                        <span className="text-4xl md:text-6xl lg:text-7xl font-bold text-amber-500 tracking-tight">
+                            Conference & Exhibition
                         </span>
                     </h1>
+
+                    {/* Secondary Heading */}
+                    <p className="font-serif text-lg md:text-2xl lg:text-3xl text-white/90 max-w-4xl mx-auto mb-10 leading-relaxed tracking-wide italic">
+                        Connect With Senior Legal Decision-Makers Shaping the Future of Law
+                    </p>
 
                     {/* Subheading */}
                     <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
