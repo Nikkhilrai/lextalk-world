@@ -177,8 +177,8 @@ export default function Hero() {
                     </div>
 
                     {/* Staggered Floating Mosaic - Row 1 (Slow Left) */}
-                    <div className="relative overflow-hidden mb-6">
-                        <div className="flex animate-marquee-slow gap-6 py-2 w-max items-center">
+                    <div className="relative overflow-hidden mb-4">
+                        <div className="flex animate-marquee-slow gap-4 py-2 w-max items-center">
                             {[...COMPANY_LOGOS.slice(0, 7), ...COMPANY_LOGOS.slice(0, 7)].map((company, idx) => (
                                 <LogoBubble key={`r1-${idx}`} company={company} />
                             ))}
@@ -186,8 +186,8 @@ export default function Hero() {
                     </div>
 
                     {/* Staggered Floating Mosaic - Row 2 (Slower Right) */}
-                    <div className="relative overflow-hidden mb-4">
-                        <div className="flex animate-marquee-reverse-slower gap-8 py-2 w-max items-center">
+                    <div className="relative overflow-hidden mb-2">
+                        <div className="flex animate-marquee-reverse-slower gap-4 py-2 w-max items-center">
                             {[...COMPANY_LOGOS.slice(7), ...COMPANY_LOGOS.slice(7)].map((company, idx) => (
                                 <LogoBubble key={`r2-${idx}`} company={company} />
                             ))}
@@ -219,17 +219,17 @@ export default function Hero() {
 
 function LogoBubble({ company }: { company: typeof COMPANY_LOGOS[0] }) {
     return (
-        <div className="relative group grayscale hover:grayscale-0 transition-all duration-700 ease-in-out px-4 py-2">
-            <div className="w-28 md:w-36 h-12 md:h-16 relative flex items-center justify-center filter drop-shadow-sm group-hover:drop-shadow-md group-hover:scale-110 transition-all duration-500">
+        <div className="relative group transition-all duration-500 ease-in-out px-2 py-2">
+            <div className="w-36 md:w-48 h-16 md:h-24 relative flex items-center justify-center bg-white/40 backdrop-blur-[2px] border border-slate-100/50 rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-105 group-hover:border-amber-200/50 transition-all duration-500 overflow-hidden">
                 <Image
                     src={company.src}
                     alt={company.name}
                     fill
-                    className="object-contain"
+                    className="object-contain p-4 md:p-6"
                 />
             </div>
-            {/* Organic Glow on Hover */}
-            <div className="absolute inset-0 bg-amber-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            {/* Subtle Ambient Glow */}
+            <div className="absolute inset-0 bg-amber-500/5 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         </div>
     );
 }
