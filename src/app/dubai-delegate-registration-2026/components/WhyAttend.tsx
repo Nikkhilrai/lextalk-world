@@ -1,71 +1,109 @@
+import Image from "next/image";
 import { Globe, Users, MessageSquare, Award } from "lucide-react";
 
 const VALUE_POINTS = [
     {
         icon: Globe,
         headline: "11 Successful Global Editions",
-        description: "From the US to the Middle East and Asia, LexTalk World has connected senior legal minds across continents, building a truly international community of practice.",
+        description: "Across the US, Middle East & Asia — building a truly international community of senior legal minds.",
     },
     {
         icon: Users,
         headline: "10,000+ Legal Professionals Engaged",
-        description: "A proven track record of engaging General Counsel, Chief Legal Officers, Partners, and LegalOps leaders from Fortune 500s and leading global firms.",
+        description: "A proven global platform that consistently attracts decision-makers from Fortune 500s and leading firms.",
     },
     {
         icon: MessageSquare,
-        headline: "The Trusted Platform for Legal Discourse",
-        description: "An enterprise-grade forum for candid conversations on strategy, technology adoption, and the evolving role of in-house and private practice.",
+        headline: "Trusted Forum for Legal & Legal Tech",
+        description: "Where candid, high-stakes conversations on strategy, technology, and the future of law take place.",
     },
     {
         icon: Award,
-        headline: "Senior-Only Participation",
-        description: "Curated attendance ensures you are in the room with decision-makers—not just spectators—who are shaping the future of the legal industry.",
+        headline: "Senior-Level Participation",
+        description: "General Counsel, CLOs, Partners, and LegalOps leaders — the people shaping the industry.",
     },
 ];
 
 export default function WhyAttend() {
     return (
-        <section className="py-20 md:py-28 bg-slate-950 text-white overflow-hidden relative">
-            {/* Subtle Background Accent */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
+        <section className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
+            {/* Subtle Background Texture */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,158,11,0.03),transparent_60%)] pointer-events-none" />
 
-            <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-5xl">
-                {/* Section Header */}
-                <div className="text-center mb-16 md:mb-20">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-6">
-                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
-                        <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
-                            The Global Standard
-                        </span>
+            <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    {/* Left Column: Content */}
+                    <div>
+                        {/* Section Header */}
+                        <div className="mb-12">
+                            <span className="text-amber-600 text-xs font-bold uppercase tracking-[0.2em] mb-4 block">
+                                The Global Standard
+                            </span>
+                            <h2 className="font-serif text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-slate-900 leading-tight tracking-tight mb-6">
+                                Why Legal Professionals Attend{" "}
+                                <span className="text-amber-600">LexTalk World</span>
+                            </h2>
+                            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl">
+                                Join the definitive gathering for senior legal leaders. LexTalk World is where global strategy meets on-the-ground execution.
+                            </p>
+                        </div>
+
+                        {/* Value Points */}
+                        <div className="space-y-8">
+                            {VALUE_POINTS.map((point, idx) => (
+                                <div key={idx} className="flex items-start gap-5 group">
+                                    {/* Icon */}
+                                    <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center transition-colors group-hover:bg-amber-100/80">
+                                        <point.icon size={20} strokeWidth={1.5} className="text-amber-600" />
+                                    </div>
+                                    {/* Text */}
+                                    <div>
+                                        <h3 className="font-semibold text-lg text-slate-900 mb-1 tracking-tight">
+                                            {point.headline}
+                                        </h3>
+                                        <p className="text-slate-500 text-sm leading-relaxed">
+                                            {point.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
-                        Why Legal Professionals Attend{" "}
-                        <span className="text-amber-500">LexTalk World</span>
-                    </h2>
-                    <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-                        Join the definitive gathering for senior legal leaders. LexTalk World is where global strategy meets on-the-ground execution.
-                    </p>
-                </div>
 
-                {/* Value Points Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-14 lg:gap-x-16 lg:gap-y-16">
-                    {VALUE_POINTS.map((point, idx) => (
-                        <div key={idx} className="flex items-start gap-5">
-                            {/* Icon Container */}
-                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 border border-amber-500/20 flex items-center justify-center">
-                                <point.icon size={22} strokeWidth={1.5} className="text-amber-500" />
+                    {/* Right Column: Image Collage */}
+                    <div className="relative lg:sticky lg:top-24">
+                        <div className="grid grid-cols-2 gap-4">
+                            {/* Large Featured Image */}
+                            <div className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
+                                <Image
+                                    src="/dubai-event/why-attend/Networking_edited.avif"
+                                    alt="Senior legal professionals networking at LexTalk World"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
                             </div>
-                            {/* Text */}
-                            <div>
-                                <h3 className="font-semibold text-lg text-white mb-2 tracking-tight">
-                                    {point.headline}
-                                </h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
-                                    {point.description}
-                                </p>
+                            {/* Smaller Images */}
+                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
+                                <Image
+                                    src="/dubai-event/why-attend/Recognition.avif"
+                                    alt="Award recognition at LexTalk World"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
+                                <Image
+                                    src="/dubai-event/why-attend/One-to-One Meetings.avif"
+                                    alt="One-to-one meetings between legal leaders"
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                         </div>
-                    ))}
+                        {/* Subtle Decorative Element */}
+                        <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl -z-10 pointer-events-none" />
+                    </div>
                 </div>
             </div>
         </section>
