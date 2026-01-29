@@ -80,74 +80,74 @@ export default function Hero() {
     return (
         <>
             {/* Hero Section */}
-            <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+            <section className="relative pt-12 pb-12 md:pt-16 md:pb-16 min-h-[90vh] flex flex-col justify-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
                 {/* Premium Background Effects */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-amber-500/5 rounded-full blur-[150px]" />
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
-                    <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
                 </div>
 
-                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-5xl">
-                    {/* Premium Eyebrow Badge */}
-                    <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-8 backdrop-blur-sm">
-                        <Sparkles size={14} className="text-amber-400" />
-                        <span className="text-amber-400 text-xs font-bold tracking-[0.2em] uppercase">
+                <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-4xl">
+                    {/* Compact Eyebrow Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-6 backdrop-blur-sm">
+                        <Sparkles size={12} className="text-amber-400" />
+                        <span className="text-amber-400 text-[10px] font-bold tracking-[0.2em] uppercase">
                             Dubai 2026 · May 13–14
                         </span>
                     </div>
 
-                    {/* Main Heading */}
-                    <h1 className="font-serif leading-tight mb-6">
-                        <span className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
+                    {/* Compact Main Heading */}
+                    <h1 className="font-serif leading-tight mb-4">
+                        <span className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
                             LexTalk World{" "}
                         </span>
-                        <span className="text-4xl md:text-6xl lg:text-7xl font-bold text-amber-500 tracking-tight">
+                        <span className="text-3xl md:text-5xl lg:text-6xl font-bold text-amber-500 tracking-tight">
                             Conference & Exhibition
                         </span>
                     </h1>
 
-                    {/* Secondary Heading */}
-                    <p className="font-serif text-lg md:text-2xl lg:text-3xl text-white/90 max-w-4xl mx-auto mb-10 leading-relaxed tracking-wide italic">
+                    {/* Compact Secondary Heading */}
+                    <p className="font-serif text-base md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto mb-6 leading-relaxed tracking-wide italic">
                         Connect With Senior Legal Decision-Makers Shaping the Future of Law
                     </p>
 
-                    {/* Subheading */}
-                    <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    {/* Smaller Subheading */}
+                    <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
                         Join senior legal leaders, General Counsel, Partners, and Legal Innovators
                         for two days of insight, networking, and global perspectives.
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <Link
                             href="#pricing"
-                            className="group px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 hover:to-amber-500 transition-all font-bold text-sm uppercase tracking-wide rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105"
+                            className="group relative px-8 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 hover:to-amber-500 transition-all font-bold text-sm uppercase tracking-wide rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5"
                         >
-                            Reserve Your Seat
+                            <span className="relative z-10">Reserve Your Seat</span>
+                            <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
                         <Link
                             href="#agenda"
-                            className="group px-8 py-4 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm"
+                            className="group px-8 py-3.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm"
                         >
                             View Conference Agenda
                             <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
 
-                    {/* Countdown Section */}
-                    <div className="pt-6">
-                        <p className="text-amber-500/80 text-xs font-medium tracking-wider mb-2">
+                    {/* Compact Countdown Section */}
+                    <div className="pt-2">
+                        <p className="text-amber-500/80 text-[10px] font-medium tracking-wider mb-1">
                             Limited seats · Early confirmation recommended
                         </p>
-                        <p className="text-white/90 text-sm font-bold uppercase tracking-widest mb-6">
+                        <p className="text-white/80 text-xs font-bold uppercase tracking-widest mb-4">
                             Early Bird Offers End Soon
                         </p>
                         <Countdown />
                     </div>
 
-                    {/* Meta Stats Row */}
-                    <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-14 mt-12 border-t border-white/5">
+                    {/* Meta Stats Row - Tighter */}
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-8 pt-10 mt-10 border-t border-white/5">
                         <MetaItem icon={Users} label="800+ Delegates" />
                         <MetaItem icon={Mic2} label="100+ Speakers" />
                         <MetaItem icon={LayoutGrid} label="20+ Sessions" />
