@@ -176,20 +176,15 @@ export default function Hero() {
                         </h2>
                     </div>
 
-                    {/* Staggered Floating Mosaic - Row 1 (Slow Left) */}
-                    <div className="relative overflow-hidden mb-4">
-                        <div className="flex animate-marquee-slow gap-4 py-2 w-max items-center">
-                            {[...COMPANY_LOGOS.slice(0, 7), ...COMPANY_LOGOS.slice(0, 7)].map((company, idx) => (
-                                <LogoBubble key={`r1-${idx}`} company={company} />
-                            ))}
-                        </div>
-                    </div>
+                    {/* Single Row Infinite Scroll Marquee */}
+                    <div className="relative overflow-hidden mb-8">
+                        {/* Gradient Masks for Fade Effect */}
+                        <div className="absolute left-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+                        <div className="absolute right-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
 
-                    {/* Staggered Floating Mosaic - Row 2 (Slower Right) */}
-                    <div className="relative overflow-hidden mb-2">
-                        <div className="flex animate-marquee-reverse-slower gap-4 py-2 w-max items-center">
-                            {[...COMPANY_LOGOS.slice(7), ...COMPANY_LOGOS.slice(7)].map((company, idx) => (
-                                <LogoBubble key={`r2-${idx}`} company={company} />
+                        <div className="flex animate-marquee-slow gap-4 py-4 w-max items-center">
+                            {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((company, idx) => (
+                                <LogoBubble key={`logo-${idx}`} company={company} />
                             ))}
                         </div>
                     </div>
@@ -200,15 +195,8 @@ export default function Hero() {
                             0% { transform: translateX(0); }
                             100% { transform: translateX(-50%); }
                         }
-                        @keyframes marquee-reverse-slower {
-                            0% { transform: translateX(-50%); }
-                            100% { transform: translateX(0); }
-                        }
                         .animate-marquee-slow {
-                            animation: marquee-slow 80s linear infinite;
-                        }
-                        .animate-marquee-reverse-slower {
-                            animation: marquee-reverse-slower 100s linear infinite;
+                            animation: marquee-slow 60s linear infinite;
                         }
                     `}</style>
                 </div>
