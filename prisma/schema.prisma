@@ -394,3 +394,46 @@ model SponsorshipInquiry {
   @@index([status])
   @@index([createdAt])
 }
+
+// Delegate Registration for Conferences (Dubai 2026, etc.)
+model DelegateRegistration {
+  id                String   @id @default(cuid())
+  // User Details
+  firstName         String
+  lastName          String
+  email             String
+  phone             String?
+  organization      String?
+  designation       String?
+  country           String
+  
+  // Pass Details
+  passType          String   // visitor, full-access, full-access-vip, vendor, vendor-vip
+  passCategory      String   // individual, team
+  conferenceSlug    String   // dubai-2026, houston-2026
+  
+  // Pricing
+  originalPrice     Float
+  discountedPrice   Float
+  currency          String   @default("USD")
+  
+  // Payment Details
+  paymentType       String?  // india, international, free
+  paymentStatus     String   @default("pending") // pending, success, failed
+  razorpayOrderId   String?
+  razorpayPaymentId String?  @unique
+  
+  // Ticket
+  ticketNumber      String?  @unique
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([email])
+  @@index([passType])
+  @@index([passCategory])
+  @@index([paymentStatus])
+  @@index([conferenceSlug])
+  @@index([createdAt])
+}
+

@@ -1,0 +1,528 @@
+"use client";
+
+import { useState } from "react";
+import { Check, Info, ArrowRight, Users, User, Clock } from "lucide-react";
+
+declare global {
+    interface Window {
+        Razorpay: any;
+    }
+}
+
+interface PassType {
+    id: string;
+    name: string;
+    originalPrice: number;
+    discountedPrice: number;
+    features: string[];
+    isPopular?: boolean;
+    isFree?: boolean;
+}
+
+const INDIVIDUAL_PASSES: PassType[] = [
+    {
+        id: "visitor",
+        name: "Visitor Pass",
+        originalPrice: 99,
+        discountedPrice: 0,
+        isFree: true,
+        features: [
+            "Access to exhibition hall",
+            "Networking breaks",
+            "Event materials",
+        ],
+    },
+    {
+        id: "full-access",
+        name: "Full Access Pass",
+        originalPrice: 399,
+        discountedPrice: 199,
+        isPopular: true,
+        features: [
+            "All conference sessions",
+            "Exhibition access",
+            "Networking events",
+            "Lunch & refreshments",
+            "Digital materials",
+        ],
+    },
+    {
+        id: "full-access-vip",
+        name: "Full Access VIP Pass",
+        originalPrice: 799,
+        discountedPrice: 399,
+        features: [
+            "All Full Access benefits",
+            "VIP seating",
+            "Exclusive VIP lounge",
+            "Priority networking",
+            "Speaker meet & greet",
+        ],
+    },
+    {
+        id: "vendor",
+        name: "Vendor Pass",
+        originalPrice: 999,
+        discountedPrice: 499,
+        features: [
+            "Exhibition booth access",
+            "Lead generation tools",
+            "All sessions access",
+            "Marketing materials",
+            "Networking events",
+        ],
+    },
+    {
+        id: "vendor-vip",
+        name: "Vendor VIP Pass",
+        originalPrice: 1999,
+        discountedPrice: 999,
+        features: [
+            "All Vendor benefits",
+            "Premium booth location",
+            "Speaking opportunity",
+            "VIP networking",
+            "Featured branding",
+        ],
+    },
+];
+
+const TEAM_PASSES: PassType[] = [
+    {
+        id: "full-access",
+        name: "Full Access Pass",
+        originalPrice: 799,
+        discountedPrice: 399,
+        isPopular: true,
+        features: [
+            "3 team members",
+            "All conference sessions",
+            "Exhibition access",
+            "Networking events",
+            "Group discounts",
+        ],
+    },
+    {
+        id: "full-access-vip",
+        name: "Full Access VIP Pass",
+        originalPrice: 999,
+        discountedPrice: 499,
+        features: [
+            "3 team members",
+            "All VIP benefits",
+            "Team coordination",
+            "Priority seating",
+            "VIP lounge access",
+        ],
+    },
+    {
+        id: "vendor",
+        name: "Vendor Pass",
+        originalPrice: 1999,
+        discountedPrice: 999,
+        features: [
+            "3 team members",
+            "Exhibition booth",
+            "Lead generation",
+            "All sessions",
+            "Team badges",
+        ],
+    },
+    {
+        id: "vendor-vip",
+        name: "Vendor VIP Pass",
+        originalPrice: 2599,
+        discountedPrice: 1299,
+        features: [
+            "3 team members",
+            "Premium booth",
+            "Speaking slots",
+            "VIP networking",
+            "Featured branding",
+        ],
+    },
+];
+
+interface RegistrationModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    pass: PassType;
+    category: "individual" | "team";
+    paymentType: "india" | "international" | "free";
+}
+
+function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: RegistrationModalProps) {
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        organization: "",
+        designation: "",
+        country: "",
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    if (!isOpen) return null;
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        try {
+            if (paymentType === "free") {
+                // Free registration
+                const res = await fetch("/api/delegate-registration/register-free", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        passType: pass.id,
+                        passCategory: category,
+                        conferenceSlug: "dubai-2026",
+                        customerDetails: formData,
+                    }),
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    alert(`Registration successful! Your ticket: ${data.ticketNumber}`);
+                    onClose();
+                } else {
+                    setError(data.error || "Registration failed");
+                }
+            } else {
+                // Paid registration
+                const currency = paymentType === "india" ? "INR" : "USD";
+                const amount = paymentType === "india"
+                    ? pass.discountedPrice * 83 // Approximate USD to INR
+                    : pass.discountedPrice;
+
+                const orderRes = await fetch("/api/delegate-registration/create-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        amount,
+                        currency,
+                        passType: pass.id,
+                        passCategory: category,
+                        paymentType,
+                        customerDetails: formData,
+                        conferenceSlug: "dubai-2026",
+                        originalPrice: pass.originalPrice,
+                        discountedPrice: pass.discountedPrice,
+                    }),
+                });
+
+                const orderData = await orderRes.json();
+                if (!orderData.orderId) {
+                    throw new Error("Failed to create order");
+                }
+
+                // Open Razorpay checkout
+                const options = {
+                    key: orderData.keyId,
+                    amount: orderData.amount,
+                    currency: orderData.currency,
+                    name: "LexTalk World",
+                    description: `${pass.name} - Dubai 2026`,
+                    order_id: orderData.orderId,
+                    handler: async function (response: any) {
+                        // Verify payment
+                        const verifyRes = await fetch("/api/delegate-registration/verify-payment", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                registrationId: orderData.registrationId,
+                            }),
+                        });
+
+                        const verifyData = await verifyRes.json();
+                        if (verifyData.success) {
+                            alert(`Payment successful! Your ticket: ${verifyData.ticketNumber}`);
+                            onClose();
+                        } else {
+                            setError("Payment verification failed");
+                        }
+                    },
+                    prefill: {
+                        name: `${formData.firstName} ${formData.lastName}`,
+                        email: formData.email,
+                        contact: formData.phone,
+                    },
+                    theme: {
+                        color: "#0f172a",
+                    },
+                };
+
+                const rzp = new window.Razorpay(options);
+                rzp.open();
+            }
+        } catch (err: any) {
+            setError(err.message || "Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div className="p-6 border-b border-slate-200">
+                    <h3 className="font-serif text-xl font-bold text-slate-900">{pass.name}</h3>
+                    <p className="text-slate-500 text-sm mt-1">
+                        {category === "team" ? "Team of 3" : "Individual"} • Dubai 2026
+                    </p>
+                </div>
+                <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
+                            <input
+                                type="text"
+                                required
+                                value={formData.firstName}
+                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
+                            <input
+                                type="text"
+                                required
+                                value={formData.lastName}
+                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                        <input
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                        <input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Organization</label>
+                        <input
+                            type="text"
+                            value={formData.organization}
+                            onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Designation</label>
+                        <input
+                            type="text"
+                            value={formData.designation}
+                            onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Country *</label>
+                        <input
+                            type="text"
+                            required
+                            value={formData.country}
+                            onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        />
+                    </div>
+
+                    {error && (
+                        <div className="p-3 bg-red-50 text-red-700 text-sm rounded-lg">{error}</div>
+                    )}
+
+                    <div className="flex gap-3 pt-4">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="flex-1 px-4 py-2.5 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="flex-1 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50"
+                        >
+                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? Math.round(pass.discountedPrice * 83) : pass.discountedPrice}`}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+
+function PassCard({ pass, category }: { pass: PassType; category: "individual" | "team" }) {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [paymentType, setPaymentType] = useState<"india" | "international" | "free">("international");
+
+    const handlePayment = (type: "india" | "international" | "free") => {
+        setPaymentType(type);
+        setModalOpen(true);
+    };
+
+    return (
+        <>
+            <div className={`relative bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/20" : "border-slate-200"} overflow-hidden transition-shadow hover:shadow-xl`}>
+                {pass.isPopular && (
+                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        POPULAR
+                    </div>
+                )}
+                <div className="p-6">
+                    <h3 className="font-semibold text-lg text-slate-900 mb-2">{pass.name}</h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                        {pass.isFree ? (
+                            <>
+                                <span className="text-slate-400 line-through text-lg">${pass.originalPrice}</span>
+                                <span className="text-3xl font-bold text-emerald-600">FREE</span>
+                            </>
+                        ) : (
+                            <>
+                                <span className="text-slate-400 line-through text-lg">${pass.originalPrice}</span>
+                                <span className="text-3xl font-bold text-slate-900">${pass.discountedPrice}</span>
+                            </>
+                        )}
+                    </div>
+                    <ul className="space-y-2 mb-6">
+                        {pass.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                                <Check size={16} className="text-amber-500 mt-0.5 flex-shrink-0" />
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="space-y-2">
+                        <button
+                            onClick={() => { }}
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+                        >
+                            <Info size={16} />
+                            Know More
+                        </button>
+                        {pass.isFree ? (
+                            <button
+                                onClick={() => handlePayment("free")}
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors"
+                            >
+                                Register Now
+                                <ArrowRight size={16} />
+                            </button>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={() => handlePayment("india")}
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors"
+                                >
+                                    Pay – India
+                                </button>
+                                <button
+                                    onClick={() => handlePayment("international")}
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors"
+                                >
+                                    Pay – International
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+            <RegistrationModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                pass={pass}
+                category={category}
+                paymentType={paymentType}
+            />
+        </>
+    );
+}
+
+export default function Pricing() {
+    const [activeTab, setActiveTab] = useState<"individual" | "team">("individual");
+
+    const passes = activeTab === "individual" ? INDIVIDUAL_PASSES : TEAM_PASSES;
+
+    return (
+        <section id="pricing" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+            {/* Subtle Background */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.04),transparent_50%)] pointer-events-none" />
+
+            <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
+                {/* Header */}
+                <div className="text-center mb-10">
+                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
+                        Choose Your Pass
+                    </h2>
+                    <p className="text-slate-600 text-base max-w-2xl mx-auto">
+                        Select the perfect pass for your needs and join the premier legal conference experience
+                    </p>
+                </div>
+
+                {/* Toggle */}
+                <div className="flex justify-center mb-8">
+                    <div className="inline-flex bg-white rounded-full p-1 border border-slate-200 shadow-sm">
+                        <button
+                            onClick={() => setActiveTab("individual")}
+                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "individual"
+                                    ? "bg-slate-900 text-white"
+                                    : "text-slate-600 hover:text-slate-900"
+                                }`}
+                        >
+                            <User size={16} />
+                            Individual
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("team")}
+                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "team"
+                                    ? "bg-slate-900 text-white"
+                                    : "text-slate-600 hover:text-slate-900"
+                                }`}
+                        >
+                            <Users size={16} />
+                            Team (×3)
+                        </button>
+                    </div>
+                </div>
+
+                {/* Early Bird Banner */}
+                <div className="bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl px-6 py-4 mb-10 flex items-center justify-center gap-3">
+                    <Clock size={20} className="text-slate-900" />
+                    <span className="text-slate-900 font-semibold text-sm md:text-base">
+                        Early Bird Offers End Soon – Seats are limited and allocated on a first-come, first-served basis
+                    </span>
+                </div>
+
+                {/* Pass Cards */}
+                <div className={`grid gap-6 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
+                    {passes.map((pass) => (
+                        <PassCard key={pass.id} pass={pass} category={activeTab} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
