@@ -157,72 +157,80 @@ export default function Hero() {
                 </div>
             </section>
 
-            {/* Social Proof Section */}
-            <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden relative">
-                {/* Subtle Pattern */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.04),transparent_60%)]" />
+            {/* Social Proof Section - Enhanced Staggered Mosaic */}
+            <section className="py-12 md:py-16 bg-white overflow-hidden relative">
+                {/* Subtle Organic Gradient */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.03),transparent_70%)]" />
 
-                <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
+                <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                     {/* Section Header */}
-                    <div className="text-center mb-14">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100/80 border border-amber-200/50 rounded-full mb-4">
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200/50 rounded-full mb-4">
                             <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
                             <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
-                                Trusted By Industry Leaders
+                                Trusted By Global Leaders
                             </span>
                         </div>
                         <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 tracking-tight">
-                            Participants from Leading Companies
+                            Participants from Elite Organizations
                         </h2>
                     </div>
 
-                    {/* Logo Grid - Clean, No Grayscale */}
-                    {/* Logo Carousel - Infinite Scroll */}
-                    <div className="relative mt-8 mb-16 overflow-hidden">
-                        {/* Gradient Masks for Fade Effect */}
-                        <div className="absolute left-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-r from-slate-50 to-transparent pointer-events-none" />
-                        <div className="absolute right-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-l from-slate-50 to-transparent pointer-events-none" />
-
-                        <div className="flex animate-marquee hover:[animation-play-state:paused] gap-4 py-4 w-max">
-                            {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((company, idx) => (
-                                <div
-                                    key={idx}
-                                    className="w-32 md:w-36 aspect-[4/3] relative flex-shrink-0 flex items-center justify-center bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-lg hover:border-amber-300/60 transition-all duration-300 group overflow-hidden"
-                                >
-                                    <Image
-                                        src={company.src}
-                                        alt={company.name}
-                                        fill
-                                        className="object-contain p-4 md:p-5 transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                </div>
+                    {/* Staggered Floating Mosaic - Row 1 (Slow Left) */}
+                    <div className="relative overflow-hidden mb-6">
+                        <div className="flex animate-marquee-slow gap-6 py-2 w-max items-center">
+                            {[...COMPANY_LOGOS.slice(0, 7), ...COMPANY_LOGOS.slice(0, 7)].map((company, idx) => (
+                                <LogoBubble key={`r1-${idx}`} company={company} />
                             ))}
                         </div>
-
-                        {/* Custom Style for Marquee Animation */}
-                        <style jsx>{`
-                            @keyframes marquee {
-                                0% { transform: translateX(0); }
-                                100% { transform: translateX(-50%); }
-                            }
-                            .animate-marquee {
-                                animation: marquee 60s linear infinite;
-                            }
-                        `}</style>
                     </div>
 
-                    {/* Stats Grid */}
-                    <div className="bg-slate-900 rounded-2xl p-8 md:p-12 shadow-xl">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-                            <StatItem value="800+" label="Attendees" light />
-                            <StatItem value="100+" label="Speakers" light />
-                            <StatItem value="20+" label="Sessions" light />
-                            <StatItem value="2" label="Days" light />
+                    {/* Staggered Floating Mosaic - Row 2 (Slower Right) */}
+                    <div className="relative overflow-hidden mb-4">
+                        <div className="flex animate-marquee-reverse-slower gap-8 py-2 w-max items-center">
+                            {[...COMPANY_LOGOS.slice(7), ...COMPANY_LOGOS.slice(7)].map((company, idx) => (
+                                <LogoBubble key={`r2-${idx}`} company={company} />
+                            ))}
                         </div>
                     </div>
+
+                    {/* Animation Styles */}
+                    <style jsx>{`
+                        @keyframes marquee-slow {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-50%); }
+                        }
+                        @keyframes marquee-reverse-slower {
+                            0% { transform: translateX(-50%); }
+                            100% { transform: translateX(0); }
+                        }
+                        .animate-marquee-slow {
+                            animation: marquee-slow 80s linear infinite;
+                        }
+                        .animate-marquee-reverse-slower {
+                            animation: marquee-reverse-slower 100s linear infinite;
+                        }
+                    `}</style>
                 </div>
             </section>
         </>
+    );
+}
+
+function LogoBubble({ company }: { company: typeof COMPANY_LOGOS[0] }) {
+    return (
+        <div className="relative group grayscale hover:grayscale-0 transition-all duration-700 ease-in-out px-4 py-2">
+            <div className="w-28 md:w-36 h-12 md:h-16 relative flex items-center justify-center filter drop-shadow-sm group-hover:drop-shadow-md group-hover:scale-110 transition-all duration-500">
+                <Image
+                    src={company.src}
+                    alt={company.name}
+                    fill
+                    className="object-contain"
+                />
+            </div>
+            {/* Organic Glow on Hover */}
+            <div className="absolute inset-0 bg-amber-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        </div>
     );
 }
 
