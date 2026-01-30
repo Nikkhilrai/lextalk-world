@@ -18,20 +18,19 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
     {
         id: 1,
-        name: "Christopher Bowen",
-        designation: "Corporate Counsel",
-        company: "Google LLC",
-        image: "/images/testimonials/delegates/Javier.avif",
-        logo: "/images/testimonials/logos/Google logo.avif",
-        quote: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available.",
+        name: "Monique Ferraro",
+        designation: "VP, Legal Innovation",
+        company: "Fortune 100 Company",
+        image: "/images/testimonials/delegates/Monique Ferraro.avif",
+        quote: "LexTalk brings a level of insight and dynamism to legal conferences that gets to the very heart of what our community needs to navigate the future of law.",
     },
     {
         id: 2,
         name: "Jorge Barona",
-        designation: "",
+        designation: "Managing Partner",
         company: "Jorge Barona ILC",
         image: "/images/testimonials/delegates/Jorge Barona_edited.avif",
-        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table. It was an honor to contribute to the discussion and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!.",
+        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table.",
     },
     {
         id: 3,
@@ -40,7 +39,7 @@ const TESTIMONIALS: Testimonial[] = [
         company: "Ticsa Grupo EPM",
         image: "/images/testimonials/delegates/Enrique Eguiarte .avif",
         logo: "/images/testimonials/logos/ticsa_grupo_epm_logo.avif",
-        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues.",
+        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues. The networking and technical insights provided a clear path for future innovation.",
     },
     {
         id: 4,
