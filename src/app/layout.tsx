@@ -12,7 +12,7 @@ import { Toaster } from "react-hot-toast";
 // Elegant, high-contrast serif for headings - authoritative and professional
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   variable: "--font-heading",
 });

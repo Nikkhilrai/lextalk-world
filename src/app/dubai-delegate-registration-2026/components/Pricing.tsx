@@ -386,13 +386,13 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 
     return (
         <>
-            <div className={`relative bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/20" : "border-slate-200"} overflow-hidden transition-shadow hover:shadow-xl`}>
+            <div className={`relative flex flex-col bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/20" : "border-slate-200"} overflow-hidden transition-shadow hover:shadow-xl h-full`}>
                 {pass.isPopular && (
-                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-bl-lg z-20">
                         POPULAR
                     </div>
                 )}
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                     <h3 className="font-semibold text-lg text-slate-900 mb-2">{pass.name}</h3>
                     <div className="flex items-baseline gap-2 mb-4">
                         {pass.isFree ? (
@@ -407,18 +407,20 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                             </>
                         )}
                     </div>
-                    <ul className="space-y-2 mb-6">
-                        {pass.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
-                                <Check size={16} className="text-amber-500 mt-0.5 flex-shrink-0" />
-                                {feature}
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="space-y-2">
+                    <div className="flex-grow">
+                        <ul className="space-y-2 mb-6">
+                            {pass.features.map((feature, idx) => (
+                                <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                                    <Check size={16} className="text-amber-500 mt-0.5 flex-shrink-0" />
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="space-y-2 mt-auto pt-6 border-t border-slate-100">
                         <button
                             onClick={() => { }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
                         >
                             <Info size={16} />
                             Know More
@@ -426,7 +428,7 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                         {pass.isFree ? (
                             <button
                                 onClick={() => handlePayment("free")}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-slate-900 text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-900 hover:text-white transition-all shadow-sm"
                             >
                                 Register Now
                                 <ArrowRight size={16} />
@@ -435,13 +437,13 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                             <>
                                 <button
                                     onClick={() => handlePayment("india")}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors"
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                                 >
                                     Pay – India
                                 </button>
                                 <button
                                     onClick={() => handlePayment("international")}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors"
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors shadow-md shadow-amber-500/10"
                                 >
                                     Pay – International
                                 </button>
@@ -475,7 +477,7 @@ export default function Pricing() {
                 {/* Header */}
                 <div className="text-center mb-10">
                     <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
-                        Choose Your Pass
+                        Choose Your <span className="text-amber-500">Pass</span>
                     </h2>
                     <p className="text-slate-600 text-base max-w-2xl mx-auto">
                         Select the perfect pass for your needs and join the premier legal conference experience
@@ -484,12 +486,16 @@ export default function Pricing() {
 
                 {/* Toggle */}
                 <div className="flex justify-center mb-8">
-                    <div className="inline-flex bg-white rounded-full p-1 border border-slate-200 shadow-sm">
+                    <div className="relative inline-flex bg-slate-100 rounded-full p-1 border border-slate-200 shadow-inner overflow-hidden">
+                        <div
+                            className={`absolute inset-y-1 transition-all duration-300 ease-in-out bg-slate-900 rounded-full shadow-lg shadow-slate-900/40 ${activeTab === "individual" ? "left-1 w-[130px]" : "left-[135px] w-[130px]"
+                                }`}
+                        />
                         <button
                             onClick={() => setActiveTab("individual")}
-                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "individual"
-                                ? "bg-slate-900 text-white"
-                                : "text-slate-600 hover:text-slate-900"
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[130px] py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${activeTab === "individual"
+                                ? "text-white"
+                                : "text-slate-500 hover:text-slate-900"
                                 }`}
                         >
                             <User size={16} />
@@ -497,13 +503,13 @@ export default function Pricing() {
                         </button>
                         <button
                             onClick={() => setActiveTab("team")}
-                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${activeTab === "team"
-                                ? "bg-slate-900 text-white"
-                                : "text-slate-600 hover:text-slate-900"
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[130px] py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${activeTab === "team"
+                                ? "text-white"
+                                : "text-slate-500 hover:text-slate-900"
                                 }`}
                         >
                             <Users size={16} />
-                            Team (×3)
+                            Team (x3)
                         </button>
                     </div>
                 </div>

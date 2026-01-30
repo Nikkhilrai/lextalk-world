@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles } from "lucide-react";
+import MouseFollowBackground from "./MouseFollowBackground";
 
 const COMPANY_LOGOS = [
     { name: "Google", src: "/images/social-proof/google.jpg" },
@@ -86,6 +87,10 @@ export default function Hero() {
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-amber-500/5 rounded-full blur-[150px]" />
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
                 </div>
+
+
+                {/* Interactive Mouse-Follow Layer */}
+                <MouseFollowBackground />
 
                 <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center max-w-4xl">
                     {/* Compact Eyebrow Badge */}
