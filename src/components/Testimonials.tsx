@@ -2,78 +2,92 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence, useInView, animate } from "framer-motion";
+import { ChevronLeft, ChevronRight, Quote, Star, Sparkles, ArrowRight } from "lucide-react";
 
-const testimonials = [
+interface Testimonial {
+    id: number;
+    name: string;
+    designation?: string;
+    company: string;
+    image: string;
+    logo?: string;
+    quote: string;
+}
+
+const TESTIMONIALS: Testimonial[] = [
     {
         id: 1,
         name: "Christopher Bowen",
-        title: "Corporate Counsel",
+        designation: "Corporate Counsel",
         company: "Google LLC",
         image: "/images/testimonials/delegates/Javier.avif",
+        logo: "/images/testimonials/logos/Google logo.avif",
         quote: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available.",
-        rating: 5,
     },
     {
         id: 2,
         name: "Jorge Barona",
-        title: "Founder",
+        designation: "Founder",
         company: "Jorge Barona ILC",
         image: "/images/testimonials/delegates/Jorge Barona_edited.avif",
-        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives.",
-        rating: 5,
+        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise.",
     },
     {
         id: 3,
         name: "Enrique Eguiarte",
-        title: "Head Legal",
+        designation: "Head Legal",
         company: "Ticsa Grupo EPM",
         image: "/images/testimonials/delegates/Enrique Eguiarte .avif",
-        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues.",
-        rating: 5,
+        logo: "/images/testimonials/logos/ticsa_grupo_epm_logo.avif",
+        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues. The networking and technical insights provided a clear path for future innovation.",
     },
     {
         id: 4,
         name: "Alejandro Espejo",
-        title: "Legal Manager Latam",
+        designation: "Legal Manager Latam",
         company: "Nordex Group",
         image: "/images/testimonials/delegates/Alejandro Espejo.avif",
-        quote: "Great experience! The networking and technical insights provided a clear path for future innovation in our legal department.",
-        rating: 5,
+        logo: "/images/testimonials/logos/nordex_logo.avif",
+        quote: "Great experience! The networking and technical insights provided a clear path for future innovation in our legal department. LexTalk brings a level of insight that gets to the heart of the community.",
     },
     {
         id: 5,
         name: "Javier AMUCHÁSTEGUI",
-        title: "Founder",
+        designation: "Founder",
         company: "Serving Immigrants",
         image: "/images/testimonials/delegates/Javier.avif",
-        quote: "Great event! Everything was perfect! The organization, the high-level attendance, and the venue all combined for a world-class experience.",
-        rating: 5,
+        logo: "/images/testimonials/logos/Serving Immigrants Logo.avif",
+        quote: "Great event! Everything was perfect! The organization, the high-level attendance, and the venue all combined for a world-class experience. Truly essential for legal executives.",
     },
-    {
-        id: 6,
-        name: "Monique Ferraro",
-        title: "VP, Legal Innovation",
-        company: "Fortune 100 Company",
-        image: "/images/testimonials/delegates/Monique Ferraro.avif",
-        quote: "LexTalk brings a level of insight and dynamism to legal conferences that gets to the very heart of what our community needs.",
-        rating: 5,
-    }
 ];
 
-// Loop data to ensure enough items for a smooth circle (aiming for ~12 items)
-const displayTestimonials = [...testimonials, ...testimonials];
+const STATS = [
+    { label: "Recommend Rate", value: 95, suffix: "%" },
+    { label: "Average Rating", value: 4.9, suffix: "/5", decimals: 1 },
+    { label: "Global Presence", value: 30, suffix: "+" },
+];
 
-function StarRating({ rating }: { rating: number }) {
+function CountUp({ value, decimals = 0, suffix = "" }: { value: number; decimals?: number; suffix?: string }) {
+    const [count, setCount] = useState(0);
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+    useEffect(() => {
+        if (isInView) {
+            const controls = animate(0, value, {
+                duration: 2,
+                onUpdate: (latest) => setCount(latest),
+            });
+            return () => controls.stop();
+        }
+    }, [isInView, value]);
+
     return (
-        <div className="flex gap-1 justify-center mt-4">
-            {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                    key={i}
-                    className={`w-3 h-3 shadow-sm ${i < rating ? "fill-amber-500 text-amber-500" : "text-slate-600"}`}
-                />
-            ))}
-        </div>
+        <span ref={ref}>
+            {count.toFixed(decimals)}
+            {suffix}
+        </span>
     );
 }
 
@@ -81,144 +95,237 @@ export function Testimonials() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-    // Constants
-    const CARD_WIDTH = 300; // px
-    const itemCount = displayTestimonials.length;
-    const theta = 360 / itemCount;
-    // Radius calculation: r = (w / 2) / tan(theta/2)
-    // For 12 items, theta=30, tan(15) ~ 0.26. r ~ 150/0.26 ~ 570px
-    const radius = Math.round((CARD_WIDTH / 2) / Math.tan(Math.PI / itemCount));
-
-    const handlePrev = () => {
-        setActiveIndex(prev => prev - 1);
-        setIsAutoPlaying(false);
-    };
-
-    const handleNext = () => {
-        setActiveIndex(prev => prev + 1);
-        setIsAutoPlaying(false);
-    };
+    const next = () => setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    const prev = () => setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
     useEffect(() => {
         if (!isAutoPlaying) return;
-        const interval = setInterval(() => {
-            setActiveIndex(prev => prev + 1);
-        }, 4000);
+        const interval = setInterval(next, 7000);
         return () => clearInterval(interval);
-    }, [isAutoPlaying]);
+    }, [isAutoPlaying, activeIndex]);
 
     return (
-        <section className="py-20 bg-[#0B0F19] relative overflow-hidden border-t border-slate-900">
-            <style jsx>{`
-                .scene {
-                    perspective: 1200px;
-                    transform-style: preserve-3d;
-                }
-                .carousel {
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    transform-style: preserve-3d;
-                    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-                }
-                .carousel-item {
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    width: ${CARD_WIDTH}px;
-                    height: 380px;
-                    margin-left: -${CARD_WIDTH / 2}px;
-                    margin-top: -190px;
-                    transform-style: preserve-3d;
-                    backface-visibility: hidden;
-                }
-            `}</style>
+        <section className="bg-slate-900 text-white py-24 relative overflow-hidden border-t border-slate-800">
+            {/* Elegant Background Accents */}
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:40px_40px] opacity-70 pointer-events-none" />
 
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 mb-6">
-                        <Star size={10} className="text-amber-500 fill-current" />
-                        <span className="text-amber-500 text-[10px] font-bold uppercase tracking-[0.2em]">Validated Voices</span>
-                    </div>
-                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-                        What <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 uppercase">Delegates</span> Say
-                    </h2>
-                    <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        Past attendees share their transformative experiences at LexTalk World—where legal excellence meets global innovation.
-                    </p>
+            <div className="container mx-auto px-6 relative z-10">
+                {/* Header - Editorial Prestige */}
+                <div className="max-w-4xl mx-auto text-center mb-20 px-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 mb-6">
+                            <Star size={10} className="text-amber-500 fill-current" />
+                            <span className="text-amber-500 text-[10px] font-bold uppercase tracking-[0.2em]">Validated Voices</span>
+                        </div>
+                        <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight leading-tight text-white">
+                            What <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 uppercase">Delegates</span> Say
+                        </h2>
+                        <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                            Past attendees share their transformative experiences at LexTalk World—where legal excellence meets global innovation.
+                        </p>
+                    </motion.div>
                 </div>
 
-                {/* 3D Scene */}
-                <div className="scene relative w-full h-[400px] flex justify-center items-center overflow-hidden">
-                    <div
-                        className="carousel"
-                        style={{
-                            transform: `translateZ(-${radius}px) rotateY(${activeIndex * -theta}deg)`
-                        }}
-                    >
-                        {displayTestimonials.map((item, index) => {
-                            const angle = theta * index;
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
-                            // Determine activity for styling
-                            // Normalize activeIndex to positive 0...length-1
-                            const normalizedActive = ((activeIndex % itemCount) + itemCount) % itemCount;
-                            const isActive = index === normalizedActive;
+                        {/* Left: Decorative Architectural Frame */}
+                        <div className="w-full lg:w-[45%] relative flex justify-center">
+                            <div className="relative w-64 h-80 md:w-80 md:h-[420px]">
 
-                            return (
-                                <div
-                                    key={`${item.id}-${index}`}
-                                    className="carousel-item"
-                                    style={{
-                                        transform: `rotateY(${angle}deg) translateZ(${radius}px)`
-                                    }}
-                                >
-                                    <div className={`w-full h-full rounded-xl p-6 flex flex-col items-center justify-center text-center border transition-all duration-500
-                                        ${isActive
-                                            ? "bg-slate-900 border-amber-500 shadow-[0_0_40px_rgba(245,158,11,0.15)] opacity-100"
-                                            : "bg-slate-900/80 border-slate-800 opacity-40 grayscale-[80%]"
-                                        }`}
-                                    >
-                                        <div className="mb-4">
-                                            <Quote className={`w-6 h-6 ${isActive ? "text-amber-500" : "text-slate-600"}`} />
-                                        </div>
+                                {/* 1. Elegant Gold Corner Accents */}
+                                <div className="absolute -top-6 -left-6 w-20 h-20 border-t-2 border-l-2 border-amber-500/30 rounded-tl-3xl z-0" />
+                                <div className="absolute -bottom-6 -right-6 w-20 h-20 border-b-2 border-r-2 border-amber-500/30 rounded-br-3xl z-0" />
 
-                                        <p className={`font-serif text-base leading-relaxed mb-6 line-clamp-4 ${isActive ? "text-slate-200" : "text-slate-500"}`}>
-                                            "{item.quote}"
-                                        </p>
+                                {/* 2. Double Offset Borders */}
+                                <div className="absolute inset-0 border border-slate-700 rounded-[2.5rem] transform translate-x-3 translate-y-3 z-0" />
+                                <div className="absolute inset-0 border border-amber-500/10 rounded-[2.5rem] transform -translate-x-3 -translate-y-3 z-0" />
 
-                                        <div className="mt-auto flex flex-col items-center">
-                                            <div className={`relative w-12 h-12 rounded-full overflow-hidden border-2 mb-2 ${isActive ? "border-amber-500" : "border-slate-700"}`}>
-                                                <Image
-                                                    src={item.image}
-                                                    alt={item.name}
-                                                    fill
-                                                    className="object-cover"
-                                                />
+                                {/* 3. The Main Portrait Frame */}
+                                <div className="absolute inset-0 z-10 rounded-[2.5rem] overflow-hidden bg-slate-800 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] border border-slate-700">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={activeIndex}
+                                            initial={{ opacity: 0, scale: 1.05 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.95 }}
+                                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                            className="absolute inset-0"
+                                        >
+                                            <Image
+                                                src={TESTIMONIALS[activeIndex].image}
+                                                alt={TESTIMONIALS[activeIndex].name}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                            {/* Name Reveal Overlay */}
+                                            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+                                                <h3 className="font-serif text-2xl font-bold text-white mb-1">
+                                                    {TESTIMONIALS[activeIndex].name}
+                                                </h3>
                                             </div>
-                                            <h4 className={`text-sm font-bold ${isActive ? "text-white" : "text-slate-400"}`}>
-                                                {item.name}
-                                            </h4>
-                                            <p className="text-[10px] text-amber-500 font-bold uppercase tracking-wider">
-                                                {item.company}
-                                            </p>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
 
-                                            {isActive && <StarRating rating={item.rating} />}
+                                {/* 4. Floating Decorative Quote Mark */}
+                                <div className="absolute -top-4 -right-4 w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center shadow-lg z-20 border-4 border-slate-900">
+                                    <Quote size={16} className="text-white fill-current" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right: Immersive Editorial Quote Section */}
+                        <div className="w-full lg:w-[55%] flex flex-col justify-center">
+                            <div className="relative min-h-[300px]">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeIndex}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="flex flex-col"
+                                    >
+                                        <blockquote className="font-serif text-base md:text-xl lg:text-2xl italic font-medium text-slate-200 mb-10 tracking-tight leading-relaxed">
+                                            <span className="float-left text-[3.8em] font-normal text-amber-500/40 mr-4 -ml-1 leading-[0.8] mt-1 select-none">
+                                                {TESTIMONIALS[activeIndex].quote.charAt(0)}
+                                            </span>
+                                            {TESTIMONIALS[activeIndex].quote.slice(1)}
+                                        </blockquote>
+
+                                        {/* Company Branding Anchor */}
+                                        <div className="flex items-center gap-6 pb-10">
+                                            {TESTIMONIALS[activeIndex].logo && (
+                                                <div className="w-16 h-16 bg-white rounded-2xl p-3 flex items-center justify-center shadow-lg border border-slate-700 flex-shrink-0">
+                                                    <Image
+                                                        src={TESTIMONIALS[activeIndex].logo}
+                                                        alt={TESTIMONIALS[activeIndex].company}
+                                                        width={64}
+                                                        height={64}
+                                                        className="w-full h-full object-contain"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="flex flex-col">
+                                                <div className="flex gap-1 mb-2">
+                                                    {Array.from({ length: 5 }).map((_, i) => (
+                                                        <Star key={i} size={14} className="text-amber-500 fill-amber-500" />
+                                                    ))}
+                                                </div>
+                                                <span className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
+                                                    {TESTIMONIALS[activeIndex].company}
+                                                </span>
+                                                {TESTIMONIALS[activeIndex].designation && (
+                                                    <span className="text-[10px] font-bold text-amber-500/60 uppercase tracking-[0.3em] mt-1">
+                                                        {TESTIMONIALS[activeIndex].designation}
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Minimal Ledger Navigation */}
+                            <div className="flex items-center justify-between mt-8 pt-8 border-t border-slate-800">
+                                <div className="flex items-center gap-8">
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => { prev(); setIsAutoPlaying(false); }}
+                                            className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-slate-900 hover:border-white transition-all duration-300 shadow-sm"
+                                        >
+                                            <ChevronLeft size={20} />
+                                        </button>
+                                        <button
+                                            onClick={() => { next(); setIsAutoPlaying(false); }}
+                                            className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-slate-900 hover:border-white transition-all duration-300 shadow-sm"
+                                        >
+                                            <ChevronRight size={20} />
+                                        </button>
+                                    </div>
+
+                                    <div className="flex gap-2">
+                                        {TESTIMONIALS.map((_, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => { setActiveIndex(i); setIsAutoPlaying(false); }}
+                                                className={`h-1.5 transition-all duration-500 rounded-full ${activeIndex === i ? 'w-10 bg-amber-500' : 'w-2 bg-slate-700 hover:bg-slate-600'}`}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
-                            );
-                        })}
+
+                                <div className="font-serif text-2xl font-light text-slate-700 hidden sm:block">
+                                    <span className="text-white font-bold">0{activeIndex + 1}</span>
+                                    <span className="mx-2 text-sm">/</span>
+                                    <span className="text-sm">0{TESTIMONIALS.length}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Controls */}
-                <div className="flex justify-center gap-4 mt-8">
-                    <button onClick={handlePrev} className="p-3 rounded-full bg-slate-800 border border-slate-700 hover:border-amber-500 hover:text-amber-500 transition-colors">
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button onClick={handleNext} className="p-3 rounded-full bg-slate-800 border border-slate-700 hover:border-amber-500 hover:text-amber-500 transition-colors">
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
+                {/* Integrated Success Stories CTA - Home Version */}
+                <div className="mt-20 max-w-5xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="bg-slate-800/50 backdrop-blur-sm rounded-[2rem] p-6 md:p-8 relative overflow-hidden shadow-2xl border border-white/5"
+                    >
+                        {/* Decorative Radial Radiance */}
+                        <div className="absolute -top-16 -right-16 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
+
+                        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 relative z-10">
+
+                            {/* Narrative Focus */}
+                            <div className="flex-1 text-center lg:text-left">
+                                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-amber-500/20 bg-amber-500/5 mb-3">
+                                    <Sparkles size={10} className="text-amber-500 fill-current" />
+                                    <span className="text-amber-500 text-[8px] font-bold uppercase tracking-[0.2em]">Transform Your Network</span>
+                                </div>
+
+                                <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
+                                    Become a part of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 italic">Success Stories</span>
+                                </h2>
+
+                                <p className="text-slate-400 text-xs md:text-sm max-w-md leading-relaxed">
+                                    Join the elite group of legal professionals who have redefined their global presence through LexTalk World.
+                                </p>
+                            </div>
+
+                            {/* Trust Metrics */}
+                            <div className="flex flex-row gap-6 md:gap-10 py-6 lg:py-0 border-y lg:border-y-0 lg:border-x border-white/5 px-6 lg:px-10 justify-center">
+                                {STATS.map((stat, i) => (
+                                    <div key={i} className="flex flex-col items-center min-w-[60px]">
+                                        <div className="font-serif text-xl md:text-3xl font-bold text-white leading-none mb-1">
+                                            <CountUp value={stat.value} decimals={stat.decimals} suffix={stat.suffix} />
+                                        </div>
+                                        <span className="text-slate-500 text-[8px] font-bold uppercase tracking-[0.2em] text-center whitespace-nowrap">{stat.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Conversion Action */}
+                            <div className="lg:min-w-[200px] flex justify-center">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-amber-900/20"
+                                >
+                                    <span className="text-[10px] uppercase tracking-widest font-black">Join Us Globally</span>
+                                    <ArrowRight size={16} />
+                                </motion.button>
+                            </div>
+
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
