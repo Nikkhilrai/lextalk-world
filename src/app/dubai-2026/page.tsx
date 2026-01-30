@@ -786,44 +786,83 @@ export default function DubaiEventPage() {
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Case Docer */}
-                                <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
+                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.casedocker.com/landing/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="relative h-full w-full p-4 md:p-8 flex items-center justify-center block"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
                                     >
                                         <div className="relative w-full h-full">
                                             <Image
                                                 src="/dubai-event/sponsors/CasedockerLogo.avif"
                                                 alt="Case Docker"
                                                 fill
-                                                className="object-contain"
-                                                sizes="(max-width: 768px) 128px, 256px"
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
                                             />
                                         </div>
                                     </a>
                                 </div>
 
                                 {/* Lex Corp */}
-                                <div className="group relative w-32 h-20 md:w-64 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 group-hover:border-amber-100 group-hover:-translate-y-1" />
+                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://home.lexcorp.org.in/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="relative h-full w-full p-4 md:p-8 flex items-center justify-center block"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
                                     >
                                         <div className="relative w-full h-full">
                                             <Image
                                                 src="/dubai-event/sponsors/Lex_Corp_Logo.avif"
                                                 alt="Lex Corp"
                                                 fill
-                                                className="object-contain"
-                                                sizes="(max-width: 768px) 128px, 256px"
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
+                                            />
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Silver Sponsors */}
+                    <div className="relative mt-20">
+                        <div className="flex flex-col items-center relative z-10">
+                            {/* Category Badge */}
+                            <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest whitespace-nowrap">
+                                        Silver Sponsor
+                                    </h3>
+                                </div>
+                            </div>
+
+                            {/* Logos Grid */}
+                            <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
+                                {/* BGK Law Associates */}
+                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
+
+                                    <a
+                                        href="https://bgklawassociates.co.in/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/dubai-event/sponsors/BGK Law Associates.jpg"
+                                                alt="BGK Law Associates"
+                                                fill
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
                                             />
                                         </div>
                                     </a>
