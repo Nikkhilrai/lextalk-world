@@ -18,11 +18,12 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
     {
         id: 1,
-        name: "Monique Ferraro",
-        designation: "VP, Legal Innovation",
-        company: "Fortune 100 Company",
-        image: "/images/testimonials/delegates/Monique Ferraro.avif",
-        quote: "LexTalk brings a level of insight and dynamism to legal conferences that gets to the very heart of what our community needs to navigate the future of law.",
+        name: "Christopher Bowen",
+        designation: "Corporate Counsel",
+        company: "Google LLC",
+        image: "/images/testimonials/delegates/Christopher Bowen.avif",
+        logo: "/images/testimonials/logos/Google logo.avif",
+        quote: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available.",
     },
     {
         id: 2,
