@@ -28,10 +28,10 @@ const TESTIMONIALS: Testimonial[] = [
     {
         id: 2,
         name: "Jorge Barona",
-        designation: "Founder",
+        designation: "",
         company: "Jorge Barona ILC",
         image: "/images/testimonials/delegates/Jorge Barona_edited.avif",
-        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise.",
+        quote: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table. It was an honor to contribute to the discussion and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!.",
     },
     {
         id: 3,
@@ -40,7 +40,7 @@ const TESTIMONIALS: Testimonial[] = [
         company: "Ticsa Grupo EPM",
         image: "/images/testimonials/delegates/Enrique Eguiarte .avif",
         logo: "/images/testimonials/logos/ticsa_grupo_epm_logo.avif",
-        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues. The networking and technical insights provided a clear path for future innovation.",
+        quote: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues.",
     },
     {
         id: 4,
@@ -49,7 +49,7 @@ const TESTIMONIALS: Testimonial[] = [
         company: "Nordex Group",
         image: "/images/testimonials/delegates/Alejandro Espejo.avif",
         logo: "/images/testimonials/logos/nordex_logo.avif",
-        quote: "Great experience! The networking and technical insights provided a clear path for future innovation in our legal department. LexTalk brings a level of insight that gets to the heart of the community.",
+        quote: "Great experience! The networking and technical insights provided a clear path for future innovation in our legal department.",
     },
     {
         id: 5,
@@ -58,7 +58,7 @@ const TESTIMONIALS: Testimonial[] = [
         company: "Serving Immigrants",
         image: "/images/testimonials/delegates/Javier.avif",
         logo: "/images/testimonials/logos/Serving Immigrants Logo.avif",
-        quote: "Great event! Everything was perfect! The organization, the high-level attendance, and the venue all combined for a world-class experience. Truly essential for legal executives.",
+        quote: "Great event! Everything was perfect! The organization, the high-level attendance, and the venue all combined for a world-class experience.",
     },
 ];
 
@@ -268,64 +268,6 @@ export function Testimonials() {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* Integrated Success Stories CTA - Home Version */}
-                <div className="mt-20 max-w-5xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="bg-slate-800/50 backdrop-blur-sm rounded-[2rem] p-6 md:p-8 relative overflow-hidden shadow-2xl border border-white/5"
-                    >
-                        {/* Decorative Radial Radiance */}
-                        <div className="absolute -top-16 -right-16 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
-
-                        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 relative z-10">
-
-                            {/* Narrative Focus */}
-                            <div className="flex-1 text-center lg:text-left">
-                                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-amber-500/20 bg-amber-500/5 mb-3">
-                                    <Sparkles size={10} className="text-amber-500 fill-current" />
-                                    <span className="text-amber-500 text-[8px] font-bold uppercase tracking-[0.2em]">Transform Your Network</span>
-                                </div>
-
-                                <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                                    Become a part of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 italic">Success Stories</span>
-                                </h2>
-
-                                <p className="text-slate-400 text-xs md:text-sm max-w-md leading-relaxed">
-                                    Join the elite group of legal professionals who have redefined their global presence through LexTalk World.
-                                </p>
-                            </div>
-
-                            {/* Trust Metrics */}
-                            <div className="flex flex-row gap-6 md:gap-10 py-6 lg:py-0 border-y lg:border-y-0 lg:border-x border-white/5 px-6 lg:px-10 justify-center">
-                                {STATS.map((stat, i) => (
-                                    <div key={i} className="flex flex-col items-center min-w-[60px]">
-                                        <div className="font-serif text-xl md:text-3xl font-bold text-white leading-none mb-1">
-                                            <CountUp value={stat.value} decimals={stat.decimals} suffix={stat.suffix} />
-                                        </div>
-                                        <span className="text-slate-500 text-[8px] font-bold uppercase tracking-[0.2em] text-center whitespace-nowrap">{stat.label}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Conversion Action */}
-                            <div className="lg:min-w-[200px] flex justify-center">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-amber-900/20"
-                                >
-                                    <span className="text-[10px] uppercase tracking-widest font-black">Join Us Globally</span>
-                                    <ArrowRight size={16} />
-                                </motion.button>
-                            </div>
-
-                        </div>
-                    </motion.div>
                 </div>
             </div>
         </section>
