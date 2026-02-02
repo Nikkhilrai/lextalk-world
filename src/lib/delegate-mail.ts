@@ -3,6 +3,10 @@ import { generateTicketPDF } from "./ticket-generator";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
 
+if (!process.env.RESEND_API_KEY) {
+    console.warn("WARNING: RESEND_API_KEY is missing in environmental variables. Emails will not be delivered.");
+}
+
 interface EmailData {
     firstName: string;
     lastName: string;
@@ -16,13 +20,14 @@ interface EmailData {
 export async function sendDelegateConfirmationEmail(data: EmailData) {
     try {
         const fullName = `${data.firstName} ${data.lastName}`;
+        console.log(`Attempting to send confirmation email to: ${data.email} (${fullName})`);
 
         // Generate PDF ticket for attachment
         const pdfBuffer = await generateTicketPDF({
             attendeeName: fullName,
             eventName: "LexTalk World Dubai 2026",
-            eventDate: "23rd - 24th April 2026",
-            eventVenue: "InterContinental Dubai Festival City, UAE",
+            eventDate: "13-14 May, 2026",
+            eventVenue: "To be announced",
             passType: data.passType.replace(/-/g, ' ').toUpperCase(),
             ticketNumber: data.ticketNumber,
             ticketId: data.ticketId,
@@ -72,8 +77,8 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
                     <!-- Event Info -->
                     <div style="margin-bottom: 30px;">
                         <h3 style="margin-top: 0; font-size: 14px; color: #64748b; text-transform: uppercase;">Event Details</h3>
-                        <p style="font-size: 15px; margin: 5px 0; color: #1e293b;">🗓 <strong>23rd - 24th April 2026</strong></p>
-                        <p style="font-size: 15px; margin: 5px 0; color: #1e293b;">📍 <strong>InterContinental Dubai Festival City, UAE</strong></p>
+                        <p style="font-size: 15px; margin: 5px 0; color: #1e293b;">🗓 <strong>13-14 May, 2026</strong></p>
+                        <p style="font-size: 15px; margin: 5px 0; color: #1e293b;">📍 <strong>To be announced</strong></p>
                     </div>
 
                     <p style="font-size: 16px; line-height: 1.6; color: #475569;">
@@ -109,6 +114,7 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
             ]
         });
 
+        console.log(`Confirmation email sent successfully to ${data.email}`);
         return { success: true };
     } catch (error) {
         console.error("Failed to send confirmation email:", error);

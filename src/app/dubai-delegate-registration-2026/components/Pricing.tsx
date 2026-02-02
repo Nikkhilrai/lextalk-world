@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, Users, User, Clock } from "lucide-react";
+import { Check, ArrowRight, Users, User, Clock, Loader2, Sparkles, ShieldCheck, Mail } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 declare global {
     interface Window {
@@ -202,7 +203,27 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
         country: "",
     });
     const [loading, setLoading] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [processStep, setProcessStep] = useState(0);
     const [error, setError] = useState("");
+
+    const steps = [
+        "Securing your registration...",
+        "Generating your unique conference ticket...",
+        "Linking secure QR verification...",
+        "Finalizing your attendee profile...",
+        "Sending confirmation email..."
+    ];
+
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (processing) {
+            interval = setInterval(() => {
+                setProcessStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
+            }, 2500);
+        }
+        return () => clearInterval(interval);
+    }, [processing, steps.length]);
 
     if (!isOpen) return null;
 
@@ -214,6 +235,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
         try {
             if (paymentType === "free") {
                 // Free registration
+                setProcessing(true); // Trigger overlay immediately
                 const res = await fetch("/api/delegate-registration/register-free", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -227,9 +249,13 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
                 const data = await res.json();
                 if (data.success) {
-                    onClose();
-                    router.push(`/dubai-delegate-confirmation-2026?regId=${data.id}`);
+                    // Stay on processing state for a moment to ensure user sees the "Work" being done
+                    setTimeout(() => {
+                        onClose();
+                        router.push(`/dubai-delegate-confirmation-2026?regId=${data.id}`);
+                    }, 3000);
                 } else {
+                    setProcessing(false);
                     setError(data.error || "Registration failed");
                 }
             } else {
@@ -274,6 +300,10 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                     description: `${pass.name} - Dubai 2026`,
                     order_id: orderData.orderId,
                     handler: async function (response: any) {
+                        // Immediately show processing overlay when payment window closes
+                        setProcessing(true);
+                        setLoading(true);
+
                         // Verify payment
                         const verifyRes = await fetch("/api/delegate-registration/verify-payment", {
                             method: "POST",
@@ -288,9 +318,14 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
                         const verifyData = await verifyRes.json();
                         if (verifyData.success) {
-                            onClose();
-                            router.push(`/dubai-delegate-confirmation-2026?regId=${orderData.registrationId}`);
+                            // Stay on processing state for a moment to ensure user sees the "Work" being done
+                            setTimeout(() => {
+                                onClose();
+                                router.push(`/dubai-delegate-confirmation-2026?regId=${orderData.registrationId}`);
+                            }, 3000);
                         } else {
+                            setProcessing(false);
+                            setLoading(false);
                             setError("Payment verification failed");
                         }
                     },
@@ -415,6 +450,57 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                         </button>
                     </div>
                 </form>
+
+                {/* Processing Overlay */}
+                <AnimatePresence>
+                    {processing && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-slate-900/95 backdrop-blur-md z-[60] flex flex-col items-center justify-center p-8 text-center"
+                        >
+                            <div className="relative mb-8">
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                    className="w-24 h-24 rounded-full border-2 border-amber-500/20 border-t-amber-500"
+                                />
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <Sparkles className="text-amber-500 w-8 h-8" />
+                                </motion.div>
+                            </div>
+
+                            <motion.div
+                                key={processStep}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="space-y-3"
+                            >
+                                <h3 className="text-xl font-serif font-bold text-white tracking-wide">
+                                    Hang Tight
+                                </h3>
+                                <p className="text-slate-400 font-medium">
+                                    {steps[processStep]}
+                                </p>
+                            </motion.div>
+
+                            <div className="mt-12 flex items-center gap-4">
+                                <span className={`w-2 h-2 rounded-full transition-colors duration-500 ${processStep >= 1 ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-slate-700'}`} />
+                                <span className={`w-2 h-2 rounded-full transition-colors duration-500 ${processStep >= 3 ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-slate-700'}`} />
+                                <span className={`w-2 h-2 rounded-full transition-colors duration-500 ${processStep >= 4 ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-slate-700'}`} />
+                            </div>
+
+                            <p className="absolute bottom-10 text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">
+                                Secure Registration in Progress
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </div>
     );

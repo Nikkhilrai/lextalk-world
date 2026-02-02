@@ -103,8 +103,9 @@ export async function generateTicketPDF(data: TicketData): Promise<Buffer> {
     doc.setFont("helvetica", "bold");
     doc.text(data.ticketNumber, 130, 160);
 
-    // QR Code
-    const qrCodeDataUrl = await QRCode.toDataURL(data.ticketId, {
+    // QR Code - Functional URL
+    const verificationUrl = `https://lextalkworld.in/attendee/verify?ticketId=${data.ticketId}`;
+    const qrCodeDataUrl = await QRCode.toDataURL(verificationUrl, {
         margin: 1,
         width: 300,
         color: {

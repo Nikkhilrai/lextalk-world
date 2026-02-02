@@ -11,13 +11,24 @@ export async function GET(request: NextRequest) {
         }
 
         const prismaClient = prisma as any;
-        const registration = await prismaClient.delegateRegistration.findUnique({
-            where: { id: regId },
+        console.log(`DEBUG: Fetching details for identifier: ${regId}`);
+
+        const registration = await prismaClient.delegateRegistration.findFirst({
+            where: {
+                OR: [
+                    { id: regId },
+                    { ticketId: regId },
+                    { ticketNumber: regId }
+                ]
+            },
         });
 
         if (!registration) {
+            console.error(`DEBUG: Details lookup failed: No record found for identifier ${regId}`);
             return NextResponse.json({ success: false, error: "Registration not found" }, { status: 404 });
         }
+
+        console.log(`DEBUG: Found details for ${registration.firstName} ${registration.lastName}`);
 
         // Return only necessary fields for the confirmation page
         const safeRegistration = {

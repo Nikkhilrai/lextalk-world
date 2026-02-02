@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles } from "lucide-react";
+import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles, Download } from "lucide-react";
 import MouseFollowBackground from "./MouseFollowBackground";
 
 const COMPANY_LOGOS = [
@@ -77,7 +77,7 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
     );
 }
 
-export default function Hero() {
+export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
     return (
         <>
             {/* Hero Section */}
@@ -131,11 +131,21 @@ export default function Hero() {
                             <span className="relative z-10">Reserve Your Seat</span>
                             <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
+
+                        {/* Download Agenda Button */}
+                        <button
+                            onClick={onOpenAgenda}
+                            className="group px-8 py-3.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-amber-500/30 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm shadow-xl shadow-black/20"
+                        >
+                            <Download size={18} className="text-amber-500" />
+                            Download Agenda
+                        </button>
+
                         <Link
                             href="#agenda"
-                            className="group px-8 py-3.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm"
+                            className="group px-6 py-3.5 text-white/60 hover:text-white transition-all font-semibold text-sm uppercase tracking-wide flex items-center gap-2"
                         >
-                            View Conference Agenda
+                            View Agenda
                             <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
@@ -162,27 +172,27 @@ export default function Hero() {
                 </div>
             </section>
 
-            {/* Social Proof Section - Enhanced Staggered Mosaic */}
-            <section className="py-12 md:py-16 bg-white overflow-hidden relative">
+            {/* Social Proof Section - Compact Elite Organizations */}
+            <section className="py-8 md:py-10 bg-white overflow-hidden relative border-b border-slate-50">
                 {/* Subtle Organic Gradient */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.03),transparent_70%)]" />
 
                 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                     {/* Section Header */}
-                    <div className="text-center mb-10">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200/50 rounded-full mb-4">
+                    <div className="text-center mb-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 border border-amber-200/50 rounded-full mb-3">
                             <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
-                            <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
+                            <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">
                                 Trusted By Global Leaders
                             </span>
                         </div>
-                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 tracking-tight">
+                        <h2 className="text-xl md:text-2xl font-serif font-bold text-slate-800 tracking-tight">
                             Participants from Elite Organizations
                         </h2>
                     </div>
 
                     {/* Single Row Infinite Scroll Marquee */}
-                    <div className="relative overflow-hidden mb-8">
+                    <div className="relative overflow-hidden mb-2">
                         {/* Gradient Masks for Fade Effect */}
                         <div className="absolute left-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-r from-white to-transparent pointer-events-none" />
                         <div className="absolute right-0 top-0 bottom-0 w-32 z-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
@@ -213,16 +223,14 @@ export default function Hero() {
 function LogoBubble({ company }: { company: typeof COMPANY_LOGOS[0] }) {
     return (
         <div className="relative group transition-all duration-500 ease-in-out px-2 py-2">
-            <div className="w-36 md:w-48 h-16 md:h-24 relative flex items-center justify-center bg-white/40 backdrop-blur-[2px] border border-slate-100/50 rounded-2xl shadow-sm group-hover:shadow-md group-hover:scale-105 group-hover:border-amber-200/50 transition-all duration-500 overflow-hidden">
+            <div className="w-36 md:w-48 h-16 md:h-20 relative flex items-center justify-center transition-all duration-500 group-hover:scale-110">
                 <Image
                     src={company.src}
                     alt={company.name}
                     fill
-                    className="object-contain p-4 md:p-6"
+                    className="object-contain"
                 />
             </div>
-            {/* Subtle Ambient Glow */}
-            <div className="absolute inset-0 bg-amber-500/5 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         </div>
     );
 }

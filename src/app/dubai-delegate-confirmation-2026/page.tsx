@@ -56,23 +56,32 @@ function ConfirmationContent() {
     }, [regId]);
 
     const handleDownload = async () => {
-        if (!registration?.ticketId) return;
+        // Fallback to id if ticketId is missing
+        const identifier = registration?.ticketId || registration?.id;
+        console.log("DEBUG: Downloading ticket for identifier:", identifier);
+        if (!identifier) return;
 
         try {
-            const res = await fetch(`/api/delegate-registration/ticket/${registration.ticketId}/download`);
-            if (!res.ok) throw new Error("Download failed");
+            const res = await fetch(`/api/delegate-registration/ticket/${identifier}/download`);
+            console.log("DEBUG: Download response status:", res.status);
+
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.details || errorData.error || "Download failed");
+            }
 
             const blob = await res.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = `LexTalk-Ticket-${registration.ticketNumber}.pdf`;
+            a.download = `LexTalk-Ticket-${registration.ticketNumber || 'Pass'}.pdf`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
-        } catch (err) {
-            alert("Failed to download ticket. Please try again.");
+        } catch (err: any) {
+            console.error("DEBUG: Download catch:", err);
+            alert(`Failed to download ticket: ${err.message}`);
         }
     };
 
@@ -168,30 +177,21 @@ function ConfirmationContent() {
                         <div className="space-y-6">
                             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-2">Event Information</h2>
                             <div className="space-y-4">
-                                <DetailItem icon={Calendar} label="Date" value="23rd - 24th April 2026" />
-                                <DetailItem icon={MapPin} label="Venue" value="InterContinental Dubai Festival City, UAE" />
+                                <DetailItem icon={Calendar} label="Date" value="13-14 May, 2026" />
+                                <DetailItem icon={MapPin} label="Venue" value="To be announced" />
                                 <DetailItem icon={CheckCircle} label="Registration ID" value={registration.ticketNumber} />
                             </div>
                         </div>
                     </div>
 
                     {/* Actions */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-10 border-t border-slate-100">
+                    <div className="flex flex-col gap-4 pt-10 border-t border-slate-100">
                         <button
                             onClick={handleDownload}
-                            className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-amber-500 text-slate-900 font-bold rounded-2xl hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10 active:scale-95"
+                            className="w-full flex items-center justify-center gap-2 px-8 py-5 bg-amber-500 text-slate-900 font-bold rounded-2xl hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10 active:scale-95 text-lg"
                         >
-                            <Download size={20} />
+                            <Download size={22} />
                             Download Your Ticket
-                        </button>
-
-                        <button
-                            onClick={handleResendEmail}
-                            disabled={resending}
-                            className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10 active:scale-95 disabled:opacity-50"
-                        >
-                            {resending ? <Loader2 size={20} className="animate-spin" /> : <Mail size={20} />}
-                            Resend Confirmation Email
                         </button>
                     </div>
 
