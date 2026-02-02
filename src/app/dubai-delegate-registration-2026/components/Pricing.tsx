@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Info, ArrowRight, Users, User, Clock } from "lucide-react";
+import { Check, ArrowRight, Users, User, Clock } from "lucide-react";
 
 declare global {
     interface Window {
@@ -27,9 +27,9 @@ const INDIVIDUAL_PASSES: PassType[] = [
         discountedPrice: 0,
         isFree: true,
         features: [
-            "Access to exhibition hall",
-            "Networking breaks",
-            "Event materials",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
         ],
     },
     {
@@ -39,11 +39,16 @@ const INDIVIDUAL_PASSES: PassType[] = [
         discountedPrice: 199,
         isPopular: true,
         features: [
-            "All conference sessions",
-            "Exhibition access",
-            "Networking events",
-            "Lunch & refreshments",
-            "Digital materials",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
+            " CA/CLE Credits",
+
         ],
     },
     {
@@ -52,11 +57,17 @@ const INDIVIDUAL_PASSES: PassType[] = [
         originalPrice: 799,
         discountedPrice: 399,
         features: [
-            "All Full Access benefits",
-            "VIP seating",
-            "Exclusive VIP lounge",
-            "Priority networking",
-            "Speaker meet & greet",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Media Bytes",
+            "Vlog Promotion",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
+            " CA/CLE Credits",
         ],
     },
     {
@@ -65,11 +76,14 @@ const INDIVIDUAL_PASSES: PassType[] = [
         originalPrice: 999,
         discountedPrice: 499,
         features: [
-            "Exhibition booth access",
-            "Lead generation tools",
-            "All sessions access",
-            "Marketing materials",
-            "Networking events",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
         ],
     },
     {
@@ -78,11 +92,17 @@ const INDIVIDUAL_PASSES: PassType[] = [
         originalPrice: 1999,
         discountedPrice: 999,
         features: [
-            "All Vendor benefits",
-            "Premium booth location",
-            "Speaking opportunity",
-            "VIP networking",
-            "Featured branding",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Logo Brandings",
+            "Media Bytes",
+            "Vlog Promotion",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
         ],
     },
 ];
@@ -95,11 +115,15 @@ const TEAM_PASSES: PassType[] = [
         discountedPrice: 399,
         isPopular: true,
         features: [
-            "3 team members",
-            "All conference sessions",
-            "Exhibition access",
-            "Networking events",
-            "Group discounts",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
+            " CA/CLE Credits",
         ],
     },
     {
@@ -108,11 +132,17 @@ const TEAM_PASSES: PassType[] = [
         originalPrice: 999,
         discountedPrice: 499,
         features: [
-            "3 team members",
-            "All VIP benefits",
-            "Team coordination",
-            "Priority seating",
-            "VIP lounge access",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Media Bytes",
+            "Vlog Promotion",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
+            " CA/CLE Credits",
         ],
     },
     {
@@ -121,11 +151,14 @@ const TEAM_PASSES: PassType[] = [
         originalPrice: 1999,
         discountedPrice: 999,
         features: [
-            "3 team members",
-            "Exhibition booth",
-            "Lead generation",
-            "All sessions",
-            "Team badges",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
+            "Cocktail Networking Access",
         ],
     },
     {
@@ -134,11 +167,16 @@ const TEAM_PASSES: PassType[] = [
         originalPrice: 2599,
         discountedPrice: 1299,
         features: [
-            "3 team members",
-            "Premium booth",
-            "Speaking slots",
-            "VIP networking",
-            "Featured branding",
+            "Access to Conference",
+            "Access to Networking Opportunities",
+            "Certification of Participation",
+            "Logo Brandings",
+            "Media Bytes",
+            "Vlog Promotion",
+            "Access to one-on-one Introduction",
+            " Morning Breakfast Access",
+            "Lunch Networking Access",
+            " Evening Networking Access",
         ],
     },
 ];
@@ -216,8 +254,13 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                 });
 
                 const orderData = await orderRes.json();
+
+                if (orderData.error) {
+                    throw new Error(orderData.error);
+                }
+
                 if (!orderData.orderId) {
-                    throw new Error("Failed to create order");
+                    throw new Error("Failed to create order - No Order ID returned");
                 }
 
                 // Open Razorpay checkout
@@ -378,76 +421,94 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 function PassCard({ pass, category }: { pass: PassType; category: "individual" | "team" }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [paymentType, setPaymentType] = useState<"india" | "international" | "free">("international");
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const handlePayment = (type: "india" | "international" | "free") => {
         setPaymentType(type);
         setModalOpen(true);
     };
 
+    // Determine features to show
+    const visibleFeatures = isExpanded ? pass.features : pass.features.slice(0, 5);
+    const hasMoreFeatures = pass.features.length > 5;
+
     return (
         <>
-            <div className={`relative flex flex-col bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/20" : "border-slate-200"} overflow-hidden transition-shadow hover:shadow-xl h-full`}>
+            <div className={`relative flex flex-col bg-white rounded-xl border ${pass.isPopular ? "border-amber-400 ring-1 ring-amber-400/20 shadow-lg scale-[1.02]" : "border-slate-200 hover:border-amber-200"} transition-all duration-300 hover:shadow-xl h-full`}>
                 {pass.isPopular && (
-                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-bl-lg z-20">
-                        POPULAR
+                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] uppercase font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg z-20 tracking-wider">
+                        Most Popular
                     </div>
                 )}
-                <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="font-semibold text-lg text-slate-900 mb-2">{pass.name}</h3>
-                    <div className="flex items-baseline gap-2 mb-4">
-                        {pass.isFree ? (
-                            <>
-                                <span className="text-slate-400 line-through text-lg">${pass.originalPrice}</span>
-                                <span className="text-3xl font-bold text-emerald-600">FREE</span>
-                            </>
-                        ) : (
-                            <>
-                                <span className="text-slate-400 line-through text-lg">${pass.originalPrice}</span>
-                                <span className="text-3xl font-bold text-slate-900">${pass.discountedPrice}</span>
-                            </>
-                        )}
+
+                <div className="p-5 flex flex-col flex-grow">
+                    {/* Header */}
+                    <div className="mb-4">
+                        <h3 className="font-serif font-bold text-lg text-slate-900 leading-tight mb-1">{pass.name}</h3>
+                        <div className="flex items-baseline gap-2">
+                            {pass.isFree ? (
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-2xl font-bold text-emerald-600">FREE</span>
+                                    <span className="text-slate-400 line-through text-sm decoration-slate-400/60">${pass.originalPrice}</span>
+                                </div>
+                            ) : (
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-2xl font-bold text-slate-900">${pass.discountedPrice}</span>
+                                    <span className="text-slate-400 line-through text-sm decoration-slate-400/60">${pass.originalPrice}</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
+
+                    {/* Divider */}
+                    <div className="h-px bg-slate-100 mb-4" />
+
+                    {/* Features List */}
                     <div className="flex-grow">
-                        <ul className="space-y-2 mb-6">
-                            {pass.features.map((feature, idx) => (
-                                <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
-                                    <Check size={16} className="text-amber-500 mt-0.5 flex-shrink-0" />
-                                    {feature}
+                        <ul className="space-y-2 mb-2">
+                            {visibleFeatures.map((feature, idx) => (
+                                <li key={idx} className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-snug">
+                                    <Check size={14} className="text-amber-500 mt-0.5 flex-shrink-0 stroke-[3]" />
+                                    <span>{feature}</span>
                                 </li>
                             ))}
                         </ul>
+
+                        {hasMoreFeatures && (
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="text-xs font-medium text-amber-600 hover:text-amber-700 hover:underline flex items-center gap-1 mt-1 transition-colors"
+                            >
+                                {isExpanded ? "Show less" : `+ ${pass.features.length - 5} more benefits`}
+                            </button>
+                        )}
                     </div>
-                    <div className="space-y-2 mt-auto pt-6 border-t border-slate-100">
-                        <button
-                            onClick={() => { }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
-                        >
-                            <Info size={16} />
-                            Know More
-                        </button>
+
+                    {/* Actions */}
+                    <div className="mt-5 pt-4 border-t border-slate-100">
                         {pass.isFree ? (
                             <button
                                 onClick={() => handlePayment("free")}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-slate-900 text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-[0.98]"
                             >
                                 Register Now
                                 <ArrowRight size={16} />
                             </button>
                         ) : (
-                            <>
+                            <div className="grid grid-cols-2 gap-2">
                                 <button
                                     onClick={() => handlePayment("india")}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                                    className="flex items-center justify-center px-1 py-2 border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 transition-colors active:bg-slate-100"
                                 >
-                                    Pay – India
+                                    Pay (INR)
                                 </button>
                                 <button
                                     onClick={() => handlePayment("international")}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors shadow-md shadow-amber-500/10"
+                                    className="flex items-center justify-center px-1 py-2 bg-amber-500 text-slate-900 rounded-lg text-xs font-semibold hover:bg-amber-400 transition-colors shadow-sm hover:shadow active:bg-amber-500/90"
                                 >
-                                    Pay – International
+                                    Pay (USD)
                                 </button>
-                            </>
+                            </div>
                         )}
                     </div>
                 </div>

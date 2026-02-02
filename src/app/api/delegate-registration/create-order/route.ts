@@ -37,7 +37,8 @@ export async function POST(request: NextRequest) {
         }
 
         // Create registration record first (pending status)
-        const registration = await prisma.delegateRegistration.create({
+        const prismaClient = prisma as any;
+        const registration = await prismaClient.delegateRegistration.create({
             data: {
                 firstName: customerDetails.firstName,
                 lastName: customerDetails.lastName,
@@ -73,7 +74,7 @@ export async function POST(request: NextRequest) {
         const order = await razorpay.orders.create(options);
 
         // Update registration with order ID
-        await prisma.delegateRegistration.update({
+        await prismaClient.delegateRegistration.update({
             where: { id: registration.id },
             data: { razorpayOrderId: order.id },
         });
@@ -86,9 +87,14 @@ export async function POST(request: NextRequest) {
             keyId: process.env.RAZORPAY_KEY_ID,
         });
     } catch (error: any) {
-        console.error("Error creating delegate order:", error);
+        console.error("DEBUG: Full error object:", error);
+        console.error("Error creating delegate order:", error.message, error.stack);
+        // Check specifically for Prisma errors
+        if (error.code) {
+            console.error("Prisma Error Code:", error.code);
+        }
         return NextResponse.json(
-            { error: "Failed to create order" },
+            { error: `Failed to create order: ${error.message}` },
             { status: 500 }
         );
     }
