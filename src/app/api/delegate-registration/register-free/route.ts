@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 
 function generateTicketNumber(): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -51,7 +52,8 @@ export async function POST(request: NextRequest) {
         }
 
         // Create free registration
-        const registration = await prisma.delegateRegistration.create({
+        const prismaClient = prisma as any;
+        const registration = await prismaClient.delegateRegistration.create({
             data: {
                 firstName: customerDetails.firstName,
                 lastName: customerDetails.lastName,
@@ -72,8 +74,31 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Trigger confirmation email
+        try {
+            const emailResult = await sendDelegateConfirmationEmail({
+                firstName: registration.firstName,
+                lastName: registration.lastName,
+                email: registration.email,
+                passType: registration.passType,
+                passCategory: registration.passCategory,
+                ticketNumber: registration.ticketNumber,
+                ticketId: registration.ticketId,
+            });
+
+            if (emailResult.success) {
+                await prismaClient.delegateRegistration.update({
+                    where: { id: registration.id },
+                    data: { emailSent: true },
+                });
+            }
+        } catch (emailError) {
+            console.error("Failed to send initial free confirmation email:", emailError);
+        }
+
         return NextResponse.json({
             success: true,
+            id: registration.id,
             ticketNumber,
             registration: {
                 id: registration.id,

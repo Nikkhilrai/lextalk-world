@@ -425,7 +425,10 @@ model DelegateRegistration {
   
   // Ticket
   ticketNumber      String?  @unique
+  ticketId          String?  @unique @default(uuid())
+  emailSent         Boolean  @default(false)
   
+  // Timestamps
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -434,6 +437,7 @@ model DelegateRegistration {
   @@index([passCategory])
   @@index([paymentStatus])
   @@index([conferenceSlug])
+  @@index([ticketId])
   @@index([createdAt])
 }
 

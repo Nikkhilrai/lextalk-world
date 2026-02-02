@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Check, ArrowRight, Users, User, Clock } from "lucide-react";
 
 declare global {
@@ -190,6 +191,7 @@ interface RegistrationModalProps {
 }
 
 function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: RegistrationModalProps) {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -225,8 +227,8 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
                 const data = await res.json();
                 if (data.success) {
-                    alert(`Registration successful! Your ticket: ${data.ticketNumber}`);
                     onClose();
+                    router.push(`/dubai-delegate-confirmation-2026?regId=${data.id}`);
                 } else {
                     setError(data.error || "Registration failed");
                 }
@@ -286,8 +288,8 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
                         const verifyData = await verifyRes.json();
                         if (verifyData.success) {
-                            alert(`Payment successful! Your ticket: ${verifyData.ticketNumber}`);
                             onClose();
+                            router.push(`/dubai-delegate-confirmation-2026?regId=${orderData.registrationId}`);
                         } else {
                             setError("Payment verification failed");
                         }

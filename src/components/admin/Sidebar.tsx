@@ -24,6 +24,7 @@ const NAV_GROUPS = [
         title: "APPS",
         items: [
             { label: "Conferences", href: "/admin/conferences", icon: Calendar },
+            { label: "Delegates", href: "/admin/delegate-registrations", icon: Users },
             { label: "Tickets", href: "/admin/tickets", icon: Ticket },
             { label: "Ticket Types", href: "/admin/ticket-types", icon: Layers },
             { label: "Agenda Downloads", href: "/admin/agenda-downloads", icon: Download },

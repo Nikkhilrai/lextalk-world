@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 
 function generateTicketNumber(): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -76,6 +77,28 @@ export async function POST(request: NextRequest) {
                 ticketNumber,
             },
         });
+
+        // Trigger confirmation email
+        try {
+            const emailResult = await sendDelegateConfirmationEmail({
+                firstName: registration.firstName,
+                lastName: registration.lastName,
+                email: registration.email,
+                passType: registration.passType,
+                passCategory: registration.passCategory,
+                ticketNumber: registration.ticketNumber,
+                ticketId: registration.ticketId,
+            });
+
+            if (emailResult.success) {
+                await prismaClient.delegateRegistration.update({
+                    where: { id: registration.id },
+                    data: { emailSent: true },
+                });
+            }
+        } catch (emailError) {
+            console.error("Failed to send initial confirmation email:", emailError);
+        }
 
         return NextResponse.json({
             success: true,
