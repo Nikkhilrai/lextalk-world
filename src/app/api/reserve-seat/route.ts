@@ -27,14 +27,6 @@ export async function POST(request: Request) {
         // (casting to any to bypass potential type mismatch if generation is pending)
         const prismaClient = prisma as any;
 
-        if (!prismaClient.seatReservation) {
-            console.error('Prisma Client does not have seatReservation model. Schema might not be generated.');
-            return NextResponse.json(
-                { error: 'System error: Database model not found.' },
-                { status: 500 }
-            );
-        }
-
         const reservation = await prismaClient.seatReservation.create({
             data: {
                 fullName,
