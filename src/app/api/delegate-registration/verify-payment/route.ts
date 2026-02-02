@@ -29,7 +29,8 @@ export async function POST(request: NextRequest) {
 
         if (generatedSignature !== razorpay_signature) {
             // Update registration as failed
-            await prisma.delegateRegistration.update({
+            const prismaClient = prisma as any;
+            await prismaClient.delegateRegistration.update({
                 where: { id: registrationId },
                 data: { paymentStatus: "failed" },
             });
@@ -39,8 +40,10 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        const prismaClient = prisma as any;
+
         // Check for existing successful payment (idempotency)
-        const existing = await prisma.delegateRegistration.findFirst({
+        const existing = await prismaClient.delegateRegistration.findFirst({
             where: { razorpayPaymentId: razorpay_payment_id },
         });
 
@@ -56,7 +59,7 @@ export async function POST(request: NextRequest) {
         let ticketNumber = generateTicketNumber();
         let attempts = 0;
         while (attempts < 5) {
-            const exists = await prisma.delegateRegistration.findFirst({
+            const exists = await prismaClient.delegateRegistration.findFirst({
                 where: { ticketNumber },
             });
             if (!exists) break;
@@ -65,7 +68,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Update registration as successful
-        const registration = await prisma.delegateRegistration.update({
+        const registration = await prismaClient.delegateRegistration.update({
             where: { id: registrationId },
             data: {
                 paymentStatus: "success",
@@ -87,7 +90,7 @@ export async function POST(request: NextRequest) {
     } catch (error: any) {
         console.error("Error verifying delegate payment:", error);
         return NextResponse.json(
-            { error: "Failed to verify payment" },
+            { error: `Failed to verify payment: ${error.message}` },
             { status: 500 }
         );
     }
