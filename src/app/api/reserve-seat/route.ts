@@ -23,13 +23,19 @@ export async function POST(request: Request) {
             );
         }
 
-        // Prevent duplicate submissions within a short timeframe (optional, but good practice)
-        // For now, we'll just check if a reservation with this email exists for this role/passType recently
-        // effectively allowing updates or re-submissions if needed, but preventing instant double-clicks
-        // Ideally, we might want to update existing or just create new.
-        // Let's create new for now as per requirement "Save all form data".
+        // Ensure prisma client is ready and SeatReservation model exists on it
+        // (casting to any to bypass potential type mismatch if generation is pending)
+        const prismaClient = prisma as any;
 
-        const reservation = await prisma.seatReservation.create({
+        if (!prismaClient.seatReservation) {
+            console.error('Prisma Client does not have seatReservation model. Schema might not be generated.');
+            return NextResponse.json(
+                { error: 'System error: Database model not found.' },
+                { status: 500 }
+            );
+        }
+
+        const reservation = await prismaClient.seatReservation.create({
             data: {
                 fullName,
                 workEmail,

@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 
 export async function getSeatReservations() {
     try {
-        const reservations = await prisma.seatReservation.findMany({
+        const prismaClient = prisma as any;
+        const reservations = await prismaClient.seatReservation.findMany({
             orderBy: { createdAt: "desc" },
         });
         return { success: true, reservations };
@@ -17,7 +18,8 @@ export async function getSeatReservations() {
 
 export async function deleteSeatReservation(id: string) {
     try {
-        await prisma.seatReservation.delete({
+        const prismaClient = prisma as any;
+        await prismaClient.seatReservation.delete({
             where: { id },
         });
         revalidatePath("/admin/seat-reservations");
