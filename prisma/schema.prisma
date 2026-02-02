@@ -437,3 +437,20 @@ model DelegateRegistration {
   @@index([createdAt])
 }
 
+
+// Reserve Your Seat / Seat Reservation Model
+model SeatReservation {
+  id           String   @id @default(cuid())
+  fullName     String
+  workEmail    String
+  organization String
+  role         String   // In-House Counsel, Law Firm Partner, etc.
+  passType     String   // Visitor Pass, Full Access Pass, etc.
+  status       String   @default("New") // New, Contacted
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([workEmail])
+  @@index([status])
+  @@index([createdAt])
+}

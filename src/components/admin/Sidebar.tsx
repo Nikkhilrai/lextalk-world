@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
     LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar,
-    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download
+    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download, Armchair
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
@@ -27,6 +27,7 @@ const NAV_GROUPS = [
             { label: "Tickets", href: "/admin/tickets", icon: Ticket },
             { label: "Ticket Types", href: "/admin/ticket-types", icon: Layers },
             { label: "Agenda Downloads", href: "/admin/agenda-downloads", icon: Download },
+            { label: "Seat Reservations", href: "/admin/seat-reservations", icon: Armchair },
             { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Awardees", href: "/admin/awardees", icon: Award },

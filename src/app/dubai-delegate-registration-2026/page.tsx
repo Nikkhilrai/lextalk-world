@@ -4,6 +4,7 @@ import WhyAttend from "./components/WhyAttend";
 import WhatYouGainAgenda from "./components/WhatYouGainAgenda";
 import Testimonials from "./components/Testimonials";
 import UpcomingEventsSection from "./components/UpcomingEventsSection";
+import ReserveYourSeatForm from "./components/ReserveYourSeatForm";
 import WhoShouldAttend from "./components/WhoShouldAttend";
 import Pricing from "./components/Pricing";
 
@@ -18,6 +19,7 @@ export default function Page() {
             <WhoShouldAttend />
             <Testimonials />
             <UpcomingEventsSection />
+            <ReserveYourSeatForm />
         </main>
     );
 }
