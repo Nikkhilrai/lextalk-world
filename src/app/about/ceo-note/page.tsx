@@ -67,7 +67,7 @@ export default function CEONotePage() {
                             <div className="space-y-2 pt-2">
                                 <h2 className="text-2xl font-serif font-bold text-slate-900 tracking-tight">Abhishek Gourav</h2>
                                 <div className="flex flex-col gap-0.5">
-                                    <p className="text-amber-600 font-bold uppercase tracking-[0.15em] text-[9px]">Co-Founder & CEO, LexTalk World</p>
+                                    <p className="text-amber-600 font-bold uppercase tracking-[0.15em] text-[9px]">Co-Founder & Director, LexTalk World</p>
                                     <p className="text-slate-500 text-[10px] font-medium leading-relaxed">
                                         LexTalk World & MysticVerse Global <br className="hidden md:block" /> Conference & Exhibitions
                                     </p>
