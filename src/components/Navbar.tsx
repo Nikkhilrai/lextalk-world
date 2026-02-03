@@ -160,7 +160,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                 </div>
                             ))}
                             <Link
-                                href="/tickets"
+                                href="/dubai-delegate-registration-2026"
                                 target="_blank"
                                 className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
                             >
@@ -172,7 +172,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                     {/* Minimal mode - just show Secure Pass button */}
                     {minimal && (
                         <Link
-                            href="/tickets"
+                            href="/dubai-delegate-registration-2026"
                             target="_blank"
                             className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
                         >
@@ -240,7 +240,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                             </div>
                         ))}
                         <Link
-                            href="/tickets"
+                            href="/dubai-delegate-registration-2026"
                             target="_blank"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="mx-3 mt-2 mb-2 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg text-sm text-center"
