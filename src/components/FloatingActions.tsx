@@ -9,7 +9,8 @@ import {
     Instagram,
     Linkedin,
     ArrowRight,
-    MessageSquare
+    MessageSquare,
+    ChevronUp
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,13 +34,20 @@ export function FloatingActions() {
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
     const actions = [
         {
             icon: MessageSquare,
             label: "WhatsApp",
             href: "https://wa.me/919205140030",
             iconColor: "text-emerald-600",
-            bgColor: "bg-slate-100", // Light grayish-blue
+            bgColor: "bg-slate-100",
             glowColor: "group-hover:shadow-emerald-500/20"
         },
         {
@@ -68,7 +76,7 @@ export function FloatingActions() {
         }
     ];
 
-    // Specular highlight for the "Water Ball" look (Light theme)
+    // Specular highlight for the "Water Ball" look
     const SpecularLight = () => (
         <div className="absolute top-1 left-2 w-1/3 h-[2px] bg-white/80 blur-[0.5px] rounded-full pointer-events-none" />
     );
@@ -141,7 +149,7 @@ export function FloatingActions() {
                     )}
                 </AnimatePresence>
 
-                {/* Main Trigger Button */}
+                {/* Main Action Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.15),inset_0_2px_5px_rgba(255,255,255,0.8)] ${isOpen
@@ -175,6 +183,18 @@ export function FloatingActions() {
                             </motion.div>
                         )}
                     </AnimatePresence>
+                </button>
+
+                {/* Back to Top Button */}
+                <button
+                    onClick={scrollToTop}
+                    className="relative w-14 h-14 rounded-[23px] bg-slate-100 text-slate-900 border border-slate-200/60 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.1),inset_0_2px_5px_rgba(255,255,255,0.8)] hover:bg-slate-200 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+                    aria-label="Back to Top"
+                >
+                    <SpecularLight />
+                    <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
+                        <ChevronUp size={26} strokeWidth={2.5} />
+                    </div>
                 </button>
             </div>
 
