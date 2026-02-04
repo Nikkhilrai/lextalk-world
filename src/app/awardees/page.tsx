@@ -77,8 +77,8 @@ export default function AwardeesPage() {
                         <button
                             onClick={() => setSelectedYear(null)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedYear === null
-                                    ? "bg-amber-500 text-black"
-                                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                                ? "bg-amber-500 text-black"
+                                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
                                 }`}
                         >
                             All Years
@@ -88,8 +88,8 @@ export default function AwardeesPage() {
                                 key={year}
                                 onClick={() => setSelectedYear(year)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedYear === year
-                                        ? "bg-amber-500 text-black"
-                                        : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                                    ? "bg-amber-500 text-black"
+                                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
                                     }`}
                             >
                                 {year}
@@ -123,18 +123,12 @@ export default function AwardeesPage() {
                                 >
                                     {/* Image */}
                                     <div className="aspect-[16/10] relative bg-gradient-to-br from-amber-900/30 to-amber-700/10">
-                                        {event.image ? (
-                                            <Image
-                                                src={event.image}
-                                                alt={event.name}
-                                                fill
-                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                        ) : (
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <Award className="w-20 h-20 text-amber-500/30" />
-                                            </div>
-                                        )}
+                                        <Image
+                                            src={event.image || "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"}
+                                            alt={event.name}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent" />
 
                                         {/* Year Badge */}
@@ -153,10 +147,6 @@ export default function AwardeesPage() {
                                             <div className="flex items-center gap-1.5">
                                                 <MapPin className="w-4 h-4 text-amber-500" />
                                                 <span>{event.location}</span>
-                                            </div>
-                                            <div className="flex items-center gap-1.5">
-                                                <Users className="w-4 h-4 text-amber-500" />
-                                                <span>{event._count?.awardees || 0} Awardees</span>
                                             </div>
                                         </div>
 
