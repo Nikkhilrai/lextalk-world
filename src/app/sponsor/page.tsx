@@ -701,12 +701,18 @@ export default function SponsorshipPage() {
                                 ))}
                             </div>
                         </div>
+                    </div>
 
-                        {/* Knowledge Partners */}
-                        <div>
-                            <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
-                                Knowledge Partners
-                            </h3>
+                    {/* Knowledge Partners */}
+                    <div className="mt-20">
+                        <div className="flex flex-col items-center">
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2 bg-gradient-to-r from-slate-200 via-white to-slate-400 border border-slate-200 rounded-full shadow-md">
+                                    <h3 className="text-base md:text-lg font-serif font-bold text-slate-900 uppercase tracking-widest whitespace-nowrap">
+                                        Knowledge Partners
+                                    </h3>
+                                </div>
+                            </div>
                             <div className="flex flex-wrap justify-center gap-6">
                                 {[
                                     { name: "Uber", logo: "/sponsor/Sponsor logo/Uber.jpg" },
@@ -745,6 +751,7 @@ export default function SponsorshipPage() {
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
 
             <SponsorshipModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
