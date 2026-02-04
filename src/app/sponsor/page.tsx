@@ -561,143 +561,190 @@ export default function SponsorshipPage() {
 
                     {/* Presenting Sponsor */}
                     <div className="mb-20">
-                        <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
-                            Presenting Sponsor
-                        </h3>
-                        <div className="flex justify-center">
-                            <a
-                                href="https://www.mrsprofessional.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full max-w-md h-36 bg-white rounded-2xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/Sponsor logo/Mrs.webp"
-                                        alt="MRS - Presenting Sponsor"
-                                        fill
-                                        className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                                    />
+                        <div className="flex flex-col items-center">
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-3 bg-gradient-to-r from-amber-500 via-amber-100 to-amber-600 border border-amber-300 rounded-full shadow-lg">
+                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-amber-950 uppercase tracking-widest whitespace-nowrap">
+                                        Presenting Sponsor
+                                    </h3>
                                 </div>
-                            </a>
+                            </div>
+                            <div className="flex justify-center">
+                                <a
+                                    href="https://www.mrsprofessional.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-full max-w-lg h-44 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(245,158,11,0.15)] border-2 border-amber-200 group-hover:border-amber-400 p-4 flex items-center justify-center hover:-translate-y-1"
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/sponsor/Sponsor logo/Mrs.webp"
+                                            alt="MRS - Presenting Sponsor"
+                                            fill
+                                            className="object-contain filter group-hover:brightness-110 transition-all duration-300"
+                                        />
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     {/* Diamond Sponsor */}
                     <div className="mb-20">
-                        <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
-                            Diamond Sponsor
-                        </h3>
-                        <div className="flex flex-wrap justify-center gap-8">
-                            <a
-                                href="https://www.findlaw.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full max-w-[280px] h-32 bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/Sponsor logo/Find Law Logo.avif"
-                                        alt="FindLaw - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
+                        <div className="flex flex-col items-center">
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-cyan-50 via-white to-cyan-50 border border-cyan-100 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
+                                        Diamond Sponsor
+                                    </h3>
                                 </div>
-                            </a>
-                            <a
-                                href="https://www.smartadvocate.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full max-w-[280px] h-32 bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/Sponsor logo/SmartAdvocate Logo.avif"
-                                        alt="SmartAdvocate - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
+                            </div>
+                            <div className="flex flex-wrap justify-center gap-8">
+                                <a
+                                    href="https://www.findlaw.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-full max-w-[320px] h-40 bg-white rounded-xl shadow-[0_10px_30px_-10px_rgba(6,182,212,0.1)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.2)] border border-cyan-50 group-hover:border-cyan-200 p-4 flex items-center justify-center hover:-translate-y-1"
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/sponsor/Sponsor logo/Find Law Logo.avif"
+                                            alt="FindLaw - Diamond Sponsor"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </a>
+                                <a
+                                    href="https://www.smartadvocate.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-full max-w-[320px] h-40 bg-white rounded-xl shadow-[0_10px_30px_-10px_rgba(6,182,212,0.1)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.2)] border border-cyan-50 group-hover:border-cyan-200 p-4 flex items-center justify-center hover:-translate-y-1"
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/sponsor/Sponsor logo/SmartAdvocate Logo.avif"
+                                            alt="SmartAdvocate - Diamond Sponsor"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Gold Sponsor */}
+                    <div className="mb-20">
+                        <div className="flex flex-col items-center">
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-amber-400 via-amber-100 to-amber-500 border border-amber-300 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-amber-900 uppercase tracking-widest whitespace-nowrap">
+                                        Gold Sponsor
+                                    </h3>
                                 </div>
-                            </a>
+                            </div>
+                            <div className="flex justify-center">
+                                <a
+                                    href="https://asgpartners.co.in/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-full max-w-[300px] h-36 bg-white rounded-xl shadow-[0_10px_30px_-10px_rgba(180,83,9,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.15)] border border-amber-50 group-hover:border-amber-200 p-4 flex items-center justify-center hover:-translate-y-1"
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/sponsor/Sponsor logo/gold sponsor/AsgandPartnerlogo.jpeg"
+                                            alt="Asgand & Partner - Gold Sponsor"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     {/* Past Sponsors & Partners */}
                     <div className="mb-20">
-                        <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
-                            Past Sponsors & Partners
-                        </h3>
-                        <div className="flex flex-wrap justify-center gap-6">
-                            {[
-                                { name: "Lex Corp", logo: "/sponsor/Sponsor logo/Lex Corp.jpg", url: "https://www.lexcorp.org.in/" },
-                                { name: "Case Docker", logo: "/sponsor/Sponsor logo/Case Docer.png", url: "https://www.casedocker.com/landing/" },
-                                { name: "Allcanza", logo: "/sponsor/Sponsor logo/Allcanza Logo.avif", url: "https://www.allcanza.com/" },
-                                { name: "Borge", logo: "/sponsor/Sponsor logo/Borge.webp", url: "https://borgesadv.com.br/" },
-                                { name: "Klip", logo: "/sponsor/Sponsor logo/Klip.jpg", url: "https://www.klip.us/" }
-                            ].map((sponsor, idx) => (
-                                <a
-                                    key={idx}
-                                    href={sponsor.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group relative w-[200px] h-[120px] bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
-                                >
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={sponsor.logo}
-                                            alt={sponsor.name}
-                                            fill
-                                            className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
-                                        />
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Knowledge Partners */}
-                    <div>
-                        <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
-                            Knowledge Partners
-                        </h3>
-                        <div className="flex flex-wrap justify-center gap-6">
-                            {[
-                                { name: "Uber", logo: "/sponsor/Sponsor logo/Uber.jpg" },
-                                { name: "White & Case", logo: "/sponsor/Sponsor logo/White and case.jpg" },
-                                { name: "Contact Force", logo: "/sponsor/Sponsor logo/contact force.jpg" },
-                                { name: "Stellantis", logo: "/sponsor/Sponsor logo/stellantis.jpg" },
-                                { name: "Fayet", logo: "/sponsor/Sponsor logo/Fayet.jpg" },
-                                { name: "Theon", logo: "/sponsor/Sponsor logo/theon.webp" },
-                                { name: "Winnow", logo: "/sponsor/Sponsor logo/Winnow.jpg" },
-                                { name: "TRCM", logo: "/sponsor/Sponsor logo/Trcm.jpg" },
-                                { name: "Consejeras MX", logo: "/sponsor/Sponsor logo/consejeras mx.jpg" },
-                                { name: "Juarez", logo: "/sponsor/Sponsor logo/juarez.jpg" },
-                                { name: "Thielmann", logo: "/sponsor/Sponsor logo/thielmann.jpg" },
-                                { name: "Littler", logo: "/sponsor/Sponsor logo/littler.jpg" },
-                                { name: "Arrow", logo: "/sponsor/Sponsor logo/arrow.jpg" },
-                                { name: "Mundial", logo: "/sponsor/Sponsor logo/mundial.jpg" },
-                                { name: "Legal AI", logo: "/sponsor/Sponsor logo/Legalai.jpg" },
-                                { name: "GMM", logo: "/sponsor/Sponsor logo/GMM.jpg" },
-                                { name: "Luxcs", logo: "/sponsor/Sponsor logo/Luxcs.jpg" },
-                            ].map((partner, idx) => (
-
-                                <div
-                                    key={idx}
-                                    className="group relative w-[220px] h-[130px] bg-white rounded-xl shadow-md border border-slate-200/50 flex items-center justify-center p-3 hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
-                                >
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={partner.logo}
-                                            alt={partner.name}
-                                            fill
-                                            className="object-contain"
-                                        />
-                                    </div>
+                        <div className="flex flex-col items-center">
+                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 border border-slate-300 rounded-full shadow-md">
+                                    <h3 className="text-base md:text-lg font-serif font-bold text-slate-900 uppercase tracking-widest whitespace-nowrap">
+                                        Past Sponsors & Partners
+                                    </h3>
                                 </div>
-                            ))}
+                            </div>
+                            <div className="flex flex-wrap justify-center gap-6">
+                                {[
+                                    { name: "Lex Corp", logo: "/sponsor/Sponsor logo/Lex Corp.jpg", url: "https://www.lexcorp.org.in/" },
+                                    { name: "Case Docker", logo: "/sponsor/Sponsor logo/Case Docer.png", url: "https://www.casedocker.com/landing/" },
+                                    { name: "Allcanza", logo: "/sponsor/Sponsor logo/Allcanza Logo.avif", url: "https://www.allcanza.com/" },
+                                    { name: "Borge", logo: "/sponsor/Sponsor logo/Borge.webp", url: "https://borgesadv.com.br/" },
+                                    { name: "Klip", logo: "/sponsor/Sponsor logo/Klip.jpg", url: "https://www.klip.us/" }
+                                ].map((sponsor, idx) => (
+                                    <a
+                                        key={idx}
+                                        href={sponsor.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative w-[200px] h-[120px] bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src={sponsor.logo}
+                                                alt={sponsor.name}
+                                                fill
+                                                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                                            />
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Knowledge Partners */}
+                        <div>
+                            <h3 className="text-2xl md:text-3xl font-bold font-serif text-slate-800 text-center mb-10">
+                                Knowledge Partners
+                            </h3>
+                            <div className="flex flex-wrap justify-center gap-6">
+                                {[
+                                    { name: "Uber", logo: "/sponsor/Sponsor logo/Uber.jpg" },
+                                    { name: "White & Case", logo: "/sponsor/Sponsor logo/White and case.jpg" },
+                                    { name: "Contact Force", logo: "/sponsor/Sponsor logo/contact force.jpg" },
+                                    { name: "Stellantis", logo: "/sponsor/Sponsor logo/stellantis.jpg" },
+                                    { name: "Fayet", logo: "/sponsor/Sponsor logo/Fayet.jpg" },
+                                    { name: "Theon", logo: "/sponsor/Sponsor logo/theon.webp" },
+                                    { name: "Winnow", logo: "/sponsor/Sponsor logo/Winnow.jpg" },
+                                    { name: "TRCM", logo: "/sponsor/Sponsor logo/Trcm.jpg" },
+                                    { name: "Consejeras MX", logo: "/sponsor/Sponsor logo/consejeras mx.jpg" },
+                                    { name: "Juarez", logo: "/sponsor/Sponsor logo/juarez.jpg" },
+                                    { name: "Thielmann", logo: "/sponsor/Sponsor logo/thielmann.jpg" },
+                                    { name: "Littler", logo: "/sponsor/Sponsor logo/littler.jpg" },
+                                    { name: "Arrow", logo: "/sponsor/Sponsor logo/arrow.jpg" },
+                                    { name: "Mundial", logo: "/sponsor/Sponsor logo/mundial.jpg" },
+                                    { name: "Legal AI", logo: "/sponsor/Sponsor logo/Legalai.jpg" },
+                                    { name: "GMM", logo: "/sponsor/Sponsor logo/GMM.jpg" },
+                                    { name: "Luxcs", logo: "/sponsor/Sponsor logo/Luxcs.jpg" },
+                                ].map((partner, idx) => (
+
+                                    <div
+                                        key={idx}
+                                        className="group relative w-[220px] h-[130px] bg-white rounded-xl shadow-md border border-slate-200/50 flex items-center justify-center p-3 hover:shadow-lg hover:border-amber-300/60 hover:-translate-y-1 transition-all duration-300"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src={partner.logo}
+                                                alt={partner.name}
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
             </section>
 
             <SponsorshipModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
