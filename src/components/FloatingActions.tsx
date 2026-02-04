@@ -10,6 +10,11 @@ export function FloatingActions() {
 
     // Show button only after scrolling down a bit (e.g., past the hero)
     useEffect(() => {
+        // Auto-open the register modal after 2 seconds for lead generation
+        const timer = setTimeout(() => {
+            setIsRegisterOpen(true);
+        }, 2000);
+
         const toggleVisibility = () => {
             if (window.scrollY > 500) {
                 setIsVisible(true);
@@ -19,7 +24,10 @@ export function FloatingActions() {
         };
 
         window.addEventListener("scroll", toggleVisibility);
-        return () => window.removeEventListener("scroll", toggleVisibility);
+        return () => {
+            window.removeEventListener("scroll", toggleVisibility);
+            clearTimeout(timer);
+        };
     }, []);
 
     // Common specular highlight for water drop effect
