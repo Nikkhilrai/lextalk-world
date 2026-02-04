@@ -38,35 +38,35 @@ export function FloatingActions() {
             icon: MessageSquare,
             label: "WhatsApp",
             href: "https://wa.me/919205140030",
-            iconColor: "text-emerald-500",
-            glowColor: "group-hover:shadow-emerald-500/30"
+            iconColor: "text-emerald-400",
+            glowColor: "group-hover:shadow-emerald-500/40"
         },
         {
             icon: Phone,
             label: "Call Us",
             href: "tel:+919205140030",
-            iconColor: "text-slate-900",
-            glowColor: "group-hover:shadow-slate-900/30"
+            iconColor: "text-amber-400",
+            glowColor: "group-hover:shadow-amber-500/40"
         },
         {
             icon: Instagram,
             label: "Instagram",
             href: "https://www.instagram.com/lextalkworldapacandme/",
-            iconColor: "text-amber-500",
-            glowColor: "group-hover:shadow-amber-500/30"
+            iconColor: "text-pink-400",
+            glowColor: "group-hover:shadow-pink-500/40"
         },
         {
             icon: Linkedin,
             label: "LinkedIn",
             href: "https://www.linkedin.com/company/lextalkworld-apac-me/",
-            iconColor: "text-[#0077b5]",
-            glowColor: "group-hover:shadow-blue-500/30"
+            iconColor: "text-blue-400",
+            glowColor: "group-hover:shadow-blue-500/40"
         }
     ];
 
-    // Premium Water Drop / Ball specular highlight (External)
-    const SpecularOuter = () => (
-        <div className="absolute -inset-1.5 bg-gradient-to-b from-white/40 to-transparent opacity-0 group-hover:opacity-100 blur-[2px] rounded-[26px] transition-opacity duration-500 pointer-events-none" />
+    // Water Drop specular highlight for dark bubbles
+    const SpecularShadow = () => (
+        <div className="absolute top-1.5 left-2 w-1/3 h-[1.5px] bg-white opacity-40 blur-[0.5px] rounded-full pointer-events-none" />
     );
 
     return (
@@ -95,16 +95,17 @@ export function FloatingActions() {
                                     }}
                                     className="flex items-center gap-3 group relative"
                                 >
-                                    <span className="px-3 py-1.5 bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-slate-200/50">
+                                    <span className="px-3 py-1.5 bg-slate-900/95 backdrop-blur-md text-slate-100 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10">
                                         {action.label}
                                     </span>
                                     <a
                                         href={action.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`relative w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl border border-white flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl`}
+                                        className={`relative w-12 h-12 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl overflow-hidden`}
                                     >
-                                        <div className="absolute top-1 left-1.5 w-1/3 h-[1.5px] bg-white opacity-90 blur-[0.5px] rounded-full" />
+                                        <SpecularShadow />
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
                                         <action.icon size={20} />
                                     </a>
                                 </motion.div>
@@ -128,8 +129,8 @@ export function FloatingActions() {
                                 <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
                                     Register Now
                                 </span>
-                                <div className="relative w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl border border-white text-amber-500 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-amber-500/30 hover:shadow-2xl">
-                                    <div className="absolute top-1 left-1.5 w-1/3 h-[1.5px] bg-white opacity-90 blur-[0.5px] rounded-full" />
+                                <div className="relative w-12 h-12 rounded-2xl bg-amber-500 border border-white/20 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.5)] transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-amber-500/40 hover:shadow-2xl overflow-hidden">
+                                    <div className="absolute top-1.5 left-2 w-1/3 h-[1.5px] bg-white opacity-60 blur-[0.5px] rounded-full" />
                                     <ArrowRight size={20} className="-rotate-45" />
                                 </div>
                             </motion.button>
@@ -140,22 +141,25 @@ export function FloatingActions() {
                 {/* Main Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.15)] bg-white border border-white group`}
+                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_15px_35px_-5px_rgba(0,0,0,0.4)] ${isOpen
+                            ? "bg-amber-500 text-slate-950 rotate-90"
+                            : "bg-slate-950 text-amber-500"
+                        } border border-white/10 group overflow-hidden`}
                 >
-                    {/* Outer "Water Drop" glow effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-b from-white/80 to-transparent opacity-0 group-hover:opacity-100 blur-[2px] rounded-[25px] transition-all duration-500" />
+                    {/* External Glow / Water Drop Effect */}
+                    <div className="absolute -inset-1 bg-amber-500/20 opacity-0 group-hover:opacity-100 blur-[4px] rounded-[24px] transition-all duration-500" />
 
-                    <div className="relative z-10">
+                    <div className="relative z-10 transition-transform duration-300 group-hover:scale-110">
                         <AnimatePresence mode="wait">
                             {isOpen ? (
                                 <motion.div
                                     key="close"
-                                    initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                    exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                                    className="text-slate-900"
+                                    initial={{ opacity: 0, scale: 0.5 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.5 }}
+                                    transition={{ duration: 0.2 }}
                                 >
-                                    <X size={24} />
+                                    <X size={24} strokeWidth={2.5} />
                                 </motion.div>
                             ) : (
                                 <motion.div
@@ -163,17 +167,18 @@ export function FloatingActions() {
                                     initial={{ opacity: 0, scale: 0.5 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.5 }}
-                                    className="relative flex items-center justify-center text-slate-900"
+                                    transition={{ duration: 0.2 }}
+                                    className="relative flex items-center justify-center"
                                 >
-                                    <MessageCircle size={26} fill="none" strokeWidth={1.5} />
-                                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
+                                    <MessageCircle size={26} strokeWidth={2} />
+                                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-slate-950 shadow-sm" />
                                 </motion.div>
                             )}
                         </AnimatePresence>
                     </div>
 
-                    {/* Inner Specular highlight for ball effect */}
-                    <div className="absolute top-2 left-3 w-1/4 h-[2px] bg-white opacity-80 blur-[0.5px] rounded-full z-20" />
+                    {/* Inner highlight for drop effect */}
+                    <div className="absolute top-2 left-3 w-1/4 h-[2px] bg-white opacity-30 blur-[0.5px] rounded-full z-20 pointer-events-none" />
                 </button>
             </div>
 
