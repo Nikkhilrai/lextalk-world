@@ -110,7 +110,9 @@ export function Hero() {
                                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
                             <Link
-                                href="#"
+                                href="https://www.youtube.com/watch?v=a4QlmJS0eBs"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group flex-1 sm:flex-none px-5 sm:px-7 py-3 sm:py-3.5 bg-white text-slate-900 border-2 border-slate-200 font-semibold rounded-xl hover:border-amber-300 hover:bg-amber-50/50 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                             >
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-amber-100 rounded-full flex items-center justify-center group-hover:bg-amber-200 transition-colors">
