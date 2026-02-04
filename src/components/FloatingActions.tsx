@@ -2,71 +2,167 @@
 
 import { useState, useEffect } from "react";
 import { RegisterModal } from "./RegisterModal";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import {
+    MessageCircle,
+    X,
+    Phone,
+    Instagram,
+    Linkedin,
+    ArrowRight,
+    MessageSquare
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function FloatingActions() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-    // Show button only after scrolling down a bit (e.g., past the hero)
+    // Show button only after scrolling down a bit
     useEffect(() => {
-        // Auto-open the register modal after 2 seconds for lead generation
-        const timer = setTimeout(() => {
-            setIsRegisterOpen(true);
-        }, 2000);
-
         const toggleVisibility = () => {
-            if (window.scrollY > 500) {
+            if (window.scrollY > 300) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
+                setIsOpen(false);
             }
         };
 
         window.addEventListener("scroll", toggleVisibility);
-        return () => {
-            window.removeEventListener("scroll", toggleVisibility);
-            clearTimeout(timer);
-        };
+        return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
-    // Common specular highlight for water drop effect
-    const specularHighlight = <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[1px] rounded-full pointer-events-none" />;
+    const actions = [
+        {
+            icon: MessageSquare,
+            label: "WhatsApp",
+            href: "https://wa.me/919811885302",
+            color: "bg-emerald-500",
+            hover: "hover:bg-emerald-600"
+        },
+        {
+            icon: Phone,
+            label: "Call Us",
+            href: "tel:+919811885302",
+            color: "bg-blue-500",
+            hover: "hover:bg-blue-600"
+        },
+        {
+            icon: Instagram,
+            label: "Instagram",
+            href: "https://www.instagram.com/lextalkworldapacandme/",
+            color: "bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600",
+            hover: "opacity-90 hover:opacity-100"
+        },
+        {
+            icon: Linkedin,
+            label: "LinkedIn",
+            href: "https://www.linkedin.com/company/lextalkworld-apac-me/",
+            color: "bg-[#0077b5]",
+            hover: "hover:bg-[#006396]"
+        }
+    ];
 
     return (
         <>
-            {/* Container - Bottom Right (Vertical Stack) */}
-            <div className={`fixed bottom-20 right-4 sm:right-6 z-50 flex flex-col items-end gap-3 transition-all duration-700 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
                 }`}>
 
-                {/* WhatsApp Button - Icon Only */}
-                <a
-                    href="https://wa.me/919811885302"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative p-2 sm:p-2.5 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_25px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
-                    aria-label="Contact on WhatsApp"
-                >
-                    {specularHighlight}
-                    <div className="relative flex items-center justify-center">
-                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:bg-green-600 transition-colors">
-                            <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white transition-transform duration-300" />
-                        </div>
-                    </div>
-                </a>
+                {/* Action Items */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            className="flex flex-col items-end gap-3 mb-2"
+                        >
+                            {actions.map((action, idx) => (
+                                <motion.div
+                                    key={action.label}
+                                    initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                                    animate={{
+                                        opacity: 1,
+                                        x: 0,
+                                        scale: 1,
+                                        transition: { delay: idx * 0.05 }
+                                    }}
+                                    className="flex items-center gap-3 group"
+                                >
+                                    <span className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10">
+                                        {action.label}
+                                    </span>
+                                    <a
+                                        href={action.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-12 h-12 rounded-2xl ${action.color} ${action.hover} flex items-center justify-center text-white shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95`}
+                                    >
+                                        <action.icon size={20} />
+                                    </a>
+                                </motion.div>
+                            ))}
 
-                {/* Register Button - Smaller */}
+                            {/* Register Button as Part of Menu */}
+                            <motion.button
+                                initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                                animate={{
+                                    opacity: 1,
+                                    x: 0,
+                                    scale: 1,
+                                    transition: { delay: actions.length * 0.05 }
+                                }}
+                                onClick={() => {
+                                    setIsRegisterOpen(true);
+                                    setIsOpen(false);
+                                }}
+                                className="flex items-center gap-3 group"
+                            >
+                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
+                                    Register Now
+                                </span>
+                                <div className="w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95">
+                                    <ArrowRight size={20} className="-rotate-45" />
+                                </div>
+                            </motion.button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Main Trigger Button */}
                 <button
-                    onClick={() => setIsRegisterOpen(true)}
-                    className="relative px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_25px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] group"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-2xl ${isOpen
+                            ? "bg-slate-900 text-white rotate-90"
+                            : "bg-white text-slate-900 hover:bg-slate-50"
+                        } border border-slate-200/50 group overflow-hidden`}
                 >
-                    {specularHighlight}
-                    <div className="relative flex items-center gap-1.5 sm:gap-2 text-slate-900 font-bold tracking-wide">
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-slate-900 flex items-center justify-center shadow-lg group-hover:bg-amber-600 transition-colors">
-                            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                        </div>
-                        <span className="text-[9px] sm:text-[10px] uppercase tracking-widest drop-shadow-sm">Register Now</span>
-                    </div>
+                    <AnimatePresence mode="wait">
+                        {isOpen ? (
+                            <motion.div
+                                key="close"
+                                initial={{ opacity: 0, rotate: -90 }}
+                                animate={{ opacity: 1, rotate: 0 }}
+                                exit={{ opacity: 0, rotate: 90 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <X size={24} />
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="open"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                transition={{ duration: 0.2 }}
+                                className="relative"
+                            >
+                                <MessageCircle size={24} />
+                                <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full border-2 border-white animate-pulse" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </button>
             </div>
 
