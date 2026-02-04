@@ -4,57 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, MapPin, Calendar, Users } from "lucide-react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { RegisterModal } from "@/components/RegisterModal";
-
-// 3D Tilt Card Component for "stretchable" effect
-function TiltCard({ children, className, style }: { children: React.ReactNode; className?: string; style?: any }) {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                rotateY,
-                rotateX,
-                transformStyle: "preserve-3d",
-                ...style
-            }}
-            className={className}
-        >
-            <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d", height: "100%", width: "100%" }}>
-                {children}
-            </div>
-        </motion.div>
-    );
-}
 
 // Animated Counter Component
 function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
@@ -222,99 +172,85 @@ export function Hero() {
                         </div>
 
                         {/* Card 1: Back */}
-                        <TiltCard
-                            className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 z-10"
-                            style={{ transform: "rotate(-8deg)" }}
-                        >
-                            <div className="w-full h-full bg-slate-800 rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop"
-                                    alt="New York"
-                                    fill
-                                    className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                            Nov 2025
-                                        </span>
-                                    </div>
-                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">New York</h3>
+                        <div className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[-8deg] hover:rotate-[-4deg] transition-all duration-500 z-10 overflow-hidden group cursor-pointer">
+                            <Image
+                                src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop"
+                                alt="New York"
+                                fill
+                                className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
+                                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
+                                        Nov 2025
+                                    </span>
                                 </div>
+                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">New York</h3>
                             </div>
-                        </TiltCard>
+                        </div>
 
                         {/* Card 2: Middle */}
-                        <TiltCard
-                            className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 z-20"
-                            style={{ transform: "rotate(12deg)" }}
-                        >
-                            <div className="w-full h-full bg-slate-800 rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop"
-                                    alt="Singapore"
-                                    fill
-                                    className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                            Jul 2025
-                                        </span>
-                                    </div>
-                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Singapore</h3>
+                        <div className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[12deg] hover:rotate-[6deg] transition-all duration-500 z-20 overflow-hidden group cursor-pointer">
+                            <Image
+                                src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop"
+                                alt="Singapore"
+                                fill
+                                className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
+                                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
+                                        Jul 2025
+                                    </span>
                                 </div>
+                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Singapore</h3>
                             </div>
-                        </TiltCard>
+                        </div>
 
                         {/* Card 3: Front (Featured) */}
-                        <TiltCard
-                            className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 z-30"
-                        >
-                            <Link href="/dubai-2026" target="_blank" className="block w-full h-full bg-slate-900 rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"
-                                    alt="Dubai"
-                                    fill
-                                    className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
+                        <Link href="/dubai-2026" target="_blank" className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] z-30 overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500">
+                            <Image
+                                src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"
+                                alt="Dubai"
+                                fill
+                                className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
 
-                                {/* Featured Badge */}
-                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Featured
-                                </div>
+                            {/* Featured Badge */}
+                            <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                Featured
+                            </div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
-                                    <div className="flex items-center gap-2 mb-2 lg:mb-3">
-                                        <Calendar className="w-3 h-3 lg:w-4 lg:h-4 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">
-                                            May 2026
-                                        </span>
-                                    </div>
-                                    <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Dubai</h3>
-                                    <div className="flex items-center gap-2 text-slate-300 text-xs lg:text-sm mb-3 lg:mb-4">
-                                        <MapPin className="w-3 h-3 lg:w-4 lg:h-4" />
-                                        <span>Dubai, UAE</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 lg:gap-3">
-                                        <div className="flex -space-x-2">
-                                            <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-amber-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-amber-800">JD</div>
-                                            <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-blue-800">SK</div>
-                                            <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-purple-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-purple-800">MR</div>
-                                        </div>
-                                        <span className="text-slate-400 text-xs lg:text-sm">+200 registered</span>
-                                    </div>
+                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
+                                <div className="flex items-center gap-2 mb-2 lg:mb-3">
+                                    <Calendar className="w-3 h-3 lg:w-4 lg:h-4 text-amber-400" />
+                                    <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">
+                                        May 2026
+                                    </span>
                                 </div>
-                            </Link>
-                        </TiltCard>
+                                <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Dubai</h3>
+                                <div className="flex items-center gap-2 text-slate-300 text-xs lg:text-sm mb-3 lg:mb-4">
+                                    <MapPin className="w-3 h-3 lg:w-4 lg:h-4" />
+                                    <span>Dubai, UAE</span>
+                                </div>
+                                <div className="flex items-center gap-2 lg:gap-3">
+                                    <div className="flex -space-x-2">
+                                        <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-amber-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-amber-800">JD</div>
+                                        <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-blue-800">SK</div>
+                                        <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-purple-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-purple-800">MR</div>
+                                    </div>
+                                    <span className="text-slate-400 text-xs lg:text-sm">+200 registered</span>
+                                </div>
+                            </div>
+                        </Link>
 
                         {/* Floating "Live Now" Element */}
-                        <div className="absolute top-[40%] right-0 lg:right-[5%] p-3 lg:p-4 bg-white/90 backdrop-blur-sm rounded-[1.5rem] lg:rounded-[2rem] shadow-xl border border-slate-100 animate-bounce z-40">
+                        <div className="absolute top-[40%] right-0 lg:right-[5%] p-3 lg:p-4 bg-white/90 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-xl border border-slate-100 animate-bounce z-40">
                             <div className="flex items-center gap-2 lg:gap-3">
                                 <div className="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 rounded-full flex items-center justify-center">
                                     <Users className="w-4 h-4 lg:w-5 lg:h-5 text-green-600" />
