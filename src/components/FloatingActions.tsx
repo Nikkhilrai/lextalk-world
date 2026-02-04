@@ -83,7 +83,7 @@ export function FloatingActions() {
 
     return (
         <>
-            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
+            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
                 }`}>
 
                 {/* Action Items */}
@@ -185,15 +185,14 @@ export function FloatingActions() {
                     </AnimatePresence>
                 </button>
 
-                {/* Back to Top Button */}
+                {/* Back to Top Button - Redesigned to match screenshot */}
                 <button
                     onClick={scrollToTop}
-                    className="relative w-14 h-14 rounded-[23px] bg-slate-100 text-slate-900 border border-slate-200/60 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.1),inset_0_2px_5px_rgba(255,255,255,0.8)] hover:bg-slate-200 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+                    className="relative w-14 h-14 rounded-full border-2 border-amber-500 flex items-center justify-center group transition-all duration-300 hover:bg-amber-500/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] bg-slate-950/20 backdrop-blur-sm"
                     aria-label="Back to Top"
                 >
-                    <SpecularLight />
-                    <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
-                        <ChevronUp size={26} strokeWidth={2.5} />
+                    <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1.5 flex items-center justify-center">
+                        <ChevronUp size={28} className="text-amber-500" strokeWidth={3} />
                     </div>
                 </button>
             </div>
