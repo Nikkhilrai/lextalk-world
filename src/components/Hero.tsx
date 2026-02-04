@@ -226,7 +226,7 @@ export function Hero() {
                             className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 z-10"
                             style={{ transform: "rotate(-8deg)" }}
                         >
-                            <div className="w-full h-full bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
+                            <div className="w-full h-full bg-slate-800 rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
                                 <Image
                                     src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop"
                                     alt="New York"
@@ -251,7 +251,7 @@ export function Hero() {
                             className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 z-20"
                             style={{ transform: "rotate(12deg)" }}
                         >
-                            <div className="w-full h-full bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
+                            <div className="w-full h-full bg-slate-800 rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500">
                                 <Image
                                     src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop"
                                     alt="Singapore"
@@ -275,7 +275,7 @@ export function Hero() {
                         <TiltCard
                             className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 z-30"
                         >
-                            <Link href="/dubai-2026" target="_blank" className="block w-full h-full bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500">
+                            <Link href="/dubai-2026" target="_blank" className="block w-full h-full bg-slate-900 rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500">
                                 <Image
                                     src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"
                                     alt="Dubai"
@@ -314,7 +314,7 @@ export function Hero() {
                         </TiltCard>
 
                         {/* Floating "Live Now" Element */}
-                        <div className="absolute top-[40%] right-0 lg:right-[5%] p-3 lg:p-4 bg-white/90 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-xl border border-slate-100 animate-bounce z-40">
+                        <div className="absolute top-[40%] right-0 lg:right-[5%] p-3 lg:p-4 bg-white/90 backdrop-blur-sm rounded-[1.5rem] lg:rounded-[2rem] shadow-xl border border-slate-100 animate-bounce z-40">
                             <div className="flex items-center gap-2 lg:gap-3">
                                 <div className="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 rounded-full flex items-center justify-center">
                                     <Users className="w-4 h-4 lg:w-5 lg:h-5 text-green-600" />
