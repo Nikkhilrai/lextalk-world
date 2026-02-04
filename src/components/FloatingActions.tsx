@@ -37,23 +37,23 @@ export function FloatingActions() {
         {
             icon: MessageSquare,
             label: "WhatsApp",
-            href: "https://wa.me/919811885302",
+            href: "https://wa.me/919205140030", // Updated number
             color: "bg-emerald-500",
             hover: "hover:bg-emerald-600"
         },
         {
             icon: Phone,
             label: "Call Us",
-            href: "tel:+919811885302",
-            color: "bg-blue-500",
-            hover: "hover:bg-blue-600"
+            href: "tel:+919205140030", // Updated number
+            color: "bg-slate-900", // Theme Blue/Dark
+            hover: "hover:bg-slate-800"
         },
         {
             icon: Instagram,
             label: "Instagram",
             href: "https://www.instagram.com/lextalkworldapacandme/",
-            color: "bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600",
-            hover: "opacity-90 hover:opacity-100"
+            color: "bg-amber-500", // Theme Yellow/Amber
+            hover: "hover:bg-amber-600"
         },
         {
             icon: Linkedin,
@@ -63,6 +63,11 @@ export function FloatingActions() {
             hover: "hover:bg-[#006396]"
         }
     ];
+
+    // Water drop style highlight component
+    const SpecularHighlight = () => (
+        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-60 blur-[1px] rounded-full pointer-events-none" />
+    );
 
     return (
         <>
@@ -97,8 +102,9 @@ export function FloatingActions() {
                                         href={action.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`w-12 h-12 rounded-2xl ${action.color} ${action.hover} flex items-center justify-center text-white shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95`}
+                                        className={`relative w-12 h-12 rounded-2xl ${action.color} ${action.hover} flex items-center justify-center text-white shadow-[0_8px_20px_-5px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden`}
                                     >
+                                        <SpecularHighlight />
                                         <action.icon size={20} />
                                     </a>
                                 </motion.div>
@@ -119,10 +125,11 @@ export function FloatingActions() {
                                 }}
                                 className="flex items-center gap-3 group"
                             >
-                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
+                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10">
                                     Register Now
                                 </span>
-                                <div className="w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95">
+                                <div className="relative w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_2px_4px_rgba(255,255,255,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden">
+                                    <SpecularHighlight />
                                     <ArrowRight size={20} className="-rotate-45" />
                                 </div>
                             </motion.button>
@@ -133,11 +140,12 @@ export function FloatingActions() {
                 {/* Main Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-2xl ${isOpen
+                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,0.2)] ${isOpen
                             ? "bg-slate-900 text-white rotate-90"
                             : "bg-white text-slate-900 hover:bg-slate-50"
                         } border border-slate-200/50 group overflow-hidden`}
                 >
+                    <SpecularHighlight />
                     <AnimatePresence mode="wait">
                         {isOpen ? (
                             <motion.div
