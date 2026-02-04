@@ -41,46 +41,58 @@ export function Footer() {
                             </div>
                         </div>
                         {/* Social Links */}
-                        <div className="flex gap-2 sm:gap-3 pt-2">
+                        <div className="space-y-4 pt-2">
+                            <div className="flex gap-2 sm:gap-3">
+                                <Link
+                                    href="https://www.linkedin.com/company/lextalkworld-apac-me/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                >
+                                    <Linkedin size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                </Link>
+                                <Link
+                                    href="https://x.com/LextalkWorldME"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                >
+                                    <Twitter size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                </Link>
+                                <Link
+                                    href="https://www.facebook.com/profile.php?id=61585120593750"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                >
+                                    <Facebook size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                </Link>
+                                <Link
+                                    href="https://www.instagram.com/lextalkworldapacandme/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                >
+                                    <Instagram size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                </Link>
+                                <Link
+                                    href="https://www.youtube.com/@LextalkWorldAPACandME"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                >
+                                    <Youtube size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                </Link>
+                            </div>
+
                             <Link
-                                href="https://www.linkedin.com/company/lextalkworld-apac-me/posts/?feedView=all"
+                                href="https://www.linkedin.com/company/lextalkworld-apac-me/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold transition-all border border-slate-700 hover:border-amber-500/50 group"
                             >
-                                <Linkedin size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
-                            </Link>
-                            <Link
-                                href="https://x.com/LextalkWorldME"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
-                            >
-                                <Twitter size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
-                            </Link>
-                            <Link
-                                href="https://www.facebook.com/profile.php?id=61585120593750"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
-                            >
-                                <Facebook size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
-                            </Link>
-                            <Link
-                                href="https://www.instagram.com/lextalkworldapacandme/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
-                            >
-                                <Instagram size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
-                            </Link>
-                            <Link
-                                href="https://www.youtube.com/@LextalkWorldAPACandME"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-slate-800/50 hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 flex items-center justify-center transition-all duration-300 border border-slate-700 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/20"
-                            >
-                                <Youtube size={16} className="sm:w-[18px] sm:h-[18px] text-slate-400 group-hover:text-white transition-colors" />
+                                <Linkedin size={14} className="text-amber-500" />
+                                Follow us on LinkedIn
                             </Link>
                         </div>
                     </div>
