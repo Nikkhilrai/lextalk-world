@@ -37,36 +37,36 @@ export function FloatingActions() {
         {
             icon: MessageSquare,
             label: "WhatsApp",
-            href: "https://wa.me/919205140030", // Updated number
-            color: "bg-emerald-500",
-            hover: "hover:bg-emerald-600"
+            href: "https://wa.me/919205140030",
+            iconColor: "text-emerald-500",
+            glowColor: "group-hover:shadow-emerald-500/30"
         },
         {
             icon: Phone,
             label: "Call Us",
-            href: "tel:+919205140030", // Updated number
-            color: "bg-slate-900", // Theme Blue/Dark
-            hover: "hover:bg-slate-800"
+            href: "tel:+919205140030",
+            iconColor: "text-slate-900",
+            glowColor: "group-hover:shadow-slate-900/30"
         },
         {
             icon: Instagram,
             label: "Instagram",
             href: "https://www.instagram.com/lextalkworldapacandme/",
-            color: "bg-amber-500", // Theme Yellow/Amber
-            hover: "hover:bg-amber-600"
+            iconColor: "text-amber-500",
+            glowColor: "group-hover:shadow-amber-500/30"
         },
         {
             icon: Linkedin,
             label: "LinkedIn",
             href: "https://www.linkedin.com/company/lextalkworld-apac-me/",
-            color: "bg-[#0077b5]",
-            hover: "hover:bg-[#006396]"
+            iconColor: "text-[#0077b5]",
+            glowColor: "group-hover:shadow-blue-500/30"
         }
     ];
 
-    // Water drop style highlight component
-    const SpecularHighlight = () => (
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-60 blur-[1px] rounded-full pointer-events-none" />
+    // Premium Water Drop / Ball specular highlight (External)
+    const SpecularOuter = () => (
+        <div className="absolute -inset-1.5 bg-gradient-to-b from-white/40 to-transparent opacity-0 group-hover:opacity-100 blur-[2px] rounded-[26px] transition-opacity duration-500 pointer-events-none" />
     );
 
     return (
@@ -93,24 +93,24 @@ export function FloatingActions() {
                                         scale: 1,
                                         transition: { delay: idx * 0.05 }
                                     }}
-                                    className="flex items-center gap-3 group"
+                                    className="flex items-center gap-3 group relative"
                                 >
-                                    <span className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10">
+                                    <span className="px-3 py-1.5 bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-slate-200/50">
                                         {action.label}
                                     </span>
                                     <a
                                         href={action.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`relative w-12 h-12 rounded-2xl ${action.color} ${action.hover} flex items-center justify-center text-white shadow-[0_8px_20px_-5px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden`}
+                                        className={`relative w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl border border-white flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl`}
                                     >
-                                        <SpecularHighlight />
+                                        <div className="absolute top-1 left-1.5 w-1/3 h-[1.5px] bg-white opacity-90 blur-[0.5px] rounded-full" />
                                         <action.icon size={20} />
                                     </a>
                                 </motion.div>
                             ))}
 
-                            {/* Register Button as Part of Menu */}
+                            {/* Register Button */}
                             <motion.button
                                 initial={{ opacity: 0, x: 20, scale: 0.8 }}
                                 animate={{
@@ -123,13 +123,13 @@ export function FloatingActions() {
                                     setIsRegisterOpen(true);
                                     setIsOpen(false);
                                 }}
-                                className="flex items-center gap-3 group"
+                                className="flex items-center gap-3 group relative"
                             >
-                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10">
+                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
                                     Register Now
                                 </span>
-                                <div className="relative w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_2px_4px_rgba(255,255,255,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden">
-                                    <SpecularHighlight />
+                                <div className="relative w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl border border-white text-amber-500 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-amber-500/30 hover:shadow-2xl">
+                                    <div className="absolute top-1 left-1.5 w-1/3 h-[1.5px] bg-white opacity-90 blur-[0.5px] rounded-full" />
                                     <ArrowRight size={20} className="-rotate-45" />
                                 </div>
                             </motion.button>
@@ -140,37 +140,40 @@ export function FloatingActions() {
                 {/* Main Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,0.2)] ${isOpen
-                            ? "bg-slate-900 text-white rotate-90"
-                            : "bg-white text-slate-900 hover:bg-slate-50"
-                        } border border-slate-200/50 group overflow-hidden`}
+                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.15)] bg-white border border-white group`}
                 >
-                    <SpecularHighlight />
-                    <AnimatePresence mode="wait">
-                        {isOpen ? (
-                            <motion.div
-                                key="close"
-                                initial={{ opacity: 0, rotate: -90 }}
-                                animate={{ opacity: 1, rotate: 0 }}
-                                exit={{ opacity: 0, rotate: 90 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <X size={24} />
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="open"
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.5 }}
-                                transition={{ duration: 0.2 }}
-                                className="relative"
-                            >
-                                <MessageCircle size={24} />
-                                <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full border-2 border-white animate-pulse" />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {/* Outer "Water Drop" glow effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-b from-white/80 to-transparent opacity-0 group-hover:opacity-100 blur-[2px] rounded-[25px] transition-all duration-500" />
+
+                    <div className="relative z-10">
+                        <AnimatePresence mode="wait">
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                    exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                    className="text-slate-900"
+                                >
+                                    <X size={24} />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="open"
+                                    initial={{ opacity: 0, scale: 0.5 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.5 }}
+                                    className="relative flex items-center justify-center text-slate-900"
+                                >
+                                    <MessageCircle size={26} fill="none" strokeWidth={1.5} />
+                                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Inner Specular highlight for ball effect */}
+                    <div className="absolute top-2 left-3 w-1/4 h-[2px] bg-white opacity-80 blur-[0.5px] rounded-full z-20" />
                 </button>
             </div>
 
