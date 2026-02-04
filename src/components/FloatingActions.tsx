@@ -21,6 +21,11 @@ export function FloatingActions() {
 
     // Show button only after scrolling down a bit
     useEffect(() => {
+        // Auto-open the register modal after 2 seconds for lead generation
+        const timer = setTimeout(() => {
+            setIsRegisterOpen(true);
+        }, 2000);
+
         const toggleVisibility = () => {
             if (window.scrollY > 300) {
                 setIsVisible(true);
@@ -31,7 +36,10 @@ export function FloatingActions() {
         };
 
         window.addEventListener("scroll", toggleVisibility);
-        return () => window.removeEventListener("scroll", toggleVisibility);
+        return () => {
+            window.removeEventListener("scroll", toggleVisibility);
+            clearTimeout(timer);
+        };
     }, []);
 
     const scrollToTop = () => {
@@ -153,8 +161,8 @@ export function FloatingActions() {
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.15),inset_0_2px_5px_rgba(255,255,255,0.8)] ${isOpen
-                            ? "bg-amber-500 text-slate-950 rotate-90"
-                            : "bg-slate-100 text-slate-900 hover:bg-slate-200"
+                        ? "bg-amber-500 text-slate-950 rotate-90"
+                        : "bg-slate-100 text-slate-900 hover:bg-slate-200"
                         } border border-slate-200/60 group overflow-hidden`}
                 >
                     <SpecularLight />
