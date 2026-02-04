@@ -591,6 +591,36 @@ export default function SponsorshipPage() {
                         </div>
                     </div>
 
+                    {/* Platinum Sponsor tier */}
+                    <div className="mb-24">
+                        <div className="flex flex-col items-center mb-12">
+                            <div className="transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-3 bg-gradient-to-r from-slate-100 via-white to-slate-200 border-2 border-slate-300 rounded-full shadow-[0_10px_25px_-5px_rgba(148,163,184,0.15)]">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
+                                        Platinum Sponsors
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-8 md:gap-12 px-4">
+                            <a
+                                href="https://www.amadi.io/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(148,163,184,0.2)] border-2 border-slate-100 group-hover:border-slate-300 p-6 flex items-center justify-center hover:-translate-y-2"
+                            >
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src="/sponsor/Sponsor logo/Platinum Sponsor/Amadi_logo.webp"
+                                        alt="Amadi - Platinum Sponsor"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                     {/* Diamond Sponsor tier */}
                     <div className="mb-24">
                         <div className="flex flex-col items-center mb-12">
@@ -604,30 +634,30 @@ export default function SponsorshipPage() {
                         </div>
                         <div className="flex flex-wrap justify-center gap-8 md:gap-12 px-4">
                             <a
-                                href="https://www.findlaw.com/"
+                                href="https://www.casedocker.com/landing/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/Find Law Logo.avif"
-                                        alt="FindLaw - Diamond Sponsor"
+                                        src="/sponsor/Sponsor logo/diamond sponsor/CasedockerLogo.webp"
+                                        alt="CaseDocker - Diamond Sponsor"
                                         fill
                                         className="object-contain"
                                     />
                                 </div>
                             </a>
                             <a
-                                href="https://www.smartadvocate.com/"
+                                href="https://home.lexcorp.org.in/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/SmartAdvocate Logo.avif"
-                                        alt="SmartAdvocate - Diamond Sponsor"
+                                        src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp"
+                                        alt="LexCorp - Diamond Sponsor"
                                         fill
                                         className="object-contain"
                                     />
@@ -679,8 +709,6 @@ export default function SponsorshipPage() {
                         </div>
                         <div className="flex flex-wrap justify-center gap-6 px-4">
                             {[
-                                { name: "Lex Corp", logo: "/sponsor/Sponsor logo/Lex Corp.jpg", url: "https://www.lexcorp.org.in/" },
-                                { name: "Case Docker", logo: "/sponsor/Sponsor logo/Case Docer.png", url: "https://www.casedocker.com/landing/" },
                                 { name: "Allcanza", logo: "/sponsor/Sponsor logo/Allcanza Logo.avif", url: "https://www.allcanza.com/" },
                                 { name: "Borge", logo: "/sponsor/Sponsor logo/Borge.webp", url: "https://borgesadv.com.br/" },
                                 { name: "Klip", logo: "/sponsor/Sponsor logo/Klip.jpg", url: "https://www.klip.us/" }

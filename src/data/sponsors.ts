@@ -1,12 +1,13 @@
 
 export const SPONSORS = [
+    { name: "Amadi", logo: "/sponsor/Sponsor logo/Platinum Sponsor/Amadi_logo.webp" },
     { name: "Borge", logo: "/sponsor/Sponsor logo/Borge.webp" },
-    { name: "Case Doctor", logo: "/sponsor/Sponsor logo/Case Docer.png" },
+    { name: "Case Docker", logo: "/sponsor/Sponsor logo/diamond sponsor/CasedockerLogo.webp" },
     { name: "Fayett", logo: "/sponsor/Sponsor logo/Fayet.jpg" },
     { name: "GMM", logo: "/sponsor/Sponsor logo/GMM.jpg" },
     { name: "Klip", logo: "/sponsor/Sponsor logo/Klip.jpg" },
     { name: "LegalAI", logo: "/sponsor/Sponsor logo/Legalai.jpg" },
-    { name: "Lex Corp", logo: "/sponsor/Sponsor logo/Lex Corp.jpg" },
+    { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" },
     { name: "Luxcs", logo: "/sponsor/Sponsor logo/Luxcs.jpg" },
     { name: "Mrs", logo: "/sponsor/Sponsor logo/Mrs.webp" },
     { name: "TRCM", logo: "/sponsor/Sponsor logo/Trcm.jpg" },
