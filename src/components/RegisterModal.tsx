@@ -232,13 +232,27 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-serif text-slate-900 font-bold border-l-4 border-amber-500 pl-3">Join as</h3>
                                                 <div className="space-y-3 pl-4">
-                                                    {['Awardee', 'Sponsor', 'Exhibitor', 'Speaker', 'Delegate'].map((option) => (
-                                                        <label key={option} className="flex items-center gap-3 cursor-pointer group">
-                                                            <div className="relative flex items-center justify-center w-4 h-4">
-                                                                <input type="radio" name="joinAs" value={option} className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300" />
+                                                    {[
+                                                        'Become a Sponsor',
+                                                        'Exhibit with Us (Legal Tech & AI)',
+                                                        'Register as Delegate',
+                                                        'Apply as Speaker',
+                                                        'Apply for Legal Honor Global Awards'
+                                                    ].map((option) => (
+                                                        <label key={option} className="flex items-center gap-3 cursor-pointer group text-left">
+                                                            <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
+                                                                <input
+                                                                    type="radio"
+                                                                    name="joinAs"
+                                                                    value={option}
+                                                                    required
+                                                                    className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300"
+                                                                />
                                                                 <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100 transition-opacity" />
                                                             </div>
-                                                            <span className="text-slate-600 text-sm sm:text-base font-medium group-hover:text-amber-700 transition-colors">{option}</span>
+                                                            <span className="text-slate-600 text-sm sm:text-base font-medium group-hover:text-amber-700 transition-colors leading-tight">
+                                                                {option}
+                                                            </span>
                                                         </label>
                                                     ))}
                                                 </div>
@@ -250,8 +264,14 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                 <div className="space-y-3 pl-4">
                                                     {['Dubai UAE, May 13-14 2026', 'Mumbai India, Dec 2026'].map((option) => (
                                                         <label key={option} className="flex items-center gap-3 cursor-pointer group">
-                                                            <div className="relative flex items-center justify-center w-4 h-4">
-                                                                <input type="radio" name="conference" value={option} className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300" />
+                                                            <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
+                                                                <input
+                                                                    type="radio"
+                                                                    name="conference"
+                                                                    value={option}
+                                                                    required
+                                                                    className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300"
+                                                                />
                                                                 <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100 transition-opacity" />
                                                             </div>
                                                             <span className="text-slate-600 text-sm sm:text-base font-medium group-hover:text-amber-700 transition-colors">{option}</span>
