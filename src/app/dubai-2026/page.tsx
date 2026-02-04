@@ -737,8 +737,8 @@ export default function DubaiEventPage() {
                         <div className="flex flex-col items-center relative z-10">
                             {/* Category Badge - Subtle amber accent */}
                             <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full shadow-md">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-white uppercase tracking-widest whitespace-nowrap">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-slate-200 via-white to-slate-200 border border-slate-300 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
                                         Platinum Sponsors
                                     </h3>
                                 </div>
@@ -747,8 +747,8 @@ export default function DubaiEventPage() {
                             {/* Logos Grid */}
                             <div className="flex justify-center">
                                 {/* Platinum Sponsor - Slightly larger with amber border */}
-                                <div className="group relative w-44 h-26 md:w-72 md:h-40 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-xl border-2 border-amber-400 group-hover:-translate-y-1" />
+                                <div className="group relative w-44 h-26 md:w-80 md:h-44 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(148,163,184,0.15)] border-2 border-slate-200 group-hover:border-slate-300 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.amadi.io/"
@@ -776,8 +776,8 @@ export default function DubaiEventPage() {
                         <div className="flex flex-col items-center relative z-10">
                             {/* Category Badge */}
                             <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest whitespace-nowrap">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-cyan-50 via-white to-cyan-50 border border-cyan-100 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
                                         Diamond Sponsors
                                     </h3>
                                 </div>
@@ -786,8 +786,8 @@ export default function DubaiEventPage() {
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Case Docer */}
-                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
+                                <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.casedocker.com/landing/"
@@ -808,8 +808,8 @@ export default function DubaiEventPage() {
                                 </div>
 
                                 {/* Lex Corp */}
-                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
+                                <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://home.lexcorp.org.in/"
@@ -831,14 +831,52 @@ export default function DubaiEventPage() {
                             </div>
                         </div>
                     </div>
+                    {/* Gold Sponsor */}
+                    <div className="relative mt-20">
+                        <div className="flex flex-col items-center relative z-10">
+                            {/* Category Badge */}
+                            <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-amber-400 via-amber-100 to-amber-500 border border-amber-300 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-amber-900 uppercase tracking-widest whitespace-nowrap">
+                                        Gold Sponsor
+                                    </h3>
+                                </div>
+                            </div>
+
+                            {/* Logos Grid */}
+                            <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
+                                {/* Asgand & Partner */}
+                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(180,83,9,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.1)] border border-amber-50 group-hover:border-amber-200 group-hover:-translate-y-1" />
+
+                                    <a
+                                        href="https://asgpartners.co.in/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/dubai-event/sponsors/AsgandPartnerlogo.jpeg"
+                                                alt="Asgand & Partner"
+                                                fill
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
+                                            />
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Silver Sponsors */}
                     <div className="relative mt-20">
                         <div className="flex flex-col items-center relative z-10">
                             {/* Category Badge */}
                             <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-2.5 bg-white border border-slate-100 rounded-full shadow-sm">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-700 uppercase tracking-widest whitespace-nowrap">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 border border-slate-300 rounded-full shadow-md">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-900 uppercase tracking-widest whitespace-nowrap">
                                         Silver Sponsor
                                     </h3>
                                 </div>
@@ -848,7 +886,7 @@ export default function DubaiEventPage() {
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* BGK Law Associates */}
                                 <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-50 group-hover:border-amber-100/50 group-hover:-translate-y-1" />
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(100,116,139,0.1)] border border-slate-100 group-hover:border-slate-200 group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://bgklawassociates.co.in/"
