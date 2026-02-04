@@ -575,7 +575,7 @@ export default function SponsorshipPage() {
                                 href="https://www.mrsprofessional.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative w-full max-w-2xl h-48 md:h-60 bg-white rounded-3xl shadow-xl transition-all duration-500 group-hover:shadow-[0_40px_80px_-15px_rgba(245,158,11,0.2)] border-2 border-amber-200 group-hover:border-amber-400 p-8 md:p-12 flex items-center justify-center hover:-translate-y-2"
+                                className="group relative w-full max-w-lg h-40 md:h-48 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(245,158,11,0.2)] border-2 border-amber-200 group-hover:border-amber-400 p-6 md:p-8 flex items-center justify-center hover:-translate-y-2"
                             >
                                 <div className="relative w-full h-full">
                                     <Image
@@ -586,7 +586,7 @@ export default function SponsorshipPage() {
                                     />
                                 </div>
                                 {/* Shine effect */}
-                                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                             </a>
                         </div>
                     </div>
