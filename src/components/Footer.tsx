@@ -30,14 +30,32 @@ export function Footer() {
                         </p>
 
                         {/* Organisation Info */}
-                        <div className="grid grid-cols-2 gap-4 pt-2">
-                            <div className="space-y-1">
+                        <div className="grid grid-cols-2 gap-6 pt-2">
+                            <div className="space-y-3">
                                 <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Organised by</p>
-                                <p className="text-sm text-slate-200 font-semibold">ClickAway Creators LLP</p>
+                                <div className="space-y-2">
+                                    <Image
+                                        src="/images/footer/ClickAway Creators LLP_logo.avif"
+                                        alt="ClickAway Creators LLP"
+                                        width={120}
+                                        height={40}
+                                        className="h-8 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                                    />
+                                    <p className="text-sm text-slate-200 font-semibold">ClickAway Creators LLP</p>
+                                </div>
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-3">
                                 <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Managed by</p>
-                                <p className="text-sm text-slate-200 font-semibold">MantranexVista</p>
+                                <div className="space-y-2">
+                                    <Image
+                                        src="/images/footer/MantraNexvista_logo.png"
+                                        alt="MantranexVista"
+                                        width={120}
+                                        height={40}
+                                        className="h-8 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                                    />
+                                    <p className="text-sm text-slate-200 font-semibold">MantranexVista</p>
+                                </div>
                             </div>
                         </div>
                         {/* Social Links */}
