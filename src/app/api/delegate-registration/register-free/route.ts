@@ -74,6 +74,16 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Create notification
+        await prismaClient.notification.create({
+            data: {
+                type: "TICKET_PURCHASE",
+                message: `Free ticket registered by ${customerDetails.firstName} ${customerDetails.lastName}`,
+                referenceId: registration.id,
+                link: `/admin/registrations/${registration.id}`,
+            }
+        }).catch((err: any) => console.error("Notification error:", err));
+
         // Trigger confirmation email
         try {
             const emailResult = await sendDelegateConfirmationEmail({

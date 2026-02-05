@@ -458,3 +458,18 @@ model SeatReservation {
   @@index([status])
   @@index([createdAt])
 }
+
+// Admin Notifications
+model Notification {
+  id          String   @id @default(cuid())
+  type        String   // "CONTACT", "AGENDA_DOWNLOAD", "NEWSLETTER", "TICKET_PURCHASE", "SPONSORSHIP", "SEAT_RESERVATION", "AWARD_NOMINATION", "COMMENT"
+  message     String
+  referenceId String?  // ID of the related record
+  read        Boolean  @default(false)
+  link        String?  // Link to the detailed view if applicable
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([read])
+  @@index([createdAt])
+}

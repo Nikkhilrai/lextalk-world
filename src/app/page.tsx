@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { FeaturedIn } from "@/components/FeaturedIn";
@@ -10,6 +11,11 @@ import { FAQ } from "@/components/FAQ";
 import { StayUpdated } from "@/components/StayUpdated";
 import { Footer } from "@/components/Footer";
 import { FloatingActions } from "@/components/FloatingActions";
+
+export const metadata: Metadata = {
+  title: "LexTalk World | Legal Tech Conference & Global Honors | Dubai 2026",
+  description: "LexTalk World is the Global Authority on Legal Tech. Join our flagship conference in Dubai May 2026. Networking, Awards, and Innovation for legal professionals worldwide.",
+};
 
 export default function Home() {
   return (

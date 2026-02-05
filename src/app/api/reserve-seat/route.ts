@@ -37,6 +37,16 @@ export async function POST(request: Request) {
             },
         });
 
+        // Create notification
+        await prismaClient.notification.create({
+            data: {
+                type: "SEAT_RESERVATION",
+                message: `New seat reservation request from ${fullName} (${organization})`,
+                referenceId: reservation.id,
+                link: `/admin/seat-reservations`,
+            }
+        }).catch((err: any) => console.error("Notification error:", err));
+
         return NextResponse.json({ success: true, id: reservation.id }, { status: 200 });
 
     } catch (error) {

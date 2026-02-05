@@ -27,6 +27,16 @@ export async function POST(request: NextRequest) {
             }
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "AGENDA_DOWNLOAD",
+                message: `Agenda downloaded by ${fullName} for ${eventSlug}`,
+                referenceId: agendaDownload.id,
+                link: `/admin/agenda-downloads`,
+            }
+        }).catch(err => console.error("Notification error:", err));
+
         // Get the agenda URL from environment or database
         // For now, we'll return a placeholder. You'll upload the actual PDF via admin panel
         const agendaUrl = process.env.NEXT_PUBLIC_AGENDA_URL || `/agendas/${eventSlug}-agenda.pdf`;

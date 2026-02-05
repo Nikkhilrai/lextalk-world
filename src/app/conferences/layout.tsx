@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Conferences",
-    description: "Explore LexTalk World's upcoming legal conferences across the globe. Dubai, Singapore, Mumbai and more. Join 500+ legal professionals at premier legal tech summits.",
+    title: "Upcoming Legal Conferences & Summits | LexTalk World",
+    description: "Discover premier global legal conferences. Join top legal minds in Dubai, Mumbai and Singapore for unparalleled networking and legal innovation.",
     keywords: [
-        "Legal Conferences",
-        "Legal Tech Events",
-        "Law Conferences 2026",
-        "Legal Summit",
-        "LexTalk World Events",
-        "Global Legal Conference",
+        "Upcoming Legal Conferences",
+        "Legal Tech Events 2026",
+        "Global Law Summit",
+        "Dubai Legal Networking",
+        "Asia Legal Technology Forum",
+        "LexTalk World Conferences",
     ],
     openGraph: {
-        title: "Legal Conferences | LexTalk World",
-        description: "Explore our upcoming legal conferences across the globe. Join 500+ legal professionals.",
+        title: "Upcoming Legal Conferences & Summits | LexTalk World",
+        description: "Join the world's leading legal professionals at our flagship conferences. Connect, learn, and shape the future of law.",
         url: "https://lextalkworld.in/conferences",
     },
 };

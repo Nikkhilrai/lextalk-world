@@ -36,6 +36,16 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "SPONSORSHIP",
+                message: `New sponsorship inquiry from ${fullName} - ${organization}`,
+                referenceId: inquiry.id,
+                link: `/admin/sponsorship-inquiries`,
+            }
+        }).catch(err => console.error("Notification error:", err));
+
         return NextResponse.json({
             success: true,
             data: inquiry,

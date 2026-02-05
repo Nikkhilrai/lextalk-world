@@ -78,6 +78,17 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Create notification
+        const prismaCreate = prisma as any;
+        await prismaCreate.notification.create({
+            data: {
+                type: "TICKET_PURCHASE",
+                message: `Ticket purchased by ${registration.firstName} ${registration.lastName} (${registration.passType})`,
+                referenceId: registration.id,
+                link: `/admin/registrations/${registration.id}`,
+            }
+        }).catch((err: any) => console.error("Notification error:", err));
+
         // Trigger confirmation email
         try {
             const emailResult = await sendDelegateConfirmationEmail({

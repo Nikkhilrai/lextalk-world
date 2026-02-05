@@ -21,9 +21,21 @@ export async function subscribe(formData: FormData) {
             return { success: true, message: "You are already subscribed!" };
         }
 
-        await prisma.subscriber.create({
+        const sub = await prisma.subscriber.create({
             data: { email },
         });
+
+        // Create notification
+        try {
+            await prisma.notification.create({
+                data: {
+                    type: "NEWSLETTER",
+                    message: `New newsletter subscriber: ${email}`,
+                    referenceId: sub.id,
+                    link: `/admin/newsletter`,
+                }
+            });
+        } catch (e) { console.error("Notification failed", e); }
 
         revalidatePath("/admin/newsletter");
         return { success: true, message: "Successfully subscribed!" };

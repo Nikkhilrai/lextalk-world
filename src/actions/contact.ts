@@ -25,6 +25,16 @@ export async function createContactMessage(data: {
             },
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "CONTACT",
+                message: `New message from ${data.name}: ${data.subject}`,
+                referenceId: contactMessage.id,
+                link: `/admin/contact-messages`,
+            }
+        }).catch(err => console.error("Notification error:", err));
+
         console.log("Contact message created:", contactMessage.id);
         revalidatePath("/admin/contact-messages");
 

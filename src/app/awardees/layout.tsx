@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Awardees | LexTalk World",
-    description: "Celebrating legal excellence - Meet our distinguished awardees from conferences around the world.",
+    title: "Distinguished Awardees & Legal Excellence | LexTalk World",
+    description: "Recognizing exceptional legal professionals worldwide. Meet our awardees who have demonstrated outstanding achievements, innovation, and leadership in the global legal community.",
+    keywords: ["Global Legal Honors", "Legal Awards 2026", "Legal Excellence Recognition", "Distinguished Lawyers"],
     openGraph: {
-        title: "Awardees | LexTalk World",
-        description: "Celebrating legal excellence - Meet our distinguished awardees from conferences around the world.",
+        title: "Distinguished Awardees & Legal Excellence | LexTalk World",
+        description: "Meet the league of exceptional legal professionals recognized by LexTalk World.",
     },
 };
 

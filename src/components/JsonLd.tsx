@@ -8,7 +8,11 @@ export function OrganizationJsonLd() {
         logo: 'https://lextalkworld.in/logo/favicon.png',
         description: 'LexTalk World is the Global Authority on Legal Tech, organizing premier legal conferences and connecting legal professionals worldwide.',
         sameAs: [
-            // Add social media links here when available
+            'https://www.linkedin.com/company/lextalkworld-apac-me/',
+            'https://x.com/LextalkWorldME',
+            'https://www.facebook.com/profile.php?id=61585120593750',
+            'https://www.instagram.com/lextalkworldapacandme/',
+            'https://www.youtube.com/@LextalkWorldAPACandME'
         ],
         contactPoint: {
             '@type': 'ContactPoint',

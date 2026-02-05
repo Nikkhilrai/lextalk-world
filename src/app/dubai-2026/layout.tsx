@@ -1,28 +1,13 @@
-import type { Metadata } from "next";
-import { EventJsonLd } from "@/components/JsonLd";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "LexTalk World Conference Dubai 2026",
-    description: "Join 800+ legal professionals at LexTalk World Conference Dubai 2026. Asia's Premier Legal Tech Conference. May 13-14, 2026.",
-    keywords: [
-        "LexTalk World Conference Dubai 2026",
-        "LexTalk World Dubai",
-        "Legal Tech Summit Dubai",
-        "Legal Conference UAE",
-        "Legal Innovation Dubai",
-        "Asia Legal Conference",
-    ],
+    title: "LexTalk World Dubai 2026 | Global Legal Conference & Awards",
+    description: "Join 800+ global legal leaders at Atlantis The Royal, Dubai on May 13-14, 2026. Networking, LexTalk Global Legal Honors, and Tech Demo.",
+    keywords: ["Dubai Legal Conference 2026", "LexTalk Dubai", "Global Legal Honors Dubai", "Legal Tech UAE"],
     openGraph: {
-        title: "LexTalk World Conference Dubai 2026",
-        description: "Join 800+ Global Legal Professionals. May 13-14, 2026.",
-        url: "https://lextalkworld.in/dubai-2026",
-        images: ["/logo/lextalkworld_logo.png"],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "LexTalk World Conference Dubai 2026",
-        description: "Join 800+ Global Legal Professionals.",
-        images: ["/logo/lextalkworld_logo.png"],
+        title: "LexTalk World Dubai 2026 | Global Legal Conference & Awards",
+        description: "Join 800+ global legal leaders at Atlantis The Royal, Dubai. May 13-14, 2026.",
+        images: ["/dubai-event/dubai-hero.jpg"],
     },
 };
 
@@ -31,10 +16,5 @@ export default function DubaiLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return (
-        <>
-            <EventJsonLd />
-            {children}
-        </>
-    );
+    return <>{children}</>;
 }

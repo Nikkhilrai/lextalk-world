@@ -1,4 +1,5 @@
 import { Sidebar } from "@/components/admin/Sidebar";
+import { NotificationBell } from "@/components/admin/NotificationBell";
 import { getAdminProfile } from "@/actions/auth";
 import { Bell, Search, Settings } from "lucide-react";
 
@@ -39,10 +40,7 @@ export default async function AdminLayout({
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-[#878a99] hover:text-[#ced4da] relative">
-                            <Bell className="w-5 h-5" />
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#f06548] rounded-full ring-2 ring-[#13192f]" />
-                        </button>
+                        <NotificationBell />
 
                         <div className="h-8 w-px bg-[#1b213b] mx-1" />
 
