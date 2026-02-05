@@ -48,7 +48,7 @@ export function Footer() {
                                 <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Managed by</p>
                                 <div className="space-y-2">
                                     <Image
-                                        src="/images/footer/MantraNexvista_logo.png"
+                                        src="/images/footer/MantraNex-Vista.png"
                                         alt="MantranexVista"
                                         width={120}
                                         height={40}
