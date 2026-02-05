@@ -185,6 +185,16 @@ export async function createLead(data: any) {
             },
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "LEAD",
+                message: `New registration of interest from ${data.firstName} ${data.lastName} (${data.joinAs || 'Interest'})`,
+                referenceId: lead.id,
+                link: `/admin/leads`,
+            }
+        }).catch(err => console.error("Notification error:", err));
+
         // Send email notification (don't await to avoid slowing down the response)
         sendNotificationEmail(data);
 
