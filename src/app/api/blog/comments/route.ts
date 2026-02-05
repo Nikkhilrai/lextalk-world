@@ -62,6 +62,16 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "COMMENT",
+                message: `New comment on ${postSlug} by ${name}`,
+                referenceId: comment.id,
+                link: `/admin/comments`,
+            }
+        }).catch(err => console.error("Notification error:", err));
+
         return NextResponse.json(
             {
                 success: true,

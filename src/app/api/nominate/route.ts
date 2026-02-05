@@ -40,6 +40,16 @@ export async function POST(req: Request) {
             },
         });
 
+        // Create notification
+        await prisma.notification.create({
+            data: {
+                type: "AWARD_NOMINATION",
+                message: `New award nomination: ${nomineeName} for ${category}`,
+                referenceId: nomination.id,
+                link: `/admin/awardees`,
+            }
+        }).catch((err: any) => console.error("Notification error:", err));
+
         // Send confirmation email to nominator
         if (process.env.RESEND_API_KEY) {
             try {
