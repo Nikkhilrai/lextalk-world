@@ -39,7 +39,7 @@ export function Footer() {
                                         alt="ClickAway Creators LLP"
                                         width={120}
                                         height={40}
-                                        className="h-8 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                                        className="h-8 w-auto object-contain hover:scale-105 transition-transform"
                                     />
                                     <p className="text-sm text-slate-200 font-semibold">ClickAway Creators LLP</p>
                                 </div>
@@ -52,7 +52,7 @@ export function Footer() {
                                         alt="MantranexVista"
                                         width={120}
                                         height={40}
-                                        className="h-8 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                                        className="h-8 w-auto object-contain hover:scale-105 transition-transform"
                                     />
                                     <p className="text-sm text-slate-200 font-semibold">MantranexVista</p>
                                 </div>
