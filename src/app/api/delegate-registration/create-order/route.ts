@@ -58,6 +58,16 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // Create notification for pending ticket purchase
+        await prismaClient.notification.create({
+            data: {
+                type: "TICKET_PURCHASE",
+                message: `New ticket purchase attempt by ${customerDetails.firstName} ${customerDetails.lastName} (${passType} - ${paymentType})`,
+                referenceId: registration.id,
+                link: `/admin/registrations/${registration.id}`,
+            }
+        }).catch((err: any) => console.error("Notification error:", err));
+
         // Create Razorpay order
         const options = {
             amount: Math.round(amount * 100), // Convert to smallest unit
