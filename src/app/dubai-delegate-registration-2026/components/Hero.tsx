@@ -125,6 +125,14 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <Link
+                            href="/"
+                            className="group px-6 py-3.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-amber-500/30 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-2 backdrop-blur-sm shadow-xl"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            Home
+                        </Link>
+
+                        <Link
                             href="#pricing"
                             className="group relative px-8 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 hover:to-amber-500 transition-all font-bold text-sm uppercase tracking-wide rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5"
                         >
@@ -140,14 +148,6 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
                             <Download size={18} className="text-amber-500" />
                             Download Agenda
                         </button>
-
-                        <Link
-                            href="#agenda"
-                            className="group px-6 py-3.5 text-white/60 hover:text-white transition-all font-semibold text-sm uppercase tracking-wide flex items-center gap-2"
-                        >
-                            View Agenda
-                            <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
                     </div>
 
                     {/* Compact Countdown Section */}
