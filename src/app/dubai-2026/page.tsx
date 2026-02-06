@@ -393,6 +393,15 @@ export default function DubaiEventPage() {
 
                     {/* Hero Buttons - Premium Design */}
                     <div className={`flex flex-col sm:flex-row justify-center gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        {/* Go to Home */}
+                        <Link
+                            href="/"
+                            className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-auto"
+                        >
+                            <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            <span className="text-white/90 group-hover:text-white font-medium text-sm">Home</span>
+                        </Link>
+
                         {/* Secure Pass */}
                         <Link
                             href="/dubai-delegate-registration-2026"
