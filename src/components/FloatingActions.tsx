@@ -122,10 +122,11 @@ export function FloatingActions() {
                                         href={action.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`relative w-12 h-12 rounded-2xl ${action.bgColor} border border-slate-200/50 flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.7)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl overflow-hidden`}
+                                        className={`relative w-12 h-12 rounded-[18px] bg-white/60 backdrop-blur-xl border border-white/50 flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.15),inset_0_1px_2px_rgba(255,255,255,0.8)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl overflow-hidden`}
                                     >
+                                        <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
                                         <SpecularLight />
-                                        <action.icon size={20} />
+                                        <action.icon size={20} className="relative z-10" />
                                     </a>
                                 </motion.div>
                             ))}
@@ -148,9 +149,10 @@ export function FloatingActions() {
                                 <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
                                     Register Now
                                 </span>
-                                <div className="relative w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.3),inset_0_2px_4px_rgba(255,255,255,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/20 overflow-hidden">
+                                <div className="relative w-12 h-12 rounded-[18px] bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_1px_2px_rgba(255,255,255,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 overflow-hidden">
+                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
                                     <SpecularLight />
-                                    <ArrowRight size={20} className="-rotate-45" />
+                                    <ArrowRight size={20} className="-rotate-45 relative z-10" />
                                 </div>
                             </motion.button>
                         </motion.div>
@@ -160,11 +162,12 @@ export function FloatingActions() {
                 {/* Main Action Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-14 h-14 rounded-[23px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.15),inset_0_2px_5px_rgba(255,255,255,0.8)] ${isOpen
+                    className={`relative w-15 h-15 rounded-[24px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.7),inset_0_-2px_6px_rgba(0,0,0,0.05)] ${isOpen
                         ? "bg-amber-500 text-slate-950 rotate-90"
-                        : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-                        } border border-slate-200/60 group overflow-hidden`}
+                        : "bg-white/70 text-slate-900 hover:bg-white/80 active:scale-90"
+                        } backdrop-blur-2xl border border-white/40 group overflow-hidden`}
                 >
+                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
                     <SpecularLight />
                     <AnimatePresence mode="wait">
                         {isOpen ? (
@@ -187,7 +190,7 @@ export function FloatingActions() {
                                 className="relative flex items-center justify-center"
                             >
                                 <MessageCircle size={28} strokeWidth={2} />
-                                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
+                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#ff8c00] rounded-full border-2 border-white shadow-lg animate-pulse" />
                             </motion.div>
                         )}
                     </AnimatePresence>

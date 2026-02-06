@@ -89,14 +89,32 @@ export function NotificationBell() {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-[#878a99] hover:text-[#ced4da] relative transition-colors"
+                className="group relative flex items-center justify-center w-10 h-10 transition-all duration-300 active:scale-95"
                 aria-label="Notifications"
             >
-                <Bell className="w-5 h-5" />
+                {/* Liquid Glass Base */}
+                <div className={`absolute inset-0 rounded-[12px] transition-all duration-500 
+                    ${isOpen
+                        ? 'bg-white/20 scale-110 blur-sm'
+                        : 'bg-white/10 group-hover:bg-white/15'
+                    } backdrop-blur-md border border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_4px_12px_rgba(0,0,0,0.2)]`}
+                />
+
+                {/* Glossy Overlay */}
+                <div className="absolute inset-[1px] rounded-[11px] bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+
+                <Bell
+                    className={`w-[18px] h-[18px] relative z-10 transition-all duration-300 
+                        ${unreadCount > 0 ? 'text-amber-400 group-hover:text-amber-300' : 'text-slate-400 group-hover:text-slate-200'}
+                    `}
+                />
+
                 {unreadCount > 0 && (
-                    <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 ring-2 ring-[#13192f]"></span>
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 z-20">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-[#ff8c00] border-2 border-[#13192f] items-center justify-center text-[8px] font-bold text-white leading-none">
+                            {unreadCount > 9 ? '9+' : unreadCount}
+                        </span>
                     </span>
                 )}
             </button>
