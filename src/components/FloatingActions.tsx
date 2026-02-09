@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function FloatingActions() {
+export function FloatingActions({ hideRegister = false }: { hideRegister?: boolean }) {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +22,12 @@ export function FloatingActions() {
     // Show button only after scrolling down a bit
     useEffect(() => {
         // Auto-open the register modal after 2 seconds for lead generation
-        const timer = setTimeout(() => {
-            setIsRegisterOpen(true);
-        }, 2000);
+        let timer: NodeJS.Timeout;
+        if (!hideRegister) {
+            timer = setTimeout(() => {
+                setIsRegisterOpen(true);
+            }, 2000);
+        }
 
         const toggleVisibility = () => {
             if (window.scrollY > 300) {
@@ -132,29 +135,31 @@ export function FloatingActions() {
                             ))}
 
                             {/* Register Button */}
-                            <motion.button
-                                initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                                animate={{
-                                    opacity: 1,
-                                    x: 0,
-                                    scale: 1,
-                                    transition: { delay: actions.length * 0.05 }
-                                }}
-                                onClick={() => {
-                                    setIsRegisterOpen(true);
-                                    setIsOpen(false);
-                                }}
-                                className="flex items-center gap-3 group relative"
-                            >
-                                <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
-                                    Register Now
-                                </span>
-                                <div className="relative w-12 h-12 rounded-[18px] bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_1px_2px_rgba(255,255,255,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 overflow-hidden">
-                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
-                                    <SpecularLight />
-                                    <ArrowRight size={20} className="-rotate-45 relative z-10" />
-                                </div>
-                            </motion.button>
+                            {!hideRegister && (
+                                <motion.button
+                                    initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                                    animate={{
+                                        opacity: 1,
+                                        x: 0,
+                                        scale: 1,
+                                        transition: { delay: actions.length * 0.05 }
+                                    }}
+                                    onClick={() => {
+                                        setIsRegisterOpen(true);
+                                        setIsOpen(false);
+                                    }}
+                                    className="flex items-center gap-3 group relative"
+                                >
+                                    <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
+                                        Register Now
+                                    </span>
+                                    <div className="relative w-12 h-12 rounded-[18px] bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_1px_2px_rgba(255,255,255,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 overflow-hidden">
+                                        <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
+                                        <SpecularLight />
+                                        <ArrowRight size={20} className="-rotate-45 relative z-10" />
+                                    </div>
+                                </motion.button>
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>

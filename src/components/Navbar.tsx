@@ -93,12 +93,12 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12 transition-transform group-hover:scale-105 flex items-center">
+                        <div className="relative w-[160px] h-12 lg:w-[240px] lg:h-16 transition-transform group-hover:scale-105 flex items-center">
                             <Image
                                 src="/logo/lextalkworld_logo.png"
                                 alt="Lextalk World"
-                                width={192}
-                                height={48}
+                                width={240}
+                                height={64}
                                 className="object-contain object-left w-full h-full"
                                 priority
                             />
