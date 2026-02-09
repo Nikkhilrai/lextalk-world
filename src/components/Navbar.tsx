@@ -27,7 +27,15 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [dynamicNavLinks, setDynamicNavLinks] = useState<NavLink[]>([
         { name: "Home", href: "/" },
-        { name: "E-Meet", href: "#" },
+        {
+            name: "E-Meet",
+            href: "#",
+            hasDropdown: true,
+            dropdownItems: [
+                { name: "Upcoming E-Meet", href: "/upcoming-e-meet" },
+                { name: "Past E-Meet", href: "/e-meet" },
+            ]
+        },
         {
             name: "Conferences",
             href: "#",
@@ -144,12 +152,17 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                                 ? "opacity-100 translate-y-0 pointer-events-auto"
                                                 : "opacity-0 -translate-y-2 pointer-events-none"
                                         )}>
-                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[240px] py-2">
-                                                {link.dropdownItems.map((item) => (
+                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[240px]">
+                                                {link.dropdownItems.map((item, i) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="block px-6 py-3 text-[#1e3a8a] hover:text-[#fbbf24] font-serif text-[15px] font-medium transition-colors text-center"
+                                                        className={cn(
+                                                            "block px-6 py-3 text-[15px] font-medium transition-colors text-center font-sans",
+                                                            link.name === "E-Meet" && i === 0
+                                                                ? "bg-amber-500 text-slate-900 hover:bg-amber-600"
+                                                                : "text-slate-700 hover:text-amber-600 hover:bg-slate-50"
+                                                        )}
                                                     >
                                                         {item.name}
                                                     </Link>
