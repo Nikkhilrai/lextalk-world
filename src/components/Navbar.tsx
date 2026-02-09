@@ -147,21 +147,21 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                     {/* Dropdown Menu */}
                                     {link.hasDropdown && link.dropdownItems && (
                                         <div className={cn(
-                                            "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
+                                            "absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300",
                                             openDropdown === link.name
                                                 ? "opacity-100 translate-y-0 pointer-events-auto"
                                                 : "opacity-0 -translate-y-2 pointer-events-none"
                                         )}>
-                                            <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden min-w-[240px]">
+                                            <div className="bg-white rounded-[28px] shadow-2xl border border-slate-100 overflow-hidden min-w-[210px] p-1.5 space-y-1">
                                                 {link.dropdownItems.map((item, i) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
                                                         className={cn(
-                                                            "block px-6 py-3 text-[15px] font-medium transition-colors text-center font-sans",
+                                                            "block px-5 py-3 text-[13px] font-bold transition-all duration-300 text-center font-sans tracking-wide",
                                                             link.name === "E-Meet" && i === 0
-                                                                ? "bg-amber-500 text-slate-900 hover:bg-amber-600"
-                                                                : "text-slate-700 hover:text-amber-600 hover:bg-slate-50"
+                                                                ? "bg-[#ef7d00] text-slate-900 rounded-[22px] hover:bg-[#d67000] hover:scale-[1.02]"
+                                                                : "text-slate-600 hover:text-amber-600 rounded-[22px] hover:bg-slate-50"
                                                         )}
                                                     >
                                                         {item.name}
