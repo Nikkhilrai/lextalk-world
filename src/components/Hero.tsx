@@ -70,41 +70,44 @@ export function Hero() {
                 >
                     <source src="/lextalk-hero.mp4" type="video/mp4" />
                 </video>
-                {/* Dark Overlay for Readability */}
-                <div className="absolute inset-0 bg-slate-900/40" />
+                {/* Darker Overlay for Maximum Readability */}
+                <div className="absolute inset-0 bg-slate-950/70" />
+
+                {/* Vignette Gradient Overlay - Darker on the left where text is */}
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent" />
 
                 {/* Grid Pattern Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] opacity-50" />
             </div>
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     {/* Left Column: Content */}
-                    <div className="space-y-5 lg:space-y-6">
+                    <div className="space-y-6 lg:space-y-8">
                         {/* Main Headline */}
                         <div className="space-y-3">
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-serif text-white leading-[1.1] tracking-tight">
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-serif text-white leading-[1.1] tracking-tight drop-shadow-2xl">
                                 Where Legal Minds
                                 <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic">Shape What's Next</span>
                             </h1>
                         </div>
 
-                        {/* Subtitle with elegant styling */}
-                        <div className="space-y-4 md:max-w-xl">
-                            <p className="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
-                                <span className="text-amber-400 font-medium">LexTalk World Conferences – Middle East & APAC</span> is a premier conference and exhibition platform for the global legal community.
+                        {/* Subtitle with high contrast styling */}
+                        <div className="space-y-5 md:max-w-xl">
+                            <p className="text-lg sm:text-xl text-white font-medium leading-relaxed drop-shadow-md">
+                                <span className="text-amber-400">LexTalk World Conferences – Middle East & APAC</span> is a premier conference and exhibition platform for the global legal community.
                             </p>
-                            <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+                            <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
                                 We bring together General Counsels, Law Firm Partners, Independent Practitioners, LegalTech leaders, and policymakers to engage in high-level dialogue that shapes the future of law.
                             </p>
-                            <div className="pt-2 flex flex-wrap gap-y-2 gap-x-4 text-[10px] sm:text-xs font-bold text-amber-500/70 uppercase tracking-[0.2em]">
+                            <div className="pt-2 flex flex-wrap gap-y-3 gap-x-5 text-[10px] sm:text-xs font-black text-amber-500 uppercase tracking-[0.25em]">
                                 <span className="flex items-center gap-2">Domain expertise</span>
-                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500/20 hidden sm:block mt-1" />
                                 <span className="flex items-center gap-2">Strategic insight</span>
-                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500/20 hidden sm:block mt-1" />
                                 <span className="flex items-center gap-2">Meaningful connections</span>
-                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500/20 hidden sm:block mt-1" />
                                 <span className="flex items-center gap-2">Distinguished recognition</span>
                             </div>
                         </div>
