@@ -82,23 +82,32 @@ export function Hero() {
                     {/* Left Column: Content */}
                     <div className="space-y-5 lg:space-y-6">
                         {/* Main Headline */}
-                        <div className="space-y-2">
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-none tracking-tight">
-                                The Global Stage
+                        <div className="space-y-3">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-serif text-white leading-[1.1] tracking-tight">
+                                Where Legal Minds
                                 <br />
-                                <span className="whitespace-nowrap">For Legal Minds to</span>
-                            </h1>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-none tracking-tight">
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic pb-2">Connect, Lead and Innovate</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic">Shape What's Next</span>
                             </h1>
                         </div>
 
                         {/* Subtitle with elegant styling */}
-                        <p className="text-sm sm:text-base md:text-lg text-slate-200 font-light md:max-w-xl leading-relaxed">
-                            Conferences, content, and recognition for{" "}
-                            <span className="font-medium text-amber-400">modern legal professionals</span>{" "}
-                            worldwide.
-                        </p>
+                        <div className="space-y-4 md:max-w-xl">
+                            <p className="text-sm sm:text-base text-slate-200 font-light leading-relaxed">
+                                <span className="text-amber-400 font-medium">LexTalk World Conferences – Middle East & APAC</span> is a premier conference and exhibition platform for the global legal community.
+                            </p>
+                            <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                                We bring together General Counsels, Law Firm Partners, Independent Practitioners, LegalTech leaders, and policymakers to engage in high-level dialogue that shapes the future of law.
+                            </p>
+                            <div className="pt-2 flex flex-wrap gap-y-2 gap-x-4 text-[10px] sm:text-xs font-bold text-amber-500/70 uppercase tracking-[0.2em]">
+                                <span className="flex items-center gap-2">Domain expertise</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="flex items-center gap-2">Strategic insight</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="flex items-center gap-2">Meaningful connections</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block mt-1" />
+                                <span className="flex items-center gap-2">Distinguished recognition</span>
+                            </div>
+                        </div>
 
                         {/* CTA Buttons */}
                         <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
