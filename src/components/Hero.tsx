@@ -92,10 +92,10 @@ export function Hero() {
 
                         {/* Subtitle with elegant styling */}
                         <div className="space-y-4 md:max-w-xl">
-                            <p className="text-sm sm:text-base text-slate-200 font-light leading-relaxed">
+                            <p className="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
                                 <span className="text-amber-400 font-medium">LexTalk World Conferences – Middle East & APAC</span> is a premier conference and exhibition platform for the global legal community.
                             </p>
-                            <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                            <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
                                 We bring together General Counsels, Law Firm Partners, Independent Practitioners, LegalTech leaders, and policymakers to engage in high-level dialogue that shapes the future of law.
                             </p>
                             <div className="pt-2 flex flex-wrap gap-y-2 gap-x-4 text-[10px] sm:text-xs font-bold text-amber-500/70 uppercase tracking-[0.2em]">
