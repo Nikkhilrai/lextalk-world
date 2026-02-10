@@ -105,17 +105,17 @@ export function Hero() {
                             <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
                                 We bring together General Counsels, Law Firm Partners, Independent Practitioners, LegalTech leaders, and policymakers to engage in high-level dialogue that shapes the future of law.
                             </p>
-                            <div className="pt-4 flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
-                                <span className="px-4 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm">
+                            <div className="pt-4 flex lg:flex-nowrap flex-wrap gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-tight overflow-x-auto no-scrollbar pb-2">
+                                <span className="px-3 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm whitespace-nowrap">
                                     Domain expertise
                                 </span>
-                                <span className="px-4 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm">
+                                <span className="px-3 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm whitespace-nowrap">
                                     Strategic insight
                                 </span>
-                                <span className="px-4 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm">
+                                <span className="px-3 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm whitespace-nowrap">
                                     Meaningful connections
                                 </span>
-                                <span className="px-4 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm">
+                                <span className="px-3 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full backdrop-blur-sm shadow-sm whitespace-nowrap">
                                     Distinguished recognition
                                 </span>
                             </div>
