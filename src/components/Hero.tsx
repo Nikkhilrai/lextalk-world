@@ -105,19 +105,14 @@ export function Hero() {
                             <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
                                 We bring together General Counsels, Law Firm Partners, Independent Practitioners, LegalTech leaders, and policymakers to engage in high-level dialogue that shapes the future of law.
                             </p>
-                            <div className="pt-4 flex lg:flex-nowrap flex-wrap gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-tight overflow-x-auto no-scrollbar pb-2">
-                                <span className="px-3 py-2 bg-amber-500/15 text-amber-500 rounded-full backdrop-blur-sm whitespace-nowrap">
-                                    Domain expertise
-                                </span>
-                                <span className="px-3 py-2 bg-amber-500/15 text-amber-500 rounded-full backdrop-blur-sm whitespace-nowrap">
-                                    Strategic insight
-                                </span>
-                                <span className="px-3 py-2 bg-amber-500/15 text-amber-500 rounded-full backdrop-blur-sm whitespace-nowrap">
-                                    Meaningful connections
-                                </span>
-                                <span className="px-3 py-2 bg-amber-500/15 text-amber-500 rounded-full backdrop-blur-sm whitespace-nowrap">
-                                    Distinguished recognition
-                                </span>
+                            <div className="pt-4 flex flex-wrap gap-y-2 gap-x-4 text-[10px] sm:text-xs font-black text-amber-500 uppercase tracking-[0.2em] items-center">
+                                <span className="whitespace-nowrap">Domain expertise</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                                <span className="whitespace-nowrap">Strategic insight</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                                <span className="whitespace-nowrap">Meaningful connections</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                                <span className="whitespace-nowrap">Distinguished recognition</span>
                             </div>
                         </div>
 
