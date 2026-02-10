@@ -70,14 +70,11 @@ export function Hero() {
                 >
                     <source src="/lextalk-hero.mp4" type="video/mp4" />
                 </video>
-                {/* Darker Overlay for Maximum Readability */}
-                <div className="absolute inset-0 bg-slate-950/70" />
-
-                {/* Vignette Gradient Overlay - Darker on the left where text is */}
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent" />
+                {/* Reverted to Lighter Overlay */}
+                <div className="absolute inset-0 bg-slate-900/40" />
 
                 {/* Grid Pattern Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] opacity-50" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
             </div>
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
