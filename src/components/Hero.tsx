@@ -94,10 +94,9 @@ export function Hero() {
                                     Where Legal Minds
                                 </span>
                             </motion.div>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-serif text-white leading-[0.9] tracking-tighter drop-shadow-2xl">
-                                Shape What's
-                                <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic pb-2">Next</span>
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] tracking-tight drop-shadow-2xl flex flex-wrap items-baseline gap-x-4">
+                                <span className="font-sans font-black text-white uppercase tracking-tighter">Shape What's</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 font-serif italic pb-1">Next</span>
                             </h1>
                         </div>
 
