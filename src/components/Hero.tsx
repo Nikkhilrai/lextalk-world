@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowRight, Play, MapPin, Calendar, Users } from "lucide-react";
 import { RegisterModal } from "@/components/RegisterModal";
 
@@ -81,12 +82,22 @@ export function Hero() {
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     {/* Left Column: Content */}
                     <div className="space-y-6 lg:space-y-8">
-                        {/* Main Headline */}
-                        <div className="space-y-3">
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-serif text-white leading-[1.1] tracking-tight drop-shadow-2xl">
-                                Where Legal Minds
+                        {/* Main Headline Redesigned for Legal Authority */}
+                        <div className="flex flex-col gap-3 lg:gap-4">
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex items-center gap-3"
+                            >
+                                <div className="h-0.5 w-6 bg-amber-500" />
+                                <span className="text-[11px] lg:text-[12px] font-black text-amber-500 uppercase tracking-[0.5em] leading-none drop-shadow-sm">
+                                    Where Legal Minds
+                                </span>
+                            </motion.div>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-serif text-white leading-[0.9] tracking-tighter drop-shadow-2xl">
+                                Shape What's
                                 <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic">Shape What's Next</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 italic pb-2">Next</span>
                             </h1>
                         </div>
 
