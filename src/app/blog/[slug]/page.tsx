@@ -194,6 +194,7 @@ export default async function BlogPostPage({
                                 prose-h2:text-xl prose-h2:md:text-2xl
                                 prose-h3:text-lg prose-h3:md:text-xl
                                 prose-p:text-base prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-7 prose-p:mb-4 prose-p:text-left
+                                prose-a:text-amber-600 dark:prose-a:text-amber-400 hover:prose-a:text-amber-700 dark:hover:prose-a:text-amber-500 prose-a:no-underline hover:prose-a:underline prose-a:break-all
                                 prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
                                 prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 dark:prose-blockquote:bg-amber-900/20 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300 prose-blockquote:text-sm prose-blockquote:my-6
                                 prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
@@ -203,37 +204,10 @@ export default async function BlogPostPage({
                                 prose-th:bg-slate-100 dark:prose-th:bg-slate-700 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-slate-900 dark:prose-th:text-white prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600
                                 prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-td:text-slate-700 dark:prose-td:text-slate-300
                                 prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
+                                [&_p]:break-words [&_li]:break-words [&_td]:break-words [&_th]:break-words [&_*]:font-sans
                             "
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
-                        <style jsx global>{`
-                            .blog-content a {
-                                color: #d97706;
-                                text-decoration: none;
-                                overflow-wrap: break-word;
-                                word-break: break-all;
-                            }
-                            .blog-content a:hover {
-                                color: #b45309;
-                                text-decoration: underline;
-                            }
-                            .dark .blog-content a {
-                                color: #fbbf24;
-                            }
-                            .dark .blog-content a:hover {
-                                color: #f59e0b;
-                            }
-                            .blog-content p,
-                            .blog-content li,
-                            .blog-content td,
-                            .blog-content th {
-                                overflow-wrap: break-word;
-                                word-break: break-word;
-                            }
-                            .blog-content * {
-                                font-family: inherit;
-                            }
-                        `}</style>
 
                         {/* Share Links */}
                         <ShareButtons title={post.title} slug={post.slug} />
