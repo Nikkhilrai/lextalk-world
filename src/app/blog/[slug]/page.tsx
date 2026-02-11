@@ -9,8 +9,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
+
 import { Clock, ArrowLeft, Calendar, User } from "lucide-react";
 import { Metadata } from "next";
 
@@ -189,72 +188,52 @@ export default async function BlogPostPage({
                 {/* Content - Optimized for reading */}
                 <div className="container mx-auto px-4 pb-12">
                     <div className="max-w-[900px] mx-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-sm transition-colors font-sans">
-                        <div className="prose prose-slate dark:prose-invert max-w-none font-sans
-                            prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:mt-8 prose-headings:mb-4
-                            prose-h2:text-xl prose-h2:md:text-2xl
-                            prose-h3:text-lg prose-h3:md:text-xl
-                            prose-p:text-base prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-7 prose-p:mb-4 prose-p:text-left prose-p:break-words prose-p:font-sans
-                            prose-a:text-amber-600 dark:prose-a:text-amber-400 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline prose-a:break-all
-                            prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
-                            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 dark:prose-blockquote:bg-amber-900/20 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300 prose-blockquote:text-sm prose-blockquote:my-6
-                            prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
-                            prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-1 prose-li:break-words prose-li:font-sans
-                            prose-ul:my-4 prose-ol:my-4
-                            prose-table:border-collapse prose-table:w-full prose-table:my-6
-                            prose-th:bg-slate-100 dark:prose-th:bg-slate-700 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-slate-900 dark:prose-th:text-white prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600
-                            prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-td:text-slate-700 dark:prose-td:text-slate-300
-                            prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
-                        ">
-                            <ReactMarkdown
-                                rehypePlugins={[rehypeRaw]}
-                                components={{
-                                    a: ({ href, children }) => (
-                                        <a
-                                            href={href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-amber-600 dark:text-amber-400 hover:text-amber-700 hover:underline break-all"
-                                        >
-                                            {children}
-                                        </a>
-                                    ),
-                                    li: ({ children }) => (
-                                        <li className="break-words font-sans">
-                                            {children}
-                                        </li>
-                                    ),
-                                    p: ({ children }) => {
-                                        // Robust URL linking for plain text
-                                        if (typeof children === 'string') {
-                                            const urlRegex = /(https?:\/\/[^\s]+)/g;
-                                            const parts = children.split(urlRegex);
-                                            if (parts.length > 1) {
-                                                return (
-                                                    <p className="break-words font-sans">
-                                                        {parts.map((part, i) =>
-                                                            urlRegex.test(part) ? (
-                                                                <a
-                                                                    key={i}
-                                                                    href={part}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="text-amber-600 dark:text-amber-400 hover:text-amber-700 hover:underline break-all"
-                                                                >
-                                                                    {part}
-                                                                </a>
-                                                            ) : part
-                                                        )}
-                                                    </p>
-                                                );
-                                            }
-                                        }
-                                        return <p className="break-words font-sans">{children}</p>;
-                                    }
-                                }}
-                            >
-                                {post.content}
-                            </ReactMarkdown>
-                        </div>
+                        <div
+                            className="blog-content prose prose-slate dark:prose-invert max-w-none font-sans
+                                prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:mt-8 prose-headings:mb-4
+                                prose-h2:text-xl prose-h2:md:text-2xl
+                                prose-h3:text-lg prose-h3:md:text-xl
+                                prose-p:text-base prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-7 prose-p:mb-4 prose-p:text-left
+                                prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
+                                prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 dark:prose-blockquote:bg-amber-900/20 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300 prose-blockquote:text-sm prose-blockquote:my-6
+                                prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
+                                prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-1
+                                prose-ul:my-4 prose-ol:my-4
+                                prose-table:border-collapse prose-table:w-full prose-table:my-6
+                                prose-th:bg-slate-100 dark:prose-th:bg-slate-700 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-slate-900 dark:prose-th:text-white prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600
+                                prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-td:text-slate-700 dark:prose-td:text-slate-300
+                                prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
+                            "
+                            dangerouslySetInnerHTML={{ __html: post.content }}
+                        />
+                        <style jsx global>{`
+                            .blog-content a {
+                                color: #d97706;
+                                text-decoration: none;
+                                overflow-wrap: break-word;
+                                word-break: break-all;
+                            }
+                            .blog-content a:hover {
+                                color: #b45309;
+                                text-decoration: underline;
+                            }
+                            .dark .blog-content a {
+                                color: #fbbf24;
+                            }
+                            .dark .blog-content a:hover {
+                                color: #f59e0b;
+                            }
+                            .blog-content p,
+                            .blog-content li,
+                            .blog-content td,
+                            .blog-content th {
+                                overflow-wrap: break-word;
+                                word-break: break-word;
+                            }
+                            .blog-content * {
+                                font-family: inherit;
+                            }
+                        `}</style>
 
                         {/* Share Links */}
                         <ShareButtons title={post.title} slug={post.slug} />
