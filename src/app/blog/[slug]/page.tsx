@@ -13,6 +13,23 @@ import Link from "next/link";
 import { Clock, ArrowLeft, Calendar, User } from "lucide-react";
 import { Metadata } from "next";
 
+// Sanitize HTML content from TipTap editor:
+// 1. Fix malformed href values (e.g. "- https://..." → "https://...")
+// 2. Add target="_blank" and rel="noopener noreferrer" to all external links
+function sanitizeContent(html: string): string {
+    return html
+        // Fix href values that have junk before the actual URL (dash, spaces, bullets, etc.)
+        .replace(/href="([^"]*?(https?:\/\/[^"]+))"/gi, (match, full, url) => {
+            // If the href starts cleanly with http, keep it; otherwise extract the real URL
+            if (full.trim().startsWith('http')) {
+                return `href="${full.trim()}"`;
+            }
+            return `href="${url.trim()}"`;
+        })
+        // Make all external links open in new tab
+        .replace(/<a\s+((?!target=)[^>]*href="https?:\/\/[^"]*")/gi, '<a target="_blank" rel="noopener noreferrer" $1');
+}
+
 // For SSG (optional but good for performance if using generateStaticParams)
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -206,7 +223,7 @@ export default async function BlogPostPage({
                                 prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
                                 [&_p]:break-words [&_li]:break-words [&_td]:break-words [&_th]:break-words [&_*]:font-sans
                             "
-                            dangerouslySetInnerHTML={{ __html: post.content }}
+                            dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }}
                         />
 
                         {/* Share Links */}
