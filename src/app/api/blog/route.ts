@@ -315,16 +315,14 @@ export async function PUT(request: NextRequest) {
             }
         }
 
-        // Auto-format content if requested or if content doesn't have formatting
-        if (data.content) {
-            const hasFormatting = data.content.includes('##') || data.content.includes('**');
-            if (!hasFormatting || body.reformat === true) {
-                // Remove existing markdown to reformat cleanly
-                let cleanContent = data.content
-                    .replace(/^##\s+/gm, '')
-                    .replace(/\*\*/g, '');
-                data.content = autoFormatContent(cleanContent);
-            }
+        // Auto-format content ONLY if explicitly requested via reformat flag
+        // TipTap editor outputs HTML directly, so we shouldn't auto-process it
+        if (data.content && body.reformat === true) {
+            // Remove existing markdown to reformat cleanly
+            let cleanContent = data.content
+                .replace(/^##\s+/gm, '')
+                .replace(/\*\*/g, '');
+            data.content = autoFormatContent(cleanContent);
         }
 
         // Auto-generate read time if missing
