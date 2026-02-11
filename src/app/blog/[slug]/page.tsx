@@ -13,14 +13,46 @@ import Link from "next/link";
 import { Clock, ArrowLeft, Calendar, User } from "lucide-react";
 import { Metadata } from "next";
 
-// Sanitize HTML content from TipTap editor:
-// 1. Fix malformed href values (e.g. "- https://..." → "https://...")
-// 2. Add target="_blank" and rel="noopener noreferrer" to all external links
-function sanitizeContent(html: string): string {
+// Hybrid content renderer: supports both Markdown (old posts) and HTML (TipTap new posts)
+function renderContent(content: string): string {
+    // Detect if content is Markdown or HTML
+    const isMarkdown = content.includes('##') || (content.includes('**') && !content.includes('<'));
+
+    let html = content;
+
+    // Convert Markdown to HTML if needed
+    if (isMarkdown) {
+        html = content
+            // Headings
+            .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+            .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+            .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+            // Bold
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            // Italic
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')
+            // Links: [text](url)
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+            // Unordered lists
+            .replace(/^\* (.+)$/gm, '<li>$1</li>')
+            .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
+            // Ordered lists
+            .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+            // Paragraphs (wrap non-tag lines)
+            .split('\n\n')
+            .map(block => {
+                if (block.trim() && !block.startsWith('<')) {
+                    return `<p>${block.trim()}</p>`;
+                }
+                return block;
+            })
+            .join('\n');
+    }
+
+    // Sanitize and fix URLs
     return html
         // Fix href values that have junk before the actual URL (dash, spaces, bullets, etc.)
         .replace(/href="([^"]*?(https?:\/\/[^"]+))"/gi, (match, full, url) => {
-            // If the href starts cleanly with http, keep it; otherwise extract the real URL
             if (full.trim().startsWith('http')) {
                 return `href="${full.trim()}"`;
             }
@@ -223,7 +255,7 @@ export default async function BlogPostPage({
                                 prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
                                 [&_p]:break-words [&_li]:break-words [&_td]:break-words [&_th]:break-words [&_*]:font-sans
                             "
-                            dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }}
+                            dangerouslySetInnerHTML={{ __html: renderContent(post.content) }}
                         />
 
                         {/* Share Links */}
