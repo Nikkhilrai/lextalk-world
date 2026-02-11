@@ -7,17 +7,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
     Calendar, Clock, ArrowRight, User, Tag,
-    BookOpen, TrendingUp, Search
+    BookOpen, TrendingUp, Search, ChevronDown
 } from "lucide-react";
-
-const categories = [
-    "All",
-    "Legal Tech",
-    "Industry Insights",
-    "Events",
-    "Interviews",
-    "Opinion",
-];
 
 interface BlogPost {
     id: string;
@@ -38,6 +29,9 @@ export default function BlogPage() {
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+    const [categories, setCategories] = useState<string[]>(["All"]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 6;
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -53,7 +47,21 @@ export default function BlogPage() {
             }
         };
 
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch("/api/blog/categories");
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    const categoryNames = data.map((cat: any) => cat.name);
+                    setCategories(["All", ...categoryNames]);
+                }
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        };
+
         fetchPosts();
+        fetchCategories();
     }, []);
 
     const featuredPost = posts.find(post => post.featured);
@@ -65,6 +73,20 @@ export default function BlogPage() {
             post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+
+    // Pagination logic
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+    const paginatedPosts = filteredPosts.slice(0, currentPage * postsPerPage);
+    const hasMore = currentPage < totalPages;
+
+    const handleLoadMore = () => {
+        setCurrentPage(prev => prev + 1);
+    };
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedCategory, searchQuery]);
 
     const formatDate = (dateStr: string) => {
         return new Date(dateStr).toLocaleDateString("en-US", {
@@ -261,60 +283,75 @@ export default function BlogPage() {
 
                             {/* Posts Grid */}
                             {filteredPosts.length > 0 ? (
-                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                                    {filteredPosts.map((post) => (
-                                        <Link
-                                            key={post.id}
-                                            href={`/blog/${post.slug}`}
-                                            className="group block bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-amber-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
-                                        >
-                                            {/* Image */}
-                                            <div className="relative aspect-video overflow-hidden">
-                                                <Image
-                                                    src={post.image}
-                                                    alt={post.title}
-                                                    fill
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
-                                            </div>
+                                <>
+                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                        {paginatedPosts.map((post) => (
+                                            <Link
+                                                key={post.id}
+                                                href={`/blog/${post.slug}`}
+                                                className="group block bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-amber-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
+                                            >
+                                                {/* Image */}
+                                                <div className="relative aspect-video overflow-hidden">
+                                                    <Image
+                                                        src={post.image}
+                                                        alt={post.title}
+                                                        fill
+                                                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
+                                                </div>
 
-                                            {/* Content */}
-                                            <div className="p-5">
-                                                <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors leading-snug">
-                                                    {post.title}
-                                                </h3>
-                                                <p className="text-slate-500 text-sm line-clamp-2 mb-4">
-                                                    {post.excerpt}
-                                                </p>
+                                                {/* Content */}
+                                                <div className="p-5">
+                                                    <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors leading-snug">
+                                                        {post.title}
+                                                    </h3>
+                                                    <p className="text-slate-500 text-sm line-clamp-2 mb-4">
+                                                        {post.excerpt}
+                                                    </p>
 
-                                                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                                                    <div className="flex items-center gap-2">
-                                                        {post.authorImage ? (
-                                                            <div className="w-7 h-7 rounded-full overflow-hidden relative">
-                                                                <Image
-                                                                    src={post.authorImage}
-                                                                    alt={post.author}
-                                                                    fill
-                                                                    className="object-cover"
-                                                                />
-                                                            </div>
-                                                        ) : (
-                                                            <div className="w-7 h-7 rounded-full bg-slate-200 flex items-center justify-center">
-                                                                <User size={12} className="text-slate-500" />
-                                                            </div>
-                                                        )}
-                                                        <span className="text-xs text-slate-600">{post.author}</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-1 text-xs text-slate-400">
-                                                        <Clock size={12} />
-                                                        {post.readTime || "5 min read"}
+                                                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                                                        <div className="flex items-center gap-2">
+                                                            {post.authorImage ? (
+                                                                <div className="w-7 h-7 rounded-full overflow-hidden relative">
+                                                                    <Image
+                                                                        src={post.authorImage}
+                                                                        alt={post.author}
+                                                                        fill
+                                                                        className="object-cover"
+                                                                    />
+                                                                </div>
+                                                            ) : (
+                                                                <div className="w-7 h-7 rounded-full bg-slate-200 flex items-center justify-center">
+                                                                    <User size={12} className="text-slate-500" />
+                                                                </div>
+                                                            )}
+                                                            <span className="text-xs text-slate-600">{post.author}</span>
+                                                        </div>
+                                                        <div className="flex items-center gap-1 text-xs text-slate-400">
+                                                            <Clock size={12} />
+                                                            {post.readTime || "5 min read"}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+
+                                    {/* Load More Button */}
+                                    {hasMore && (
+                                        <div className="flex justify-center mt-12">
+                                            <button
+                                                onClick={handleLoadMore}
+                                                className="group px-8 py-4 bg-slate-900 hover:bg-amber-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                                            >
+                                                Load More Articles
+                                                <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
+                                            </button>
+                                        </div>
+                                    )}
+                                </>
                             ) : (
                                 <div className="text-center py-16">
                                     <p className="text-slate-500">No articles found matching your criteria.</p>
