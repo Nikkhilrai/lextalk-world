@@ -97,8 +97,6 @@ const EPISODES = [
     { id: 50, title: "Talk Show with Anthony Wong, Senior Director & Associate General Counsel – Informatica", youtubeId: "UejRAgX0LRU", duration: "22:43", guest: "Anthony Wong" },
 ];
 
-// Hand-picked editor's picks (diverse, interesting episodes)
-const EDITORS_PICKS = [EPISODES[0], EPISODES[4], EPISODES[5], EPISODES[34], EPISODES[49]];
 
 // Featured guests for marquee (select ones with recognizable titles)
 const FEATURED_GUESTS = [
@@ -383,50 +381,6 @@ export default function PodcastPage() {
                 </div>
             </section>
 
-            {/* ═══════════════════════════════════════
-                4. EDITOR'S PICKS — Horizontal scroll
-               ═══════════════════════════════════════ */}
-            <section className="py-10">
-                <div className="container mx-auto px-4">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-2.5">
-                            <Star className="text-[#d4a843]" size={18} fill="currentColor" />
-                            <h2 className="text-lg md:text-xl font-bold text-white">Editor&apos;s Picks</h2>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        {EDITORS_PICKS.map((ep) => (
-                            <motion.div
-                                key={ep.id}
-                                whileHover={{ y: -4 }}
-                                className="flex-shrink-0 w-[300px] md:w-[340px] cursor-pointer group"
-                                onClick={() => handlePlayFeatured(ep)}
-                            >
-                                <div className="bg-gradient-to-br from-[#1a3654] to-[#0f2336] rounded-xl overflow-hidden border border-white/10 hover:border-[#d4a843]/30 transition-all shadow-lg hover:shadow-xl hover:shadow-[#d4a843]/5">
-                                    <div className="relative aspect-video overflow-hidden">
-                                        <Image src={`https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`} alt={ep.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0f2336] via-transparent to-transparent" />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="w-12 h-12 rounded-full bg-[#d4a843] text-[#0f2336] flex items-center justify-center shadow-lg">
-                                                <Play fill="currentColor" size={18} className="ml-0.5" />
-                                            </div>
-                                        </div>
-                                        <span className="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/70 rounded text-[10px] font-semibold text-white">{ep.duration}</span>
-                                        <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#d4a843] rounded-full text-[9px] font-bold text-[#0f2336] uppercase flex items-center gap-1">
-                                            <Star size={8} fill="currentColor" /> Pick
-                                        </div>
-                                    </div>
-                                    <div className="p-4">
-                                        <p className="text-[#d4a843] text-[10px] font-bold mb-1">EP {String(ep.id).padStart(2, "0")} · {ep.guest}</p>
-                                        <h3 className="text-sm font-semibold text-white leading-snug line-clamp-2">{ep.title}</h3>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* ═══════════════════════════════════════
                 5. VIDEO MODAL
