@@ -46,7 +46,17 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
         },
         { name: "Awardees", href: "/awardees" },
         { name: "Sponsor", href: "/sponsor" },
-        { name: "Blog", href: "/blog" },
+        {
+            name: "More",
+            href: "#",
+            hasDropdown: true,
+            dropdownItems: [
+                { name: "Blog", href: "/blog" },
+                { name: "Podcasts", href: "/podcasts" },
+                { name: "Testimonial", href: "/testimonials" },
+                { name: "Magazine", href: "/magazine" },
+            ]
+        },
     ]);
 
     useEffect(() => {
@@ -152,12 +162,18 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                                 ? "opacity-100 translate-y-0 pointer-events-auto"
                                                 : "opacity-0 -translate-y-2 pointer-events-none"
                                         )}>
-                                            <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-1 min-w-[190px]">
-                                                {link.dropdownItems.map((item) => (
+                                            <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
+                                                {link.dropdownItems.map((item, index) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="block px-4 py-2.5 text-[12px] font-bold text-slate-600 hover:text-amber-600 hover:bg-amber-50/50 rounded-xl transition-all duration-200 text-center whitespace-nowrap"
+                                                        className={cn(
+                                                            "block px-6 py-3 text-sm font-semibold transition-all duration-200",
+                                                            // Special styling for Blog (first item in More dropdown)
+                                                            link.name === "More" && index === 0
+                                                                ? "bg-amber-400 text-slate-900 hover:bg-amber-500"
+                                                                : "text-slate-700 hover:text-amber-600 hover:bg-amber-50/50"
+                                                        )}
                                                     >
                                                         {item.name}
                                                     </Link>
@@ -223,11 +239,17 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                         </button>
                                         {openDropdown === link.name && link.dropdownItems && (
                                             <div className="bg-slate-50">
-                                                {link.dropdownItems.map((item) => (
+                                                {link.dropdownItems.map((item, index) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="block px-8 py-2 text-sm text-slate-600 hover:text-amber-600 transition-colors"
+                                                        className={cn(
+                                                            "block px-8 py-2.5 text-sm font-semibold transition-colors",
+                                                            // Special styling for Blog (first item in More dropdown)
+                                                            link.name === "More" && index === 0
+                                                                ? "bg-amber-400 text-slate-900 hover:bg-amber-500"
+                                                                : "text-slate-600 hover:text-amber-600"
+                                                        )}
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {item.name}
