@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Home, ArrowLeft, Gavel, Scale } from "lucide-react";
+import { Home, Calendar, Layout, ArrowRight } from "lucide-react";
 
 export default function NotFound() {
     return (
@@ -10,81 +10,156 @@ export default function NotFound() {
             className="relative min-h-screen w-full flex items-center justify-center overflow-hidden font-sans"
             style={{ backgroundColor: '#0b1a2a' }}
         >
-            {/* Background Aesthetic Elements */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#d4a843]/10 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#0f3350]/30 blur-[120px] rounded-full" />
+            {/* SEO Title Simulation for Browser */}
+            <title>404 | Page Under Construction - LexTalk World</title>
 
-                {/* Subtle Dot Grid */}
-                <div className="absolute inset-0 opacity-[0.05]"
-                    style={{ backgroundImage: 'radial-gradient(#d4a843 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+            {/* Premium Gradient & Animated Background */}
+            <div className="absolute inset-0 z-0">
+                {/* Main Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0b1a2a] via-[#0f2340] to-[#040d1a]" />
+
+                {/* Soft Animated Glow Elements */}
+                <motion.div
+                    animate={{
+                        opacity: [0.3, 0.5, 0.3],
+                        scale: [1, 1.1, 1],
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#d4a843]/5 blur-[120px] rounded-full"
                 />
+                <motion.div
+                    animate={{
+                        opacity: [0.2, 0.4, 0.2],
+                        scale: [1, 1.2, 1],
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#0f3350]/20 blur-[120px] rounded-full"
+                />
+
+                {/* Minimal Blueprint Grid - Dynamic Aesthetic */}
+                <div className="absolute inset-0 opacity-[0.05]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, #d4a843 1px, transparent 1px),
+                            linear-gradient(to bottom, #d4a843 1px, transparent 1px)
+                        `,
+                        backgroundSize: '80px 80px'
+                    }}
+                />
+
+                {/* Floating Particles (Soft Glow Lines) */}
+                <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none">
+                    <motion.path
+                        d="M -100 100 Q 200 300 500 100 T 1100 300"
+                        fill="none"
+                        stroke="#d4a843"
+                        strokeWidth="0.5"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                    />
+                    <motion.path
+                        d="M -100 500 Q 300 200 700 500 T 1300 200"
+                        fill="none"
+                        stroke="#d4a843"
+                        strokeWidth="0.5"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
+                    />
+                </svg>
             </div>
 
-            <div className="container relative z-10 px-4 text-center">
+            <div className="container relative z-10 px-4 text-center max-w-2xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    {/* Icon Reveal */}
-                    <div className="relative inline-block mb-8">
+                    {/* Minimal Technical Visual - Blueprint Gear */}
+                    <div className="relative inline-block mb-10">
                         <motion.div
-                            initial={{ scale: 0, rotate: -20 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
-                            className="w-24 h-24 bg-gradient-to-br from-[#d4a843] to-[#b88a2d] rounded-2xl flex items-center justify-center shadow-[0_0_50px_rgba(212,168,67,0.2)] mx-auto relative z-10"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.8 }}
+                            className="relative"
                         >
-                            <Gavel size={48} className="text-[#0b1a2a] fill-current" />
+                            {/* Animated Construction Line */}
+                            <motion.div
+                                className="w-20 h-20 border-2 border-[#d4a843]/20 rounded-xl flex items-center justify-center relative mx-auto"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <Layout size={32} className="text-[#d4a843]" />
+
+                                {/* Scanning line animation */}
+                                <motion.div
+                                    className="absolute inset-x-0 h-[1px] bg-[#d4a843] shadow-[0_0_10px_#d4a843]"
+                                    animate={{ top: ['0%', '100%', '0%'] }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                />
+                            </motion.div>
+
+                            {/* Orbiting particles */}
+                            <motion.div
+                                className="absolute -inset-4 border border-dashed border-[#d4a843]/10 rounded-full"
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            />
                         </motion.div>
-                        <div className="absolute -inset-4 bg-[#d4a843]/20 blur-2xl rounded-full translate-y-4" />
                     </div>
 
-                    {/* 404 Text */}
-                    <h1 className="text-[120px] md:text-[180px] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white/40 to-white/10 select-none filter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                        404
-                    </h1>
+                    {/* Content Section */}
+                    <div className="space-y-6">
+                        <h1 className="text-[40px] md:text-[64px] font-extrabold tracking-tight text-white leading-tight">
+                            Page Under <span className="text-[#d4a843]">Construction</span>
+                        </h1>
 
-                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 mt-[-20px] md:mt-[-40px]">
-                        The Verdict: <span className="text-[#d4a843]">Page Not Found</span>
-                    </h2>
+                        <h2 className="text-xl md:text-2xl font-semibold text-white/90">
+                            We&apos;re currently building something valuable for you.
+                        </h2>
 
-                    <p className="max-w-md mx-auto text-[#6895b2] mb-12 text-lg leading-relaxed">
-                        It seems the link you&apos;re looking for has been dismissed from our court or never existed in the first place.
-                    </p>
+                        <p className="text-base md:text-lg text-[#6895b2] leading-relaxed opacity-80">
+                            This page is not available yet, but our team is working behind the scenes to bring it live soon. Stay tuned.
+                        </p>
+                    </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-12">
                         <Link href="/">
                             <motion.button
-                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(212,168,67,0.2)" }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-8 py-4 bg-[#d4a843] hover:bg-[#c49833] text-[#0b1a2a] font-bold rounded-xl transition-all shadow-lg hover:shadow-[#d4a843]/20 flex items-center gap-2 group"
+                                className="w-full sm:w-auto px-8 py-4 bg-[#d4a843] hover:bg-[#c49833] text-[#0b1a2a] font-bold rounded-xl transition-all flex items-center justify-center gap-2 group"
                             >
-                                <Home size={20} />
-                                Back to Home
+                                <Home size={18} />
+                                Go Back Home
                             </motion.button>
                         </Link>
 
-                        <button
-                            onClick={() => window.history.back()}
-                            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all border border-white/10 hover:border-white/20 flex items-center gap-2"
-                        >
-                            <ArrowLeft size={20} />
-                            Previous Page
-                        </button>
+                        <Link href="/conferences">
+                            <motion.button
+                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full sm:w-auto px-8 py-4 bg-transparent text-white font-semibold rounded-xl transition-all border border-white/20 hover:border-[#d4a843]/40 flex items-center justify-center gap-2"
+                            >
+                                <Calendar size={18} />
+                                Explore Conferences
+                                <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                            </motion.button>
+                        </Link>
                     </div>
                 </motion.div>
 
-                {/* Bottom Branding */}
+                {/* Footer Quote / Branding */}
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="mt-24 pt-12 border-t border-white/5 opacity-40 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.2em] font-medium text-white/50"
+                    animate={{ opacity: 0.4 }}
+                    transition={{ delay: 1.2, duration: 1 }}
+                    className="mt-24 pt-10 border-t border-white/5"
                 >
-                    <Scale size={14} fill="currentColor" />
-                    LexTalk World Media Hub
+                    <p className="text-xs uppercase tracking-[0.25em] font-medium text-white/60">
+                        &copy; LexTalk World &ndash; Building Global Legal Dialogues
+                    </p>
                 </motion.div>
             </div>
         </div>
