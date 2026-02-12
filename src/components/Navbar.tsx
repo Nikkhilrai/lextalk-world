@@ -163,17 +163,11 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                                 : "opacity-0 -translate-y-2 pointer-events-none"
                                         )}>
                                             <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
-                                                {link.dropdownItems.map((item, index) => (
+                                                {link.dropdownItems.map((item) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className={cn(
-                                                            "block px-6 py-3 text-sm font-semibold transition-all duration-200",
-                                                            // Special styling for Blog (first item in More dropdown)
-                                                            link.name === "More" && index === 0
-                                                                ? "bg-amber-400 text-slate-900 hover:bg-amber-500"
-                                                                : "text-slate-700 hover:text-amber-600 hover:bg-amber-50/50"
-                                                        )}
+                                                        className="block px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-amber-400 hover:text-slate-900 transition-all duration-200"
                                                     >
                                                         {item.name}
                                                     </Link>
@@ -239,17 +233,11 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                         </button>
                                         {openDropdown === link.name && link.dropdownItems && (
                                             <div className="bg-slate-50">
-                                                {link.dropdownItems.map((item, index) => (
+                                                {link.dropdownItems.map((item) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className={cn(
-                                                            "block px-8 py-2.5 text-sm font-semibold transition-colors",
-                                                            // Special styling for Blog (first item in More dropdown)
-                                                            link.name === "More" && index === 0
-                                                                ? "bg-amber-400 text-slate-900 hover:bg-amber-500"
-                                                                : "text-slate-600 hover:text-amber-600"
-                                                        )}
+                                                        className="block px-8 py-2.5 text-sm font-semibold text-slate-700 hover:bg-amber-400 hover:text-slate-900 transition-colors"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {item.name}
