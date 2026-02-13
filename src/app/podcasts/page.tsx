@@ -156,7 +156,15 @@ function CardSkeleton() {
 /* ─────────────────────────────────────────────
    Main Page Component
    ───────────────────────────────────────────── */
+import { notFound } from "next/navigation";
+
+// ... (existing imports)
+
 export default function PodcastPage() {
+    // Force "Under Construction" page as requested
+    notFound();
+
+    // The rest of the component remains but won't be executed for now
     const [activeVideo, setActiveVideo] = useState(EPISODES[0]);
     const [isPlaying, setIsPlaying] = useState(false);
     const [visibleCount, setVisibleCount] = useState(12);

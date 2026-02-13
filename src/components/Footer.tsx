@@ -175,6 +175,24 @@ export function Footer() {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/podcasts" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">
+                                    <span className="w-0 group-hover:w-2 h-0.5 bg-amber-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
+                                    Podcasts
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/testimonials" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">
+                                    <span className="w-0 group-hover:w-2 h-0.5 bg-amber-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
+                                    Testimonials
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/magazine" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">
+                                    <span className="w-0 group-hover:w-2 h-0.5 bg-amber-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
+                                    Magazine
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/speakers" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">
                                     <span className="w-0 group-hover:w-2 h-0.5 bg-amber-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
                                     Speakers
