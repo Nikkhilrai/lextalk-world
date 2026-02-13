@@ -222,8 +222,8 @@ export async function createLead(data: any) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        // Sync to Google Sheet (don't await to avoid slowing down the response)
-        syncToGoogleSheet({
+        // Sync to Google Sheet (Awaited to ensure completion in serverless environments)
+        await syncToGoogleSheet({
             ...data,
             status: "New",
             createdAt: new Date().toISOString()
