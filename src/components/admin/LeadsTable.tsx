@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, Search, Trash, Eye, FileDown, Phone, Building, Briefcase, Calendar, MessageSquare, X } from "lucide-react";
+import { Mail, MapPin, Search, Trash, Eye, FileDown, Phone, Building, Briefcase, Calendar, MessageSquare, X, FileSpreadsheet } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getLeads, deleteLead } from "@/actions/lead";
 
@@ -204,6 +204,29 @@ export function LeadsTable() {
         ));
     };
 
+    const handleExportExcel = async () => {
+        const XLSX = await import("xlsx");
+        const headers = ["First Name", "Last Name", "Email", "Contact", "Organization", "Designation", "Country", "Join As", "Conference", "Status", "Registered On"];
+        const data = leads.map(l => ({
+            "First Name": l.firstName,
+            "Last Name": l.lastName,
+            "Email": l.email,
+            "Contact": l.contact || "N/A",
+            "Organization": l.organization || "N/A",
+            "Designation": l.designation || "N/A",
+            "Country": l.country,
+            "Join As": l.joinAs || "N/A",
+            "Conference": l.conference || "N/A",
+            "Status": l.status,
+            "Registered On": new Date(l.createdAt).toLocaleDateString()
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(data, { header: headers });
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Leads");
+        XLSX.writeFile(wb, "LexTalk_Leads_Export.xlsx");
+    };
+
     const exportAllPDF = () => {
         const rows = leads.map(l => `
             <tr>
@@ -280,6 +303,12 @@ export function LeadsTable() {
                             onClick={loadLeads}
                         >
                             Refresh
+                        </button>
+                        <button
+                            className="px-3 py-2 bg-green-600 hover:bg-green-700 text-sm text-white font-medium rounded-lg transition flex items-center gap-2"
+                            onClick={handleExportExcel}
+                        >
+                            <FileSpreadsheet className="w-4 h-4" /> Excel
                         </button>
                         <button
                             className="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-sm text-white font-medium rounded-lg transition flex items-center gap-2"
