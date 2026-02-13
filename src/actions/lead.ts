@@ -170,17 +170,28 @@ async function sendConfirmationEmail(data: any) {
 
 async function syncToGoogleSheet(data: any) {
     const WEBHOOK_URL = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-    if (!WEBHOOK_URL) return;
+    if (!WEBHOOK_URL) {
+        console.log("Sync skipped: GOOGLE_SHEET_WEBHOOK_URL not set");
+        return;
+    }
 
     try {
-        await fetch(WEBHOOK_URL, {
+        console.log("Attempting to sync lead to Google Sheets:", data.email);
+        const response = await fetch(WEBHOOK_URL, {
             method: "POST",
+            redirect: "follow",
             body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
         });
-        console.log("Lead synced to Google Sheet successfully");
+
+        const result = await response.text();
+        console.log("Google Sheets response status:", response.status);
+        console.log("Google Sheets result:", result);
     } catch (error) {
-        console.error("Failed to sync lead to Google Sheet:", error);
+        console.error("CRITICAL ERROR: Failed to sync lead to Google Sheet:", error);
     }
 }
 
