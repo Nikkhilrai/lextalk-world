@@ -168,6 +168,22 @@ async function sendConfirmationEmail(data: any) {
     }
 }
 
+async function syncToGoogleSheet(data: any) {
+    const WEBHOOK_URL = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+    if (!WEBHOOK_URL) return;
+
+    try {
+        await fetch(WEBHOOK_URL, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json" },
+        });
+        console.log("Lead synced to Google Sheet successfully");
+    } catch (error) {
+        console.error("Failed to sync lead to Google Sheet:", error);
+    }
+}
+
 export async function createLead(data: any) {
     try {
         const lead = await prisma.lead.create({
@@ -194,6 +210,13 @@ export async function createLead(data: any) {
                 link: `/admin/leads`,
             }
         }).catch(err => console.error("Notification error:", err));
+
+        // Sync to Google Sheet (don't await to avoid slowing down the response)
+        syncToGoogleSheet({
+            ...data,
+            status: "New",
+            createdAt: new Date().toISOString()
+        });
 
         // Send email notification (don't await to avoid slowing down the response)
         sendNotificationEmail(data);
