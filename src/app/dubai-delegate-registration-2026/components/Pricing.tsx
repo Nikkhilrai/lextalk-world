@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, Users, User, Clock, Loader2, Sparkles, ShieldCheck, Mail } from "lucide-react";
+import { Check, ArrowRight, Users, User, Clock, Loader2, Sparkles, ShieldCheck, Mail, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 declare global {
     interface Window {
@@ -495,92 +496,118 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
         setModalOpen(true);
     };
 
-    // Determine features to show
     const visibleFeatures = isExpanded ? pass.features : pass.features.slice(0, 5);
     const hasMoreFeatures = pass.features.length > 5;
 
     return (
         <>
-            <div className={`relative flex flex-col bg-white rounded-xl border ${pass.isPopular ? "border-amber-400 ring-1 ring-amber-400/20 shadow-lg scale-[1.02]" : pass.isStudent ? "border-blue-200 bg-blue-50/10" : "border-slate-200 hover:border-amber-200"} transition-all duration-300 hover:shadow-xl h-full`}>
+            <div className={`group relative flex flex-col bg-slate-900/40 backdrop-blur-xl border-t border-x rounded-3xl transition-all duration-500 hover:-translate-y-2 h-full overflow-hidden ${pass.isPopular
+                ? "border-amber-500/50 shadow-[0_0_40px_-10px_rgba(245,158,11,0.2)]"
+                : "border-white/10 hover:border-amber-500/30 shadow-2xl"
+                }`}>
+                {/* Visual Accent Bar */}
+                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${pass.isPopular ? "from-amber-400 via-amber-600 to-amber-400" : "from-white/5 via-white/20 to-white/5"}`} />
+
+                {/* Badges */}
                 {pass.isPopular && (
-                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] uppercase font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg z-20 tracking-wider">
-                        Most Popular
+                    <div className="absolute top-4 right-4 bg-amber-500 text-slate-950 text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+                        <Sparkles size={10} /> Best Selection
                     </div>
                 )}
                 {pass.isStudent && (
-                    <div className="absolute top-0 right-0 bg-blue-500 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg z-20 tracking-wider">
-                        For Students
+                    <div className="absolute top-4 right-4 bg-blue-500 text-white text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg">
+                        Future Leader
                     </div>
                 )}
 
-                <div className="p-5 flex flex-col flex-grow">
-                    {/* Header */}
-                    <div className="mb-4">
-                        <h3 className="font-serif font-bold text-lg text-slate-900 leading-tight mb-1">{pass.name}</h3>
+                <div className="p-8 flex flex-col flex-grow">
+                    {/* Tier Name */}
+                    <div className="mb-6">
+                        <h3 className="font-serif font-bold text-2xl text-white mb-3 group-hover:text-amber-400 transition-colors">
+                            {pass.name}
+                        </h3>
                         <div className="flex flex-col">
                             <div className="flex items-baseline gap-2">
-                                <span className="text-2xl font-bold text-slate-900">${pass.discountedPrice}</span>
+                                <span className="text-4xl font-black text-white tracking-tight">
+                                    ${pass.discountedPrice}
+                                </span>
                                 {pass.originalPrice > pass.discountedPrice && (
-                                    <span className="text-slate-400 line-through text-sm decoration-slate-400/60">${pass.originalPrice}</span>
+                                    <span className="text-slate-500 line-through text-sm font-medium">
+                                        ${pass.originalPrice}
+                                    </span>
                                 )}
                             </div>
                             {pass.priceLabel && (
-                                <span className="text-[10px] font-semibold text-amber-600 uppercase tracking-wider">{pass.priceLabel}</span>
+                                <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-amber-500/80 uppercase tracking-widest mt-2 px-2.5 py-1 bg-amber-500/5 rounded-md self-start border border-amber-500/10">
+                                    <Clock size={12} /> {pass.priceLabel}
+                                </span>
                             )}
                         </div>
                     </div>
 
-                    <div className="mb-4">
-                        <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wide mb-1">Ideal For:</p>
-                        <p className="text-xs text-slate-600 leading-relaxed italic">{pass.idealFor}</p>
+                    {/* Ideal For Section - Highlighted */}
+                    <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:bg-white/10 transition-colors">
+                        <p className="text-[10px] text-amber-500/70 font-black uppercase tracking-widest mb-2">Exclusive For:</p>
+                        <p className="text-sm text-slate-300 leading-relaxed font-light">{pass.idealFor}</p>
                     </div>
 
-                    {/* Divider */}
-                    <div className="h-px bg-slate-100 mb-4" />
-
-                    {/* Features List */}
-                    <div className="flex-grow">
-                        <ul className="space-y-2 mb-2">
+                    {/* Features List with Custom Icons */}
+                    <div className="flex-grow space-y-6">
+                        <ul className="space-y-4">
                             {visibleFeatures.map((feature, idx) => (
-                                <li key={idx} className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-snug">
-                                    <Check size={14} className="text-amber-500 mt-0.5 flex-shrink-0 stroke-[3]" />
-                                    <span>{feature}</span>
-                                </li>
+                                <motion.li
+                                    key={idx}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: idx * 0.05 }}
+                                    className="flex items-start gap-3.5 text-sm text-slate-300/90 leading-snug group/item"
+                                >
+                                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center group-hover/item:bg-amber-500/30 group-hover/item:border-amber-500/50 transition-all">
+                                        <Check size={12} className="text-amber-400 stroke-[3]" />
+                                    </div>
+                                    <span className="group-hover/item:text-white transition-colors">{feature}</span>
+                                </motion.li>
                             ))}
                         </ul>
 
                         {hasMoreFeatures && (
                             <button
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="text-xs font-medium text-amber-600 hover:text-amber-700 hover:underline flex items-center gap-1 mt-1 transition-colors"
+                                className="text-xs font-bold text-slate-400 hover:text-amber-400 flex items-center gap-1.5 mt-2 transition-colors uppercase tracking-widest"
                             >
-                                {isExpanded ? "Show less" : `+ ${pass.features.length - 5} more benefits`}
+                                {isExpanded ? "Close Benefits" : `Discover ${pass.features.length - 5} more Benefits`}
+                                <ChevronRight size={14} className={`transition-transform ${isExpanded ? "rotate-90" : ""}`} />
                             </button>
                         )}
                     </div>
 
-                    {/* Note */}
+                    {/* Note Branding */}
                     {pass.note && (
-                        <div className="mt-4 p-2 bg-slate-50 rounded-lg border border-slate-100">
-                            <p className="text-[10px] text-slate-500 italic"><span className="font-bold">Note:</span> {pass.note}</p>
+                        <div className="mt-8 flex items-center gap-3 py-3 px-4 bg-blue-500/5 border border-blue-500/10 rounded-xl">
+                            <ShieldCheck size={16} className="text-blue-400 flex-shrink-0" />
+                            <p className="text-[10px] text-blue-300 font-medium leading-tight">{pass.note}</p>
                         </div>
                     )}
 
-                    {/* Actions */}
-                    <div className="mt-5 pt-4 border-t border-slate-100">
-                        <div className="grid grid-cols-2 gap-2">
+                    {/* High-Impact Actions */}
+                    <div className="mt-10 pt-8 border-t border-white/10">
+                        <div className="grid grid-cols-2 gap-3 mb-4">
                             <button
                                 onClick={() => handlePayment("india")}
-                                className="flex items-center justify-center px-1 py-2.5 border border-slate-200 text-slate-700 rounded-lg text-[11px] font-bold hover:bg-slate-50 hover:border-slate-300 transition-colors active:bg-slate-100 uppercase tracking-tight"
+                                className="group/btn relative flex items-center justify-center px-2 py-3.5 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all hover:bg-white/10 hover:border-white/20 active:scale-[0.98]"
                             >
-                                Pay in INR
+                                Pay in INR (₹)
                             </button>
                             <button
                                 onClick={() => handlePayment("international")}
-                                className="flex items-center justify-center px-1 py-2.5 bg-slate-900 text-white rounded-lg text-[11px] font-bold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:bg-slate-900/90 uppercase tracking-tight"
+                                className="group/btn relative flex items-center justify-center px-2 py-3.5 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all hover:shadow-[0_0_20px_-5px_rgba(251,191,36,0.5)] active:scale-[0.98]"
                             >
-                                Pay in USD
+                                Pay in USD ($)
                             </button>
+                        </div>
+                        <div className="flex items-center justify-center gap-1.5 opacity-40">
+                            <ShieldCheck size={12} className="text-amber-500" />
+                            <span className="text-[9px] text-white uppercase font-bold tracking-[0.1em]">Secure End-to-End Encryption</span>
                         </div>
                     </div>
                 </div>
@@ -598,68 +625,116 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 
 export default function Pricing() {
     const [activeTab, setActiveTab] = useState<"individual" | "team">("individual");
-
     const passes = activeTab === "individual" ? INDIVIDUAL_PASSES : TEAM_PASSES;
 
     return (
-        <section id="pricing" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
-            {/* Subtle Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.04),transparent_50%)] pointer-events-none" />
+        <section id="pricing" className="py-24 md:py-32 bg-[#0b1120] relative overflow-hidden">
+            {/* Immersive Background Effects */}
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
 
             <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
                 {/* Header */}
-                <div className="text-center mb-10">
-                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
-                        Choose Your <span className="text-amber-500">Pass</span>
-                    </h2>
-                    <p className="text-slate-600 text-base max-w-2xl mx-auto">
-                        Select the perfect pass for your needs and join the premier legal conference experience
-                    </p>
+                <div className="text-center mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                            Reserve Your Presence
+                        </span>
+                        <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+                            Secure Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200">Exclusive Pass</span>
+                        </h2>
+                        <p className="text-slate-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                            Join the global assembly of legal visionaries in Dubai.
+                            Choose the tier that matches your professional objectives.
+                        </p>
+                    </motion.div>
                 </div>
 
-                {/* Toggle */}
-                <div className="flex justify-center mb-8">
-                    <div className="relative inline-flex bg-slate-100 rounded-full p-1 border border-slate-200 shadow-inner overflow-hidden">
-                        <div
-                            className={`absolute inset-y-1 transition-all duration-300 ease-in-out bg-slate-900 rounded-full shadow-lg shadow-slate-900/40 ${activeTab === "individual" ? "left-1 w-[130px]" : "left-[135px] w-[130px]"
-                                }`}
+                {/* Toggle - Premium Glass Style */}
+                <div className="flex justify-center mb-12">
+                    <div className="relative inline-flex bg-white/5 backdrop-blur-md rounded-2xl p-1.5 border border-white/10 shadow-2xl">
+                        <motion.div
+                            layoutId="pricing-bg"
+                            className="absolute inset-y-1.5 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl shadow-lg"
+                            animate={{
+                                left: activeTab === "individual" ? "6px" : "146px",
+                                width: activeTab === "individual" ? "140px" : "140px"
+                            }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                         <button
                             onClick={() => setActiveTab("individual")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[130px] py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${activeTab === "individual"
-                                ? "text-white"
-                                : "text-slate-500 hover:text-slate-900"
-                                }`}
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${activeTab === "individual" ? "text-slate-950" : "text-white/60 hover:text-white"}`}
                         >
-                            <User size={16} />
-                            Individual
+                            <User size={14} /> Individual
                         </button>
                         <button
                             onClick={() => setActiveTab("team")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[130px] py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${activeTab === "team"
-                                ? "text-white"
-                                : "text-slate-500 hover:text-slate-900"
-                                }`}
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${activeTab === "team" ? "text-slate-950" : "text-white/60 hover:text-white"}`}
                         >
-                            <Users size={16} />
-                            Team (x3)
+                            <Users size={14} /> Team (x3)
                         </button>
                     </div>
                 </div>
 
-                {/* Early Bird Banner */}
-                <div className="bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl px-6 py-4 mb-10 flex items-center justify-center gap-3">
-                    <Clock size={20} className="text-slate-900" />
-                    <span className="text-slate-900 font-semibold text-sm md:text-base">
-                        Early Bird Offers End Soon – Seats are limited and allocated on a first-come, first-served basis
-                    </span>
+                {/* Dynamic Early Bird Ticker */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    className="max-w-3xl mx-auto mb-16"
+                >
+                    <div className="relative overflow-hidden bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 backdrop-blur-sm border border-amber-500/20 rounded-2xl px-8 py-5 flex items-center justify-center gap-4 group">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        <div className="flex -space-x-2">
+                            {[1, 2, 3].map(i => (
+                                <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0b1120] bg-slate-800 flex items-center justify-center overflow-hidden">
+                                    <Image src={`https://i.pravatar.cc/100?u=${i}`} alt="Attendee" width={32} height={32} />
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-white/90 font-medium text-sm md:text-base tracking-wide">
+                            <span className="text-amber-400 font-bold">Seats filling fast!</span> Join 150+ confirmed delegates from 40 countries.
+                        </p>
+                        <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-slate-950 text-[10px] font-black uppercase rounded-full">
+                            <Clock size={12} strokeWidth={3} /> Expiring Soon
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Pass Cards Grid */}
+                <div className={`grid gap-8 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-3"}`}>
+                    {passes.map((pass, idx) => (
+                        <motion.div
+                            key={pass.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                        >
+                            <PassCard pass={pass} category={activeTab} />
+                        </motion.div>
+                    ))}
                 </div>
 
-                {/* Pass Cards */}
-                <div className={`grid gap-6 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-3"}`}>
-                    {passes.map((pass) => (
-                        <PassCard key={pass.id} pass={pass} category={activeTab} />
-                    ))}
+                {/* Secure Trust Indicators */}
+                <div className="mt-20 flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div className="flex items-center gap-2 text-white font-medium">
+                        <ShieldCheck size={20} className="text-amber-500" />
+                        <span className="text-sm uppercase tracking-widest">PCI-DSS Compliant</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white font-medium">
+                        <Sparkles size={20} className="text-amber-500" />
+                        <span className="text-sm uppercase tracking-widest">Instant Confirmation</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white font-medium">
+                        <Loader2 size={20} className="text-amber-500" />
+                        <span className="text-sm uppercase tracking-widest">24/7 Priority Support</span>
+                    </div>
                 </div>
             </div>
         </section>
