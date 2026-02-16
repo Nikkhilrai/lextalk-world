@@ -563,31 +563,20 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 
                     {/* Actions */}
                     <div className="mt-5 pt-4 border-t border-slate-100">
-                        {pass.isFree ? (
+                        <div className="grid grid-cols-2 gap-2">
                             <button
-                                onClick={() => handlePayment("free")}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-[0.98]"
+                                onClick={() => handlePayment("india")}
+                                className="flex items-center justify-center px-1 py-2.5 border border-slate-200 text-slate-700 rounded-lg text-[11px] font-bold hover:bg-slate-50 hover:border-slate-300 transition-colors active:bg-slate-100 uppercase tracking-tight"
                             >
-                                {pass.ctaText || "Register Now"}
-                                <ArrowRight size={16} />
+                                Pay in INR
                             </button>
-                        ) : (
-                            <div className="flex flex-col gap-2">
-                                <button
-                                    onClick={() => handlePayment("international")}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-[0.98]"
-                                >
-                                    {pass.ctaText || "Register Now"}
-                                    <ArrowRight size={16} />
-                                </button>
-                                <button
-                                    onClick={() => handlePayment("india")}
-                                    className="w-full text-center text-[10px] font-medium text-slate-500 hover:text-amber-600 transition-colors"
-                                >
-                                    Prefer to pay in INR? Click here
-                                </button>
-                            </div>
-                        )}
+                            <button
+                                onClick={() => handlePayment("international")}
+                                className="flex items-center justify-center px-1 py-2.5 bg-slate-900 text-white rounded-lg text-[11px] font-bold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:bg-slate-900/90 uppercase tracking-tight"
+                            >
+                                Pay in USD
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
