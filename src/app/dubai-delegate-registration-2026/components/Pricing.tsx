@@ -107,67 +107,12 @@ const INDIVIDUAL_PASSES: PassType[] = [
     },
 ];
 
-const TEAM_PASSES: PassType[] = [
-    {
-        id: "delegate",
-        name: "Delegate Pass",
-        originalPrice: 799,
-        discountedPrice: 399,
-        idealFor: "Legal teams, small law firms",
-        priceLabel: "Team Early Bird",
-        ctaText: "Register Team as Delegate",
-        features: [
-            "Full 2-Day Conference Access for 3",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Morning Networking Breakfast",
-            "Delegate Kit + Certificate",
-        ],
-    },
-    {
-        id: "delegate-vip",
-        name: "Delegate VIP Pass",
-        originalPrice: 1499,
-        discountedPrice: 799,
-        isPopular: true,
-        idealFor: "Corporate legal leadership teams",
-        priceLabel: "Team Early Bird",
-        ctaText: "Register Team as VIP",
-        features: [
-            "Full 2-Day Conference Access for 3",
-            "Structured Networking Sessions",
-            "Morning Networking Breakfast",
-            "VIP Networking Lounge",
-            "Featured Networking Introduction",
-            "Media Byte Interview",
-            "Digital Spotlight",
-        ],
-    },
-    {
-        id: "vendor-vip",
-        name: "Vendor VIP Pass",
-        originalPrice: 3599,
-        discountedPrice: 1999,
-        idealFor: "Tech companies, consulting teams",
-        priceLabel: "Team Early Bird",
-        ctaText: "Register Team as Vendor VIP",
-        features: [
-            "Full Conference Access for 3",
-            "Structured Business Networking",
-            "Logo Placement on Website",
-            "Featured Vendor Listing",
-            "Media Byte Coverage",
-            "Social Media Brand Mention",
-            "Priority Business Introduction",
-        ],
-    },
-];
 
 interface RegistrationModalProps {
     isOpen: boolean;
     onClose: () => void;
     pass: PassType;
-    category: "individual" | "team";
+    category: string;
     paymentType: "india" | "international" | "free";
 }
 
@@ -486,7 +431,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
     );
 }
 
-function PassCard({ pass, category }: { pass: PassType; category: "individual" | "team" }) {
+function PassCard({ pass }: { pass: PassType }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [paymentType, setPaymentType] = useState<"india" | "international" | "free">("international");
     const [isExpanded, setIsExpanded] = useState(false);
@@ -601,7 +546,7 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 pass={pass}
-                category={category}
+                category="Individual"
                 paymentType={paymentType}
             />
         </>
@@ -609,9 +554,6 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 }
 
 export default function Pricing() {
-    const [activeTab, setActiveTab] = useState<"individual" | "team">("individual");
-    const passes = activeTab === "individual" ? INDIVIDUAL_PASSES : TEAM_PASSES;
-
     return (
         <section id="pricing" className="py-24 bg-slate-50 relative overflow-hidden">
             {/* Subtle Texture Background */}
@@ -633,33 +575,6 @@ export default function Pricing() {
                             Select a registration tier that fits your professional journey.
                         </p>
                     </motion.div>
-                </div>
-
-                {/* Toggle - Clean Refined Style */}
-                <div className="flex justify-center mb-12">
-                    <div className="relative inline-flex bg-slate-200/50 backdrop-blur-sm rounded-2xl p-1 border border-slate-200 shadow-inner">
-                        <motion.div
-                            layoutId="pricing-bg-refined"
-                            className="absolute inset-y-1 bg-white rounded-xl shadow-md"
-                            animate={{
-                                left: activeTab === "individual" ? "4px" : "144px",
-                                width: "140px"
-                            }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        />
-                        <button
-                            onClick={() => setActiveTab("individual")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${activeTab === "individual" ? "text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
-                        >
-                            <User size={14} /> Individual
-                        </button>
-                        <button
-                            onClick={() => setActiveTab("team")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${activeTab === "team" ? "text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
-                        >
-                            <Users size={14} /> Team (x3)
-                        </button>
-                    </div>
                 </div>
 
                 {/* High-Urgency FOMO Banner */}
@@ -709,8 +624,8 @@ export default function Pricing() {
                 </motion.div>
 
                 {/* Pass Cards Grid */}
-                <div className={`grid gap-8 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-3"}`}>
-                    {passes.map((pass, idx) => (
+                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                    {INDIVIDUAL_PASSES.map((pass, idx) => (
                         <motion.div
                             key={pass.id}
                             initial={{ opacity: 0, y: 20 }}
@@ -718,7 +633,7 @@ export default function Pricing() {
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
                         >
-                            <PassCard pass={pass} category={activeTab} />
+                            <PassCard pass={pass} />
                         </motion.div>
                     ))}
                 </div>
