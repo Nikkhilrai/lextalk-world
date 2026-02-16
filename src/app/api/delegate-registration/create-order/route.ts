@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
             conferenceSlug,
             originalPrice,
             discountedPrice,
+            registrationId, // New optional field
         } = body;
 
         if (!amount || amount <= 0) {
@@ -36,27 +37,82 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Create registration record first (pending status)
         const prismaClient = prisma as any;
-        const registration = await prismaClient.delegateRegistration.create({
-            data: {
-                firstName: customerDetails.firstName,
-                lastName: customerDetails.lastName,
-                email: customerDetails.email,
-                phone: customerDetails.phone || null,
-                organization: customerDetails.organization || null,
-                designation: customerDetails.designation || null,
-                country: customerDetails.country,
-                passType,
-                passCategory,
-                conferenceSlug,
-                originalPrice,
-                discountedPrice,
-                currency,
-                paymentType,
-                paymentStatus: "pending",
-            },
-        });
+        let registration;
+
+        if (registrationId) {
+            // Update existing registration record
+            registration = await prismaClient.delegateRegistration.update({
+                where: { id: registrationId },
+                data: {
+                    firstName: customerDetails.firstName,
+                    lastName: customerDetails.lastName,
+                    email: customerDetails.email,
+                    phone: customerDetails.phone || null,
+                    organization: customerDetails.organization || null,
+                    designation: customerDetails.designation || null,
+                    country: customerDetails.country,
+                    passType,
+                    passCategory,
+                    conferenceSlug,
+                    originalPrice,
+                    discountedPrice,
+                    currency,
+                    paymentType,
+                    paymentStatus: "pending",
+                },
+            });
+        } else {
+            // Fallback: check if a pending one exists for this email/conference
+            const existing = await prismaClient.delegateRegistration.findFirst({
+                where: {
+                    email: customerDetails.email,
+                    conferenceSlug,
+                    paymentStatus: "pending"
+                }
+            });
+
+            if (existing) {
+                registration = await prismaClient.delegateRegistration.update({
+                    where: { id: existing.id },
+                    data: {
+                        firstName: customerDetails.firstName,
+                        lastName: customerDetails.lastName,
+                        phone: customerDetails.phone || null,
+                        organization: customerDetails.organization || null,
+                        designation: customerDetails.designation || null,
+                        country: customerDetails.country,
+                        passType,
+                        passCategory,
+                        originalPrice,
+                        discountedPrice,
+                        currency,
+                        paymentType,
+                    }
+                });
+            } else {
+                // Create new record
+                registration = await prismaClient.delegateRegistration.create({
+                    data: {
+                        firstName: customerDetails.firstName,
+                        lastName: customerDetails.lastName,
+                        email: customerDetails.email,
+                        phone: customerDetails.phone || null,
+                        organization: customerDetails.organization || null,
+                        designation: customerDetails.designation || null,
+                        country: customerDetails.country,
+                        passType,
+                        passCategory,
+                        conferenceSlug,
+                        originalPrice,
+                        discountedPrice,
+                        currency,
+                        paymentType,
+                        paymentStatus: "pending",
+                    },
+                });
+            }
+        }
 
         // Create notification for pending ticket purchase
         await prismaClient.notification.create({

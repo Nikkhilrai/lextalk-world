@@ -12,15 +12,36 @@ interface PhoneInputProps {
     id?: string;
     required?: boolean;
     dropdownDirection?: "up" | "down";
+    variant?: "underlined" | "pill";
 }
 
-export function PhoneInput({ value, onChange, name, id, required, dropdownDirection = "down" }: PhoneInputProps) {
+export function PhoneInput({ value, onChange, name, id, required, dropdownDirection = "down", variant = "underlined" }: PhoneInputProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCountry, setSelectedCountry] = useState<Country>(DEFAULT_COUNTRY);
     const [phoneNumber, setPhoneNumber] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    // Initialize state from value prop if provided
+    useEffect(() => {
+        if (value && !phoneNumber) {
+            // Check if value starts with a plus and has a space
+            if (value.startsWith("+") && value.includes(" ")) {
+                const [dialCode, ...rest] = value.split(" ");
+                const number = rest.join("");
+                setPhoneNumber(number);
+
+                // Find matching country
+                const country = COUNTRIES_DATA.find(c => c.dialCode === dialCode);
+                if (country) {
+                    setSelectedCountry(country);
+                }
+            } else {
+                setPhoneNumber(value);
+            }
+        }
+    }, [value, phoneNumber]);
 
     // Filter countries based on search (by name, code, or dial code)
     const filteredCountries = useMemo(() => {
@@ -58,19 +79,23 @@ export function PhoneInput({ value, onChange, name, id, required, dropdownDirect
 
     return (
         <div className="relative group" ref={wrapperRef}>
-            <div className="flex items-center gap-2">
+            <div className={cn(
+                "flex items-center gap-2",
+                variant === "pill" && "bg-slate-50 rounded-xl px-2 focus-within:ring-2 focus-within:ring-slate-900/5 transition-all"
+            )}>
                 {/* Country Code Selector */}
                 <div className="relative">
                     <button
                         type="button"
                         onClick={() => setIsOpen(!isOpen)}
                         className={cn(
-                            "flex items-center gap-1.5 py-2 px-2 border-b transition-all min-w-[90px]",
-                            isOpen ? "border-amber-500" : "border-slate-300 hover:border-slate-400"
+                            "flex items-center gap-1.5 py-2 px-2 transition-all min-w-[70px]",
+                            variant === "underlined" ? (isOpen ? "border-b border-amber-500" : "border-b border-slate-300 hover:border-slate-400") : "border-0",
+                            variant === "pill" && "py-3"
                         )}
                     >
                         <span className="text-lg leading-none">{selectedCountry.flag}</span>
-                        <span className="text-sm text-slate-700 font-medium">{selectedCountry.dialCode}</span>
+                        <span className="text-base text-slate-700 font-bold">{selectedCountry.dialCode}</span>
                         <ChevronDown className={cn(
                             "w-3.5 h-3.5 text-slate-400 transition-transform duration-200",
                             isOpen && "rotate-180 text-amber-500"
@@ -140,20 +165,25 @@ export function PhoneInput({ value, onChange, name, id, required, dropdownDirect
                         required={required}
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value.replace(/[^0-9]/g, ""))}
-                        className="peer w-full py-2 bg-transparent text-slate-900 border-b border-slate-300 focus:border-amber-500 transition-all outline-none placeholder-transparent text-base"
-                        placeholder="Phone Number"
-                    />
-                    <label
-                        htmlFor={id}
                         className={cn(
-                            "absolute left-0 transition-all duration-200 pointer-events-none",
-                            (phoneNumber || document.activeElement === inputRef.current)
-                                ? "-top-4 text-xs text-amber-600 font-semibold"
-                                : "top-2 text-slate-400 text-base"
+                            "peer w-full py-2 bg-transparent text-slate-900 transition-all outline-none text-base font-medium px-1",
+                            variant === "underlined" ? "border-b border-slate-300 focus:border-amber-500 placeholder-transparent" : "border-0 placeholder:text-slate-300 py-3",
                         )}
-                    >
-                        Contact Number
-                    </label>
+                        placeholder={variant === "pill" ? "Enter number" : "Phone Number"}
+                    />
+                    {variant === "underlined" && (
+                        <label
+                            htmlFor={id}
+                            className={cn(
+                                "absolute left-0 transition-all duration-200 pointer-events-none",
+                                (phoneNumber || document.activeElement === inputRef.current)
+                                    ? "-top-4 text-xs text-amber-600 font-semibold"
+                                    : "top-2 text-slate-400 text-base"
+                            )}
+                        >
+                            Contact Number
+                        </label>
+                    )}
                 </div>
             </div>
 

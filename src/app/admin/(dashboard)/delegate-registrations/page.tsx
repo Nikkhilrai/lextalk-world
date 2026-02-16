@@ -165,6 +165,10 @@ export default function DelegateRegistrationsPage() {
                         <option value="full-access-vip">Full Access VIP</option>
                         <option value="vendor">Vendor</option>
                         <option value="vendor-vip">Vendor VIP</option>
+                        <option value="student">Student</option>
+                        <option value="professional">Professional</option>
+                        <option value="corporate">Corporate</option>
+                        <option value="global-speaker">Global Speaker</option>
                     </select>
                 </div>
 

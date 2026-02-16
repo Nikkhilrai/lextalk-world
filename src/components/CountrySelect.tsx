@@ -9,9 +9,10 @@ interface CountrySelectProps {
     value?: string;
     onChange?: (value: string) => void;
     id?: string;
+    variant?: "underlined" | "pill";
 }
 
-export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
+export function CountrySelect({ value, onChange, id, variant = "underlined" }: CountrySelectProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -55,17 +56,18 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className={cn(
-                    "peer w-full py-2 bg-transparent border-b border-slate-300 transition-all text-sm sm:text-base flex items-center justify-between",
-                    isOpen ? "border-amber-500" : "group-hover:border-slate-400"
+                    "peer w-full py-2 bg-transparent transition-all text-sm sm:text-base flex items-center justify-between",
+                    variant === "underlined" ? (isOpen ? "border-b border-amber-500" : "border-b border-slate-300 group-hover:border-slate-400") : "bg-slate-50 border-0 rounded-xl px-4 py-3 focus-within:ring-2 focus-within:ring-slate-900/5"
                 )}>
                     <div className="flex items-center gap-2">
                         {selectedCountry && (
                             <span className="text-lg leading-none">{selectedCountry.flag}</span>
                         )}
                         <span className={cn(
-                            value ? "text-slate-900" : "text-transparent"
+                            "text-base sm:text-lg font-medium",
+                            value ? "text-slate-900" : "text-slate-300"
                         )}>
-                            {value || "Select Country"}
+                            {value || (variant === "pill" ? "Select Country" : "")}
                         </span>
                     </div>
                     <ChevronDown className={cn(
@@ -75,17 +77,19 @@ export function CountrySelect({ value, onChange, id }: CountrySelectProps) {
                 </div>
 
                 {/* Floating Label */}
-                <label
-                    htmlFor={id}
-                    className={cn(
-                        "absolute left-0 transition-all duration-200 pointer-events-none",
-                        (value || isOpen)
-                            ? "-top-4 text-xs text-amber-600 font-semibold"
-                            : "top-2 text-slate-400 text-sm sm:text-base"
-                    )}
-                >
-                    Country*
-                </label>
+                {variant === "underlined" && (
+                    <label
+                        htmlFor={id}
+                        className={cn(
+                            "absolute left-0 transition-all duration-200 pointer-events-none",
+                            (value || isOpen)
+                                ? "-top-4 text-xs text-amber-600 font-semibold"
+                                : "top-2 text-slate-400 text-sm sm:text-base"
+                        )}
+                    >
+                        Country*
+                    </label>
+                )}
             </div>
 
             {/* Dropdown Menu */}

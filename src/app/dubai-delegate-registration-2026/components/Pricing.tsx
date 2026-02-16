@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, Users, User, Clock, Loader2, Sparkles, ShieldCheck, Mail, ChevronRight } from "lucide-react";
+import { Check, ArrowRight, Users, User, Loader2, Sparkles, ShieldCheck, Mail, ChevronRight, AlertCircle, Phone, Globe, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { CountrySelect } from "@/components/CountrySelect";
+import { PhoneInput } from "@/components/PhoneInput";
 
 declare global {
     interface Window {
@@ -113,11 +115,12 @@ interface RegistrationModalProps {
     onClose: () => void;
     pass: PassType;
     category: string;
-    paymentType: "india" | "international" | "free";
 }
 
-function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: RegistrationModalProps) {
+function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModalProps) {
     const router = useRouter();
+    const [activeStep, setActiveStep] = useState(1);
+    const [registrationId, setRegistrationId] = useState<string | null>(null);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -127,10 +130,15 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
         designation: "",
         country: "",
     });
-    const [loading, setLoading] = useState(false);
-    const [processing, setProcessing] = useState(false);
+    const [isSavingLead, setIsSavingLead] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
     const [processStep, setProcessStep] = useState(0);
-    const [error, setError] = useState("");
+    const [error, setError] = useState<string | null>(null);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        if (error) setError(null);
+    };
 
     const steps = [
         "Securing your registration...",
@@ -142,25 +150,64 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
-        if (processing) {
+        if (isProcessing) {
             interval = setInterval(() => {
                 setProcessStep((prev: number) => (prev < steps.length - 1 ? prev + 1 : prev));
             }, 2500);
         }
         return () => clearInterval(interval);
-    }, [processing, steps.length]);
+    }, [isProcessing, steps.length]);
 
     if (!isOpen) return null;
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleNextStep = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+
+        // Basic validation
+        if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.country) {
+            setError("Please fill in all required fields.");
+            return;
+        }
+
+        setIsSavingLead(true);
+        setError(null);
+
+        try {
+            // CAPTURE LEAD BEFORE MOVING TO STEP 2
+            const response = await fetch("/api/delegate-registration/save-lead", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    customerDetails: formData,
+                    passType: pass.id,
+                    passCategory: category,
+                    conferenceSlug: "dubai-2026",
+                    originalPrice: pass.originalPrice,
+                    discountedPrice: pass.discountedPrice,
+                }),
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Failed to save information");
+
+            setRegistrationId(data.registrationId);
+            setActiveStep(2);
+        } catch (err: any) {
+            setError(err.message || "Something went wrong. Please try again.");
+        } finally {
+            setIsSavingLead(false);
+        }
+    };
+
+    const handleSubmit = async (paymentType: "india" | "international" | "free") => {
+
+        setIsProcessing(true);
         setError("");
 
         try {
             if (paymentType === "free") {
                 // Free registration
-                setProcessing(true); // Trigger overlay immediately
+                setIsProcessing(true); // Trigger overlay immediately
                 const res = await fetch("/api/delegate-registration/register-free", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -180,7 +227,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                         router.push(`/dubai-delegate-confirmation-2026?regId=${data.id}`);
                     }, 3000);
                 } else {
-                    setProcessing(false);
+                    setIsProcessing(false);
                     setError(data.error || "Registration failed");
                 }
             } else {
@@ -203,6 +250,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                         conferenceSlug: "dubai-2026",
                         originalPrice: pass.originalPrice,
                         discountedPrice: pass.discountedPrice,
+                        registrationId, // Pass the ID captured from Step 1
                     }),
                 });
 
@@ -226,8 +274,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                     order_id: orderData.orderId,
                     handler: async function (response: any) {
                         // Immediately show processing overlay when payment window closes
-                        setProcessing(true);
-                        setLoading(true);
+                        setIsProcessing(true);
 
                         // Verify payment
                         const verifyRes = await fetch("/api/delegate-registration/verify-payment", {
@@ -249,8 +296,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                                 router.push(`/dubai-delegate-confirmation-2026?regId=${orderData.registrationId}`);
                             }, 3000);
                         } else {
-                            setProcessing(false);
-                            setLoading(false);
+                            setIsProcessing(false);
                             setError("Payment verification failed");
                         }
                     },
@@ -270,115 +316,238 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
         } catch (err: any) {
             setError(err.message || "Something went wrong");
         } finally {
-            setLoading(false);
+            setIsProcessing(false);
         }
     };
 
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-                <div className="p-6 border-b border-slate-200">
-                    <h3 className="font-serif text-xl font-bold text-slate-900">{pass.name}</h3>
-                    <p className="text-slate-500 text-sm mt-1">
-                        {category === "team" ? "Team of 3" : "Individual"} • Dubai 2026
-                    </p>
+            <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+                {/* High-Impact Header with Timer */}
+                <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    <div>
+                        <h3 className="font-serif text-xl font-black text-slate-900 leading-none">{pass.name}</h3>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1.5 flex items-center gap-1.5">
+                            <span className="w-1 h-1 rounded-full bg-emerald-500" /> Individual Registration
+                        </p>
+                    </div>
+                    <div className="flex flex-col items-end">
+                        <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-50 rounded-full border border-amber-100">
+                            <Sparkles size={12} className="text-amber-500" />
+                            <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">Early Bird Active</span>
+                        </div>
+                    </div>
                 </div>
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.firstName}
-                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.lastName}
-                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
-                        <input
-                            type="email"
-                            required
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                        <input
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Organization</label>
-                        <input
-                            type="text"
-                            value={formData.organization}
-                            onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Designation</label>
-                        <input
-                            type="text"
-                            value={formData.designation}
-                            onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Country *</label>
-                        <input
-                            type="text"
-                            required
-                            value={formData.country}
-                            onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
 
-                    {error && (
-                        <div className="p-3 bg-red-50 text-red-700 text-sm rounded-lg">{error}</div>
-                    )}
+                {/* Progress Bar */}
+                <div className="h-1 w-full bg-slate-100 flex">
+                    <motion.div
+                        initial={{ width: "0%" }}
+                        animate={{ width: activeStep === 1 ? "50%" : "100%" }}
+                        className="h-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+                    />
+                </div>
 
-                    <div className="flex gap-3 pt-4">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="flex-1 px-4 py-2.5 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="flex-1 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50"
-                        >
-                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? (pass.inrPrice || Math.round(pass.discountedPrice * 90)).toLocaleString('en-IN') : pass.discountedPrice}`}
-                        </button>
-                    </div>
-                </form>
+                <div className="p-8">
+                    <AnimatePresence mode="wait">
+                        {activeStep === 1 ? (
+                            <motion.div
+                                key="step1"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                className="space-y-5"
+                            >
+                                <form onSubmit={handleNextStep} className="space-y-4">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-1.5">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">First Name *</label>
+                                            <input
+                                                type="text"
+                                                name="firstName"
+                                                required
+                                                value={formData.firstName}
+                                                onChange={handleChange}
+                                                placeholder="Nikhil"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                            />
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Last Name *</label>
+                                            <input
+                                                type="text"
+                                                name="lastName"
+                                                required
+                                                value={formData.lastName}
+                                                onChange={handleChange}
+                                                placeholder="Rai"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Personal Email *</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            placeholder="nikkhilrai@gmail.com"
+                                            className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Phone Number *</label>
+                                        <PhoneInput
+                                            value={formData.phone}
+                                            onChange={(val) => setFormData(prev => ({ ...prev, phone: val }))}
+                                            id="phone-input"
+                                            variant="pill"
+                                        />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-1.5">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Organization</label>
+                                            <input
+                                                type="text"
+                                                name="organization"
+                                                value={formData.organization}
+                                                onChange={handleChange}
+                                                placeholder="e.g. Legal Solutions Inc."
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                            />
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Designation</label>
+                                            <input
+                                                type="text"
+                                                name="designation"
+                                                value={formData.designation}
+                                                onChange={handleChange}
+                                                placeholder="e.g. Senior Partner"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Country *</label>
+                                        <CountrySelect
+                                            value={formData.country}
+                                            onChange={(val) => setFormData(prev => ({ ...prev, country: val }))}
+                                            id="country-select"
+                                            variant="pill"
+                                        />
+                                    </div>
+
+                                    {error && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="p-3 bg-red-50 text-red-700 text-[10px] font-black uppercase tracking-wider rounded-lg border border-red-100 flex items-center gap-2"
+                                        >
+                                            <AlertCircle size={14} /> {error}
+                                        </motion.div>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSavingLead}
+                                        className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 bg-slate-900 text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-amber-500 hover:text-slate-950 active:scale-[0.98] disabled:opacity-70"
+                                    >
+                                        {isSavingLead ? (
+                                            <>
+                                                <Loader2 size={16} className="animate-spin text-amber-500" />
+                                                <span>Saving Details...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span>Review & Secure Payment</span>
+                                                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                                            </>
+                                        )}
+                                    </button>
+                                </form>
+
+                                <button
+                                    onClick={onClose}
+                                    className="w-full py-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest hover:text-slate-600 transition-colors"
+                                >
+                                    Cancel registration
+                                </button>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="step2"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                className="space-y-6"
+                            >
+                                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-3">Registration Summary</p>
+                                    <div className="space-y-2">
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">Pass Type</span>
+                                            <span className="font-bold text-slate-900">{pass.name}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">Attendee</span>
+                                            <span className="font-bold text-slate-900">{formData.firstName} {formData.lastName}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">Organization</span>
+                                            <span className="font-bold text-slate-900">{formData.organization || 'Individual'}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <p className="text-[10px] text-amber-600 font-black uppercase tracking-[0.2em] text-center italic">Choose your preferred currency to pay</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <button
+                                            onClick={() => handleSubmit("india")}
+                                            disabled={isProcessing}
+                                            className="group relative flex flex-col items-center justify-center p-6 border-2 border-slate-900 text-slate-900 rounded-3xl hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98] disabled:opacity-50"
+                                        >
+                                            <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 opacity-60">Indian Clients</span>
+                                            <span className="text-2xl font-black">₹{(pass.inrPrice || Math.round(pass.discountedPrice * 90)).toLocaleString('en-IN')}</span>
+                                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <ChevronRight size={16} />
+                                            </div>
+                                        </button>
+                                        <button
+                                            onClick={() => handleSubmit("international")}
+                                            disabled={isProcessing}
+                                            className="group relative flex flex-col items-center justify-center p-6 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(245,158,11,0.5)] transition-all active:scale-[0.98] disabled:opacity-50 shadow-lg"
+                                        >
+                                            <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 text-slate-900/60">International Clients</span>
+                                            <span className="text-2xl font-black">${pass.discountedPrice}</span>
+                                            <div className="absolute top-2 right-2">
+                                                <Sparkles size={16} fill="currentColor" />
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button
+                                    onClick={() => setActiveStep(1)}
+                                    className="w-full py-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest hover:text-slate-600 transition-colors flex items-center justify-center gap-2"
+                                >
+                                    <ArrowRight size={14} className="rotate-180" /> Edit attendee information
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
 
                 {/* Processing Overlay */}
                 <AnimatePresence>
-                    {processing && (
+                    {isProcessing && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -433,13 +602,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
 
 function PassCard({ pass }: { pass: PassType }) {
     const [modalOpen, setModalOpen] = useState(false);
-    const [paymentType, setPaymentType] = useState<"india" | "international" | "free">("international");
     const [isExpanded, setIsExpanded] = useState(false);
-
-    const handlePayment = (type: "india" | "international" | "free") => {
-        setPaymentType(type);
-        setModalOpen(true);
-    };
 
     const visibleFeatures = isExpanded ? pass.features : pass.features.slice(0, 5);
     const hasMoreFeatures = pass.features.length > 5;
@@ -521,23 +684,16 @@ function PassCard({ pass }: { pass: PassType }) {
 
                     {/* Actions */}
                     <div className="mt-8 pt-6 border-t border-slate-100">
-                        <div className="grid grid-cols-2 gap-3 mb-3">
-                            <button
-                                onClick={() => handlePayment("india")}
-                                className="flex items-center justify-center px-2 py-3 border-2 border-slate-900 text-slate-900 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98]"
-                            >
-                                Pay in INR (₹)
-                            </button>
-                            <button
-                                onClick={() => handlePayment("international")}
-                                className="flex items-center justify-center px-2 py-3 bg-amber-500 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 hover:shadow-lg transition-all active:scale-[0.98]"
-                            >
-                                Pay in USD ($)
-                            </button>
-                        </div>
-                        <div className="flex items-center justify-center gap-1.5 opacity-50">
+                        <button
+                            onClick={() => setModalOpen(true)}
+                            className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 bg-slate-900 text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-amber-500 hover:text-slate-950 hover:shadow-[0_10px_30px_-5px_rgba(245,158,11,0.4)] active:scale-[0.98]"
+                        >
+                            {pass.ctaText || `Register as ${pass.name.split(' ')[0]}`}
+                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                        </button>
+                        <div className="flex items-center justify-center gap-1.5 mt-4 opacity-50">
                             <ShieldCheck size={12} className="text-slate-400" />
-                            <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Encrypted Checkout</span>
+                            <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Secure Global Registration</span>
                         </div>
                     </div>
                 </div>
@@ -547,7 +703,6 @@ function PassCard({ pass }: { pass: PassType }) {
                 onClose={() => setModalOpen(false)}
                 pass={pass}
                 category="Individual"
-                paymentType={paymentType}
             />
         </>
     );
