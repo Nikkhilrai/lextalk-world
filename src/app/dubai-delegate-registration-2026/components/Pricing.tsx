@@ -19,73 +19,66 @@ interface PassType {
     features: string[];
     isPopular?: boolean;
     isFree?: boolean;
+    isStudent?: boolean;
+    idealFor?: string;
+    note?: string;
+    ctaText?: string;
+    priceLabel?: string;
 }
 
 const INDIVIDUAL_PASSES: PassType[] = [
     {
-        id: "visitor",
-        name: "Visitor Pass",
-        originalPrice: 99,
-        discountedPrice: 0,
-        isFree: true,
+        id: "student",
+        name: "Student Pass",
+        originalPrice: 129,
+        discountedPrice: 129,
+        isStudent: true,
+        priceLabel: "Flat Price",
+        idealFor: "Law students, LLM candidates, research scholars",
+        ctaText: "Register as Student",
+        note: "Valid student ID required at check-in",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
+            "Full 2-Day Conference Access",
+            "Access to General Networking Sessions",
+            "Participation Certificate",
+            "Access to Career & Mentorship Round",
         ],
     },
     {
-        id: "full-access",
-        name: "Full Access Pass",
+        id: "delegate",
+        name: "Delegate Pass",
         originalPrice: 399,
         discountedPrice: 199,
-        isPopular: true,
+        priceLabel: "Early Bird till 15th March",
+        idealFor: "Legal professionals, in-house counsel, law firm associates",
+        ctaText: "Register as Delegate",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
-            " CA/CLE Credits",
-
+            "Full 2-Day Conference Access",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Morning Networking Breakfast",
+            "Delegate Kit + Certificate",
         ],
     },
     {
-        id: "full-access-vip",
-        name: "Full Access VIP Pass",
+        id: "delegate-vip",
+        name: "Delegate VIP Pass",
         originalPrice: 799,
         discountedPrice: 399,
+        isPopular: true,
+        priceLabel: "Early Bird",
+        idealFor: "Partners, GCs, Founders, Senior Decision Makers",
+        ctaText: "Register as VIP Delegate",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Media Bytes",
-            "Vlog Promotion",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
-            " CA/CLE Credits",
-        ],
-    },
-    {
-        id: "vendor",
-        name: "Vendor Pass",
-        originalPrice: 999,
-        discountedPrice: 499,
-        features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
+            "Full 2-Day Conference Access",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Morning Networking Breakfast",
+            "Delegate Kit + Certificate",
+            "VIP Networking Lounge",
+            "Featured Networking Introduction",
+            "Media Byte Interview",
+            "Digital Spotlight",
         ],
     },
     {
@@ -93,92 +86,73 @@ const INDIVIDUAL_PASSES: PassType[] = [
         name: "Vendor VIP Pass",
         originalPrice: 1999,
         discountedPrice: 999,
+        priceLabel: "Early Bird valid till 15th March",
+        idealFor: "Legal tech companies, consultants, solution providers actively pitching",
+        ctaText: "Register as Vendor VIP",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Logo Brandings",
-            "Media Bytes",
-            "Vlog Promotion",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
+            "Full Conference Access",
+            "Structured Business Networking",
+            "Logo Placement on Website",
+            "Featured Vendor Listing",
+            "Media Byte Coverage",
+            "Social Media Brand Mention",
+            "Priority Business Introduction",
         ],
     },
 ];
 
 const TEAM_PASSES: PassType[] = [
     {
-        id: "full-access",
-        name: "Full Access Pass",
+        id: "delegate",
+        name: "Delegate Pass",
         originalPrice: 799,
         discountedPrice: 399,
+        idealFor: "Legal teams, small law firms",
+        priceLabel: "Team Early Bird",
+        ctaText: "Register Team as Delegate",
+        features: [
+            "Full 2-Day Conference Access for 3",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Morning Networking Breakfast",
+            "Delegate Kit + Certificate",
+        ],
+    },
+    {
+        id: "delegate-vip",
+        name: "Delegate VIP Pass",
+        originalPrice: 1499,
+        discountedPrice: 799,
         isPopular: true,
+        idealFor: "Corporate legal leadership teams",
+        priceLabel: "Team Early Bird",
+        ctaText: "Register Team as VIP",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
-            " CA/CLE Credits",
-        ],
-    },
-    {
-        id: "full-access-vip",
-        name: "Full Access VIP Pass",
-        originalPrice: 999,
-        discountedPrice: 499,
-        features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Media Bytes",
-            "Vlog Promotion",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
-            " CA/CLE Credits",
-        ],
-    },
-    {
-        id: "vendor",
-        name: "Vendor Pass",
-        originalPrice: 1999,
-        discountedPrice: 999,
-        features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
-            "Cocktail Networking Access",
+            "Full 2-Day Conference Access for 3",
+            "Structured Networking Sessions",
+            "Morning Networking Breakfast",
+            "VIP Networking Lounge",
+            "Featured Networking Introduction",
+            "Media Byte Interview",
+            "Digital Spotlight",
         ],
     },
     {
         id: "vendor-vip",
         name: "Vendor VIP Pass",
-        originalPrice: 2599,
-        discountedPrice: 1299,
+        originalPrice: 3599,
+        discountedPrice: 1999,
+        idealFor: "Tech companies, consulting teams",
+        priceLabel: "Team Early Bird",
+        ctaText: "Register Team as Vendor VIP",
         features: [
-            "Access to Conference",
-            "Access to Networking Opportunities",
-            "Certification of Participation",
-            "Logo Brandings",
-            "Media Bytes",
-            "Vlog Promotion",
-            "Access to one-on-one Introduction",
-            " Morning Breakfast Access",
-            "Lunch Networking Access",
-            " Evening Networking Access",
+            "Full Conference Access for 3",
+            "Structured Business Networking",
+            "Logo Placement on Website",
+            "Featured Vendor Listing",
+            "Media Byte Coverage",
+            "Social Media Brand Mention",
+            "Priority Business Introduction",
         ],
     },
 ];
@@ -522,10 +496,15 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 
     return (
         <>
-            <div className={`relative flex flex-col bg-white rounded-xl border ${pass.isPopular ? "border-amber-400 ring-1 ring-amber-400/20 shadow-lg scale-[1.02]" : "border-slate-200 hover:border-amber-200"} transition-all duration-300 hover:shadow-xl h-full`}>
+            <div className={`relative flex flex-col bg-white rounded-xl border ${pass.isPopular ? "border-amber-400 ring-1 ring-amber-400/20 shadow-lg scale-[1.02]" : pass.isStudent ? "border-blue-200 bg-blue-50/10" : "border-slate-200 hover:border-amber-200"} transition-all duration-300 hover:shadow-xl h-full`}>
                 {pass.isPopular && (
                     <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] uppercase font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg z-20 tracking-wider">
                         Most Popular
+                    </div>
+                )}
+                {pass.isStudent && (
+                    <div className="absolute top-0 right-0 bg-blue-500 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg z-20 tracking-wider">
+                        For Students
                     </div>
                 )}
 
@@ -533,19 +512,22 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                     {/* Header */}
                     <div className="mb-4">
                         <h3 className="font-serif font-bold text-lg text-slate-900 leading-tight mb-1">{pass.name}</h3>
-                        <div className="flex items-baseline gap-2">
-                            {pass.isFree ? (
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-2xl font-bold text-emerald-600">FREE</span>
+                        <div className="flex flex-col">
+                            <div className="flex items-baseline gap-2">
+                                <span className="text-2xl font-bold text-slate-900">${pass.discountedPrice}</span>
+                                {pass.originalPrice > pass.discountedPrice && (
                                     <span className="text-slate-400 line-through text-sm decoration-slate-400/60">${pass.originalPrice}</span>
-                                </div>
-                            ) : (
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-2xl font-bold text-slate-900">${pass.discountedPrice}</span>
-                                    <span className="text-slate-400 line-through text-sm decoration-slate-400/60">${pass.originalPrice}</span>
-                                </div>
+                                )}
+                            </div>
+                            {pass.priceLabel && (
+                                <span className="text-[10px] font-semibold text-amber-600 uppercase tracking-wider">{pass.priceLabel}</span>
                             )}
                         </div>
+                    </div>
+
+                    <div className="mb-4">
+                        <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wide mb-1">Ideal For:</p>
+                        <p className="text-xs text-slate-600 leading-relaxed italic">{pass.idealFor}</p>
                     </div>
 
                     {/* Divider */}
@@ -572,6 +554,13 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                         )}
                     </div>
 
+                    {/* Note */}
+                    {pass.note && (
+                        <div className="mt-4 p-2 bg-slate-50 rounded-lg border border-slate-100">
+                            <p className="text-[10px] text-slate-500 italic"><span className="font-bold">Note:</span> {pass.note}</p>
+                        </div>
+                    )}
+
                     {/* Actions */}
                     <div className="mt-5 pt-4 border-t border-slate-100">
                         {pass.isFree ? (
@@ -579,22 +568,23 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
                                 onClick={() => handlePayment("free")}
                                 className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-[0.98]"
                             >
-                                Register Now
+                                {pass.ctaText || "Register Now"}
                                 <ArrowRight size={16} />
                             </button>
                         ) : (
-                            <div className="grid grid-cols-2 gap-2">
-                                <button
-                                    onClick={() => handlePayment("india")}
-                                    className="flex items-center justify-center px-1 py-2 border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 transition-colors active:bg-slate-100"
-                                >
-                                    Pay (INR)
-                                </button>
+                            <div className="flex flex-col gap-2">
                                 <button
                                     onClick={() => handlePayment("international")}
-                                    className="flex items-center justify-center px-1 py-2 bg-amber-500 text-slate-900 rounded-lg text-xs font-semibold hover:bg-amber-400 transition-colors shadow-sm hover:shadow active:bg-amber-500/90"
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-[0.98]"
                                 >
-                                    Pay (USD)
+                                    {pass.ctaText || "Register Now"}
+                                    <ArrowRight size={16} />
+                                </button>
+                                <button
+                                    onClick={() => handlePayment("india")}
+                                    className="w-full text-center text-[10px] font-medium text-slate-500 hover:text-amber-600 transition-colors"
+                                >
+                                    Prefer to pay in INR? Click here
                                 </button>
                             </div>
                         )}
@@ -672,7 +662,7 @@ export default function Pricing() {
                 </div>
 
                 {/* Pass Cards */}
-                <div className={`grid gap-6 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
+                <div className={`grid gap-6 ${activeTab === "individual" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-3"}`}>
                     {passes.map((pass) => (
                         <PassCard key={pass.id} pass={pass} category={activeTab} />
                     ))}
