@@ -369,7 +369,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                                 value={formData.firstName}
                                                 onChange={handleChange}
                                                 placeholder="Nikhil"
-                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
                                             />
                                         </div>
                                         <div className="space-y-1.5">
@@ -381,7 +381,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                                 value={formData.lastName}
                                                 onChange={handleChange}
                                                 placeholder="Rai"
-                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
                                             />
                                         </div>
                                     </div>
@@ -395,7 +395,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                             value={formData.email}
                                             onChange={handleChange}
                                             placeholder="nikkhilrai@gmail.com"
-                                            className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                            className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
                                         />
                                     </div>
 
@@ -418,7 +418,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                                 value={formData.organization}
                                                 onChange={handleChange}
                                                 placeholder="e.g. Legal Solutions Inc."
-                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
                                             />
                                         </div>
                                         <div className="space-y-1.5">
@@ -429,7 +429,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                                 value={formData.designation}
                                                 onChange={handleChange}
                                                 placeholder="e.g. Senior Partner"
-                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
+                                                className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all placeholder:text-slate-300"
                                             />
                                         </div>
                                     </div>
