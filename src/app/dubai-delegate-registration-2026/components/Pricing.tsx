@@ -236,7 +236,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                 // Paid registration
                 const currency = paymentType === "india" ? "INR" : "USD";
                 const amount = paymentType === "india"
-                    ? pass.discountedPrice * 83 // Approximate USD to INR
+                    ? pass.discountedPrice * 90 // Updated USD to INR for 2026 market rate + fees
                     : pass.discountedPrice;
 
                 const orderRes = await fetch("/api/delegate-registration/create-order", {
@@ -420,7 +420,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             disabled={loading}
                             className="flex-1 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50"
                         >
-                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? Math.round(pass.discountedPrice * 83) : pass.discountedPrice}`}
+                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? Math.round(pass.discountedPrice * 90) : pass.discountedPrice}`}
                         </button>
                     </div>
                 </form>
