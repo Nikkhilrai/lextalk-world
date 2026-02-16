@@ -24,6 +24,7 @@ interface PassType {
     note?: string;
     ctaText?: string;
     priceLabel?: string;
+    inrPrice?: number;
 }
 
 const INDIVIDUAL_PASSES: PassType[] = [
@@ -37,6 +38,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         idealFor: "Law students, LLM candidates, research scholars",
         ctaText: "Register as Student",
         note: "Valid student ID required at check-in",
+        inrPrice: 11600,
         features: [
             "Full 2-Day Conference Access",
             "Access to General Networking Sessions",
@@ -52,6 +54,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         priceLabel: "Early Bird till 15th March",
         idealFor: "Legal professionals, in-house counsel, law firm associates",
         ctaText: "Register as Delegate",
+        inrPrice: 18000,
         features: [
             "Full 2-Day Conference Access",
             "Structured Networking Sessions",
@@ -69,6 +72,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         priceLabel: "Early Bird",
         idealFor: "Partners, GCs, Founders, Senior Decision Makers",
         ctaText: "Register as VIP Delegate",
+        inrPrice: 36000,
         features: [
             "Full 2-Day Conference Access",
             "Structured Networking Sessions",
@@ -89,6 +93,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         priceLabel: "Early Bird valid till 15th March",
         idealFor: "Legal tech companies, consultants, solution providers actively pitching",
         ctaText: "Register as Vendor VIP",
+        inrPrice: 90000,
         features: [
             "Full Conference Access",
             "Structured Business Networking",
@@ -236,7 +241,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                 // Paid registration
                 const currency = paymentType === "india" ? "INR" : "USD";
                 const amount = paymentType === "india"
-                    ? pass.discountedPrice * 90 // Updated USD to INR for 2026 market rate + fees
+                    ? (pass.inrPrice || pass.discountedPrice * 90)
                     : pass.discountedPrice;
 
                 const orderRes = await fetch("/api/delegate-registration/create-order", {
@@ -420,7 +425,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
                             disabled={loading}
                             className="flex-1 px-4 py-2.5 bg-amber-500 text-slate-900 rounded-lg text-sm font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50"
                         >
-                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? Math.round(pass.discountedPrice * 90) : pass.discountedPrice}`}
+                            {loading ? "Processing..." : paymentType === "free" ? "Register Now" : `Pay ${paymentType === "india" ? "₹" : "$"}${paymentType === "india" ? (pass.inrPrice || Math.round(pass.discountedPrice * 90)).toLocaleString('en-IN') : pass.discountedPrice}`}
                         </button>
                     </div>
                 </form>
