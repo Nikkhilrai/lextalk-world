@@ -199,7 +199,7 @@ function RegistrationModal({ isOpen, onClose, pass, category, paymentType }: Reg
         let interval: NodeJS.Timeout;
         if (processing) {
             interval = setInterval(() => {
-                setProcessStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
+                setProcessStep((prev: number) => (prev < steps.length - 1 ? prev + 1 : prev));
             }, 2500);
         }
         return () => clearInterval(interval);
@@ -501,113 +501,98 @@ function PassCard({ pass, category }: { pass: PassType; category: "individual" |
 
     return (
         <>
-            <div className={`group relative flex flex-col bg-slate-900/40 backdrop-blur-xl border-t border-x rounded-3xl transition-all duration-500 hover:-translate-y-2 h-full overflow-hidden ${pass.isPopular
-                ? "border-amber-500/50 shadow-[0_0_40px_-10px_rgba(245,158,11,0.2)]"
-                : "border-white/10 hover:border-amber-500/30 shadow-2xl"
-                }`}>
-                {/* Visual Accent Bar */}
-                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${pass.isPopular ? "from-amber-400 via-amber-600 to-amber-400" : "from-white/5 via-white/20 to-white/5"}`} />
-
-                {/* Badges */}
+            <div className={`relative flex flex-col bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/10 shadow-xl scale-[1.02]" : "border-slate-200 shadow-sm"} transition-all duration-300 hover:shadow-2xl hover:border-amber-200 h-full overflow-hidden`}>
                 {pass.isPopular && (
-                    <div className="absolute top-4 right-4 bg-amber-500 text-slate-950 text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
-                        <Sparkles size={10} /> Best Selection
+                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] uppercase font-black px-3 py-1.5 rounded-bl-xl z-20 tracking-wider flex items-center gap-1 shadow-lg">
+                        <Sparkles size={12} fill="currentColor" /> Most Popular
                     </div>
                 )}
                 {pass.isStudent && (
-                    <div className="absolute top-4 right-4 bg-blue-500 text-white text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg">
-                        Future Leader
+                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] uppercase font-black px-3 py-1.5 rounded-bl-xl z-20 tracking-wider shadow-lg">
+                        For Students
                     </div>
                 )}
+                <div className="absolute top-0 left-0 bg-red-600 text-white text-[9px] uppercase font-black px-3 py-1 rounded-br-xl z-20 animate-pulse">
+                    Limited Seats left
+                </div>
 
-                <div className="p-8 flex flex-col flex-grow">
-                    {/* Tier Name */}
+                <div className="p-6 flex flex-col flex-grow">
+                    {/* Header */}
                     <div className="mb-6">
-                        <h3 className="font-serif font-bold text-2xl text-white mb-3 group-hover:text-amber-400 transition-colors">
-                            {pass.name}
-                        </h3>
+                        <h3 className="font-serif font-bold text-xl text-slate-900 leading-tight mb-2">{pass.name}</h3>
                         <div className="flex flex-col">
                             <div className="flex items-baseline gap-2">
-                                <span className="text-4xl font-black text-white tracking-tight">
-                                    ${pass.discountedPrice}
-                                </span>
+                                <span className="text-3xl font-bold text-slate-900">${pass.discountedPrice}</span>
                                 {pass.originalPrice > pass.discountedPrice && (
-                                    <span className="text-slate-500 line-through text-sm font-medium">
-                                        ${pass.originalPrice}
-                                    </span>
+                                    <span className="text-slate-400 line-through text-sm font-medium decoration-slate-400/60">${pass.originalPrice}</span>
                                 )}
                             </div>
                             {pass.priceLabel && (
-                                <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-amber-500/80 uppercase tracking-widest mt-2 px-2.5 py-1 bg-amber-500/5 rounded-md self-start border border-amber-500/10">
-                                    <Clock size={12} /> {pass.priceLabel}
+                                <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-1 border border-amber-100 bg-amber-50 px-2 py-0.5 rounded-full self-start inline-flex items-center gap-1">
+                                    <Clock size={10} /> {pass.priceLabel}
                                 </span>
                             )}
                         </div>
                     </div>
 
-                    {/* Ideal For Section - Highlighted */}
-                    <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:bg-white/10 transition-colors">
-                        <p className="text-[10px] text-amber-500/70 font-black uppercase tracking-widest mb-2">Exclusive For:</p>
-                        <p className="text-sm text-slate-300 leading-relaxed font-light">{pass.idealFor}</p>
+                    {/* Ideal For Section */}
+                    <div className="mb-6">
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Perfect For:</p>
+                        <p className="text-xs text-slate-600 leading-relaxed italic border-l-2 border-amber-100 pl-3">{pass.idealFor}</p>
                     </div>
 
-                    {/* Features List with Custom Icons */}
-                    <div className="flex-grow space-y-6">
-                        <ul className="space-y-4">
+                    {/* Features List */}
+                    <div className="flex-grow">
+                        <ul className="space-y-3">
                             {visibleFeatures.map((feature, idx) => (
-                                <motion.li
-                                    key={idx}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: idx * 0.05 }}
-                                    className="flex items-start gap-3.5 text-sm text-slate-300/90 leading-snug group/item"
-                                >
-                                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center group-hover/item:bg-amber-500/30 group-hover/item:border-amber-500/50 transition-all">
-                                        <Check size={12} className="text-amber-400 stroke-[3]" />
+                                <li key={idx} className="flex items-start gap-3 text-[13px] text-slate-600 leading-snug">
+                                    <div className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-emerald-50 flex items-center justify-center">
+                                        <Check size={10} className="text-emerald-600 stroke-[4]" />
                                     </div>
-                                    <span className="group-hover/item:text-white transition-colors">{feature}</span>
-                                </motion.li>
+                                    <span>{feature}</span>
+                                </li>
                             ))}
                         </ul>
 
                         {hasMoreFeatures && (
                             <button
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="text-xs font-bold text-slate-400 hover:text-amber-400 flex items-center gap-1.5 mt-2 transition-colors uppercase tracking-widest"
+                                className="text-xs font-semibold text-amber-600 hover:text-amber-700 hover:underline flex items-center gap-1 mt-3 transition-colors"
                             >
-                                {isExpanded ? "Close Benefits" : `Discover ${pass.features.length - 5} more Benefits`}
-                                <ChevronRight size={14} className={`transition-transform ${isExpanded ? "rotate-90" : ""}`} />
+                                {isExpanded ? "View less" : `+ ${pass.features.length - 5} more benefits`}
                             </button>
                         )}
                     </div>
 
-                    {/* Note Branding */}
+                    {/* Note */}
                     {pass.note && (
-                        <div className="mt-8 flex items-center gap-3 py-3 px-4 bg-blue-500/5 border border-blue-500/10 rounded-xl">
-                            <ShieldCheck size={16} className="text-blue-400 flex-shrink-0" />
-                            <p className="text-[10px] text-blue-300 font-medium leading-tight">{pass.note}</p>
+                        <div className="mt-6 p-3 bg-slate-50 rounded-xl border border-slate-100 flex gap-2 items-start">
+                            <ShieldCheck size={14} className="text-slate-400 mt-0.5" />
+                            <p className="text-[10px] text-slate-500 leading-relaxed font-medium">
+                                <span className="text-slate-700 font-bold">Requirement:</span> {pass.note}
+                            </p>
                         </div>
                     )}
 
-                    {/* High-Impact Actions */}
-                    <div className="mt-10 pt-8 border-t border-white/10">
-                        <div className="grid grid-cols-2 gap-3 mb-4">
+                    {/* Actions */}
+                    <div className="mt-8 pt-6 border-t border-slate-100">
+                        <div className="grid grid-cols-2 gap-3 mb-3">
                             <button
                                 onClick={() => handlePayment("india")}
-                                className="group/btn relative flex items-center justify-center px-2 py-3.5 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all hover:bg-white/10 hover:border-white/20 active:scale-[0.98]"
+                                className="flex items-center justify-center px-2 py-3 border-2 border-slate-900 text-slate-900 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98]"
                             >
                                 Pay in INR (₹)
                             </button>
                             <button
                                 onClick={() => handlePayment("international")}
-                                className="group/btn relative flex items-center justify-center px-2 py-3.5 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all hover:shadow-[0_0_20px_-5px_rgba(251,191,36,0.5)] active:scale-[0.98]"
+                                className="flex items-center justify-center px-2 py-3 bg-amber-500 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 hover:shadow-lg transition-all active:scale-[0.98]"
                             >
                                 Pay in USD ($)
                             </button>
                         </div>
-                        <div className="flex items-center justify-center gap-1.5 opacity-40">
-                            <ShieldCheck size={12} className="text-amber-500" />
-                            <span className="text-[9px] text-white uppercase font-bold tracking-[0.1em]">Secure End-to-End Encryption</span>
+                        <div className="flex items-center justify-center gap-1.5 opacity-50">
+                            <ShieldCheck size={12} className="text-slate-400" />
+                            <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Encrypted Checkout</span>
                         </div>
                     </div>
                 </div>
@@ -628,11 +613,9 @@ export default function Pricing() {
     const passes = activeTab === "individual" ? INDIVIDUAL_PASSES : TEAM_PASSES;
 
     return (
-        <section id="pricing" className="py-24 md:py-32 bg-[#0b1120] relative overflow-hidden">
-            {/* Immersive Background Effects */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+        <section id="pricing" className="py-24 bg-slate-50 relative overflow-hidden">
+            {/* Subtle Texture Background */}
+            <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: "radial-gradient(#e2e8f0 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
 
             <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
                 {/* Header */}
@@ -642,66 +625,85 @@ export default function Pricing() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-                            Reserve Your Presence
-                        </span>
-                        <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-                            Secure Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200">Exclusive Pass</span>
+                        <h2 className="font-serif text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+                            Choose Your <span className="text-amber-500">Conference Pass</span>
                         </h2>
-                        <p className="text-slate-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                            Join the global assembly of legal visionaries in Dubai.
-                            Choose the tier that matches your professional objectives.
+                        <p className="text-slate-600 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                            Join the elite gathering of legal minds in Dubai 2026.
+                            Select a registration tier that fits your professional journey.
                         </p>
                     </motion.div>
                 </div>
 
-                {/* Toggle - Premium Glass Style */}
+                {/* Toggle - Clean Refined Style */}
                 <div className="flex justify-center mb-12">
-                    <div className="relative inline-flex bg-white/5 backdrop-blur-md rounded-2xl p-1.5 border border-white/10 shadow-2xl">
+                    <div className="relative inline-flex bg-slate-200/50 backdrop-blur-sm rounded-2xl p-1 border border-slate-200 shadow-inner">
                         <motion.div
-                            layoutId="pricing-bg"
-                            className="absolute inset-y-1.5 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl shadow-lg"
+                            layoutId="pricing-bg-refined"
+                            className="absolute inset-y-1 bg-white rounded-xl shadow-md"
                             animate={{
-                                left: activeTab === "individual" ? "6px" : "146px",
-                                width: activeTab === "individual" ? "140px" : "140px"
+                                left: activeTab === "individual" ? "4px" : "144px",
+                                width: "140px"
                             }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                         <button
                             onClick={() => setActiveTab("individual")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${activeTab === "individual" ? "text-slate-950" : "text-white/60 hover:text-white"}`}
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${activeTab === "individual" ? "text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
                         >
                             <User size={14} /> Individual
                         </button>
                         <button
                             onClick={() => setActiveTab("team")}
-                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${activeTab === "team" ? "text-slate-950" : "text-white/60 hover:text-white"}`}
+                            className={`relative z-10 flex items-center justify-center gap-2 w-[140px] py-3 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${activeTab === "team" ? "text-slate-900" : "text-slate-500 hover:text-slate-700"}`}
                         >
                             <Users size={14} /> Team (x3)
                         </button>
                     </div>
                 </div>
 
-                {/* Dynamic Early Bird Ticker */}
+                {/* High-Urgency FOMO Banner */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    className="max-w-3xl mx-auto mb-16"
+                    className="max-w-4xl mx-auto mb-16"
                 >
-                    <div className="relative overflow-hidden bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 backdrop-blur-sm border border-amber-500/20 rounded-2xl px-8 py-5 flex items-center justify-center gap-4 group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                        <div className="flex -space-x-2">
-                            {[1, 2, 3].map(i => (
-                                <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0b1120] bg-slate-800 flex items-center justify-center overflow-hidden">
-                                    <Image src={`https://i.pravatar.cc/100?u=${i}`} alt="Attendee" width={32} height={32} />
+                    <div className="relative overflow-hidden bg-gradient-to-r from-red-600 via-orange-500 to-red-600 rounded-2xl shadow-[0_10px_40px_-10px_rgba(220,38,38,0.5)] px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-6 border-b-4 border-red-700/30">
+                        {/* Animated background pulse */}
+                        <div className="absolute inset-0 bg-white/10 animate-pulse" />
+
+                        <div className="relative z-10 flex items-center gap-4">
+                            <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white animate-bounce shadow-inner">
+                                <Clock size={28} strokeWidth={2.5} />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                                    <span className="flex h-2 w-2 rounded-full bg-white animate-ping" />
+                                    <p className="text-white font-black text-xs uppercase tracking-[0.2em]">Live Registration Update</p>
                                 </div>
-                            ))}
+                                <h3 className="text-white font-serif text-xl md:text-2xl font-black italic tracking-tight leading-none mb-1">
+                                    URGENT: PRICES JUMPING SOON!
+                                </h3>
+                                <p className="text-white/90 text-[11px] font-bold uppercase tracking-widest bg-black/20 px-2 py-0.5 rounded-md inline-block">
+                                    Final Early Bird Deadline: March 15th
+                                </p>
+                            </div>
                         </div>
-                        <p className="text-white/90 font-medium text-sm md:text-base tracking-wide">
-                            <span className="text-amber-400 font-bold">Seats filling fast!</span> Join 150+ confirmed delegates from 40 countries.
-                        </p>
-                        <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-slate-950 text-[10px] font-black uppercase rounded-full">
-                            <Clock size={12} strokeWidth={3} /> Expiring Soon
+
+                        <div className="relative z-10 flex flex-col items-center md:items-end gap-2">
+                            <div className="flex -space-x-3">
+                                {[1, 2, 3, 4, 5].map(i => (
+                                    <div key={i} className="w-9 h-9 rounded-full border-2 border-orange-400 bg-white flex items-center justify-center overflow-hidden shadow-lg">
+                                        <Image src={`https://i.pravatar.cc/100?u=${i + 20}`} alt="Attendee" width={36} height={36} />
+                                    </div>
+                                ))}
+                                <div className="w-9 h-9 rounded-full border-2 border-orange-400 bg-slate-900 flex items-center justify-center text-[10px] font-black text-white shadow-lg">
+                                    +182
+                                </div>
+                            </div>
+                            <p className="text-white font-black text-[10px] uppercase tracking-tighter bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                                🔥 12 delegates registered in last 24 hours
+                            </p>
                         </div>
                     </div>
                 </motion.div>
@@ -711,7 +713,7 @@ export default function Pricing() {
                     {passes.map((pass, idx) => (
                         <motion.div
                             key={pass.id}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
@@ -721,19 +723,24 @@ export default function Pricing() {
                     ))}
                 </div>
 
+                {/* Post-Grid Urgency */}
+                <div className="mt-16 text-center">
+                    <p className="text-slate-500 text-sm font-bold flex items-center justify-center gap-2 mb-4">
+                        <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
+                        Don't pay USD $799 later. Register for $199 now.
+                    </p>
+                </div>
+
                 {/* Secure Trust Indicators */}
-                <div className="mt-20 flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                    <div className="flex items-center gap-2 text-white font-medium">
-                        <ShieldCheck size={20} className="text-amber-500" />
-                        <span className="text-sm uppercase tracking-widest">PCI-DSS Compliant</span>
+                <div className="mt-20 flex flex-wrap items-center justify-center gap-12 opacity-50">
+                    <div className="flex items-center gap-2 text-slate-900 font-bold uppercase tracking-[0.2em] text-[10px]">
+                        <ShieldCheck size={18} className="text-emerald-600" /> Secure Payment
                     </div>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                        <Sparkles size={20} className="text-amber-500" />
-                        <span className="text-sm uppercase tracking-widest">Instant Confirmation</span>
+                    <div className="flex items-center gap-2 text-slate-900 font-bold uppercase tracking-[0.2em] text-[10px]">
+                        <Mail size={18} className="text-blue-600" /> Instant Receipt
                     </div>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                        <Loader2 size={20} className="text-amber-500" />
-                        <span className="text-sm uppercase tracking-widest">24/7 Priority Support</span>
+                    <div className="flex items-center gap-2 text-slate-900 font-bold uppercase tracking-[0.2em] text-[10px]">
+                        <Sparkles size={18} className="text-amber-500" /> Global Certification
                     </div>
                 </div>
             </div>
