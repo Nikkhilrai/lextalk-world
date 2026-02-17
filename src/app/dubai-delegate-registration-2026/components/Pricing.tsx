@@ -722,10 +722,10 @@ export default function Pricing() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="font-serif text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+                        <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
                             Choose Your <span className="text-amber-500">Conference Pass</span>
                         </h2>
-                        <p className="text-slate-600 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                        <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
                             Join the elite gathering of legal minds in Dubai 2026.
                             Select a registration tier that fits your professional journey.
                         </p>
@@ -802,7 +802,7 @@ export default function Pricing() {
                 </div>
 
                 {/* Secure Trust Indicators */}
-                <div className="mt-20 flex flex-wrap items-center justify-center gap-12 opacity-50">
+                <div className="mt-12 md:mt-20 flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-50">
                     <div className="flex items-center gap-2 text-slate-900 font-bold uppercase tracking-[0.2em] text-[10px]">
                         <ShieldCheck size={18} className="text-emerald-600" /> Secure Payment
                     </div>

@@ -18,7 +18,7 @@ export function FloatingAgendaButton({ eventSlug }: FloatingAgendaButtonProps) {
               FLOATING BUTTON - "THE GLASS PILL"
               -----------------------------------------------------------------------
             */}
-            <div className="fixed left-6 bottom-8 z-50 group animate-[popIn_0.8s_ease-out] hover:animate-none">
+            <div className="hidden md:block fixed left-6 bottom-8 z-50 group animate-[popIn_0.8s_ease-out] hover:animate-none">
                 {/* Breathing Glow & Ring */}
                 <div className="absolute inset-0 rounded-full bg-amber-500/20 blur-xl animate-pulse"></div>
                 <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-transparent via-amber-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></div>

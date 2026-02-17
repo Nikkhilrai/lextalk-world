@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function FloatingRegisterButton() {
     return (
-        <div className="fixed right-6 top-32 z-50 group animate-[popIn_0.6s_cubic-bezier(0.34,1.56,0.64,1)]">
+        <div className="hidden md:block fixed right-6 top-32 z-50 group animate-[popIn_0.6s_cubic-bezier(0.34,1.56,0.64,1)]">
             {/* Subtle Glow */}
             <div className="absolute inset-0 rounded-lg bg-amber-900/10 blur-xl transition-all"></div>
 
