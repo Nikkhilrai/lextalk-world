@@ -5,135 +5,168 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+const focusAreas = [
+    "Corporate legal leadership in high-growth, highly regulated markets",
+    "Multi-jurisdictional regulatory compliance",
+    "Data protection, ESG, AI governance, and financial regulation",
+    "Legal operations, automation, and enterprise technology adoption",
+    "Cross-border structuring, dispute strategy, and regional expansion",
+];
+
 export default function DubaiSpeakersIntro() {
     return (
-        <section className="bg-white pt-6 pb-12 lg:pt-8 lg:pb-16 border-b border-slate-100">
-            <div className="container mx-auto px-4 max-w-6xl">
-                {/* Main Centered Section Heading */}
+        <section className="relative bg-[#F7F6F3] pt-10 pb-16 lg:pt-14 lg:pb-20 overflow-hidden">
+            {/* Matching pinstripe background */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                        backgroundImage: `repeating-linear-gradient(90deg, #1e293b 0px, #1e293b 1px, transparent 1px, transparent 80px)`,
+                    }}
+                />
+            </div>
+
+            <div className="container mx-auto px-4 max-w-6xl relative z-10">
+
+                {/* Section Heading — formal, centered */}
                 <motion.div
                     initial={{ opacity: 0, y: -15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-10 lg:mb-14"
+                    className="text-center mb-12 lg:mb-16"
                 >
-                    <p className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-slate-400 mb-3">Dubai 2026</p>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-slate-900 tracking-tight">
+                    <p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.4em] text-slate-400 mb-4">
+                        Dubai 2026 · Middle East Edition
+                    </p>
+                    <h2 className="text-3xl md:text-4xl lg:text-[44px] font-serif font-bold text-slate-900 tracking-tight leading-tight">
                         Stop Presenting.{" "}
                         <span className="italic font-light text-amber-600">Start Connecting.</span>
                     </h2>
+                    {/* Formal double rule */}
+                    <div className="mt-5 flex justify-center">
+                        <div className="flex flex-col items-center gap-[3px]">
+                            <div className="w-16 h-[1px] bg-slate-300" />
+                            <div className="w-10 h-[1px] bg-amber-500/70" />
+                        </div>
+                    </div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 
                     {/* Left Column: Content (7 cols) */}
-                    <div className="lg:col-span-7 flex flex-col">
-                        <motion.div
-                            initial={{ opacity: 0, x: -15 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="mb-6"
-                        >
-                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 leading-tight tracking-tight">
-                                Dubai | <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-500">Middle East Edition</span>
-                            </h3>
-                        </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="lg:col-span-7 space-y-7"
+                    >
+                        {/* Lead paragraph */}
+                        <div className="space-y-3">
+                            <p className="text-[15px] md:text-base font-semibold text-slate-800 leading-relaxed">
+                                The Dubai edition is designed around the realities of the Middle East legal ecosystem.
+                            </p>
+                            <p className="text-[14px] md:text-[15px] font-normal text-slate-500 leading-relaxed">
+                                It convenes General Counsel, senior in-house leaders, regional and international law firm partners, regulatory and compliance experts, and legal tech founders shaping the GCC landscape.
+                            </p>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="space-y-6 text-slate-600 text-sm leading-relaxed"
-                        >
-                            <div className="space-y-3">
-                                <p className="font-bold text-slate-900 md:text-base">
-                                    The Dubai edition is designed around the realities of the Middle East legal ecosystem.
-                                </p>
-                                <p className="font-light md:text-base">
-                                    It convenes General Counsel, senior in-house leaders, regional and international law firm partners, regulatory and compliance experts, and legal tech founders shaping the GCC landscape.
-                                </p>
-                            </div>
+                        {/* Focus Areas */}
+                        <div>
+                            <p className="text-[10px] md:text-[11px] uppercase font-bold tracking-[0.3em] text-amber-600 mb-4">
+                                Core Focus Areas
+                            </p>
+                            <ul className="space-y-2.5">
+                                {focusAreas.map((item, idx) => (
+                                    <li key={idx} className="flex items-start gap-3">
+                                        <div className="w-1 h-1 mt-[0.45rem] bg-amber-500 shrink-0" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} />
+                                        <span className="text-[13px] md:text-[14px] font-medium text-slate-600 leading-snug">{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                            <div className="py-2">
-                                <p className="text-[11px] uppercase font-black tracking-[0.15em] text-amber-600 mb-3">Core focus areas:</p>
-                                <ul className="space-y-2.5">
-                                    {[
-                                        "Corporate legal leadership in high-growth, highly regulated markets",
-                                        "Multi-jurisdictional regulatory compliance",
-                                        "Data protection, ESG, AI governance, and financial regulation",
-                                        "Legal operations, automation, and enterprise technology adoption",
-                                        "Cross-border structuring, dispute strategy, and regional expansion"
-                                    ].map((item, idx) => (
-                                        <li key={idx} className="flex items-start gap-2.5 group">
-                                            <div className="w-1.5 h-1.5 mt-[0.35rem] rounded-full bg-amber-500 shrink-0" />
-                                            <span className="text-[13px] font-semibold text-slate-700 leading-snug">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        {/* Blockquote-style insight */}
+                        <div className="border-l-2 border-amber-500/40 pl-5 py-1 space-y-2.5">
+                            <p className="text-[13px] md:text-[14px] text-slate-500 font-normal leading-relaxed italic">
+                                Dubai stands at the crossroads of global investment, sovereign capital, and rapidly evolving regulation. Legal leadership here demands commercial sharpness, regulatory depth, and the agility to drive growth without compromising compliance.
+                            </p>
+                            <p className="text-[13px] md:text-[14px] text-slate-500 font-normal leading-relaxed italic">
+                                Our Middle East faculty reflects that benchmark — leaders who have built and transformed legal functions, advised on complex regional mandates, and delivered practical technology solutions.
+                            </p>
+                        </div>
 
-                            <div className="space-y-3">
-                                <p className="text-slate-500 font-light text-[13px] border-l-2 border-amber-500/30 pl-4 py-0.5">
-                                    Dubai stands at the crossroads of global investment, sovereign capital, and rapidly evolving regulation. Legal leadership here demands commercial sharpness, regulatory depth, and the agility to drive growth without compromising compliance.
-                                </p>
-                                <p className="text-slate-500 font-light text-[13px] border-l-2 border-amber-500/30 pl-4 py-0.5">
-                                    Our Middle East faculty reflects that benchmark — leaders who have built and transformed legal functions, advised on complex regional mandates, implemented robust compliance systems, and delivered practical technology solutions.
-                                </p>
-                            </div>
+                        {/* Closing statement */}
+                        <p className="text-[14px] font-semibold text-slate-800 leading-snug tracking-tight">
+                            This is not about inspiration.<br />
+                            <span className="font-normal text-slate-500">
+                                It is about perspective, substance, and actionable insight for decision-makers shaping the region&apos;s legal future.
+                            </span>
+                        </p>
 
-                            <div className="pt-2">
-                                <p className="text-[13px] font-semibold text-slate-800 tracking-tight leading-snug">
-                                    This is not about inspiration.<br />
-                                    <span className="font-normal text-slate-600">It is about perspective, substance, and actionable insight for decision-makers shaping the region’s legal future.</span>
-                                </p>
-                            </div>
+                        {/* CTA Block */}
+                        <div className="pt-2">
+                            <div className="bg-white border border-slate-200/80 rounded-lg p-6 md:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 md:gap-8 relative overflow-hidden group/cta">
+                                {/* Subtle corner accent */}
+                                <div className="absolute top-0 left-0 w-12 h-[2px] bg-amber-500/50" />
+                                <div className="absolute top-0 left-0 w-[2px] h-8 bg-amber-500/50" />
 
-                            {/* Prominent Call to Action Block */}
-                            <div className="pt-6">
-                                <div className="bg-slate-50 border border-slate-100 rounded-xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-12 relative overflow-hidden group/cta">
-                                    {/* Decorative subtle background gradient */}
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl transition-all duration-500 group-hover/cta:bg-amber-500/20" />
-
-                                    <div className="relative z-10 text-center sm:text-left">
-                                        <h4 className="text-[15px] md:text-base font-serif font-bold text-slate-900 mb-1">Ready to lead the conversation?</h4>
-                                        <p className="text-[11px] text-slate-500 uppercase tracking-widest font-semibold">Apply to Speak at LexTalk World Dubai 2026</p>
-                                    </div>
-
-                                    <Link
-                                        href="/speakers/apply"
-                                        className="relative z-10 inline-flex items-center justify-center gap-3 px-8 py-3 bg-[#D4AF37] hover:bg-[#B8962E] text-white font-bold text-sm rounded transition-all duration-300 w-full sm:w-auto overflow-hidden shrink-0 group/btn"
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                                        <span className="relative z-10 drop-shadow-sm">Apply Now</span>
-                                        <ArrowRight className="relative z-10 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                    </Link>
+                                <div className="text-center sm:text-left">
+                                    <h4 className="text-[15px] md:text-base font-serif font-bold text-slate-900 mb-0.5">
+                                        Ready to lead the conversation?
+                                    </h4>
+                                    <p className="text-[10px] md:text-[11px] text-slate-400 uppercase tracking-[0.25em] font-semibold">
+                                        Apply to Speak at LexTalk World Dubai 2026
+                                    </p>
                                 </div>
+
+                                <Link
+                                    href="/speakers/apply"
+                                    className="inline-flex items-center justify-center gap-2.5 px-7 py-2.5 bg-slate-900 hover:bg-amber-600 text-white font-semibold text-sm rounded transition-all duration-300 w-full sm:w-auto shrink-0 group/btn"
+                                >
+                                    <span>Apply Now</span>
+                                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
+                                </Link>
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
 
                     {/* Right Column: Image (5 cols) */}
                     <motion.div
-                        initial={{ opacity: 0, x: 15 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="lg:col-span-5 relative"
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="lg:col-span-5 relative lg:sticky lg:top-28"
                     >
-                        {/* Main Image Container */}
-                        <div className="relative w-full rounded-xl overflow-hidden shadow-xl ring-1 ring-slate-900/5" style={{ aspectRatio: '4/3' }}>
-                            <Image
-                                src="/dubai-event/why-attend-slideshow/1.avif"
-                                alt="Dubai Legal Leadership"
-                                fill
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                        <div className="relative">
+                            {/* Decorative corner frame */}
+                            <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-amber-500/30 rounded-tl-lg z-10" />
+                            <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-amber-500/30 rounded-br-lg z-10" />
+
+                            {/* Image */}
+                            <div className="relative w-full rounded-lg overflow-hidden shadow-lg ring-1 ring-slate-200/60" style={{ aspectRatio: '4/3' }}>
+                                <Image
+                                    src="/dubai-event/why-attend-slideshow/1.avif"
+                                    alt="Dubai Legal Leadership Conference"
+                                    fill
+                                    sizes="(max-width: 1024px) 100vw, 40vw"
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent" />
+
+                                {/* Overlay label */}
+                                <div className="absolute bottom-0 left-0 right-0 p-5">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-5 h-[2px] bg-amber-400" />
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/90 drop-shadow-sm">
+                                            Dubai, UAE
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        {/* Subtle ambient glow */}
-                        <div className="absolute -inset-4 bg-amber-500/10 rounded-2xl blur-2xl -z-10" />
                     </motion.div>
 
                 </div>
