@@ -105,7 +105,7 @@ export default function DubaiSpeakersList() {
                 </motion.div>
 
                 {/* Speakers Grid: 3 cols desktop, 2 cols tablet, 1 col mobile */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {speakers.map((speaker, idx) => (
                         <motion.div
                             key={idx}
