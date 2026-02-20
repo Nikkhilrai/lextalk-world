@@ -15,16 +15,7 @@ const focusAreas = [
 
 export default function DubaiSpeakersIntro() {
     return (
-        <section className="relative bg-[#F7F6F3] pt-10 pb-16 lg:pt-14 lg:pb-20 overflow-hidden">
-            {/* Matching pinstripe background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                        backgroundImage: `repeating-linear-gradient(90deg, #1e293b 0px, #1e293b 1px, transparent 1px, transparent 80px)`,
-                    }}
-                />
-            </div>
+        <section className="relative bg-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-100">
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
