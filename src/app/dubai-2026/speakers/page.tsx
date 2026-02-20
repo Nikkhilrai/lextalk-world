@@ -1,14 +1,14 @@
 "use client";
 
 import { Footer } from "@/components/Footer";
-import { EventNavbar } from "@/components/EventNavbar";
+import { Navbar } from "@/components/Navbar";
 import DubaiSpeakersHero from "../dubai-speakers-2026";
 import { motion } from "framer-motion";
 
 export default function DubaiSpeakersPage() {
     return (
         <main className="min-h-screen bg-[#050a15]">
-            <EventNavbar />
+            <Navbar />
 
             {/* The Custom Hero We Built */}
             <DubaiSpeakersHero />
