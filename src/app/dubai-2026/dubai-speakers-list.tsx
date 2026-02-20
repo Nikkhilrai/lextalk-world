@@ -63,17 +63,18 @@ const speakers = [
 
 export default function DubaiSpeakersList() {
     return (
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-[#0a0f1e] via-[#0d1326] to-[#0a0f1e]">
-            {/* Ambient background effects */}
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-[#FAFBFD]">
+            {/* Subtle decorative background */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/[0.03] rounded-full blur-[100px]" />
-                {/* Subtle grid pattern */}
+                {/* Warm radial glow */}
+                <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-amber-100/40 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-amber-50/60 rounded-full blur-[100px]" />
+                {/* Delicate dot pattern */}
                 <div
-                    className="absolute inset-0 opacity-[0.03]"
+                    className="absolute inset-0 opacity-[0.25]"
                     style={{
-                        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                        backgroundSize: '60px 60px',
+                        backgroundImage: `radial-gradient(circle, #d4af37 0.5px, transparent 0.5px)`,
+                        backgroundSize: '32px 32px',
                     }}
                 />
             </div>
@@ -89,26 +90,26 @@ export default function DubaiSpeakersList() {
                     className="text-center mb-16 lg:mb-20"
                 >
                     <motion.p
-                        initial={{ opacity: 0, letterSpacing: '0.2em' }}
-                        whileInView={{ opacity: 1, letterSpacing: '0.35em' }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.1 }}
-                        className="text-[11px] md:text-xs font-bold uppercase text-amber-500/80 mb-4"
+                        className="text-[11px] md:text-xs font-bold uppercase tracking-[0.35em] text-amber-600/70 mb-4"
                     >
                         Dubai 2026
                     </motion.p>
-                    <h2 className="text-4xl md:text-5xl lg:text-[52px] font-serif font-bold text-white uppercase tracking-wide">
+                    <h2 className="text-4xl md:text-5xl lg:text-[52px] font-serif font-bold text-slate-900 uppercase tracking-wide">
                         Our{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                             Speakers
                         </span>
                     </h2>
                     <div className="mt-5 flex justify-center items-center gap-3">
-                        <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-500/60" />
-                        <div className="w-2 h-2 rotate-45 border border-amber-500/60" />
-                        <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-500/60" />
+                        <div className="w-10 h-[1px] bg-gradient-to-r from-transparent to-amber-400/50" />
+                        <div className="w-1.5 h-1.5 rotate-45 bg-amber-500" />
+                        <div className="w-10 h-[1px] bg-gradient-to-l from-transparent to-amber-400/50" />
                     </div>
-                    <p className="mt-5 text-sm md:text-base text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+                    <p className="mt-5 text-sm md:text-[15px] text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
                         Distinguished leaders shaping the future of legal practice across the Middle East and beyond
                     </p>
                 </motion.div>
@@ -121,59 +122,50 @@ export default function DubaiSpeakersList() {
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-                            className="group relative"
+                            transition={{ duration: 0.5, delay: idx * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+                            className="group"
                         >
-                            {/* Card container */}
-                            <div className="relative rounded-[24px] overflow-hidden bg-gradient-to-b from-slate-800/80 to-slate-900/90 backdrop-blur-sm border border-white/[0.06] hover:border-amber-500/30 transition-all duration-500 flex flex-col h-full shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-amber-900/10 hover:-translate-y-2">
+                            <div className="relative flex flex-col items-center text-center">
+                                {/* Image with decorative ring */}
+                                <div className="relative mb-6">
+                                    {/* Gold arc / ring behind the image */}
+                                    <div className="absolute -inset-3 rounded-full border-2 border-dashed border-amber-300/30 group-hover:border-amber-400/60 group-hover:scale-105 transition-all duration-700" />
+                                    <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-amber-300/20 via-transparent to-amber-400/20 group-hover:from-amber-300/40 group-hover:to-amber-400/40 transition-all duration-500" />
 
-                                {/* Shimmer border effect on hover */}
-                                <div className="absolute inset-0 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                                    style={{
-                                        background: `linear-gradient(135deg, transparent 40%, rgba(212,175,55,0.1) 50%, transparent 60%)`,
-                                    }}
-                                />
-
-                                {/* Image Container */}
-                                <div className="relative aspect-square w-full overflow-hidden shrink-0">
-                                    {speaker.image ? (
-                                        <Image
-                                            src={speaker.image}
-                                            alt={speaker.name}
-                                            fill
-                                            className="object-cover object-top transition-all duration-700 group-hover:scale-110"
-                                        />
-                                    ) : (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-slate-800 text-slate-600">
-                                            <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                            </svg>
-                                        </div>
-                                    )}
-
-                                    {/* Multi-layer gradient overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    {/* Decorative corner accent */}
-                                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0">
-                                        <div className="w-8 h-8 border-t-2 border-r-2 border-amber-500/50 rounded-tr-lg" />
+                                    {/* Circular image */}
+                                    <div className="relative w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden ring-4 ring-white shadow-xl shadow-slate-200/80 group-hover:shadow-2xl group-hover:shadow-amber-200/40 transition-all duration-500">
+                                        {speaker.image ? (
+                                            <Image
+                                                src={speaker.image}
+                                                alt={speaker.name}
+                                                fill
+                                                className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300">
+                                                <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                </svg>
+                                            </div>
+                                        )}
+                                        {/* Subtle inner vignette */}
+                                        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.08)]" />
                                     </div>
-                                    <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-2 group-hover:translate-x-0">
-                                        <div className="w-8 h-8 border-b-2 border-l-2 border-amber-500/50 rounded-bl-lg" />
-                                    </div>
+
+                                    {/* Small decorative diamond below */}
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-gradient-to-br from-amber-400 to-amber-500 shadow-md shadow-amber-300/50 ring-2 ring-white" />
                                 </div>
 
-                                {/* Content */}
-                                <div className="p-6 md:p-8 flex flex-col items-center text-center flex-1 relative">
-                                    {/* Subtle gold line separator */}
-                                    <div className="w-8 h-[2px] bg-gradient-to-r from-transparent via-amber-500/60 to-transparent mb-4 group-hover:w-12 transition-all duration-500" />
-
-                                    <h3 className="text-[18px] md:text-[20px] font-bold text-white mb-2 leading-tight group-hover:text-amber-300 transition-colors duration-300 tracking-tight">
+                                {/* Text content */}
+                                <div className="pt-2 flex flex-col items-center">
+                                    <h3 className="text-lg md:text-xl font-bold text-slate-800 mb-1.5 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight font-serif">
                                         {speaker.name}
                                     </h3>
+
+                                    <div className="w-6 h-[1.5px] bg-amber-400/50 mb-2.5 group-hover:w-10 transition-all duration-500 rounded-full" />
+
                                     {speaker.title && (
-                                        <p className="text-[11px] md:text-[12px] font-medium text-slate-400 group-hover:text-amber-400/80 transition-colors duration-300 uppercase tracking-[0.15em] leading-relaxed whitespace-pre-line">
+                                        <p className="text-[11px] md:text-[12px] font-medium text-slate-400 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-[0.12em] leading-relaxed whitespace-pre-line max-w-[220px]">
                                             {speaker.title}
                                         </p>
                                     )}
