@@ -5,6 +5,11 @@ import { motion } from "framer-motion";
 
 const speakers = [
     {
+        name: "Monica Romelina Sijabat",
+        title: "Professor at the Faculty of Economics & Business, University of Indonesia",
+        image: "/dubai-event/dubai-speakers/Monica Romelina Sijabat.jpeg",
+    },
+    {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
         image: "/dubai-event/dubai-speakers/Dr Lalit-Bhasin.jpeg",
@@ -18,11 +23,6 @@ const speakers = [
         name: "Bhavin Mehta",
         title: "Vice President and Head of Compliance MEA, Mastercard, UAE",
         image: "/dubai-event/dubai-speakers/Bhavin-Mehta.jpeg",
-    },
-    {
-        name: "Monica Romelina Sijabat",
-        title: "Professor at the Faculty of Economics & Business, University of Indonesia",
-        image: "/dubai-event/dubai-speakers/Monica Romelina Sijabat.jpeg",
     },
     {
         name: "Sanjay Jain",
