@@ -42,7 +42,7 @@ const speakers = [
     {
         name: "Aniket Gautam",
         title: "Founding and Managing Partner at ASG & PARTNERS",
-        image: "/dubai-event/dubai-speakers/aniket-gautam.jpeg",
+        image: "/dubai-event/dubai-speakers/aniket gautam.jpeg",
     },
     {
         name: "Mahmoud Shafik Youssef",
