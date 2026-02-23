@@ -81,9 +81,21 @@ Prior to his current role, George served as the Senior Director and Head of Corp
 With extensive experience in the legal and M&A fields, George has held significant positions in the industry, including Senior Associate at Baker & McKenzie in Saudi Arabia and Legal Affairs Manager at M1 Group (the Parent Company of Investcom). His contributions extend to the drafting of policy papers and laws, such as Lebanon's Consumer Protection Law and the Lebanese Trademark Law.
 
 George's educational background includes a bachelor’s degree in law from the University of La Sagesse, Lebanon. Furthermore, his commitment to lifelong learning is evident in his completion of a mini MBA in Telecoms, AI Essential for Business from Harvard Business School Data Privacy & Technology from Harvard Business School, Emotional Intelligence and Maturity from Tomorrow’s Architect, AML and Compliance Regulatory from Qatar Chamber of Commerce and in in Intellectual Property Rights from the World Intellectual Property Organization in Geneva`
+    },
+    {
+        name: "Sergey Konov",
+        title: "Regional Compliance & Integrity Officer IMETA, Boehringer Ingelheim",
+        image: "/dubai-event/dubai-speakers/Sergey Konov.jpeg",
+    },
+    {
+        name: "Dr. Yasser Aboismail",
+        title: "Director – Head of Legal, Contracts and Compliance, Thales Group",
+        image: "/dubai-event/dubai-speakers/Yasser Aboismail.jpeg",
     }
 ];
 
+
+ 
 interface Speaker {
     name: string;
     title: string;
