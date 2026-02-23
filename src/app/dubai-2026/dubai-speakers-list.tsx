@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 const speakers = [
     {
@@ -68,10 +70,30 @@ const speakers = [
         name: "Georges Abi Saab",
         title: "General Counsel, Ooredoo Group",
         image: "/dubai-event/dubai-speakers/Georges Abi Saab.png",
+        bio: `George Abi Saab is the General Counsel at Ooredoo Group since 2020, where he plays a pivotal role in managing and overseeing all legal aspects of the Group. 
+
+One of George's notable achievements was leading Ooredoo’s M&A expansion such leading the acquisition in Iraq, Tunisia and Kuwait as well as obtaining a license in Myanmar as well as leading many corporate finance work such as a USD 1.25 billion sukuk issuance. 
+
+Currently, George is at the helm of a transformative project involving the sale and leaseback of up to 30,000 towers in Qatar, Kuwait, Algeria, Tunisia, Iraq, and Jordan. This initiative represents a significant step towards establishing a jointly owned independent tower company through a cash and share deal. In addition, Georges is also leading the adjacencies carve out in Data Centre and Fintech.
+
+Prior to his current role, George served as the Senior Director and Head of Corporate Governance at Ooredoo Group. During his tenure, he spearheaded the development of the Corporate Governance policies and procedures framework. This framework was designed to enable the function to effectively meet its objectives and targets, in alignment with overall risk policies, procedures, and the Group's strategic direction.
+
+With extensive experience in the legal and M&A fields, George has held significant positions in the industry, including Senior Associate at Baker & McKenzie in Saudi Arabia and Legal Affairs Manager at M1 Group (the Parent Company of Investcom). His contributions extend to the drafting of policy papers and laws, such as Lebanon's Consumer Protection Law and the Lebanese Trademark Law.
+
+George's educational background includes a bachelor’s degree in law from the University of La Sagesse, Lebanon. Furthermore, his commitment to lifelong learning is evident in his completion of a mini MBA in Telecoms, AI Essential for Business from Harvard Business School Data Privacy & Technology from Harvard Business School, Emotional Intelligence and Maturity from Tomorrow’s Architect, AML and Compliance Regulatory from Qatar Chamber of Commerce and in in Intellectual Property Rights from the World Intellectual Property Organization in Geneva`
     }
 ];
 
+interface Speaker {
+    name: string;
+    title: string;
+    image: string;
+    bio?: string;
+}
+
 export default function DubaiSpeakersList() {
+    const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+
     return (
         <section className="relative py-20 lg:py-28 overflow-hidden bg-[#F7F6F3]">
             {/* Subtle structured background — fine linen texture */}
@@ -123,9 +145,10 @@ export default function DubaiSpeakersList() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: idx * 0.06 }}
-                            className="group"
+                            className={`group ${speaker.bio ? "cursor-pointer" : ""}`}
+                            onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
-                            <div className="relative flex flex-col items-center text-center">
+                            <div className="relative flex flex-col items-center text-center p-4">
                                 {/* Circular portrait with structured frame */}
                                 <div className="relative mb-4">
                                     {/* Outer thin formal ring */}
@@ -166,13 +189,79 @@ export default function DubaiSpeakersList() {
                                             {speaker.title}
                                         </p>
                                     )}
+
+                                    {speaker.bio && (
+                                        <div className="mt-3 overflow-hidden h-0 group-hover:h-5 transition-all duration-500">
+                                            <p className="text-[10px] font-bold text-amber-600 uppercase tracking-widest">View Biography</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
-
             </div>
+
+            {/* Biography Modal */}
+            <AnimatePresence>
+                {selectedSpeaker && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedSpeaker(null)}
+                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="relative w-full max-w-2xl max-h-[90vh] overflow-hidden bg-white rounded-2xl shadow-2xl flex flex-col"
+                        >
+                            {/* Close button */}
+                            <button
+                                onClick={() => setSelectedSpeaker(null)}
+                                className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 text-slate-500 hover:bg-amber-100 hover:text-amber-600 transition-colors z-10"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
+                            {/* Modal Content */}
+                            <div className="overflow-y-auto p-6 md:p-10">
+                                <div className="flex flex-col md:flex-row gap-8 items-start">
+                                    <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0">
+                                        <Image
+                                            src={selectedSpeaker.image}
+                                            alt={selectedSpeaker.name}
+                                            fill
+                                            className="object-cover object-top"
+                                        />
+                                    </div>
+                                    <div className="flex-1 text-center md:text-left">
+                                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-2">
+                                            {selectedSpeaker.name}
+                                        </h2>
+                                        <p className="text-sm md:text-base font-medium text-amber-600 uppercase tracking-wider mb-6">
+                                            {selectedSpeaker.title}
+                                        </p>
+                                        <div className="w-12 h-[2px] bg-slate-200 mb-8 mx-auto md:mx-0" />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-6 text-slate-600 text-sm md:text-base leading-relaxed font-light">
+                                    {selectedSpeaker.bio?.split('\n\n').map((paragraph, i) => (
+                                        <p key={i}>{paragraph}</p>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Footer / Accent */}
+                            <div className="h-1.5 w-full bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200" />
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
