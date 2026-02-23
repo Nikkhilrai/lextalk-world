@@ -115,7 +115,7 @@ export default function DubaiSpeakersList() {
                 </motion.div>
 
                 {/* Speakers Grid: 3 cols desktop, 2 cols tablet, 1 col mobile */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-2 lg:gap-y-4">
                     {speakers.map((speaker, idx) => (
                         <motion.div
                             key={idx}
@@ -127,7 +127,7 @@ export default function DubaiSpeakersList() {
                         >
                             <div className="relative flex flex-col items-center text-center">
                                 {/* Circular portrait with structured frame */}
-                                <div className="relative mb-6">
+                                <div className="relative mb-4">
                                     {/* Outer thin formal ring */}
                                     <div className="absolute -inset-3 rounded-full border border-slate-200/70 group-hover:border-amber-400/50 transition-all duration-500" />
                                     {/* Inner subtle glow */}
