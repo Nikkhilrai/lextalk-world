@@ -58,6 +58,16 @@ const speakers = [
         name: "Ahmed Nagy",
         title: "Senior Legal Counsel, Emirates Islamic",
         image: "/dubai-event/dubai-speakers/Ahmed Nagy.jpeg",
+    },
+    {
+        name: "Vijay Ojha",
+        title: "Group Company Secretary, Sharaf Group",
+        image: "/dubai-event/dubai-speakers/Vijay Ojha.jpeg",
+    },
+    {
+        name: "Georges Abi Saab",
+        title: "General Counsel, Ooredoo Group",
+        image: "/dubai-event/dubai-speakers/Georges Abi Saab.png",
     }
 ];
 
