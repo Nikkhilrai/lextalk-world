@@ -69,7 +69,7 @@ const speakers = [
     {
         name: "Georges Abi Saab",
         title: "General Counsel, Ooredoo Group",
-        image: "/dubai-event/dubai-speakers/Georges Abi Saab.png",
+        image: "/dubai-event/dubai-speakers/Georges Abi Saab.jpg",
         bio: `George Abi Saab is the General Counsel at Ooredoo Group since 2020, where he plays a pivotal role in managing and overseeing all legal aspects of the Group. 
 
 One of George's notable achievements was leading Ooredoo’s M&A expansion such leading the acquisition in Iraq, Tunisia and Kuwait as well as obtaining a license in Myanmar as well as leading many corporate finance work such as a USD 1.25 billion sukuk issuance. 
@@ -230,7 +230,7 @@ export default function DubaiSpeakersList() {
                             {/* Modal Content */}
                             <div className="overflow-y-auto p-6 md:p-10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
-                                    <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0">
+                                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0">
                                         <Image
                                             src={selectedSpeaker.image}
                                             alt={selectedSpeaker.name}
