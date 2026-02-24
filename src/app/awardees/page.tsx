@@ -16,8 +16,54 @@ interface AwardEvent {
     year: number;
     image: string | null;
     description: string | null;
-    _count: { awardees: number };
+    _count?: { awardees: number };
+    // Custom optional properties for enhanced UI
+    customHref?: string;
+    date?: string;
+    fullLocation?: string;
+    stats?: { label: string; value: string }[];
 }
+
+const STATIC_EVENTS: AwardEvent[] = [
+    {
+        id: "static-dubai-2024",
+        name: "Awardees-dubai-2024",
+        slug: "awardees-dubai-2024",
+        customHref: "/awardees/awardees-dubai-2024",
+        location: "Dubai, UAE",
+        year: 2024,
+        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
+        description: null,
+        date: "28-29 November 2024",
+        fullLocation: "Crowne Plaza, Dubai-Deira, UAE",
+        stats: [
+            { label: "People", value: "500+" },
+            { label: "Speaker", value: "50+" },
+            { label: "Awardee", value: "50+" },
+            { label: "Exhibitors", value: "15+" },
+            { label: "Countries", value: "20+" },
+        ],
+    },
+    {
+        id: "static-dubai-2021",
+        name: "Awardees Dubai, UAE -2021",
+        slug: "awardees-dubai-2021",
+        customHref: "/awardees-dubai-2021",
+        location: "Dubai, UAE",
+        year: 2021,
+        image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop",
+        description: null,
+        date: "7 & 8 April 2021",
+        fullLocation: "Millennium Plaza Downtown Hotel, Dubai, UAE",
+        stats: [
+            { label: "People", value: "500+" },
+            { label: "Speaker", value: "70+" },
+            { label: "Awardee", value: "100+" },
+            { label: "Exhibitors", value: "20+" },
+            { label: "Countries", value: "25+" },
+        ],
+    }
+];
 
 export default function AwardeesPage() {
     const [events, setEvents] = useState<AwardEvent[]>([]);
@@ -27,9 +73,18 @@ export default function AwardeesPage() {
     useEffect(() => {
         const load = async () => {
             const res = await getAwardEvents();
+            let dbEvents = [];
             if (res.success) {
-                setEvents(res.events as any);
+                dbEvents = res.events as any;
             }
+
+            // Merge static and DB events
+            // We'll filter out DB events if they have the same slug as static ones
+            const staticSlugs = new Set(STATIC_EVENTS.map(s => s.slug));
+            const filteredDbEvents = dbEvents.filter((e: any) => !staticSlugs.has(e.slug));
+
+            const allEvents = [...filteredDbEvents, ...STATIC_EVENTS].sort((a, b) => b.year - a.year);
+            setEvents(allEvents);
             setLoading(false);
         };
         load();
@@ -41,44 +96,44 @@ export default function AwardeesPage() {
         : events;
 
     return (
-        <div className="min-h-screen bg-[#0B1120] text-white">
-            <Navbar />
+        <div className="min-h-screen bg-[#F8FAFC] text-slate-900">
+            <Navbar variant="light" />
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 overflow-hidden">
-                {/* Background */}
-                <div className="absolute inset-0 bg-gradient-to-b from-amber-900/20 via-transparent to-transparent" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/10 rounded-full blur-[100px]" />
+                {/* Background Decor */}
+                <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="text-center max-w-3xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full mb-6">
-                            <Award className="w-4 h-4 text-amber-400" />
-                            <span className="text-amber-400 text-sm font-medium">Celebrating Excellence</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-100 rounded-full mb-6">
+                            <Award className="w-4 h-4 text-amber-600" />
+                            <span className="text-amber-700 text-sm font-medium">Celebrating Excellence</span>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-slate-900">
                             Our Distinguished{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
+                            <span className="text-amber-600">
                                 Awardees
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
                             Recognizing exceptional legal professionals who have demonstrated outstanding
-                            achievements, innovation, and leadership in the global legal community.
+                            achievements and leadership in the global legal community.
                         </p>
                     </div>
                 </div>
             </section>
 
             {/* Year Filter */}
-            <section className="py-8 border-y border-white/10">
+            <section className="py-8 border-y border-slate-200 bg-white/50 backdrop-blur-sm sticky top-[72px] z-20">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-center gap-3 flex-wrap">
                         <button
                             onClick={() => setSelectedYear(null)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedYear === null
-                                ? "bg-amber-500 text-black"
-                                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                            className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${selectedYear === null
+                                ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20"
+                                : "bg-white text-slate-500 border border-slate-200 hover:border-amber-500 hover:text-amber-600"
                                 }`}
                         >
                             All Years
@@ -87,9 +142,9 @@ export default function AwardeesPage() {
                             <button
                                 key={year}
                                 onClick={() => setSelectedYear(year)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedYear === year
-                                    ? "bg-amber-500 text-black"
-                                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${selectedYear === year
+                                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20"
+                                    : "bg-white text-slate-500 border border-slate-200 hover:border-amber-500 hover:text-amber-600"
                                     }`}
                             >
                                 {year}
@@ -104,61 +159,85 @@ export default function AwardeesPage() {
                 <div className="container mx-auto px-4">
                     {loading ? (
                         <div className="text-center py-20">
-                            <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin mx-auto" />
-                            <p className="text-gray-400 mt-4">Loading events...</p>
+                            <div className="w-12 h-12 border-4 border-amber-100 border-t-amber-500 rounded-full animate-spin mx-auto" />
+                            <p className="text-slate-500 mt-4 font-medium">Loading events...</p>
                         </div>
                     ) : filteredEvents.length === 0 ? (
                         <div className="text-center py-20">
-                            <Award className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold text-gray-400">No events found</h3>
-                            <p className="text-gray-500 mt-2">Check back soon for updates!</p>
+                            <Award className="w-16 h-16 text-slate-200 mx-auto mb-4" />
+                            <h3 className="text-xl font-bold text-slate-400">No events found</h3>
+                            <p className="text-slate-400 mt-2">Check back soon for updates!</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                             {filteredEvents.map((event) => (
                                 <Link
                                     key={event.id}
-                                    href={`/awardees/${event.slug}`}
-                                    className="group relative bg-gradient-to-b from-white/5 to-transparent rounded-2xl overflow-hidden border border-white/10 hover:border-amber-500/50 transition-all duration-300"
+                                    href={event.customHref || `/awardees/${event.slug}`}
+                                    className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-amber-500/5"
                                 >
-                                    {/* Image */}
-                                    <div className="aspect-[16/10] relative bg-gradient-to-br from-amber-900/30 to-amber-700/10">
+                                    {/* Image Container - Larger Image */}
+                                    <div className="relative h-48 w-full overflow-hidden">
                                         <Image
                                             src={event.image || "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"}
                                             alt={event.name}
                                             fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 
-                                        {/* Year Badge */}
-                                        <div className="absolute top-4 right-4 px-3 py-1 bg-amber-500 text-black text-sm font-bold rounded">
+                                        {/* Year Badge - Minimal */}
+                                        <div className="absolute top-4 right-4 px-2.5 py-1 bg-amber-500 text-white text-[11px] font-black rounded shadow-lg">
                                             {event.year}
                                         </div>
                                     </div>
 
-                                    {/* Content */}
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">
+                                    {/* Content Section - Extremely Tight to maintain card height */}
+                                    <div className="flex-1 p-3.5 pb-3.5 flex flex-col">
+                                        <h3 className="text-[18px] font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-600 transition-colors tracking-tight">
                                             {event.name}
                                         </h3>
 
-                                        <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
-                                            <div className="flex items-center gap-1.5">
-                                                <MapPin className="w-4 h-4 text-amber-500" />
-                                                <span>{event.location}</span>
+                                        <div className="flex flex-col gap-1 mb-2 text-slate-500">
+                                            <div className="flex items-start gap-2">
+                                                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                                                <span className="text-[13px] font-medium leading-tight">{event.fullLocation || event.location}</span>
                                             </div>
+                                            {event.date && (
+                                                <div className="flex items-start gap-2">
+                                                    <Calendar className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                                                    <span className="text-[13px] font-medium">{event.date}</span>
+                                                </div>
+                                            )}
                                         </div>
 
-                                        {event.description && (
-                                            <p className="text-gray-500 text-sm line-clamp-2 mb-4">
+                                        {/* Stats - Super Dense Grid */}
+                                        {event.stats && (
+                                            <div className="grid grid-cols-3 gap-2 py-2 border-t border-slate-100 mb-2 bg-slate-50/50 -mx-3.5 px-3.5">
+                                                {event.stats.map((stat, i) => (
+                                                    <div key={i} className="flex flex-col">
+                                                        <span className="text-[14px] font-black text-slate-900 leading-none">
+                                                            {stat.value}
+                                                        </span>
+                                                        <span className="text-[8px] uppercase font-bold text-amber-600 tracking-wider mt-1 truncate">
+                                                            {stat.label}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {event.description && !event.stats && (
+                                            <p className="text-slate-500 text-[13px] line-clamp-2 mb-3 px-1">
                                                 {event.description}
                                             </p>
                                         )}
 
-                                        <div className="flex items-center gap-2 text-amber-400 text-sm font-medium group-hover:gap-3 transition-all">
-                                            <span>View Awardees</span>
-                                            <ChevronRight className="w-4 h-4" />
+                                        <div className="mt-auto">
+                                            <div className="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-600 text-[12px] font-bold group-hover:bg-amber-500 group-hover:text-white group-hover:border-amber-500 transition-all duration-500 shadow-inner">
+                                                <span>View Awardees</span>
+                                                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
@@ -168,25 +247,6 @@ export default function AwardeesPage() {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-b from-transparent to-amber-900/10">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                        Want to Be Recognized?
-                    </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto mb-8">
-                        Submit your nomination for the upcoming LexTalk World conference awards
-                        and join our community of distinguished legal professionals.
-                    </p>
-                    <Link
-                        href="/nominate"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-black font-bold rounded-lg hover:from-amber-400 hover:to-yellow-400 transition-all"
-                    >
-                        <Award className="w-5 h-5" />
-                        Submit Nomination
-                    </Link>
-                </div>
-            </section>
 
             <Footer />
         </div>
