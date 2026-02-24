@@ -70,31 +70,45 @@ export function AwardeesFloatingActions() {
                         className="flex flex-col items-end gap-3"
                     >
                         {actions.map((action, idx) => (
-                            <motion.a
+                            <motion.div
                                 key={action.label}
-                                href={action.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1, transition: { delay: idx * 0.05 } }}
-                                className="relative w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group border border-slate-100"
+                                initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                                animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: idx * 0.05 } }}
+                                className="flex items-center gap-3 group relative"
                             >
-                                <action.icon size={20} className={`${action.iconColor}`} strokeWidth={2.5} />
-                                {action.dot && (
-                                    <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
-                                )}
-                            </motion.a>
+                                <span className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10 whitespace-nowrap pointer-events-none">
+                                    {action.label}
+                                </span>
+                                <a
+                                    href={action.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+                                >
+                                    <action.icon size={20} className={`${action.iconColor}`} strokeWidth={2.5} />
+                                    {action.dot && (
+                                        <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
+                                    )}
+                                </a>
+                            </motion.div>
                         ))}
 
                         {/* Nomination/Register Mini Button */}
-                        <motion.a
-                            href="/nominate"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1, transition: { delay: actions.length * 0.05 } }}
-                            className="relative w-11 h-11 rounded-2xl bg-[#ff8c00] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group border border-white/20"
+                        <motion.div
+                            initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                            animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: actions.length * 0.05 } }}
+                            className="flex items-center gap-3 group relative"
                         >
-                            <ArrowRight size={20} className="text-black -rotate-45" strokeWidth={3} />
-                        </motion.a>
+                            <span className="px-3 py-1.5 bg-[#ff8c00] text-black text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl whitespace-nowrap pointer-events-none">
+                                Nominate Now
+                            </span>
+                            <a
+                                href="/nominate"
+                                className="relative w-11 h-11 rounded-2xl bg-[#ff8c00] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
+                            >
+                                <ArrowRight size={20} className="text-black -rotate-45" strokeWidth={3} />
+                            </a>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
