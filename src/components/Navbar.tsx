@@ -78,16 +78,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                             href: `/awardees/${e.slug}`
                         }));
 
-                    setDynamicNavLinks(prev => prev.map(link => {
-                        if (link.name === "Awardees") {
-                            return {
-                                ...link,
-                                hasDropdown: true,
-                                dropdownItems: awardItems
-                            };
-                        }
-                        return link;
-                    }));
+
                 }
             } catch (error) {
                 console.error("Failed to fetch nav events:", error);
