@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { MessageSquare, ChevronUp, X, Phone, Instagram, Linkedin, ArrowRight, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { RegisterModal } from "./RegisterModal";
 
 export function AwardeesFloatingActions() {
     const [isVisible, setIsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     useEffect(() => {
         const toggleVisibility = () => {
@@ -58,91 +60,101 @@ export function AwardeesFloatingActions() {
     ];
 
     return (
-        <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"}`}>
+        <>
+            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"}`}>
 
-            {/* Expanded Actions Stack */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        className="flex flex-col items-end gap-3"
-                    >
-                        {actions.map((action, idx) => (
+                {/* Expanded Actions Stack */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            className="flex flex-col items-end gap-3"
+                        >
+                            {actions.map((action, idx) => (
+                                <motion.div
+                                    key={action.label}
+                                    initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                                    animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: idx * 0.05 } }}
+                                    className="flex items-center gap-3 group relative"
+                                >
+                                    <span className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10 whitespace-nowrap pointer-events-none">
+                                        {action.label}
+                                    </span>
+                                    <a
+                                        href={action.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+                                    >
+                                        <action.icon size={20} className={`${action.iconColor}`} strokeWidth={2.5} />
+                                        {action.dot && (
+                                            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
+                                        )}
+                                    </a>
+                                </motion.div>
+                            ))}
+
+                            {/* Register Button */}
                             <motion.div
-                                key={action.label}
                                 initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                                animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: idx * 0.05 } }}
+                                animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: actions.length * 0.05 } }}
                                 className="flex items-center gap-3 group relative"
                             >
-                                <span className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/10 whitespace-nowrap pointer-events-none">
-                                    {action.label}
+                                <span className="px-3 py-1.5 bg-[#ff8c00] text-black text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl whitespace-nowrap pointer-events-none">
+                                    Register Now
                                 </span>
-                                <a
-                                    href={action.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="relative w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+                                <button
+                                    onClick={() => {
+                                        setIsRegisterOpen(true);
+                                        setIsOpen(false);
+                                    }}
+                                    className="relative w-11 h-11 rounded-2xl bg-[#ff8c00] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
                                 >
-                                    <action.icon size={20} className={`${action.iconColor}`} strokeWidth={2.5} />
-                                    {action.dot && (
-                                        <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
-                                    )}
-                                </a>
+                                    <ArrowRight size={20} className="text-black -rotate-45" strokeWidth={3} />
+                                </button>
                             </motion.div>
-                        ))}
-
-                        {/* Nomination/Register Mini Button */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                            animate={{ opacity: 1, x: 0, scale: 1, transition: { delay: actions.length * 0.05 } }}
-                            className="flex items-center gap-3 group relative"
-                        >
-                            <span className="px-3 py-1.5 bg-[#ff8c00] text-black text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl whitespace-nowrap pointer-events-none">
-                                Nominate Now
-                            </span>
-                            <a
-                                href="/nominate"
-                                className="relative w-11 h-11 rounded-2xl bg-[#ff8c00] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
-                            >
-                                <ArrowRight size={20} className="text-black -rotate-45" strokeWidth={3} />
-                            </a>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            {/* Toggle Action Button */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`relative w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg border ${isOpen ? "bg-[#ff8c00] text-black border-white/20" : "bg-white text-slate-900 border-slate-100"
-                    }`}
-            >
-                <AnimatePresence mode="wait">
-                    {isOpen ? (
-                        <motion.div key="close" initial={{ opacity: 0, rotate: -45 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 45 }}>
-                            <X size={22} strokeWidth={3} />
-                        </motion.div>
-                    ) : (
-                        <motion.div key="open" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} className="relative">
-                            <MessageCircle size={22} className="fill-slate-900/5" strokeWidth={2.5} />
-                            <span className="absolute -top-1 -right-1.5 w-3 h-3 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </button>
 
-            {/* Scroll to Top Button - Always visible when scrolled */}
-            <button
-                onClick={scrollToTop}
-                className="relative w-11 h-11 rounded-full border-2 border-[#ff8c00] flex items-center justify-center group transition-all duration-300 hover:bg-[#ff8c00]/10 bg-slate-100/10 backdrop-blur-sm shadow-lg overflow-hidden"
-                aria-label="Back to Top"
-            >
-                <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
-                    <ChevronUp size={22} className="text-[#ff8c00]" strokeWidth={3} />
-                </div>
-            </button>
-        </div>
+                {/* Toggle Action Button */}
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={`relative w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg border ${isOpen ? "bg-[#ff8c00] text-black border-white/20" : "bg-white text-slate-900 border-slate-100"
+                        }`}
+                >
+                    <AnimatePresence mode="wait">
+                        {isOpen ? (
+                            <motion.div key="close" initial={{ opacity: 0, rotate: -45 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 45 }}>
+                                <X size={22} strokeWidth={3} />
+                            </motion.div>
+                        ) : (
+                            <motion.div key="open" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} className="relative">
+                                <MessageCircle size={22} className="fill-slate-900/5" strokeWidth={2.5} />
+                                <span className="absolute -top-1 -right-1.5 w-3 h-3 bg-[#ff8c00] rounded-full border-2 border-white shadow-sm" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </button>
+
+                {/* Scroll to Top Button - Always visible when scrolled */}
+                <button
+                    onClick={scrollToTop}
+                    className="relative w-11 h-11 rounded-full border-2 border-[#ff8c00] flex items-center justify-center group transition-all duration-300 hover:bg-[#ff8c00]/10 bg-slate-100/10 backdrop-blur-sm shadow-lg overflow-hidden"
+                    aria-label="Back to Top"
+                >
+                    <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
+                        <ChevronUp size={22} className="text-[#ff8c00]" strokeWidth={3} />
+                    </div>
+                </button>
+            </div>
+
+            <RegisterModal
+                isOpen={isRegisterOpen}
+                onClose={() => setIsRegisterOpen(false)}
+            />
+        </>
     );
 }
