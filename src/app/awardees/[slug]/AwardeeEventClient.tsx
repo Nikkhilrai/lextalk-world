@@ -114,6 +114,8 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: DBAwardee; index:
     );
 }
 
+import { AwardeesFloatingActions } from "@/components/AwardeesFloatingActions";
+
 export default function AwardeeEventClient({ event, categories }: { event: DBEvent; categories: Record<string, DBAwardee[]> }) {
     const [selected, setSelected] = useState<DBAwardee | null>(null);
     const heroRef = useRef<HTMLDivElement>(null);
@@ -338,6 +340,7 @@ export default function AwardeeEventClient({ event, categories }: { event: DBEve
             </section>
 
             <Footer />
+            <AwardeesFloatingActions />
         </div>
     );
 }

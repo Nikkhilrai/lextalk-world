@@ -8,6 +8,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import { awardees, type Awardee } from "./awardees-data";
+import { AwardeesFloatingActions } from "@/components/AwardeesFloatingActions";
 
 function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: number; onSelect: (a: Awardee) => void }) {
     const ref = useRef<HTMLDivElement>(null);
@@ -228,6 +229,7 @@ export default function AwardeesDubai2021Page() {
             </section>
 
             <Footer />
+            <AwardeesFloatingActions />
         </div>
     );
 }
