@@ -3,8 +3,8 @@ import { Footer } from "@/components/Footer";
 import { NominationForm } from "@/components/NominationForm";
 
 export const metadata = {
-    title: "Nominate - Global Legal Honour Awards",
-    description: "Submit a nomination for the upcoming Global Legal Honour Awards in Dubai 2026.",
+    title: "Nominate - Legal Honor Global Awards",
+    description: "Submit a nomination for the upcoming Legal Honor Global Awards in Dubai 2026.",
 };
 
 export default function NominatePage() {

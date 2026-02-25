@@ -134,7 +134,7 @@ export default function AboutPage() {
                             { icon: Mic2, title: "Visionary Keynotes", desc: "Thought leadership that inspires." },
                             { icon: Laptop, title: "Legal Tech Exhibition", desc: "Interactive showcases of innovation." },
                             { icon: Handshake, title: "Curated Networking", desc: "Formats designed for real connection." },
-                            { icon: Award, title: "Global Awards", desc: "Celebrating the Legal Honors." },
+                            { icon: Award, title: "Global Awards", desc: "Celebrating the Legal Honor Global." },
                         ].map((item, idx) => (
                             <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                                 <item.icon className="w-10 h-10 text-amber-500 mb-6" />
@@ -192,7 +192,7 @@ export default function AboutPage() {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px]" />
                 <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <Award className="w-16 h-16 text-amber-500 mx-auto mb-6" />
-                    <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8">Legal Honors Global Awards</h2>
+                    <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8">Legal Honor Global Awards</h2>
                     <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12">
                         These honours are respected for their credibility and merit, recognizing outstanding achievement across:
                     </p>

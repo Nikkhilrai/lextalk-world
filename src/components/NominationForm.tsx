@@ -126,7 +126,7 @@ export function NominationForm() {
         try {
             const payload = {
                 type: data.nominateAs,
-                category: "Global Legal Honour 2026",
+                category: "Legal Honor Global 2026",
                 nominatorEmail: data.email,
                 nominatorPhone: data.phone,
                 nomineeName: `${data.firstName} ${data.lastName}`,
@@ -154,7 +154,7 @@ export function NominationForm() {
                     <Image src="/logo/Lextalk-Logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-800 mb-2">
-                    Global Legal Honour <span className="text-amber-600">2026</span> Dubai
+                    Legal Honor Global <span className="text-amber-600">2026</span> Dubai
                 </h1>
                 <p className="text-slate-500">Dubai Award Nomination Form</p>
             </div>
@@ -255,7 +255,7 @@ export function NominationForm() {
                                                     </li>
                                                     <li className="flex items-start gap-2">
                                                         <span className="text-amber-500 mt-0.5">•</span>
-                                                        <span>LexTalk World and Legal Honour are brought to you by Canada-based firm; ClickAway Creators (A division of CAC Media & Events) which reserves the right to make any changes to the event.</span>
+                                                        <span>LexTalk World and Legal Honor Global are brought to you by Canada-based firm; ClickAway Creators (A division of CAC Media & Events) which reserves the right to make any changes to the event.</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -558,7 +558,7 @@ export function NominationForm() {
                                                         amount: orderData.amount,
                                                         currency: orderData.currency,
                                                         name: "LexTalk World",
-                                                        description: "Nomination Fee - Global Legal Honour",
+                                                        description: "Nomination Fee - Legal Honor Global",
                                                         order_id: orderData.orderId,
                                                         handler: async function (response: any) {
                                                             try {
@@ -620,7 +620,7 @@ export function NominationForm() {
                                                         amount: orderData.amount,
                                                         currency: orderData.currency,
                                                         name: "LexTalk World",
-                                                        description: "Nomination Fee - Global Legal Honour",
+                                                        description: "Nomination Fee - Legal Honor Global",
                                                         order_id: orderData.orderId,
                                                         handler: async function (response: any) {
                                                             try {
