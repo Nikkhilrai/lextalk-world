@@ -91,11 +91,17 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Dr. Yasser Aboismail",
         title: "Director – Head of Legal, Contracts and Compliance, Thales Group",
         image: "/dubai-event/dubai-speakers/Yasser Aboismail.jpeg",
+    },
+    {
+        name: "Julia Kolomenko",
+        title: "Regional Head of Legal, EEMEA, SGS",
+        image: "/dubai-event/dubai-speakers/Julia Kolomenko.jpeg",
     }
+
 ];
 
 
- 
+
 interface Speaker {
     name: string;
     title: string;
