@@ -26,7 +26,7 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
         if (!hideRegister) {
             timer = setTimeout(() => {
                 setIsRegisterOpen(true);
-            }, 2000);
+            }, 5000);
         }
 
         const toggleVisibility = () => {

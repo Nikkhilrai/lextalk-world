@@ -96,14 +96,14 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
 
                     {/* Modal Container */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" }}
+                        animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20, filter: "blur(10px)" }}
                         transition={{
                             type: "spring",
                             damping: 25,
-                            stiffness: 300,
-                            duration: 0.3
+                            stiffness: 260,
+                            duration: 0.6
                         }}
                         className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] z-10"
                     >
@@ -142,16 +142,27 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                             ) : (
                                 <>
                                     {/* Header */}
-                                    <div className="text-center mb-8">
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.2 }}
+                                        className="text-center mb-8"
+                                    >
                                         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mb-2">
                                             Register Your Interest
                                         </h2>
                                         <p className="text-slate-500 text-sm sm:text-base">
                                             Join the global stage for legal innovation and leadership.
                                         </p>
-                                    </div>
+                                    </motion.div>
 
-                                    <form className="space-y-8" onSubmit={handleSubmit}>
+                                    <motion.form
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.3 }}
+                                        className="space-y-8"
+                                        onSubmit={handleSubmit}
+                                    >
 
                                         {/* Top Inputs Group */}
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -362,7 +373,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                 </span>
                                             </button>
                                         </div>
-                                    </form>
+                                    </motion.form>
                                 </>
                             )}
                         </div>
