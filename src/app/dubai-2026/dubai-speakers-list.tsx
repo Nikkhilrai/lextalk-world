@@ -60,6 +60,7 @@ const speakers = [
         name: "Ahmed Nagy",
         title: "Senior Legal Counsel, Emirates Islamic",
         image: "/dubai-event/dubai-speakers/Ahmed Nagy.jpeg",
+        bio: ` Nagy is highly qualified lawyer, certified in LMAs & certified Quality Management System (QMS) Leader Auditor, accredited by CQI & IRCA with 15+ years extensive of experience in legal profession both in Islamic and Conventional banking, specialized in Banking, Corporate, Commercial & technology laws. He holds a LLB degree in law and has three post-graduate diplomas in IP Rights, Int’l Arbitration, and Economic Courts. Nagy has extensive expertise in providing strategic legal advice, negotiating complex agreements, trademarks & employment matters, and overseeing corporate and company secretary affairs. His solid and diversified knowledge is reflected in his remarkable achievements for being a part of leading ISO 9001:2015 Certifications for legal department in both Islamic and Conventional Banking in the UAE which strengthened his understanding of quality assurance and control, further enhance his ability to straddle digital , strategic & legal roles as an influential change-maker shaping the legal industry future.`
     },
     {
         name: "Vijay Ojha",
@@ -96,6 +97,11 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Julia Kolomenko",
         title: "Regional Head of Legal, EEMEA, SGS",
         image: "/dubai-event/dubai-speakers/Julia Kolomenko.jpeg",
+    },
+    {
+        name: "Karishma Sookrajh",
+        title: "Legal Counsel, DHL Middle East, Africa & Turkey",
+        image: "/dubai-event/dubai-speakers/Karishma Sookrajh.jpeg",
     }
 
 ];
