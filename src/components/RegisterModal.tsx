@@ -78,6 +78,19 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         };
     }, [isOpen]);
 
+    const itemVariants: any = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring" as const,
+                damping: 25,
+                stiffness: 300
+            }
+        }
+    };
+
     if (!mounted) return null;
 
     return createPortal(
@@ -86,26 +99,47 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        animate={{ opacity: 1, backdropFilter: "blur(18px)" }}
+                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        transition={{ duration: 0.5, ease: "circOut" }}
+                        className="absolute inset-0 bg-slate-950/70"
                         onClick={onClose}
                     />
 
                     {/* Modal Container */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" }}
-                        animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20, filter: "blur(10px)" }}
+                        initial={{
+                            opacity: 0,
+                            scale: 0.8,
+                            y: 60,
+                            rotateX: 12,
+                            perspective: 1000,
+                            filter: "blur(15px)"
+                        }}
+                        animate={{
+                            opacity: 1,
+                            scale: 1,
+                            y: 0,
+                            rotateX: 0,
+                            perspective: 1000,
+                            filter: "blur(0px)"
+                        }}
+                        exit={{
+                            opacity: 0,
+                            scale: 0.9,
+                            y: 40,
+                            rotateX: -5,
+                            filter: "blur(10px)",
+                            transition: { duration: 0.3, ease: "anticipate" }
+                        }}
                         transition={{
                             type: "spring",
-                            damping: 25,
-                            stiffness: 260,
-                            duration: 0.6
+                            damping: 22,
+                            stiffness: 280,
+                            mass: 1.2
                         }}
-                        className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] z-10"
+                        className="relative w-full max-w-4xl bg-white rounded-3xl shadow-[0_30px_90px_-20px_rgba(0,0,0,0.4),0_0_50px_rgba(245,158,11,0.1)] overflow-y-auto max-h-[90vh] z-10 border border-white/20"
                     >
                         {/* Close Button */}
                         <button
@@ -157,15 +191,21 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                     </motion.div>
 
                                     <motion.form
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.3 }}
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={{
+                                            hidden: { opacity: 0 },
+                                            visible: {
+                                                opacity: 1,
+                                                transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                                            }
+                                        }}
                                         className="space-y-8"
                                         onSubmit={handleSubmit}
                                     >
 
                                         {/* Top Inputs Group */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                                        <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                             <div className="relative group">
                                                 <input
                                                     type="text"
@@ -235,10 +275,10 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     Email Address
                                                 </label>
                                             </div>
-                                        </div>
+                                        </motion.div>
 
                                         {/* Middle Group - Radio Sections */}
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-2">
+                                        <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-2">
                                             {/* Join As */}
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-serif text-slate-900 font-bold border-l-4 border-amber-500 pl-3">Join as</h3>
@@ -290,10 +330,10 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     ))}
                                                 </div>
                                             </div>
-                                        </div>
+                                        </motion.div>
 
                                         {/* Bottom Inputs Group */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 pt-2">
+                                        <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 pt-2">
                                             <div className="relative group">
                                                 <input
                                                     type="text"
@@ -358,10 +398,10 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     Any Questions?
                                                 </label>
                                             </div>
-                                        </div>
+                                        </motion.div>
 
                                         {/* Submit Button */}
-                                        <div className="flex justify-center pt-6">
+                                        <motion.div variants={itemVariants} className="flex justify-center pt-6">
                                             <button
                                                 type="submit"
                                                 className="group relative px-12 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-base font-bold rounded-full overflow-hidden shadow-lg hover:shadow-amber-500/30 hover:-translate-y-0.5 transition-all duration-300"
@@ -372,7 +412,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                                 </span>
                                             </button>
-                                        </div>
+                                        </motion.div>
                                     </motion.form>
                                 </>
                             )}
