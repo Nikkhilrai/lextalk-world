@@ -663,6 +663,21 @@ export default function SponsorshipPage() {
                                     />
                                 </div>
                             </a>
+                            <a
+                                href="https://www.gorodissky.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
+                            >
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                                        alt="Gorodissky & Partners - Diamond Sponsor"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </a>
                         </div>
                     </div>
 
@@ -682,14 +697,15 @@ export default function SponsorshipPage() {
                                 href="https://asgpartners.co.in/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[340px] h-40 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.2)] border-2 border-amber-50 group-hover:border-amber-200 p-6 flex items-center justify-center hover:-translate-y-2"
+                                className="group relative w-full sm:w-[380px] h-48 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.2)] border-2 border-amber-50 group-hover:border-amber-200 p-0 flex items-center justify-center hover:-translate-y-2"
                             >
                                 <div className="relative w-full h-full">
                                     <Image
                                         src="/sponsor/Sponsor logo/gold sponsor/AsgandPartnerlogo.jpeg"
                                         alt="Asgand & Partner - Gold Sponsor"
                                         fill
-                                        className="object-contain"
+                                        className="object-contain rounded-xl"
+                                        sizes="(max-width: 768px) 300px, 380px"
                                     />
                                 </div>
                             </a>
