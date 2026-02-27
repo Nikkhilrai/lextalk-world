@@ -2,14 +2,19 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
+// Routes that blog_editor role is allowed to visit
+const BLOG_EDITOR_ALLOWED = ["/admin/blog", "/admin/comments"];
+
 export async function middleware(request: NextRequest) {
+    const pathname = request.nextUrl.pathname;
+
     // Only check /admin routes
-    if (!request.nextUrl.pathname.startsWith("/admin")) {
+    if (!pathname.startsWith("/admin")) {
         return NextResponse.next();
     }
 
     // Allow access to login page
-    if (request.nextUrl.pathname === "/admin/login") {
+    if (pathname === "/admin/login") {
         return NextResponse.next();
     }
 
@@ -22,7 +27,19 @@ export async function middleware(request: NextRequest) {
     try {
         const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key_change_me";
         const secret = new TextEncoder().encode(JWT_SECRET);
-        await jwtVerify(token.value, secret);
+        const { payload } = await jwtVerify(token.value, secret);
+        const role = payload.role as string;
+
+        // Blog editor: only can access blog + comments pages
+        if (role === "blog_editor") {
+            const isAllowed = BLOG_EDITOR_ALLOWED.some(allowed =>
+                pathname === allowed || pathname.startsWith(allowed + "/")
+            );
+            if (!isAllowed) {
+                return NextResponse.redirect(new URL("/admin/blog", request.url));
+            }
+        }
+
         return NextResponse.next();
     } catch (error) {
         // Invalid token
@@ -33,3 +50,4 @@ export async function middleware(request: NextRequest) {
 export const config = {
     matcher: "/admin/:path*",
 };
+

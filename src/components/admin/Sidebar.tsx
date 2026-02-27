@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -53,11 +53,32 @@ const NAV_GROUPS = [
     }
 ];
 
+// Restricted sidebar for Blog Editor role — only blog-related links
+const BLOG_EDITOR_NAV = [
+    {
+        title: "CONTENT",
+        items: [
+            { label: "Blog Posts", href: "/admin/blog", icon: BookOpen },
+            { label: "Comments", href: "/admin/comments", icon: MessageCircle },
+        ]
+    }
+];
+
 export function Sidebar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const [role, setRole] = useState<string | null>(null);
 
-    // Initial state for mobile
+    useEffect(() => {
+        fetch("/api/auth/me")
+            .then(r => r.json())
+            .then(d => setRole(d.role || "admin"))
+            .catch(() => setRole("admin"));
+    }, []);
+
+    const isBlogEditor = role === "blog_editor";
+    const navGroups = isBlogEditor ? BLOG_EDITOR_NAV : NAV_GROUPS;
+
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     return (
@@ -76,16 +97,21 @@ export function Sidebar() {
             >
                 {/* Logo */}
                 <div className="h-[70px] flex items-center justify-center border-b border-[#1b213b]">
-                    <Link href="/admin" className="flex items-center gap-2">
+                    <Link href={isBlogEditor ? "/admin/blog" : "/admin"} className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded bg-[#405189] flex items-center justify-center">
                             <span className="text-white font-bold text-lg">L</span>
                         </div>
-                        <span className="text-white font-bold text-xl tracking-wide">LEXTALK</span>
+                        <div className="flex flex-col">
+                            <span className="text-white font-bold text-xl tracking-wide leading-none">LEXTALK</span>
+                            {isBlogEditor && (
+                                <span className="text-[#405189] text-[9px] font-semibold uppercase tracking-widest leading-none mt-0.5">Blog Editor</span>
+                            )}
+                        </div>
                     </Link>
                 </div>
 
                 <div className="h-[calc(100vh-70px)] overflow-y-auto hidden-scrollbar py-4">
-                    {NAV_GROUPS.map((group, idx) => (
+                    {navGroups.map((group, idx) => (
                         <div key={idx} className="mb-6">
                             <div className="px-6 mb-2">
                                 <p className="text-[#878a99] text-[11px] font-semibold uppercase tracking-wider">{group.title}</p>

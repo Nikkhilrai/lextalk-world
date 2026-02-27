@@ -26,7 +26,14 @@ export default function AdminLoginPage() {
             const data = await res.json();
 
             if (res.ok) {
-                router.push("/admin");
+                // Decode role from the JWT cookie (server echoes role in response)
+                const roleRes = await fetch("/api/auth/me");
+                const roleData = await roleRes.json();
+                if (roleData.role === "blog_editor") {
+                    router.push("/admin/blog");
+                } else {
+                    router.push("/admin");
+                }
                 router.refresh();
             } else {
                 setError(data.error || "Invalid credentials");

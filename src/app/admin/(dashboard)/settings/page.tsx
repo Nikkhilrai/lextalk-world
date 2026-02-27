@@ -361,8 +361,9 @@ export default function SettingsPage() {
                                         onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
                                         className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
                                     >
-                                        <option value="admin">Admin</option>
+                                        <option value="admin">Admin (Full Access)</option>
                                         <option value="super_admin">Super Admin</option>
+                                        <option value="blog_editor">Blog Editor (Blog & Comments only)</option>
                                     </select>
                                 </div>
                             </div>
@@ -406,10 +407,12 @@ export default function SettingsPage() {
                                             <td className="py-3 px-4 text-slate-400">{user.email}</td>
                                             <td className="py-3 px-4">
                                                 <span className={`px-2 py-1 text-xs rounded-full ${user.role === "super_admin"
-                                                    ? "bg-amber-500/20 text-amber-400"
-                                                    : "bg-slate-700 text-slate-300"
+                                                        ? "bg-amber-500/20 text-amber-400"
+                                                        : user.role === "blog_editor"
+                                                            ? "bg-emerald-500/20 text-emerald-400"
+                                                            : "bg-slate-700 text-slate-300"
                                                     }`}>
-                                                    {user.role}
+                                                    {user.role === "blog_editor" ? "Blog Editor" : user.role}
                                                 </span>
                                             </td>
                                             <td className="py-3 px-4 text-right flex justify-end gap-1">
@@ -492,8 +495,9 @@ export default function SettingsPage() {
                                     onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
                                     className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-blue-500 outline-none"
                                 >
-                                    <option value="admin">Admin</option>
+                                    <option value="admin">Admin (Full Access)</option>
                                     <option value="super_admin">Super Admin</option>
+                                    <option value="blog_editor">Blog Editor (Blog & Comments only)</option>
                                 </select>
                             </div>
                             <div className="flex gap-2 pt-4">
