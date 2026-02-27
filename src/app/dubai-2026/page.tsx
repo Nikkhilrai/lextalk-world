@@ -837,6 +837,28 @@ export default function DubaiEventPage() {
                                         </div>
                                     </a>
                                 </div>
+
+                                {/* Gorodissky */}
+                                <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
+
+                                    <a
+                                        href="https://www.gorodissky.com/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                                                alt="Gorodissky & Partners"
+                                                fill
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
+                                            />
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
