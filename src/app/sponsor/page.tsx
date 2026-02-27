@@ -324,18 +324,6 @@ export default function SponsorshipPage() {
 
                         </div>
                     </div>
-
-                    {/* Media Partners Row */}
-                    <div className="mt-12 text-center">
-                        <div className="inline-flex items-center gap-8 md:gap-12 px-8 py-4 rounded-full bg-white/5 border border-white/10">
-                            <span className="text-slate-500 text-xs font-bold uppercase tracking-widest">Media Partners</span>
-                            <div className="flex items-center gap-6 md:gap-10">
-                                <span className="font-serif text-lg md:text-xl text-white/60 hover:text-amber-400 transition-colors">Forbes</span>
-                                <span className="font-serif text-lg md:text-xl text-white/60 hover:text-amber-400 transition-colors">LegalEra</span>
-                                <span className="font-serif text-lg md:text-xl text-white/60 hover:text-amber-400 transition-colors">BusinessLine</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
