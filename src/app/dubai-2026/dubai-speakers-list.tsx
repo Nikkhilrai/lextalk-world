@@ -105,8 +105,23 @@ George's educational background includes a bachelor’s degree in law from the U
     },
     {
         name: "Raneen Stanley",
-        title: " Data Privacy Lead & Inhouse Counsel, ME, AON",
+        title: "Data Privacy Lead & Inhouse Counsel, ME, AON",
         image: "/dubai-event/dubai-speakers/Raneen Stanley.jpeg",
+    },
+    {
+        name: "Dr. Ahmed El Shakankiry",
+        title: "Head of Legal and Compliance, Samsung Gulf Electronics",
+        image: "/dubai-event/dubai-speakers/Dr. Ahmed El Shakankiry.jpeg",
+    },
+    {
+        name: "Mehrdad Molaei",
+        title: "Senior Legal Counsel, SLB",
+        image: "/dubai-event/dubai-speakers/Mehrdad Molaei.jpeg",
+    },
+    {
+        name: "Beyana Maluegha",
+        title: "Senior Counsel, BOGAC2",
+        image: "/dubai-event/dubai-speakers/Beyana Maluegha.jpeg",
     }
 
 ];
