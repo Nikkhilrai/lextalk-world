@@ -102,6 +102,11 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Karishma Sookrajh",
         title: "Legal Counsel, DHL Middle East, Africa & Turkey",
         image: "/dubai-event/dubai-speakers/Karishma Sookrajh.jpeg",
+    },
+    {
+        name: "Raneen Stanley",
+        title: " Data Privacy Lead & Inhouse Counsel, ME, AON",
+        image: "/dubai-event/dubai-speakers/Raneen Stanley.jpeg",
     }
 
 ];
