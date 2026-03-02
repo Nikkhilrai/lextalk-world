@@ -44,8 +44,6 @@ const NAV_GROUPS = [
             { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
             { label: "Awards", href: "/admin/awards", icon: Trophy },
             { label: "Advisory Board", href: "/admin/advisors", icon: Users },
-            { label: "Dubai Contacts", href: "/admin/dubai-contacts", icon: Users },
-            { label: "Contact Research", href: "/admin/dubai-contacts-research", icon: Target },
             { label: "Blog", href: "/admin/blog", icon: BookOpen },
             { label: "Comments", href: "/admin/comments", icon: MessageCircle },
             { label: "Authentication", href: "/admin/settings", icon: Shield },
@@ -73,8 +71,6 @@ const LEAD_MANAGER_NAV = [
             { label: "Delegate Registrations", href: "/admin/delegate-registrations", icon: Users },
             { label: "Seat Reservations", href: "/admin/seat-reservations", icon: Armchair },
             { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
-            { label: "Dubai Contacts", href: "/admin/dubai-contacts", icon: Users },
-            { label: "Contact Research", href: "/admin/dubai-contacts-research", icon: Target },
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
         ]

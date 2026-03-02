@@ -12,8 +12,6 @@ const LEAD_MANAGER_ALLOWED = [
     "/admin/delegate-registrations",
     "/admin/seat-reservations",
     "/admin/newsletter",
-    "/admin/dubai-contacts",
-    "/admin/dubai-contacts-research",
     "/admin/contact-messages",
     "/admin/sponsorship-inquiries"
 ];
