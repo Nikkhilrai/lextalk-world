@@ -5,6 +5,19 @@ import { jwtVerify } from "jose";
 // Routes that blog_editor role is allowed to visit
 const BLOG_EDITOR_ALLOWED = ["/admin/blog", "/admin/comments"];
 
+// Routes that lead_manager role is allowed to visit
+const LEAD_MANAGER_ALLOWED = [
+    "/admin/leads",
+    "/admin/agenda-downloads",
+    "/admin/delegate-registrations",
+    "/admin/seat-reservations",
+    "/admin/newsletter",
+    "/admin/dubai-contacts",
+    "/admin/dubai-contacts-research",
+    "/admin/contact-messages",
+    "/admin/sponsorship-inquiries"
+];
+
 export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
 
@@ -37,6 +50,16 @@ export async function middleware(request: NextRequest) {
             );
             if (!isAllowed) {
                 return NextResponse.redirect(new URL("/admin/blog", request.url));
+            }
+        }
+
+        // Lead manager: only can access leads related pages
+        if (role === "lead_manager") {
+            const isAllowed = LEAD_MANAGER_ALLOWED.some(allowed =>
+                pathname === allowed || pathname.startsWith(allowed + "/")
+            );
+            if (!isAllowed) {
+                return NextResponse.redirect(new URL("/admin/leads", request.url));
             }
         }
 

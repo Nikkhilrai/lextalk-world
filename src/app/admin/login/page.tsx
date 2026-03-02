@@ -31,6 +31,8 @@ export default function AdminLoginPage() {
                 const roleData = await roleRes.json();
                 if (roleData.role === "blog_editor") {
                     router.push("/admin/blog");
+                } else if (roleData.role === "lead_manager") {
+                    router.push("/admin/leads");
                 } else {
                     router.push("/admin");
                 }

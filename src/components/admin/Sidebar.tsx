@@ -64,6 +64,23 @@ const BLOG_EDITOR_NAV = [
     }
 ];
 
+const LEAD_MANAGER_NAV = [
+    {
+        title: "LEADS DATA",
+        items: [
+            { label: "Leads", href: "/admin/leads", icon: Users },
+            { label: "Agenda Downloads", href: "/admin/agenda-downloads", icon: Download },
+            { label: "Delegate Registrations", href: "/admin/delegate-registrations", icon: Users },
+            { label: "Seat Reservations", href: "/admin/seat-reservations", icon: Armchair },
+            { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
+            { label: "Dubai Contacts", href: "/admin/dubai-contacts", icon: Users },
+            { label: "Contact Research", href: "/admin/dubai-contacts-research", icon: Target },
+            { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
+            { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
+        ]
+    }
+];
+
 export function Sidebar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
@@ -77,7 +94,11 @@ export function Sidebar() {
     }, []);
 
     const isBlogEditor = role === "blog_editor";
-    const navGroups = isBlogEditor ? BLOG_EDITOR_NAV : NAV_GROUPS;
+    const isLeadManager = role === "lead_manager";
+
+    let navGroups = NAV_GROUPS;
+    if (isBlogEditor) navGroups = BLOG_EDITOR_NAV;
+    if (isLeadManager) navGroups = LEAD_MANAGER_NAV;
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -97,7 +118,7 @@ export function Sidebar() {
             >
                 {/* Logo */}
                 <div className="h-[70px] flex items-center justify-center border-b border-[#1b213b]">
-                    <Link href={isBlogEditor ? "/admin/blog" : "/admin"} className="flex items-center gap-2">
+                    <Link href={isBlogEditor ? "/admin/blog" : isLeadManager ? "/admin/leads" : "/admin"} className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded bg-[#405189] flex items-center justify-center">
                             <span className="text-white font-bold text-lg">L</span>
                         </div>
@@ -105,6 +126,9 @@ export function Sidebar() {
                             <span className="text-white font-bold text-xl tracking-wide leading-none">LEXTALK</span>
                             {isBlogEditor && (
                                 <span className="text-[#405189] text-[9px] font-semibold uppercase tracking-widest leading-none mt-0.5">Blog Editor</span>
+                            )}
+                            {isLeadManager && (
+                                <span className="text-[#405189] text-[9px] font-semibold uppercase tracking-widest leading-none mt-0.5">Lead Manager</span>
                             )}
                         </div>
                     </Link>
