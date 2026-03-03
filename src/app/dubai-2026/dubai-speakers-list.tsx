@@ -122,6 +122,11 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Beyana Maluegha",
         title: "Senior Counsel, BOGAC2",
         image: "/dubai-event/dubai-speakers/Beyana Maluegha.jpeg",
+    },
+    {
+        name: "Hadi N. El Kadi",
+        title: " Group Chief Legal Officer, Al Habtoor Group",
+        image: "/dubai-event/dubai-speakers/Hadi N. El Kadi.jpeg",
     }
 
 ];
