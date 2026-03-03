@@ -50,7 +50,11 @@ const speakers = [
         name: "Mahmoud Shafik Youssef",
         title: "Group General Counsel - Head of Legal, Foodics",
         image: "/dubai-event/dubai-speakers/Mahmoud Shafik Youssef.jpeg",
+        bio: `Mahmoud Shafik Youssef is the Group General Counsel and Company Secretary of Foodics, a leading fintech and SaaS technology company operating across the GCC and emerging markets in Restaurant Management Systems and Technologies. With over 16 years of international legal experience, Mahmoud specializes in technology, AI governance, fintech regulation, cross-border M&A, and capital markets transactions. He has led complex acquisitions, corporate restructurings, and IPO-readiness initiatives across multiple jurisdictions, and is recognized for building scalable legal and compliance frameworks aligned with digital transformation strategies. 
+
+Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global legal and technology summits, where he shares insights on AI governance, data protection, and regulatory innovation. He is passionate about positioning legal functions as strategic enablers of growth in rapidly evolving digital ecosystems.`
     },
+
     {
         name: "Chehade Kahi",
         title: "General Counsel Legal, Emirates Petroleum",
@@ -117,6 +121,11 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Mehrdad Molaei",
         title: "Senior Legal Counsel, SLB",
         image: "/dubai-event/dubai-speakers/Mehrdad Molaei.jpeg",
+        bio: `Mehrdad Molaei is a senior legal executive with over 20 years of global experience advising multinational organizations on cross-border transactions, corporate governance, and complex risk management.
+
+He has led legal strategy for multi-billion-dollar projects across the Middle East, Europe, and North America, overseeing high-value commercial negotiations, IP-sensitive matters, dispute exposure, and enterprise-wide compliance frameworks.
+
+Mehrdad focuses on aligning legal oversight with business strategy, strengthening corporate resilience in an increasingly complex global environment`
     },
     {
         name: "Beyana Maluegha",
