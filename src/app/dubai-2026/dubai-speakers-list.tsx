@@ -108,11 +108,6 @@ George's educational background includes a bachelor’s degree in law from the U
         image: "/dubai-event/dubai-speakers/Karishma Sookrajh.jpeg",
     },
     {
-        name: "Raneen Stanley",
-        title: "Data Privacy Lead & Inhouse Counsel, ME, AON",
-        image: "/dubai-event/dubai-speakers/Raneen Stanley.jpeg",
-    },
-    {
         name: "Dr. Ahmed El Shakankiry",
         title: "Head of Legal and Compliance, Samsung Gulf Electronics",
         image: "/dubai-event/dubai-speakers/Dr. Ahmed El Shakankiry.jpeg",
@@ -136,7 +131,12 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         name: "Hadi N. El Kadi",
         title: " Group Chief Legal Officer, Al Habtoor Group",
         image: "/dubai-event/dubai-speakers/Hadi N. El Kadi.jpeg",
-    }
+    },
+    {
+        name: "Denis Sergienko",
+        title: "Global Counsel, HP",
+        image: "/dubai-event/dubai-speakers/Denis Sergienko.jpeg",
+    },
 
 ];
 

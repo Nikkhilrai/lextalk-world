@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { promises as fs } from "fs";
+import path from "path";
 
 export async function POST(request: NextRequest) {
     try {
@@ -81,10 +83,32 @@ export async function GET(request: NextRequest) {
             );
         }
 
+        // Determine if a local agenda file exists
+        const localPath = path.join(process.cwd(), "public", "agendas", `${eventSlug}-agenda.pdf`);
+        let localExists = false;
+        try {
+            await fs.access(localPath);
+            localExists = true;
+        } catch (_) {
+            localExists = false;
+        }
+
         const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-        const agendaUrl = cloudName
+        const cloudUrl = cloudName
             ? `https://res.cloudinary.com/${cloudName}/image/upload/lextalk/agendas/${eventSlug}-agenda.pdf`
-            : `/agendas/${eventSlug}-agenda.pdf`;
+            : null;
+
+        // Prefer local file if it exists; otherwise fall back to Cloudinary if configured
+        const agendaUrl = localExists
+            ? `/agendas/${eventSlug}-agenda.pdf`
+            : (cloudUrl ? cloudUrl : null);
+
+        if (!agendaUrl) {
+            return NextResponse.json(
+                { error: "Agenda file not found" },
+                { status: 404 }
+            );
+        }
 
         return NextResponse.json({ agendaUrl });
 
