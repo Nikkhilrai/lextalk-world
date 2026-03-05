@@ -41,21 +41,41 @@ export function EventsList() {
             ],
             link: "/dubai-2026",
             agendaLink: "/agendas/dubai-2026-agenda.pdf",
-            stats: { delegates: "800+", type: "Conference" }
+            stats: { delegates: "800+", type: "Conference", duration: "2 Days" }
         },
         {
             city: "Mumbai",
             month: "DEC",
-            days: "TBA", // Or specific days if known
+            days: "TBA",
             year: "2026",
-            venue: "Taj Lands End, Mumbai", // Placeholder venue or TBA
+            venue: "Taj Lands End, Mumbai",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
             status: "Registrations Open",
             region: "South Asia",
             description: "Experience the convergence of law and technology in India's financial capital. Pre-register your interest today.",
-            link: "/mumbai-2026", // Link to new page
+            link: "/mumbai-2026",
             agendaLink: "#",
-            stats: { delegates: "1000+", type: "Summit" }
+            stats: { delegates: "1000+", type: "Summit", duration: "2 Days" }
+        },
+        {
+            city: "Bangalore",
+            month: "TBA",
+            days: "TBA",
+            year: "2026",
+            venue: "TBA, Bangalore",
+            image: "https://images.unsplash.com/photo-1596422846543-75c6fc18a5ce?q=80&w=1200&auto=format&fit=crop", // Vidhana Soudha
+            status: "Coming Soon",
+            region: "South Asia",
+            description: "Join us in India's technology capital for a unique convergence of legal expertise and technological innovation.",
+            highlights: [
+                "800+ Global Legal Professionals",
+                "70+ Renowned Speakers",
+                "100+ Awardees",
+                "30+ Exhibitors"
+            ],
+            link: "#",
+            agendaLink: "#",
+            stats: { delegates: "800+", type: "Conference", duration: "1 Day" }
         }
     ];
 
@@ -95,7 +115,7 @@ export function EventsList() {
                 </div>
 
                 {/* Event Cards Container - Grid Layout - Optimized Sizes */}
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto px-2 sm:px-0">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-7xl mx-auto px-2 sm:px-0">
                     {events.map((event: any, index) => (
                         <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:border-amber-500/30 hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full">
 
@@ -181,7 +201,7 @@ export function EventsList() {
                                     <div className="flex items-center gap-1.5 sm:gap-2">
                                         <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
                                         <div>
-                                            <span className="text-xs sm:text-sm font-bold text-slate-900">2 Days</span>
+                                            <span className="text-xs sm:text-sm font-bold text-slate-900">{event.stats.duration || "2 Days"}</span>
                                             <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase ml-1">{event.stats.type}</span>
                                         </div>
                                     </div>
