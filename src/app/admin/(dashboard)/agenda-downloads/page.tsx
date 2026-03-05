@@ -252,6 +252,7 @@ export default function AgendaDownloadsPage() {
                     >
                         <option value="" disabled>Select Event</option>
                         <option value="dubai-2026">Dubai 2026</option>
+                        <option value="mumbai-2026">Mumbai 2026</option>
                         <option value="houston-2026">Houston 2026</option>
                     </select>
                     <input

@@ -50,10 +50,10 @@ export function EventsList() {
             year: "2026",
             venue: "Taj Lands End, Mumbai", // Placeholder venue or TBA
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
-            status: "Coming Soon",
+            status: "Registrations Open",
             region: "South Asia",
             description: "Experience the convergence of law and technology in India's financial capital. Pre-register your interest today.",
-            link: "#", // No page yet
+            link: "/mumbai-2026", // Link to new page
             agendaLink: "#",
             stats: { delegates: "1000+", type: "Summit" }
         }

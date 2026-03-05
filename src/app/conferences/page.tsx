@@ -50,7 +50,7 @@ const upcomingConferences = [
         venue: "Mumbai",
         duration: "2 Days",
         image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop",
-        status: "Coming Soon",
+        status: "Open",
         featured: false,
         stats: {
             attendees: "1000+",
@@ -65,7 +65,7 @@ const upcomingConferences = [
             "Legal Tech & Innovation Forum",
             "Regional Awards Ceremony",
         ],
-        link: "#",
+        link: "/mumbai-2026",
         earlyBird: false,
     },
 ];

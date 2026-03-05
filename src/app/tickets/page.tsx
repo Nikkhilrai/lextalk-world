@@ -31,7 +31,7 @@ const availableEvents = [
         location: "Mumbai, India",
         venue: "",
         image: "/dubai-event/event-bg.avif",
-        status: "Coming Soon",
+        status: "Open",
         earlyBird: false,
     },
 ];
