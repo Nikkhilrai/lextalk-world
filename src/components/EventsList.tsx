@@ -54,14 +54,14 @@ export function EventsList() {
             region: "South Asia",
             description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
             highlights: [
-                "800+ Global Legal Professionals",
+                "300+ Global Legal Professionals",
                 "70+ Renowned Speakers",
                 "100+ Awardees",
                 "30+ Exhibitors"
             ],
             link: "#",
             agendaLink: "#",
-            stats: { delegates: "800+", type: "Conference", duration: "1 Day" }
+            stats: { delegates: "300+", type: "Conference", duration: "1 Day" }
         },
         {
             city: "Mumbai",
