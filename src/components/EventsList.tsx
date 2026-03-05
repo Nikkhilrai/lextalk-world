@@ -44,6 +44,26 @@ export function EventsList() {
             stats: { delegates: "800+", type: "Conference", duration: "2 Days" }
         },
         {
+            city: "Bangalore",
+            month: "SEP",
+            days: "TBA",
+            year: "2026",
+            venue: "Bangalore",
+            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
+            status: "Coming Soon",
+            region: "South Asia",
+            description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
+            highlights: [
+                "800+ Global Legal Professionals",
+                "70+ Renowned Speakers",
+                "100+ Awardees",
+                "30+ Exhibitors"
+            ],
+            link: "#",
+            agendaLink: "#",
+            stats: { delegates: "800+", type: "Conference", duration: "1 Day" }
+        },
+        {
             city: "Mumbai",
             month: "DEC",
             days: "TBA",
@@ -56,26 +76,6 @@ export function EventsList() {
             link: "/mumbai-2026",
             agendaLink: "#",
             stats: { delegates: "1000+", type: "Summit", duration: "2 Days" }
-        },
-        {
-            city: "Bangalore",
-            month: "TBA",
-            days: "TBA",
-            year: "2026",
-            venue: "Bangalore",
-            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
-            status: "Coming Soon",
-            region: "South Asia",
-            description: "Join us in India's technology capital for a unique convergence of legal expertise and technological innovation.",
-            highlights: [
-                "800+ Global Legal Professionals",
-                "70+ Renowned Speakers",
-                "100+ Awardees",
-                "30+ Exhibitors"
-            ],
-            link: "#",
-            agendaLink: "#",
-            stats: { delegates: "800+", type: "Conference", duration: "1 Day" }
         }
     ];
 
