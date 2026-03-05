@@ -37,9 +37,21 @@ export async function POST(request: NextRequest) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        // Get the agenda URL from environment or database
-        // For now, we'll return a placeholder. You'll upload the actual PDF via admin panel
-        const agendaUrl = process.env.NEXT_PUBLIC_AGENDA_URL || `/agendas/${eventSlug}-agenda.pdf`;
+        // Get the agenda URL
+        // Prioritize Cloudinary if configured
+        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+        let agendaUrl = `/agendas/${eventSlug}-agenda.pdf`; // Default local path
+
+        if (cloudName) {
+            // For auto resource types in Cloudinary (like PDF), the URL pattern is usually image/upload
+            // We use the predictable path we set in the upload API
+            agendaUrl = `https://res.cloudinary.com/${cloudName}/image/upload/lextalk/agendas/${eventSlug}-agenda.pdf`;
+        }
+
+        // Allow environment override
+        if (process.env.NEXT_PUBLIC_AGENDA_URL) {
+            agendaUrl = process.env.NEXT_PUBLIC_AGENDA_URL;
+        }
 
         return NextResponse.json({
             success: true,
@@ -69,9 +81,10 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // In a real implementation, you'd fetch this from a database
-        // For now, return a constructed URL
-        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
+        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+        const agendaUrl = cloudName
+            ? `https://res.cloudinary.com/${cloudName}/image/upload/lextalk/agendas/${eventSlug}-agenda.pdf`
+            : `/agendas/${eventSlug}-agenda.pdf`;
 
         return NextResponse.json({ agendaUrl });
 

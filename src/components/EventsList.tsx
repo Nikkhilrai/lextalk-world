@@ -202,7 +202,7 @@ export function EventsList() {
                                         {event.status !== "Coming Soon" && <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4" />}
                                     </Link>
                                     <button
-                                        onClick={() => setSelectedAgendaSlug("dubai-2026")}
+                                        onClick={() => setSelectedAgendaSlug(event.link.split("/").pop())}
                                         disabled={event.status === "Coming Soon"}
                                         className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon"
                                             ? "border-slate-100 text-slate-300 cursor-not-allowed hidden sm:flex"

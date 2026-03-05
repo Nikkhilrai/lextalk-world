@@ -211,13 +211,26 @@ export default function AgendaDownloadsPage() {
         }
     };
 
-    const downloadAgendaFile = (eventSlug: string) => {
-        const link = document.createElement("a");
-        link.href = `/agendas/${eventSlug}-agenda.pdf`;
-        link.download = `${eventSlug}-agenda.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const downloadAgendaFile = async (eventSlug: string) => {
+        try {
+            const response = await fetch(`/api/agenda/download?eventSlug=${eventSlug}`);
+            const data = await response.json();
+
+            if (data.agendaUrl) {
+                const link = document.createElement("a");
+                link.href = data.agendaUrl;
+                link.download = `${eventSlug}-agenda.pdf`;
+                link.target = "_blank";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("Agenda URL not found");
+            }
+        } catch (error) {
+            console.error("Error downloading agenda:", error);
+            alert("Failed to get agenda URL");
+        }
     };
 
     const filteredDownloads = downloads.filter(d => {
