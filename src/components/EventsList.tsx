@@ -48,7 +48,7 @@ export function EventsList() {
             month: "DEC",
             days: "TBA",
             year: "2026",
-            venue: "Taj Lands End, Mumbai",
+            venue: "Mumbai",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
             status: "Registrations Open",
             region: "South Asia",
@@ -62,8 +62,8 @@ export function EventsList() {
             month: "TBA",
             days: "TBA",
             year: "2026",
-            venue: "TBA, Bangalore",
-            image: "https://images.unsplash.com/photo-1596422846543-75c6fc18a5ce?q=80&w=1200&auto=format&fit=crop", // Vidhana Soudha
+            venue: "Bangalore",
+            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
             status: "Coming Soon",
             region: "South Asia",
             description: "Join us in India's technology capital for a unique convergence of legal expertise and technological innovation.",
