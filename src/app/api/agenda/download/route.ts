@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Helper: get the agenda URL for an event
+async function getAgendaUrl(eventSlug: string): Promise<string> {
+    // Check if admin has uploaded an agenda (stored in EventAgenda table)
+    const eventAgenda = await prisma.eventAgenda.findUnique({
+        where: { eventSlug }
+    });
+
+    if (eventAgenda?.url) {
+        return eventAgenda.url;
+    }
+
+    // Fallback to static file in public/agendas/
+    return `/agendas/${eventSlug}-agenda.pdf`;
+}
+
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
@@ -37,8 +52,8 @@ export async function POST(request: NextRequest) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        // Agenda PDFs are stored in public/agendas/ and served as static assets
-        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
+        // Get the correct agenda URL (admin-uploaded or static fallback)
+        const agendaUrl = await getAgendaUrl(eventSlug);
 
         return NextResponse.json({
             success: true,
@@ -68,8 +83,7 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // Agenda PDFs are stored in public/agendas/ and served as static assets
-        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
+        const agendaUrl = await getAgendaUrl(eventSlug);
 
         return NextResponse.json({ agendaUrl });
 

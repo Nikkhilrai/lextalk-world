@@ -357,6 +357,15 @@ model AgendaDownload {
   @@index([createdAt])
 }
 
+// Stores the uploaded agenda PDF URL per event (set by admin)
+model EventAgenda {
+  id        String   @id @default(cuid())
+  eventSlug String   @unique // e.g., "dubai-2026", "mumbai-2026"
+  url       String   // Cloudinary URL or local path
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // Contact Form Messages
 model ContactMessage {
   id        String   @id @default(cuid())

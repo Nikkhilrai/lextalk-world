@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
+import { prisma } from "@/lib/prisma";
 
 // Configure Cloudinary
 cloudinary.config({
@@ -42,16 +43,21 @@ export async function POST(request: NextRequest) {
         if (isCloudinaryConfigured) {
             // Upload to Cloudinary
             try {
-                // Use a predictible public_id so we can construct the URL if needed, 
-                // but better to return the secure_url
                 const base64Data = buffer.toString('base64');
                 const dataUri = `data:application/pdf;base64,${base64Data}`;
 
                 const result = await cloudinary.uploader.upload(dataUri, {
                     folder: "lextalk/agendas",
                     public_id: `${eventSlug}-agenda`,
-                    resource_type: "auto", // Specifically for PDFs and other non-image files
+                    resource_type: "auto",
                     overwrite: true
+                });
+
+                // Save the Cloudinary URL to the database
+                await prisma.eventAgenda.upsert({
+                    where: { eventSlug },
+                    update: { url: result.secure_url },
+                    create: { eventSlug, url: result.secure_url }
                 });
 
                 return NextResponse.json({
@@ -83,9 +89,18 @@ export async function POST(request: NextRequest) {
         const filepath = path.join(uploadsDir, filename);
         await writeFile(filepath, buffer);
 
+        const localUrl = `/agendas/${filename}`;
+
+        // Save the local URL to the database
+        await prisma.eventAgenda.upsert({
+            where: { eventSlug },
+            update: { url: localUrl },
+            create: { eventSlug, url: localUrl }
+        });
+
         return NextResponse.json({
             success: true,
-            url: `/agendas/${filename}`,
+            url: localUrl,
             message: "Agenda uploaded successfully (Local)"
         });
 
