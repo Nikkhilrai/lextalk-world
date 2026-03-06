@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { promises as fs } from "fs";
-import path from "path";
 
 export async function POST(request: NextRequest) {
     try {
@@ -39,21 +37,8 @@ export async function POST(request: NextRequest) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        // Get the agenda URL
-        // Prioritize Cloudinary if configured
-        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-        let agendaUrl = `/agendas/${eventSlug}-agenda.pdf`; // Default local path
-
-        if (cloudName) {
-            // For auto resource types in Cloudinary (like PDF), the URL pattern is usually image/upload
-            // We use the predictable path we set in the upload API
-            agendaUrl = `https://res.cloudinary.com/${cloudName}/image/upload/lextalk/agendas/${eventSlug}-agenda.pdf`;
-        }
-
-        // Allow environment override
-        if (process.env.NEXT_PUBLIC_AGENDA_URL) {
-            agendaUrl = process.env.NEXT_PUBLIC_AGENDA_URL;
-        }
+        // Agenda PDFs are stored in public/agendas/ and served as static assets
+        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
 
         return NextResponse.json({
             success: true,
@@ -83,32 +68,8 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // Determine if a local agenda file exists
-        const localPath = path.join(process.cwd(), "public", "agendas", `${eventSlug}-agenda.pdf`);
-        let localExists = false;
-        try {
-            await fs.access(localPath);
-            localExists = true;
-        } catch (_) {
-            localExists = false;
-        }
-
-        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-        const cloudUrl = cloudName
-            ? `https://res.cloudinary.com/${cloudName}/image/upload/lextalk/agendas/${eventSlug}-agenda.pdf`
-            : null;
-
-        // Prefer local file if it exists; otherwise fall back to Cloudinary if configured
-        const agendaUrl = localExists
-            ? `/agendas/${eventSlug}-agenda.pdf`
-            : (cloudUrl ? cloudUrl : null);
-
-        if (!agendaUrl) {
-            return NextResponse.json(
-                { error: "Agenda file not found" },
-                { status: 404 }
-            );
-        }
+        // Agenda PDFs are stored in public/agendas/ and served as static assets
+        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
 
         return NextResponse.json({ agendaUrl });
 
