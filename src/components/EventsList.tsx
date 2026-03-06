@@ -27,7 +27,7 @@ export function EventsList() {
             month: "MAY",
             days: "13-14",
             year: "2026",
-            venue: "Dubai",
+            venue: "UAE",
             // image: "https://images.unsplash.com/photo-1512453979798-5ea90b7cad11?q=80&w=1200&auto=format&fit=crop", // Old broken link?
             image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop", // New Dubai Skyline
             status: "Registrations Open",
@@ -44,11 +44,11 @@ export function EventsList() {
             stats: { delegates: "800+", type: "Conference", duration: "2 Days" }
         },
         {
-            city: "Bangalore, India",
+            city: "Bangalore",
             month: "SEP",
             days: "10",
             year: "2026",
-            venue: "Bangalore",
+            venue: "India",
             image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
             status: "Coming Soon",
             region: "South Asia",
@@ -64,11 +64,11 @@ export function EventsList() {
             stats: { delegates: "100+", type: "Conference", duration: "1 Day" }
         },
         {
-            city: "Mumbai, India",
+            city: "Mumbai",
             month: "DEC",
             days: "TBA",
             year: "2026",
-            venue: "Mumbai",
+            venue: "India",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
             status: "Registrations Open",
             region: "South Asia",
