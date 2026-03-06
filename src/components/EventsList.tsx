@@ -44,9 +44,9 @@ export function EventsList() {
             stats: { delegates: "800+", type: "Conference", duration: "2 Days" }
         },
         {
-            city: "Bangalore",
+            city: "Bangalore, India",
             month: "SEP",
-            days: "TBA",
+            days: "10",
             year: "2026",
             venue: "Bangalore",
             image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
@@ -55,16 +55,16 @@ export function EventsList() {
             description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
             highlights: [
                 "300+ Global Legal Professionals",
-                "70+ Renowned Speakers",
-                "100+ Awardees",
-                "30+ Exhibitors"
+                "50+ Renowned Speakers",
+                "25+ Awardees",
+                "15+ Exhibitors"
             ],
             link: "#",
             agendaLink: "#",
-            stats: { delegates: "300+", type: "Conference", duration: "1 Day" }
+            stats: { delegates: "100+", type: "Conference", duration: "1 Day" }
         },
         {
-            city: "Mumbai",
+            city: "Mumbai, India",
             month: "DEC",
             days: "TBA",
             year: "2026",
@@ -75,7 +75,13 @@ export function EventsList() {
             description: "Experience the convergence of law and technology in India's financial capital. Pre-register your interest today.",
             link: "/mumbai-2026",
             agendaLink: "#",
-            stats: { delegates: "1000+", type: "Summit", duration: "2 Days" }
+            stats: { delegates: "500+", type: "Summit", duration: "2 Days" },
+            highlights: [
+                "300+ Global Legal Professionals",
+                "70+ Renowned Speakers",
+                "100+ Awardees",
+                "30+ Exhibitors"
+            ]
         }
     ];
 
