@@ -20,11 +20,31 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const [contactNumber, setContactNumber] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [countryError, setCountryError] = useState(false);
+    const [designationError, setDesignationError] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoading(true);
         const formData = new FormData(e.currentTarget);
+
+        // Custom validation for Designation and Country
+        const designation = formData.get("designation") as string;
+        let hasError = false;
+        if (!designation || designation.trim() === "") {
+            setDesignationError(true);
+            hasError = true;
+        } else {
+            setDesignationError(false);
+        }
+        if (!selectedCountry) {
+            setCountryError(true);
+            hasError = true;
+        } else {
+            setCountryError(false);
+        }
+        if (hasError) return;
+
+        setIsLoading(true);
 
         const data = {
             firstName: formData.get("firstName"),
@@ -62,6 +82,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                 setIsSubmitted(false);
                 setSelectedCountry("");
                 setContactNumber("");
+                setCountryError(false);
+                setDesignationError(false);
             }, 300);
         }
     }, [isOpen]);
@@ -358,8 +380,9 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     type="text"
                                                     name="designation"
                                                     id="designation"
-                                                    required
-                                                    className="peer w-full py-2 bg-transparent text-slate-900 border-b border-slate-300 focus:border-amber-500 transition-all outline-none placeholder-transparent text-base"
+                                                    onChange={() => setDesignationError(false)}
+                                                    className={`peer w-full py-2 bg-transparent text-slate-900 border-b transition-all outline-none placeholder-transparent text-base ${designationError ? 'border-red-500' : 'border-slate-300 focus:border-amber-500'
+                                                        }`}
                                                     placeholder="Designation"
                                                 />
                                                 <label
@@ -369,16 +392,25 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                             peer-focus:-top-4 peer-focus:text-xs peer-focus:text-amber-600 peer-focus:font-semibold
                                             peer-[&:not(:placeholder-shown)]:-top-4 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-amber-600 peer-[&:not(:placeholder-shown)]:font-semibold"
                                                 >
-                                                    Designation
+                                                    Designation*
                                                 </label>
+                                                {designationError && (
+                                                    <p className="mt-1 text-xs text-red-500 font-medium">Designation is required</p>
+                                                )}
                                             </div>
 
                                             <div className="relative group">
                                                 <CountrySelect
                                                     id="country"
                                                     value={selectedCountry}
-                                                    onChange={setSelectedCountry}
+                                                    onChange={(val) => {
+                                                        setSelectedCountry(val);
+                                                        setCountryError(false);
+                                                    }}
                                                 />
+                                                {countryError && (
+                                                    <p className="mt-1 text-xs text-red-500 font-medium">Country is required</p>
+                                                )}
                                             </div>
 
                                             <div className="relative group">

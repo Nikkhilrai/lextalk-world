@@ -50,16 +50,6 @@ export function CountrySelect({ value, onChange, id, variant = "underlined" }: C
 
     return (
         <div className="relative group" ref={wrapperRef}>
-            {/* Hidden Input for Form Validation */}
-            <input
-                type="text"
-                name={id} // Using id as name for FormData
-                value={value || ""}
-                required
-                readOnly
-                className="absolute opacity-0 w-0 h-0"
-                tabIndex={-1}
-            />
             {/* Display Input (triggers dropdown) */}
             <div
                 className="relative cursor-pointer"
