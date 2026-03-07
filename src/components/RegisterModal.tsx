@@ -33,7 +33,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
             contact: contactNumber,
             organization: formData.get("organization"),
             designation: formData.get("designation"),
-            country: selectedCountry || "International",
+            country: selectedCountry,
             joinAs: formData.get("joinAs"),
             conference: formData.get("conference"),
             query: formData.get("query"),
@@ -313,7 +313,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-serif text-slate-900 font-bold border-l-4 border-amber-500 pl-3">Conferences</h3>
                                                 <div className="space-y-3 pl-4">
-                                                    {['Dubai UAE, May 13-14 2026', 'Bangalore India, Sep 10 2026', 'Mumbai India, Dec 2026'].map((option) => (
+                                                    {['Dubai UAE, May 13-14 2026', 'Bangalore India, Sep 10 2026', 'Mumbai India, Dec 10 & 11 2026'].map((option) => (
                                                         <label key={option} className="flex items-center gap-3 cursor-pointer group">
                                                             <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
                                                                 <input
@@ -358,6 +358,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                     type="text"
                                                     name="designation"
                                                     id="designation"
+                                                    required
                                                     className="peer w-full py-2 bg-transparent text-slate-900 border-b border-slate-300 focus:border-amber-500 transition-all outline-none placeholder-transparent text-base"
                                                     placeholder="Designation"
                                                 />
