@@ -66,7 +66,7 @@ export function EventsList() {
         {
             city: "Mumbai",
             month: "DEC",
-            days: "TBA",
+            days: "10 & 11",
             year: "2026",
             venue: "India",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
