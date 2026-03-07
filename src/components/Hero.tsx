@@ -189,11 +189,11 @@ export function Hero() {
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/60" />
                         </div>
 
-                        {/* Card 1: Back */}
-                        <div className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[-8deg] hover:rotate-[-4deg] transition-all duration-500 z-10 overflow-hidden group cursor-pointer">
+                        {/* Card 1: Back (Mumbai) */}
+                        <Link href="/mumbai-2026" className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[-8deg] hover:rotate-[-4deg] transition-all duration-500 z-10 overflow-hidden group cursor-pointer block">
                             <Image
-                                src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop"
-                                alt="New York"
+                                src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop"
+                                alt="Mumbai"
                                 fill
                                 className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
                             />
@@ -202,18 +202,19 @@ export function Hero() {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
                                     <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        Nov 2025
+                                        Dec 2026
                                     </span>
                                 </div>
-                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">New York</h3>
+                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
+                                <div className="text-slate-300 text-[10px] uppercase tracking-tighter">India</div>
                             </div>
-                        </div>
+                        </Link>
 
-                        {/* Card 2: Middle */}
-                        <div className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[12deg] hover:rotate-[6deg] transition-all duration-500 z-20 overflow-hidden group cursor-pointer">
+                        {/* Card 2: Middle (Bangalore) */}
+                        <Link href="#" className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[12deg] hover:rotate-[6deg] transition-all duration-500 z-20 overflow-hidden group cursor-pointer block text-left">
                             <Image
-                                src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop"
-                                alt="Singapore"
+                                src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=800&auto=format&fit=crop"
+                                alt="Bangalore"
                                 fill
                                 className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
                             />
@@ -222,17 +223,18 @@ export function Hero() {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
                                     <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        Jul 2025
+                                        Sep 2026
                                     </span>
                                 </div>
-                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Singapore</h3>
+                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Bangalore</h3>
+                                <div className="text-slate-300 text-[10px] uppercase tracking-tighter">India</div>
                             </div>
-                        </div>
+                        </Link>
 
-                        {/* Card 3: Front (Featured) */}
-                        <Link href="/dubai-2026" target="_blank" className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] z-30 overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500">
+                        {/* Card 3: Front (Dubai - Featured) */}
+                        <Link href="/dubai-2026" className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] z-30 overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500 block text-left">
                             <Image
-                                src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
                                 alt="Dubai"
                                 fill
                                 className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
