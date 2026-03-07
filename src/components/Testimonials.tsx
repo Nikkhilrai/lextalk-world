@@ -150,19 +150,19 @@ export function Testimonials() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-14 md:py-20 bg-[#0c1222] overflow-hidden"
+            className="relative py-14 md:py-20 bg-slate-50 overflow-hidden"
         >
             {/* ── Background ── */}
             <div
-                className="absolute inset-0 opacity-[0.02]"
+                className="absolute inset-0 opacity-[0.04]"
                 style={{
                     backgroundImage:
-                        "radial-gradient(circle, #f59e0b 0.5px, transparent 0.5px)",
+                        "radial-gradient(circle, #94a3b8 0.5px, transparent 0.5px)",
                     backgroundSize: "30px 30px",
                 }}
             />
-            <div className="absolute -top-28 left-1/4 w-[500px] h-[250px] bg-amber-500/[0.04] rounded-full blur-[100px]" />
-            <div className="absolute -bottom-28 right-1/4 w-[400px] h-[200px] bg-indigo-500/[0.03] rounded-full blur-[100px]" />
+            <div className="absolute -top-28 left-1/4 w-[500px] h-[250px] bg-amber-500/[0.06] rounded-full blur-[100px]" />
+            <div className="absolute -bottom-28 right-1/4 w-[400px] h-[200px] bg-indigo-500/[0.04] rounded-full blur-[100px]" />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* ── Header ── */}
@@ -174,14 +174,14 @@ export function Testimonials() {
                 >
                     <div className="inline-flex items-center gap-2.5 mb-4">
                         <div className="w-6 h-px bg-amber-500" />
-                        <span className="text-[10px] font-bold text-amber-500 uppercase tracking-[0.3em]">
+                        <span className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.3em]">
                             Testimonials
                         </span>
                         <div className="w-6 h-px bg-amber-500" />
                     </div>
-                    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e2848] leading-tight">
                         What{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500 italic">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600 italic">
                             Delegates
                         </span>{" "}
                         Say
@@ -195,10 +195,10 @@ export function Testimonials() {
                         <div className="lg:col-span-4 flex justify-center">
                             <div className="relative w-52 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80">
                                 {/* Decorative offset border */}
-                                <div className="absolute -inset-2 border border-amber-500/10 rounded-2xl" />
+                                <div className="absolute -inset-2 border border-amber-500/15 rounded-2xl" />
 
                                 {/* Image frame */}
-                                <div className="relative w-full h-full rounded-xl overflow-hidden bg-slate-800 shadow-xl shadow-black/30 border border-white/[0.06]">
+                                <div className="relative w-full h-full rounded-xl overflow-hidden bg-slate-200 shadow-xl shadow-slate-900/20 border border-slate-200">
                                     <AnimatePresence
                                         mode="wait"
                                         custom={direction}
@@ -227,14 +227,14 @@ export function Testimonials() {
                                                 priority
                                             />
                                             {/* Gradient overlay at bottom */}
-                                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/50 to-transparent pt-16 pb-4 px-4">
+                                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent pt-16 pb-4 px-4">
                                                 <p className="font-serif text-lg font-bold text-white leading-snug">
                                                     {current.name}
                                                 </p>
                                                 <p className="text-amber-400 text-[9px] font-bold uppercase tracking-wider mt-0.5">
                                                     {current.designation}
                                                 </p>
-                                                <p className="text-slate-400 text-[10px] mt-0.5">
+                                                <p className="text-slate-300 text-[10px] mt-0.5">
                                                     {current.company}
                                                 </p>
                                             </div>
@@ -281,8 +281,8 @@ export function Testimonials() {
                                                         size={14}
                                                         className={
                                                             i < current.rating
-                                                                ? "text-amber-400 fill-amber-400"
-                                                                : "text-slate-700"
+                                                                ? "text-amber-500 fill-amber-500"
+                                                                : "text-slate-300"
                                                         }
                                                     />
                                                 )
@@ -291,12 +291,12 @@ export function Testimonials() {
 
                                         {/* Quote */}
                                         <blockquote className="relative">
-                                            <p className="font-serif text-lg sm:text-xl md:text-2xl text-slate-200 leading-relaxed tracking-tight italic">
-                                                <span className="text-amber-500/40 text-3xl md:text-4xl mr-1.5 align-top font-sans not-italic select-none">
+                                            <p className="font-serif text-lg sm:text-xl md:text-2xl text-slate-700 leading-relaxed tracking-tight italic">
+                                                <span className="text-amber-500/50 text-3xl md:text-4xl mr-1.5 align-top font-sans not-italic select-none">
                                                     &ldquo;
                                                 </span>
                                                 {current.quote}
-                                                <span className="text-amber-500/40 text-3xl md:text-4xl ml-1 align-bottom font-sans not-italic select-none">
+                                                <span className="text-amber-500/50 text-3xl md:text-4xl ml-1 align-bottom font-sans not-italic select-none">
                                                     &rdquo;
                                                 </span>
                                             </p>
@@ -314,10 +314,10 @@ export function Testimonials() {
                                                 />
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-white text-sm">
+                                                <p className="font-semibold text-slate-900 text-sm">
                                                     {current.name}
                                                 </p>
-                                                <p className="text-amber-500/70 text-[9px] font-bold uppercase tracking-wider">
+                                                <p className="text-amber-600 text-[9px] font-bold uppercase tracking-wider">
                                                     {current.designation} •{" "}
                                                     {current.company}
                                                 </p>
@@ -328,19 +328,19 @@ export function Testimonials() {
                             </div>
 
                             {/* ── Controls ── */}
-                            <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/[0.06]">
+                            <div className="flex items-center justify-between mt-6 pt-5 border-t border-slate-200">
                                 {/* Arrows */}
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => handleNav(prev)}
-                                        className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-amber-500 hover:border-amber-500 hover:text-white transition-all duration-300"
+                                        className="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:border-amber-500 hover:text-white transition-all duration-300"
                                         aria-label="Previous"
                                     >
                                         <ChevronLeft size={15} />
                                     </button>
                                     <button
                                         onClick={() => handleNav(next)}
-                                        className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-amber-500 hover:border-amber-500 hover:text-white transition-all duration-300"
+                                        className="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:border-amber-500 hover:text-white transition-all duration-300"
                                         aria-label="Next"
                                     >
                                         <ChevronRight size={15} />
@@ -354,8 +354,8 @@ export function Testimonials() {
                                             key={i}
                                             onClick={() => goTo(i)}
                                             className={`h-1.5 rounded-full transition-all duration-500 ${activeIndex === i
-                                                    ? "w-7 bg-amber-500"
-                                                    : "w-1.5 bg-white/10 hover:bg-white/20"
+                                                ? "w-7 bg-amber-500"
+                                                : "w-1.5 bg-slate-300 hover:bg-slate-400"
                                                 }`}
                                             aria-label={`Testimonial ${i + 1}`}
                                         />
@@ -372,7 +372,7 @@ export function Testimonials() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="mt-10 flex justify-center"
                     >
-                        <div className="flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 rounded-full bg-white/[0.02] border border-white/[0.04]">
+                        <div className="flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm">
                             {getStripIndices().map((idx, i) => {
                                 const isActive = idx === activeIndex;
                                 return (
@@ -380,10 +380,10 @@ export function Testimonials() {
                                         key={`${idx}-${i}`}
                                         onClick={() => goTo(idx)}
                                         className={`relative rounded-full overflow-hidden transition-all duration-500 flex-shrink-0 ${isActive
-                                                ? "w-12 h-12 sm:w-14 sm:h-14 ring-2 ring-amber-500 ring-offset-2 ring-offset-[#0c1222] shadow-lg shadow-amber-500/20"
-                                                : i === 0 || i === 4
-                                                    ? "w-7 h-7 sm:w-8 sm:h-8 opacity-25 hover:opacity-50 grayscale"
-                                                    : "w-9 h-9 sm:w-10 sm:h-10 opacity-45 hover:opacity-70 grayscale hover:grayscale-0"
+                                            ? "w-12 h-12 sm:w-14 sm:h-14 ring-2 ring-amber-500 ring-offset-2 ring-offset-slate-50 shadow-lg shadow-amber-500/20"
+                                            : i === 0 || i === 4
+                                                ? "w-7 h-7 sm:w-8 sm:h-8 opacity-30 hover:opacity-60 grayscale"
+                                                : "w-9 h-9 sm:w-10 sm:h-10 opacity-50 hover:opacity-80 grayscale hover:grayscale-0"
                                             }`}
                                     >
                                         <Image
