@@ -28,7 +28,6 @@ export default function UpcomingEMeetPage() {
             <EventCTA />
             {/* Future sections (Speakers, Agenda, etc.) will be added here */}
             <Footer />
-            <FloatingActions hideRegister={true} />
         </main>
     );
 }

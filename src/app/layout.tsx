@@ -7,6 +7,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { CartSidebar } from "@/components/CartSidebar";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { FloatingCartButton } from "@/components/FloatingCartButton";
+import { FloatingActions } from "@/components/FloatingActions";
 import { Toaster } from "react-hot-toast";
 
 // Elegant, high-contrast serif for headings - authoritative and professional
@@ -118,6 +119,7 @@ export default function RootLayout({
             {children}
             <CartSidebar />
             <FloatingCartButton />
+            <FloatingActions />
             <Toaster position="bottom-right" />
           </CartProvider>
         </ToastProvider>

@@ -340,7 +340,6 @@ export default function AwardeeEventClient({ event, categories }: { event: DBEve
             </section>
 
             <Footer />
-            <AwardeesFloatingActions />
         </div>
     );
 }

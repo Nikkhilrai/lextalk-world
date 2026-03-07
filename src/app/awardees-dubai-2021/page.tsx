@@ -229,7 +229,6 @@ export default function AwardeesDubai2021Page() {
             </section>
 
             <Footer />
-            <AwardeesFloatingActions />
         </div>
     );
 }

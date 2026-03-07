@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { RegisterModal } from "./RegisterModal";
+import { usePathname } from "next/navigation";
 import {
     MessageCircle,
     X,
@@ -18,15 +19,17 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     // Show button only after scrolling down a bit
     useEffect(() => {
-        // Auto-open the register modal after 2 seconds for lead generation
+        // Auto-open the register modal after 5 seconds for lead generation
+        // Only on homepage to avoid being too intrusive on every page
         let timer: NodeJS.Timeout;
-        if (!hideRegister) {
+        if (!hideRegister && pathname === "/") {
             timer = setTimeout(() => {
                 setIsRegisterOpen(true);
-            }, 5000);
+            }, 8000); // Increased to 8s for better UX
         }
 
         const toggleVisibility = () => {
@@ -43,7 +46,7 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
             window.removeEventListener("scroll", toggleVisibility);
             clearTimeout(timer);
         };
-    }, []);
+    }, [hideRegister, pathname]);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -94,8 +97,7 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
 
     return (
         <>
-            <div className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
-                }`}>
+            <div className={`fixed bottom-5 right-5 z-[9999] flex flex-col items-end gap-2.5 transition-all duration-500`}>
 
                 {/* Action Items */}
                 <AnimatePresence>
@@ -125,11 +127,11 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
                                         href={action.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`relative w-12 h-12 rounded-[18px] bg-white/60 backdrop-blur-xl border border-white/50 flex items-center justify-center ${action.iconColor} shadow-[0_8px_20px_-5px_rgba(0,0,0,0.15),inset_0_1px_2px_rgba(255,255,255,0.8)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl overflow-hidden`}
+                                        className={`relative w-[38px] h-[38px] rounded-[12px] bg-white/70 backdrop-blur-xl border border-white/50 flex items-center justify-center ${action.iconColor} shadow-[0_4px_12px_-4px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.8)] transition-all duration-300 hover:scale-110 active:scale-95 ${action.glowColor} hover:shadow-2xl overflow-hidden`}
                                     >
                                         <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
                                         <SpecularLight />
-                                        <action.icon size={20} className="relative z-10" />
+                                        <action.icon size={18} className="relative z-10" />
                                     </a>
                                 </motion.div>
                             ))}
@@ -151,12 +153,12 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
                                     className="flex items-center gap-3 group relative"
                                 >
                                     <span className="px-3 py-1.5 bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl">
-                                        Register Now
+                                        Register
                                     </span>
-                                    <div className="relative w-12 h-12 rounded-[18px] bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4),inset_0_1px_2px_rgba(255,255,255,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 overflow-hidden">
+                                    <div className="relative w-[38px] h-[38px] rounded-[12px] bg-amber-500 text-slate-950 flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(245,158,11,0.5),inset_0_1px_2px_rgba(255,255,255,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 border border-white/30 overflow-hidden">
                                         <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
                                         <SpecularLight />
-                                        <ArrowRight size={20} className="-rotate-45 relative z-10" />
+                                        <ArrowRight size={16} className="-rotate-45 relative z-10" />
                                     </div>
                                 </motion.button>
                             )}
@@ -167,10 +169,10 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
                 {/* Main Action Trigger Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-15 h-15 rounded-[24px] flex items-center justify-center transition-all duration-500 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.7),inset_0_-2px_6px_rgba(0,0,0,0.05)] ${isOpen
+                    className={`relative w-[46px] h-[46px] rounded-[16px] flex items-center justify-center transition-all duration-500 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_6px_rgba(0,0,0,0.05)] ${isOpen
                         ? "bg-amber-500 text-slate-950 rotate-90"
-                        : "bg-white/70 text-slate-900 hover:bg-white/80 active:scale-90"
-                        } backdrop-blur-2xl border border-white/40 group overflow-hidden`}
+                        : "bg-white/80 text-slate-900 hover:bg-white active:scale-90"
+                        } backdrop-blur-2xl border border-white/60 group overflow-hidden`}
                 >
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
                     <SpecularLight />
@@ -183,7 +185,7 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
                                 exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <X size={26} strokeWidth={2.5} />
+                                <X size={22} strokeWidth={2.5} />
                             </motion.div>
                         ) : (
                             <motion.div
@@ -194,23 +196,25 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
                                 transition={{ duration: 0.2 }}
                                 className="relative flex items-center justify-center"
                             >
-                                <MessageCircle size={28} strokeWidth={2} />
-                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#ff8c00] rounded-full border-2 border-white shadow-lg animate-pulse" />
+                                <MessageCircle size={24} strokeWidth={2} />
+                                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#ff8c00] rounded-full border-2 border-white shadow-lg animate-pulse" />
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </button>
 
-                {/* Back to Top Button - Redesigned to match screenshot */}
-                <button
-                    onClick={scrollToTop}
-                    className="relative w-14 h-14 rounded-full border-2 border-amber-500 flex items-center justify-center group transition-all duration-300 hover:bg-amber-500/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] bg-slate-950/20 backdrop-blur-sm"
-                    aria-label="Back to Top"
-                >
-                    <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1.5 flex items-center justify-center">
-                        <ChevronUp size={28} className="text-amber-500" strokeWidth={3} />
-                    </div>
-                </button>
+                {/* Back to Top Button */}
+                {isVisible && (
+                    <button
+                        onClick={scrollToTop}
+                        className="relative w-[40px] h-[40px] rounded-full border-2 border-amber-500/60 flex items-center justify-center group transition-all duration-300 hover:bg-amber-500/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.4)] bg-slate-950/10 backdrop-blur-sm"
+                        aria-label="Back to Top"
+                    >
+                        <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5 flex items-center justify-center">
+                            <ChevronUp size={20} className="text-amber-500" strokeWidth={3} />
+                        </div>
+                    </button>
+                )}
             </div>
 
             <RegisterModal
