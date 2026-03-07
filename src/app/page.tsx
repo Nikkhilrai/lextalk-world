@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { FeaturedIn } from "@/components/FeaturedIn";
 import { EventsList } from "@/components/EventsList";
 import { SupportingAssociations } from "@/components/SupportingAssociations";
+import { Testimonials } from "@/components/Testimonials";
 import { MediaPartners } from "@/components/MediaPartners";
 import { AdvisoryBoard } from "@/components/AdvisoryBoard";
 import { WhoShouldJoin } from "@/components/WhoShouldJoin";
@@ -26,6 +27,7 @@ export default function Home() {
       <AdvisoryBoard />
       <WhoShouldJoin />
       <SupportingAssociations />
+      <Testimonials />
       <MediaPartners />
       <FAQ />
       <StayUpdated />
