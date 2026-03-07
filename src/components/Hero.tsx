@@ -267,18 +267,7 @@ export function Hero() {
                             </div>
                         </Link>
 
-                        {/* Floating "Live Now" Element */}
-                        <div className="absolute top-[40%] right-0 lg:right-[5%] p-3 lg:p-4 bg-white/90 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-xl border border-slate-100 animate-bounce z-40">
-                            <div className="flex items-center gap-2 lg:gap-3">
-                                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                    <Users className="w-4 h-4 lg:w-5 lg:h-5 text-green-600" />
-                                </div>
-                                <div>
-                                    <div className="text-xs lg:text-sm font-bold text-slate-900">Live Now</div>
-                                    <div className="text-[10px] lg:text-xs text-slate-500">47 people viewing</div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
