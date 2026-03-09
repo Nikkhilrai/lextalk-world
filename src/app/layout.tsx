@@ -45,6 +45,8 @@ export const metadata: Metadata = {
     "Middle East Legal Tech",
     "Legal Networking Event",
     "Legal Innovation Forum",
+    "legalhonor.com",
+    "lextalkworld.org",
   ],
   authors: [{ name: "LexTalk World" }],
   creator: "LexTalk World",

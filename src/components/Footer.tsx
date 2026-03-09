@@ -211,6 +211,19 @@ export function Footer() {
                                 </Link>
                             </li>
                         </ul>
+
+                        {/* Official Domains */}
+                        <div className="mt-8">
+                            <h4 className="text-white text-[11px] uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
+                                <span className="w-4 h-px bg-amber-500/50"></span>
+                                Official Domains
+                            </h4>
+                            <div className="flex flex-col gap-2">
+                                <Link href="https://lextalkworld.in" className="text-[11px] text-slate-500 hover:text-amber-500 transition-colors">lextalkworld.in</Link>
+                                <Link href="https://lextalkworld.org" className="text-[11px] text-slate-500 hover:text-amber-500 transition-colors">lextalkworld.org</Link>
+                                <Link href="https://legalhonor.com" className="text-[11px] text-slate-500 hover:text-amber-500 transition-colors">legalhonor.com</Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Contact Info */}

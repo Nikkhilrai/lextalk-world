@@ -18,6 +18,17 @@ const LEAD_MANAGER_ALLOWED = [
 
 export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
+    const hostname = request.headers.get("host") || "";
+    const otherDomains = ["legalhonor.com", "lextalkworld.org", "www.legalhonor.com", "www.lextalkworld.org"];
+    const primaryDomain = "lextalkworld.in";
+
+    // If request comes from other domains and is hitting the homepage, ensure it stays on homepage
+    // Note: If you want to redirect them to the primary domain for SEO, you can uncomment below:
+    /*
+    if (otherDomains.includes(hostname)) {
+        return NextResponse.redirect(new URL("/", `https://${primaryDomain}`));
+    }
+    */
 
     // Only check /admin routes
     if (!pathname.startsWith("/admin")) {
@@ -71,4 +82,3 @@ export async function middleware(request: NextRequest) {
 export const config = {
     matcher: "/admin/:path*",
 };
-
