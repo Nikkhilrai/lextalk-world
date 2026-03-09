@@ -137,6 +137,11 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         title: "Global Counsel, HP",
         image: "/dubai-event/dubai-speakers/Denis Sergienko.jpeg",
     },
+    {
+        name: "Chinar Jethwani",
+        title: "Company Secretary (Global Compliance & Legal Affiars ), Varun Beverages Limited",
+        image: "/dubai-event/dubai-speakers/Chinar Jethwani.jpeg",
+    },
 
 ];
 
