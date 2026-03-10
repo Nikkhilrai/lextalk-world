@@ -142,6 +142,17 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         title: "Company Secretary (Global Compliance & Legal Affiars ), Varun Beverages Limited",
         image: "/dubai-event/dubai-speakers/Chinar Jethwani.jpeg",
     },
+    {
+        name: "Adeel Mirza",
+        title: "Head of AML & KYC Unit, Al Masraf",
+        image: "/dubai-event/dubai-speakers/Adeel Mirza.jpeg",
+    },
+    {
+        name: "Saloni Tuteja",
+        title: "Head of Legal & Compliance, Servier Middle East",
+        image: "/dubai-event/dubai-speakers/Saloni Tuteja.jpeg",
+    }
+
 
 ];
 
