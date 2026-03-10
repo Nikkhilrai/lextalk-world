@@ -151,7 +151,7 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         name: "Saloni Tuteja",
         title: "Head of Legal & Compliance, Servier Middle East",
         image: "/dubai-event/dubai-speakers/Saloni Tuteja.png",
-    }
+    },
 
 
 ];
