@@ -145,12 +145,12 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
     {
         name: "Adeel Mirza",
         title: "Head of AML & KYC Unit, Al Masraf",
-        image: "/dubai-event/dubai-speakers/Adeel Mirza.jpeg",
+        image: "/dubai-event/dubai-speakers/Adeel Mirza.png",
     },
     {
         name: "Saloni Tuteja",
         title: "Head of Legal & Compliance, Servier Middle East",
-        image: "/dubai-event/dubai-speakers/Saloni Tuteja.jpeg",
+        image: "/dubai-event/dubai-speakers/Saloni Tuteja.png",
     }
 
 
