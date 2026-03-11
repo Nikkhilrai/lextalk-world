@@ -152,6 +152,11 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         title: "Head of Legal & Compliance, Servier Middle East",
         image: "/dubai-event/dubai-speakers/Saloni Tuteja.png",
     },
+    {
+        name: "Dr Thouraya Mathlouthi",
+        title: "Group Legal Director, Data Privacy & Protection, E&",
+        image: "/dubai-event/dubai-speakers/Dr Thouraya Mathlouthi.jpg",
+    }
 
 
 ];
