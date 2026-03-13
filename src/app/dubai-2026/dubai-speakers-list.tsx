@@ -156,7 +156,13 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         name: "Dr Thouraya Mathlouthi",
         title: "Group Legal Director, Data Privacy & Protection, E&",
         image: "/dubai-event/dubai-speakers/Dr Thouraya Mathlouthi.jpg",
+    },
+    {
+        name: "Anna Kobzar",
+        title: "Senior Legal Counsel, Seddiqi Holding LLC",
+        image: "/dubai-event/dubai-speakers/Anna Kobzar.jpeg",
     }
+
 
 
 ];
