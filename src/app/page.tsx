@@ -11,7 +11,7 @@ import { WhoShouldJoin } from "@/components/WhoShouldJoin";
 import { FAQ } from "@/components/FAQ";
 import { StayUpdated } from "@/components/StayUpdated";
 import { Footer } from "@/components/Footer";
-// import { SpeakerLineup } from "@/components/SpeakerLineup";
+
 
 export const metadata: Metadata = {
   title: "LexTalk World | Legal Tech Conference & Legal Honor Global | Dubai 2026",
@@ -25,7 +25,7 @@ export default function Home() {
       <Hero />
       <FeaturedIn />
       <EventsList />
-      {/* <SpeakerLineup /> */}
+
       <AdvisoryBoard />
       <WhoShouldJoin />
       <SupportingAssociations />
