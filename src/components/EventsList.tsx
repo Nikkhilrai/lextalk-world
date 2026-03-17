@@ -50,7 +50,7 @@ export function EventsList() {
             year: "2026",
             venue: "India",
             image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
-            status: "Coming Soon",
+            status: "Registrations Open",
             region: "South Asia",
             description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
             highlights: [
@@ -59,7 +59,7 @@ export function EventsList() {
                 "25+ Awardees",
                 "15+ Exhibitors"
             ],
-            link: "#",
+            link: "/bangalore-2026",
             agendaLink: "#",
             stats: { delegates: "100+", type: "Conference", duration: "1 Day" }
         },
