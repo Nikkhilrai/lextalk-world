@@ -45,7 +45,7 @@ export function EventsList() {
         },
         {
             city: "Bangalore",
-            month: "SEP",
+            month: "JUN",
             days: "10",
             year: "2026",
             venue: "India",
