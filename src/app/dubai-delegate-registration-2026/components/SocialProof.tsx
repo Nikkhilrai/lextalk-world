@@ -43,7 +43,7 @@ export default function SocialProof() {
                 {/* Stats Bar */}
                 <div className="border-t border-slate-200 pt-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
-                        <StatItem icon={Users} value="800+" label="Attendees" />
+                        <StatItem icon={Users} value="500+" label="Attendees" />
                         <StatItem icon={Mic2} value="100+" label="Speakers" />
                         <StatItem icon={LayoutGrid} value="20+" label="Sessions" />
                         <StatItem icon={Calendar} value="2" label="Days" />

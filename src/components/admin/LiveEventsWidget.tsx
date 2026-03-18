@@ -18,10 +18,10 @@ interface LegalEvent {
 const LEGAL_EVENTS: LegalEvent[] = [
     {
         id: "1",
-        name: "LexTalk World Summit 2025",
+        name: "LexTalk World Summit 2026",
         location: "Dubai, UAE",
         region: "Dubai",
-        date: "May 13-14, 2025",
+        date: "September 2026",
         status: "upcoming",
         type: "Conference",
         url: "/dubai-2026"

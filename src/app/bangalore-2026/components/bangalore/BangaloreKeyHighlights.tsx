@@ -5,10 +5,10 @@ import { Users, Mic, Award, Building } from "lucide-react";
 import { motion } from "framer-motion";
 
 const highlights = [
-    { icon: Users, number: "500+", label: "Legal Professionals" },
+    { icon: Users, number: "300+", label: "Legal Professionals" },
     { icon: Mic, number: "50+", label: "Renowned Speakers" },
-    { icon: Award, number: "50+", label: "Awardees" },
-    { icon: Building, number: "25+", label: "Exhibitors" },
+    { icon: Award, number: "30", label: "Top Legal Honor Global Awardees" },
+    { icon: Building, number: "15+", label: "Exhibitors" },
 ];
 
 function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; suffix: string; duration?: number }) {

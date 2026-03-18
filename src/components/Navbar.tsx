@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Menu, X, ChevronDown, Flame, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { RegisterModal } from "@/components/RegisterModal";
-import { getAwardEvents } from "@/actions/awardee";
 
 interface NavLink {
     name: string;
@@ -25,14 +24,8 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-    const [bannerVisible, setBannerVisible] = useState(false);
-    const [bannerDismissed, setBannerDismissed] = useState(false);
 
-    // Countdown to Dubai 2026 event
-    const eventDate = new Date("2026-05-15T00:00:00");
-    const now = new Date();
-    const daysLeft = Math.max(0, Math.ceil((eventDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
-    const [dynamicNavLinks, setDynamicNavLinks] = useState<NavLink[]>([
+    const [dynamicNavLinks] = useState<NavLink[]>([
         { name: "Home", href: "/" },
         {
             name: "E-Meet",
@@ -72,96 +65,15 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
         };
 
         window.addEventListener("scroll", handleScroll);
-
-        // Fetch award events
-        const fetchEvents = async () => {
-            try {
-                const res = await getAwardEvents();
-                if (res.success && res.events.length > 0) {
-                    const awardItems = res.events
-                        .filter((e: any) => e.isActive)
-                        .map((e: any) => ({
-                            name: `Awardees ${e.name}`,
-                            href: `/awardees/${e.slug}`
-                        }));
-
-
-                }
-            } catch (error) {
-                console.error("Failed to fetch nav events:", error);
-            }
-        };
-        fetchEvents();
-
-        // Banner: check dismissal and show after delay
-        const dismissed = sessionStorage.getItem("banner_dismissed");
-        if (dismissed) {
-            setBannerDismissed(true);
-        } else {
-            const bannerTimer = setTimeout(() => setBannerVisible(true), 800);
-            return () => {
-                window.removeEventListener("scroll", handleScroll);
-                clearTimeout(bannerTimer);
-            };
-        }
-
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const handleBannerDismiss = () => {
-        setBannerDismissed(true);
-        setBannerVisible(false);
-        sessionStorage.setItem("banner_dismissed", "true");
-    };
-
-    const showBanner = bannerVisible && !bannerDismissed;
-
     return (
         <>
-            {/* Urgency Banner - sits above navbar */}
-            <div
-                className={cn(
-                    "fixed top-0 left-0 right-0 z-[51] transition-all duration-500 ease-out",
-                    showBanner ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-                )}
-            >
-                <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-amber-500/20">
-                    <div className="relative container mx-auto px-4">
-                        <div className="flex items-center justify-center gap-2 sm:gap-4 py-2 sm:py-2.5 text-center pr-8">
-                            <Flame className="hidden sm:block w-3.5 h-3.5 text-amber-400 animate-pulse flex-shrink-0" />
-                            <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-[10px] sm:text-xs">
-                                <span className="font-bold text-amber-400 tracking-wide">DUBAI 2026</span>
-                                <span className="text-slate-400 hidden sm:inline">—</span>
-                                <span className="text-white/90 font-medium">
-                                    Only <span className="text-amber-400 font-black">{daysLeft}</span> days left
-                                </span>
-                                <span className="text-slate-500 hidden md:inline">|</span>
-                                <span className="text-slate-300 hidden md:inline font-normal">Limited Seats</span>
-                            </div>
-                            <button
-                                onClick={() => setIsRegisterOpen(true)}
-                                className="group flex items-center gap-1 px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-[10px] sm:text-xs rounded-full transition-all duration-200 flex-shrink-0"
-                            >
-                                Register
-                                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                            </button>
-                            <button
-                                onClick={handleBannerDismiss}
-                                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-white transition-colors"
-                                aria-label="Dismiss banner"
-                            >
-                                <X className="w-3.5 h-3.5" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Main Navbar - offset by banner height when visible */}
+            {/* Main Navbar */}
             <nav
                 className={cn(
-                    "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out",
-                    showBanner ? "top-[36px] sm:top-[40px]" : "top-0",
+                    "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out top-0",
                     isScrolled
                         ? "bg-white/80 backdrop-blur-md shadow-sm py-4"
                         : "bg-transparent py-6"
@@ -316,17 +228,18 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                 )}
                             </div>
                         ))}
-                        <Link
-                            href="/dubai-delegate-registration-2026"
-                            target="_blank"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        <button
+                            onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setIsRegisterOpen(true);
+                            }}
                             className="mx-3 mt-2 mb-2 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg text-sm text-center"
                         >
                             Secure Pass
-                        </Link>
+                        </button>
                     </div>
                 </div>
-            </nav >
+            </nav>
 
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
         </>

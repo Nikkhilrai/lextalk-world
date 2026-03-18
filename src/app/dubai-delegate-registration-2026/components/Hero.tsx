@@ -24,7 +24,7 @@ const COMPANY_LOGOS = [
 
 function Countdown() {
     const calculateTimeLeft = () => {
-        const targetDate = new Date("2026-05-13T09:00:00Z").getTime();
+        const targetDate = new Date("2026-09-01T09:00:00Z").getTime();
         const now = new Date().getTime();
         const difference = targetDate - now;
 
@@ -97,7 +97,7 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-6 backdrop-blur-sm">
                         <Sparkles size={12} className="text-amber-400" />
                         <span className="text-amber-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-                            Dubai 2026 · May 13–14
+                            Dubai 2026 · September 2026
                         </span>
                     </div>
 
@@ -163,7 +163,7 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
 
                     {/* Meta Stats Row - Tighter */}
                     <div className="flex flex-wrap justify-center gap-4 md:gap-8 pt-10 mt-10 border-t border-white/5">
-                        <MetaItem icon={Users} label="800+ Delegates" />
+                        <MetaItem icon={Users} label="500+ Delegates" />
                         <MetaItem icon={Mic2} label="100+ Speakers" />
                         <MetaItem icon={LayoutGrid} label="20+ Sessions" />
                         <MetaItem icon={Calendar} label="2 Days" />

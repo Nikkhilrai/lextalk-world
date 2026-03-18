@@ -112,7 +112,7 @@ export default function CEONotePage() {
                                     </div>
 
                                     <p>
-                                        Every platform we create is focused on dialogue that matters and connections that endure. As we step into 2026, we are proud to return with the <strong className="text-slate-900 font-bold">LexTalk World Conference & Exhibition in Dubai on 13th & 14th May 2026</strong>, followed by the <strong className="text-slate-900 font-bold">Mumbai edition in December 2026</strong>, strengthening our presence across both the Middle East and APAC.
+                                        Every platform we create is focused on dialogue that matters and connections that endure. As we step into 2026, we are proud to return with the <strong className="text-slate-900 font-bold">LexTalk World Conference & Exhibition in Dubai in September 2026</strong>, followed by the <strong className="text-slate-900 font-bold">Mumbai edition in December 2026</strong>, strengthening our presence across both the Middle East and APAC.
                                     </p>
 
                                     <p>

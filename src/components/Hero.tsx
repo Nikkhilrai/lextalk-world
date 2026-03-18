@@ -202,7 +202,7 @@ export function Hero() {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
                                     <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        Dec 2026
+                                        Dec 10-11, 2026
                                     </span>
                                 </div>
                                 <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
@@ -223,7 +223,7 @@ export function Hero() {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
                                     <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        June 10, 2026
+                                        June 11, 2026
                                     </span>
                                 </div>
                                 <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Bangalore</h3>
@@ -250,7 +250,7 @@ export function Hero() {
                                 <div className="flex items-center gap-2 mb-2 lg:mb-3">
                                     <Calendar className="w-3 h-3 lg:w-4 lg:h-4 text-amber-400" />
                                     <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">
-                                        May 2026
+                                        Sep 2026
                                     </span>
                                 </div>
                                 <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Dubai</h3>

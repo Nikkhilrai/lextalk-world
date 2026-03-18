@@ -24,29 +24,29 @@ export function EventsList() {
     const events = [
         {
             city: "Dubai",
-            month: "MAY",
-            days: "13-14",
+            month: "SEP",
+            days: "TBA",
             year: "2026",
             venue: "UAE",
             // image: "https://images.unsplash.com/photo-1512453979798-5ea90b7cad11?q=80&w=1200&auto=format&fit=crop", // Old broken link?
             image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop", // New Dubai Skyline
             status: "Registrations Open",
             region: "Middle East",
-            description: "Join 800+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
+            description: "Join 500+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
             highlights: [
-                "800+ Global Legal Professionals",
+                "500+ Global Legal Professionals",
                 "70+ Renowned Speakers",
-                "100+ Awardees",
+                "100+ Distinguished Legal Honor Global Awardees",
                 "30+ Exhibitors"
             ],
             link: "/dubai-2026",
             agendaLink: "/agendas/dubai-2026-agenda.pdf",
-            stats: { delegates: "800+", type: "Conference", duration: "2 Days" }
+            stats: { delegates: "500+", delegatesLabel: "Global Legal Leaders", type: "Conference", duration: "2 Days" }
         },
         {
             city: "Bangalore",
             month: "JUN",
-            days: "10",
+            days: "11",
             year: "2026",
             venue: "India",
             image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
@@ -56,17 +56,17 @@ export function EventsList() {
             highlights: [
                 "300+ Global Legal Professionals",
                 "50+ Renowned Speakers",
-                "25+ Awardees",
+                "Top 30 Legal Honor Global Awardees",
                 "15+ Exhibitors"
             ],
             link: "/bangalore-2026",
             agendaLink: "#",
-            stats: { delegates: "100+", type: "Conference", duration: "1 Day" }
+            stats: { delegates: "300+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "1 Day" }
         },
         {
             city: "Mumbai",
             month: "DEC",
-            days: "10 & 11",
+            days: "10-11",
             year: "2026",
             venue: "India",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop", // Gateway of India
@@ -75,11 +75,11 @@ export function EventsList() {
             description: "Experience the convergence of law and technology in India's financial capital. Pre-register your interest today.",
             link: "/mumbai-2026",
             agendaLink: "#",
-            stats: { delegates: "500+", type: "Summit", duration: "2 Days" },
+            stats: { delegates: "500+", delegatesLabel: "Global Legal Professionals", type: "Conference", duration: "2 Days" },
             highlights: [
-                "300+ Global Legal Professionals",
+                "500+ Global Legal Professionals",
                 "70+ Renowned Speakers",
-                "100+ Awardees",
+                "100+ Distinguished Legal Honor Global Awardees",
                 "30+ Exhibitors"
             ]
         }
@@ -125,8 +125,8 @@ export function EventsList() {
                     {events.map((event: any, index) => (
                         <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:border-amber-500/30 hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full">
 
-                            {/* Image Section (Top) - Balanced Height */}
-                            <div className="relative h-44 sm:h-56 md:h-64 overflow-hidden shrink-0">
+                            {/* Image Section (Top) - More Compact */}
+                            <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden shrink-0">
                                 <Image
                                     src={event.image}
                                     alt={event.city}
@@ -157,8 +157,8 @@ export function EventsList() {
                                 </div>
                             </div>
 
-                            {/* Content Section (Bottom) - Full Content */}
-                            <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
+                            {/* Content Section (Bottom) - More Compact */}
+                            <div className="p-4 sm:p-5 flex flex-col flex-grow">
                                 {/* Location */}
                                 <div className="flex items-center gap-1.5 text-amber-600 mb-1.5 sm:mb-2">
                                     <MapPin className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
@@ -166,12 +166,12 @@ export function EventsList() {
                                 </div>
 
                                 {/* City Name */}
-                                <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-1.5 sm:mb-2 group-hover:text-amber-600 transition-colors">
+                                <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">
                                     {event.city}
                                 </h3>
 
                                 {/* Venue */}
-                                <p className="text-slate-500 text-[11px] sm:text-xs mb-2 sm:mb-3 flex items-center gap-2">
+                                <p className="text-slate-500 text-[11px] sm:text-xs mb-1 sm:mb-2 flex items-center gap-2">
                                     <span className="w-3 sm:w-4 h-px bg-amber-400" />
                                     {event.venue}
                                 </p>
@@ -179,7 +179,7 @@ export function EventsList() {
                                 {/* Description or Highlights */}
                                 {event.highlights ? (
                                     <div className="mb-4 sm:mb-5 flex-grow">
-                                        <p className="text-[10px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Event Highlights:</p>
+                                        <p className="text-[10px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Event Highlights:</p>
                                         <ul className="grid grid-cols-2 gap-x-2 gap-y-2">
                                             {event.highlights.map((highlight: string, i: number) => (
                                                 <li key={i} className="flex items-start gap-1.5 text-[10px] sm:text-xs text-slate-600 font-medium leading-tight">
@@ -195,20 +195,23 @@ export function EventsList() {
                                     </p>
                                 )}
 
-                                {/* Stats Row - Compact */}
-                                <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-5 pb-4 sm:pb-5 border-b border-slate-100">
-                                    <div className="flex items-center gap-1.5 sm:gap-2">
-                                        <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
-                                        <div>
-                                            <span className="text-xs sm:text-sm font-bold text-slate-900">{event.stats.delegates}</span>
-                                            <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase ml-1">People</span>
+                                {/* Event Scale Section */}
+                                <div className="mb-4 sm:mb-5">
+                                        <p className="text-[10px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Event Scale:</p>
+                                    <div className="flex gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-slate-100">
+                                        <div className="flex items-center gap-1.5 sm:gap-2">
+                                            <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
+                                            <div>
+                                                <span className="text-xs font-bold text-slate-900">{event.stats.delegates}</span>
+                                            <span className="text-[8px] sm:text-[9px] text-slate-400 uppercase ml-1 whitespace-nowrap">{event.stats.delegatesLabel || "People"}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex items-center gap-1.5 sm:gap-2">
-                                        <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
-                                        <div>
-                                            <span className="text-xs sm:text-sm font-bold text-slate-900">{event.stats.duration || "2 Days"}</span>
-                                            <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase ml-1">{event.stats.type}</span>
+                                        <div className="flex items-center gap-1.5 sm:gap-2">
+                                            <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
+                                            <div>
+                                                <span className="text-xs font-bold text-slate-900">{event.stats.duration || "2 Days"}</span>
+                                            <span className="text-[8px] sm:text-[9px] text-slate-400 uppercase ml-1 whitespace-nowrap">{event.stats.type}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

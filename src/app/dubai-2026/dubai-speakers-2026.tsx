@@ -148,7 +148,7 @@ export default function DubaiSpeakersHero() {
                     <div className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full border border-amber-500/25 bg-white/[0.04] backdrop-blur-sm">
                         <Calendar className="w-3.5 h-3.5 text-amber-400" />
                         <span className="text-amber-400/90 font-serif text-xs md:text-sm font-medium tracking-[0.2em]">
-                            May 13th & 14th, 2026
+                            September 2026
                         </span>
                     </div>
                 </motion.div>
