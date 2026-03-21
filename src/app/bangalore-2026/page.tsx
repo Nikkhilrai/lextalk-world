@@ -16,7 +16,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 import { AgendaModal } from "@/components/AgendaModal";
-import { RegisterModal } from "@/components/RegisterModal";
+import { EventSelectionModal } from "@/components/EventSelectionModal";
 
 export default function Bangalore2026Page() {
     const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function Bangalore2026Page() {
                 eventSlug="bangalore-2026"
             />
 
-            <RegisterModal
+            <EventSelectionModal
                 isOpen={isRegisterModalOpen}
                 onClose={() => setIsRegisterModalOpen(false)}
             />

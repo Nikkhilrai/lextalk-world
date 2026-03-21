@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
         const body = await request.json();
         const {
-            amount,
+            amount: rawAmount,
             currency,
             passType,
             passCategory,
@@ -27,8 +27,40 @@ export async function POST(request: NextRequest) {
             conferenceSlug,
             originalPrice,
             discountedPrice,
-            registrationId, // New optional field
+            registrationId,
+            couponCode,
+            couponDiscount,
         } = body;
+
+        // Server-side coupon validation — if coupon provided, re-validate and recompute amount
+        let finalAmount = rawAmount;
+        let validatedCouponCode: string | null = couponCode || null;
+        let validatedCouponDiscount: number | null = couponDiscount || null;
+
+        if (couponCode) {
+            const prismaClient2 = prisma as any;
+            const coupon = await prismaClient2.delegateCoupon.findUnique({
+                where: { code: couponCode.trim().toUpperCase() },
+            });
+
+            const now = new Date();
+            const isValid = coupon &&
+                coupon.isActive &&
+                now >= new Date(coupon.validFrom) &&
+                now <= new Date(coupon.validUntil) &&
+                (coupon.maxUses === null || coupon.usedCount < coupon.maxUses);
+
+            if (isValid) {
+                const GST_RATE = 0.18;
+                const basePrice = currency === "INR" ? (body.baseInrPrice || rawAmount) : (body.baseUsdPrice || rawAmount);
+                const discounted = basePrice * (1 - coupon.discountPct / 100);
+                finalAmount = Math.round(discounted * (1 + GST_RATE) * 100) / 100;
+                validatedCouponCode = coupon.code;
+                validatedCouponDiscount = coupon.discountPct;
+            }
+        }
+
+        const amount = finalAmount;
 
         if (!amount || amount <= 0) {
             return NextResponse.json(
@@ -60,6 +92,8 @@ export async function POST(request: NextRequest) {
                     currency,
                     paymentType,
                     paymentStatus: "pending",
+                    couponCode: validatedCouponCode,
+                    couponDiscount: validatedCouponDiscount,
                 },
             });
         } else {
@@ -88,6 +122,8 @@ export async function POST(request: NextRequest) {
                         discountedPrice,
                         currency,
                         paymentType,
+                        couponCode: validatedCouponCode,
+                        couponDiscount: validatedCouponDiscount,
                     }
                 });
             } else {
@@ -109,9 +145,19 @@ export async function POST(request: NextRequest) {
                         currency,
                         paymentType,
                         paymentStatus: "pending",
+                        couponCode: validatedCouponCode,
+                        couponDiscount: validatedCouponDiscount,
                     },
                 });
             }
+        }
+
+        // Increment coupon usedCount if a coupon was applied
+        if (validatedCouponCode) {
+            await (prisma as any).delegateCoupon.updateMany({
+                where: { code: validatedCouponCode },
+                data: { usedCount: { increment: 1 } },
+            }).catch((err: any) => console.error("Coupon increment error:", err));
         }
 
         // Create notification for pending ticket purchase

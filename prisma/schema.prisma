@@ -432,6 +432,10 @@ model DelegateRegistration {
   razorpayOrderId   String?
   razorpayPaymentId String?  @unique
   
+  // Coupon
+  couponCode        String?           // Coupon code used (if any)
+  couponDiscount    Float?            // Discount % applied
+
   // Ticket
   ticketNumber      String?  @unique
   ticketId          String?  @unique @default(uuid())
@@ -450,6 +454,26 @@ model DelegateRegistration {
   @@index([createdAt])
 }
 
+
+// Delegate Coupon Model
+model DelegateCoupon {
+  id             String   @id @default(cuid())
+  code           String   @unique  // e.g. "SAVE15", "VIP2026"
+  name           String            // Display name: "VIP Partner Discount"
+  discountPct    Float             // 15 = 15% discount
+  validFrom      DateTime @default(now())
+  validUntil     DateTime
+  maxUses        Int?              // null = unlimited
+  usedCount      Int      @default(0)
+  isActive       Boolean  @default(true)
+  conferenceSlug String?           // null = all conferences
+  applicableTo   String?           // null = all passes, or "student,delegate,vendor"
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([code])
+  @@index([isActive])
+}
 
 // Reserve Your Seat / Seat Reservation Model
 model SeatReservation {

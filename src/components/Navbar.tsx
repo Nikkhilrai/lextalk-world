@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { RegisterModal } from "@/components/RegisterModal";
 
 interface NavLink {
     name: string;
@@ -22,7 +21,6 @@ interface NavbarProps {
 export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     const [dynamicNavLinks] = useState<NavLink[]>([
@@ -149,8 +147,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                 </div>
                             ))}
                             <Link
-                                href="/dubai-delegate-registration-2026"
-                                target="_blank"
+                                href="/delegate-registration"
                                 className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
                             >
                                 Secure Pass
@@ -161,8 +158,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                     {/* Minimal mode - just show Secure Pass button */}
                     {minimal && (
                         <Link
-                            href="/dubai-delegate-registration-2026"
-                            target="_blank"
+                            href="/delegate-registration"
                             className="px-7 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-slate-800 hover:to-slate-900 text-white text-sm font-bold tracking-wide rounded-lg hover:shadow-lg hover:shadow-slate-900/30 hover:scale-105 transition-all duration-300"
                         >
                             Secure Pass
@@ -228,20 +224,16 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                 )}
                             </div>
                         ))}
-                        <button
-                            onClick={() => {
-                                setIsMobileMenuOpen(false);
-                                setIsRegisterOpen(true);
-                            }}
-                            className="mx-3 mt-2 mb-2 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg text-sm text-center"
+                        <Link
+                            href="/delegate-registration"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="mx-3 mt-2 mb-2 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold rounded-lg text-sm text-center block"
                         >
                             Secure Pass
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
-
-            <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
         </>
     );
 }
