@@ -21,7 +21,7 @@ const LEGAL_EVENTS: LegalEvent[] = [
         name: "LexTalk World Summit 2026",
         location: "Dubai, UAE",
         region: "Dubai",
-        date: "September 2026",
+        date: "Sep 9-10, 2026",
         status: "upcoming",
         type: "Conference",
         url: "/dubai-2026"

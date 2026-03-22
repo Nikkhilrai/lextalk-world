@@ -54,7 +54,7 @@ function generateInvitationHtml(contact: InvitationContact, customMessage?: stri
                 <table style="width: 100%;">
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; width: 100px;">Date:</td>
-                        <td style="padding: 8px 0; color: #1e293b; font-weight: 600;">September 2026</td>
+                        <td style="padding: 8px 0; color: #1e293b; font-weight: 600;">September 9-10, 2026</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b;">Location:</td>

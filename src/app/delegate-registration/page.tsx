@@ -78,7 +78,7 @@ const EVENTS = [
         city: "Dubai",
         country: "UAE",
         tagline: "Global Legal & Business Summit",
-        date: "September 2026",
+        date: "September 9-10, 2026",
         day: "2 Days",
         duration: "2 Days",
         delegates: "500+",

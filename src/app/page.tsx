@@ -14,8 +14,8 @@ import { Footer } from "@/components/Footer";
 
 
 export const metadata: Metadata = {
-  title: "LexTalk World | Legal Tech Conference & Legal Honor Global | Dubai September 2026",
-  description: "LexTalk World is the Global Authority on Legal Tech. Join our flagship conference in Dubai September 2026. Networking, Awards, and Innovation for legal professionals worldwide.",
+  title: "LexTalk World | Legal Tech Conference & Legal Honor Global | Dubai 9th - 10th Sep 2026",
+  description: "LexTalk World is the Global Authority on Legal Tech. Join our flagship conference in Dubai 9th - 10th Sep 2026. Networking, Awards, and Innovation for legal professionals worldwide.",
 };
 
 export default function Home() {

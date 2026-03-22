@@ -8,8 +8,8 @@ import { AgendaModal } from "./AgendaModal";
 
 const event = {
     city: "Dubai",
-    month: "MAY",
-    days: "13-14",
+    month: "SEP",
+    days: "9-10",
     year: "2026",
     venue: "Dubai",
     image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200&auto=format&fit=crop",
@@ -45,7 +45,7 @@ export function EventsList() {
         {
             city: "Dubai",
             month: "SEP",
-            days: "TBA",
+            days: "9-10",
             year: "2026",
             venue: "UAE",
             // image: "https://images.unsplash.com/photo-1512453979798-5ea90b7cad11?q=80&w=1200&auto=format&fit=crop", // Old broken link?

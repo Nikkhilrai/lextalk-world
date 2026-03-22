@@ -15,7 +15,7 @@ const availableEvents = [
         id: "dubai-2026",
         name: "LexTalk World Summit Dubai 2026",
         shortName: "Dubai 2026",
-        date: "September 2026",
+        date: "Sep 9-10, 2026",
         location: "Dubai, UAE",
         venue: "Dubai",
         image: "/dubai-event/event-bg.avif",

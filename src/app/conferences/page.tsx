@@ -45,7 +45,7 @@ const upcomingConferences = [
         city: "Dubai",
         country: "UAE",
         region: "Middle East",
-        date: "September 2026",
+        date: "September 9-10, 2026",
         venue: "Dubai",
         duration: "2 Days",
         image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
