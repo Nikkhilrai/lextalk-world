@@ -23,6 +23,26 @@ export function EventsList() {
 
     const events = [
         {
+            city: "Bangalore",
+            month: "JUN",
+            days: "11",
+            year: "2026",
+            venue: "India",
+            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
+            status: "Registrations Open",
+            region: "South Asia",
+            description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
+            highlights: [
+                "300+ Global Legal Professionals",
+                "50+ Renowned Speakers",
+                "Top 30 Legal Honor Global Awardees",
+                "15+ Exhibitors"
+            ],
+            link: "/bangalore-2026",
+            agendaLink: "#",
+            stats: { delegates: "300+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "1 Day" }
+        },
+        {
             city: "Dubai",
             month: "SEP",
             days: "TBA",
@@ -42,26 +62,6 @@ export function EventsList() {
             link: "/dubai-2026",
             agendaLink: "/agendas/dubai-2026-agenda.pdf",
             stats: { delegates: "500+", delegatesLabel: "Global Legal Leaders", type: "Conference", duration: "2 Days" }
-        },
-        {
-            city: "Bangalore",
-            month: "JUN",
-            days: "11",
-            year: "2026",
-            venue: "India",
-            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop", // Coming Soon Placeholder
-            status: "Registrations Open",
-            region: "South Asia",
-            description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
-            highlights: [
-                "300+ Global Legal Professionals",
-                "50+ Renowned Speakers",
-                "Top 30 Legal Honor Global Awardees",
-                "15+ Exhibitors"
-            ],
-            link: "/bangalore-2026",
-            agendaLink: "#",
-            stats: { delegates: "300+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "1 Day" }
         },
         {
             city: "Mumbai",
