@@ -35,13 +35,27 @@ export async function POST(request: NextRequest) {
                 quantity,
                 totalAmount,
                 currency: currency || "USD",
-                status: "paid", // Mark as paid since PayPal has already captured payment
+                status: "paid", // Mark as paid since PayPal/Razorpay has already captured payment
                 paymentId: paymentId || null,
-                notes: buyerOrganization && buyerDesignation
-                    ? `${buyerDesignation} at ${buyerOrganization}`
+                notes: buyerOrganization || buyerDesignation
+                    ? `Organization: ${buyerOrganization || 'N/A'}\nDesignation: ${buyerDesignation || 'N/A'}`
                     : null,
             },
         });
+
+        // Create notification for admin
+        try {
+            await prisma.notification.create({
+                data: {
+                    type: "TICKET_PURCHASE",
+                    message: `New ticket purchase: ${buyerName} - ${quantity} ticket(s)`,
+                    referenceId: order.id,
+                    link: "/admin/tickets",
+                }
+            });
+        } catch (notificationErr) {
+            console.error("Failed to create notification:", notificationErr);
+        }
 
         // Update sold count on ticket type
         await prisma.ticketType.update({
