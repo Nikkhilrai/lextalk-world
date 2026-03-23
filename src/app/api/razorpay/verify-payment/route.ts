@@ -37,6 +37,11 @@ export async function POST(request: NextRequest) {
             "standard-pass-dubai-2026": "standard",
             "premium-pass-dubai-2026": "premium",
             "exclusive-pass-dubai-2026": "exclusive",
+            // Bangalore passes
+            "standard-physical-pass-bangalore-2026": "standard-physical",
+            "premium-physical-pass-bangalore-2026": "premium-physical",
+            "exclusive-physical-pass-bangalore-2026": "exclusive-physical",
+            "virtual-pass-bangalore-2026": "virtual",
         };
 
         const ticketNumbers: string[] = [];
@@ -47,9 +52,11 @@ export async function POST(request: NextRequest) {
                 const ticketTypeSlug = ticketTypeMap[item.id];
                 if (!ticketTypeSlug) continue;
 
+                const isBangalore = item.id.includes("bangalore");
+
                 // Fetch ticket type ID from database
                 const ticketTypeRes = await fetch(
-                    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/get-type?slug=dubai-2026&type=${ticketTypeSlug}`
+                    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/get-type?slug=${isBangalore ? "bangalore-2026" : "dubai-2026"}&type=${ticketTypeSlug}`
                 );
                 if (!ticketTypeRes.ok) {
                     console.error("Failed to fetch ticket type ID");
@@ -72,7 +79,7 @@ export async function POST(request: NextRequest) {
                             buyerDesignation: customerDetails.designation,
                             quantity: item.quantity,
                             totalAmount: item.price * item.quantity,
-                            currency: "USD",
+                            currency: isBangalore ? "INR" : "USD", // Bangalore orders might be in INR if paid via INR gate, but internally we track USD unless specified
                             paymentId: razorpay_payment_id,
                         }),
                     }
@@ -84,59 +91,66 @@ export async function POST(request: NextRequest) {
                 }
 
                 const { order: createdOrder } = await orderRes.json();
+                const ticketNumber = createdOrder.ticketNumber || `BNG-${createdOrder.id}`;
+                ticketNumbers.push(ticketNumber);
 
-                // Generate PDF ticket
-                const ticketRes = await fetch(
-                    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/generate-ticket`,
-                    {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            orderId: createdOrder.id,
-                            buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                            buyerEmail: customerDetails.email,
-                            organization: customerDetails.organization,
-                            designation: customerDetails.designation,
-                            passType: item.name,
-                            amount: item.price * item.quantity,
-                            conferenceDetails: {
-                                name: "Dubai 2026",
-                                location: "Dubai, UAE",
-                                year: 2026,
-                            },
-                        }),
+                let ticketUrl = null;
+
+                // Generate PDF ticket only for non-Bangalore orders
+                if (!isBangalore) {
+                    const ticketRes = await fetch(
+                        `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/generate-ticket`,
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                orderId: createdOrder.id,
+                                buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                buyerEmail: customerDetails.email,
+                                organization: customerDetails.organization,
+                                designation: customerDetails.designation,
+                                passType: item.name,
+                                amount: item.price * item.quantity,
+                                conferenceDetails: {
+                                    name: "Dubai 2026",
+                                    location: "Dubai, UAE",
+                                    year: 2026,
+                                },
+                            }),
+                        }
+                    );
+
+                    if (ticketRes.ok) {
+                        const result = await ticketRes.json();
+                        ticketUrl = result.ticketUrl;
                     }
-                );
+                }
 
-                if (ticketRes.ok) {
-                    const { ticketNumber, ticketUrl } = await ticketRes.json();
-                    ticketNumbers.push(ticketNumber);
-
-                    // Send email receipt with ticket PDF
-                    try {
-                        await fetch(
-                            `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/email-receipt`,
-                            {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({
-                                    ticketNumber,
-                                    ticketPdfUrl: ticketUrl,
-                                    buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-                                    buyerEmail: customerDetails.email,
-                                    organization: customerDetails.organization,
-                                    designation: customerDetails.designation,
-                                    passType: item.name,
-                                    amount: item.price * item.quantity,
-                                    currency: "USD",
-                                    paymentId: razorpay_payment_id,
-                                    orderDate: new Date().toISOString(),
-                                }),
-                            }
-                        );
-                    } catch (emailErr) {
-                        console.error("Email send error:", emailErr);
-                    }
+                // Send email receipt
+                try {
+                    await fetch(
+                        `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/email-receipt`,
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                ticketNumber,
+                                ticketPdfUrl: ticketUrl,
+                                buyerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                                buyerEmail: customerDetails.email,
+                                organization: customerDetails.organization,
+                                designation: customerDetails.designation,
+                                passType: item.name,
+                                amount: item.price * item.quantity,
+                                currency: isBangalore ? "INR" : "USD",
+                                paymentId: razorpay_payment_id,
+                                orderDate: new Date().toISOString(),
+                                isBangalore: isBangalore,
+                            }),
+                        }
+                    );
+                } catch (emailErr) {
+                    console.error("Email send error:", emailErr);
                 }
             }
         } catch (err) {

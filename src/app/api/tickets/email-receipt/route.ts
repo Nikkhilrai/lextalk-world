@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
             currency = "USD",
             paymentId,
             orderDate,
+            isBangalore = false,
         } = body;
 
         // Check if Resend is configured
@@ -30,20 +31,26 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Fetch PDF from dynamic download endpoint
+        const eventName = isBangalore ? "Bangalore 2026 South Asia Edition" : "Dubai 2026 Legal Conference";
+        const eventDate = isBangalore ? "June 11, 2026" : "September 9-10, 2026";
+        const eventVenue = isBangalore ? "Bangalore, India" : "Dubai, UAE";
+
+        // Fetch PDF from dynamic download endpoint if available
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
         let pdfBase64 = "";
 
-        try {
-            const pdfResponse = await fetch(`${baseUrl}/api/tickets/${ticketNumber}/download`);
-            if (pdfResponse.ok) {
-                const pdfBuffer = await pdfResponse.arrayBuffer();
-                pdfBase64 = Buffer.from(pdfBuffer).toString("base64");
-            } else {
-                console.error("Failed to fetch PDF:", pdfResponse.status);
+        if (ticketPdfUrl && ticketNumber) {
+            try {
+                const pdfResponse = await fetch(`${baseUrl}/api/tickets/${ticketNumber}/download`);
+                if (pdfResponse.ok) {
+                    const pdfBuffer = await pdfResponse.arrayBuffer();
+                    pdfBase64 = Buffer.from(pdfBuffer).toString("base64");
+                } else {
+                    console.error("Failed to fetch PDF:", pdfResponse.status);
+                }
+            } catch (pdfErr) {
+                console.error("Error fetching PDF for email:", pdfErr);
             }
-        } catch (pdfErr) {
-            console.error("Error fetching PDF for email:", pdfErr);
         }
 
         const formattedDate = new Date(orderDate || Date.now()).toLocaleDateString("en-US", {
@@ -92,7 +99,7 @@ export async function POST(request: NextRequest) {
                             <p style="margin: 0 0 20px; font-size: 16px; color: #1F2937;">Dear ${buyerName},</p>
                             
                             <p style="margin: 0 0 30px; font-size: 15px; line-height: 24px; color: #4B5563;">
-                                Thank you for registering for the <strong>Dubai 2026 Legal Conference</strong>. Your payment has been successfully processed and your conference pass is confirmed.
+                                Thank you for registering for the <strong>${eventName}</strong>. Your payment has been successfully processed and your conference pass is confirmed.
                             </p>
 
                             <!-- Transaction Details -->
@@ -138,44 +145,20 @@ export async function POST(request: NextRequest) {
                                 </tr>
                             </table>
 
-                            <!-- Attendee Info -->
-                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden;">
-                                <tr>
-                                    <td colspan="2" style="background-color: #F3F4F6; padding: 15px 20px; border-bottom: 1px solid #E5E7EB;">
-                                        <h2 style="margin: 0; font-size: 16px; color: #1F2937; font-weight: 600;">Attendee Information</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #6B7280; font-size: 14px; width: 40%;">Name</td>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px;">${buyerName}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #6B7280; font-size: 14px;">Email</td>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px;">${buyerEmail}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #6B7280; font-size: 14px;">Organization</td>
-                                    <td style="padding: 12px 20px; border-bottom: 1px solid #E5E7EB; color: #1F2937; font-size: 14px;">${organization || 'N/A'}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 20px; color: #6B7280; font-size: 14px;">Designation</td>
-                                    <td style="padding: 12px 20px; color: #1F2937; font-size: 14px;">${designation || 'N/A'}</td>
-                                </tr>
-                            </table>
-
                             <!-- Event Details -->
                             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; background-color: #FEF3C7; border: 1px solid #F59E0B; border-radius: 6px; padding: 20px;">
                                 <tr>
                                     <td>
                                         <h3 style="margin: 0 0 10px; font-size: 16px; color: #92400E; font-weight: 600;">Event Details</h3>
-                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Event:</strong> Dubai 2026 Legal Conference</p>
-                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Dates:</strong> September 9-10, 2026</p>
-                                        <p style="margin: 0; color: #78350F; font-size: 14px;"><strong>Venue:</strong> Dubai, UAE</p>
+                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Event:</strong> ${eventName}</p>
+                                        <p style="margin: 0 0 5px; color: #78350F; font-size: 14px;"><strong>Date:</strong> ${eventDate}</p>
+                                        <p style="margin: 0; color: #78350F; font-size: 14px;"><strong>Venue:</strong> ${eventVenue}</p>
                                     </td>
                                 </tr>
                             </table>
 
-                            <!-- Ticket Attachment Notice -->
+                            ${!isBangalore ? `
+                            <!-- Ticket Attachment Notice (Dubai only) -->
                             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; background-color: #DBEAFE; border: 1px solid #3B82F6; border-radius: 6px; padding: 20px;">
                                 <tr>
                                     <td>
@@ -187,15 +170,14 @@ export async function POST(request: NextRequest) {
                                     </td>
                                 </tr>
                             </table>
-
-                            <!-- Support Info -->
-                            <p style="margin: 0 0 10px; font-size: 14px; color: #4B5563; line-height: 22px;">
-                                If you have any questions or need assistance, please don't hesitate to contact our support team at 
-                                <a href="mailto:info@lextalkworld.in" style="color: #3B82F6; text-decoration: none; font-weight: 500;">info@lextalkworld.in</a>
+                            ` : `
+                            <p style="margin: 0 0 30px; font-size: 15px; line-height: 24px; color: #4B5563;">
+                                Please present a copy of this email at the registration desk on the event day to collect your physical pass.
                             </p>
+                            `}
 
                             <p style="margin: 30px 0 0; font-size: 14px; color: #4B5563;">
-                                We look forward to welcoming you at the Dubai 2026 Legal Conference!
+                                We look forward to welcoming you to the conference!
                             </p>
 
                             <p style="margin: 20px 0 0; font-size: 14px; color: #4B5563;">
@@ -204,19 +186,6 @@ export async function POST(request: NextRequest) {
                             </p>
                         </td>
                     </tr>
-
-                    <!-- Footer -->
-                    <tr>
-                        <td style="background-color: #F3F4F6; padding: 30px; text-align: center; border-top: 1px solid #E5E7EB;">
-                            <p style="margin: 0 0 10px; font-size: 12px; color: #6B7280;">
-                                This is an automated confirmation email. Please do not reply to this message.
-                            </p>
-                            <p style="margin: 0; font-size: 12px; color: #9CA3AF;">
-                                © ${new Date().getFullYear()} LexTalk World. All rights reserved.
-                            </p>
-                        </td>
-                    </tr>
-
                 </table>
             </td>
         </tr>
@@ -229,11 +198,11 @@ export async function POST(request: NextRequest) {
         const emailOptions: any = {
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: [buyerEmail],
-            subject: `Payment Confirmation - Dubai 2026 Conference Pass (${ticketNumber})`,
+            subject: `Payment Confirmation - ${isBangalore ? 'Bangalore' : 'Dubai'} 2026 Conference Pass (#${ticketNumber})`,
             html: htmlEmail,
         };
 
-        // Attach PDF if we got it
+        // Attach PDF if available
         if (pdfBase64) {
             emailOptions.attachments = [
                 {
@@ -245,6 +214,29 @@ export async function POST(request: NextRequest) {
 
         // Send email with Resend
         const { data, error } = await resend.emails.send(emailOptions);
+
+        // Also send a notification to the organizer
+        try {
+            await resend.emails.send({
+                from: "Notifications <noreply@lextalkworld.in>",
+                to: ["info@lextalkworld.in"],
+                subject: `NEW Payment Confirmed: ${buyerName} - ${isBangalore ? 'Bangalore' : 'Dubai'} 2026`,
+                html: `
+                    <h2>New Conference Registration Details</h2>
+                    <p><strong>Name:</strong> ${buyerName}</p>
+                    <p><strong>Email:</strong> ${buyerEmail}</p>
+                    <p><strong>Organization:</strong> ${organization}</p>
+                    <p><strong>Designation:</strong> ${designation}</p>
+                    <p><strong>Pass Type:</strong> ${passType}</p>
+                    <p><strong>Amount:</strong> ${currencySymbol}${amount?.toLocaleString()} ${currency}</p>
+                    <p><strong>Payment ID:</strong> ${paymentId}</p>
+                    <p><strong>Order Number:</strong> #${ticketNumber}</p>
+                    <p><strong>Location:</strong> ${isBangalore ? 'Bangalore' : 'Dubai'}</p>
+                `
+            });
+        } catch (organizerErr) {
+            console.error("Organizer notification error:", organizerErr);
+        }
 
         if (error) {
             console.error("Error sending email:", error);

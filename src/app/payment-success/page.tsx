@@ -9,6 +9,7 @@ function SuccessContent() {
     const searchParams = useSearchParams();
     const ticketsParam = searchParams.get("tickets");
     const tickets = ticketsParam ? ticketsParam.split(",").filter(Boolean) : [];
+    const isBangalore = tickets.some(t => t.startsWith("BNG-"));
 
     const handleDownload = async (ticketId: string) => {
         try {
@@ -37,10 +38,13 @@ function SuccessContent() {
             </div>
             <h1 className="text-3xl font-serif font-bold text-slate-900 mb-4">Payment Successful!</h1>
             <p className="text-slate-600 mb-8 leading-relaxed">
-                Thank you for your purchase. A confirmation email has been sent to you with your pass details.
+                {isBangalore 
+                    ? "Thank you for your Bangalore 2026 registration. Your attendance is confirmed, and a confirmation email has been sent to you."
+                    : "Thank you for your purchase. A confirmation email has been sent to you with your pass details."
+                }
             </p>
 
-            {tickets.length > 0 && (
+            {!isBangalore && tickets.length > 0 && (
                 <div className="mb-8">
                     <h2 className="text-lg font-bold text-slate-900 mb-4">Your Tickets</h2>
                     <div className="space-y-3">
@@ -61,7 +65,7 @@ function SuccessContent() {
             )}
 
             <Link
-                href="/dubai-awardee-confirmation-2026"
+                href={isBangalore ? "/bangalore-awardee-confirmation-2026" : "/dubai-awardee-confirmation-2026"}
                 className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-lg flex items-center justify-center gap-2"
             >
                 Return to Event Page
