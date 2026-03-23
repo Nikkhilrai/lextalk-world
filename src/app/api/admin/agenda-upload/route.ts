@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
                         {
                             folder: "lextalk/agendas",
                             public_id: `${eventSlug}-agenda`,
-                            resource_type: "image",
+                            resource_type: "raw",
                             format: "pdf",
                             overwrite: true,
                         },
