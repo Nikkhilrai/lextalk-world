@@ -278,17 +278,18 @@ export default function AgendaDownloadsPage() {
                         className="flex-1 px-4 py-3 border border-amber-500/30 rounded-lg bg-slate-800 text-white focus:ring-2 focus:ring-amber-500 outline-none"
                     >
                         <option value="" disabled>Select Event</option>
-                        {conferences.map(conf => (
-                            <option key={conf.slug} value={conf.slug}>{conf.name}</option>
-                        ))}
-                        {/* Fallback if no conferences are loaded yet or for specific events */}
-                        {conferences.length === 0 && (
-                            <>
-                                <option value="dubai-2026">Dubai 2026</option>
-                                <option value="mumbai-2026">Mumbai 2026</option>
-                                <option value="bangalore-2026">Bangalore 2026</option>
-                            </>
-                        )}
+                        {/* Static core options always present */}
+                        <option value="dubai-2026">Dubai 2026</option>
+                        <option value="mumbai-2026">Mumbai 2026</option>
+                        <option value="bangalore-2026">Bangalore 2026</option>
+                        
+                        {/* Dynamic options (excluding core ones if already present) */}
+                        {conferences
+                            .filter(conf => !["dubai-2026", "mumbai-2026", "bangalore-2026"].includes(conf.slug))
+                            .map(conf => (
+                                <option key={conf.slug} value={conf.slug}>{conf.name}</option>
+                            ))
+                        }
                     </select>
                     <input
                         type="file"
