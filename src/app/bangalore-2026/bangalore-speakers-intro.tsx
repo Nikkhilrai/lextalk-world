@@ -139,8 +139,8 @@ export default function BangaloreSpeakersIntro() {
                             {/* Image */}
                             <div className="relative w-full rounded-lg overflow-hidden shadow-lg ring-1 ring-slate-200/60" style={{ aspectRatio: '4/3' }}>
                                 <Image
-                                    src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1200&auto=format&fit=crop"
-                                    alt="Bangalore Legal Innovation Conference"
+                                    src="/bangalore-2026/bangalore.png"
+                                    alt="Bangalore Corporate Legal Faculty"
                                     fill
                                     sizes="(max-width: 1024px) 100vw, 40vw"
                                     className="object-cover"
