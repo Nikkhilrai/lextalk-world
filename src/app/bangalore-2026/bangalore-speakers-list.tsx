@@ -111,13 +111,13 @@ export default function BangaloreSpeakersList() {
                                         <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
                                         
                                         {/* Main Portrait Container */}
-                                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-100 rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
+                                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
                                             {speaker.image ? (
                                                 <Image
                                                     src={speaker.image}
                                                     alt={speaker.name}
                                                     fill
-                                                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                                    className="object-contain transition-transform duration-700 group-hover:scale-105"
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-300">
