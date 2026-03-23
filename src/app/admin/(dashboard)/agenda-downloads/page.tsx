@@ -25,10 +25,24 @@ export default function AgendaDownloadsPage() {
     const [selectedEventForUpload, setSelectedEventForUpload] = useState("");
     const [viewingEntry, setViewingEntry] = useState<AgendaDownload | null>(null);
     const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
+    const [conferences, setConferences] = useState<{ name: string; slug: string }[]>([]);
 
     useEffect(() => {
         fetchDownloads();
+        fetchConferences();
     }, []);
+
+    const fetchConferences = async () => {
+        try {
+            const response = await fetch("/api/admin/conferences");
+            const data = await response.json();
+            if (data.success) {
+                setConferences(data.conferences);
+            }
+        } catch (error) {
+            console.error("Error fetching conferences:", error);
+        }
+    };
 
     const fetchDownloads = async () => {
         try {
@@ -264,9 +278,17 @@ export default function AgendaDownloadsPage() {
                         className="flex-1 px-4 py-3 border border-amber-500/30 rounded-lg bg-slate-800 text-white focus:ring-2 focus:ring-amber-500 outline-none"
                     >
                         <option value="" disabled>Select Event</option>
-                        <option value="dubai-2026">Dubai 2026</option>
-                        <option value="mumbai-2026">Mumbai 2026</option>
-                        <option value="houston-2026">Houston 2026</option>
+                        {conferences.map(conf => (
+                            <option key={conf.slug} value={conf.slug}>{conf.name}</option>
+                        ))}
+                        {/* Fallback if no conferences are loaded yet or for specific events */}
+                        {conferences.length === 0 && (
+                            <>
+                                <option value="dubai-2026">Dubai 2026</option>
+                                <option value="mumbai-2026">Mumbai 2026</option>
+                                <option value="bangalore-2026">Bangalore 2026</option>
+                            </>
+                        )}
                     </select>
                     <input
                         type="file"
