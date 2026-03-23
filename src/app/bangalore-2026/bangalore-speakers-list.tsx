@@ -41,6 +41,16 @@ const speakers: any[] = [
         name: "Tanin Chakraborty",
         title: "Senior Director, Global DPO, Biocon Biologics",
         image: "/bangalore-2026/speakers images/Tanin Chakraborty.png",
+    },
+    {
+        name: "Arvind Subramaniam",
+        title: "Data Privacy Officer, M2P Fintech",
+        image: "/bangalore-2026/speakers images/Arvind Subramaniam .png",
+    },
+    {
+        name: "Poulomi Chakraborty",
+        title: "Senior Corporate Counsel, Infosys",
+        image: "/bangalore-2026/speakers images/Poulomi Chakraborty.png",
     }
 ];
 
@@ -98,7 +108,7 @@ export default function BangaloreSpeakersList() {
 
                 {speakers.length > 0 ? (
                     /* Speakers Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                         {speakers.map((speaker, idx) => (
                             <motion.div
                                 key={idx}
@@ -115,14 +125,15 @@ export default function BangaloreSpeakersList() {
                                         {/* Outer thin formal frame */}
                                         <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
                                         
-                                        {/* Main Portrait Container */}
-                                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
+                                        {/* Main Portrait Container - Changed to h-auto to remove vertical white space */}
+                                        <div className="relative w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white h-auto flex flex-col items-center">
                                             {speaker.image ? (
                                                 <Image
                                                     src={speaker.image}
                                                     alt={speaker.name}
-                                                    fill
-                                                    className="object-contain transition-transform duration-700 group-hover:scale-105"
+                                                    width={400}
+                                                    height={500}
+                                                    className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-300">
