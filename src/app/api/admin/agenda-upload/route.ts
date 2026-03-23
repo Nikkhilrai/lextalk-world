@@ -47,8 +47,9 @@ export async function POST(request: NextRequest) {
                     const uploadStream = cloudinary.uploader.upload_stream(
                         {
                             folder: "lextalk/agendas",
-                            public_id: `${eventSlug}-agenda.pdf`,
-                            resource_type: "raw",
+                            public_id: `${eventSlug}-agenda`,
+                            resource_type: "image",
+                            format: "pdf",
                             overwrite: true,
                         },
                         (error, result) => {
