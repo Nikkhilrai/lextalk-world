@@ -36,6 +36,11 @@ const speakers: any[] = [
         name: "Amit Anand",
         title: "India Head Legal ( VP Legal ), Commonwealth Bank",
         image: "/bangalore-2026/speakers images/Amit Anand .png",
+    },
+    {
+        name: "Tanin Chakraborty",
+        title: "Senior Director, Global DPO, Biocon Biologics",
+        image: "/bangalore-2026/speakers images/Tanin Chakraborty.png",
     }
 ];
 
