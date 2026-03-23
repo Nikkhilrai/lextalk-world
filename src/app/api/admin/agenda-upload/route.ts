@@ -41,16 +41,22 @@ export async function POST(request: NextRequest) {
             process.env.CLOUDINARY_API_SECRET;
 
         if (isCloudinaryConfigured) {
-            // Upload to Cloudinary
+            // Upload to Cloudinary using a Promise (since upload_stream is callback-based)
             try {
-                const base64Data = buffer.toString('base64');
-                const dataUri = `data:application/pdf;base64,${base64Data}`;
-
-                const result = await cloudinary.uploader.upload(dataUri, {
-                    folder: "lextalk/agendas",
-                    public_id: `${eventSlug}-agenda`,
-                    resource_type: "auto",
-                    overwrite: true
+                const result: any = await new Promise((resolve, reject) => {
+                    const uploadStream = cloudinary.uploader.upload_stream(
+                        {
+                            folder: "lextalk/agendas",
+                            public_id: `${eventSlug}-agenda.pdf`,
+                            resource_type: "raw",
+                            overwrite: true,
+                        },
+                        (error, result) => {
+                            if (error) reject(error);
+                            else resolve(result);
+                        }
+                    );
+                    uploadStream.end(buffer);
                 });
 
                 // Save the Cloudinary URL to the database
