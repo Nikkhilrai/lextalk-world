@@ -34,21 +34,37 @@ export function AgendaModal({ isOpen, onClose, eventSlug }: AgendaModalProps) {
                 body: JSON.stringify({ ...data, eventSlug })
             });
 
-            const result = await response.json();
+            if (!response.ok) {
+                const result = await response.json().catch(() => ({}));
+                throw new Error(result.error || "Failed to submit");
+            }
 
-            if (!response.ok) throw new Error(result.error || "Failed to submit");
+            const contentType = response.headers.get("content-type") || "";
 
-            // Direct download calculation
-            const link = document.createElement('a');
-            // Add timestamp to prevent caching
-            link.href = `${result.agendaUrl}?t=${new Date().getTime()}`;
-            link.setAttribute('download', `${eventSlug}-agenda.pdf`);
-            link.setAttribute('target', '_blank'); // Fallback for some browsers
-            link.style.display = 'none';
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (contentType.includes("application/pdf") || contentType.includes("octet-stream")) {
+                // Server proxied the file — trigger blob download
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `${eventSlug}-agenda.pdf`;
+                link.style.display = "none";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 10000);
+            } else {
+                // Fallback: local static file path returned as JSON
+                const result = await response.json();
+                const link = document.createElement("a");
+                link.href = result.agendaUrl;
+                link.download = `${eventSlug}-agenda.pdf`;
+                link.target = "_blank";
+                link.style.display = "none";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
 
             setSubmitSuccess(true);
             reset();
