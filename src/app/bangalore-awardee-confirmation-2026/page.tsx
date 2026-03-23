@@ -60,6 +60,9 @@ const passes = [
     },
 ];
 
+const physicalPasses = passes.filter(p => p.tier !== "Virtual");
+const virtualPasses = passes.filter(p => p.tier === "Virtual");
+
 function PassCard({ pass }: { pass: typeof passes[0] }) {
     const { addItem } = useCart();
     const { showToast } = useToast();
@@ -73,7 +76,7 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
             id: pass.id,
             name: pass.name,
             price: pass.price,
-            image: "/logo/lextalkworld_logo.png", // Using logo as fallback since no images requested
+            image: "/logo/lextalkworld_logo.png",
         });
         showToast(`${pass.name} added to cart!`);
     };
@@ -113,154 +116,150 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
     const colors = tierColors[pass.tier as keyof typeof tierColors] || tierColors.Standard;
 
     return (
-        <div className={`relative bg-white rounded-2xl shadow-xl border-2 ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 active:scale-[0.98] active:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/50 transition-all duration-300 flex flex-col min-h-[650px] group cursor-pointer`}>
+        <div className={`relative bg-white rounded-2xl shadow-xl border-2 ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer`}>
             
             {/* Header with Gradient & Icon */}
-            <div className={`bg-gradient-to-br ${colors.gradient} px-8 py-10 text-center relative`}>
+            <div className={`bg-gradient-to-br ${colors.gradient} px-6 py-8 text-center relative`}>
                 {/* Icon Background */}
-                <div className="absolute top-0 right-0 p-4 opacity-10">
-                    <PassIcon size={120} />
+                
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.iconBg} backdrop-blur-sm mb-3 ring-1 ring-white/20 shadow-inner`}>
+                    <PassIcon className="text-white" size={24} />
                 </div>
                 
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${colors.iconBg} backdrop-blur-sm mb-4 ring-1 ring-white/20 shadow-inner`}>
-                    <PassIcon className="text-white" size={32} />
-                </div>
-                
-                <h3 className="text-2xl font-serif font-bold text-white mb-2">{pass.name}</h3>
+                <h3 className="text-xl font-serif font-bold text-white mb-2">{pass.name}</h3>
                 
                 <div className="flex items-center justify-center gap-1">
-                    <span className="text-4xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
-                    <div className="flex flex-col items-start leading-none opacity-80">
-                        <span className="text-white text-xs font-bold uppercase tracking-wider">USD</span>
-                        <span className="text-white/60 text-[10px]">Per Entry</span>
-                    </div>
+                    <span className="text-3xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-wider">USD</span>
                 </div>
 
                 {/* Tier Badge */}
-                <div className={`absolute top-4 right-4 ${colors.badge} text-[10px] font-black text-slate-950 px-3 py-1 rounded-full uppercase tracking-[0.2em] shadow-lg`}>
+                <div className={`absolute top-3 right-3 ${colors.badge} text-[9px] font-black text-slate-950 px-2.5 py-0.5 rounded-full uppercase tracking-[0.15em] shadow-lg`}>
                     {pass.tier}
                 </div>
             </div>
 
             {/* Benefits Section */}
-            <div className="p-8 flex-1 flex flex-col bg-white">
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="h-px flex-1 bg-slate-100"></div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">Included Benefits</span>
-                    <div className="h-px flex-1 bg-slate-100"></div>
-                </div>
-
-                <ul className="space-y-4 flex-1">
+            <div className="p-6 flex-1 flex flex-col bg-white">
+                <ul className="space-y-3 flex-1 mb-6">
                     {pass.benefits.map((benefit, index) => (
-                        <li key={index} className="flex gap-3 text-[13px] text-slate-600 group/item">
-                            <CheckCircle2 className={`flex-shrink-0 w-5 h-5 ${colors.accent} transition-transform group-hover/item:scale-110`} />
-                            <span className="leading-relaxed">{benefit}</span>
+                        <li key={index} className="flex gap-2.5 text-[12px] text-slate-600 leading-snug">
+                            <CheckCircle2 className={`flex-shrink-0 w-4 h-4 ${colors.accent} mt-0.5`} />
+                            <span>{benefit}</span>
                         </li>
                     ))}
                 </ul>
 
                 {/* Button Section - Pushed to bottom */}
-                <div className="mt-10 pt-8 border-t border-slate-50">
-                    <button
-                        onClick={handleAddToCart}
-                        className={`w-full py-4 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-xl hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-black/10 flex items-center justify-center gap-2 group/btn`}
-                    >
-                        <span>Confirm Attendance</span>
-                        <div className="w-1.5 h-1.5 rounded-full bg-white group-hover/btn:scale-150 transition-transform"></div>
-                    </button>
-
-                    {/* Share Buttons */}
-                    <div className="flex items-center justify-center gap-5 mt-6">
-                        <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-400 hover:text-blue-600 transition-colors"
-                        >
-                            <Facebook size={16} />
-                        </a>
-                        <a
-                            href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-400 hover:text-green-600 transition-colors"
-                        >
-                            <MessageCircle size={16} />
-                        </a>
-                        <a
-                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-400 hover:text-slate-900 transition-colors"
-                        >
-                            <Twitter size={16} />
-                        </a>
-                    </div>
-                </div>
+                <button
+                    onClick={handleAddToCart}
+                    className={`w-full py-3 bg-gradient-to-r ${colors.gradient} text-white text-sm font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all duration-300 shadow-md flex items-center justify-center gap-2`}
+                >
+                    Confirm Attendance
+                </button>
             </div>
         </div>
     );
 }
 
 export default function BangaloreAwardeeConfirmationPage() {
+    const { addItem } = useCart();
+    const { showToast } = useToast();
+
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-slate-50">
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 sm:pt-44 sm:pb-28 overflow-hidden">
+            <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-24 overflow-hidden bg-[#050a15]">
                 {/* Background Decor */}
-                <div className="absolute inset-0 bg-[#050a15] z-0">
-                    <div className="absolute inset-0 opacity-[0.03]" 
-                        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] -mr-48 -mt-48" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] -ml-24 -mb-24" />
-                </div>
-
+                <div className="absolute inset-0 opacity-[0.03]" 
+                    style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+                
                 <div className="container mx-auto px-4 text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-500 text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
-                        <CheckCircle2 size={12} />
-                        Awardee Exclusive
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-500 text-[9px] font-bold uppercase tracking-[0.3em] mb-6">
+                        <Trophy size={10} />
+                        Awardee Exclusive Portal
                     </div>
                     
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight">
-                        Bangalore Awardee <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600 font-italic italic">Confirmation 2026</span>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tight">
+                        Confirmation <span className="text-amber-500 italic">2026</span>
                     </h1>
                     
-                    <div className="w-24 h-1 bg-amber-500/50 mx-auto rounded-full mb-8"></div>
+                    <div className="w-16 h-1 bg-amber-500/50 mx-auto rounded-full mb-8"></div>
                     
                     <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-light">
-                        Congratulations on being selected for the LexTalk World Global Legal Awards. Please confirm your participation by selecting one of the exclusive awardee passes below.
+                        Congratulations on your selection for the LexTalk World Global Legal Awards. Please select your pass type to confirm your presence in Bangalore.
                     </p>
                 </div>
             </section>
 
-            {/* Pass Cards Grid */}
-            <section className="py-20 bg-slate-50 relative z-10 -mt-8 rounded-t-[40px] shadow-2xl">
+            {/* Pass Section */}
+            <section className="py-16 -mt-10 bg-slate-50 relative z-10 rounded-t-[40px]">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
-                        {passes.map((pass) => (
-                            <PassCard
-                                key={pass.id}
-                                pass={pass}
-                            />
-                        ))}
+                    {/* Physical Passes */}
+                    <div className="mb-20">
+                        <div className="text-center mb-10">
+                            <h2 className="text-2xl font-serif font-bold text-slate-800 mb-2">Physical Attendance Passes</h2>
+                            <p className="text-slate-500 text-sm">Join us in person for the full conference experience</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+                            {physicalPasses.map((pass) => (
+                                <PassCard key={pass.id} pass={pass} />
+                            ))}
+                        </div>
                     </div>
-                    
-                    {/* Trust/Support Section */}
-                    <div className="mt-24 text-center">
-                        <p className="text-slate-400 text-sm font-medium uppercase tracking-[0.2em] mb-8">Secure Checkout & Support</p>
-                        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-                             {/* Support Badge placeholder */}
-                             <div className="flex items-center gap-2 text-slate-600">
-                                 <ShieldCheck size={24} />
-                                 <span className="font-bold text-lg">Secure SSL Payment</span>
-                             </div>
-                             <div className="flex items-center gap-2 text-slate-600">
-                                 <MessageCircle size={24} />
-                                 <span className="font-bold text-lg">24/7 Awardee Support</span>
-                             </div>
+
+                    {/* Virtual Passes */}
+                    <div className="max-w-4xl mx-auto py-12 px-6 rounded-3xl bg-blue-50 border border-blue-100 flex flex-col md:flex-row items-center gap-10">
+                        <div className="flex-1 text-center md:text-left">
+                            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 mb-4">
+                                <Monitor size={24} />
+                            </div>
+                            <h2 className="text-2xl font-serif font-bold text-slate-800 mb-3">Virtual Awardee Pass</h2>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                                Cannot make it to Bangalore? Join the global conversation virtually. Access all sessions, virtual networking, and receive your digital award recognition directly.
+                            </p>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                                {virtualPasses[0].benefits.map((benefit, index) => (
+                                    <li key={index} className="flex gap-2 text-[12px] text-slate-600">
+                                        <CheckCircle2 className="flex-shrink-0 w-4 h-4 text-blue-500 mt-0.5" />
+                                        <span>{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="w-full md:w-64 bg-white p-6 rounded-2xl shadow-xl border border-blue-100 text-center">
+                            <div className="text-blue-600 text-sm font-bold uppercase tracking-widest mb-2">Virtual Pass</div>
+                            <div className="text-4xl font-extrabold text-slate-900 mb-6">$600<span className="text-base font-normal text-slate-400">.00</span></div>
+                            <button
+                                onClick={() => {
+                                    addItem({
+                                        id: virtualPasses[0].id,
+                                        name: virtualPasses[0].name,
+                                        price: virtualPasses[0].price,
+                                        image: "/logo/lextalkworld_logo.png",
+                                    });
+                                    showToast(`${virtualPasses[0].name} added to cart!`);
+                                }}
+                                className="w-full py-3 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-all shadow-lg"
+                            >
+                                Confirm Virtual
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Trust Section */}
+                    <div className="mt-20 text-center opacity-40">
+                        <div className="flex flex-wrap items-center justify-center gap-8 text-slate-600">
+                            <div className="flex items-center gap-2">
+                                <ShieldCheck size={20} />
+                                <span className="font-bold text-sm">Secure Checkout</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <MessageCircle size={20} />
+                                <span className="font-bold text-sm">Awardee Support</span>
+                            </div>
                         </div>
                     </div>
                 </div>
