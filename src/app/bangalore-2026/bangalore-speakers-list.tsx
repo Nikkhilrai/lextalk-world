@@ -51,6 +51,31 @@ const speakers: any[] = [
         name: "Poulomi Chakraborty",
         title: "Senior Corporate Counsel, Infosys",
         image: "/bangalore-2026/speakers images/Poulomi Chakraborty.png",
+    },
+    {
+        name: "Hena Datta",
+        title: "Head of Legal, Emmvee Group",
+        image: "/bangalore-2026/speakers images/Hena Datta.png",
+    },
+    {
+        name: "Smitha Chandrashekar",
+        title: "Legal Director, Harman International",
+        image: "/bangalore-2026/speakers images/Smitha Chandrashekar .png",
+    },
+    {
+        name: "Prashant Srivastava",
+        title: "Head of Contracts & Attorney Regional Counsel, Hewlett Packard Enterprise",
+        image: "/bangalore-2026/speakers images/Prashant Srivastava.png",
+    },
+    {
+        name: "Deepalakshmi Vadivelan",
+        title: "General Counsel & SVP Legal, Global DPO, Quess Corp Limited",
+        image: "/bangalore-2026/speakers images/Deepalakshmi Vadivelan.png",
+    },
+    {
+        name: "Krishna Chellapilla",
+        title: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",
+        image: "/bangalore-2026/speakers images/Krishna Chellapilla.png",
     }
 ];
 
