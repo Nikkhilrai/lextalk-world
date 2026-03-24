@@ -50,23 +50,6 @@ export function BangaloreHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?:
 
             {/* Content */}
             <div className="relative z-30 container mx-auto px-4 text-center pt-32 md:pt-28">
-                {/* Company Logo */}
-                <div className={`flex justify-center mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <div className="relative w-56 h-16 md:w-80 md:h-24 opacity-90">
-                        <Image
-                            src="/logo/mrs-logo.avif"
-                            alt="Mrs Company Logo"
-                            fill
-                            className="object-contain"
-                            priority
-                        />
-                    </div>
-                </div>
-
-                {/* Presents Badge */}
-                <div className={`mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
-                </div>
 
                 {/* LexTalk Logo */}
                 <div className={`flex items-center justify-center mb-5 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

@@ -32,49 +32,6 @@ export function BangaloreSponsor() {
                     </motion.div>
                 </div>
 
-                {/* Presenting Sponsor */}
-                <div className="mb-24 relative">
-                    <div className="flex flex-col items-center relative z-10">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                            className="mb-10"
-                        >
-                            <div className="relative px-8 py-3 bg-white border border-amber-100 rounded-full shadow-[0_4px_20px_-2px_rgba(245,158,11,0.15)]">
-                                <h3 className="text-lg md:text-xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 uppercase tracking-widest">
-                                    Presenting Sponsor
-                                </h3>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
-                            className="relative group cursor-pointer"
-                        >
-                            <div className="absolute inset-x-0 bottom-0 h-1 bg-amber-500/20 group-hover:h-full group-hover:bg-amber-500/5 transition-all duration-500 rounded-2xl" />
-                            <a
-                                href="https://www.mrsprofessional.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="relative w-64 h-36 md:w-[400px] md:h-52 bg-white rounded-2xl border border-slate-100 flex items-center justify-center p-8 transition-all duration-500 shadow-sm group-hover:shadow-xl"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/logo/mrs-logo.avif"
-                                        alt="MRS Company - Presenting Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </a>
-                        </motion.div>
-                    </div>
-                </div>
 
                 {/* Grid for other tiers */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
