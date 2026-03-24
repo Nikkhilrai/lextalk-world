@@ -1,37 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { v2 as cloudinary } from "cloudinary";
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// Extract public_id and resource_type from a Cloudinary secure_url
-function parseCloudinaryUrl(url: string): { publicId: string; resourceType: string } | null {
-    try {
-        const match = url.match(/cloudinary\.com\/[^/]+\/(image|raw|video)\/upload\/(?:v\d+\/)?(.+)$/);
-        if (!match) return null;
-        // Strip file extension for public_id
-        const publicId = match[2].replace(/\.[^/.]+$/, "");
-        return { publicId, resourceType: match[1] };
-    } catch {
-        return null;
-    }
-}
-
-async function getAgendaUrl(eventSlug: string): Promise<string> {
-    const eventAgenda = await prisma.eventAgenda.findUnique({
-        where: { eventSlug }
-    });
-
-    if (eventAgenda?.url) {
-        return eventAgenda.url;
-    }
-
-    return `/agendas/${eventSlug}-agenda.pdf`;
-}
 
 export async function POST(request: NextRequest) {
     try {
@@ -60,50 +28,9 @@ export async function POST(request: NextRequest) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        const agendaUrl = await getAgendaUrl(eventSlug);
+        // Always serve from static public/agendas/ folder
+        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
 
-        // If it's a Cloudinary or external URL, generate a signed download URL
-        // and proxy-stream the file from our server with correct headers.
-        if (agendaUrl.startsWith("http")) {
-            const filename = `${eventSlug}-agenda.pdf`;
-            const parsed = parseCloudinaryUrl(agendaUrl);
-
-            let fetchUrl = agendaUrl;
-
-            if (parsed && process.env.CLOUDINARY_API_SECRET) {
-                // Generate a signed URL that bypasses Cloudinary ACL restrictions
-                fetchUrl = cloudinary.utils.private_download_url(
-                    parsed.publicId,
-                    "pdf",
-                    {
-                        resource_type: parsed.resourceType as "image" | "raw" | "video",
-                        attachment: true,
-                        expires_at: Math.floor(Date.now() / 1000) + 300, // valid 5 min
-                    }
-                );
-            }
-
-            const upstream = await fetch(fetchUrl);
-
-            if (!upstream.ok) {
-                console.error("[agenda-download] Failed to fetch agenda. URL:", fetchUrl, "Status:", upstream.status);
-                return NextResponse.json(
-                    { error: "Agenda file could not be retrieved. Please try again or contact the organiser." },
-                    { status: 502 }
-                );
-            }
-
-            return new NextResponse(upstream.body, {
-                status: 200,
-                headers: {
-                    "Content-Type": "application/pdf",
-                    "Content-Disposition": `attachment; filename="${filename}"`,
-                    "Cache-Control": "no-store",
-                },
-            });
-        }
-
-        // Local static file — return URL for the client to navigate to
         return NextResponse.json({
             success: true,
             agendaUrl,
@@ -129,8 +56,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "Event slug is required" }, { status: 400 });
         }
 
-        const agendaUrl = await getAgendaUrl(eventSlug);
-        return NextResponse.json({ agendaUrl });
+        return NextResponse.json({ agendaUrl: `/agendas/${eventSlug}-agenda.pdf` });
 
     } catch (error) {
         console.error("Error fetching agenda:", error);
