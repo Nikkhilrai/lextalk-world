@@ -76,6 +76,11 @@ const speakers: any[] = [
         name: "Krishna Chellapilla",
         title: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",
         image: "/bangalore-2026/speakers images/Krishna Chellapilla.png",
+    },
+    {
+        name: "Iqbal Tauseef",
+        title: "Executive Director – Legal Head - India & Global Contracts COE, TTEC",
+        image: "/bangalore-2026/speakers images/Iqbal Tauseef.png",
     }
 ];
 
