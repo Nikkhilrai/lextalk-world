@@ -76,6 +76,9 @@ const speakers: any[] = [
         name: "Krishna Chellapilla",
         title: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",
         image: "/bangalore-2026/speakers images/Krishna Chellapilla.png",
+        bio: `Krishna Chellapilla has around 25 years of experience across diverse aspects of Intellectual Property Rights and currently heads the Patents, Prosecution and Copyright activities for TCS. His primary responsibility is to create and protect TCS intellectual property. His specialization includes managing patent prosecution across jurisdictions and handling oral proceedings and examiner interviews at European Patent Office (EPO) and US Patent and Trademark office (USPTO).
+
+Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before that, worked with a US-based law firm as an IP attorney.`
     },
     {
         name: "Iqbal Tauseef",
