@@ -53,12 +53,10 @@ export function BangaloreSponsor() {
                     {/* Diamond Sponsors */}
                     <div className="lg:col-span-2">
                         <div className="flex flex-col items-center">
-                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Diamond Sponsors</h4>
-                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
+                            <div className="flex justify-center w-full">
                                 {[
-                                    { name: "Case Docker", src: "/dubai-event/sponsors/CasedockerLogo.avif", url: "https://www.casedocker.com/landing/" },
-                                    { name: "Lex Corp", src: "/dubai-event/sponsors/Lex_Corp_Logo.avif", url: "https://home.lexcorp.org.in/" },
-                                    { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/Gorodissky_Logo.jpg", url: "https://www.gorodissky.com/" }
+                                    { name: "Case Docker", src: "/dubai-event/sponsors/CasedockerLogo.avif", url: "https://www.casedocker.com/landing/" }
                                 ].map((sp, i) => (
                                     <motion.div
                                         key={i}
@@ -77,37 +75,6 @@ export function BangaloreSponsor() {
                         </div>
                     </div>
 
-                    {/* Gold & Silver */}
-                    <div className="md:col-span-2 lg:col-span-3">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
-                            <div className="flex flex-col items-center">
-                                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Gold Sponsor</h4>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
-                                >
-                                    <a href="https://asgpartners.co.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                        <Image src="/dubai-event/sponsors/AsgandPartnerlogo.jpeg" alt="Asgand & Partner" fill className="object-contain mix-blend-multiply" />
-                                    </a>
-                                </motion.div>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Silver Sponsor</h4>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
-                                >
-                                    <a href="https://bgklawassociates.co.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                        <Image src="/dubai-event/sponsors/BGK Law Associates.jpg" alt="BGK Law Associates" fill className="object-contain mix-blend-multiply" />
-                                    </a>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
