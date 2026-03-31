@@ -33,10 +33,10 @@ export function BangaloreSponsor() {
                 </div>
 
 
-                {/* Grid for other tiers */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                {/* Centered container for two tiers */}
+                <div className="flex flex-col md:flex-row justify-center gap-12 max-w-4xl mx-auto">
                     {/* Platinum */}
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center flex-1 max-w-sm">
                         <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -51,29 +51,19 @@ export function BangaloreSponsor() {
                     </div>
 
                     {/* Diamond Sponsors */}
-                    <div className="lg:col-span-2">
-                        <div className="flex flex-col items-center">
-                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
-                            <div className="flex justify-center w-full">
-                                {[
-                                    { name: "Case Docker", src: "/dubai-event/sponsors/CasedockerLogo.avif", url: "https://www.casedocker.com/landing/" }
-                                ].map((sp, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1 }}
-                                        className="bg-slate-50/50 rounded-xl p-4 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-md transition-all duration-300 group"
-                                    >
-                                        <a href={sp.url} target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[3/2]">
-                                            <Image src={sp.src} alt={sp.name} fill className="object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
-                                        </a>
-                                    </motion.div>
-                                ))}
-                            </div>
+                    <div className="flex flex-col items-center flex-1 max-w-sm">
+                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="w-full bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            >
+                                <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
+                                    <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
+                                </a>
+                            </motion.div>
                         </div>
-                    </div>
 
                 </div>
             </div>
