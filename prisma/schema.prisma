@@ -506,3 +506,22 @@ model Notification {
   @@index([read])
   @@index([createdAt])
 }
+
+// Speaker Application / Interest Form
+model SpeakerApplication {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String
+  country    String
+  company    String
+  designation String
+  conference String   // Which conference they're interested in
+  status     String   @default("New") // New, Reviewed, Shortlisted, Rejected
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}

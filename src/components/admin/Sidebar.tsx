@@ -30,6 +30,7 @@ const NAV_GROUPS = [
             { label: "Agenda Downloads", href: "/admin/agenda-downloads", icon: Download },
             { label: "Seat Reservations", href: "/admin/seat-reservations", icon: Armchair },
             { label: "Delegate Coupons", href: "/admin/delegate-coupons", icon: Tag },
+            { label: "Speaker Applications", href: "/admin/speaker-applications", icon: Mic },
             { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
