@@ -85,6 +85,16 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
         name: "Iqbal Tauseef",
         title: "Executive Director – Legal Head - India & Global Contracts COE, TTEC",
         image: "/bangalore-2026/speakers images/Iqbal Tauseef.png",
+    },
+    {
+        name: "Alpa Sood",
+        title: "Director - Legal, Marvell Technology",
+        image: "/bangalore-2026/speakers images/Alpa Sood.png",
+    },
+    {
+        name: "Sathish Kolar Ramamoorthy",
+        title: "General Counsel VP Legal & CS, Manipal Health Enterprises PVT. LTD.",
+        image: "/bangalore-2026/speakers images/Sathish Kolar Ramamoorthy.png",
     }
 ];
 
