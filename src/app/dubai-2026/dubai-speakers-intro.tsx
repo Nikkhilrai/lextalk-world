@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 
 const focusAreas = [
     "Corporate legal leadership in high-growth, highly regulated markets",
@@ -14,7 +15,10 @@ const focusAreas = [
 ];
 
 export default function DubaiSpeakersIntro() {
+    const [modalOpen, setModalOpen] = useState(false);
+
     return (
+        <>
         <section className="relative bg-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-100">
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
@@ -112,13 +116,13 @@ export default function DubaiSpeakersIntro() {
                                     </p>
                                 </div>
 
-                                <Link
-                                    href="/speakers/apply"
+                                <button
+                                    onClick={() => setModalOpen(true)}
                                     className="inline-flex items-center justify-center gap-2.5 px-7 py-2.5 bg-slate-900 hover:bg-amber-600 text-white font-semibold text-sm rounded transition-all duration-300 w-full sm:w-auto shrink-0 group/btn"
                                 >
                                     <span>Apply Now</span>
                                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </motion.div>
@@ -163,5 +167,8 @@ export default function DubaiSpeakersIntro() {
                 </div>
             </div>
         </section>
+
+            <SpeakerApplyModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+        </>
     );
 }
