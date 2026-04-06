@@ -326,15 +326,28 @@ h6 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   line-height: 1.75;
+  text-align: center;
 }
 
-/* Restore a bit more breathing room before headings */
+/* Headings centered */
 .blog-content h1,
 .blog-content h2,
 .blog-content h3,
 .blog-content h4 {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* Keep lists left-aligned for readability */
+.blog-content ul,
+.blog-content ol {
+  text-align: left;
+}
+
+/* Blockquotes centered */
+.blog-content blockquote {
+  text-align: center;
 }
 
 /* TipTap adds inline style="text-align:left" on every block.
