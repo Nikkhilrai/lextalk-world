@@ -27,9 +27,7 @@ interface BlogPost {
 export default function BlogPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
-    const [categories, setCategories] = useState<string[]>(["All"]);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 6;
 
@@ -47,32 +45,16 @@ export default function BlogPage() {
             }
         };
 
-        const fetchCategories = async () => {
-            try {
-                const res = await fetch("/api/blog/categories");
-                const data = await res.json();
-                if (Array.isArray(data)) {
-                    setCategories(["All", ...data.map((cat: any) => cat.name)]);
-                }
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        };
-
         fetchPosts();
-        fetchCategories();
     }, []);
 
     const featuredPost = posts.find(post => post.featured);
     const regularPosts = posts.filter(post => !post.featured);
 
-    const filteredPosts = regularPosts.filter(post => {
-        const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
-        const matchesSearch =
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
-    });
+    const filteredPosts = regularPosts.filter(post =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
     const paginatedPosts = filteredPosts.slice(0, currentPage * postsPerPage);
@@ -80,7 +62,7 @@ export default function BlogPage() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedCategory, searchQuery]);
+    }, [searchQuery]);
 
     const formatDate = (dateStr: string) =>
         new Date(dateStr).toLocaleDateString("en-US", {
@@ -174,11 +156,6 @@ export default function BlogPage() {
                                             className="object-cover group-hover:scale-105 transition-transform duration-700"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wide rounded-full shadow-lg">
-                                                {featuredPost.category}
-                                            </span>
-                                        </div>
                                     </div>
 
                                     {/* Content */}
@@ -234,22 +211,7 @@ export default function BlogPage() {
                         <div className="max-w-6xl mx-auto">
 
                             {/* Filters */}
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
-                                <div className="flex flex-wrap gap-2">
-                                    {categories.map((cat) => (
-                                        <button
-                                            key={cat}
-                                            onClick={() => setSelectedCategory(cat)}
-                                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                                                selectedCategory === cat
-                                                    ? "bg-slate-900 text-white"
-                                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                                            }`}
-                                        >
-                                            {cat}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className="flex justify-end mb-10">
                                 <div className="relative">
                                     <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                                     <input
@@ -281,12 +243,6 @@ export default function BlogPage() {
                                                         className="object-cover group-hover:scale-105 transition-transform duration-600"
                                                     />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
-                                                    {/* Category on image */}
-                                                    <div className="absolute top-3 left-3">
-                                                        <span className="px-2.5 py-1 bg-white/90 text-slate-700 text-[10px] font-bold uppercase tracking-wide rounded-full shadow-sm">
-                                                            {post.category}
-                                                        </span>
-                                                    </div>
                                                 </div>
 
                                                 {/* Content */}
