@@ -317,8 +317,24 @@ h6 {
 
 /* ── Blog content: fix TipTap HTML output ─────────────────────────── */
 .blog-content {
-  /* Ensure the prose block fills its centered container */
   width: 100%;
+}
+
+/* TipTap creates a new <p> for every Enter key press.
+   Reduce the gap so single-sentence paragraphs don't look double-spaced. */
+.blog-content p {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.75;
+}
+
+/* Restore a bit more breathing room before headings */
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 /* TipTap adds inline style="text-align:left" on every block.
