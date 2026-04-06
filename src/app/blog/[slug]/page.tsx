@@ -239,19 +239,6 @@ export default async function BlogPostPage({
                             dangerouslySetInnerHTML={{ __html: renderContent(post.content) }}
                         />
 
-                        {/* Tags */}
-                        {post.tags && (
-                            <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-slate-100 dark:border-slate-700">
-                                {post.tags.split(",").map((tag: string) => (
-                                    <span
-                                        key={tag.trim()}
-                                        className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-xs font-medium rounded-full"
-                                    >
-                                        #{tag.trim()}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
 
                         {/* Share */}
                         <ShareButtons title={post.title} slug={post.slug} />
