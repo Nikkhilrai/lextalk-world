@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
-    Calendar, Clock, ArrowRight, User, Tag,
-    BookOpen, TrendingUp, Search, ChevronDown
+    Clock, ArrowRight, User,
+    BookOpen, Search, ChevronDown
 } from "lucide-react";
 
 interface BlogPost {
@@ -74,16 +74,12 @@ export default function BlogPage() {
         return matchesCategory && matchesSearch;
     });
 
-    // Pagination logic
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
     const paginatedPosts = filteredPosts.slice(0, currentPage * postsPerPage);
     const hasMore = currentPage < totalPages;
 
-    const handleLoadMore = () => {
-        setCurrentPage(prev => prev + 1);
-    };
+    const handleLoadMore = () => setCurrentPage(prev => prev + 1);
 
-    // Reset to page 1 when filters change
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedCategory, searchQuery]);
@@ -97,145 +93,103 @@ export default function BlogPage() {
     };
 
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen bg-white">
             <Navbar />
 
-            {/* Hero Section */}
-            <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-                {/* Background Elements */}
-                <div className="absolute inset-0">
-                    <div className="absolute top-20 left-20 w-72 h-72 bg-amber-500/10 rounded-full blur-[100px]" />
-                    <div className="absolute bottom-10 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
-                </div>
-
-                <div
-                    className="absolute inset-0 opacity-[0.02]"
-                    style={{
-                        backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                        backgroundSize: '50px 50px'
-                    }}
-                />
-
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-6">
-                            <BookOpen size={14} className="text-amber-400" />
-                            <span className="text-xs font-medium text-white uppercase tracking-wider">
-                                Insights & Updates
+            {/* ── Page Header ──────────────────────────────────── */}
+            <section className="pt-32 pb-12 md:pt-40 md:pb-16 border-b border-slate-100">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-3xl">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-full mb-5">
+                            <BookOpen size={12} className="text-amber-500" />
+                            <span className="text-xs font-semibold text-amber-600 uppercase tracking-wider">
+                                LexTalk Blog
                             </span>
                         </div>
-
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                            LexTalk{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-500">
-                                Blog
-                            </span>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-5 leading-tight">
+                            Insights from the legal world
                         </h1>
-
-                        <p className="text-lg text-slate-300 leading-relaxed max-w-xl mx-auto">
-                            Stay informed with the latest trends, insights, and stories from the global legal community.
+                        <p className="text-lg text-slate-500 leading-relaxed max-w-xl">
+                            Trends, analysis, and stories from the global legal community — written by practitioners and experts.
                         </p>
                     </div>
                 </div>
-
-                <div className="absolute bottom-0 left-0 right-0">
-                    <svg viewBox="0 0 1440 60" fill="none" className="w-full">
-                        <path d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z" fill="#f8fafc" />
-                    </svg>
-                </div>
             </section>
 
-            {/* Loading State */}
+            {/* Loading */}
             {loading && (
-                <section className="py-16">
+                <section className="py-20">
                     <div className="container mx-auto px-4 text-center">
-                        <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                        <p className="text-slate-500">Loading posts...</p>
+                        <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                        <p className="text-sm text-slate-400">Loading articles...</p>
                     </div>
                 </section>
             )}
 
-            {/* No Posts State */}
+            {/* Empty */}
             {!loading && posts.length === 0 && (
-                <section className="py-16">
+                <section className="py-20">
                     <div className="container mx-auto px-4 text-center">
-                        <BookOpen size={48} className="mx-auto text-slate-300 mb-4" />
-                        <h2 className="text-xl font-semibold text-slate-700 mb-2">No posts yet</h2>
-                        <p className="text-slate-500">Check back soon for exciting content!</p>
+                        <BookOpen size={40} className="mx-auto text-slate-200 mb-4" />
+                        <h2 className="text-lg font-semibold text-slate-700 mb-1">No articles yet</h2>
+                        <p className="text-sm text-slate-400">Check back soon for exciting content.</p>
                     </div>
                 </section>
             )}
 
-            {/* Featured Post */}
+            {/* ── Featured Post ─────────────────────────────────── */}
             {!loading && featuredPost && (
-                <section className="py-12 md:py-16">
+                <section className="py-12 md:py-16 border-b border-slate-100">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
-                            <div className="flex items-center gap-2 mb-6">
-                                <TrendingUp size={18} className="text-amber-500" />
-                                <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Featured Article</span>
-                            </div>
-
+                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
+                                Featured
+                            </p>
                             <Link href={`/blog/${featuredPost.slug}`} className="group block">
-                                <div className="grid md:grid-cols-2 gap-6 md:gap-8 bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-amber-200 hover:shadow-2xl transition-all duration-500">
-                                    {/* Image */}
-                                    <div className="relative h-64 md:h-full md:min-h-[400px] overflow-hidden">
+                                <div className="grid md:grid-cols-5 gap-0 overflow-hidden rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-xl transition-all duration-500">
+                                    {/* Image — 3 cols */}
+                                    <div className="relative md:col-span-3 aspect-video md:aspect-auto overflow-hidden">
                                         <Image
                                             src={featuredPost.image}
                                             alt={featuredPost.title}
                                             fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                            className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase rounded-full">
-                                                {featuredPost.category}
-                                            </span>
-                                        </div>
                                     </div>
 
-                                    {/* Content */}
-                                    <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-                                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 mb-4 group-hover:text-amber-600 transition-colors leading-tight">
-                                            {featuredPost.title}
-                                        </h2>
-                                        <p className="text-slate-600 leading-relaxed mb-6">
-                                            {featuredPost.excerpt}
-                                        </p>
+                                    {/* Content — 2 cols */}
+                                    <div className="md:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-white">
+                                        <div>
+                                            <span className="inline-block px-2.5 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-widest rounded-full border border-amber-100 mb-5">
+                                                {featuredPost.category}
+                                            </span>
+                                            <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-4 leading-snug group-hover:text-amber-700 transition-colors">
+                                                {featuredPost.title}
+                                            </h2>
+                                            <p className="text-slate-500 leading-relaxed text-sm line-clamp-3 mb-6">
+                                                {featuredPost.excerpt}
+                                            </p>
+                                        </div>
 
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
+                                        <div className="flex items-center justify-between pt-5 border-t border-slate-100">
+                                            <div className="flex items-center gap-2.5">
                                                 {featuredPost.authorImage ? (
-                                                    <div className="w-10 h-10 rounded-full overflow-hidden relative">
-                                                        <Image
-                                                            src={featuredPost.authorImage}
-                                                            alt={featuredPost.author}
-                                                            fill
-                                                            className="object-cover"
-                                                        />
+                                                    <div className="w-8 h-8 rounded-full overflow-hidden relative">
+                                                        <Image src={featuredPost.authorImage} alt={featuredPost.author} fill className="object-cover" />
                                                     </div>
                                                 ) : (
-                                                    <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                                                        <User size={18} className="text-slate-500" />
+                                                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                                                        <User size={14} className="text-slate-400" />
                                                     </div>
                                                 )}
                                                 <div>
-                                                    <p className="text-sm font-semibold text-slate-900">{featuredPost.author}</p>
-                                                    <div className="flex items-center gap-2 text-xs text-slate-500">
-                                                        <span>{formatDate(featuredPost.createdAt)}</span>
-                                                        {featuredPost.readTime && (
-                                                            <>
-                                                                <span>•</span>
-                                                                <span>{featuredPost.readTime}</span>
-                                                            </>
-                                                        )}
-                                                    </div>
+                                                    <p className="text-xs font-semibold text-slate-800 leading-none">{featuredPost.author}</p>
+                                                    <p className="text-xs text-slate-400 mt-0.5">{formatDate(featuredPost.createdAt)}</p>
                                                 </div>
                                             </div>
-                                            <div className="hidden sm:flex items-center gap-2 text-amber-600 font-semibold group-hover:gap-3 transition-all">
-                                                Read More
-                                                <ArrowRight size={16} />
-                                            </div>
+                                            <span className="flex items-center gap-1.5 text-amber-600 text-xs font-bold group-hover:gap-2.5 transition-all">
+                                                Read <ArrowRight size={13} />
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -245,22 +199,23 @@ export default function BlogPage() {
                 </section>
             )}
 
-            {/* Blog Posts Grid */}
+            {/* ── All Articles ──────────────────────────────────── */}
             {!loading && posts.length > 0 && (
-                <section className="py-12 md:py-16 bg-white">
+                <section className="py-12 md:py-16">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
+
                             {/* Filters */}
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-8 border-b border-slate-100">
                                 {/* Categories */}
                                 <div className="flex flex-wrap gap-2">
                                     {categories.map((cat) => (
                                         <button
                                             key={cat}
                                             onClick={() => setSelectedCategory(cat)}
-                                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === cat
-                                                ? "bg-slate-900 text-white"
-                                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${selectedCategory === cat
+                                                ? "bg-slate-900 text-white border-slate-900"
+                                                : "bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-700"
                                                 }`}
                                         >
                                             {cat}
@@ -269,92 +224,88 @@ export default function BlogPage() {
                                 </div>
 
                                 {/* Search */}
-                                <div className="relative">
-                                    <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                                <div className="relative flex-shrink-0">
+                                    <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                                     <input
                                         type="text"
                                         placeholder="Search articles..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all"
+                                        className="pl-10 pr-4 py-2 border border-slate-200 rounded-full text-sm w-full md:w-56 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-400 transition-all"
                                     />
                                 </div>
                             </div>
 
-                            {/* Posts Grid */}
+                            {/* Grid */}
                             {filteredPosts.length > 0 ? (
                                 <>
-                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                                         {paginatedPosts.map((post) => (
                                             <Link
                                                 key={post.id}
                                                 href={`/blog/${post.slug}`}
-                                                className="group block bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-amber-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
+                                                className="group block"
                                             >
                                                 {/* Image */}
-                                                <div className="relative aspect-video overflow-hidden">
+                                                <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-4 bg-slate-100">
                                                     <Image
                                                         src={post.image}
                                                         alt={post.title}
                                                         fill
-                                                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                     />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
                                                 </div>
 
                                                 {/* Content */}
-                                                <div className="p-5">
-                                                    <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors leading-snug">
+                                                <div>
+                                                    <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">
+                                                        {post.category}
+                                                    </span>
+                                                    <h3 className="text-lg font-serif font-bold text-slate-900 mt-1.5 mb-2 leading-snug group-hover:text-amber-700 transition-colors line-clamp-2">
                                                         {post.title}
                                                     </h3>
-                                                    <p className="text-slate-500 text-sm line-clamp-2 mb-4">
+                                                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-2 mb-4">
                                                         {post.excerpt}
                                                     </p>
 
-                                                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                                                        <div className="flex items-center gap-2">
-                                                            {post.authorImage ? (
-                                                                <div className="w-7 h-7 rounded-full overflow-hidden relative">
-                                                                    <Image
-                                                                        src={post.authorImage}
-                                                                        alt={post.author}
-                                                                        fill
-                                                                        className="object-cover"
-                                                                    />
-                                                                </div>
-                                                            ) : (
-                                                                <div className="w-7 h-7 rounded-full bg-slate-200 flex items-center justify-center">
-                                                                    <User size={12} className="text-slate-500" />
-                                                                </div>
-                                                            )}
-                                                            <span className="text-xs text-slate-600">{post.author}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-1 text-xs text-slate-400">
-                                                            <Clock size={12} />
+                                                    <div className="flex items-center gap-2.5">
+                                                        {post.authorImage ? (
+                                                            <div className="w-7 h-7 rounded-full overflow-hidden relative flex-shrink-0">
+                                                                <Image src={post.authorImage} alt={post.author} fill className="object-cover" />
+                                                            </div>
+                                                        ) : (
+                                                            <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+                                                                <User size={12} className="text-slate-400" />
+                                                            </div>
+                                                        )}
+                                                        <span className="text-xs font-medium text-slate-700">{post.author}</span>
+                                                        <span className="text-slate-300">·</span>
+                                                        <span className="text-xs text-slate-400 flex items-center gap-1">
+                                                            <Clock size={11} />
                                                             {post.readTime || "5 min read"}
-                                                        </div>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </Link>
                                         ))}
                                     </div>
 
-                                    {/* Load More Button */}
+                                    {/* Load More */}
                                     {hasMore && (
-                                        <div className="flex justify-center mt-12">
+                                        <div className="flex justify-center mt-14">
                                             <button
                                                 onClick={handleLoadMore}
-                                                className="group px-8 py-4 bg-slate-900 hover:bg-amber-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                                                className="flex items-center gap-2 px-7 py-3 border border-slate-200 hover:border-slate-400 text-slate-600 hover:text-slate-900 font-medium rounded-full text-sm transition-all duration-200 group"
                                             >
-                                                Load More Articles
-                                                <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
+                                                Load more articles
+                                                <ChevronDown size={15} className="group-hover:translate-y-0.5 transition-transform" />
                                             </button>
                                         </div>
                                     )}
                                 </>
                             ) : (
-                                <div className="text-center py-16">
-                                    <p className="text-slate-500">No articles found matching your criteria.</p>
+                                <div className="text-center py-20">
+                                    <p className="text-slate-400 text-sm">No articles match your search.</p>
                                 </div>
                             )}
                         </div>
@@ -362,25 +313,25 @@ export default function BlogPage() {
                 </section>
             )}
 
-            {/* Newsletter CTA */}
-            <section className="py-16 md:py-20 bg-gradient-to-r from-amber-500 to-amber-600">
+            {/* ── Newsletter ────────────────────────────────────── */}
+            <section className="py-16 md:py-20 bg-slate-900">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-2xl mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-                            Stay Updated
+                    <div className="max-w-xl mx-auto text-center">
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-3">
+                            Stay updated
                         </h2>
-                        <p className="text-amber-100 mb-8">
-                            Subscribe to our newsletter for the latest insights delivered to your inbox.
+                        <p className="text-slate-400 text-sm mb-7">
+                            Subscribe for the latest legal insights delivered to your inbox.
                         </p>
-                        <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <form className="flex flex-col sm:flex-row gap-2.5 max-w-sm mx-auto">
                             <input
                                 type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 px-5 py-3 rounded-full text-slate-800 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                placeholder="Your email address"
+                                className="flex-1 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all text-sm"
                             />
                             <button
                                 type="submit"
-                                className="px-6 py-3 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-colors"
+                                className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full text-sm transition-colors"
                             >
                                 Subscribe
                             </button>

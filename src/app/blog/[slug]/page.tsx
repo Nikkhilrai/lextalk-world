@@ -5,6 +5,7 @@ import ShareButtons from "@/components/ShareButtons";
 import AuthorBio from "@/components/AuthorBio";
 import RelatedPosts from "@/components/RelatedPosts";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import BlogProgressBar from "@/components/BlogProgressBar";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -62,8 +63,7 @@ function renderContent(content: string): string {
         .replace(/<a\s+((?!target=)[^>]*href="https?:\/\/[^"]*")/gi, '<a target="_blank" rel="noopener noreferrer" $1');
 }
 
-// For SSG (optional but good for performance if using generateStaticParams)
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
 
 async function getPost(slug: string) {
     const post = await prisma.blogPost.findUnique({
@@ -89,7 +89,6 @@ async function getRelatedPosts(category: string, currentSlug: string) {
     return posts;
 }
 
-// Generate SEO metadata for each blog post
 export async function generateMetadata({
     params,
 }: {
@@ -104,10 +103,7 @@ export async function generateMetadata({
         };
     }
 
-    // Use metaDescription if available, otherwise use excerpt
     const description = post.metaDescription || post.excerpt;
-
-    // Parse tags if available
     const keywords = post.tags
         ? post.tags.split(",").map((tag: string) => tag.trim())
         : ["legal", "law", "conference", "legal tech"];
@@ -154,118 +150,156 @@ export default async function BlogPostPage({
         notFound();
     }
 
-    // Fetch author details and related posts in parallel
     const [author, relatedPosts] = await Promise.all([
         getAuthor(post.author),
         getRelatedPosts(post.category, post.slug),
     ]);
 
+    const formattedDate = new Date(post.createdAt).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+
     return (
         <main className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
             <Navbar variant="light" />
             <DarkModeToggle />
+            <BlogProgressBar />
 
             <article>
-                {/* Header Section */}
-                <header className="pt-24 pb-8 md:pt-28 md:pb-10 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 transition-colors">
+                {/* ── Article Header ────────────────────────────── */}
+                <header className="pt-28 pb-10 bg-white dark:bg-slate-900 transition-colors">
                     <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto text-center">
-                            {/* Back Link */}
+                        <div className="max-w-3xl mx-auto">
+
+                            {/* Back link */}
                             <Link
                                 href="/blog"
-                                className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors mb-5 font-medium text-sm group"
+                                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors mb-8 text-sm font-medium group"
                             >
-                                <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                                Back to Blog
+                                <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+                                All articles
                             </Link>
 
-                            {/* Meta Info */}
-                            <div className="flex flex-wrap items-center justify-center gap-3 mb-4 text-xs">
-                                {post.readTime && (
-                                    <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium">
-                                        <Clock size={14} />
-                                        {post.readTime}
-                                    </span>
-                                )}
-                                <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium">
-                                    <Calendar size={14} />
-                                    {new Date(post.createdAt).toLocaleDateString("en-US", {
-                                        month: "short",
-                                        day: "numeric",
-                                        year: "numeric"
-                                    })}
+                            {/* Category */}
+                            <div className="mb-5">
+                                <span className="inline-block px-3 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest rounded-full border border-amber-200 dark:border-amber-700">
+                                    {post.category}
                                 </span>
                             </div>
 
-                            {/* Title - Smaller, more readable */}
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-6 leading-snug">
+                            {/* Title */}
+                            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-slate-900 dark:text-white leading-tight mb-6">
                                 {post.title}
                             </h1>
 
-                            {/* Author - Compact */}
-                            <div className="flex items-center justify-center gap-2">
-                                {post.authorImage ? (
-                                    <div className="w-9 h-9 rounded-full overflow-hidden relative border border-slate-200 dark:border-slate-600">
-                                        <Image
-                                            src={post.authorImage}
-                                            alt={post.author}
-                                            fill
-                                            className="object-cover"
-                                        />
+                            {/* Excerpt */}
+                            <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 leading-relaxed mb-8">
+                                {post.excerpt}
+                            </p>
+
+                            {/* Divider */}
+                            <div className="border-t border-slate-100 dark:border-slate-800 pt-6">
+                                {/* Author + Meta row */}
+                                <div className="flex items-center gap-4">
+                                    {post.authorImage ? (
+                                        <div className="w-11 h-11 rounded-full overflow-hidden relative flex-shrink-0 border-2 border-slate-100 dark:border-slate-700">
+                                            <Image
+                                                src={post.authorImage}
+                                                alt={post.author}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-11 h-11 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 border-2 border-slate-100 dark:border-slate-700">
+                                            <User size={18} className="text-slate-400" />
+                                        </div>
+                                    )}
+                                    <div>
+                                        <p className="font-semibold text-slate-900 dark:text-white text-sm leading-none mb-1">
+                                            {post.author}
+                                        </p>
+                                        <div className="flex items-center gap-3 text-xs text-slate-400">
+                                            <span className="flex items-center gap-1">
+                                                <Calendar size={11} />
+                                                {formattedDate}
+                                            </span>
+                                            {post.readTime && (
+                                                <>
+                                                    <span>·</span>
+                                                    <span className="flex items-center gap-1">
+                                                        <Clock size={11} />
+                                                        {post.readTime}
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
-                                ) : (
-                                    <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center border border-slate-200 dark:border-slate-600">
-                                        <User size={16} className="text-slate-400 dark:text-slate-300" />
-                                    </div>
-                                )}
-                                <div className="text-left">
-                                    <p className="text-slate-900 dark:text-white font-semibold text-sm">{post.author}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </header>
 
-                {/* Featured Image */}
-                <div className="w-full px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10 flex flex-col items-center">
-                    <div className="w-full max-w-4xl">
-                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
-                            <Image
-                                src={post.image}
-                                alt={post.title}
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
+                {/* ── Hero Image — Full Width ────────────────────── */}
+                <div className="w-full bg-slate-100 dark:bg-slate-800">
+                    <div className="relative w-full aspect-[2/1] md:aspect-[3/1]">
+                        <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
                     </div>
                 </div>
 
-                {/* Content - Optimized for reading */}
-                <div className="w-full px-4 pb-12 flex flex-col items-center">
-                    <div className="w-full max-w-[900px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-sm transition-colors font-sans">
+                {/* ── Article Body ──────────────────────────────── */}
+                <div className="container mx-auto px-4 py-12 md:py-16">
+                    <div className="max-w-[700px] mx-auto">
                         <div
                             className="blog-content prose prose-slate dark:prose-invert max-w-none font-sans
-                                prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:mt-8 prose-headings:mb-3
-                                prose-h2:text-xl prose-h2:md:text-2xl
-                                prose-h3:text-lg prose-h3:md:text-xl
-                                prose-p:text-base prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-relaxed prose-p:my-1
-                                prose-a:text-amber-600 dark:prose-a:text-amber-400 hover:prose-a:text-amber-700 dark:hover:prose-a:text-amber-500 prose-a:no-underline hover:prose-a:underline prose-a:break-all
-                                prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
-                                prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 dark:prose-blockquote:bg-amber-900/20 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300 prose-blockquote:text-sm prose-blockquote:my-6
+                                prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white
+                                prose-headings:mt-10 prose-headings:mb-4
+                                prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:border-b prose-h2:border-slate-100 dark:prose-h2:border-slate-800 prose-h2:pb-3
+                                prose-h3:text-xl md:prose-h3:text-2xl
+                                prose-p:text-[17px] prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:leading-8 prose-p:my-4
+                                prose-a:text-amber-600 dark:prose-a:text-amber-400 hover:prose-a:text-amber-700 prose-a:no-underline hover:prose-a:underline prose-a:break-all prose-a:font-medium
+                                prose-img:rounded-xl prose-img:shadow-md prose-img:my-8
+                                prose-blockquote:border-l-4 prose-blockquote:border-amber-500
+                                prose-blockquote:bg-amber-50/60 dark:prose-blockquote:bg-amber-900/20
+                                prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl
+                                prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-300
+                                prose-blockquote:not-italic prose-blockquote:my-8
                                 prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
-                                prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:text-base prose-li:my-0.5
-                                prose-ul:my-3 prose-ol:my-3
-                                prose-table:border-collapse prose-table:w-full prose-table:my-6
-                                prose-th:bg-slate-100 dark:prose-th:bg-slate-700 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-slate-900 dark:prose-th:text-white prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600
-                                prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-td:text-slate-700 dark:prose-td:text-slate-300
-                                prose-tr:even:bg-slate-50 dark:prose-tr:even:bg-slate-800/50
-                                [&_p]:break-words [&_li]:break-words [&_td]:break-words [&_th]:break-words [&_*]:font-sans
+                                prose-li:text-[17px] prose-li:text-slate-700 dark:prose-li:text-slate-300 prose-li:leading-7 prose-li:my-1
+                                prose-ul:my-5 prose-ol:my-5 prose-ul:space-y-1 prose-ol:space-y-1
+                                prose-table:border-collapse prose-table:w-full prose-table:my-8
+                                prose-th:bg-slate-50 dark:prose-th:bg-slate-800 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:border prose-th:border-slate-200 dark:prose-th:border-slate-700
+                                prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-slate-200 dark:prose-td:border-slate-700 prose-td:text-slate-700 dark:prose-td:text-slate-300
+                                prose-tr:even:bg-slate-50/50 dark:prose-tr:even:bg-slate-800/30
+                                [&_p]:break-words [&_li]:break-words [&_td]:break-words [&_*]:font-sans
                             "
                             dangerouslySetInnerHTML={{ __html: renderContent(post.content) }}
                         />
 
-                        {/* Share Links */}
+                        {/* Tags */}
+                        {post.tags && (
+                            <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-slate-100 dark:border-slate-800">
+                                {post.tags.split(",").map((tag: string) => (
+                                    <span
+                                        key={tag.trim()}
+                                        className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full"
+                                    >
+                                        #{tag.trim()}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Share */}
                         <ShareButtons title={post.title} slug={post.slug} />
 
                         {/* Author Bio */}
@@ -286,37 +320,37 @@ export default async function BlogPostPage({
                             currentSlug={post.slug}
                         />
 
-                        {/* Comments Section */}
+                        {/* Comments */}
                         <BlogComments postSlug={post.slug} postId={post.id} />
                     </div>
                 </div>
             </article>
 
-            {/* Newsletter CTA Style Update */}
+            {/* Newsletter */}
             <section className="py-20 bg-slate-900 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-2xl mx-auto text-center">
+                    <div className="max-w-xl mx-auto text-center">
                         <span className="inline-block px-3 py-1 bg-white/10 text-amber-400 text-xs font-bold uppercase rounded-full mb-6 tracking-wider">
                             Weekly Insights
                         </span>
                         <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-                            Subscribe to our newsletter
+                            Stay in the loop
                         </h2>
-                        <p className="text-slate-400 mb-8 text-lg">
-                            Get the latest legal tech trends and industry insights delivered directly to your inbox.
+                        <p className="text-slate-400 mb-8">
+                            Get the latest legal insights delivered directly to your inbox.
                         </p>
                         <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                             <input
                                 type="email"
-                                placeholder="Enter your email address"
-                                className="flex-1 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-medium"
+                                placeholder="Your email address"
+                                className="flex-1 px-5 py-3.5 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all text-sm"
                             />
                             <button
                                 type="submit"
-                                className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all duration-300"
+                                className="px-7 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-sm"
                             >
                                 Subscribe
                             </button>

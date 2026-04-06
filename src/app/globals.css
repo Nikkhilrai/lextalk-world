@@ -321,12 +321,12 @@ h6 {
 }
 
 /* TipTap creates a new <p> for every Enter key press.
-   Reduce the gap so single-sentence paragraphs don't look double-spaced. */
+   Use comfortable spacing that reads naturally. */
 .blog-content p {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-  line-height: 1.75;
-  text-align: justify;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.85;
+  text-align: left;
 }
 
 .blog-content h1,
