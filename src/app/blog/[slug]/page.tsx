@@ -141,6 +141,13 @@ export default async function BlogPostPage({
                                 Back to Blog
                             </Link>
 
+                            {/* Category pill */}
+                            <div className="mb-4">
+                                <span className="inline-block px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-widest rounded-full">
+                                    {post.category}
+                                </span>
+                            </div>
+
                             {/* Meta row */}
                             <div className="flex flex-wrap items-center justify-center gap-3 mb-5 text-xs text-slate-500 dark:text-slate-400 font-medium">
                                 <span className="flex items-center gap-1">
