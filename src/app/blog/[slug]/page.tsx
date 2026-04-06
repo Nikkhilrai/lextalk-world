@@ -227,8 +227,8 @@ export default async function BlogPostPage({
                 </header>
 
                 {/* Featured Image */}
-                <div className="container mx-auto px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10">
-                    <div className="max-w-4xl mx-auto">
+                <div className="w-full px-4 -mt-4 md:-mt-6 mb-8 md:mb-10 relative z-10 flex flex-col items-center">
+                    <div className="w-full max-w-4xl">
                         <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
                             <Image
                                 src={post.image}
@@ -242,8 +242,8 @@ export default async function BlogPostPage({
                 </div>
 
                 {/* Content - Optimized for reading */}
-                <div className="container mx-auto px-4 pb-12">
-                    <div className="max-w-[900px] mx-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-sm transition-colors font-sans">
+                <div className="w-full px-4 pb-12 flex flex-col items-center">
+                    <div className="w-full max-w-[900px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-sm transition-colors font-sans">
                         <div
                             className="blog-content prose prose-slate dark:prose-invert max-w-none font-sans
                                 prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:mt-8 prose-headings:mb-3
