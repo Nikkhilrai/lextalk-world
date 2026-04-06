@@ -72,6 +72,10 @@ async function getPost(slug: string) {
     return post;
 }
 
+async function getAuthor(name: string) {
+    return prisma.blogAuthor.findUnique({ where: { name } });
+}
+
 async function getRelatedPosts(category: string, currentSlug: string) {
     const posts = await prisma.blogPost.findMany({
         where: {
@@ -150,8 +154,11 @@ export default async function BlogPostPage({
         notFound();
     }
 
-    // Fetch related posts by category
-    const relatedPosts = await getRelatedPosts(post.category, post.slug);
+    // Fetch author details and related posts in parallel
+    const [author, relatedPosts] = await Promise.all([
+        getAuthor(post.author),
+        getRelatedPosts(post.category, post.slug),
+    ]);
 
     return (
         <main className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
@@ -264,7 +271,10 @@ export default async function BlogPostPage({
                         {/* Author Bio */}
                         <AuthorBio
                             name={post.author}
-                            image={post.authorImage}
+                            image={author?.image ?? post.authorImage}
+                            bio={author?.bio ?? undefined}
+                            linkedin={author?.linkedin ?? undefined}
+                            twitter={author?.twitter ?? undefined}
                         />
 
                         {/* Related Posts */}

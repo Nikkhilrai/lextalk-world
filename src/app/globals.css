@@ -314,3 +314,48 @@ h6 {
 .animate-marquee-slow:hover {
   animation-play-state: paused;
 }
+
+/* ── Blog content: fix TipTap HTML output ─────────────────────────── */
+.blog-content {
+  /* Ensure the prose block fills its centered container */
+  width: 100%;
+}
+
+/* TipTap adds inline style="text-align:left" on every block.
+   We let prose control alignment; only override when editor
+   explicitly sets center/right/justify. */
+.blog-content [style*="text-align: left"],
+.blog-content [style*="text-align:left"] {
+  text-align: left !important;
+}
+.blog-content [style*="text-align: center"],
+.blog-content [style*="text-align:center"] {
+  text-align: center !important;
+}
+.blog-content [style*="text-align: right"],
+.blog-content [style*="text-align:right"] {
+  text-align: right !important;
+}
+.blog-content [style*="text-align: justify"],
+.blog-content [style*="text-align:justify"] {
+  text-align: justify !important;
+}
+
+/* TipTap wraps list items as <li><p>text</p></li> — remove the
+   extra top/bottom margin that prose adds to those inner <p> tags. */
+.blog-content li > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* TipTap table: ensure tables don't overflow the card on mobile */
+.blog-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Remove any stray margin/padding that might shift the block left */
+.blog-content > * {
+  max-width: 100%;
+}
