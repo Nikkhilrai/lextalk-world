@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, Users, User, Loader2, Sparkles, ShieldCheck, Mail, ChevronRight, AlertCircle, Phone, Globe, Clock } from "lucide-react";
+import { Check, ArrowRight, Users, User, Loader2, Sparkles, ShieldCheck, Mail, ChevronRight, AlertCircle, Phone, Globe, Clock, Tag, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { CountrySelect } from "@/components/CountrySelect";
@@ -134,6 +134,46 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
     const [isProcessing, setIsProcessing] = useState(false);
     const [processStep, setProcessStep] = useState(0);
     const [error, setError] = useState<string | null>(null);
+    const [couponCode, setCouponCode] = useState("");
+    const [couponApplied, setCouponApplied] = useState<{ code: string; discountPct: number; name: string } | null>(null);
+    const [couponError, setCouponError] = useState<string | null>(null);
+    const [couponLoading, setCouponLoading] = useState(false);
+
+    // Reset coupon state when modal closes
+    useEffect(() => {
+        if (!isOpen) {
+            setCouponCode("");
+            setCouponApplied(null);
+            setCouponError(null);
+        }
+    }, [isOpen]);
+
+    const handleApplyCoupon = async () => {
+        if (!couponCode.trim()) return;
+        setCouponLoading(true); setCouponError(null); setCouponApplied(null);
+        try {
+            const res = await fetch("/api/delegate-coupons/validate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code: couponCode.trim(), passType: pass.id, conferenceSlug: "dubai-2026" }),
+            });
+            const data = await res.json();
+            if (data.valid) {
+                setCouponApplied({ code: couponCode.trim().toUpperCase(), discountPct: data.discountPct, name: data.name });
+            } else {
+                setCouponError(data.error || "Invalid coupon code.");
+            }
+        } catch {
+            setCouponError("Could not validate coupon. Please try again.");
+        } finally {
+            setCouponLoading(false);
+        }
+    };
+
+    const discountMultiplier = couponApplied ? (1 - couponApplied.discountPct / 100) : 1;
+    const inrOriginal = pass.inrPrice || Math.round(pass.discountedPrice * 90);
+    const inrFinal = Math.round(inrOriginal * discountMultiplier);
+    const usdFinal = Math.round(pass.discountedPrice * discountMultiplier * 100) / 100;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -233,9 +273,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
             } else {
                 // Paid registration
                 const currency = paymentType === "india" ? "INR" : "USD";
-                const amount = paymentType === "india"
-                    ? (pass.inrPrice || pass.discountedPrice * 90)
-                    : pass.discountedPrice;
+                const amount = paymentType === "india" ? inrFinal : usdFinal;
 
                 const orderRes = await fetch("/api/delegate-registration/create-order", {
                     method: "POST",
@@ -250,7 +288,9 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                         conferenceSlug: "dubai-2026",
                         originalPrice: pass.originalPrice,
                         discountedPrice: pass.discountedPrice,
-                        registrationId, // Pass the ID captured from Step 1
+                        couponCode: couponApplied?.code || null,
+                        couponDiscount: couponApplied?.discountPct || null,
+                        registrationId,
                     }),
                 });
 
@@ -506,6 +546,53 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                     </div>
                                 </div>
 
+                                {/* Coupon Code */}
+                                <div className="space-y-2">
+                                    <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Have a Coupon?</p>
+                                    {couponApplied ? (
+                                        <div className="flex items-center justify-between px-4 py-3 bg-green-50 border border-green-200 rounded-xl">
+                                            <div className="flex items-center gap-2">
+                                                <CheckCircle2 size={14} className="text-green-600" />
+                                                <div>
+                                                    <p className="text-xs font-bold text-green-800">{couponApplied.code} — {couponApplied.discountPct}% off</p>
+                                                    <p className="text-[10px] text-green-600">{couponApplied.name}</p>
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={() => { setCouponApplied(null); setCouponCode(""); }}
+                                                className="text-[10px] text-green-700 hover:text-red-500 font-bold transition-colors"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="flex gap-2">
+                                            <div className="relative flex-1">
+                                                <Tag size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                <input
+                                                    type="text"
+                                                    value={couponCode}
+                                                    onChange={e => { setCouponCode(e.target.value.toUpperCase()); setCouponError(null); }}
+                                                    placeholder="ENTER CODE"
+                                                    className="w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 transition-all uppercase tracking-widest"
+                                                />
+                                            </div>
+                                            <button
+                                                onClick={handleApplyCoupon}
+                                                disabled={couponLoading || !couponCode.trim()}
+                                                className="px-4 py-2.5 bg-slate-900 hover:bg-amber-500 text-white hover:text-slate-950 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all duration-300 disabled:opacity-40 flex items-center gap-1.5"
+                                            >
+                                                {couponLoading ? <Loader2 size={11} className="animate-spin" /> : "Apply"}
+                                            </button>
+                                        </div>
+                                    )}
+                                    {couponError && (
+                                        <p className="flex items-center gap-1.5 text-[10px] text-red-500 font-medium">
+                                            <AlertCircle size={10} /> {couponError}
+                                        </p>
+                                    )}
+                                </div>
+
                                 <div className="space-y-4">
                                     <p className="text-[10px] text-amber-600 font-black uppercase tracking-[0.2em] text-center italic">Choose your preferred currency to pay</p>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -515,7 +602,13 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                             className="group relative flex flex-col items-center justify-center p-6 border-2 border-slate-900 text-slate-900 rounded-3xl hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98] disabled:opacity-50"
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 opacity-60">Indian Clients</span>
-                                            <span className="text-2xl font-black">₹{(pass.inrPrice || Math.round(pass.discountedPrice * 90)).toLocaleString('en-IN')}</span>
+                                            {couponApplied && (
+                                                <span className="text-sm line-through opacity-40 leading-none">₹{inrOriginal.toLocaleString("en-IN")}</span>
+                                            )}
+                                            <span className="text-2xl font-black">₹{inrFinal.toLocaleString("en-IN")}</span>
+                                            {couponApplied && (
+                                                <span className="text-[9px] mt-0.5 opacity-50">{couponApplied.discountPct}% off applied</span>
+                                            )}
                                             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <ChevronRight size={16} />
                                             </div>
@@ -526,7 +619,13 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                             className="group relative flex flex-col items-center justify-center p-6 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(245,158,11,0.5)] transition-all active:scale-[0.98] disabled:opacity-50 shadow-lg"
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 text-slate-900/60">International Clients</span>
-                                            <span className="text-2xl font-black">${pass.discountedPrice}</span>
+                                            {couponApplied && (
+                                                <span className="text-sm line-through text-slate-900/40 leading-none">${pass.discountedPrice} USD</span>
+                                            )}
+                                            <span className="text-2xl font-black">${usdFinal} USD</span>
+                                            {couponApplied && (
+                                                <span className="text-[9px] mt-0.5 text-slate-900/40">{couponApplied.discountPct}% off applied</span>
+                                            )}
                                             <div className="absolute top-2 right-2">
                                                 <Sparkles size={16} fill="currentColor" />
                                             </div>
