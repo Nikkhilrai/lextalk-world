@@ -113,9 +113,6 @@ function CountdownCell({ value, label }: { value: number; label: string }) {
 export default function UpcomingCounselExchange() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const yHero = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const opacityHero = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const eventDate = new Date("2026-04-22T11:00:00Z");
   const countdown = useCountdown(eventDate);
@@ -158,8 +155,7 @@ export default function UpcomingCounselExchange() {
 
         {/* Hero content */}
         <motion.div
-          style={{ y: yHero, opacity: opacityHero }}
-          className="relative z-10 container mx-auto px-5 sm:px-8 pt-28 pb-24 md:pt-36 md:pb-32 will-change-transform"
+          className="relative z-10 container mx-auto px-5 sm:px-8 pt-28 pb-24 md:pt-36 md:pb-32"
         >
           <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center">
 
