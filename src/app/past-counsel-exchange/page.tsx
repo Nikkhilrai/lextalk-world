@@ -8,14 +8,13 @@ import WhyThisEventIsDifferent from "./components/WhyThisEventIsDifferent";
 import EventCTA from "./components/EventCTA";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { FloatingActions } from "@/components/FloatingActions";
 
 export const metadata: Metadata = {
-    title: "Upcoming E-Meet | LexTalk World",
-    description: "Join the next LexTalk Live Lab virtual roundtable. Decode real AI use cases in legal operations with top legal minds. August 8th, 2025.",
+    title: "Past Counsel Exchange | LexTalk World",
+    description: "Previous LexTalk Live Lab sessions.",
 };
 
-export default function UpcomingEMeetPage() {
+export default function PastCounselExchangePage() {
     return (
         <main className="min-h-screen bg-[#0a0f1d]">
             <Navbar />
@@ -26,7 +25,6 @@ export default function UpcomingEMeetPage() {
             <WhatYouWillDiscover />
             <WhyThisEventIsDifferent />
             <EventCTA />
-            {/* Future sections (Speakers, Agenda, etc.) will be added here */}
             <Footer />
         </main>
     );
