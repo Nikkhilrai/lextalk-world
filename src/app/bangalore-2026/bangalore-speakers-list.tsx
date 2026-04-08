@@ -49,9 +49,19 @@ const speakers: any[] = [
         image: "/bangalore-2026/speakers images/Arvind Subramaniam .png",
     },
     {
-        name: "Poulomi Chakraborty",
-        title: "Senior Corporate Counsel, Infosys",
-        image: "/bangalore-2026/speakers images/Poulomi Chakraborty.png",
+        name: "Shalini Chawla",
+        title: "Patent Specialist - ITC Limited",
+        image: "/bangalore-2026/speakers images/Shalini Chawla.png",
+    },
+    {
+        name: "Bhavesh Saxena",
+        title: "Compliance Lead - Asia Pacific & Country Counsel India, Agilent Technologies",
+        image: "/bangalore-2026/speakers images/Bhavesh Saxena.png",
+    },
+    {
+        name: "Ankita Choudhary",
+        title: "Head - Legal Advisory and Contracts at Nuvama Group",
+        image: "/bangalore-2026/speakers images/Ankita Choudhary.png",
     },
     {
         name: "Hena Datta",
