@@ -26,7 +26,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [dynamicNavLinks] = useState<NavLink[]>([
         { name: "Home", href: "/" },
         {
-            name: "THE COUNSEL EXCHANGE",
+            name: "The Counsel Exchange",
             href: "#",
             hasDropdown: true,
             dropdownItems: [
