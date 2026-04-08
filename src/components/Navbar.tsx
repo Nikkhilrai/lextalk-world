@@ -30,8 +30,8 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             href: "#",
             hasDropdown: true,
             dropdownItems: [
-                { name: "Upcoming Counsel Exchange", href: "/upcoming-counsel-exchange" },
-                { name: "Past Counsel Exchange", href: "/past-counsel-exchange" },
+                { name: "Inside the Room", href: "/upcoming-counsel-exchange" },
+                { name: "Session Archive", href: "/past-counsel-exchange" },
             ]
         },
         {
