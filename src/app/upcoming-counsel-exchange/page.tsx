@@ -122,7 +122,7 @@ export default function UpcomingCounselExchange() {
 
   return (
     <main className="min-h-screen bg-white text-slate-800 overflow-x-hidden selection:bg-amber-200 selection:text-amber-900">
-      <Navbar />
+      <Navbar variant="light" />
 
       {/* ══════════════════════ HERO ══════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FFFDF8]">
@@ -169,7 +169,7 @@ export default function UpcomingCounselExchange() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
               </span>
-              <span className="text-amber-700 text-xs font-bold tracking-[0.25em] uppercase">The Counsel Exchange · Session II</span>
+              <span className="text-amber-700 text-xs font-bold tracking-[0.25em] uppercase">The Counsel Exchange</span>
               <Lock className="w-3 h-3 text-amber-500/80" />
             </motion.div>
 
