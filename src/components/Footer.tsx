@@ -171,7 +171,7 @@ export function Footer() {
                             <li>
                                 <Link href="/e-meet" className="text-xs sm:text-sm text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">
                                     <span className="w-0 group-hover:w-2 h-0.5 bg-amber-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
-                                    E-Meet
+                                    THE COUNSEL EXCHANGE
                                 </Link>
                             </li>
                             <li>

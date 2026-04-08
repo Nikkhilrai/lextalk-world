@@ -26,12 +26,12 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [dynamicNavLinks] = useState<NavLink[]>([
         { name: "Home", href: "/" },
         {
-            name: "E-Meet",
+            name: "THE COUNSEL EXCHANGE",
             href: "#",
             hasDropdown: true,
             dropdownItems: [
-                { name: "Upcoming E-Meet", href: "/upcoming-e-meet" },
-                { name: "Past E-Meet", href: "/e-meet" },
+                { name: "Upcoming Counsel Exchange", href: "/upcoming-e-meet" },
+                { name: "Past Counsel Exchange", href: "/e-meet" },
             ]
         },
         {
