@@ -56,7 +56,8 @@ const speakers: any[] = [
     {
         name: "Bhavesh Saxena",
         title: "Compliance Lead - Asia Pacific & Country Counsel India, Agilent Technologies",
-        image: "/bangalore-2026/speakers-images/Bhavesh-Saxena.png",
+        image: "/bangalore-2026/speakers-images/Bhavesh-Saxena1.jpg",
+        bio: `The leadership journey of Bhavesh in the legal domain has been dynamic with significant milestones and impactful decisions. He has transitioned across various sectors, including Service Sector, ITES, Petrochemicals, Crop Science, Automobile, and Life Science over the past 23 years. From being part of 1st E- Governance Government Project of India (MCA21) with TCS, to working with complex greenfield projects at Haldia Petrochemicals and Mitsubishi Chemicals, he later joined Murugappa Group where he worked on mergers and amalgamations and thereafter led the Legal Function of Nissan Motor in India. For last, eight plus years Bhavesh has been with Agilent Technologies- a life science company (a spinoff Hewlett Packard) where he is currently the Compliance Counsel Asia Pacific & Country Legal Counsel - India.`
     },
     {
         name: "Ankita Choudhary",
