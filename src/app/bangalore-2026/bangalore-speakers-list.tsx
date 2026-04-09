@@ -10,82 +10,83 @@ const speakers: any[] = [
     {
         name: "Jaya Kathju",
         title: "Associate Director - Legal, Eli Lilly",
-        image: "/bangalore-2026/speakers images/Jaya Kathju.png",
+        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png",
     },
     {
         name: "Priyesh Sharma",
         title: "Assistant VP Legal, Knowledge Really Trust",
-        image: "/bangalore-2026/speakers images/Priyesh Sharma.png",
+        image: "/bangalore-2026/speakers-images/Priyesh-Sharma.png",
     },
     {
         name: "Shirish Pillai",
         title: "Senior Director, Enterprise Risk Management, Nasdaq",
-        image: "/bangalore-2026/speakers images/Shirish Pillai .png",
+        image: "/bangalore-2026/speakers-images/Shirish-Pillai.png",
     },
     {
         name: "Debasish Roychowdhury",
         title: "General Counsel and Head Legal, Compliance and Secretarial, In-solutions Global Ltd.",
-        image: "/bangalore-2026/speakers images/Debasish Roychowdhury.png",
+        image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png",
     },
     {
         name: "Sivani Peesapati",
         title: "Director, Cyber Security, GE HealthCare",
-        image: "/bangalore-2026/speakers images/Sivani Peesapati.png",
+        image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png",
         bio: `A dedicated and experienced Manager in Cybersecurity, committed to safeguarding digital assets and protecting organizations from cyber threats. Skilled in developing and implementing robust security strategies, and compliance initiatives . Adept at leading teams and fostering a culture of cyber resilience. Passionate about staying at the forefront of the ever-evolving cybersecurity landscape to ensure the highest level of protection for businesses and end customers.`
     },
     {
         name: "Amit Anand",
         title: "India Head Legal ( VP Legal ), Commonwealth Bank",
-        image: "/bangalore-2026/speakers images/Amit Anand .png",
+        image: "/bangalore-2026/speakers-images/Amit-Anand.png",
     },
     {
         name: "Tanin Chakraborty",
         title: "Senior Director, Global DPO, Biocon Biologics",
-        image: "/bangalore-2026/speakers images/Tanin Chakraborty.png",
+        image: "/bangalore-2026/speakers-images/Tanin-Chakraborty.png",
     },
     {
         name: "Arvind Subramaniam",
         title: "Data Privacy Officer, M2P Fintech",
-        image: "/bangalore-2026/speakers images/Arvind Subramaniam .png",
+        image: "/bangalore-2026/speakers-images/Arvind-Subramaniam.png",
     },
     {
         name: "Shalini Chawla",
         title: "Patent Specialist - ITC Limited",
-        image: "/bangalore-2026/speakers images/Shalini Chawla.png",
+        image: "/bangalore-2026/speakers-images/Shalini-Chawla.png",
     },
     {
         name: "Bhavesh Saxena",
         title: "Compliance Lead - Asia Pacific & Country Counsel India, Agilent Technologies",
-        image: "/bangalore-2026/speakers images/Bhavesh Saxena.png",
+        image: "/bangalore-2026/speakers-images/Bhavesh-Saxena.png",
     },
     {
         name: "Ankita Choudhary",
         title: "Head - Legal Advisory and Contracts at Nuvama Group",
-        image: "/bangalore-2026/speakers images/Ankita Choudhary.png",
+        image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png",
     },
     {
         name: "Hena Datta",
         title: "Head of Legal, Emmvee Group",
-        image: "/bangalore-2026/speakers images/Hena Datta.png",
+        image: "/bangalore-2026/speakers-images/Hena-Datta.png",
     },
     {
         name: "Smitha Chandrashekar",
         title: "Legal Director, Harman International",
-        image: "/bangalore-2026/speakers images/Smitha Chandrashekar .png",
+        image: "/bangalore-2026/speakers-images/Smitha-Chandrashekar.png",
     },
     {
         name: "Prashant Srivastava",
         title: "Head of Contracts & Attorney Regional Counsel, Hewlett Packard Enterprise",
+        image: "/bangalore-2026/speakers-images/prashant-srivastava.jpg",
     },
     {
         name: "Deepalakshmi Vadivelan",
         title: "General Counsel & SVP Legal, Global DPO, Quess Corp Limited",
-        image: "/bangalore-2026/speakers images/Deepalakshmi Vadivelan.png",
+        image: "/bangalore-2026/speakers-images/Deepalakshmi-Vadivelan.png",
     },
     {
         name: "Krishna Chellapilla",
         title: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",
-        image: "/bangalore-2026/speakers images/Krishna Chellapilla.png",
+        image: "/bangalore-2026/speakers-images/Krishna-Chellapilla.png",
         bio: `Krishna Chellapilla has around 25 years of experience across diverse aspects of Intellectual Property Rights and currently heads the Patents, Prosecution and Copyright activities for TCS. His primary responsibility is to create and protect TCS intellectual property. His specialization includes managing patent prosecution across jurisdictions and handling oral proceedings and examiner interviews at European Patent Office (EPO) and US Patent and Trademark office (USPTO).
 
 Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before that, worked with a US-based law firm as an IP attorney.`
@@ -93,17 +94,17 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
     {
         name: "Iqbal Tauseef",
         title: "Executive Director – Legal Head - India & Global Contracts COE, TTEC",
-        image: "/bangalore-2026/speakers images/Iqbal Tauseef.png",
+        image: "/bangalore-2026/speakers-images/Iqbal-Tauseef.png",
     },
     {
         name: "Alpa Sood",
         title: "Director - Legal, Marvell Technology",
-        image: "/bangalore-2026/speakers images/Alpa Sood.png",
+        image: "/bangalore-2026/speakers-images/Alpa-Sood.png",
     },
     {
         name: "Sathish Kolar Ramamoorthy",
         title: "General Counsel VP Legal & CS, Manipal Health Enterprises PVT. LTD.",
-        image: "/bangalore-2026/speakers images/Sathish Kolar Ramamoorthy.png",
+        image: "/bangalore-2026/speakers-images/Sathish-Kolar-Ramamoorthy.png",
     }
 ];
 
