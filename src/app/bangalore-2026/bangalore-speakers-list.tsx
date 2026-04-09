@@ -76,7 +76,6 @@ const speakers: any[] = [
     {
         name: "Prashant Srivastava",
         title: "Head of Contracts & Attorney Regional Counsel, Hewlett Packard Enterprise",
-        image: "/bangalore-2026/speakers images/Prashant Srivastava.png",
     },
     {
         name: "Deepalakshmi Vadivelan",
