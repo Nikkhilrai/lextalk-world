@@ -735,6 +735,7 @@ export default function UpcomingCounselExchange() {
         </div>
       </section>
 
+      </main>
       <Footer />
       <RegisterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
