@@ -71,7 +71,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             {/* Main Navbar */}
             <nav
                 className={cn(
-                    "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out top-0",
+                    "fixed left-0 right-0 z-[9999] transition-all duration-500 ease-in-out top-0",
                     isScrolled
                         ? "bg-white/80 backdrop-blur-md shadow-sm py-4"
                         : "bg-transparent py-6"
