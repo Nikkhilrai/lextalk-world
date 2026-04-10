@@ -90,7 +90,7 @@ function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   const labelClass = "block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5";
 
   return createPortal(
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={onClose} />
 
