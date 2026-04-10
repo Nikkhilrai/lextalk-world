@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { RegisterModal } from "@/components/RegisterModal";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { createPortal } from "react-dom";
 import {
   Calendar,
   Clock,
@@ -26,7 +26,191 @@ import {
   MessageSquare,
   Star,
   ChevronRight,
+  X,
+  CheckCircle,
+  Loader2,
 } from "lucide-react";
+
+/* ─── Access Request Modal ─── */
+function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [mounted, setMounted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      setIsSubmitted(false);
+      setError("");
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      country: (form.elements.namedItem("country") as HTMLInputElement).value.trim(),
+      organization: (form.elements.namedItem("organization") as HTMLInputElement).value.trim(),
+      designation: (form.elements.namedItem("designation") as HTMLInputElement).value.trim(),
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
+    };
+    try {
+      const res = await fetch("/api/counsel-exchange-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setIsSubmitted(true);
+      } else {
+        const json = await res.json();
+        setError(json.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!mounted || !isOpen) return null;
+
+  const inputClass = "w-full px-4 py-2.5 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-all placeholder:text-slate-400";
+  const labelClass = "block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5";
+
+  return createPortal(
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={onClose} />
+
+      {/* Modal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 16 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+      >
+        <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <div className="p-6 sm:p-8 max-h-[85vh] overflow-y-auto">
+          {isSubmitted ? (
+            <div className="flex flex-col items-center text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-4">
+                <CheckCircle className="w-8 h-8 text-green-500" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Request Submitted</h3>
+              <p className="text-slate-500 text-sm max-w-xs">
+                Thank you. We'll review your request and be in touch shortly.
+              </p>
+              <button
+                onClick={onClose}
+                className="mt-6 px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 mb-3">
+                  <Lock className="w-3 h-3 text-amber-600" />
+                  <span className="text-amber-700 text-[11px] font-bold tracking-widest uppercase">Request Access</span>
+                </div>
+                <h2 className="text-xl font-bold text-slate-900">The Counsel Exchange</h2>
+                <p className="text-sm text-slate-500 mt-1">AI, Patents & Power — April 22, 2026</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>Full Name *</label>
+                    <input name="name" type="text" required placeholder="Jane Smith" className={inputClass} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Email *</label>
+                    <input name="email" type="email" required placeholder="jane@firm.com" className={inputClass} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>Phone *</label>
+                    <input name="phone" type="tel" required placeholder="+1 555 000 0000" className={inputClass} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Country *</label>
+                    <input name="country" type="text" required placeholder="United States" className={inputClass} />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={labelClass}>Organization *</label>
+                  <input name="organization" type="text" required placeholder="Law firm or company name" className={inputClass} />
+                </div>
+
+                <div>
+                  <label className={labelClass}>Designation *</label>
+                  <input name="designation" type="text" required placeholder="e.g. General Counsel, Partner" className={inputClass} />
+                </div>
+
+                <div>
+                  <label className={labelClass}>Why do you want to join? (optional)</label>
+                  <textarea
+                    name="message"
+                    rows={3}
+                    placeholder="Briefly share your interest or what you hope to gain from this session..."
+                    className={inputClass + " resize-none"}
+                  />
+                </div>
+
+                {error && (
+                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2">{error}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-xl transition-colors text-sm"
+                >
+                  {isLoading ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
+                  ) : (
+                    <><Sparkles className="w-4 h-4" /> Submit Access Request</>
+                  )}
+                </button>
+
+                <p className="text-center text-xs text-slate-400">
+                  <Lock className="w-3 h-3 inline mr-1" />
+                  Participation is limited and curated. We'll review your request.
+                </p>
+              </form>
+            </>
+          )}
+        </div>
+      </motion.div>
+    </div>,
+    document.body
+  );
+}
 
 /* ─── Animation variants ─── */
 const fadeUp = {
@@ -120,9 +304,8 @@ export default function UpcomingCounselExchange() {
   const countdown = useCountdown(EVENT_DATE);
 
   return (
-    <>
+    <main className="min-h-screen bg-white text-slate-800 selection:bg-amber-200 selection:text-amber-900">
       <Navbar variant="light" />
-      <main className="min-h-screen bg-white text-slate-800 selection:bg-amber-200 selection:text-amber-900">
 
       {/* ══════════════════════ HERO ══════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FFFDF8]">
@@ -737,9 +920,8 @@ export default function UpcomingCounselExchange() {
         </div>
       </section>
 
-      </main>
       <Footer />
-      <RegisterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+      <AccessRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </main>
   );
 }
