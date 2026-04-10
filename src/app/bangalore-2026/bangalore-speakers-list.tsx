@@ -10,7 +10,7 @@ const speakers: any[] = [
     {
         name: "Jaya Kathju",
         title: "Associate Director – Legal, Eli Lilly",
-        image: "/bangalore-2026/speakers-images/Sivani_Peesapati.png",
+        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png",
         bio: `Jaya Kathju is Associate Director – Legal at Eli Lilly, with over a decade of experience in corporate legal functions and litigation. She has previously worked with leading global organizations such as Cognizant and Capgemini: Jaya brings a strong foundation in contracts, complemented by her in-house counsel expertise. She is a graduate of Gujarat National Law University.`
     },
     {
@@ -31,7 +31,7 @@ const speakers: any[] = [
     {
         name: "Sivani Peesapati",
         title: "Director, Cyber Security, GE HealthCare",
-        image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png",
+        image: "/bangalore-2026/speakers-images/Sivani_Peesapati.png",
         bio: `A dedicated and experienced Manager in Cybersecurity, committed to safeguarding digital assets and protecting organizations from cyber threats. Skilled in developing and implementing robust security strategies, and compliance initiatives . Adept at leading teams and fostering a culture of cyber resilience. Passionate about staying at the forefront of the ever-evolving cybersecurity landscape to ensure the highest level of protection for businesses and end customers.`
     },
     {
