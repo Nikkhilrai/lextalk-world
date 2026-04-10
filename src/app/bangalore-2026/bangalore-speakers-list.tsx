@@ -31,7 +31,7 @@ const speakers: any[] = [
     {
         name: "Sivani Peesapati",
         title: "Director, Cyber Security, GE HealthCare",
-        image: "/bangalore-2026/speakers-images/Sivani_Peesapati.png",
+        image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png",
         bio: `A dedicated and experienced Manager in Cybersecurity, committed to safeguarding digital assets and protecting organizations from cyber threats. Skilled in developing and implementing robust security strategies, and compliance initiatives . Adept at leading teams and fostering a culture of cyber resilience. Passionate about staying at the forefront of the ever-evolving cybersecurity landscape to ensure the highest level of protection for businesses and end customers.`
     },
     {
