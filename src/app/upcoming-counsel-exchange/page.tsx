@@ -110,12 +110,14 @@ function CountdownCell({ value, label }: { value: number; label: string }) {
   );
 }
 
+// Defined outside component so it's a stable reference — prevents useEffect re-runs on every render
+const EVENT_DATE = new Date("2026-04-22T11:00:00Z");
+
 export default function UpcomingCounselExchange() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
-  const eventDate = new Date("2026-04-22T11:00:00Z");
-  const countdown = useCountdown(eventDate);
+  const countdown = useCountdown(EVENT_DATE);
 
   return (
     <>
