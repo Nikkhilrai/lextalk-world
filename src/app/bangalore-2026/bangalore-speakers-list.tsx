@@ -9,8 +9,9 @@ import { X, Calendar, MessageCircle } from "lucide-react";
 const speakers: any[] = [
     {
         name: "Jaya Kathju",
-        title: "Associate Director - Legal, Eli Lilly",
-        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png",
+        title: "Associate Director – Legal, Eli Lilly",
+        image: "/bangalore-2026/speakers-images/Sivani_Peesapati.png",
+        bio: `Jaya Kathju is Associate Director – Legal at Eli Lilly, with over a decade of experience in corporate legal functions and litigation. She has previously worked with leading global organizations such as Cognizant and Capgemini: Jaya brings a strong foundation in contracts, complemented by her in-house counsel expertise. She is a graduate of Gujarat National Law University.`
     },
     {
         name: "Priyesh Sharma",
