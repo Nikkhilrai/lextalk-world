@@ -118,9 +118,8 @@ export default function UpcomingCounselExchange() {
   const countdown = useCountdown(eventDate);
 
   return (
-    <>
+    <main className="min-h-screen bg-white text-slate-800 selection:bg-amber-200 selection:text-amber-900">
       <Navbar variant="light" />
-      <main className="min-h-screen bg-white text-slate-800 overflow-x-hidden selection:bg-amber-200 selection:text-amber-900">
 
       {/* ══════════════════════ HERO ══════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FFFDF8]">
@@ -735,9 +734,8 @@ export default function UpcomingCounselExchange() {
         </div>
       </section>
 
-      </main>
       <Footer />
       <RegisterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+    </main>
   );
 }
