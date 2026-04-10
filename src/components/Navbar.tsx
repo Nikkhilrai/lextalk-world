@@ -98,14 +98,12 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                             {dynamicNavLinks.map((link) => (
                                 <div
                                     key={link.name}
-                                    className="relative"
-                                    onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
-                                    onMouseLeave={() => setOpenDropdown(null)}
+                                    className="relative group/nav"
                                 >
                                     <Link
                                         href={link.href}
                                         className={cn(
-                                            "relative text-sm font-semibold tracking-wide transition-all duration-300 group flex items-center gap-1",
+                                            "relative text-sm font-semibold tracking-wide transition-all duration-300 flex items-center gap-1",
                                             isScrolled
                                                 ? "text-slate-700 hover:text-amber-600"
                                                 : variant === "light"
@@ -115,22 +113,17 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                     >
                                         {link.name}
                                         {link.hasDropdown && (
-                                            <ChevronDown size={14} className={cn("transition-transform duration-200", openDropdown === link.name && "rotate-180")} />
+                                            <ChevronDown size={14} className="transition-transform duration-200 group-hover/nav:rotate-180" />
                                         )}
                                         <span className={cn(
-                                            "absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover:w-full",
+                                            "absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300 -translate-x-1/2 group-hover/nav:w-full",
                                             isScrolled ? "bg-amber-600" : "bg-amber-400"
                                         )} />
                                     </Link>
 
-                                    {/* Dropdown Menu */}
+                                    {/* Dropdown Menu - CSS hover controlled, no React state needed */}
                                     {link.hasDropdown && link.dropdownItems && (
-                                        <div className={cn(
-                                            "absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300",
-                                            openDropdown === link.name
-                                                ? "opacity-100 translate-y-0 pointer-events-auto"
-                                                : "opacity-0 -translate-y-2 pointer-events-none"
-                                        )}>
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300 opacity-0 -translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto z-[99999]">
                                             <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden min-w-[200px]">
                                                 {link.dropdownItems.map((item) => (
                                                     <Link
