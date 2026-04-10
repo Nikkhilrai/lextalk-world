@@ -23,13 +23,6 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-    const toggleDropdown = (e: React.MouseEvent, name: string) => {
-        if (window.innerWidth < 1024) return; // Let mobile menu handle it
-        e.preventDefault();
-        e.stopPropagation();
-        setOpenDropdown(openDropdown === name ? null : name);
-    };
-
     const [dynamicNavLinks] = useState<NavLink[]>([
         { name: "Home", href: "/" },
         {
@@ -108,7 +101,6 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                                     className="relative"
                                     onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
                                     onMouseLeave={() => setOpenDropdown(null)}
-                                    onClick={(e) => link.hasDropdown && toggleDropdown(e, link.name)}
                                 >
                                     <Link
                                         href={link.href}

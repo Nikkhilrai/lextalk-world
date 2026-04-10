@@ -126,7 +126,7 @@ export default function UpcomingCounselExchange() {
       <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FFFDF8]">
 
         {/* Background layers */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 pointer-events-none">
           {/* Warm cream base */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF8] via-[#FFF8ED] to-[#FFFDF8]" />
           {/* Soft amber blob top */}
@@ -353,7 +353,7 @@ export default function UpcomingCounselExchange() {
 
       {/* ══════════════════════ SESSION AGENDA ══════════════════════ */}
       <section className="relative py-24 sm:py-32 bg-slate-50">
-        <div className="absolute inset-0 opacity-[0.04]"
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: "linear-gradient(to right, #92400e 1px, transparent 1px), linear-gradient(to bottom, #92400e 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
         <div className="container mx-auto px-5 sm:px-8 relative z-10">
@@ -545,7 +545,7 @@ export default function UpcomingCounselExchange() {
 
       {/* ══════════════════════ WHO & GAIN ══════════════════════ */}
       <section className="relative py-24 sm:py-32 bg-slate-50">
-        <div className="absolute inset-0 opacity-[0.04]"
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: "radial-gradient(circle, #92400e 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }} />
 
         <div className="container mx-auto px-5 sm:px-8 relative z-10">
