@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { motion, useInView } from "framer-motion";
@@ -692,7 +693,12 @@ export default function UpcomingCounselExchange() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
             {[
-              { initials: "IP", role: "Senior IP Counsel", org: "AI / Technology Organisation" },
+              { 
+                name: "Sushma Shankar", 
+                role: "Vice President Legal", 
+                org: "Accenture", 
+                image: "/images/Counsel Exchange Image/Sushma Shankar.jpeg" 
+              },
               { initials: "LP", role: "Partner – IP", org: "International Law Firm" },
               { initials: "PA", role: "Patent Strategist", org: "Deep Tech" },
               { initials: "LT", role: "Legal Tech / AI Leader", org: "Platform Organisation" },
@@ -708,13 +714,23 @@ export default function UpcomingCounselExchange() {
               >
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 {/* Avatar */}
-                <div className="relative w-20 h-20 mx-auto mb-5">
+                <div className="relative w-24 h-24 mx-auto mb-5">
                   <div className="absolute inset-0 rounded-full border border-dashed border-amber-300/50 group-hover:border-amber-400 transition-colors" style={{ animation: "spin 14s linear infinite" }} />
-                  <div className="absolute inset-2 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center">
-                    <span className="text-lg font-black text-amber-500 group-hover:text-amber-600 transition-colors">{speaker.initials}</span>
+                  <div className="absolute inset-2 rounded-full overflow-hidden bg-amber-50 border border-amber-200 flex items-center justify-center">
+                    {"image" in speaker ? (
+                      <Image 
+                        src={speaker.image} 
+                        alt={speaker.name} 
+                        fill 
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    ) : (
+                      <span className="text-xl font-black text-amber-500 group-hover:text-amber-600 transition-colors">{(speaker as any).initials}</span>
+                    )}
                   </div>
                 </div>
-                <p className="text-slate-900 font-bold text-sm mb-1 relative z-10">{speaker.role}</p>
+                <p className="text-slate-900 font-bold text-sm mb-1 relative z-10">{"name" in speaker ? speaker.name : speaker.role}</p>
+                {"name" in speaker && <p className="text-amber-600 text-[10px] font-bold uppercase tracking-widest mb-1 relative z-10">{speaker.role}</p>}
                 <p className="text-slate-400 text-xs relative z-10">{speaker.org}</p>
               </motion.div>
             ))}
