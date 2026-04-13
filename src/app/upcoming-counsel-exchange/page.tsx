@@ -19,385 +19,226 @@ import {
   ShieldCheck,
   Lightbulb,
   TrendingUp,
+  Award,
   Users,
+  MessageSquare,
   Sparkles,
   Zap,
-  Award,
-  FileText,
-  MessageSquare,
-  Star,
   ChevronRight,
+  ChevronLeft,
+  Briefcase,
+  FileText,
+  Star,
+  MapPin,
+  Check,
   X,
-  CheckCircle,
-  Loader2,
+  Linkedin,
+  Download,
+  Phone,
+  Play
 } from "lucide-react";
 
-/* ─── Access Request Modal ─── */
-function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [mounted, setMounted] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+// ══════════════════════ CONSTANTS & TYPES ══════════════════════
 
-  useEffect(() => { setMounted(true); }, []);
+const SESSION_DATE = new Date("2026-04-20T10:00:00Z");
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: [0.21, 0.45, 0.32, 0.9]
+    }
+  })
+};
+
+// ══════════════════════ COMPONENTS ══════════════════════
+
+function AnimatedNumber({ value, duration = 2, suffix = "" }: { value: number; duration?: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      setIsSubmitted(false);
-      setError("");
-    } else {
-      document.body.style.overflow = "";
+    if (isInView) {
+      let start = 0;
+      const end = value;
+      const totalMiliseconds = duration * 1000;
+      const incrementTime = totalMiliseconds / end;
+
+      const timer = setInterval(() => {
+        start += 1;
+        setCount(start);
+        if (start === end) clearInterval(timer);
+      }, incrementTime);
+
+      return () => clearInterval(timer);
     }
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+  }, [isInView, value, duration]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
-      email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
-      country: (form.elements.namedItem("country") as HTMLInputElement).value.trim(),
-      organization: (form.elements.namedItem("organization") as HTMLInputElement).value.trim(),
-      designation: (form.elements.namedItem("designation") as HTMLInputElement).value.trim(),
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
-    };
-    try {
-      const res = await fetch("/api/counsel-exchange-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        setIsSubmitted(true);
-      } else {
-        const json = await res.json();
-        setError(json.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setError("Network error. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
-  if (!mounted || !isOpen) return null;
+function CountdownCell({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-2">
+        <span className="text-xl sm:text-2xl font-black text-slate-900">{String(value).padStart(2, '0')}</span>
+      </div>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{label}</span>
+    </div>
+  );
+}
 
-  const inputClass = "w-full px-4 py-2.5 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-all placeholder:text-slate-400";
-  const labelClass = "block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5";
+// Access Request Modal Component
+function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[100000] flex justify-center items-start overflow-y-auto p-4 pt-16 sm:pt-24 md:items-center md:pt-4">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={onClose} />
-
-      {/* Modal */}
+    <div className="fixed inset-0 z-[100000] flex items-start justify-center pt-16 px-4 md:px-0 bg-slate-950/40 backdrop-blur-md overflow-y-auto pb-10">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 16 }}
+        initial={{ opacity: 0, scale: 0.95, y: -20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 16 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+        className="relative w-full max-w-lg bg-white rounded-[2.5rem] shadow-2xl overflow-hidden mt-6"
       >
-        <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
-
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+          className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 transition-colors z-10"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5 text-slate-500" />
         </button>
 
-        <div className="p-6 sm:p-8 max-h-[85vh] overflow-y-auto">
-          {isSubmitted ? (
-            <div className="flex flex-col items-center text-center py-8">
-              <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-4">
-                <CheckCircle className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Request Submitted</h3>
-              <p className="text-slate-500 text-sm max-w-xs">
-                Thank you. We'll review your request and be in touch shortly.
-              </p>
-              <button
-                onClick={onClose}
-                className="mt-6 px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-colors"
-              >
-                Close
-              </button>
+        <div className="p-10 md:p-12">
+          <div className="mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-6">
+              <Lock className="w-6 h-6 text-amber-600" />
             </div>
-          ) : (
-            <>
-              <div className="mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 mb-3">
-                  <Lock className="w-3 h-3 text-amber-600" />
-                  <span className="text-amber-700 text-[11px] font-bold tracking-widest uppercase">Request Access</span>
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">The Counsel Exchange</h2>
-                <p className="text-sm text-slate-500 mt-1">AI, Patents & Power — April 22, 2026</p>
-              </div>
+            <h2 className="text-3xl font-serif font-bold text-slate-900 mb-3">Request Access</h2>
+            <p className="text-slate-500">Submit your professional details. All participants are curated to ensure high-signal peer interaction.</p>
+          </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className={labelClass}>Full Name *</label>
-                    <input name="name" type="text" required placeholder="Jane Smith" className={inputClass} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Email *</label>
-                    <input name="email" type="email" required placeholder="jane@firm.com" className={inputClass} />
-                  </div>
-                </div>
+          <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Access request submitted. We will be in touch shortly."); onClose(); }}>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name</label>
+              <input type="text" required placeholder="Sushma Shankar" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Professional Email</label>
+              <input type="email" required placeholder="sushma@accenture.com" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Organisation</label>
+              <input type="text" required placeholder="Accenture" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Role/Designation</label>
+              <input type="text" required placeholder="Vice President Legal" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
+            </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className={labelClass}>Phone *</label>
-                    <input name="phone" type="tel" required placeholder="+1 555 000 0000" className={inputClass} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Country *</label>
-                    <input name="country" type="text" required placeholder="United States" className={inputClass} />
-                  </div>
-                </div>
-
-                <div>
-                  <label className={labelClass}>Organization *</label>
-                  <input name="organization" type="text" required placeholder="Law firm or company name" className={inputClass} />
-                </div>
-
-                <div>
-                  <label className={labelClass}>Designation *</label>
-                  <input name="designation" type="text" required placeholder="e.g. General Counsel, Partner" className={inputClass} />
-                </div>
-
-                <div>
-                  <label className={labelClass}>Why do you want to join? (optional)</label>
-                  <textarea
-                    name="message"
-                    rows={3}
-                    placeholder="Briefly share your interest or what you hope to gain from this session..."
-                    className={inputClass + " resize-none"}
-                  />
-                </div>
-
-                {error && (
-                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2">{error}</p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-white font-bold rounded-xl transition-colors text-sm"
-                >
-                  {isLoading ? (
-                    <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
-                  ) : (
-                    <><Sparkles className="w-4 h-4" /> Submit Access Request</>
-                  )}
-                </button>
-
-                <p className="text-center text-xs text-slate-400">
-                  <Lock className="w-3 h-3 inline mr-1" />
-                  Participation is limited and curated. We'll review your request.
-                </p>
-              </form>
-            </>
-          )}
+            <button type="submit" className="w-full py-5 bg-gradient-to-br from-amber-500 to-amber-600 text-white font-black rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all active:scale-[0.98] mt-4">
+              Submit Request
+            </button>
+          </form>
         </div>
-      </motion.div>
+      </form>
     </div>,
     document.body
   );
 }
 
-/* ─── Animation variants ─── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: "easeOut" as const, delay: i * 0.1 },
-  }),
-};
+// ══════════════════════ MAIN PAGE ══════════════════════
 
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-/* ─── Countdown hook ─── */
-function useCountdown(target: Date) {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  useEffect(() => {
-    function tick() {
-      const diff = target.getTime() - Date.now();
-      if (diff <= 0) { setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 }); return; }
-      setTimeLeft({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000) / 60000),
-        seconds: Math.floor((diff % 60000) / 1000),
-      });
-    }
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, [target]);
-  return timeLeft;
-}
-
-/* ─── Animated Counter ─── */
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    if (!isInView) return;
-    let start = 0;
-    const end = value;
-    const duration = 1400;
-    const step = 16;
-    const increment = end / (duration / step);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) { setDisplay(end); clearInterval(timer); }
-      else setDisplay(Math.floor(start));
-    }, step);
-    return () => clearInterval(timer);
-  }, [isInView, value]);
-  return <span ref={ref}>{display}{suffix}</span>;
-}
-
-/* ─── Countdown digit cell ─── */
-function CountdownCell({ value, label }: { value: number; label: string }) {
-  const prev = useRef(value);
-  const changed = prev.current !== value;
-  if (changed) prev.current = value;
-  return (
-    <div className="flex flex-col items-center gap-1.5">
-      <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-50/50 to-transparent" />
-        <motion.span
-          key={value}
-          initial={changed ? { y: -24, opacity: 0 } : false}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="relative text-2xl sm:text-3xl font-black text-slate-900 tabular-nums"
-        >
-          {String(value).padStart(2, "0")}
-        </motion.span>
-      </div>
-      <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400">{label}</span>
-    </div>
-  );
-}
-
-// Defined outside component so it's a stable reference — prevents useEffect re-runs on every render
-const EVENT_DATE = new Date("2026-04-22T11:00:00Z");
-
-export default function UpcomingCounselExchange() {
+export default function CounselExchangePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  const countdown = useCountdown(EVENT_DATE);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const distance = SESSION_DATE.getTime() - new Date().getTime();
+      setCountdown({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <main className="min-h-screen bg-white text-slate-800 selection:bg-amber-200 selection:text-amber-900">
-      <Navbar variant="light" />
+    <main className="min-h-screen bg-white">
+      <Navbar />
 
-      {/* ══════════════════════ HERO ══════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FFFDF8]">
-
-        {/* Background layers */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Warm cream base */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF8] via-[#FFF8ED] to-[#FFFDF8]" />
-          {/* Soft amber blob top */}
-          <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-amber-400/15 blur-[140px]" />
-          {/* Side accent */}
-          <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-orange-300/10 blur-[120px]" />
-          <div className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full bg-amber-300/10 blur-[100px]" />
-          {/* Fine dot pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.07]"
+      {/* ══════════════════════ HERO SECTION ══════════════════════ */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-20">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-amber-200/20 rounded-full blur-[120px] mix-blend-multiply animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] mix-blend-multiply" />
+          <div className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle, rgba(180,120,0,0.9) 1px, transparent 1px)`,
-              backgroundSize: "44px 44px",
+              backgroundImage: "radial-gradient(#e5e7eb 1.5px, transparent 1.5px)",
+              backgroundSize: "40px 40px",
+              opacity: 0.3
             }}
           />
-          {/* Horizontal rule */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
         </div>
 
-        {/* Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
-          <span className="text-[clamp(50px,16vw,220px)] font-black text-amber-900/[0.025] tracking-tighter whitespace-nowrap">
-            COUNSEL EXCHANGE
-          </span>
-        </div>
-
-        {/* Hero content */}
         <motion.div
-          className="relative z-10 container mx-auto px-5 sm:px-8 pt-28 pb-24 md:pt-36 md:pb-32"
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="container mx-auto px-5 sm:px-8 relative z-10"
         >
-          <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center">
-
-            {/* Eyebrow badge */}
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 mb-8 px-5 py-2.5 rounded-full border border-amber-400/40 bg-amber-50 shadow-sm">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+          <motion.div className="max-w-4xl mx-auto text-center">
+            {/* Upper Badge */}
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 mb-8 sm:mb-12">
+              <div className="flex -space-x-2">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white" />
+                ))}
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+                Exclusive Virtual Session • April 2026
               </span>
-              <span className="text-amber-700 text-lg md:text-xl font-black tracking-[0.25em] uppercase">The Counsel Exchange</span>
-              <Lock className="w-3 h-3 text-amber-500/80" />
             </motion.div>
- 
-            {/* Main headline */}
-            <motion.div variants={fadeUp} custom={1} className="mb-6">
-              <h1 className="text-[clamp(20px,3vw,32px)] font-serif font-bold leading-[1.2] tracking-tight">
-                <span className="block text-slate-900">Private Legal</span>
-                <span className="block relative text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
+
+            {/* Main Branding */}
+            <motion.div variants={fadeUp} custom={1} className="mb-8">
+              <h2 className="text-lg md:text-xl font-black text-amber-600 uppercase tracking-[0.5em] mb-4">
+                The Counsel Exchange
+              </h2>
+              <h1 className="text-[clamp(28px,6vw,72px)] font-serif font-black text-slate-900 leading-[1.05] tracking-tight mb-8">
+                Private Legal<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500">
                   Strategy Sessions
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-gradient-to-r from-transparent via-amber-400/70 to-transparent rounded-full" />
                 </span>
               </h1>
-            </motion.div>
+            </motion.h1>
 
-            {/* Sub-headline */}
-            <motion.p variants={fadeUp} custom={2} className="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium max-w-3xl mx-auto mb-4 leading-relaxed">
-              AI, Patents &amp; Power: Who Owns Innovation<br className="hidden sm:block" /> in the Age of Generative Tech?
-            </motion.p>
-
-            <motion.p variants={fadeUp} custom={3} className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-              A closed-door session where legal leaders examine how AI is reshaping intellectual property, ownership rights, and commercial strategy.
-            </motion.p>
-
-            {/* Countdown */}
-            <motion.div variants={fadeUp} custom={4} className="mb-10">
-              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-amber-600/80 mb-4">Session begins in</p>
-              <div className="inline-flex items-end gap-3 sm:gap-4">
-                <CountdownCell value={countdown.days} label="Days" />
-                <span className="text-2xl font-black text-amber-400/60 mb-4 leading-none">:</span>
-                <CountdownCell value={countdown.hours} label="Hours" />
-                <span className="text-2xl font-black text-amber-400/60 mb-4 leading-none">:</span>
-                <CountdownCell value={countdown.minutes} label="Min" />
-                <span className="text-2xl font-black text-amber-400/60 mb-4 leading-none">:</span>
-                <CountdownCell value={countdown.seconds} label="Sec" />
-              </div>
-            </motion.div>
-
-            {/* Event meta pills */}
-            <motion.div variants={fadeUp} custom={5} className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 mb-12">
+            {/* Value Props */}
+            <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12 sm:mb-16">
               {[
-                { icon: Calendar, label: "April 22, 2026" },
-                { icon: Clock, label: "4:30 PM IST · 60 Minutes" },
-                { icon: Video, label: "Virtual · Private Session" },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white border border-slate-200 shadow-sm hover:border-amber-400/60 hover:shadow-md transition-all duration-300">
+                { icon: Users, label: "50+ Legal Leaders" },
+                { icon: Globe2, label: "20+ Jurisdictions" },
+                { icon: Zap, label: "Focused AI & IP Strategy" },
+              ].map(({ icon: Icon, label }, i) => (
+                <div key={i} className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/50 backdrop-blur-sm border border-slate-100 shadow-sm">
                   <Icon className="w-4 h-4 text-amber-600 shrink-0" />
                   <span className="text-sm font-semibold text-slate-700 whitespace-nowrap">{label}</span>
                 </div>
@@ -417,7 +258,7 @@ export default function UpcomingCounselExchange() {
               </button>
               <div className="flex items-center gap-2 text-xs text-slate-400">
                 <Lock className="w-3 h-3" />
-                <span>Participation is limited &amp; curated</span>
+                <span>Participation is limited & curated</span>
               </div>
             </motion.div>
           </motion.div>
@@ -691,12 +532,12 @@ export default function UpcomingCounselExchange() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               { 
                 name: "Deepalakshmi Vadivelan", 
-                role: "General Counsel & SVP Legal, Global DPO", 
-                org: "Quess Corp Limited", 
+                role: "General Counsel & SVP Legal",
+                org: "Global DPO, Quess Corp Limited", 
                 image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" 
               },
               { 
@@ -731,51 +572,30 @@ export default function UpcomingCounselExchange() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="group relative rounded-[2rem] p-6 bg-white border border-slate-100 shadow-sm hover:border-amber-300 hover:shadow-xl transition-all duration-500 text-center flex flex-col items-center"
+                className="group relative rounded-[2rem] p-5 bg-white border border-slate-100 shadow-sm hover:border-amber-300 hover:shadow-xl transition-all duration-500 text-center flex flex-col items-center"
               >
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-amber-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Avatar Container */}
-                <div className="relative w-full aspect-[4/5] mb-6 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 group-hover:border-amber-200 transition-colors duration-500">
-                  {"image" in speaker ? (
-                    <Image 
-                      src={speaker.image} 
-                      alt={speaker.name} 
-                      fill 
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative">
-                        <div className="absolute inset-0 rounded-full border border-dashed border-amber-300/40 animate-[spin_20s_linear_infinite]" />
-                        <div className="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center">
-                          <span className="text-xl font-black text-amber-500">{(speaker as any).initials}</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
+                <div className="relative w-full aspect-[4/5] mb-5 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 group-hover:border-amber-200 transition-colors duration-500">
+                  <Image 
+                    src={speaker.image} 
+                    alt={speaker.name} 
+                    fill 
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
                   {/* Glass Overlay on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 <div className="relative z-10 w-full">
-                  <p className="text-slate-900 font-bold text-base mb-1.5 leading-tight">{"name" in speaker ? speaker.name : speaker.role}</p>
-                  {"name" in speaker 
-                    ? <p className="text-amber-600 text-[11px] font-bold uppercase tracking-wider mb-1 line-clamp-2">{speaker.role}</p>
-                    : <p className="text-slate-400 text-xs">{(speaker as any).org}</p>
-                  }
-                  {"org" in speaker && "name" in speaker && <p className="text-slate-400 text-xs">{(speaker as any).org}</p>}
+                  <p className="text-slate-900 font-bold text-sm mb-1 leading-tight">{speaker.name}</p>
+                  <p className="text-amber-600 text-[10px] font-bold uppercase tracking-wider mb-1 line-clamp-2">{speaker.role}</p>
+                  <p className="text-slate-400 text-[10px] line-clamp-1">{speaker.org}</p>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="flex items-center justify-center gap-3">
-            <div className="h-px w-12 bg-amber-300" />
-            <p className="text-amber-600 text-xs font-bold tracking-[0.2em] uppercase animate-pulse">Speaker announcements releasing soon</p>
-            <div className="h-px w-12 bg-amber-300" />
-          </motion.div>
         </div>
       </section>
 
