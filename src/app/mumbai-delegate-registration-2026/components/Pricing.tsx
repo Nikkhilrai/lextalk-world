@@ -277,7 +277,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4">
+                <div className="fixed inset-0 z-[100000] flex items-end sm:items-start justify-center p-0 sm:p-4 sm:pt-24 overflow-y-auto">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -290,7 +290,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 30 }}
                         transition={{ type: "spring", damping: 28, stiffness: 350 }}
-                        className="relative z-10 w-full sm:max-w-md bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden"
+                        className="relative z-10 w-full sm:max-w-md bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden sm:mb-8"
                     >
                         {/* Header */}
                         <div className="relative flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
@@ -322,7 +322,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
                             />
                         </div>
 
-                        <div className="p-6 max-h-[72vh] overflow-y-auto">
+                        <div className="p-6 overflow-y-auto">
                             <AnimatePresence mode="wait">
                                 {step === 1 ? (
                                     <motion.form
