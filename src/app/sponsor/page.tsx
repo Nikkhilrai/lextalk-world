@@ -547,38 +547,6 @@ export default function SponsorshipPage() {
                         <div className="w-20 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full" />
                     </div>
 
-                    {/* Presenting Sponsor */}
-                    <div className="mb-24">
-                        <div className="flex flex-col items-center mb-12">
-                            <div className="transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-10 py-3.5 bg-gradient-to-r from-amber-500 via-amber-100 to-amber-600 border-2 border-amber-300 rounded-full shadow-[0_10px_30px_-5px_rgba(245,158,11,0.3)]">
-                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-amber-950 uppercase tracking-widest whitespace-nowrap">
-                                        Presenting Sponsor
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex justify-center px-4">
-                            <a
-                                href="https://www.mrsprofessional.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full max-w-lg h-40 md:h-48 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(245,158,11,0.2)] border-2 border-amber-200 group-hover:border-amber-400 p-6 md:p-8 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/Sponsor logo/Mrs.webp"
-                                        alt="MRS - Presenting Sponsor"
-                                        fill
-                                        className="object-contain filter group-hover:brightness-110 transition-all duration-500"
-                                    />
-                                </div>
-                                {/* Shine effect */}
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                            </a>
-                        </div>
-                    </div>
-
                     {/* Platinum Sponsor tier */}
                     <div className="mb-24">
                         <div className="flex flex-col items-center mb-12">
