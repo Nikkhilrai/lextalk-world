@@ -101,6 +101,34 @@ const EVENTS = [
             "VIP Networking & Awards Gala",
         ],
     },
+    {
+        id: "mumbai",
+        city: "Mumbai",
+        country: "India",
+        tagline: "India\u2019s Commercial Capital Legal Summit",
+        date: "December 10-11, 2026",
+        day: "2 Days",
+        duration: "2 Days",
+        delegates: "400+",
+        href: "/mumbai-delegate-registration-2026",
+        accent: "rose",
+        gradient: "from-rose-500 to-rose-600",
+        hoverGradient: "from-rose-400 to-rose-500",
+        bgGradient: "from-rose-950/80 via-slate-900 to-slate-950",
+        radialGlow: "rgba(244,63,94,0.15)",
+        borderHover: "hover:border-rose-500/40",
+        badgeBg: "bg-rose-500/10 border-rose-500/20 text-rose-400",
+        iconColor: "text-rose-400",
+        titleAccent: "text-rose-400",
+        btnClass:
+            "bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white",
+        shadowHover: "hover:shadow-rose-500/20",
+        features: [
+            "2-Day Conference Access",
+            "400+ Legal Professionals",
+            "Structured Networking & Delegate Kit",
+        ],
+    },
 ];
 
 /* ── Event Card ── */
@@ -230,6 +258,8 @@ function EventCard({
                                     className={`w-1.5 h-1.5 rounded-full ${
                                         event.accent === "amber"
                                             ? "bg-amber-500"
+                                            : event.accent === "rose"
+                                            ? "bg-rose-500"
                                             : "bg-sky-500"
                                     }`}
                                 />
@@ -355,7 +385,7 @@ export default function DelegateRegistrationPage() {
                     </div>
 
                     {/* Event Cards Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
                         {EVENTS.map((event, i) => (
                             <EventCard
                                 key={event.id}
@@ -383,7 +413,7 @@ export default function DelegateRegistrationPage() {
                             <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/10" />
                         </div>
                         <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
-                            Both events are part of the{" "}
+                            All events are part of the{" "}
                             <span className="text-slate-400 font-medium">
                                 LexTalk World Global Legal Roadshow 2026
                             </span>
