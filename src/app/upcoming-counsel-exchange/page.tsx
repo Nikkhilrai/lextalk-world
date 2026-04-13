@@ -155,7 +155,7 @@ function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             </button>
           </form>
         </div>
-      </form>
+      </motion.div>
     </div>,
     document.body
   );
@@ -229,7 +229,7 @@ export default function CounselExchangePage() {
                   Strategy Sessions
                 </span>
               </h1>
-            </motion.h1>
+            </motion.div>
 
             {/* Value Props */}
             <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12 sm:mb-16">
