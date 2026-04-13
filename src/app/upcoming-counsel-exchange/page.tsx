@@ -346,18 +346,18 @@ export default function UpcomingCounselExchange() {
           <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center">
 
             {/* Eyebrow badge */}
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-full border border-amber-400/40 bg-amber-50 shadow-sm">
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 mb-8 px-5 py-2.5 rounded-full border border-amber-400/40 bg-amber-50 shadow-sm">
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
               </span>
-              <span className="text-amber-700 text-xs font-bold tracking-[0.25em] uppercase">The Counsel Exchange</span>
+              <span className="text-amber-700 text-sm md:text-base font-bold tracking-[0.25em] uppercase">The Counsel Exchange</span>
               <Lock className="w-3 h-3 text-amber-500/80" />
             </motion.div>
-
+ 
             {/* Main headline */}
             <motion.div variants={fadeUp} custom={1} className="mb-6">
-              <h1 className="text-[clamp(38px,8vw,90px)] font-serif font-bold leading-[1.04] tracking-tight">
+              <h1 className="text-[clamp(28px,5vw,54px)] font-serif font-bold leading-[1.1] tracking-tight">
                 <span className="block text-slate-900">Private Legal</span>
                 <span className="block relative text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                   Strategy Sessions
