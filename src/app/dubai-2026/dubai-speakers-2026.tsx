@@ -58,38 +58,6 @@ export default function DubaiSpeakersHero() {
             {/* Content Container */}
             <div className="relative z-20 container mx-auto px-4 pt-20 md:pt-28 flex flex-col items-center text-center">
 
-                {/* 1. MRS Logo */}
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="mb-1"
-                >
-                    <div className="relative w-28 h-8 md:w-36 md:h-12">
-                        <Image
-                            src="/logo/mrs-logo.avif"
-                            alt="MRS Logo"
-                            fill
-                            className="object-contain"
-                            priority
-                        />
-                    </div>
-                </motion.div>
-
-                {/* 2. PRESENTS small text */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isVisible ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex items-center gap-3 mb-4"
-                >
-                    <div className="w-6 h-[1px] bg-amber-500/50" />
-                    <p className="text-[9px] md:text-[10px] font-bold tracking-[0.5em] text-amber-400 uppercase">
-                        Presents
-                    </p>
-                    <div className="w-6 h-[1px] bg-amber-500/50" />
-                </motion.div>
-
                 {/* 3. LexTalk World Logo */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}

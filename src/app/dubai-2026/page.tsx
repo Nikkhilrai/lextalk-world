@@ -287,24 +287,6 @@ export default function DubaiEventPage() {
 
                 {/* Content */}
                 <div className="relative z-30 container mx-auto px-4 text-center pt-32 md:pt-28">
-                    {/* Company Logo */}
-                    <div className={`flex justify-center mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <div className="relative w-56 h-16 md:w-80 md:h-24 opacity-90">
-                            <Image
-                                src="/logo/mrs-logo.avif"
-                                alt="Mrs Company Logo"
-                                fill
-                                className="object-contain"
-                                priority
-                            />
-                        </div>
-                    </div>
-
-                    {/* Presents Badge */}
-                    <div className={`mb-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <p className="text-amber-400/80 text-[10px] md:text-xs tracking-[0.4em] uppercase font-light">Presents</p>
-                    </div>
-
                     {/* LexTalk Logo - Reduced Size */}
                     <div className={`flex items-center justify-center mb-5 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <div className="relative h-10 w-28 md:h-20 md:w-72">
@@ -696,48 +678,6 @@ export default function DubaiEventPage() {
                             <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400" />
                             <div className="w-2 h-2 rounded-full bg-amber-500" />
                             <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400" />
-                        </div>
-                    </div>
-
-                    {/* Presenting Sponsor - The "Hero" of Sponsors */}
-                    <div className="mb-24 relative">
-                        {/* Connecting Line */}
-                        <div className="absolute left-1/2 -top-10 bottom-0 w-px bg-gradient-to-b from-amber-500/20 via-amber-500/10 to-transparent -translate-x-1/2 pointer-events-none" />
-
-                        <div className="flex flex-col items-center relative z-10">
-                            {/* Category Badge */}
-                            <div className="mb-10 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-3 bg-white border border-amber-100 rounded-full shadow-[0_4px_20px_-2px_rgba(245,158,11,0.15)] backdrop-blur-sm group">
-                                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-50" />
-                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 uppercase tracking-widest group-hover:tracking-[0.15em] transition-all duration-500">
-                                        Presenting Sponsor
-                                    </h3>
-                                </div>
-                            </div>
-
-                            {/* Premium Logo Showcase */}
-                            <div className="relative group perspective-1000">
-                                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-amber-600/5 rounded-3xl blur-xl transition-all duration-500 group-hover:bg-amber-500/10 group-hover:blur-2xl" />
-
-                                <a
-                                    href="https://www.mrsprofessional.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="relative w-64 h-36 md:w-[400px] md:h-52 bg-white/60 backdrop-blur-md rounded-3xl border border-white/60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_-12px_rgba(217,119,6,0.15)] flex items-center justify-center p-8 transition-all duration-500 transform group-hover:-translate-y-2 block"
-                                >
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src="/logo/mrs-logo.avif"
-                                            alt="MRS Company - Presenting Sponsor"
-                                            fill
-                                            className="object-contain filter transition-all duration-500"
-                                        />
-                                    </div>
-
-                                    {/* Shine Effect */}
-                                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                                </a>
-                            </div>
                         </div>
                     </div>
 

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const categories = [
-    { name: "Presenting Sponsor", size: "lg", items: [{ name: "MRS Company", logo: "/logo/mrs-logo.avif" }] },
     {
         name: "Global Partners", size: "md", items: [
             { name: "Counselling Association", logo: "/dubai-event/logos/2.png" },
