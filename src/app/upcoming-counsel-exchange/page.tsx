@@ -691,12 +691,11 @@ export default function UpcomingCounselExchange() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               { 
                 name: "Sushma Shankar", 
-                role: "Vice President Legal", 
-                org: "Accenture", 
+                role: "Vice President Legal at Accenture", 
                 image: "/images/counsel-exchange/sushma_shankar.jpeg" 
               },
               { initials: "LP", role: "Partner – IP", org: "International Law Firm" },
@@ -709,29 +708,43 @@ export default function UpcomingCounselExchange() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -6 }}
-                className="group relative rounded-3xl p-8 bg-white border border-slate-100 shadow-sm hover:border-amber-300 hover:shadow-md transition-all duration-500 text-center"
+                whileHover={{ y: -8 }}
+                className="group relative rounded-[2rem] p-6 bg-white border border-slate-100 shadow-sm hover:border-amber-300 hover:shadow-xl transition-all duration-500 text-center flex flex-col items-center"
               >
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Avatar */}
-                <div className="relative w-24 h-24 mx-auto mb-5">
-                  <div className="absolute inset-0 rounded-full border border-dashed border-amber-300/50 group-hover:border-amber-400 transition-colors" style={{ animation: "spin 14s linear infinite" }} />
-                  <div className="absolute inset-2 rounded-full overflow-hidden bg-amber-50 border border-amber-200 flex items-center justify-center">
-                    {"image" in speaker ? (
-                      <Image 
-                        src={speaker.image} 
-                        alt={speaker.name} 
-                        fill 
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    ) : (
-                      <span className="text-xl font-black text-amber-500 group-hover:text-amber-600 transition-colors">{(speaker as any).initials}</span>
-                    )}
-                  </div>
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-amber-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Avatar Container */}
+                <div className="relative w-full aspect-[4/5] mb-6 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 group-hover:border-amber-200 transition-colors duration-500">
+                  {"image" in speaker ? (
+                    <Image 
+                      src={speaker.image} 
+                      alt={speaker.name} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="absolute inset-0 rounded-full border border-dashed border-amber-300/40 animate-[spin_20s_linear_infinite]" />
+                        <div className="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center">
+                          <span className="text-xl font-black text-amber-500">{(speaker as any).initials}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Glass Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <p className="text-slate-900 font-bold text-sm mb-1 relative z-10">{"name" in speaker ? speaker.name : speaker.role}</p>
-                {"name" in speaker && <p className="text-amber-600 text-[10px] font-bold uppercase tracking-widest mb-1 relative z-10">{speaker.role}</p>}
-                <p className="text-slate-400 text-xs relative z-10">{speaker.org}</p>
+
+                <div className="relative z-10 w-full">
+                  <p className="text-slate-900 font-bold text-base mb-1.5 leading-tight">{"name" in speaker ? speaker.name : speaker.role}</p>
+                  {"name" in speaker 
+                    ? <p className="text-amber-600 text-[11px] font-bold uppercase tracking-wider mb-1 line-clamp-2">{speaker.role}</p>
+                    : <p className="text-slate-400 text-xs">{(speaker as any).org}</p>
+                  }
+                  {"org" in speaker && "name" in speaker && <p className="text-slate-400 text-xs">{(speaker as any).org}</p>}
+                </div>
               </motion.div>
             ))}
           </div>
