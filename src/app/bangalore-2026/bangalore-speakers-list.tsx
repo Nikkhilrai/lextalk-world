@@ -107,6 +107,16 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
         name: "Sathish Kolar Ramamoorthy",
         title: "General Counsel VP Legal & CS, Manipal Health Enterprises PVT. LTD.",
         image: "/bangalore-2026/speakers-images/Sathish-Kolar-Ramamoorthy.png",
+    },
+    {
+        name: "Anvesha Kumar",
+        title: "Director - Legal, JLL",
+        image: "/bangalore-2026/speakers-images/Anvesha-Kumar.png",
+    },
+    {
+        name: "Devesh Bhardwaj",
+        title: "Head - Legal, VerSe Innovation",
+        image: "/bangalore-2026/speakers-images/Devesh-Bhardwaj.png",
     }
 ];
 
