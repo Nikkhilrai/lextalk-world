@@ -351,13 +351,13 @@ export default function UpcomingCounselExchange() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
               </span>
-              <span className="text-amber-700 text-sm md:text-base font-bold tracking-[0.25em] uppercase">The Counsel Exchange</span>
+              <span className="text-amber-700 text-lg md:text-xl font-black tracking-[0.25em] uppercase">The Counsel Exchange</span>
               <Lock className="w-3 h-3 text-amber-500/80" />
             </motion.div>
  
             {/* Main headline */}
             <motion.div variants={fadeUp} custom={1} className="mb-6">
-              <h1 className="text-[clamp(28px,5vw,54px)] font-serif font-bold leading-[1.1] tracking-tight">
+              <h1 className="text-[clamp(20px,3vw,32px)] font-serif font-bold leading-[1.2] tracking-tight">
                 <span className="block text-slate-900">Private Legal</span>
                 <span className="block relative text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                   Strategy Sessions
