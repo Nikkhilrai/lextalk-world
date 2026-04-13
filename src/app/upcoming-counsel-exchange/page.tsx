@@ -691,16 +691,38 @@ export default function UpcomingCounselExchange() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
             {[
               { 
+                name: "Deepalakshmi Vadivelan", 
+                role: "General Counsel & SVP Legal, Global DPO", 
+                org: "Quess Corp Limited", 
+                image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" 
+              },
+              { 
+                name: "Saurabh Anand", 
+                role: "Senior Legal Counsel", 
+                org: "Akamai Technologies", 
+                image: "/images/counsel-exchange/saurabh_anand.jpeg" 
+              },
+              { 
                 name: "Sushma Shankar", 
-                role: "Vice President Legal at Accenture", 
+                role: "Vice President Legal", 
+                org: "Accenture", 
                 image: "/images/counsel-exchange/sushma_shankar.jpeg" 
               },
-              { initials: "LP", role: "Partner – IP", org: "International Law Firm" },
-              { initials: "PA", role: "Patent Strategist", org: "Deep Tech" },
-              { initials: "LT", role: "Legal Tech / AI Leader", org: "Platform Organisation" },
+              { 
+                name: "Dr. Akshay Kant Chaturvedi", 
+                role: "Corporate Head - IPR", 
+                org: "Gujarat Fluorochemicals Limited", 
+                image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg" 
+              },
+              { 
+                name: "Krishna Chellapilla", 
+                role: "Head - Patents, Prosecution and Copyrights", 
+                org: "Tata Consultancy Services", 
+                image: "/images/counsel-exchange/krishna_chellapilla.webp" 
+              },
             ].map((speaker, i) => (
               <motion.div
                 key={i}
