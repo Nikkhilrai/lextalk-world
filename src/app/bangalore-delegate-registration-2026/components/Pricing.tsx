@@ -20,6 +20,8 @@ interface PassConfig {
     name: string;
     usdPrice: number;
     inrPrice: number;
+    usdOriginalPrice?: number;
+    inrOriginalPrice?: number;
     icon: React.ElementType;
     isPopular?: boolean;
     badge?: string;
@@ -33,6 +35,8 @@ const PASSES: PassConfig[] = [
         name: "Student Pass",
         usdPrice: 129,
         inrPrice: 11600,
+        usdOriginalPrice: 129,
+        inrOriginalPrice: 11600,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
@@ -48,6 +52,8 @@ const PASSES: PassConfig[] = [
         name: "Delegate Pass",
         usdPrice: 199,
         inrPrice: 18000,
+        usdOriginalPrice: 399,
+        inrOriginalPrice: 36000,
         icon: Users,
         isPopular: true,
         badge: "Most Popular",
@@ -65,6 +71,8 @@ const PASSES: PassConfig[] = [
         name: "Delegate VIP Pass",
         usdPrice: 399,
         inrPrice: 36000,
+        usdOriginalPrice: 799,
+        inrOriginalPrice: 72000,
         icon: Building2,
         badge: "VIP",
         color: "slate",
@@ -85,6 +93,8 @@ const PASSES: PassConfig[] = [
         name: "Vendor VIP Pass",
         usdPrice: 999,
         inrPrice: 90000,
+        usdOriginalPrice: 1999,
+        inrOriginalPrice: 180000,
         icon: Building2,
         badge: "Business",
         color: "slate",
@@ -723,12 +733,25 @@ export default function BangaloreDelegatePricing() {
 
                                     {/* Price */}
                                     <div className="mt-5 pb-5 border-b border-slate-100">
-                                        <div className="flex items-baseline gap-2">
+                                        <div className="flex items-baseline flex-wrap gap-2">
                                             <span className="text-4xl font-black text-slate-900 tracking-tight">
                                                 {currency === "INR"
                                                     ? `₹${pass.inrPrice.toLocaleString("en-IN")}`
                                                     : `$${pass.usdPrice}`}
                                             </span>
+                                            {currency === "INR" ? (
+                                                pass.inrOriginalPrice && pass.inrOriginalPrice > pass.inrPrice && (
+                                                    <span className="text-slate-400 line-through text-base font-medium decoration-slate-400/60">
+                                                        ₹{pass.inrOriginalPrice.toLocaleString("en-IN")}
+                                                    </span>
+                                                )
+                                            ) : (
+                                                pass.usdOriginalPrice && pass.usdOriginalPrice > pass.usdPrice && (
+                                                    <span className="text-slate-400 line-through text-lg font-medium decoration-slate-400/60">
+                                                        ${pass.usdOriginalPrice}
+                                                    </span>
+                                                )
+                                            )}
                                             <span className="text-xs text-slate-400 font-semibold">+ GST</span>
                                         </div>
                                         <p className="text-[10px] text-slate-400 mt-1 font-medium">per attendee · early bird pricing</p>
