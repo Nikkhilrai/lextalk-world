@@ -31,23 +31,23 @@ const PASSES: PassConfig[] = [
     {
         id: "student",
         name: "Student Pass",
-        usdPrice: 49,
-        inrPrice: 4500,
+        usdPrice: 129,
+        inrPrice: 11600,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
         features: [
             "Full Day Conference Access",
-            "General Networking Sessions",
+            "Access to General Networking Sessions",
             "Participation Certificate",
-            "Career & Mentorship Round",
+            "Access to Career & Mentorship Round",
         ],
     },
     {
         id: "delegate",
         name: "Delegate Pass",
-        usdPrice: 129,
-        inrPrice: 12500,
+        usdPrice: 199,
+        inrPrice: 18000,
         icon: Users,
         isPopular: true,
         badge: "Most Popular",
@@ -56,24 +56,43 @@ const PASSES: PassConfig[] = [
             "Full Day Conference Access",
             "Structured Networking Sessions",
             "Curated One-to-One Introductions",
-            "Networking Breakfast & Lunch",
+            "Morning Networking Breakfast",
             "Delegate Kit + Certificate",
         ],
     },
     {
-        id: "vendor",
-        name: "Vendor Pass",
-        usdPrice: 499,
-        inrPrice: 45000,
+        id: "delegate-vip",
+        name: "Delegate VIP Pass",
+        usdPrice: 399,
+        inrPrice: 36000,
+        icon: Building2,
+        badge: "VIP",
+        color: "slate",
+        features: [
+            "Full Day Conference Access",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Morning Networking Breakfast",
+            "Delegate Kit + Certificate",
+            "VIP Networking Lounge",
+            "Featured Networking Introduction",
+            "Media Byte Interview",
+            "Digital Spotlight",
+        ],
+    },
+    {
+        id: "vendor-vip",
+        name: "Vendor VIP Pass",
+        usdPrice: 999,
+        inrPrice: 90000,
         icon: Building2,
         badge: "Business",
         color: "slate",
         features: [
             "Full Conference Access",
             "Structured Business Networking",
-            "Logo on Website & Listing",
-            "Networking Breakfast & Lunch",
-            "Delegate Kit + Certificate",
+            "Logo Placement on Website",
+            "Featured Vendor Listing",
             "Media Byte Coverage",
             "Social Media Brand Mention",
             "Priority Business Introduction",
@@ -655,7 +674,7 @@ export default function BangaloreDelegatePricing() {
                 </div>
 
                 {/* Pass Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
                     {PASSES.map((pass, i) => {
                         const Icon = pass.icon;
                         return (
