@@ -77,9 +77,9 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                         : "bg-transparent py-6"
                 )}
             >
-                <div className="container mx-auto px-2 md:px-4 flex items-center justify-between">
+                <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                     {/* Logo - Refined left shift */}
-                    <Link href="/" className="flex items-center gap-2 group -ml-6 md:-ml-12">
+                    <Link href="/" className="flex items-center gap-2 group md:-ml-8">
                         <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-14 transition-transform group-hover:scale-105 flex items-center">
                             <Image
                                 src="/logo/lextalkworld_logo.png"
