@@ -20,6 +20,8 @@ interface PassConfig {
     name: string;
     usdPrice: number;
     inrPrice: number;
+    usdOriginalPrice?: number;
+    inrOriginalPrice?: number;
     icon: React.ElementType;
     isPopular?: boolean;
     badge?: string;
@@ -31,23 +33,27 @@ const PASSES: PassConfig[] = [
     {
         id: "student",
         name: "Student Pass",
-        usdPrice: 49,
-        inrPrice: 4500,
+        usdPrice: 129,
+        inrPrice: 11600,
+        usdOriginalPrice: 129,
+        inrOriginalPrice: 11600,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
         features: [
             "Full Day Conference Access",
-            "General Networking Sessions",
+            "Access to General Networking Sessions",
             "Participation Certificate",
-            "Career & Mentorship Round",
+            "Access to Career & Mentorship Round",
         ],
     },
     {
         id: "delegate",
         name: "Delegate Pass",
-        usdPrice: 129,
-        inrPrice: 12500,
+        usdPrice: 199,
+        inrPrice: 18000,
+        usdOriginalPrice: 399,
+        inrOriginalPrice: 36000,
         icon: Users,
         isPopular: true,
         badge: "Most Popular",
@@ -56,24 +62,47 @@ const PASSES: PassConfig[] = [
             "Full Day Conference Access",
             "Structured Networking Sessions",
             "Curated One-to-One Introductions",
-            "Networking Breakfast & Lunch",
+            "Morning Networking Breakfast",
             "Delegate Kit + Certificate",
         ],
     },
     {
-        id: "vendor",
-        name: "Vendor Pass",
-        usdPrice: 499,
-        inrPrice: 45000,
+        id: "delegate-vip",
+        name: "Delegate VIP Pass",
+        usdPrice: 399,
+        inrPrice: 36000,
+        usdOriginalPrice: 799,
+        inrOriginalPrice: 72000,
+        icon: Building2,
+        badge: "VIP",
+        color: "slate",
+        features: [
+            "Full Day Conference Access",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Morning Networking Breakfast",
+            "Delegate Kit + Certificate",
+            "VIP Networking Lounge",
+            "Featured Networking Introduction",
+            "Media Byte Interview",
+            "Digital Spotlight",
+        ],
+    },
+    {
+        id: "vendor-vip",
+        name: "Vendor VIP Pass",
+        usdPrice: 999,
+        inrPrice: 90000,
+        usdOriginalPrice: 1999,
+        inrOriginalPrice: 180000,
         icon: Building2,
         badge: "Business",
         color: "slate",
         features: [
             "Full Conference Access",
             "Structured Business Networking",
-            "Logo on Website & Listing",
-            "Networking Breakfast & Lunch",
-            "Delegate Kit + Certificate",
+            "Logo Placement on Website",
+            "Featured Vendor Listing",
             "Media Byte Coverage",
             "Social Media Brand Mention",
             "Priority Business Introduction",
@@ -655,7 +684,7 @@ export default function MumbaiDelegatePricing() {
                 </div>
 
                 {/* Pass Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
                     {PASSES.map((pass, i) => {
                         const Icon = pass.icon;
                         return (
@@ -700,12 +729,25 @@ export default function MumbaiDelegatePricing() {
                                     )}
 
                                     <div className="mt-5 pb-5 border-b border-slate-100">
-                                        <div className="flex items-baseline gap-2">
+                                        <div className="flex items-baseline flex-wrap gap-2">
                                             <span className="text-4xl font-black text-slate-900 tracking-tight">
                                                 {currency === "INR"
                                                     ? `₹${pass.inrPrice.toLocaleString("en-IN")}`
                                                     : `$${pass.usdPrice}`}
                                             </span>
+                                            {currency === "INR" ? (
+                                                pass.inrOriginalPrice && pass.inrOriginalPrice > pass.inrPrice && (
+                                                    <span className="text-slate-400 line-through text-base font-medium decoration-slate-400/60">
+                                                        ₹{pass.inrOriginalPrice.toLocaleString("en-IN")}
+                                                    </span>
+                                                )
+                                            ) : (
+                                                pass.usdOriginalPrice && pass.usdOriginalPrice > pass.usdPrice && (
+                                                    <span className="text-slate-400 line-through text-lg font-medium decoration-slate-400/60">
+                                                        ${pass.usdOriginalPrice}
+                                                    </span>
+                                                )
+                                            )}
                                             <span className="text-xs text-slate-400 font-semibold">+ GST</span>
                                         </div>
                                         <p className="text-[10px] text-slate-400 mt-1 font-medium">per attendee · early bird pricing</p>
