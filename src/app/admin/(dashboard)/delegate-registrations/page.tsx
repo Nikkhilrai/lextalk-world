@@ -160,14 +160,16 @@ export default function DelegateRegistrationsPage() {
                         className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200"
                     >
                         <option value="all">Pass: All</option>
+                        <option value="delegate">Delegate</option>
+                        <option value="delegate-vip">Delegate VIP</option>
+                        <option value="vendor-vip">Vendor Pass</option>
+                        <option value="student">Student</option>
+                        <option value="corporate-counsel">Corporate Counsel</option>
                         <option value="visitor">Visitor</option>
                         <option value="full-access">Full Access</option>
                         <option value="full-access-vip">Full Access VIP</option>
                         <option value="vendor">Vendor</option>
-                        <option value="vendor-vip">Vendor VIP</option>
-                        <option value="student">Student</option>
                         <option value="professional">Professional</option>
-                        <option value="corporate">Corporate</option>
                         <option value="global-speaker">Global Speaker</option>
                     </select>
                 </div>
