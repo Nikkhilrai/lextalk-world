@@ -1,5 +1,4 @@
 import { Resend } from "resend";
-import { generateTicketPDF } from "./ticket-generator";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
 
@@ -227,17 +226,6 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
 
         console.log(`Sending confirmation email to: ${data.email} (${fullName}) — ${data.conferenceSlug}`);
 
-        // Generate PDF ticket
-        const pdfBuffer = await generateTicketPDF({
-            attendeeName: fullName,
-            eventName: isBangalore ? "LexTalk World Bangalore 2026" : "LexTalk World Dubai 2026",
-            eventDate: isBangalore ? "June 11, 2026" : "13-14 May, 2026",
-            eventVenue: "To be announced",
-            passType: passDisplayName(data.passType),
-            ticketNumber: data.ticketNumber,
-            ticketId: data.ticketId,
-        });
-
         const subject = isBangalore
             ? `Your pass is confirmed — LexTalk World Bangalore, June 11 ✓`
             : `Your LexTalk World Dubai 2026 Ticket Confirmation — ${data.ticketNumber}`;
@@ -249,12 +237,6 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
             to: data.email,
             subject,
             html,
-            attachments: [
-                {
-                    filename: `LexTalk-${isBangalore ? "Bangalore" : "Dubai"}-${data.ticketNumber}.pdf`,
-                    content: pdfBuffer,
-                }
-            ]
         });
 
         console.log(`Confirmation email sent successfully to ${data.email}`);
