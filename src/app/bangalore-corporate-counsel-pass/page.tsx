@@ -32,7 +32,6 @@ const AUDIENCE = [
 
 const FEATURES = [
     { icon: Star,       text: "Full-day conference access" },
-    { icon: Users,      text: "Structured networking sessions" },
     { icon: Coffee,     text: "Networking luncheon" },
     { icon: Coffee,     text: "Two high tea networking sessions" },
     { icon: Wifi,       text: "Access to VIP networking lounge" },
@@ -407,8 +406,7 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                     </div>
 
                     {/* Name + event */}
-                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-1">Corporate Counsel</h2>
-                    <p className="text-amber-400 text-sm font-semibold mb-3">Exclusive Pass</p>
+                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">Exclusive Pass</h2>
                     <div className="flex gap-3 mb-5">
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> June 11, 2026</span>
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Bangalore, India</span>
@@ -576,7 +574,7 @@ export default function BangaloreCorporateCounselPass() {
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
                                 className="text-slate-400 text-base leading-relaxed mb-8 max-w-lg"
                             >
-                                A curated experience built for legal and compliance leadership — connecting you with peers, media, and decision-makers at India&apos;s premier legal summit.
+                                A curated experience built for legal and compliance leadership at India&apos;s premier legal summit.
                             </motion.p>
 
                             {/* Audience */}
