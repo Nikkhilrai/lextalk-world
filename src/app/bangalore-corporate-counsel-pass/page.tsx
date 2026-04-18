@@ -384,24 +384,20 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
 
     return (
         <div className="relative">
-            {/* Glow behind card */}
-            <div className="absolute -inset-4 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent rounded-[2.5rem] blur-2xl pointer-events-none" />
+            <div className="absolute -inset-3 bg-gradient-to-br from-amber-400/15 via-amber-500/8 to-transparent rounded-[2rem] blur-2xl pointer-events-none" />
 
-            <div className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                {/* Top gold bar */}
+            <div className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <div className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500" />
+                <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-amber-400/6 to-transparent pointer-events-none" />
 
-                {/* Card shimmer top */}
-                <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-amber-400/8 to-transparent pointer-events-none" />
-
-                <div className="p-8 md:p-10">
-                    {/* Badge */}
-                    <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-500/15 border border-amber-500/30 rounded-full">
-                            <ShieldCheck size={12} className="text-amber-400" />
-                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.25em]">Exclusive Pass</span>
+                <div className="p-6">
+                    {/* Top row */}
+                    <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/25 rounded-full">
+                            <ShieldCheck size={10} className="text-amber-400" />
+                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">Exclusive Pass</span>
                         </div>
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
                             <span className="relative flex h-1.5 w-1.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
@@ -410,82 +406,82 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                         </div>
                     </div>
 
-                    {/* Pass name */}
-                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight mb-2">
-                        Corporate Counsel
-                    </h2>
-                    <p className="font-serif text-xl text-amber-400 font-semibold mb-1">Exclusive Pass</p>
-
-                    {/* Event info */}
-                    <div className="flex flex-wrap gap-3 mt-4 mb-8">
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs">
-                            <Calendar size={12} className="text-amber-500/70" />
-                            June 11, 2026
-                        </div>
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs">
-                            <MapPin size={12} className="text-amber-500/70" />
-                            Bangalore, India
-                        </div>
+                    {/* Name + event */}
+                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-1">Corporate Counsel</h2>
+                    <p className="text-amber-400 text-sm font-semibold mb-3">Exclusive Pass</p>
+                    <div className="flex gap-3 mb-5">
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> June 11, 2026</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Bangalore, India</span>
                     </div>
 
-                    {/* Divider */}
-                    <div className="h-px bg-white/8 mb-8" />
+                    <div className="h-px bg-white/6 mb-5" />
+
+                    {/* Coupon hint banner — always show unless applied */}
+                    {!couponApplied && (
+                        <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-amber-500/8 border border-amber-500/20 rounded-xl mb-5">
+                            <div className="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <Tag size={11} className="text-amber-400" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <p className="text-[10px] text-amber-300/70 font-medium">Apply coupon for 30% off</p>
+                                <button
+                                    onClick={() => { setCouponInput(COUPON_CODE); setCouponError(""); }}
+                                    className="text-[11px] font-black text-amber-400 hover:text-amber-300 tracking-widest transition-colors"
+                                >
+                                    {COUPON_CODE}
+                                </button>
+                            </div>
+                            <span className="text-[10px] font-bold text-amber-400 whitespace-nowrap">Save ₹3,000</span>
+                        </div>
+                    )}
 
                     {/* Price */}
-                    <div className="mb-8">
-                        <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Pricing</p>
-                        <div className="flex items-end gap-3">
+                    <div className="mb-5">
+                        <div className="flex items-baseline gap-2 mb-1">
                             {couponApplied && (
-                                <span className="text-2xl font-bold text-slate-600 line-through">
-                                    ₹{ORIGINAL_PRICE.toLocaleString("en-IN")}
-                                </span>
+                                <span className="text-lg font-bold text-slate-600 line-through">₹{ORIGINAL_PRICE.toLocaleString("en-IN")}</span>
                             )}
-                            <span className="text-5xl md:text-6xl font-black text-white leading-none">
-                                ₹{price.toLocaleString("en-IN")}
-                            </span>
-                            <span className="text-slate-400 text-sm pb-1">+ GST</span>
+                            <span className="text-4xl font-black text-white leading-none">₹{price.toLocaleString("en-IN")}</span>
+                            <span className="text-slate-400 text-xs">+ GST</span>
                         </div>
-                        <p className="text-slate-500 text-xs mt-2">
-                            Total payable: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> (incl. 18% GST)
+                        <p className="text-slate-500 text-[11px]">
+                            Total: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> incl. 18% GST
                         </p>
                         {couponApplied && (
-                            <div className="flex items-center gap-2 mt-3 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-xl">
-                                <CheckCircle2 size={13} className="text-green-400" />
-                                <span className="text-green-400 text-xs font-semibold">
-                                    {COUPON_CODE} — ₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")} saved
-                                </span>
-                                <button onClick={onRemoveCoupon} className="ml-auto text-[10px] text-green-600 hover:text-red-400 font-bold transition-colors">Remove</button>
+                            <div className="flex items-center gap-2 mt-2.5 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-xl">
+                                <CheckCircle2 size={12} className="text-green-400" />
+                                <span className="text-green-400 text-[11px] font-semibold">{COUPON_CODE} applied — ₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")} saved</span>
+                                <button onClick={onRemoveCoupon} className="ml-auto text-[9px] text-green-600 hover:text-red-400 font-bold transition-colors">Remove</button>
                             </div>
                         )}
                     </div>
 
                     {/* Features */}
-                    <div className="mb-8">
-                        <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500 mb-4">What&apos;s Included</p>
-                        <ul className="space-y-3">
-                            {FEATURES.map(({ icon: Icon, text }) => (
-                                <li key={text} className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0">
-                                        <Check size={11} strokeWidth={3} className="text-amber-400" />
+                    <div className="mb-5">
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">Includes</p>
+                        <ul className="space-y-2">
+                            {FEATURES.map(({ text }) => (
+                                <li key={text} className="flex items-center gap-2.5">
+                                    <div className="w-4 h-4 rounded-md bg-amber-500/12 flex items-center justify-center flex-shrink-0">
+                                        <Check size={9} strokeWidth={3} className="text-amber-400" />
                                     </div>
-                                    <span className="text-slate-300 text-sm">{text}</span>
+                                    <span className="text-slate-400 text-xs leading-snug">{text}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Coupon */}
+                    {/* Coupon input */}
                     {!couponApplied && (
-                        <div className="mb-6">
-                            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Have a Coupon?</p>
+                        <div className="mb-5">
                             <div className="flex gap-2">
                                 <div className="relative flex-1">
-                                    <Tag size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                                    <Tag size={11} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                                     <input
                                         type="text" value={couponInput}
                                         onChange={e => { setCouponInput(e.target.value.toUpperCase()); setCouponError(""); }}
-                                        placeholder="EXCLUSIVE30"
-                                        className="w-full pl-8 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-500/50 transition-all uppercase tracking-widest"
+                                        placeholder="Enter coupon code"
+                                        className="w-full pl-8 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-500/40 transition-all uppercase tracking-widest"
                                     />
                                 </div>
                                 <button onClick={onApplyCoupon} disabled={!couponInput.trim()}
@@ -504,22 +500,18 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
 
                     {/* CTA */}
                     <button onClick={onRegister}
-                        className="group w-full flex items-center justify-center gap-2.5 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm uppercase tracking-widest rounded-2xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 active:scale-[0.98] relative overflow-hidden"
+                        className="group w-full flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/15 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.98] relative overflow-hidden"
                     >
                         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-                        <Sparkles size={16} />
+                        <Sparkles size={13} />
                         Secure Your Pass
-                        <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
-                    <div className="flex items-center justify-center gap-4 mt-5">
-                        <div className="flex items-center gap-1.5 text-slate-600 text-[10px]">
-                            <ShieldCheck size={11} /> Secure Razorpay Payment
-                        </div>
-                        <div className="w-px h-3 bg-slate-700" />
-                        <div className="flex items-center gap-1.5 text-slate-600 text-[10px]">
-                            <Zap size={11} /> Instant Confirmation
-                        </div>
+                    <div className="flex items-center justify-center gap-3 mt-4">
+                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
+                        <div className="w-px h-3 bg-slate-800" />
+                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
                     </div>
                 </div>
             </div>
@@ -548,7 +540,7 @@ export default function BangaloreCorporateCounselPass() {
     return (
         <main className="bg-[#050a15] min-h-screen">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-            <Navbar variant="light" />
+            <Navbar />
 
             {/* ── Page body: two-column on desktop ── */}
             <section className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
