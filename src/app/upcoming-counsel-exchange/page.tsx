@@ -182,7 +182,7 @@ export default function CounselExchangePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar variant="light" />
 
       {/* ══════════════════════ HERO SECTION ══════════════════════ */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-20">
