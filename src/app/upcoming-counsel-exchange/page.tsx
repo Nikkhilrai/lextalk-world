@@ -40,7 +40,7 @@ import {
 
 // ══════════════════════ CONSTANTS & TYPES ══════════════════════
 
-const SESSION_DATE = new Date("2026-04-20T10:00:00Z");
+const SESSION_DATE = new Date("2026-04-22T11:00:00+05:30");
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -214,29 +214,37 @@ export default function CounselExchangePage() {
                 ))}
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                Exclusive Virtual Session • April 2026
+                April 22, 2026 · 4:30 PM IST | Virtual Session
               </span>
             </motion.div>
 
             {/* Main Branding */}
             <motion.div variants={fadeUp} custom={1} className="mb-8">
-              <h2 className="text-lg md:text-xl font-black text-amber-600 uppercase tracking-[0.5em] mb-4">
+              <h2 className="text-2xl md:text-4xl font-black text-amber-600 uppercase tracking-[0.5em] mb-4">
                 The Counsel Exchange
               </h2>
-              <h1 className="text-[clamp(28px,6vw,72px)] font-serif font-black text-slate-900 leading-[1.05] tracking-tight mb-8">
+              <h1 className="text-[clamp(22px,4vw,48px)] font-serif font-black text-slate-900 leading-[1.05] tracking-tight mb-6">
                 Private Legal<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500">
                   Strategy Sessions
                 </span>
               </h1>
+              <div className="max-w-2xl mx-auto mb-8">
+                <p className="text-base sm:text-lg font-semibold text-slate-700 mb-2">
+                  AI, Patents &amp; Power: Who Owns Innovation in the Age of Generative Tech?
+                </p>
+                <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+                  As generative AI reshapes how innovation happens, legal teams face a defining question: who actually owns what AI creates? This closed-door session brings together senior legal leaders to examine the evolving boundaries of IP law, patent eligibility, and ownership rights in an AI-driven world — across jurisdictions, industries, and deal structures.
+                </p>
+              </div>
             </motion.div>
 
             {/* Value Props */}
             <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12 sm:mb-16">
               {[
-                { icon: Users, label: "50+ Legal Leaders" },
-                { icon: Globe2, label: "20+ Jurisdictions" },
-                { icon: Zap, label: "Focused AI & IP Strategy" },
+                { icon: Cpu, label: "Who Owns AI Output" },
+                { icon: FileText, label: "Can AI Be an Inventor" },
+                { icon: TrendingUp, label: "How IP Risk Is Evolving" },
               ].map(({ icon: Icon, label }, i) => (
                 <div key={i} className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/50 backdrop-blur-sm border border-slate-100 shadow-sm">
                   <Icon className="w-4 h-4 text-amber-600 shrink-0" />
@@ -256,9 +264,15 @@ export default function CounselExchangePage() {
                 <span className="relative">Request Access</span>
                 <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <div className="flex items-center gap-2 text-xs text-slate-400">
-                <Lock className="w-3 h-3" />
-                <span>Participation is limited & curated</span>
+              <div className="flex flex-col items-center sm:items-start gap-1 text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <Lock className="w-3 h-3" />
+                  <span>Participation is limited & curated</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-400">
+                  <Clock className="w-3 h-3" />
+                  <span>Duration: 60 Minutes · 45-minute discussion followed by curated interaction</span>
+                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -281,11 +295,11 @@ export default function CounselExchangePage() {
         <div className="container mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-slate-100">
             {[
-              { value: 4, suffix: "+", label: "Expert Voices" },
-              { value: 60, suffix: "", label: "Minutes of High-Signal Exchange" },
-              { value: 10, suffix: "+", label: "Jurisdictions Represented" },
-              { value: 1, suffix: "", label: "Focused AI & IP Topic" },
-            ].map(({ value, suffix, label }, i) => (
+              { label: "6 Senior Legal Experts" },
+              { label: "60-Minute Closed-Door Exchange" },
+              { label: "Cross-Jurisdiction IP Perspectives" },
+              { label: "AI, Patents & Ownership Focus" },
+            ].map(({ label }, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -294,10 +308,7 @@ export default function CounselExchangePage() {
                 transition={{ delay: i * 0.1 }}
                 className="text-center lg:px-8"
               >
-                <p className="text-3xl sm:text-4xl font-black text-amber-600 mb-1">
-                  <AnimatedNumber value={value} suffix={suffix} />
-                </p>
-                <p className="text-xs text-slate-400 font-medium tracking-wide">{label}</p>
+                <p className="text-sm sm:text-base font-bold text-slate-800 leading-tight">{label}</p>
               </motion.div>
             ))}
           </div>
@@ -542,7 +553,7 @@ export default function CounselExchangePage() {
               },
               { 
                 name: "Saurabh Anand", 
-                role: "Senior Legal Counsel", 
+                role: "Lead Counsel", 
                 org: "Akamai Technologies", 
                 image: "/images/counsel-exchange/saurabh_anand.jpeg" 
               },

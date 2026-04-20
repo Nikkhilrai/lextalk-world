@@ -42,7 +42,7 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                        className="relative z-10 w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+                        className="relative z-10 w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden"
                     >
                         {/* Close */}
                         <button
@@ -60,7 +60,7 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                         </div>
 
                         {/* Cards */}
-                        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {/* Dubai Card */}
                             <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-300 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10">
                                 {/* Background gradient */}
@@ -146,7 +146,51 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                                     </Link>
                                 </div>
                             </div>
+
+                            {/* Mumbai Card */}
+                            <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-emerald-300 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10">
+                                {/* Background gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950" />
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.25),transparent_60%)]" />
+
+                                <div className="relative p-6">
+                                    <div className="flex items-center justify-between mb-5">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.3em] text-emerald-300 px-2.5 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                                            Mumbai, India
+                                        </span>
+                                        <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 px-2.5 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                                            Open
+                                        </span>
+                                    </div>
+
+                                    <h3 className="font-serif text-xl font-bold text-white leading-tight mb-2">
+                                        LexTalk World<br />
+                                        <span className="text-emerald-400">Mumbai 2026</span>
+                                    </h3>
+
+                                    <div className="space-y-2 mb-6">
+                                        <div className="flex items-center gap-2 text-slate-400">
+                                            <Calendar size={12} className="text-emerald-400 flex-shrink-0" />
+                                            <span className="text-xs">December 10-11, 2026</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-slate-400">
+                                            <MapPin size={12} className="text-emerald-400 flex-shrink-0" />
+                                            <span className="text-xs">Mumbai, India</span>
+                                        </div>
+                                    </div>
+
+                                    <Link
+                                        href="/mumbai-delegate-registration-2026"
+                                        onClick={onClose}
+                                        className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-[11px] uppercase tracking-widest rounded-xl hover:from-emerald-400 hover:to-emerald-500 transition-all active:scale-[0.98]"
+                                    >
+                                        Secure Mumbai Pass
+                                        <ArrowRight size={14} />
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
+
 
                         {/* Footer */}
                         <div className="px-7 pb-6 text-center">
