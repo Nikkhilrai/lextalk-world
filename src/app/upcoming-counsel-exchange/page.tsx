@@ -262,18 +262,15 @@ export default function CounselExchangePage() {
             {/* Label */}
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
               <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-400">
+              <span className="text-sm sm:text-base font-black uppercase tracking-[0.25em] text-amber-400">
                 The Counsel Exchange
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.div variants={fadeUp} custom={1} className="mb-6">
-              <h1 className="text-[clamp(32px,5.5vw,72px)] font-serif font-black text-white leading-[1.05] tracking-tight mb-6">
-                Private Legal<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">
-                  Strategy Sessions
-                </span>
+              <h1 className="text-[clamp(20px,3vw,36px)] font-serif font-semibold text-white/70 leading-[1.2] tracking-tight mb-6">
+                Private Legal · <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">Strategy Sessions</span>
               </h1>
             </motion.div>
 
@@ -627,35 +624,35 @@ export default function CounselExchangePage() {
                 org: "Global DPO, Quess Corp Limited", 
                 image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" 
               },
-              { 
-                name: "Saurabh Anand", 
-                role: "Lead Counsel", 
-                org: "Akamai Technologies", 
-                image: "/images/counsel-exchange/saurabh_anand.jpeg" 
+              {
+                name: "Sergey Medvedev",
+                role: "Managing Partner",
+                org: "Gorodissky & Partners",
+                image: "/images/counsel-exchange/Sergey Medvedev.jpg"
               },
-              { 
-                name: "Sushma Shankar", 
-                role: "Vice President Legal", 
-                org: "Accenture", 
-                image: "/images/counsel-exchange/sushma_shankar.jpeg" 
+              {
+                name: "Saurabh Anand",
+                role: "Lead Counsel",
+                org: "Akamai Technologies",
+                image: "/images/counsel-exchange/saurabh_anand.jpeg"
               },
-              { 
-                name: "Dr. Akshay Kant Chaturvedi", 
-                role: "Corporate Head - IPR", 
-                org: "Gujarat Fluorochemicals Limited", 
-                image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg" 
+              {
+                name: "Sushma Shankar",
+                role: "Vice President Legal",
+                org: "Accenture",
+                image: "/images/counsel-exchange/sushma_shankar.jpeg"
               },
-              { 
-                name: "Krishna Chellapilla", 
-                role: "Head - Patents, Prosecution and Copyrights", 
-                org: "Tata Consultancy Services", 
-                image: "/images/counsel-exchange/krishna_chellapilla.webp" 
+              {
+                name: "Dr. Akshay Kant Chaturvedi",
+                role: "Corporate Head - IPR",
+                org: "Gujarat Fluorochemicals Limited",
+                image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg"
               },
-              { 
-                name: "Sergey Medvedev", 
-                role: "Managing Partner", 
-                org: "Gorodissky & Partners", 
-                image: "/images/counsel-exchange/Sergey Medvedev.jpg" 
+              {
+                name: "Krishna Chellapilla",
+                role: "Head - Patents, Prosecution and Copyrights",
+                org: "Tata Consultancy Services",
+                image: "/images/counsel-exchange/krishna_chellapilla.webp"
               },
             ].map((speaker, i) => (
               <motion.div
