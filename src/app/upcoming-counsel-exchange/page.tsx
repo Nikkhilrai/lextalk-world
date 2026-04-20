@@ -235,19 +235,18 @@ export default function CounselExchangePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar variant="light" />
+      <Navbar />
 
       {/* ══════════════════════ HERO SECTION ══════════════════════ */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-20">
-        {/* Decorative Background Elements */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0f1e] pt-20">
+        {/* Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-amber-200/20 rounded-full blur-[120px] mix-blend-multiply animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] mix-blend-multiply" />
+          <div className="absolute top-1/3 left-1/4 w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
           <div className="absolute inset-0"
             style={{
-              backgroundImage: "radial-gradient(#e5e7eb 1.5px, transparent 1.5px)",
+              backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
-              opacity: 0.3
             }}
           />
         </div>
@@ -256,76 +255,66 @@ export default function CounselExchangePage() {
           variants={stagger}
           initial="hidden"
           animate="visible"
-          className="container mx-auto px-5 sm:px-8 relative z-10"
+          className="container mx-auto px-5 sm:px-8 relative z-10 py-24"
         >
           <motion.div className="max-w-4xl mx-auto text-center">
-            {/* Upper Badge */}
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 mb-8 sm:mb-12">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white" />
-                ))}
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                April 22, 2026 · 4:30 PM IST | Virtual Session
+
+            {/* Label */}
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-400">
+                The Counsel Exchange
               </span>
             </motion.div>
 
-            {/* Main Branding */}
-            <motion.div variants={fadeUp} custom={1} className="mb-8">
-              <h2 className="text-2xl md:text-4xl font-black text-amber-600 uppercase tracking-[0.5em] mb-4">
-                The Counsel Exchange
-              </h2>
-              <h1 className="text-[clamp(22px,4vw,48px)] font-serif font-black text-slate-900 leading-[1.05] tracking-tight mb-6">
+            {/* Headline */}
+            <motion.div variants={fadeUp} custom={1} className="mb-6">
+              <h1 className="text-[clamp(32px,5.5vw,72px)] font-serif font-black text-white leading-[1.05] tracking-tight mb-6">
                 Private Legal<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">
                   Strategy Sessions
                 </span>
               </h1>
-              <div className="max-w-2xl mx-auto mb-8">
-                <p className="text-base sm:text-lg font-semibold text-slate-700 mb-2">
-                  AI, Patents &amp; Power: Who Owns Innovation in the Age of Generative Tech?
-                </p>
-                <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
-                  As generative AI reshapes how innovation happens, legal teams face a defining question: who actually owns what AI creates? This closed-door session brings together senior legal leaders to examine the evolving boundaries of IP law, patent eligibility, and ownership rights in an AI-driven world — across jurisdictions, industries, and deal structures.
-                </p>
-              </div>
             </motion.div>
 
-            {/* Value Props */}
-            <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12 sm:mb-16">
+            {/* Topic */}
+            <motion.div variants={fadeUp} custom={2} className="max-w-2xl mx-auto mb-10">
+              <p className="text-base sm:text-lg font-semibold text-white/90 mb-3">
+                AI, Patents &amp; Power: Who Owns Innovation in the Age of Generative Tech?
+              </p>
+              <p className="text-sm sm:text-base text-white/50 leading-relaxed">
+                A closed-door session for senior legal leaders examining the evolving boundaries of IP law, patent eligibility, and ownership rights in an AI-driven world — across jurisdictions, industries, and deal structures.
+              </p>
+            </motion.div>
+
+            {/* Date / Format Pills */}
+            <motion.div variants={fadeUp} custom={3} className="flex flex-wrap justify-center gap-3 mb-12">
               {[
-                { icon: Cpu, label: "Who Owns AI Output" },
-                { icon: FileText, label: "Can AI Be an Inventor" },
-                { icon: TrendingUp, label: "How IP Risk Is Evolving" },
+                { icon: Calendar, label: "April 22, 2026" },
+                { icon: Clock, label: "4:30 PM IST · 60 Minutes" },
+                { icon: Video, label: "Virtual · Private Session" },
               ].map(({ icon: Icon, label }, i) => (
-                <div key={i} className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/50 backdrop-blur-sm border border-slate-100 shadow-sm">
-                  <Icon className="w-4 h-4 text-amber-600 shrink-0" />
-                  <span className="text-sm font-semibold text-slate-700 whitespace-nowrap">{label}</span>
+                <div key={i} className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <Icon className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="text-sm font-medium text-white/80">{label}</span>
                 </div>
               ))}
             </motion.div>
 
             {/* CTA */}
-            <motion.div variants={fadeUp} custom={6} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <motion.div variants={fadeUp} custom={4} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="group relative inline-flex items-center gap-3 px-10 py-4 sm:py-5 bg-gradient-to-br from-amber-500 via-amber-500 to-amber-600 text-white font-black rounded-full text-base sm:text-lg shadow-[0_8px_40px_-8px_rgba(217,119,6,0.5)] hover:shadow-[0_12px_60px_-8px_rgba(217,119,6,0.7)] transition-all duration-500 hover:-translate-y-1.5 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 sm:py-5 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-white font-black rounded-full text-base sm:text-lg shadow-[0_8px_40px_-8px_rgba(217,119,6,0.6)] hover:shadow-[0_12px_60px_-8px_rgba(217,119,6,0.8)] transition-all duration-500 hover:-translate-y-1.5 overflow-hidden"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-110%] group-hover:translate-x-[110%] skew-x-12 transition-transform duration-700" />
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-110%] group-hover:translate-x-[110%] skew-x-12 transition-transform duration-700" />
                 <Sparkles className="relative w-5 h-5" />
                 <span className="relative">Request Access</span>
                 <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <div className="flex flex-col items-center sm:items-start gap-1 text-xs text-slate-400">
-                <div className="flex items-center gap-2">
-                  <Lock className="w-3 h-3" />
-                  <span>Participation is limited & curated</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <Clock className="w-3 h-3" />
-                  <span>Duration: 60 Minutes · 45-minute discussion followed by curated interaction</span>
-                </div>
+              <div className="flex items-center gap-2 text-xs text-white/40">
+                <Lock className="w-3 h-3" />
+                <span>Participation is limited &amp; curated</span>
               </div>
             </motion.div>
           </motion.div>
@@ -338,30 +327,64 @@ export default function CounselExchangePage() {
           transition={{ delay: 2.2 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
         >
-          <div className="w-px h-14 bg-gradient-to-b from-transparent to-amber-500/40" />
-          <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" />
+          <div className="w-px h-14 bg-gradient-to-b from-transparent to-amber-400/40" />
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce" />
         </motion.div>
       </section>
 
-      {/* ══════════════════════ STATS BAR ══════════════════════ */}
-      <section className="relative py-8 border-y border-slate-100 bg-white">
+      {/* ══════════════════════ TOPIC HIGHLIGHT ══════════════════════ */}
+      <section className="relative py-16 bg-white border-b border-slate-100">
         <div className="container mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-slate-100">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { label: "6 Senior Legal Experts" },
-              { label: "60-Minute Closed-Door Exchange" },
-              { label: "Cross-Jurisdiction IP Perspectives" },
-              { label: "AI, Patents & Ownership Focus" },
-            ].map(({ label }, i) => (
+              { icon: Cpu, title: "Who Owns AI Output", desc: "Ownership rights when AI creates the innovation" },
+              { icon: FileText, title: "Can AI Be an Inventor", desc: "Patent eligibility in generative AI systems" },
+              { icon: TrendingUp, title: "How IP Risk Is Evolving", desc: "Cross-border liability and regulatory exposure" },
+            ].map(({ icon: Icon, title, desc }, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center lg:px-8"
+                className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100"
               >
-                <p className="text-sm sm:text-base font-bold text-slate-800 leading-tight">{label}</p>
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-amber-600" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 text-sm mb-1">{title}</p>
+                  <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════ STATS BAR ══════════════════════ */}
+      <section className="relative py-12 bg-[#0a0f1e]">
+        <div className="container mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/10">
+            {[
+              { icon: Users, value: "6", label: "Senior Legal Experts" },
+              { icon: Clock, value: "60", label: "Minute Closed-Door Exchange" },
+              { icon: Globe2, value: "Multi", label: "Jurisdiction IP Perspectives" },
+              { icon: Cpu, value: "1", label: "Focused AI & IP Topic" },
+            ].map(({ icon: Icon, value, label }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center lg:px-8 flex flex-col items-center gap-2"
+              >
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-1">
+                  <Icon className="w-5 h-5 text-amber-400" />
+                </div>
+                <p className="text-2xl sm:text-3xl font-black text-white">{value}</p>
+                <p className="text-xs text-white/40 font-medium tracking-wide leading-snug">{label}</p>
               </motion.div>
             ))}
           </div>
