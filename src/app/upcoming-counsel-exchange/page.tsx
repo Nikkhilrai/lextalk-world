@@ -575,6 +575,12 @@ export default function CounselExchangePage() {
                 org: "Tata Consultancy Services", 
                 image: "/images/counsel-exchange/krishna_chellapilla.webp" 
               },
+              { 
+                name: "Sergey Medvedev", 
+                role: "Managing Partner", 
+                org: "Gorodissky & Partners", 
+                image: "/images/counsel-exchange/Sergey Medvedev.jpg" 
+              },
             ].map((speaker, i) => (
               <motion.div
                 key={i}
