@@ -106,7 +106,38 @@ function CountdownCell({ value, label }: { value: number; label: string }) {
 
 // Access Request Modal Component
 function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", organization: "", designation: "" });
+
   if (!isOpen) return null;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/counsel-exchange-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const inputClass = "w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-900 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300";
 
   return createPortal(
     <div className="fixed inset-0 z-[100000] flex items-start justify-center pt-16 px-4 md:px-0 bg-slate-950/40 backdrop-blur-md overflow-y-auto pb-10">
@@ -117,43 +148,65 @@ function AccessRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
         className="relative w-full max-w-lg bg-white rounded-[2.5rem] shadow-2xl overflow-hidden mt-6"
       >
         <button
-          onClick={onClose}
+          onClick={() => { onClose(); setSubmitted(false); setForm({ name: "", email: "", phone: "", country: "", organization: "", designation: "" }); }}
           className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 transition-colors z-10"
         >
           <X className="w-5 h-5 text-slate-500" />
         </button>
 
         <div className="p-10 md:p-12">
-          <div className="mb-8">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-6">
-              <Lock className="w-6 h-6 text-amber-600" />
+          {submitted ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="w-8 h-8 text-amber-600" />
+              </div>
+              <h2 className="text-2xl font-serif font-bold text-slate-900 mb-3">Request Received</h2>
+              <p className="text-slate-500 text-sm leading-relaxed">Your request has been submitted. We will review your details and send the access link to your email <strong>3 days before the session</strong>.</p>
             </div>
-            <h2 className="text-3xl font-serif font-bold text-slate-900 mb-3">Request Access</h2>
-            <p className="text-slate-500">Submit your professional details. All participants are curated to ensure high-signal peer interaction.</p>
-          </div>
+          ) : (
+            <>
+              <div className="mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-6">
+                  <Lock className="w-6 h-6 text-amber-600" />
+                </div>
+                <h2 className="text-3xl font-serif font-bold text-slate-900 mb-3">Request Access</h2>
+                <p className="text-slate-500">Submit your professional details. All participants are curated to ensure high-signal peer interaction.</p>
+              </div>
 
-          <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Access request submitted. We will be in touch shortly."); onClose(); }}>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name</label>
-              <input type="text" required placeholder="Sushma Shankar" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Professional Email</label>
-              <input type="email" required placeholder="sushma@accenture.com" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Organisation</label>
-              <input type="text" required placeholder="Accenture" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Role/Designation</label>
-              <input type="text" required placeholder="Vice President Legal" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-amber-400 focus:ring-4 focus:ring-amber-500/5 outline-none transition-all placeholder:text-slate-300" />
-            </div>
+              <form className="space-y-5" onSubmit={handleSubmit}>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name</label>
+                  <input name="name" type="text" required value={form.name} onChange={handleChange} placeholder="Sushma Shankar" className={inputClass} />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Professional Email</label>
+                  <input name="email" type="email" required value={form.email} onChange={handleChange} placeholder="sushma@accenture.com" className={inputClass} />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Phone</label>
+                    <input name="phone" type="tel" required value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" className={inputClass} />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Country</label>
+                    <input name="country" type="text" required value={form.country} onChange={handleChange} placeholder="India" className={inputClass} />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Organisation</label>
+                  <input name="organization" type="text" required value={form.organization} onChange={handleChange} placeholder="Accenture" className={inputClass} />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Role / Designation</label>
+                  <input name="designation" type="text" required value={form.designation} onChange={handleChange} placeholder="Vice President Legal" className={inputClass} />
+                </div>
 
-            <button type="submit" className="w-full py-5 bg-gradient-to-br from-amber-500 to-amber-600 text-white font-black rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all active:scale-[0.98] mt-4">
-              Submit Request
-            </button>
-          </form>
+                <button type="submit" disabled={submitting} className="w-full py-5 bg-gradient-to-br from-amber-500 to-amber-600 text-white font-black rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all active:scale-[0.98] mt-4 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {submitting ? "Submitting..." : "Submit Request"}
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </motion.div>
     </div>,
