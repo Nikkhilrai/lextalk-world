@@ -364,24 +364,20 @@ export default function CounselExchangePage() {
         <div className="container mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/10">
             {[
-              { icon: Users, value: "6", label: "Senior Legal Experts" },
-              { icon: Clock, value: "60", label: "Minute Closed-Door Exchange" },
-              { icon: Globe2, value: "Multi", label: "Jurisdiction IP Perspectives" },
-              { icon: Cpu, value: "1", label: "Focused AI & IP Topic" },
-            ].map(({ icon: Icon, value, label }, i) => (
+              "6 Senior Legal Experts",
+              "60-Minute Closed-Door Exchange",
+              "Cross-Jurisdiction IP Perspectives",
+              "AI, Patents & Ownership Focus",
+            ].map((label, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center lg:px-8 flex flex-col items-center gap-2"
+                className="text-center lg:px-8"
               >
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-1">
-                  <Icon className="w-5 h-5 text-amber-400" />
-                </div>
-                <p className="text-2xl sm:text-3xl font-black text-white">{value}</p>
-                <p className="text-xs text-white/40 font-medium tracking-wide leading-snug">{label}</p>
+                <p className="text-sm sm:text-base font-bold text-white/80 leading-snug">{label}</p>
               </motion.div>
             ))}
           </div>
