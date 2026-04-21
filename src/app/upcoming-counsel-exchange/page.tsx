@@ -826,14 +826,12 @@ export default function CounselExchangePage() {
           >
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Partner</p>
             <div className="flex flex-wrap justify-center items-center gap-10">
-              <div className="relative h-16 w-56">
-                <Image
-                  src="/images/counsel-exchange/sponsor/gorodissky.png"
-                  alt="Gorodissky & Partners"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/counsel-exchange/sponsor/gorodissky.png"
+                alt="Gorodissky & Partners"
+                className="h-14 w-auto object-contain"
+              />
             </div>
           </motion.div>
         </div>
