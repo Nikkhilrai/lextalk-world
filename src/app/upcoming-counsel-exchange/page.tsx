@@ -815,6 +815,30 @@ export default function CounselExchangePage() {
         </div>
       </section>
 
+      {/* ══════════════════════ SPONSORS ══════════════════════ */}
+      <section className="py-14 border-t border-slate-100 bg-white">
+        <div className="container mx-auto px-5 sm:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center gap-8"
+          >
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Knowledge Partner</p>
+            <div className="flex flex-wrap justify-center items-center gap-10">
+              <div className="relative h-12 w-48 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                <Image
+                  src="/images/counsel-exchange/sponsor/gorodissky.png"
+                  alt="Gorodissky & Partners"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ══════════════════════ CLOSING CTA ══════════════════════ */}
       <section className="relative py-28 sm:py-36 overflow-hidden bg-[#FFFDF8] border-t border-slate-100">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-300/15 rounded-full blur-[130px]" />
