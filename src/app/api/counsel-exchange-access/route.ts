@@ -35,11 +35,11 @@ function userConfirmationHtml(name: string) {
           </p>
 
           <p style="margin:0 0 28px;color:#475569;font-size:15px;line-height:1.8;">
-            We acknowledge receipt of your registration. The confirmation, along with the Zoom access link, will be shared on your email <strong>03 days prior to the session</strong>.
+            Your access has been confirmed. Please find the Zoom meeting details below to join the session.
           </p>
 
           <!-- Session info box -->
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-bottom:28px;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-bottom:24px;">
             <tr><td style="padding:20px 24px;">
               <p style="margin:0 0 12px;color:#92400e;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Session Details</p>
               <table width="100%" cellpadding="0" cellspacing="0">
@@ -57,13 +57,36 @@ function userConfirmationHtml(name: string) {
                 </tr>
                 <tr>
                   <td style="padding:6px 0;color:#78350f;font-size:14px;">Format</td>
-                  <td style="padding:6px 0;color:#1e293b;font-size:14px;font-weight:600;">Virtual · Private Session</td>
+                  <td style="padding:6px 0;color:#1e293b;font-size:14px;font-weight:600;">Virtual · Zoom Meeting</td>
                 </tr>
               </table>
             </td></tr>
           </table>
 
-          <p style="margin:0 0 8px;color:#475569;font-size:15px;line-height:1.8;">We appreciate your interest in being part of this exchange.</p>
+          <!-- Zoom Join Box -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;border-radius:10px;margin-bottom:28px;">
+            <tr><td style="padding:24px;">
+              <p style="margin:0 0 16px;color:#f59e0b;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Zoom Meeting Access</p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:6px 0;color:#94a3b8;font-size:13px;width:120px;">Meeting ID</td>
+                  <td style="padding:6px 0;color:#ffffff;font-size:13px;font-weight:700;font-family:monospace;">630 337 8211</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;color:#94a3b8;font-size:13px;">Passcode</td>
+                  <td style="padding:6px 0;color:#ffffff;font-size:13px;font-weight:700;font-family:monospace;">k16jHn</td>
+                </tr>
+              </table>
+              <div style="margin-top:20px;text-align:center;">
+                <a href="https://us06web.zoom.us/j/6303378211?pwd=ZkAFkK1UEZWkLXyUq6dj2TUAGqOZTM.1"
+                   style="display:inline-block;background:#f59e0b;color:#0f172a;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:800;font-size:15px;letter-spacing:0.02em;">
+                  Join Zoom Meeting →
+                </a>
+              </div>
+            </td></tr>
+          </table>
+
+          <p style="margin:0 0 8px;color:#475569;font-size:15px;line-height:1.8;">We look forward to your participation in this exchange.</p>
 
           <p style="margin:28px 0 0;color:#1e293b;font-size:15px;line-height:1.6;">
             Warm regards,<br>
