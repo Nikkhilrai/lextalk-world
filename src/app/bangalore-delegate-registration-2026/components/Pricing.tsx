@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle,
     GraduationCap, Users, Building2, Globe, IndianRupee,
-    X, Clock, ShieldCheck, Tag, CheckCircle2
+    X, Clock, ShieldCheck, Tag, CheckCircle2, Copy, Zap, Timer
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CountrySelect } from "@/components/CountrySelect";
@@ -605,6 +605,99 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
 /* ═══════════════════════════════════════════════
    Pricing Section
    ═══════════════════════════════════════════════ */
+const COUPON_EXPIRY = new Date("2026-04-30T23:59:59+05:30");
+const COUPON_CODE = "EARLY30";
+
+function CouponBanner() {
+    const [copied, setCopied] = useState(false);
+    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+    useEffect(() => {
+        const tick = () => {
+            const diff = COUPON_EXPIRY.getTime() - Date.now();
+            if (diff <= 0) return;
+            setTimeLeft({
+                days: Math.floor(diff / 86400000),
+                hours: Math.floor((diff % 86400000) / 3600000),
+                minutes: Math.floor((diff % 3600000) / 60000),
+                seconds: Math.floor((diff % 60000) / 1000),
+            });
+        };
+        tick();
+        const t = setInterval(tick, 1000);
+        return () => clearInterval(t);
+    }, []);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(COUPON_CODE);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const pad = (n: number) => String(n).padStart(2, "0");
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative overflow-hidden rounded-2xl mb-10 bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 shadow-[0_8px_40px_-8px_rgba(245,158,11,0.6)]"
+        >
+            {/* Shimmer sweep */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] animate-[shimmer_2.5s_infinite]" style={{ animation: "shimmer 2.5s infinite" }} />
+            <style>{`@keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }`}</style>
+
+            {/* Dot pattern overlay */}
+            <div className="absolute inset-0 opacity-10"
+                style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-5">
+                {/* Left */}
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                        <Zap size={20} className="text-white" fill="white" />
+                    </div>
+                    <div>
+                        <p className="text-white/80 text-[10px] font-bold uppercase tracking-[0.2em]">Limited Time Offer · Save 30%</p>
+                        <p className="text-white font-black text-sm">Use code at checkout for instant 30% off</p>
+                    </div>
+                </div>
+
+                {/* Code + copy */}
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={handleCopy}
+                        className="group flex items-center gap-2.5 px-5 py-2.5 bg-white rounded-xl border-2 border-dashed border-amber-300 hover:border-white hover:bg-amber-50 transition-all duration-200 active:scale-95"
+                    >
+                        <span className="font-black text-lg tracking-[0.15em] text-amber-600">{COUPON_CODE}</span>
+                        <span className="flex items-center gap-1 text-[10px] font-bold text-amber-500 uppercase tracking-wide">
+                            {copied ? <><CheckCircle2 size={12} className="text-green-500" /><span className="text-green-600">Copied!</span></> : <><Copy size={12} />Copy</>}
+                        </span>
+                    </button>
+
+                    {/* Countdown */}
+                    <div className="flex items-center gap-1.5 bg-white/20 rounded-xl px-4 py-2.5">
+                        <Timer size={13} className="text-white shrink-0" />
+                        <div className="flex items-center gap-1 text-white font-black text-sm tabular-nums">
+                            <span>{pad(timeLeft.days)}<span className="text-[9px] font-normal ml-0.5 opacity-70">d</span></span>
+                            <span className="opacity-50">:</span>
+                            <span>{pad(timeLeft.hours)}<span className="text-[9px] font-normal ml-0.5 opacity-70">h</span></span>
+                            <span className="opacity-50">:</span>
+                            <span>{pad(timeLeft.minutes)}<span className="text-[9px] font-normal ml-0.5 opacity-70">m</span></span>
+                            <span className="opacity-50">:</span>
+                            <span>{pad(timeLeft.seconds)}<span className="text-[9px] font-normal ml-0.5 opacity-70">s</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Expiry note */}
+            <div className="relative z-10 text-center pb-2.5 -mt-1">
+                <p className="text-[10px] text-white/70 font-semibold">Offer expires April 30, 2026 at midnight</p>
+            </div>
+        </motion.div>
+    );
+}
+
 export default function BangaloreDelegatePricing() {
     const [selectedPass, setSelectedPass] = useState<PassConfig | null>(null);
     const [currency, setCurrency] = useState<"INR" | "USD">("INR");
@@ -661,6 +754,9 @@ export default function BangaloreDelegatePricing() {
                         <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wide">Secure Razorpay Payment</span>
                     </div>
                 </motion.div>
+
+                {/* Coupon Banner */}
+                <CouponBanner />
 
                 {/* Currency Toggle */}
                 <div className="flex justify-center mb-10 md:mb-12">
