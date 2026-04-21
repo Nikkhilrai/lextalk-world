@@ -824,9 +824,9 @@ export default function CounselExchangePage() {
             viewport={{ once: true }}
             className="flex flex-col items-center gap-8"
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Knowledge Partner</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Partner</p>
             <div className="flex flex-wrap justify-center items-center gap-10">
-              <div className="relative h-12 w-48 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <div className="relative h-16 w-56">
                 <Image
                   src="/images/counsel-exchange/sponsor/gorodissky.png"
                   alt="Gorodissky & Partners"
