@@ -37,8 +37,15 @@ const speakers: any[] = [
     },
     {
         name: "Amit Anand",
-        title: "India Head Legal ( VP Legal ), Commonwealth Bank",
+        title: "Director, Legal, Adobe India",
         image: "/bangalore-2026/speakers-images/Amit-Anand.png",
+        bio: `Amit Anand is an internationally recognized legal expert with more than 17 years of experience managing diverse teams and cross-border legal matters. As Director, Legal at Adobe, Amit leads the company’s legal strategies and ensures compliance with applicable regulations, playing a vital role in its operational success. Previously, he headed the legal function for the Commonwealth Bank of Australia in India, advising on governance and risk management, contract negotiations, and regulatory compliance.
+
+Amit’s prior roles at Wells Fargo, NTT DATA, and EY involved managing legal affairs across multiple jurisdictions, including India, the Philippines, China, Poland, Spain, Hungary, Sri Lanka, Mexico, and Argentina. He led and managed international legal teams, resolved cross-border disputes, and developed compliance policies tailored to local and international laws, earning a reputation as a trusted advisor and leader in multinational organizations. A certified Privacy and Corporate Governance Professional, Amit is dedicated to privacy, transparency, and ethical governance.
+
+Beyond corporate roles, Amit is a prominent industry voice, frequently speaking at legal conferences and authoring articles on emerging issues. He has actively contributed to legislative and policy developments such as the Digital Personal Data Protection Act (DPDPA), labor codes, and GCC policies in India.
+
+Amit’s influence on policy, commitment to legal scholarship, and advisory work have shaped privacy, labor, and corporate governance frameworks. His leadership continues to advance the legal profession and guide organizations within an evolving regulatory landscape.`
     },
     {
         name: "Tanin Chakraborty",
