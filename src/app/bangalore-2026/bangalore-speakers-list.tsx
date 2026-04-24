@@ -117,6 +117,11 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
         name: "Devesh Bhardwaj",
         title: "Head - Legal, VerSe Innovation",
         image: "/bangalore-2026/speakers-images/Devesh-Bhardwaj.png",
+    },
+    {
+        name: "Panduranga Acharya",
+        title: "General Counsel, Zepto",
+        image: "/bangalore-2026/speakers-images/Panduranga Acharya.png",
     }
 ];
 
