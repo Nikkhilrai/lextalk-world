@@ -28,6 +28,11 @@ const speakers: any[] = [
         name: "Debasish Roychowdhury",
         title: "General Counsel and Head Legal, Compliance and Secretarial, In-solutions Global Ltd.",
         image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png",
+        bio: `Debasish Roychowdhury is a distinguished & Award-winning General Counsel and seasoned expert in Governance, Legal, Risk, and Compliance professional, bringing over 22 years of comprehensive experience across diverse domains including Corporate Governance, Legal Affairs, M&A, Contract Management, Regulatory Compliance, IPOs, Data Privacy, AI Ethics, and more.
+
+His multifaceted qualifications—Company Secretary, LLM, LLB, MBA in Finance, and a Commerce degree—are further bolstered by specialized diplomas and certifications in Cyber Law, IPR, ESG, GDPR, and Artificial Intelligence Governance.
+
+A recognized thought leader and keynote speaker, Debasish is widely respected for his insights on legal and governance issues at the intersection of technology and ethics. Currently, he serves as the General Counsel and Head of Legal, Compliance, and Secretarial at In-Solutions Global Limited, Mumbai, a Fintech entity, where he leads a multidisciplinary team of legal and compliance professionals.`
     },
     {
         name: "Sivani Peesapati",
