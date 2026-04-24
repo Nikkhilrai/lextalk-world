@@ -122,6 +122,9 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
         name: "Panduranga Acharya",
         title: "General Counsel, Zepto",
         image: "/bangalore-2026/speakers-images/Panduranga Acharya.png",
+        bio: `Panduranga Acharya is a visionary General Counsel with a proven track record of driving business success through strategic legal counsel. With a deep understanding of diverse customer-facing sectors, he has consistently demonstrated the ability to align legal strategies with evolving business needs, enabling organizations to thrive in competitive landscapes.
+
+Currently serving as the General Counsel of Zepto, India’s pioneering 10-minute delivery quick commerce company, Panduranga has been a cornerstone of the company’s exceptional growth over the last three years. His strategic vision and legal expertise have been instrumental in Zepto’s meteoric rise, with significant contributions to its soaring valuation and rapid market expansion across India. By navigating complex regulatory frameworks and ensuring seamless compliance, Panduranga has positioned Zepto as a leader in the quick commerce industry.`
     }
 ];
 
