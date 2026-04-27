@@ -144,6 +144,11 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
         name: "Jagannath PV",
         title: "Global Data Privacy Officer, LTIMindtree",
         image: "/bangalore-2026/speakers-images/Jagannath PV.png",
+    },
+    {
+        name: "Sushma Shankar",
+        title: "Vice President - Legal, Accenture",
+        image: "/bangalore-2026/speakers-images/sushma_shankar.png",
     }
 ];
 
