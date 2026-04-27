@@ -149,6 +149,11 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
         name: "Sushma Shankar",
         title: "Vice President - Legal, Accenture",
         image: "/bangalore-2026/speakers-images/sushma_shankar.png",
+    },
+    {
+        name: "Dr. Lalit Bhasin",
+        title: "President, Society of Indian Law Firms, India",
+        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
     }
 ];
 
@@ -222,7 +227,7 @@ export default function BangaloreSpeakersList() {
                                     <div className="relative mb-6 w-full max-w-[280px]">
                                         {/* Outer thin formal frame */}
                                         <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
-                                        
+
                                         {/* Main Portrait Container - Changed to h-auto to remove vertical white space */}
                                         <div className="relative w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white h-auto flex flex-col items-center">
                                             {speaker.image ? (
@@ -240,7 +245,7 @@ export default function BangaloreSpeakersList() {
                                                     </svg>
                                                 </div>
                                             )}
-                                            
+
                                             {/* Subtle Gradient Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                         </div>
@@ -254,7 +259,7 @@ export default function BangaloreSpeakersList() {
                                         <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
                                             {speaker.name}
                                         </h3>
-                                        
+
                                         {speaker.title && (
                                             <p className="text-[12px] md:text-[13px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-widest leading-relaxed">
                                                 {speaker.title}
@@ -283,7 +288,7 @@ export default function BangaloreSpeakersList() {
                         <div className="bg-white border border-slate-200/60 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden shadow-xl shadow-slate-200/40">
                             {/* Decorative Corner */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-bl-full -mr-16 -mt-16" />
-                            
+
                             <div className="relative z-10 flex flex-col items-center">
                                 <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6">
                                     <Calendar className="w-8 h-8 text-amber-600" />
@@ -294,7 +299,7 @@ export default function BangaloreSpeakersList() {
                                 <p className="text-slate-500 text-sm md:text-base max-w-lg mx-auto leading-relaxed mb-8 font-light">
                                     We are currently finalizing our lineup of industry-leading speakers for the Bangalore summit. Stay tuned for the official faculty unveiling.
                                 </p>
-                                
+
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <div className="flex items-center gap-3 px-6 py-3 bg-slate-50 rounded-xl border border-slate-100">
                                         <MessageCircle className="w-5 h-5 text-amber-600" />
