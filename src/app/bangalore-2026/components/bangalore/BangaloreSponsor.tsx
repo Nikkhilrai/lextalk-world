@@ -37,7 +37,7 @@ export function BangaloreSponsor() {
                 <div className="flex flex-col md:flex-row justify-center gap-12 max-w-4xl mx-auto">
                     {/* Platinum */}
                     <div className="flex flex-col items-center flex-1 max-w-sm">
-                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
+                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export function BangaloreSponsor() {
 
                     {/* Diamond Sponsors */}
                     <div className="flex flex-col items-center flex-1 max-w-sm">
-                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
+                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ export function BangaloreSponsor() {
 
                 {/* Venue Partner */}
                 <div className="flex flex-col items-center mt-16">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
