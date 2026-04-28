@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
         try {
             await resend.emails.send({
                 from: "Notifications <noreply@lextalkworld.in>",
-                to: ["nikhil@mantranexvista.com"],
+                to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"],
                 subject: `NEW Payment Confirmed: ${buyerName} - ${isBangalore ? 'Bangalore' : 'Dubai'} 2026`,
                 html: `
                     <h2>New Conference Registration Details</h2>
