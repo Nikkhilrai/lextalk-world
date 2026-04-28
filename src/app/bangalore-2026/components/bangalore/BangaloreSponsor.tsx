@@ -74,20 +74,14 @@ export function BangaloreSponsor() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-slate-50/50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300 w-full max-w-xs"
+                        className="bg-slate-50/50 rounded-xl p-4 border border-slate-100/50 flex items-center justify-center hover:bg-white hover:shadow-md transition-all duration-300 w-full max-w-sm"
                     >
-                        <div className="relative w-56 h-24">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
-                                alt="Radisson Blu Atria Bangalore"
-                                className="w-full h-full object-contain mix-blend-multiply"
-                            />
-                        </div>
-                        <p className="text-xs text-slate-400 mt-4 text-center leading-relaxed">
-                            Radisson Blu Atria Bangalore<br />
-                            1, Palace Rd, Bengaluru, Karnataka 560001
-                        </p>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
+                            alt="Radisson Blu Atria Bangalore"
+                            className="w-72 h-32 object-contain mix-blend-multiply"
+                        />
                     </motion.div>
                 </div>
 
