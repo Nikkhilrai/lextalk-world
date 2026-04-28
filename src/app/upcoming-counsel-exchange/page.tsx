@@ -8,7 +8,7 @@ import {
   Calendar, Clock, Video, CheckCircle2,
   Globe2, Cpu, Scale, ShieldCheck, Lightbulb,
   TrendingUp, Award, Users, MessageSquare,
-  Zap, FileText, Star, Play
+  Zap, FileText, Star, Play, ChevronDown
 } from "lucide-react";
 
 // ══════════════════════ CONSTANTS ══════════════════════
@@ -22,7 +22,7 @@ const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.8, delay: i * 0.1, ease: [0.21, 0.45, 0.32, 0.9] }
+    transition: { duration: 0.8, delay: i * 0.1, ease: [0.21, 0.45, 0.32, 0.9] as [number, number, number, number] }
   })
 };
 
@@ -34,15 +34,15 @@ export default function CounselExchangePage() {
     <main className="min-h-screen bg-white">
       <Navbar />
 
-      {/* ══════════════════════ HERO SECTION ══════════════════════ */}
+      {/* ══════════════════════ HERO ══════════════════════ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0f1e] pt-20">
-        {/* Background */}
+        {/* Background blobs */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/3 left-1/4 w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[140px]" />
           <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
           <div className="absolute inset-0"
             style={{
-              backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
+              backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
             }}
           />
@@ -56,8 +56,8 @@ export default function CounselExchangePage() {
         >
           <motion.div className="max-w-4xl mx-auto text-center">
 
-            {/* Label */}
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            {/* Eyebrow */}
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
               <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span className="text-sm sm:text-base font-black uppercase tracking-[0.25em] text-amber-400">
                 The Counsel Exchange
@@ -65,23 +65,26 @@ export default function CounselExchangePage() {
             </motion.div>
 
             {/* Headline */}
-            <motion.div variants={fadeUp} custom={1} className="mb-6">
-              <h1 className="text-[clamp(20px,3vw,36px)] font-serif font-semibold text-white/70 leading-[1.2] tracking-tight mb-6">
-                Private Legal · <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">Strategy Sessions</span>
+            <motion.div variants={fadeUp} custom={1} className="mb-5">
+              <h1 className="text-[clamp(18px,2.8vw,34px)] font-serif font-semibold text-white/60 leading-[1.2] tracking-tight mb-4">
+                Private Legal ·{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">
+                  Strategy Sessions
+                </span>
               </h1>
             </motion.div>
 
             {/* Topic */}
             <motion.div variants={fadeUp} custom={2} className="max-w-2xl mx-auto mb-10">
-              <p className="text-base sm:text-lg font-semibold text-white/90 mb-3">
+              <p className="text-lg sm:text-xl font-semibold text-white/90 mb-3 leading-snug">
                 AI, Patents &amp; Power: Who Owns Innovation in the Age of Generative Tech?
               </p>
-              <p className="text-sm sm:text-base text-white/50 leading-relaxed">
-                A closed-door session for senior legal leaders examining the evolving boundaries of IP law, patent eligibility, and ownership rights in an AI-driven world — across jurisdictions, industries, and deal structures.
+              <p className="text-sm sm:text-base text-white/45 leading-relaxed">
+                A closed-door session for senior legal leaders examining the evolving boundaries of IP law, patent eligibility, and ownership rights in an AI-driven world.
               </p>
             </motion.div>
 
-            {/* Date / Format Pills */}
+            {/* Pills */}
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap justify-center gap-3 mb-12">
               {[
                 { icon: Calendar, label: "April 22, 2026" },
@@ -90,38 +93,132 @@ export default function CounselExchangePage() {
               ].map(({ icon: Icon, label }, i) => (
                 <div key={i} className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
                   <Icon className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span className="text-sm font-medium text-white/80">{label}</span>
+                  <span className="text-sm font-medium text-white/75">{label}</span>
                 </div>
               ))}
             </motion.div>
 
-            {/* Event Completed Badge */}
-            <motion.div variants={fadeUp} custom={4} className="flex flex-col items-center gap-3">
-              <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/10 border border-white/20">
+            {/* Concluded badge + scroll CTA */}
+            <motion.div variants={fadeUp} custom={4} className="flex flex-col items-center gap-4">
+              <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-emerald-500/10 border border-emerald-500/30">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm font-bold text-white/80">This session has concluded · April 22, 2026</span>
+                <span className="text-sm font-bold text-emerald-300 tracking-wide">Session Concluded · April 22, 2026</span>
               </div>
-              <p className="text-xs text-white/40">Watch the session recording below</p>
+              <button
+                onClick={() => document.getElementById("recording")?.scrollIntoView({ behavior: "smooth" })}
+                className="group inline-flex flex-col items-center gap-1.5 text-white/35 hover:text-amber-400 transition-colors duration-300"
+              >
+                <span className="text-xs font-semibold tracking-[0.15em] uppercase">Watch Recording</span>
+                <ChevronDown className="w-4 h-4 animate-bounce" />
+              </button>
             </motion.div>
           </motion.div>
         </motion.div>
+      </section>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-        >
-          <div className="w-px h-14 bg-gradient-to-b from-transparent to-amber-400/40" />
-          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce" />
-        </motion.div>
+      {/* ══════════════════════ SESSION RECORDING ══════════════════════ */}
+      <section id="recording" className="relative py-20 sm:py-28 bg-[#060b17] overflow-hidden">
+        {/* Background */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-amber-500/8 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-600/8 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+        <div className="container mx-auto px-5 sm:px-8 relative z-10 max-w-5xl">
+
+          {/* Header */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/25 mb-6">
+              <div className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center">
+                <Play className="w-2.5 h-2.5 text-amber-400 ml-0.5" fill="currentColor" />
+              </div>
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-amber-400">Full Session Recording</span>
+            </motion.div>
+
+            <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight">
+              Watch the Full Session
+            </motion.h2>
+            <motion.p variants={fadeUp} custom={2} className="text-white/40 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+              AI, Patents &amp; Power — recorded live on April 22, 2026
+            </motion.p>
+          </motion.div>
+
+          {/* Video player */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="relative"
+          >
+            {/* Outer glow rings */}
+            <div className="absolute -inset-3 bg-gradient-to-r from-amber-600/20 via-amber-400/10 to-amber-600/20 rounded-[2rem] blur-2xl" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/15 to-amber-500/15 rounded-3xl blur-lg" />
+
+            {/* Player shell */}
+            <div className="relative rounded-2xl overflow-hidden border border-white/8 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]">
+              {/* Amber accent bar */}
+              <div className="h-[3px] bg-gradient-to-r from-amber-600/50 via-amber-400 to-amber-600/50" />
+
+              {/* Title bar */}
+              <div className="bg-[#0d1526] px-6 py-3.5 flex items-center justify-between border-b border-white/5">
+                <div className="flex gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/8" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/8" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/8" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400/60 animate-pulse" />
+                  <span className="text-[10px] text-white/30 font-medium tracking-widest uppercase">The Counsel Exchange · April 22, 2026</span>
+                </div>
+                <div className="w-14" />
+              </div>
+
+              {/* Iframe */}
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/jQIeWVmg5-w?rel=0&modestbranding=1"
+                  title="The Counsel Exchange — AI, Patents & Power"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full bg-black"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Meta chips */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4 mt-10"
+          >
+            {[
+              { icon: Users, label: "6 Senior Legal Experts" },
+              { icon: Clock, label: "60 Minutes" },
+              { icon: Globe2, label: "Cross-Jurisdiction Perspectives" },
+              { icon: Calendar, label: "April 22, 2026" },
+            ].map(({ icon: Icon, label }, i) => (
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/4 border border-white/8">
+                <Icon className="w-3.5 h-3.5 text-amber-500/70 shrink-0" />
+                <span className="text-white/40 text-xs font-medium">{label}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════ TOPIC HIGHLIGHT ══════════════════════ */}
       <section className="relative py-16 bg-white border-b border-slate-100">
         <div className="container mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
               { icon: Cpu, title: "Who Owns AI Output", desc: "Ownership rights when AI creates the innovation" },
               { icon: FileText, title: "Can AI Be an Inventor", desc: "Patent eligibility in generative AI systems" },
@@ -133,7 +230,7 @@ export default function CounselExchangePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100"
+                className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-200 hover:bg-amber-50/40 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
                   <Icon className="w-5 h-5 text-amber-600" />
@@ -149,24 +246,28 @@ export default function CounselExchangePage() {
       </section>
 
       {/* ══════════════════════ STATS BAR ══════════════════════ */}
-      <section className="relative py-12 bg-[#0a0f1e]">
-        <div className="container mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/10">
+      <section className="relative py-14 bg-[#0a0f1e]">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(to right, rgba(245,158,11,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(245,158,11,0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="container mx-auto px-5 sm:px-8 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/8 max-w-4xl mx-auto">
             {[
-              "6 Senior Legal Experts",
-              "60-Minute Closed-Door Exchange",
-              "Cross-Jurisdiction IP Perspectives",
-              "AI, Patents & Ownership Focus",
-            ].map((label, i) => (
+              { label: "6 Senior Legal Experts", icon: Users },
+              { label: "60-Minute Closed-Door Exchange", icon: Clock },
+              { label: "Cross-Jurisdiction IP Perspectives", icon: Globe2 },
+              { label: "AI, Patents & Ownership Focus", icon: Cpu },
+            ].map(({ label, icon: Icon }, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center lg:px-8"
+                className="flex flex-col items-center gap-2 text-center lg:px-8"
               >
-                <p className="text-sm sm:text-base font-bold text-white/80 leading-snug">{label}</p>
+                <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center mb-1">
+                  <Icon className="w-4 h-4 text-amber-400/70" />
+                </div>
+                <p className="text-sm font-semibold text-white/65 leading-snug">{label}</p>
               </motion.div>
             ))}
           </div>
@@ -180,7 +281,6 @@ export default function CounselExchangePage() {
 
         <div className="container mx-auto px-5 sm:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Text */}
             <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 border border-amber-300/50 mb-6">
                 <Zap className="w-3.5 h-3.5 text-amber-600" />
@@ -196,7 +296,7 @@ export default function CounselExchangePage() {
                 {[
                   "Artificial intelligence is no longer just assisting innovation. It is actively contributing to it.",
                   "As organisations accelerate AI adoption, fundamental questions around ownership, patentability, and liability are becoming harder to answer. Legal systems across jurisdictions are responding — but not in alignment.",
-                  "This session brings together legal leaders to examine how intellectual property frameworks are evolving, and what it means for companies building, investing in, or acquiring AI-driven capabilities.",
+                  "This session brought together legal leaders to examine how intellectual property frameworks are evolving, and what it means for companies building, investing in, or acquiring AI-driven capabilities.",
                 ].map((p, i) => (
                   <motion.p key={i} variants={fadeUp} custom={i + 2}>{p}</motion.p>
                 ))}
@@ -211,7 +311,6 @@ export default function CounselExchangePage() {
               </motion.div>
             </motion.div>
 
-            {/* Visual card grid */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -264,7 +363,6 @@ export default function CounselExchangePage() {
           </motion.div>
 
           <div className="max-w-3xl mx-auto relative">
-            {/* Vertical line */}
             <div className="absolute left-[22px] sm:left-[26px] top-0 bottom-0 w-px bg-gradient-to-b from-amber-400/50 via-amber-300/30 to-transparent" />
 
             {[
@@ -303,7 +401,6 @@ export default function CounselExchangePage() {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-6">
-            {/* What Will Be Discussed */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -314,7 +411,7 @@ export default function CounselExchangePage() {
               <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-6">
                 <Scale className="w-6 h-6 text-amber-600" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-8">What Will Be Discussed</h3>
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-8">What Was Discussed</h3>
               <ul className="space-y-3.5">
                 {[
                   "Ownership of AI-generated innovation",
@@ -340,7 +437,6 @@ export default function CounselExchangePage() {
               </ul>
             </motion.div>
 
-            {/* Inside The Session */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -401,44 +497,14 @@ export default function CounselExchangePage() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {[
-              { 
-                name: "Deepalakshmi Vadivelan", 
-                role: "General Counsel & SVP Legal",
-                org: "Global DPO, Quess Corp Limited", 
-                image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" 
-              },
-              {
-                name: "Sergey Medvedev",
-                role: "Managing Partner",
-                org: "Gorodissky & Partners",
-                image: "/images/counsel-exchange/Sergey Medvedev.jpg"
-              },
-              {
-                name: "Saurabh Anand",
-                role: "Lead Counsel",
-                org: "Akamai Technologies",
-                image: "/images/counsel-exchange/saurabh_anand.jpeg"
-              },
-              {
-                name: "Sushma Shankar",
-                role: "Vice President Legal",
-                org: "Accenture",
-                image: "/images/counsel-exchange/sushma_shankar.jpeg"
-              },
-              {
-                name: "Dr. Akshay Kant Chaturvedi",
-                role: "Corporate Head - IPR",
-                org: "Gujarat Fluorochemicals Limited",
-                image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg"
-              },
-              {
-                name: "Krishna Chellapilla",
-                role: "Head - Patents, Prosecution and Copyrights",
-                org: "Tata Consultancy Services",
-                image: "/images/counsel-exchange/krishna_chellapilla.webp"
-              },
+              { name: "Deepalakshmi Vadivelan", role: "General Counsel & SVP Legal", org: "Global DPO, Quess Corp Limited", image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" },
+              { name: "Sergey Medvedev", role: "Managing Partner", org: "Gorodissky & Partners", image: "/images/counsel-exchange/Sergey Medvedev.jpg" },
+              { name: "Saurabh Anand", role: "Lead Counsel", org: "Akamai Technologies", image: "/images/counsel-exchange/saurabh_anand.jpeg" },
+              { name: "Sushma Shankar", role: "Vice President Legal", org: "Accenture", image: "/images/counsel-exchange/sushma_shankar.jpeg" },
+              { name: "Dr. Akshay Kant Chaturvedi", role: "Corporate Head - IPR", org: "Gujarat Fluorochemicals Limited", image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg" },
+              { name: "Krishna Chellapilla", role: "Head - Patents, Prosecution and Copyrights", org: "Tata Consultancy Services", image: "/images/counsel-exchange/krishna_chellapilla.webp" },
             ].map((speaker, i) => (
               <motion.div
                 key={i}
@@ -446,23 +512,14 @@ export default function CounselExchangePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
                 className="group relative rounded-[2rem] p-5 bg-white border border-slate-100 shadow-sm hover:border-amber-300 hover:shadow-xl transition-all duration-500 text-center flex flex-col items-center"
               >
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-amber-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Avatar Container */}
                 <div className="relative w-full aspect-[4/5] mb-5 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 group-hover:border-amber-200 transition-colors duration-500">
-                  <Image 
-                    src={speaker.image} 
-                    alt={speaker.name} 
-                    fill 
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                  {/* Glass Overlay on Hover */}
+                  <Image src={speaker.image} alt={speaker.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-
                 <div className="relative z-10 w-full">
                   <p className="text-slate-900 font-bold text-sm mb-1 leading-tight">{speaker.name}</p>
                   <p className="text-amber-600 text-[10px] font-bold uppercase tracking-wider mb-1 line-clamp-2">{speaker.role}</p>
@@ -481,7 +538,6 @@ export default function CounselExchangePage() {
 
         <div className="container mx-auto px-5 sm:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-6">
-            {/* Who This Is Built For */}
             <motion.div
               variants={stagger}
               initial="hidden"
@@ -494,7 +550,7 @@ export default function CounselExchangePage() {
                 <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
                   <Users className="w-5 h-5 text-amber-600" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900">Who This Is Built For</h2>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900">Who This Was Built For</h2>
               </motion.div>
               <div className="space-y-2.5">
                 {[
@@ -518,7 +574,6 @@ export default function CounselExchangePage() {
               </div>
             </motion.div>
 
-            {/* What You Will Gain */}
             <motion.div
               variants={stagger}
               initial="hidden"
@@ -532,7 +587,7 @@ export default function CounselExchangePage() {
                 <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center">
                   <Lightbulb className="w-5 h-5 text-indigo-500" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900">What You Will Gain</h2>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900">What Participants Gained</h2>
               </motion.div>
               <div className="space-y-6">
                 {[
@@ -622,86 +677,6 @@ export default function CounselExchangePage() {
                 className="h-14 w-auto object-contain"
               />
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════ SESSION RECORDING ══════════════════════ */}
-      <section className="relative py-24 sm:py-32 bg-[#0a0f1e] overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-
-        <div className="container mx-auto px-5 sm:px-8 relative z-10 max-w-5xl">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Play className="w-3.5 h-3.5 text-amber-400" fill="currentColor" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-400">Session Recording</span>
-            </motion.div>
-            <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-              Watch the Full Session
-            </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-white/50 text-sm sm:text-base max-w-xl mx-auto">
-              AI, Patents &amp; Power: Who Owns Innovation in the Age of Generative Tech?
-            </motion.p>
-          </motion.div>
-
-          {/* Video Embed */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative group"
-          >
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/30 via-amber-400/20 to-amber-500/30 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-
-            {/* Video container */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.8)]">
-              {/* Top bar decoration */}
-              <div className="h-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500" />
-              <div className="bg-[#0f172a] px-5 py-3 flex items-center gap-3 border-b border-white/5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <span className="text-[10px] text-white/30 font-medium tracking-wide">The Counsel Exchange · April 22, 2026</span>
-                </div>
-              </div>
-              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                <iframe
-                  src="https://www.youtube.com/embed/jQIeWVmg5-w"
-                  title="The Counsel Exchange — AI, Patents & Power"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Below video meta */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-6 mt-8 text-white/40 text-xs font-medium"
-          >
-            {["6 Senior Legal Experts", "60 Minutes", "Cross-Jurisdiction Perspectives", "April 22, 2026"].map((t, i) => (
-              <span key={i} className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-500" />
-                {t}
-              </span>
-            ))}
           </motion.div>
         </div>
       </section>
