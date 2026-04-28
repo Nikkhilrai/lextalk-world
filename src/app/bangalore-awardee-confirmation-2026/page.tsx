@@ -11,7 +11,7 @@ const passes = [
     {
         id: "standard-physical-pass-bangalore-2026",
         name: "Standard Physical Pass",
-        price: 900,
+        price: 800,
         tier: "Standard",
         icon: ShieldCheck,
         benefits: [
