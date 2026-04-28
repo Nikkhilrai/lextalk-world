@@ -33,30 +33,6 @@ export function BangaloreSponsor() {
                 </div>
 
 
-                {/* Venue Partner */}
-                <div className="flex flex-col items-center mb-16">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="bg-slate-50/50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300 w-full max-w-xs"
-                    >
-                        <div className="relative w-56 h-24">
-                            <Image
-                                src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
-                                alt="Radisson Blu Atria Bangalore"
-                                fill
-                                className="object-contain mix-blend-multiply"
-                            />
-                        </div>
-                        <p className="text-xs text-slate-400 mt-4 text-center leading-relaxed">
-                            Radisson Blu Atria Bangalore<br />
-                            1, Palace Rd, Bengaluru, Karnataka 560001
-                        </p>
-                    </motion.div>
-                </div>
-
                 {/* Centered container for two tiers */}
                 <div className="flex flex-col md:flex-row justify-center gap-12 max-w-4xl mx-auto">
                     {/* Platinum */}
@@ -90,6 +66,31 @@ export function BangaloreSponsor() {
                         </div>
 
                 </div>
+
+                {/* Venue Partner */}
+                <div className="flex flex-col items-center mt-16">
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-slate-50/50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300 w-full max-w-xs"
+                    >
+                        <div className="relative w-56 h-24">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
+                                alt="Radisson Blu Atria Bangalore"
+                                className="w-full h-full object-contain mix-blend-multiply"
+                            />
+                        </div>
+                        <p className="text-xs text-slate-400 mt-4 text-center leading-relaxed">
+                            Radisson Blu Atria Bangalore<br />
+                            1, Palace Rd, Bengaluru, Karnataka 560001
+                        </p>
+                    </motion.div>
+                </div>
+
             </div>
         </section>
     );
