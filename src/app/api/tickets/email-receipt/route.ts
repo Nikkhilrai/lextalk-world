@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
         const eventName = isBangalore ? "Bangalore 2026 South Asia Edition" : "Dubai 2026 Legal Conference";
         const eventDate = isBangalore ? "June 11, 2026" : "September 9-10, 2026";
-        const eventVenue = isBangalore ? "Bangalore, India" : "Dubai, UAE";
+        const eventVenue = isBangalore ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001" : "Dubai, UAE";
 
         // Fetch PDF from dynamic download endpoint if available
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
