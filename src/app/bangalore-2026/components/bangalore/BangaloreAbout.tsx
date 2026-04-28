@@ -89,7 +89,7 @@ export function BangaloreAbout() {
                                         <div className="absolute bottom-5 left-5 flex items-center gap-2.5 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-lg">
                                             <Building2 className="w-4 h-4 text-amber-600" />
                                             <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                                                Bangalore, India
+                                                Radisson Blu Atria, Bangalore
                                             </span>
                                         </div>
                                     </div>

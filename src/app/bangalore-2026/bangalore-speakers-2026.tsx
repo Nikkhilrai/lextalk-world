@@ -154,7 +154,7 @@ export default function BangaloreSpeakersHero() {
                 >
                     <MapPin className="w-3.5 h-3.5 text-amber-500/60" />
                     <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-light text-white/50">
-                        Bangalore, India
+                        Radisson Blu Atria, Bangalore
                     </span>
                 </motion.div>
 

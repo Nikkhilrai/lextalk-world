@@ -5,6 +5,11 @@ import Image from "next/image";
 
 const categories = [
     {
+        name: "Venue Partner", size: "lg", items: [
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg" },
+        ]
+    },
+    {
         name: "Global Partners", size: "md", items: [
             { name: "Counselling Association", logo: "/dubai-event/logos/2.png" },
             { name: "Global Innovation", logo: "/dubai-event/logos/4.png" }
