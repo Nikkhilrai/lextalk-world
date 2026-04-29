@@ -161,10 +161,12 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         name: "Anna Kobzar",
         title: "Senior Legal Counsel, Seddiqi Holding LLC",
         image: "/dubai-event/dubai-speakers/Anna Kobzar.jpeg",
-    }
-
-
-
+    },
+    {
+        name: "Sergey Medvedev",
+        title: "Managing Partner, Gorodissky & Partners",
+        image: "/images/counsel-exchange/Sergey Medvedev.jpg",
+    },
 ];
 
 
