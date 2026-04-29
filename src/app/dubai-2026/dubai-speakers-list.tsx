@@ -282,6 +282,29 @@ export default function DubaiSpeakersList() {
                         </motion.div>
                     ))}
                 </div>
+            {/* Partner */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="mt-20 flex flex-col items-center gap-6"
+            >
+                <div className="flex items-center gap-4">
+                    <div className="h-px w-12 bg-slate-200" />
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">Partner</p>
+                    <div className="h-px w-12 bg-slate-200" />
+                </div>
+                <div className="bg-white rounded-xl border border-slate-100 shadow-sm px-10 py-5 hover:shadow-md hover:border-amber-200 transition-all duration-300">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                        alt="Gorodissky & Partners"
+                        className="h-14 w-auto object-contain mix-blend-multiply"
+                    />
+                </div>
+            </motion.div>
+
             </div>
 
             {/* Biography Modal */}
