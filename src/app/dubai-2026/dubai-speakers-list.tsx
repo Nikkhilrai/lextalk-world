@@ -223,8 +223,8 @@ export default function DubaiSpeakersList() {
                     </p>
                 </motion.div>
 
-                {/* Speakers Grid: 3 cols desktop, 2 cols tablet, 1 col mobile */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-2 lg:gap-y-4">
+                {/* Speakers Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {speakers.map((speaker, idx) => (
                         <motion.div
                             key={idx}
@@ -235,16 +235,15 @@ export default function DubaiSpeakersList() {
                             className={`group ${speaker.bio ? "cursor-pointer" : ""}`}
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
-                            <div className="relative flex flex-col items-center text-center p-4">
-                                {/* Circular portrait with structured frame */}
-                                <div className="relative mb-4">
-                                    {/* Outer thin formal ring */}
-                                    <div className="absolute -inset-3 rounded-full border border-slate-200/70 group-hover:border-amber-400/50 transition-all duration-500" />
-                                    {/* Inner subtle glow */}
-                                    <div className="absolute -inset-1 rounded-full bg-gradient-to-b from-amber-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            {/* Card */}
+                            <div className="relative bg-white rounded-2xl border border-slate-100 shadow-md group-hover:shadow-xl group-hover:border-amber-200 transition-all duration-400 p-6 flex flex-col items-center text-center overflow-hidden">
+                                {/* Amber top accent line */}
+                                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
-                                    {/* Portrait */}
-                                    <div className="relative w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden ring-[3px] ring-white shadow-lg shadow-slate-200/60 group-hover:shadow-xl group-hover:shadow-amber-100/50 transition-all duration-500">
+                                {/* Circular portrait */}
+                                <div className="relative mb-5">
+                                    <div className="absolute -inset-2 rounded-full border border-amber-200/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className="relative w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-slate-50 shadow-lg group-hover:shadow-amber-100/60 transition-all duration-500">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
@@ -254,35 +253,31 @@ export default function DubaiSpeakersList() {
                                             />
                                         ) : (
                                             <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300">
-                                                <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-14 h-14" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                 </svg>
                                             </div>
                                         )}
                                     </div>
-
-                                    {/* Small formal accent — single bar instead of diamond */}
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-[2px] bg-amber-500 rounded-full" />
+                                    {/* Amber dot accent */}
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-amber-500 rounded-full" />
                                 </div>
 
-                                {/* Text content */}
-                                <div className="pt-2 flex flex-col items-center">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 mb-1 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
-                                        {speaker.name}
-                                    </h3>
-
-                                    {speaker.title && (
-                                        <p className="text-[11px] md:text-[12px] font-medium text-slate-400 group-hover:text-slate-500 transition-colors duration-300 uppercase tracking-[0.1em] leading-relaxed whitespace-pre-line max-w-[240px] mt-1">
-                                            {speaker.title}
-                                        </p>
-                                    )}
-
-                                    {speaker.bio && (
-                                        <div className="mt-3 overflow-hidden h-0 group-hover:h-5 transition-all duration-500">
-                                            <p className="text-[10px] font-bold text-amber-600 uppercase tracking-widest">View Biography</p>
-                                        </div>
-                                    )}
-                                </div>
+                                {/* Name & title */}
+                                <h3 className="text-base md:text-lg font-serif font-bold text-slate-900 mb-1.5 leading-snug group-hover:text-amber-700 transition-colors duration-300">
+                                    {speaker.name}
+                                </h3>
+                                {speaker.title && (
+                                    <p className="text-[11px] font-medium text-slate-400 group-hover:text-slate-500 transition-colors duration-300 uppercase tracking-[0.08em] leading-relaxed max-w-[220px]">
+                                        {speaker.title}
+                                    </p>
+                                )}
+                                {speaker.bio && (
+                                    <div className="mt-3 flex items-center gap-1.5 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0">
+                                        <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
+                                        <div className="w-3 h-px bg-amber-500" />
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     ))}
