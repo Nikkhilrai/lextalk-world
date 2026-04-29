@@ -224,7 +224,7 @@ export default function DubaiSpeakersList() {
                 </motion.div>
 
                 {/* Speakers Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                     {speakers.map((speaker, idx) => (
                         <motion.div
                             key={idx}
@@ -235,49 +235,54 @@ export default function DubaiSpeakersList() {
                             className={`group ${speaker.bio ? "cursor-pointer" : ""}`}
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
-                            {/* Card */}
-                            <div className="relative bg-white rounded-2xl border border-slate-100 shadow-md group-hover:shadow-xl group-hover:border-amber-200 transition-all duration-400 p-6 flex flex-col items-center text-center overflow-hidden">
-                                {/* Amber top accent line */}
-                                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                            <div className="relative flex flex-col items-center text-center">
+                                {/* Rectangular portrait card — matches Bangalore style */}
+                                <div className="relative mb-6 w-full max-w-[280px]">
+                                    {/* Outer thin formal frame */}
+                                    <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
 
-                                {/* Circular portrait */}
-                                <div className="relative mb-5">
-                                    <div className="absolute -inset-2 rounded-full border border-amber-200/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                                    <div className="relative w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-slate-50 shadow-lg group-hover:shadow-amber-100/60 transition-all duration-500">
+                                    {/* Portrait container */}
+                                    <div className="relative w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.name}
-                                                fill
-                                                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                                width={400}
+                                                height={500}
+                                                className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-105"
                                             />
                                         ) : (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300">
-                                                <svg className="w-14 h-14" fill="currentColor" viewBox="0 0 24 24">
+                                            <div className="w-full aspect-[4/5] flex items-center justify-center bg-slate-100 text-slate-300">
+                                                <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                 </svg>
                                             </div>
                                         )}
+                                        {/* Hover gradient overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     </div>
-                                    {/* Amber dot accent */}
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[3px] bg-amber-500 rounded-full" />
+
+                                    {/* Bottom amber accent line */}
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-amber-500 rounded-full shadow-sm" />
                                 </div>
 
-                                {/* Name & title */}
-                                <h3 className="text-base md:text-lg font-serif font-bold text-slate-900 mb-1.5 leading-snug group-hover:text-amber-700 transition-colors duration-300">
-                                    {speaker.name}
-                                </h3>
-                                {speaker.title && (
-                                    <p className="text-[11px] font-medium text-slate-400 group-hover:text-slate-500 transition-colors duration-300 uppercase tracking-[0.08em] leading-relaxed max-w-[220px]">
-                                        {speaker.title}
-                                    </p>
-                                )}
-                                {speaker.bio && (
-                                    <div className="mt-3 flex items-center gap-1.5 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0">
-                                        <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
-                                        <div className="w-3 h-px bg-amber-500" />
-                                    </div>
-                                )}
+                                {/* Text content */}
+                                <div className="pt-2 flex flex-col items-center max-w-[280px]">
+                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
+                                        {speaker.name}
+                                    </h3>
+                                    {speaker.title && (
+                                        <p className="text-[12px] md:text-[13px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-widest leading-relaxed">
+                                            {speaker.title}
+                                        </p>
+                                    )}
+                                    {speaker.bio && (
+                                        <div className="mt-4 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                                            <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
+                                            <div className="w-4 h-px bg-amber-600" />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </motion.div>
                     ))}
