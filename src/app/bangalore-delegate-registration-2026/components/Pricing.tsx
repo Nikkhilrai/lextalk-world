@@ -605,7 +605,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
 /* ═══════════════════════════════════════════════
    Pricing Section
    ═══════════════════════════════════════════════ */
-const COUPON_EXPIRY = new Date("2026-04-30T23:59:59+05:30");
+const COUPON_EXPIRY = new Date("2026-05-07T23:59:59+05:30");
 const COUPON_CODE = "EARLY30";
 
 function CouponBanner() {
@@ -692,7 +692,7 @@ function CouponBanner() {
 
             {/* Expiry note */}
             <div className="relative z-10 text-center pb-2.5 -mt-1">
-                <p className="text-[10px] text-white/70 font-semibold">Offer expires April 30, 2026 at midnight</p>
+                <p className="text-[10px] text-white/70 font-semibold">Offer expires May 7, 2026 at midnight</p>
             </div>
         </motion.div>
     );
