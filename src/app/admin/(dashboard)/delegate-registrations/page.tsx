@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { StatCard } from "@/components/admin/StatCard";
 import {
-    Ticket, DollarSign, Search, CheckCircle, Clock, XCircle, Download, Mail, RefreshCw, Trash2, Eye
+    Ticket, DollarSign, Search, CheckCircle, Clock, XCircle, Download, Mail, RefreshCw, Trash2, Eye, Send, Loader2
 } from "lucide-react";
 import {
     getDelegateRegistrations,
@@ -17,6 +17,8 @@ export default function DelegateRegistrationsPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [passTypeFilter, setPassTypeFilter] = useState("all");
+    const [conferenceFilter, setConferenceFilter] = useState("all");
+    const [sendingPass, setSendingPass] = useState<string | null>(null);
     const [stats, setStats] = useState({
         total: 0,
         paid: 0,
@@ -82,6 +84,25 @@ export default function DelegateRegistrationsPage() {
         }
     };
 
+    const handleSendPass = async (regId: string, email: string) => {
+        if (!confirm(`Send entry pass PDF to ${email}?`)) return;
+        setSendingPass(regId);
+        try {
+            const res = await fetch("/api/delegate-registration/send-pass", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ registrationId: regId }),
+            });
+            const data = await res.json();
+            if (data.success) alert(`✓ Pass sent to ${email}`);
+            else alert(`Failed: ${data.error}`);
+        } catch {
+            alert("Failed to send pass.");
+        } finally {
+            setSendingPass(null);
+        }
+    };
+
     const filtered = registrations.filter(reg => {
         const matchesSearch =
             `${reg.firstName} ${reg.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -90,8 +111,9 @@ export default function DelegateRegistrationsPage() {
 
         const matchesStatus = statusFilter === "all" || reg.paymentStatus === statusFilter;
         const matchesPass = passTypeFilter === "all" || reg.passType === passTypeFilter;
+        const matchesConference = conferenceFilter === "all" || (reg.conferenceSlug || "").includes(conferenceFilter);
 
-        return matchesSearch && matchesStatus && matchesPass;
+        return matchesSearch && matchesStatus && matchesPass && matchesConference;
     });
 
     const getStatusColor = (status: string) => {
@@ -171,6 +193,16 @@ export default function DelegateRegistrationsPage() {
                         <option value="vendor">Vendor</option>
                         <option value="professional">Professional</option>
                         <option value="global-speaker">Global Speaker</option>
+                    </select>
+
+                    <select
+                        value={conferenceFilter}
+                        onChange={(e) => setConferenceFilter(e.target.value)}
+                        className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200"
+                    >
+                        <option value="all">Event: All</option>
+                        <option value="bangalore">Bangalore 2026</option>
+                        <option value="dubai">Dubai 2026</option>
                     </select>
                 </div>
 
@@ -253,10 +285,28 @@ export default function DelegateRegistrationsPage() {
                                                 <button
                                                     onClick={() => handleResendEmail(reg.id)}
                                                     className="p-1.5 bg-[#405189]/20 text-[#abb9e8] rounded hover:bg-[#405189] hover:text-white transition-all"
-                                                    title="Resend Ticket"
+                                                    title="Resend Confirmation Email"
                                                 >
                                                     <Mail size={16} />
                                                 </button>
+
+                                                {/* Send Entry Pass — Bangalore physical only */}
+                                                {(reg.conferenceSlug || "").includes("bangalore") &&
+                                                    reg.paymentStatus === "success" &&
+                                                    !reg.passType?.includes("virtual") && (
+                                                    <button
+                                                        onClick={() => handleSendPass(reg.id, reg.email)}
+                                                        disabled={sendingPass === reg.id}
+                                                        className="p-1.5 bg-amber-500/10 text-amber-500 rounded hover:bg-amber-500 hover:text-white transition-all disabled:opacity-40"
+                                                        title="Send Entry Pass PDF"
+                                                    >
+                                                        {sendingPass === reg.id
+                                                            ? <Loader2 size={16} className="animate-spin" />
+                                                            : <Send size={16} />
+                                                        }
+                                                    </button>
+                                                )}
+
                                                 <button
                                                     onClick={() => handleDelete(reg.id)}
                                                     className="p-1.5 bg-rose-500/10 text-rose-500 rounded hover:bg-rose-500 hover:text-white transition-all"

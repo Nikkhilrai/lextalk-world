@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
-import { generateBangalorePass } from "@/lib/bangalore-pass-generator";
-import type { BangalorePassTitle } from "@/lib/bangalore-pass-generator";
+import { generateBangalorePassPDF, BangalorePassTitle } from "@/lib/bangalore-pass-puppeteer";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -108,7 +107,7 @@ export async function POST(request: NextRequest) {
 
         if (isBangalorePhysical) {
             try {
-                bangalorePassPdf = await generateBangalorePass({
+                bangalorePassPdf = await generateBangalorePassPDF({
                     attendeeName: `${registration.firstName} ${registration.lastName}`,
                     organization: registration.organization || "",
                     designation: registration.designation || "",
