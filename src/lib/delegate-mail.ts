@@ -15,6 +15,7 @@ interface EmailData {
     ticketNumber: string;
     ticketId: string;
     conferenceSlug?: string;
+    bangalorePassPdf?: Buffer;
 }
 
 function passDisplayName(passType: string): string {
@@ -31,6 +32,7 @@ function passDisplayName(passType: string): string {
 function bangaloreEmailHtml(data: EmailData): string {
     const fullName = `${data.firstName} ${data.lastName}`;
     const passName = passDisplayName(data.passType);
+    const hasPass = !!data.bangalorePassPdf;
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -56,6 +58,7 @@ function bangaloreEmailHtml(data: EmailData): string {
         <p style="margin:0 0 8px;color:#0f172a;font-size:17px;font-weight:600;">Dear ${data.firstName},</p>
         <p style="margin:0 0 24px;color:#475569;font-size:15px;line-height:1.8;">
           You're in. Your delegate pass for <strong>LexTalk World Conference &amp; Exhibition — Bangalore 2026</strong> has been confirmed.
+          ${hasPass ? "Your <strong>entry pass is attached</strong> to this email — please bring a printed or digital copy on the day." : ""}
         </p>
 
         <!-- Registration Details -->
@@ -70,6 +73,10 @@ function bangaloreEmailHtml(data: EmailData): string {
               <tr>
                 <td style="padding:7px 0;color:#64748b;font-size:13px;border-bottom:1px solid #f1f5f9;">Date</td>
                 <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;border-bottom:1px solid #f1f5f9;">Thursday, June 11, 2026</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;border-bottom:1px solid #f1f5f9;">Venue</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;border-bottom:1px solid #f1f5f9;">Radisson Blu Atria Bangalore, 1 Palace Rd, Bengaluru 560001</td>
               </tr>
               <tr>
                 <td style="padding:7px 0;color:#64748b;font-size:13px;border-bottom:1px solid #f1f5f9;">Attendee</td>
@@ -87,40 +94,37 @@ function bangaloreEmailHtml(data: EmailData): string {
           </td></tr>
         </table>
 
+        ${hasPass ? `
+        <!-- Entry Pass notice -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#fefce8;border:1px solid #fde68a;border-radius:10px;margin-bottom:28px;">
+          <tr><td style="padding:18px 24px;">
+            <p style="margin:0 0 6px;color:#92400e;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Your Entry Pass</p>
+            <p style="margin:0;color:#78350f;font-size:13px;line-height:1.6;">
+              Your personalised entry pass with QR code is <strong>attached to this email</strong> as a PDF.<br>
+              Please present it (printed or on mobile) at the registration desk on June 11.
+            </p>
+          </td></tr>
+        </table>
+        ` : ""}
+
         <!-- What happens next -->
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-bottom:28px;">
           <tr><td style="padding:20px 24px;">
             <p style="margin:0 0 14px;color:#92400e;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">What Happens Next</p>
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="padding:6px 0;vertical-align:top;width:20px;">
-                  <div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div>
-                </td>
+                <td style="padding:6px 0;vertical-align:top;width:20px;"><div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div></td>
                 <td style="padding:6px 0;color:#78350f;font-size:13px;line-height:1.6;">You'll receive the <strong>detailed agenda 2 weeks</strong> before the event</td>
               </tr>
               <tr>
-                <td style="padding:6px 0;vertical-align:top;">
-                  <div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div>
-                </td>
-                <td style="padding:6px 0;color:#78350f;font-size:13px;line-height:1.6;">A <strong>reminder with venue address and logistics</strong> will follow 5 days prior</td>
+                <td style="padding:6px 0;vertical-align:top;"><div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div></td>
+                <td style="padding:6px 0;color:#78350f;font-size:13px;line-height:1.6;">A <strong>reminder with logistics details</strong> will follow 5 days prior</td>
               </tr>
               <tr>
-                <td style="padding:6px 0;vertical-align:top;">
-                  <div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div>
-                </td>
+                <td style="padding:6px 0;vertical-align:top;"><div style="width:6px;height:6px;background:#f59e0b;border-radius:50%;margin-top:6px;"></div></td>
                 <td style="padding:6px 0;color:#78350f;font-size:13px;line-height:1.6;">Your <strong>delegate kit</strong> will be available at check-in</td>
               </tr>
             </table>
-          </td></tr>
-        </table>
-
-        <!-- Venue & Check-in -->
-        <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:28px;">
-          <tr><td style="padding:20px 24px;">
-            <p style="margin:0 0 10px;color:#64748b;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Venue &amp; Check-In</p>
-            <p style="margin:0;color:#475569;font-size:13px;line-height:1.7;">
-              Full venue details will be shared <strong>by June 1</strong>. Please carry a <strong>valid photo ID</strong> and this email for check-in.
-            </p>
           </td></tr>
         </table>
 
@@ -227,16 +231,26 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
         console.log(`Sending confirmation email to: ${data.email} (${fullName}) — ${data.conferenceSlug}`);
 
         const subject = isBangalore
-            ? `Your pass is confirmed — LexTalk World Bangalore, June 11 ✓`
+            ? `Your entry pass is confirmed — LexTalk World Bangalore, June 11 ✓`
             : `Your LexTalk World Dubai 2026 Ticket Confirmation — ${data.ticketNumber}`;
 
         const html = isBangalore ? bangaloreEmailHtml(data) : dubaiEmailHtml(data);
+
+        const attachments = [];
+        if (isBangalore && data.bangalorePassPdf) {
+            attachments.push({
+                filename: `LexTalk-Bangalore-Pass-${data.ticketNumber}.pdf`,
+                content: data.bangalorePassPdf.toString("base64"),
+                contentType: "application/pdf",
+            });
+        }
 
         await resend.emails.send({
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: data.email,
             subject,
             html,
+            ...(attachments.length > 0 ? { attachments } : {}),
         });
 
         console.log(`Confirmation email sent successfully to ${data.email}`);

@@ -2,14 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
+import { generateBangalorePass } from "@/lib/bangalore-pass-generator";
+import type { BangalorePassTitle } from "@/lib/bangalore-pass-generator";
 
-function generateTicketNumber(): string {
+function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = "LTW-DXB26-";
+    const prefix = conferenceSlug?.includes("bangalore") ? "LTW-BLR26-" : "LTW-DXB26-";
+    let result = prefix;
     for (let i = 0; i < 6; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return result;
+}
+
+function resolvePassTitle(passType: string, conferenceSlug: string): BangalorePassTitle {
+    if (conferenceSlug?.includes("awardee")) return "AWARDEE";
+    if (passType?.includes("awardee")) return "AWARDEE";
+    return "DELEGATE";
 }
 
 export async function POST(request: NextRequest) {
@@ -29,7 +38,6 @@ export async function POST(request: NextRequest) {
             .digest("hex");
 
         if (generatedSignature !== razorpay_signature) {
-            // Update registration as failed
             const prismaClient = prisma as any;
             await prismaClient.delegateRegistration.update({
                 where: { id: registrationId },
@@ -43,7 +51,7 @@ export async function POST(request: NextRequest) {
 
         const prismaClient = prisma as any;
 
-        // Check for existing successful payment (idempotency)
+        // Idempotency check
         const existing = await prismaClient.delegateRegistration.findFirst({
             where: { razorpayPaymentId: razorpay_payment_id },
         });
@@ -56,15 +64,19 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Generate unique ticket number
-        let ticketNumber = generateTicketNumber();
+        // Get conference slug from the registration to generate correct prefix
+        const pendingReg = await prismaClient.delegateRegistration.findUnique({
+            where: { id: registrationId },
+        });
+        const conferenceSlug = pendingReg?.conferenceSlug || "";
+
+        // Generate unique ticket number with correct prefix
+        let ticketNumber = generateTicketNumber(conferenceSlug);
         let attempts = 0;
         while (attempts < 5) {
-            const exists = await prismaClient.delegateRegistration.findFirst({
-                where: { ticketNumber },
-            });
+            const exists = await prismaClient.delegateRegistration.findFirst({ where: { ticketNumber } });
             if (!exists) break;
-            ticketNumber = generateTicketNumber();
+            ticketNumber = generateTicketNumber(conferenceSlug);
             attempts++;
         }
 
@@ -78,9 +90,8 @@ export async function POST(request: NextRequest) {
             },
         });
 
-        // Create notification
-        const prismaCreate = prisma as any;
-        await prismaCreate.notification.create({
+        // Notification
+        await (prisma as any).notification.create({
             data: {
                 type: "TICKET_PURCHASE",
                 message: `Ticket purchased by ${registration.firstName} ${registration.lastName} (${registration.passType})`,
@@ -89,7 +100,28 @@ export async function POST(request: NextRequest) {
             }
         }).catch((err: any) => console.error("Notification error:", err));
 
-        // Trigger confirmation email
+        // Generate Bangalore PDF pass for physical attendees
+        let bangalorePassPdf: Buffer | null = null;
+        const isBangalorePhysical =
+            conferenceSlug?.includes("bangalore") &&
+            !registration.passType?.includes("virtual");
+
+        if (isBangalorePhysical) {
+            try {
+                bangalorePassPdf = await generateBangalorePass({
+                    attendeeName: `${registration.firstName} ${registration.lastName}`,
+                    organization: registration.organization || "",
+                    designation: registration.designation || "",
+                    passTitle: resolvePassTitle(registration.passType, conferenceSlug),
+                    passType: registration.passType,
+                    ticketNumber,
+                });
+            } catch (pdfErr) {
+                console.error("Failed to generate Bangalore pass PDF:", pdfErr);
+            }
+        }
+
+        // Send confirmation email
         try {
             const emailResult = await sendDelegateConfirmationEmail({
                 firstName: registration.firstName,
@@ -100,6 +132,7 @@ export async function POST(request: NextRequest) {
                 ticketNumber: registration.ticketNumber,
                 ticketId: registration.ticketId,
                 conferenceSlug: registration.conferenceSlug || "",
+                bangalorePassPdf: bangalorePassPdf ?? undefined,
             });
 
             if (emailResult.success) {
@@ -109,7 +142,7 @@ export async function POST(request: NextRequest) {
                 });
             }
         } catch (emailError) {
-            console.error("Failed to send initial confirmation email:", emailError);
+            console.error("Failed to send confirmation email:", emailError);
         }
 
         return NextResponse.json({
