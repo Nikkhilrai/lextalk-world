@@ -51,19 +51,32 @@ export function BangaloreSponsor() {
                     </div>
 
                     {/* Diamond Sponsors */}
-                    <div className="flex flex-col items-center flex-1 max-w-sm">
-                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsor</h4>
+                    <div className="flex flex-col items-center flex-1">
+                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsors</h4>
+                        <div className="flex flex-wrap justify-center gap-6 w-full">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="w-full bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                                className="w-full max-w-[260px] bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                             >
                                 <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
                                     <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
                                 </a>
                             </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.1 }}
+                                className="w-full max-w-[260px] bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            >
+                                <a href="https://home.lexcorp.org.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
+                                    <Image src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" alt="Lex Corp" fill className="object-contain mix-blend-multiply" />
+                                </a>
+                            </motion.div>
                         </div>
+                    </div>
 
                 </div>
 
