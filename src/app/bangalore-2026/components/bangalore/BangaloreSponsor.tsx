@@ -11,7 +11,7 @@ export function BangaloreSponsor() {
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-amber-500/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
             <div className="container mx-auto px-4 relative z-10">
-                {/* Header - Premium Style */}
+                {/* Header */}
                 <div className="text-center mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -32,56 +32,51 @@ export function BangaloreSponsor() {
                     </motion.div>
                 </div>
 
+                {/* Platinum Sponsor — full row */}
+                <div className="flex flex-col items-center mb-16">
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="w-full max-w-xs bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                    >
+                        <a href="https://www.amadi.io/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
+                            <Image src="/dubai-event/sponsors/Amadi.jpg" alt="Amadi" fill className="object-contain mix-blend-multiply" />
+                        </a>
+                    </motion.div>
+                </div>
 
-                {/* Centered container for two tiers */}
-                <div className="flex flex-col md:flex-row justify-center gap-12 max-w-4xl mx-auto">
-                    {/* Platinum */}
-                    <div className="flex flex-col items-center flex-1 max-w-sm">
-                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
+                {/* Diamond Sponsors — two logos side by side */}
+                <div className="flex flex-col items-center mb-16">
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsors</h4>
+                    <div className="flex flex-row flex-wrap justify-center gap-6">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="w-full bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                         >
-                            <a href="https://www.amadi.io/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                <Image src="/dubai-event/sponsors/Amadi.jpg" alt="Amadi" fill className="object-contain mix-blend-multiply" />
+                            <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
+                                <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
+                            </a>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                        >
+                            <a href="https://home.lexcorp.org.in/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
+                                <Image src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" alt="Lex Corp" fill className="object-contain mix-blend-multiply" />
                             </a>
                         </motion.div>
                     </div>
-
-                    {/* Diamond Sponsors */}
-                    <div className="flex flex-col items-center flex-1">
-                        <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsors</h4>
-                        <div className="flex flex-wrap justify-center gap-6 w-full">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="w-full max-w-[260px] bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
-                            >
-                                <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                    <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
-                                </a>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="w-full max-w-[260px] bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
-                            >
-                                <a href="https://home.lexcorp.org.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                    <Image src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" alt="Lex Corp" fill className="object-contain mix-blend-multiply" />
-                                </a>
-                            </motion.div>
-                        </div>
-                    </div>
-
                 </div>
 
                 {/* Venue Partner */}
-                <div className="flex flex-col items-center mt-16">
+                <div className="flex flex-col items-center mt-4">
                     <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
