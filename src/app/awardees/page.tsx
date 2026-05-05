@@ -29,7 +29,7 @@ const STATIC_EVENTS: AwardEvent[] = [
         id: "static-india-2025",
         name: "Awardees New Delhi, India – 2025",
         slug: "awardees-india-2025",
-        customHref: "https://lextalk.world/new-delhi-2025/",
+        customHref: "https://lextalk.world/awardees-india-2025/",
         location: "New Delhi, India",
         year: 2025,
         image: "https://images.unsplash.com/photo-1597040663342-45b6af3d91a5?q=80&w=800&auto=format&fit=crop",
