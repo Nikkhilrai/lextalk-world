@@ -40,6 +40,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             hasDropdown: true,
             dropdownItems: [
                 { name: "Upcoming Conferences", href: "/conferences" },
+                { name: "Past Conferences", href: "/conferences#past" },
             ]
         },
         { name: "Awardees", href: "/awardees" },
