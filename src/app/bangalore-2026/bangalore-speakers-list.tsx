@@ -8,6 +8,11 @@ import { X, Calendar, MessageCircle } from "lucide-react";
 // Bangalore speakers - Updated with actual information
 const speakers: any[] = [
     {
+        name: "Dr. Lalit Bhasin",
+        title: "President, Society of Indian Law Firms, India",
+        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
+    },
+    {
         name: "Jaya Kathju",
         title: "Associate Director – Legal, Eli Lilly",
         image: "/bangalore-2026/speakers-images/Jaya-Kathju.png",
@@ -149,11 +154,6 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
         name: "Sushma Shankar",
         title: "Vice President - Legal, Accenture",
         image: "/bangalore-2026/speakers-images/sushma_shankar.png",
-    },
-    {
-        name: "Dr. Lalit Bhasin",
-        title: "President, Society of Indian Law Firms, India",
-        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
     }
 ];
 
