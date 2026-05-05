@@ -16,7 +16,7 @@ const pastConferences = [
         venue: "Dubai, UAE",
         image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
         stats: { people: "500+", speakers: "50+", awardees: "80+", countries: "20+" },
-        link: "https://lextalk.world/past-conferences/",
+        link: "https://lextalk.world/dubai-2021/",
     },
     {
         year: "2022",
@@ -27,7 +27,7 @@ const pastConferences = [
         venue: "Dubai, UAE",
         image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop",
         stats: { people: "700+", speakers: "60+", awardees: "100+", countries: "22+" },
-        link: "https://lextalk.world/past-conferences/",
+        link: "https://lextalk.world/dubai-2022/",
     },
     {
         year: "2022",
@@ -38,7 +38,7 @@ const pastConferences = [
         venue: "Singapore",
         image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=1200&auto=format&fit=crop",
         stats: { people: "500+", speakers: "50+", awardees: "70+", countries: "18+" },
-        link: "https://lextalk.world/past-conferences/",
+        link: "https://lextalk.world/singapore-2022/",
     },
     {
         year: "2023",
@@ -71,7 +71,7 @@ const pastConferences = [
         venue: "Holiday Inn Orchard City Centre, Singapore",
         image: "https://lextalk.world/wp-content/uploads/2026/01/4-1-1024x554.jpg",
         stats: { people: "500+", speakers: "50+", awardees: "70+", countries: "20+" },
-        link: "https://lextalk.world/awardees/awardees-singapore-2024/",
+        link: "https://lextalk.world/awardees-singapore-2024/",
     },
     {
         year: "2024",
@@ -99,14 +99,6 @@ const pastConferences = [
 
 const years = [...new Set(pastConferences.map(c => c.year))];
 
-const aggregateStats = [
-    { value: "8", label: "Conferences" },
-    { value: "5+", label: "Countries" },
-    { value: "4,600+", label: "Attendees" },
-    { value: "510+", label: "Speakers" },
-    { value: "770+", label: "Awardees" },
-];
-
 export default function PastConferencesPage() {
     return (
         <main className="min-h-screen bg-slate-50">
@@ -130,24 +122,9 @@ export default function PastConferencesPage() {
                                 Conferences
                             </span>
                         </h1>
-                        <p className="text-slate-500 text-lg max-w-xl mx-auto leading-relaxed mb-12">
-                            A legacy of landmark legal gatherings across the region's most influential cities — from Dubai to New Delhi to Singapore.
+                        <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                            The Premier Legal Conference successfully united legal visionaries and innovators, delivering forward-thinking insights and meaningful connections that shaped the future of legal knowledge.
                         </p>
-
-                        <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-                            {aggregateStats.map((s, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 16 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.15 + i * 0.07 }}
-                                    className="text-center px-6 py-4 bg-white rounded-2xl border border-slate-100 shadow-sm"
-                                >
-                                    <div className="text-3xl md:text-4xl font-serif font-bold text-amber-500">{s.value}</div>
-                                    <div className="text-slate-500 text-xs uppercase tracking-widest mt-1">{s.label}</div>
-                                </motion.div>
-                            ))}
-                        </div>
                     </motion.div>
                 </div>
 
@@ -173,9 +150,7 @@ export default function PastConferencesPage() {
                                         <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30 flex-shrink-0">
                                             <span className="text-white text-xs font-black">{year.slice(2)}</span>
                                         </div>
-                                        <div>
-                                            <span className="text-2xl md:text-3xl font-serif font-bold text-slate-900">{year}</span>
-                                        </div>
+                                        <span className="text-2xl md:text-3xl font-serif font-bold text-slate-900">{year}</span>
                                         <div className="flex-1 h-px bg-gradient-to-r from-amber-200 to-transparent ml-2" />
                                     </motion.div>
 
@@ -258,24 +233,6 @@ export default function PastConferencesPage() {
                             );
                         })}
                     </div>
-
-                    {/* View all CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="mt-20 text-center"
-                    >
-                        <a
-                            href="https://lextalk.world/past-conferences/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white border border-slate-200 rounded-full text-slate-700 text-sm font-semibold hover:border-amber-400 hover:text-amber-600 hover:shadow-md transition-all duration-300"
-                        >
-                            View all on lextalk.world
-                            <ArrowUpRight size={15} />
-                        </a>
-                    </motion.div>
                 </div>
             </section>
 
