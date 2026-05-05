@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, MessageCircle } from "lucide-react";
 
-// Bangalore speakers - Updated with actual information
+// Bangalore speakers - Updated with actual information - Force Rebuild
 const speakers: any[] = [
     {
         name: "Dr. Lalit Bhasin",
