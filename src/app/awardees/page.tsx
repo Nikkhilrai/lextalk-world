@@ -26,15 +26,72 @@ interface AwardEvent {
 
 const STATIC_EVENTS: AwardEvent[] = [
     {
+        id: "static-india-2025",
+        name: "Awardees New Delhi, India – 2025",
+        slug: "awardees-india-2025",
+        customHref: "https://lextalk.world/new-delhi-2025/",
+        location: "New Delhi, India",
+        year: 2025,
+        image: "https://images.unsplash.com/photo-1597040663342-45b6af3d91a5?q=80&w=800&auto=format&fit=crop",
+        description: null,
+        date: "26–27 May 2025",
+        fullLocation: "Le Méridien, Windsor Place, New Delhi",
+        stats: [
+            { label: "People", value: "600+" },
+            { label: "Speaker", value: "100+" },
+            { label: "Awardee", value: "30+" },
+            { label: "Exhibitors", value: "10+" },
+            { label: "Countries", value: "15+" },
+        ],
+    },
+    {
+        id: "static-singapore-2024",
+        name: "Awardees Singapore – 2024",
+        slug: "awardees-singapore-2024",
+        customHref: "https://lextalk.world/awardees/awardees-singapore-2024/",
+        location: "Singapore",
+        year: 2024,
+        image: "https://lextalk.world/wp-content/uploads/2026/01/4-1-1024x554.jpg",
+        description: null,
+        date: "18–19 July 2024",
+        fullLocation: "Holiday Inn Orchard City Centre, Singapore",
+        stats: [
+            { label: "People", value: "500+" },
+            { label: "Speaker", value: "50+" },
+            { label: "Awardee", value: "70+" },
+            { label: "Exhibitors", value: "10+" },
+            { label: "Countries", value: "20+" },
+        ],
+    },
+    {
+        id: "static-india-2024",
+        name: "Awardees New Delhi, India – 2024",
+        slug: "awardees-india-2024",
+        customHref: "https://lextalk.world/india-2024/",
+        location: "New Delhi, India",
+        year: 2024,
+        image: "https://lextalk.world/wp-content/uploads/2026/01/India-1024x554.png",
+        description: null,
+        date: "6–7 March 2024",
+        fullLocation: "Le Méridien, Windsor Place, New Delhi",
+        stats: [
+            { label: "People", value: "1000+" },
+            { label: "Speaker", value: "80+" },
+            { label: "Awardee", value: "150+" },
+            { label: "Exhibitors", value: "20+" },
+            { label: "Countries", value: "25+" },
+        ],
+    },
+    {
         id: "static-dubai-2024",
-        name: "Awardees-dubai-2024",
+        name: "Awardees Dubai, UAE – 2024",
         slug: "awardees-dubai-2024",
         customHref: "/awardees/awardees-dubai-2024",
         location: "Dubai, UAE",
         year: 2024,
         image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
         description: null,
-        date: "28-29 November 2024",
+        date: "28–29 November 2024",
         fullLocation: "Crowne Plaza, Dubai-Deira, UAE",
         stats: [
             { label: "People", value: "500+" },
@@ -45,15 +102,72 @@ const STATIC_EVENTS: AwardEvent[] = [
         ],
     },
     {
+        id: "static-dubai-2023",
+        name: "Awardees Dubai, UAE – 2023",
+        slug: "awardees-dubai-2023",
+        customHref: "https://lextalk.world/awardees-dubai-2023/",
+        location: "Dubai, UAE",
+        year: 2023,
+        image: "https://lextalk.world/wp-content/uploads/2026/01/Dubai-1-1024x554.jpg",
+        description: null,
+        date: "24–25 May 2023",
+        fullLocation: "Millennium Plaza Downtown Hotel, Dubai, UAE",
+        stats: [
+            { label: "People", value: "1000+" },
+            { label: "Speaker", value: "80+" },
+            { label: "Awardee", value: "200+" },
+            { label: "Exhibitors", value: "20+" },
+            { label: "Countries", value: "25+" },
+        ],
+    },
+    {
+        id: "static-singapore-2022",
+        name: "Awardees Singapore – 2022",
+        slug: "awardees-singapore-2022",
+        customHref: "https://lextalk.world/awardees-singapore-2022/",
+        location: "Singapore",
+        year: 2022,
+        image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop",
+        description: null,
+        date: "23–24 November 2022",
+        fullLocation: "Singapore",
+        stats: [
+            { label: "People", value: "500+" },
+            { label: "Speaker", value: "50+" },
+            { label: "Awardee", value: "70+" },
+            { label: "Exhibitors", value: "10+" },
+            { label: "Countries", value: "18+" },
+        ],
+    },
+    {
+        id: "static-dubai-2022",
+        name: "Awardees Dubai, UAE – 2022",
+        slug: "awardees-dubai-2022",
+        customHref: "https://lextalk.world/awardees-dubai-2022/",
+        location: "Dubai, UAE",
+        year: 2022,
+        image: "https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?q=80&w=800&auto=format&fit=crop",
+        description: null,
+        date: "24–25 March 2022",
+        fullLocation: "Millennium Plaza Downtown Hotel, Dubai, UAE",
+        stats: [
+            { label: "People", value: "700+" },
+            { label: "Speaker", value: "60+" },
+            { label: "Awardee", value: "100+" },
+            { label: "Exhibitors", value: "15+" },
+            { label: "Countries", value: "22+" },
+        ],
+    },
+    {
         id: "static-dubai-2021",
-        name: "Awardees Dubai, UAE -2021",
+        name: "Awardees Dubai, UAE – 2021",
         slug: "awardees-dubai-2021",
         customHref: "/awardees-dubai-2021",
         location: "Dubai, UAE",
         year: 2021,
         image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&auto=format&fit=crop",
         description: null,
-        date: "7 & 8 April 2021",
+        date: "7–8 April 2021",
         fullLocation: "Millennium Plaza Downtown Hotel, Dubai, UAE",
         stats: [
             { label: "People", value: "500+" },
@@ -62,7 +176,7 @@ const STATIC_EVENTS: AwardEvent[] = [
             { label: "Exhibitors", value: "20+" },
             { label: "Countries", value: "25+" },
         ],
-    }
+    },
 ];
 
 export default function AwardeesPage() {
@@ -170,10 +284,15 @@ export default function AwardeesPage() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                            {filteredEvents.map((event) => (
+                            {filteredEvents.map((event) => {
+                                const href = event.customHref || `/awardees/${event.slug}`;
+                                const isExternal = href.startsWith("http");
+                                return (
                                 <Link
                                     key={event.id}
-                                    href={event.customHref || `/awardees/${event.slug}`}
+                                    href={href}
+                                    target={isExternal ? "_blank" : undefined}
+                                    rel={isExternal ? "noopener noreferrer" : undefined}
                                     className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-amber-500/5"
                                 >
                                     {/* Image Container - Larger Image */}
@@ -241,7 +360,8 @@ export default function AwardeesPage() {
                                         </div>
                                     </div>
                                 </Link>
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
                 </div>
