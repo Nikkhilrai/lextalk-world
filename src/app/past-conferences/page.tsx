@@ -101,102 +101,140 @@ const years = [...new Set(pastConferences.map(c => c.year))];
 
 export default function PastConferencesPage() {
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen bg-white">
             <Navbar variant="light" />
 
-            {/* Hero */}
-            <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-white overflow-hidden">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-50 rounded-full blur-[120px] opacity-60 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-100 rounded-full blur-[100px] opacity-50 pointer-events-none" />
+            {/* ── Hero ── */}
+            <section className="relative pt-36 pb-20 md:pt-44 md:pb-24 overflow-hidden bg-white">
+                {/* Subtle dot pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.035]"
+                    style={{ backgroundImage: 'radial-gradient(circle, #1e293b 1px, transparent 1px)', backgroundSize: '28px 28px' }}
+                />
+                {/* Amber glow top-right */}
+                <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-amber-100 rounded-full blur-[140px] opacity-70 pointer-events-none" />
 
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-                        <div className="inline-flex items-center gap-2 px-5 py-2 bg-amber-50 border border-amber-200 rounded-full mb-6">
-                            <Globe size={13} className="text-amber-600" />
-                            <span className="text-amber-700 text-xs font-bold tracking-[0.2em] uppercase">Asia &amp; Middle East</span>
-                        </div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                            {/* Eyebrow pill */}
+                            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-amber-200 bg-amber-50 mb-8">
+                                <Globe size={12} className="text-amber-600" />
+                                <span className="text-amber-700 text-[11px] font-bold tracking-[0.22em] uppercase">Asia &amp; Middle East</span>
+                            </div>
 
-                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-slate-900 mb-5 leading-tight">
-                            Past{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600">
-                                Conferences
-                            </span>
-                        </h1>
-                        <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
-                            The Premier Legal Conference successfully united legal visionaries and innovators, delivering forward-thinking insights and meaningful connections that shaped the future of legal knowledge.
-                        </p>
-                    </motion.div>
+                            <h1 className="text-5xl md:text-[72px] font-serif font-bold leading-tight text-slate-900 mb-6">
+                                Past{" "}
+                                <span className="relative inline-block">
+                                    <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">
+                                        Conferences
+                                    </span>
+                                    {/* Underline accent */}
+                                    <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-400 to-amber-200 rounded-full" />
+                                </span>
+                            </h1>
+
+                            <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
+                                The Premier Legal Conference successfully united legal visionaries and innovators, delivering forward-thinking insights and meaningful connections that shaped the future of legal knowledge.
+                            </p>
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-100" />
+                {/* Bottom separator */}
+                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center pb-0">
+                    <div className="w-full h-px bg-slate-100" />
+                </div>
             </section>
 
-            {/* Conference Cards */}
-            <section className="py-16 md:py-24">
+            {/* ── Conference Cards ── */}
+            <section className="py-20 md:py-28 bg-slate-50">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <div className="space-y-16">
-                        {years.map((year) => {
+                    <div className="space-y-20">
+                        {years.map((year, yi) => {
                             const yearConfs = pastConferences.filter(c => c.year === year);
                             return (
                                 <div key={year}>
                                     {/* Year marker */}
                                     <motion.div
-                                        initial={{ opacity: 0, x: -20 }}
+                                        initial={{ opacity: 0, x: -24 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.5 }}
-                                        className="flex items-center gap-4 mb-8"
+                                        className="relative flex items-center gap-5 mb-10 overflow-hidden"
                                     >
-                                        <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30 flex-shrink-0">
-                                            <span className="text-white text-xs font-black">{year.slice(2)}</span>
+                                        {/* Faint large year watermark */}
+                                        <span className="absolute -left-2 text-[100px] md:text-[120px] font-serif font-black text-slate-900/[0.04] leading-none select-none pointer-events-none">
+                                            {year}
+                                        </span>
+
+                                        <div className="relative z-10 flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/25 flex-shrink-0">
+                                                <span className="text-white text-sm font-black">{year.slice(2)}</span>
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.25em] mb-0.5">Year</p>
+                                                <span className="text-3xl font-serif font-bold text-slate-900">{year}</span>
+                                            </div>
                                         </div>
-                                        <span className="text-2xl md:text-3xl font-serif font-bold text-slate-900">{year}</span>
-                                        <div className="flex-1 h-px bg-gradient-to-r from-amber-200 to-transparent ml-2" />
+                                        <div className="relative z-10 flex-1 h-px bg-gradient-to-r from-amber-200 via-slate-200 to-transparent ml-2" />
+                                        <span className="relative z-10 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                            {yearConfs.length} {yearConfs.length === 1 ? "event" : "events"}
+                                        </span>
                                     </motion.div>
 
-                                    {/* Cards */}
-                                    <div className={`grid gap-6 ${yearConfs.length === 1 ? "grid-cols-1 max-w-sm" : yearConfs.length === 2 ? "grid-cols-1 md:grid-cols-2 max-w-3xl" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}>
+                                    {/* Cards grid */}
+                                    <div className={`grid gap-6 ${
+                                        yearConfs.length === 1
+                                            ? "grid-cols-1 max-w-md"
+                                            : yearConfs.length === 2
+                                            ? "grid-cols-1 md:grid-cols-2 max-w-3xl"
+                                            : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                                    }`}>
                                         {yearConfs.map((conf, ci) => (
                                             <motion.a
                                                 key={`${conf.city}-${conf.year}-${ci}`}
                                                 href={conf.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                initial={{ opacity: 0, y: 24 }}
+                                                initial={{ opacity: 0, y: 28 }}
                                                 whileInView={{ opacity: 1, y: 0 }}
                                                 viewport={{ once: true }}
-                                                transition={{ duration: 0.45, delay: ci * 0.1 }}
-                                                className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/70 hover:-translate-y-1.5 transition-all duration-400 flex flex-col"
+                                                transition={{ duration: 0.5, delay: ci * 0.1 }}
+                                                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-md hover:shadow-2xl hover:shadow-slate-300/50 hover:-translate-y-2 transition-all duration-500 flex flex-col"
                                             >
+                                                {/* Amber top accent bar */}
+                                                <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300 group-hover:from-amber-500 group-hover:to-amber-400 transition-all duration-300" />
+
                                                 {/* Image */}
-                                                <div className="relative h-48 overflow-hidden">
+                                                <div className="relative h-52 overflow-hidden">
                                                     <Image
                                                         src={conf.image}
                                                         alt={`${conf.city} ${conf.year}`}
                                                         fill
-                                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                                        className="object-cover transition-transform duration-700 group-hover:scale-108 brightness-95 group-hover:brightness-100"
                                                     />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
 
-                                                    {/* Hover arrow */}
-                                                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg translate-y-1 group-hover:translate-y-0">
-                                                        <ArrowUpRight size={14} className="text-white" />
+                                                    {/* Hover arrow button */}
+                                                    <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                                        <ArrowUpRight size={15} className="text-amber-600" />
                                                     </div>
 
-                                                    {/* Past badge */}
-                                                    <div className="absolute top-3 left-3">
-                                                        <span className="px-2.5 py-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-[9px] font-bold text-white uppercase tracking-[0.15em]">
+                                                    {/* Past Event pill */}
+                                                    <div className="absolute top-4 left-4">
+                                                        <span className="px-3 py-1 bg-black/30 backdrop-blur-sm border border-white/20 rounded-full text-[9px] font-bold text-white/90 uppercase tracking-[0.18em]">
                                                             Past Event
                                                         </span>
                                                     </div>
 
-                                                    {/* City overlay */}
-                                                    <div className="absolute bottom-4 left-4">
-                                                        <div className="flex items-center gap-1 mb-1">
-                                                            <MapPin size={10} className="text-amber-400" />
-                                                            <span className="text-amber-400 text-[10px] font-bold uppercase tracking-wider">{conf.country}</span>
+                                                    {/* City name overlay */}
+                                                    <div className="absolute bottom-4 left-5">
+                                                        <div className="flex items-center gap-1.5 mb-1">
+                                                            <MapPin size={10} className="text-amber-300" />
+                                                            <span className="text-amber-300 text-[10px] font-bold uppercase tracking-wider">{conf.country}</span>
                                                         </div>
-                                                        <h3 className="text-xl font-serif font-bold text-white leading-tight">
+                                                        <h3 className="text-2xl font-serif font-bold text-white leading-tight">
                                                             {conf.flag} {conf.city}
                                                         </h3>
                                                     </div>
@@ -204,24 +242,28 @@ export default function PastConferencesPage() {
 
                                                 {/* Card body */}
                                                 <div className="p-5 flex flex-col flex-1">
-                                                    <div className="flex items-center gap-2 mb-1">
-                                                        <Calendar size={12} className="text-amber-500 flex-shrink-0" />
-                                                        <span className="text-amber-600 text-xs font-semibold">{conf.date}</span>
+                                                    {/* Date */}
+                                                    <div className="flex items-center gap-2 mb-1.5">
+                                                        <div className="w-5 h-5 bg-amber-50 rounded-md flex items-center justify-center flex-shrink-0">
+                                                            <Calendar size={11} className="text-amber-600" />
+                                                        </div>
+                                                        <span className="text-amber-700 text-xs font-bold">{conf.date}</span>
                                                     </div>
-                                                    <p className="text-slate-500 text-xs leading-snug mb-4 pl-5">{conf.venue}</p>
+                                                    {/* Venue */}
+                                                    <p className="text-slate-400 text-xs leading-snug mb-5 pl-7">{conf.venue}</p>
 
                                                     {/* Stats */}
-                                                    <div className="mt-auto grid grid-cols-4 gap-1 pt-4 border-t border-slate-100">
+                                                    <div className="mt-auto grid grid-cols-4 divide-x divide-slate-100 pt-4 border-t border-slate-100">
                                                         {[
                                                             { icon: Users,  value: conf.stats.people,   label: "People" },
                                                             { icon: Mic,    value: conf.stats.speakers,  label: "Speakers" },
                                                             { icon: Award,  value: conf.stats.awardees,  label: "Awardees" },
                                                             { icon: Globe,  value: conf.stats.countries, label: "Countries" },
                                                         ].map((s, si) => (
-                                                            <div key={si} className="text-center">
+                                                            <div key={si} className="text-center px-1">
                                                                 <s.icon size={10} className="text-amber-400 mx-auto mb-1" />
                                                                 <div className="text-slate-800 text-xs font-bold">{s.value}</div>
-                                                                <div className="text-slate-400 text-[9px] uppercase tracking-wide">{s.label}</div>
+                                                                <div className="text-slate-400 text-[9px] uppercase tracking-wide leading-tight">{s.label}</div>
                                                             </div>
                                                         ))}
                                                     </div>
