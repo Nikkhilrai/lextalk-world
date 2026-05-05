@@ -90,6 +90,21 @@ export function BangaloreSponsor() {
                     </motion.div>
                 </div>
 
+                {/* Premium Exhibitor */}
+                <div className="flex flex-col items-center mb-16">
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Premium Exhibitor</h4>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                    >
+                        <a href="https://presolv360.com/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
+                            <Image src="/bangalore-2026/Sponsor/presolv360.jpeg" alt="Presolv360" fill className="object-contain mix-blend-multiply" />
+                        </a>
+                    </motion.div>
+                </div>
+
                 {/* Venue Partner */}
                 <div className="flex flex-col items-center mt-4">
                     <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
