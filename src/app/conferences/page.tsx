@@ -9,6 +9,7 @@ import {
     Calendar, MapPin, Users, Clock, ArrowRight, ExternalLink,
     Globe, Award, Mic, BookOpen, Sparkles, Star
 } from "lucide-react";
+import { PastConferencesSection } from "@/components/PastConferencesSection";
 
 const upcomingConferences = [
     {
@@ -322,6 +323,8 @@ export default function ConferencesPage() {
                     </div>
                 </div>
             </section>
+
+            <PastConferencesSection />
 
             {/* CTA Section */}
             <section className="py-16 md:py-20 bg-gradient-to-r from-slate-900 to-slate-800">

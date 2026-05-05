@@ -23,6 +23,10 @@ const nextConfig: any = {
         protocol: "https",
         hostname: "img.youtube.com",
       },
+      {
+        protocol: "https",
+        hostname: "lextalk.world",
+      },
     ],
   },
   eslint: {
