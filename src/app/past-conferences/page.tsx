@@ -178,9 +178,6 @@ export default function PastConferencesPage() {
                                             </div>
                                         </div>
                                         <div className="relative z-10 flex-1 h-px bg-gradient-to-r from-amber-200 via-slate-200 to-transparent ml-2" />
-                                        <span className="relative z-10 text-xs font-bold text-slate-400 uppercase tracking-widest">
-                                            {yearConfs.length} {yearConfs.length === 1 ? "event" : "events"}
-                                        </span>
                                     </motion.div>
 
                                     {/* Cards grid */}
