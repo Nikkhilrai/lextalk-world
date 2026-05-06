@@ -23,7 +23,7 @@ const tiers = [
         label: "Gold Sponsor",
         accent: "from-amber-200 via-amber-400 to-amber-200",
         sponsors: [
-            { name: "ASG Partners", logo: "/dubai-event/sponsors/AsgandPartnerlogo.jpeg", href: "https://asgpartners.co.in/", w: 460, h: 200 },
+            { name: "ASG Partners", logo: "/dubai-event/sponsors/AsgandPartnerlogo.jpeg", href: "https://asgpartners.co.in/", w: 260, h: 130 },
         ],
     },
     {
@@ -37,7 +37,7 @@ const tiers = [
         label: "Venue Partner",
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
-            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 480, h: 200 },
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
         ],
     },
 ];
@@ -89,7 +89,7 @@ export function BangaloreSponsor() {
                             {/* Tier label with ruled lines */}
                             <div className="flex items-center gap-4 w-full max-w-lg mb-12">
                                 <div className={`flex-1 h-[1px] bg-gradient-to-r ${tier.accent}`} />
-                                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 whitespace-nowrap">
+                                <span className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-slate-600 whitespace-nowrap">
                                     {tier.label}
                                 </span>
                                 <div className={`flex-1 h-[1px] bg-gradient-to-l ${tier.accent}`} />
@@ -126,24 +126,6 @@ export function BangaloreSponsor() {
                     ))}
                 </div>
 
-                {/* CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="mt-28 text-center"
-                >
-                    <div className="inline-flex flex-col items-center gap-5">
-                        <p className="text-slate-400 text-sm italic">Interested in becoming a sponsor or exhibitor?</p>
-                        <a
-                            href="/sponsor"
-                            className="inline-flex items-center gap-2.5 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm tracking-wide rounded-xl transition-all shadow-lg shadow-amber-900/15 hover:shadow-amber-900/25"
-                        >
-                            Become a Sponsor
-                        </a>
-                    </div>
-                </motion.div>
 
             </div>
         </section>
