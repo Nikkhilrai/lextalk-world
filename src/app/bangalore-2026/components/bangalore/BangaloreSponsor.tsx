@@ -3,125 +3,147 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const tiers = [
+    {
+        label: "Platinum Sponsor",
+        accent: "from-slate-300 via-slate-400 to-slate-300",
+        sponsors: [
+            { name: "Amadi", logo: "/dubai-event/sponsors/Amadi.jpg", href: "https://www.amadi.io/", w: 260, h: 130 },
+        ],
+    },
+    {
+        label: "Diamond Sponsors",
+        accent: "from-sky-200 via-sky-400 to-sky-200",
+        sponsors: [
+            { name: "Case Docker", logo: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/", w: 220, h: 110 },
+            { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp", href: "https://home.lexcorp.org.in/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Gold Sponsor",
+        accent: "from-amber-200 via-amber-400 to-amber-200",
+        sponsors: [
+            { name: "ASG Partners", logo: "/dubai-event/sponsors/AsgandPartnerlogo.jpeg", href: "https://asgpartners.co.in/", w: 460, h: 200 },
+        ],
+    },
+    {
+        label: "Premium Exhibitor",
+        accent: "from-slate-200 via-slate-300 to-slate-200",
+        sponsors: [
+            { name: "Presolv360", logo: "/bangalore-2026/Sponsor/presolv360.jpeg", href: "https://presolv360.com/", w: 300, h: 140 },
+        ],
+    },
+    {
+        label: "Venue Partner",
+        accent: "from-slate-200 via-slate-300 to-slate-200",
+        sponsors: [
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 480, h: 200 },
+        ],
+    },
+];
+
 export function BangaloreSponsor() {
     return (
-        <section id="sponsors" className="relative py-24 md:py-32 bg-white overflow-hidden">
-            {/* Background Decor */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-amber-500/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+        <section id="sponsors" className="relative py-24 md:py-36 bg-white overflow-hidden">
+            {/* Subtle ambient glow */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/4 to-transparent rounded-full blur-3xl -translate-y-1/3 translate-x-1/4 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-amber-500/4 to-transparent rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
 
-            <div className="container mx-auto px-4 relative z-10">
-                {/* Header */}
-                <div className="text-center mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <span className="text-amber-600 font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3 block">
-                            Our Strategic Partners
-                        </span>
-                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6">
-                            Sponsors
-                        </h2>
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400" />
-                            <div className="w-2 h-2 rounded-full bg-amber-500" />
-                            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400" />
-                        </div>
-                    </motion.div>
-                </div>
+            <div className="container mx-auto px-4 relative z-10 max-w-5xl">
 
-                {/* Platinum Sponsor — full row */}
-                <div className="flex flex-col items-center mb-16">
-                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Platinum Sponsor</h4>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="w-full max-w-xs flex items-center justify-center"
-                    >
-                        <a href="https://www.amadi.io/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                            <Image src="/dubai-event/sponsors/Amadi.jpg" alt="Amadi" fill className="object-contain mix-blend-multiply" />
-                        </a>
-                    </motion.div>
-                </div>
-
-                {/* Diamond Sponsors — two logos side by side */}
-                <div className="flex flex-col items-center mb-16">
-                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Diamond Sponsors</h4>
-                    <div className="flex flex-row flex-wrap justify-center gap-12">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="w-[220px] h-[130px] flex items-center justify-center"
-                        >
-                            <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
-                                <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
-                            </a>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="w-[220px] h-[130px] flex items-center justify-center"
-                        >
-                            <a href="https://home.lexcorp.org.in/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
-                                <Image src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" alt="Lex Corp" fill className="object-contain mix-blend-multiply" />
-                            </a>
-                        </motion.div>
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-24"
+                >
+                    <span className="text-amber-600 font-bold tracking-[0.35em] text-xs md:text-sm uppercase mb-4 block">
+                        Our Strategic Partners
+                    </span>
+                    <h2 className="text-5xl md:text-7xl font-serif font-bold text-slate-900 mb-6 tracking-tight">
+                        Sponsors
+                    </h2>
+                    <div className="flex items-center justify-center gap-3 mb-5">
+                        <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-amber-400" />
+                        <div className="w-2 h-2 rounded-full bg-amber-500" />
+                        <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-amber-400" />
                     </div>
+                    <p className="text-slate-400 text-sm md:text-base font-light max-w-md mx-auto">
+                        We are proud to partner with leading organisations that share our commitment to the legal community.
+                    </p>
+                </motion.div>
+
+                {/* Tiers */}
+                <div className="flex flex-col gap-20">
+                    {tiers.map((tier, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-60px" }}
+                            transition={{ duration: 0.5, delay: i * 0.07 }}
+                            className="flex flex-col items-center"
+                        >
+                            {/* Tier label with ruled lines */}
+                            <div className="flex items-center gap-4 w-full max-w-lg mb-12">
+                                <div className={`flex-1 h-[1px] bg-gradient-to-r ${tier.accent}`} />
+                                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 whitespace-nowrap">
+                                    {tier.label}
+                                </span>
+                                <div className={`flex-1 h-[1px] bg-gradient-to-l ${tier.accent}`} />
+                            </div>
+
+                            {/* Logos */}
+                            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                                {tier.sponsors.map((s, j) => {
+                                    const img = (
+                                        <Image
+                                            src={s.logo}
+                                            alt={s.name}
+                                            width={s.w}
+                                            height={s.h}
+                                            className="object-contain mix-blend-multiply"
+                                        />
+                                    );
+                                    return (
+                                        <motion.div
+                                            key={j}
+                                            whileHover={{ scale: 1.04 }}
+                                            transition={{ duration: 0.25 }}
+                                        >
+                                            {s.href ? (
+                                                <a href={s.href} target="_blank" rel="noopener noreferrer">
+                                                    {img}
+                                                </a>
+                                            ) : img}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
 
-                {/* Gold Sponsor */}
-                <div className="flex flex-col items-center mb-16">
-                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Gold Sponsor</h4>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="w-full max-w-lg flex items-center justify-center"
-                    >
-                        <a href="https://asgpartners.co.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                            <Image src="/dubai-event/sponsors/AsgandPartnerlogo.jpeg" alt="ASG Partners" fill className="object-contain mix-blend-multiply" />
+                {/* CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="mt-28 text-center"
+                >
+                    <div className="inline-flex flex-col items-center gap-5">
+                        <p className="text-slate-400 text-sm italic">Interested in becoming a sponsor or exhibitor?</p>
+                        <a
+                            href="/sponsor"
+                            className="inline-flex items-center gap-2.5 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm tracking-wide rounded-xl transition-all shadow-lg shadow-amber-900/15 hover:shadow-amber-900/25"
+                        >
+                            Become a Sponsor
                         </a>
-                    </motion.div>
-                </div>
-
-                {/* Premium Exhibitor */}
-                <div className="flex flex-col items-center mb-16">
-                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Premium Exhibitor</h4>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="w-full max-w-sm flex items-center justify-center"
-                    >
-                        <a href="https://presolv360.com/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                            <Image src="/bangalore-2026/Sponsor/presolv360.jpeg" alt="Presolv360" fill className="object-contain mix-blend-multiply" />
-                        </a>
-                    </motion.div>
-                </div>
-
-                {/* Venue Partner */}
-                <div className="flex flex-col items-center mt-4">
-                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-[0.2em] mb-8">Venue Partner</h4>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center justify-center"
-                    >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
-                            alt="Radisson Blu Atria Bangalore"
-                            className="w-96 h-44 object-contain mix-blend-multiply"
-                        />
-                    </motion.div>
-                </div>
+                    </div>
+                </motion.div>
 
             </div>
         </section>
