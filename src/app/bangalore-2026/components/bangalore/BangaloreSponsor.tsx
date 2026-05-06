@@ -39,7 +39,7 @@ export function BangaloreSponsor() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="w-full max-w-xs bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                        className="w-full max-w-xs bg-slate-50/50 rounded-2xl p-6 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                     >
                         <a href="https://www.amadi.io/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
                             <Image src="/dubai-event/sponsors/Amadi.jpg" alt="Amadi" fill className="object-contain mix-blend-multiply" />
@@ -55,7 +55,7 @@ export function BangaloreSponsor() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                         >
                             <a href="https://www.casedocker.com/landing/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
                                 <Image src="/dubai-event/sponsors/CasedockerLogo.avif" alt="Case Docker" fill className="object-contain mix-blend-multiply" />
@@ -66,7 +66,7 @@ export function BangaloreSponsor() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            className="w-[220px] h-[130px] bg-slate-50/50 rounded-2xl p-5 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                         >
                             <a href="https://home.lexcorp.org.in/" target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
                                 <Image src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp" alt="Lex Corp" fill className="object-contain mix-blend-multiply" />
@@ -82,7 +82,7 @@ export function BangaloreSponsor() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                        className="w-full max-w-lg bg-slate-50/50 rounded-2xl p-6 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                     >
                         <a href="https://asgpartners.co.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
                             <Image src="/dubai-event/sponsors/AsgandPartnerlogo.jpeg" alt="ASG Partners" fill className="object-contain mix-blend-multiply" />
@@ -97,7 +97,7 @@ export function BangaloreSponsor() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                        className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                     >
                         <a href="https://presolv360.com/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
                             <Image src="/bangalore-2026/Sponsor/presolv360.jpeg" alt="Presolv360" fill className="object-contain mix-blend-multiply" />
@@ -112,13 +112,13 @@ export function BangaloreSponsor() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-slate-50/50 rounded-xl p-4 border border-slate-100/50 flex items-center justify-center hover:bg-white hover:shadow-md transition-all duration-300 w-full max-w-sm"
+                        className="bg-slate-50/50 rounded-xl p-4 flex items-center justify-center hover:bg-white hover:shadow-md transition-all duration-300 w-full max-w-md"
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
                             alt="Radisson Blu Atria Bangalore"
-                            className="w-72 h-32 object-contain mix-blend-multiply"
+                            className="w-96 h-44 object-contain mix-blend-multiply"
                         />
                     </motion.div>
                 </div>
