@@ -9,7 +9,7 @@ import { X, Calendar, MessageCircle } from "lucide-react";
 const speakers: any[] = [
     {
         name: "Shri. G. Sridhar",
-        title: "Secretary to Government, Parliamentary Affairs and Legislation, Government of Karnataka",
+        title: "Secretary to Government, Department of Parliamentary Affairs and Legislation, Government of Karnataka",
         image: "/bangalore-2026/speakers-images/Shri. G. Sridhar.jpg",
         isGuestOfHonor: true,
     },
