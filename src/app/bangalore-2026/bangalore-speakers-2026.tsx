@@ -16,7 +16,7 @@ export default function BangaloreSpeakersHero() {
     const navTabs = [
         { label: "Overview", href: "/bangalore-2026" },
         { label: "Agenda", href: "#" },
-        { label: "Awards & Recognition", href: "/bangalore-2026#awards" },
+        { label: "Awards & Recognition", href: "/awardees" },
         { label: "Sponsorship", href: "/sponsor" },
     ];
 

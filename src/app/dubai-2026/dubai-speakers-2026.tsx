@@ -17,7 +17,7 @@ export default function DubaiSpeakersHero() {
         { label: "Overview", href: "/dubai-2026" },
         { label: "Agenda", href: "/agenda" },
         { label: "Past Event Images", href: "https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93" },
-        { label: "Awards & Recognition", href: "/dubai-2026#awards" },
+        { label: "Awards & Recognition", href: "/awardees" },
         { label: "Sponsorship", href: "/sponsor" },
     ];
 
