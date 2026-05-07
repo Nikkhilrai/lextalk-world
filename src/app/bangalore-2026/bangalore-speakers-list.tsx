@@ -166,6 +166,14 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
         title: "Associate Vice President, Infosys Ltd.",
         image: "/bangalore-2026/speakers-images/Rakesh Udupi.png",
     },
+    {
+        name: "Sivaramakrishnan M.S",
+        title: "Advocate and Founder, Law Chamber of Sivaramakishnan M.S. (KPU Chambers)",
+        image: "/bangalore-2026/speakers-images/Sivaramakrishnan M.S.png",
+        bio: `Sivaramakrishnan M.S. is a Practicing Advocate running a boutique commercial litigation and advisory practice in Bangalore. He has over 15 years of experience across commercial courts, arbitration, and corporate advisory, with early practice at the Supreme Court of India.
+
+He holds a Certificate with Honours in AI & Law from Lund University and has been an active voice on the responsible adoption of AI in legal practice by designing practitioner-focused workshops and developing original frameworks on AI reliability in legal contexts. He speaks and writes on what it means to be a human-led, AI-assisted practice in an era of rapid technological change.`
+    },
 ];
 
 interface Speaker {
