@@ -163,7 +163,10 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
     }, [isProcessing, steps.length]);
 
     useEffect(() => {
-        if (!isOpen) {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
             setTimeout(() => {
                 setStep(1); setRegistrationId(null); setError(null);
                 setIsProcessing(false); setProcessStep(0);
@@ -171,6 +174,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
                 setCouponCode(""); setCouponApplied(null); setCouponError(null);
             }, 300);
         }
+        return () => { document.body.style.overflow = ""; };
     }, [isOpen]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
