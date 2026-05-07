@@ -53,7 +53,7 @@ const PASSES: PassConfig[] = [
         usdPrice: 299,
         inrPrice: 7499,
         usdOriginalPrice: 799,
-        inrOriginalPrice: 180000,
+        inrOriginalPrice: 14999,
         icon: Building2,
         color: "slate",
         features: [
