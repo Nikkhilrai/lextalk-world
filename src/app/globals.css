@@ -326,7 +326,7 @@ h6 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   line-height: 1.85;
-  text-align: left;
+  text-align: justify;
 }
 
 .blog-content h1,
@@ -348,11 +348,11 @@ h6 {
 }
 
 /* TipTap adds inline style="text-align:left" on every block.
-   We let prose control alignment; only override when editor
-   explicitly sets center/right/justify. */
+   Override so our justify default wins; only honour explicit
+   center / right / justify from the editor. */
 .blog-content [style*="text-align: left"],
 .blog-content [style*="text-align:left"] {
-  text-align: left !important;
+  text-align: justify !important;
 }
 .blog-content [style*="text-align: center"],
 .blog-content [style*="text-align:center"] {

@@ -195,8 +195,8 @@ export default async function BlogPostPage({
                 </header>
 
                 {/* ── Hero Image ─────────────────────────────────── */}
-                <div className="w-full px-4 -mt-5 md:-mt-7 mb-8 md:mb-10 relative z-10 flex justify-center">
-                    <div className="w-full max-w-4xl">
+                <div className="w-full px-4 -mt-5 md:-mt-7 mb-8 md:mb-10 relative z-10">
+                    <div className="max-w-4xl mx-auto">
                         <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl shadow-slate-200/60 dark:shadow-slate-900/60 border border-slate-100 dark:border-slate-700">
                             <Image
                                 src={post.image}
@@ -210,8 +210,8 @@ export default async function BlogPostPage({
                 </div>
 
                 {/* ── Content ────────────────────────────────────── */}
-                <div className="w-full px-4 pb-14 flex justify-center">
-                    <div className="w-full max-w-[860px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-10 lg:p-12 shadow-sm transition-colors">
+                <div className="w-full px-4 pb-14">
+                    <div className="max-w-[860px] mx-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-10 lg:p-12 shadow-sm transition-colors">
                         <div
                             className="blog-content prose prose-slate dark:prose-invert max-w-none font-sans
                                 prose-headings:font-sans prose-headings:font-bold
