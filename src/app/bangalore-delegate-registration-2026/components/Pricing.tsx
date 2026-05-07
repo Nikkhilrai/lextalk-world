@@ -18,6 +18,7 @@ declare global {
 interface PassConfig {
     id: string;
     name: string;
+    subtitle?: string;
     usdPrice: number;
     inrPrice: number;
     usdOriginalPrice?: number;
@@ -32,7 +33,7 @@ interface PassConfig {
 const PASSES: PassConfig[] = [
     {
         id: "student",
-        name: "Student Pass",
+        name: "Law Student Pass",
         usdPrice: 69,
         inrPrice: 5999,
         usdOriginalPrice: 69,
@@ -48,8 +49,30 @@ const PASSES: PassConfig[] = [
         ],
     },
     {
+        id: "delegate-vip",
+        name: "Corporate Counsel Pass",
+        usdPrice: 299,
+        inrPrice: 74999,
+        usdOriginalPrice: 799,
+        inrOriginalPrice: 180000,
+        icon: Building2,
+        badge: "VIP",
+        color: "slate",
+        features: [
+            "Full Day Conference Access",
+            "Structured Networking Sessions",
+            "Curated One-to-One Introductions",
+            "Delegate Kit + Certificate",
+            "VIP Networking Lounge",
+            "Featured Networking Introduction",
+            "Media Byte Interview",
+            "Digital Spotlight",
+        ],
+    },
+    {
         id: "delegate",
         name: "Delegate Pass",
+        subtitle: "Law Firm Partners and Individual Practitioners",
         usdPrice: 139,
         inrPrice: 12499,
         usdOriginalPrice: 399,
@@ -66,29 +89,9 @@ const PASSES: PassConfig[] = [
         ],
     },
     {
-        id: "delegate-vip",
-        name: "Delegate VIP Pass",
-        usdPrice: 299,
-        inrPrice: 24999,
-        usdOriginalPrice: 799,
-        inrOriginalPrice: 72000,
-        icon: Building2,
-        badge: "VIP",
-        color: "slate",
-        features: [
-            "Full Day Conference Access",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Delegate Kit + Certificate",
-            "VIP Networking Lounge",
-            "Featured Networking Introduction",
-            "Media Byte Interview",
-            "Digital Spotlight",
-        ],
-    },
-    {
         id: "vendor-vip",
-        name: "Vendor Pass",
+        name: "Service Provider Pass",
+        subtitle: "Legal Tech Companies, AI Assisting Companies and Consulting Firms",
         usdPrice: 599,
         inrPrice: 54999,
         usdOriginalPrice: 1999,
@@ -605,7 +608,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
 /* ═══════════════════════════════════════════════
    Pricing Section
    ═══════════════════════════════════════════════ */
-const COUPON_EXPIRY = new Date("2026-05-07T23:59:59+05:30");
+const COUPON_EXPIRY = new Date("2026-05-20T23:59:59+05:30");
 const COUPON_CODE = "EARLY30";
 
 function CouponBanner() {
@@ -692,7 +695,7 @@ function CouponBanner() {
 
             {/* Expiry note */}
             <div className="relative z-10 text-center pb-2.5 -mt-1">
-                <p className="text-[10px] text-white/70 font-semibold">Offer expires May 7, 2026 at midnight</p>
+                <p className="text-[10px] text-white/70 font-semibold">Offer expires May 20, 2026 at midnight</p>
             </div>
         </motion.div>
     );
@@ -821,7 +824,10 @@ export default function BangaloreDelegatePricing() {
                                     </div>
 
                                     <h3 className="font-serif text-xl font-bold text-slate-900 mb-1">{pass.name}</h3>
-                                    {pass.badge && !pass.isPopular && (
+                                    {pass.subtitle && (
+                                        <p className="text-[11px] text-slate-500 font-medium leading-snug mt-1">{pass.subtitle}</p>
+                                    )}
+                                    {pass.badge && !pass.isPopular && !pass.subtitle && (
                                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{pass.badge}</p>
                                     )}
 
@@ -896,7 +902,8 @@ export default function BangaloreDelegatePricing() {
                     viewport={{ once: true }}
                     className="text-center mt-10 text-xs text-slate-400 max-w-lg mx-auto leading-relaxed"
                 >
-                    All payments secured via Razorpay · Instant email confirmation · Valid student ID required at check-in for Student Pass
+                    If you require more than three passes, get in touch with our team at{" "}
+                    <a href="mailto:teams@mantranexvista.com" className="text-amber-600 hover:underline">teams@mantranexvista.com</a>
                 </motion.p>
             </div>
 
