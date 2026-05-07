@@ -39,7 +39,6 @@ const PASSES: PassConfig[] = [
         usdOriginalPrice: 69,
         inrOriginalPrice: 5999,
         icon: GraduationCap,
-        badge: "Student",
         color: "slate",
         features: [
             "Full Day Conference Access",
@@ -52,11 +51,10 @@ const PASSES: PassConfig[] = [
         id: "delegate-vip",
         name: "Corporate Counsel Pass",
         usdPrice: 299,
-        inrPrice: 74999,
+        inrPrice: 7499,
         usdOriginalPrice: 799,
         inrOriginalPrice: 180000,
         icon: Building2,
-        badge: "VIP",
         color: "slate",
         features: [
             "Full Day Conference Access",
