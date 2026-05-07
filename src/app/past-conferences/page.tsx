@@ -97,7 +97,7 @@ const pastConferences = [
     },
 ];
 
-const years = [...new Set(pastConferences.map(c => c.year))];
+const years = [...new Set(pastConferences.map(c => c.year))].sort((a, b) => Number(b) - Number(a));
 
 export default function PastConferencesPage() {
     return (
