@@ -19,7 +19,7 @@ export function BangaloreFeaturedIn() {
             <div className="container mx-auto px-4 mb-8">
                 <div className="flex items-center justify-center gap-4">
                     <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-amber-500/50"></div>
-                    <h2 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-[0.4em] whitespace-nowrap">Supporting association</h2>
+                    <h2 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-[0.4em] whitespace-nowrap">Supporting associations</h2>
                     <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-amber-500/50"></div>
                 </div>
             </div>
