@@ -5,13 +5,6 @@ import { motion } from "framer-motion";
 
 const tiers = [
     {
-        label: "Platinum Sponsor",
-        accent: "from-slate-300 via-slate-400 to-slate-300",
-        sponsors: [
-            { name: "Amadi", logo: "/dubai-event/sponsors/Amadi.jpg", href: "https://www.amadi.io/", w: 260, h: 130 },
-        ],
-    },
-    {
         label: "Diamond Sponsors",
         accent: "from-sky-200 via-sky-400 to-sky-200",
         sponsors: [
@@ -23,7 +16,7 @@ const tiers = [
         label: "Gold Sponsor",
         accent: "from-amber-200 via-amber-400 to-amber-200",
         sponsors: [
-            { name: "ASG Partners", logo: "/dubai-event/sponsors/AsgandPartnerlogo.jpeg", href: "https://asgpartners.co.in/", w: 260, h: 130 },
+            { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/", w: 260, h: 130 },
         ],
     },
     {
