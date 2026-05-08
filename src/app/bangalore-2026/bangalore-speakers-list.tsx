@@ -10,7 +10,7 @@ const speakers: any[] = [
     {
         name: "Shri. G. Sridhar",
         title: "Secretary to Government, Department of Parliamentary Affairs and Legislation, Government of Karnataka",
-        image: "/bangalore-2026/speakers-images/Shri. G. Sridhar.jpg",
+        image: "/bangalore-2026/speakers-images/Shri G. Sridhar.jpeg",
         isGuestOfHonor: true,
     },
     {
@@ -173,6 +173,12 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
         bio: `Sivaramakrishnan M.S. is a Practicing Advocate running a boutique commercial litigation and advisory practice in Bangalore. He has over 15 years of experience across commercial courts, arbitration, and corporate advisory, with early practice at the Supreme Court of India.
 
 He holds a Certificate with Honours in AI & Law from Lund University and has been an active voice on the responsible adoption of AI in legal practice by designing practitioner-focused workshops and developing original frameworks on AI reliability in legal contexts. He speaks and writes on what it means to be a human-led, AI-assisted practice in an era of rapid technological change.`
+    },
+    {
+        name: "Apoorva Achwal Sane",
+        title: "CIPP(E), CIPM, LLM, Privacy and legal professional",
+        image: "/bangalore-2026/speakers-images/Apoorva Achwal Sane.png",
+        bio: `Apoorva Sane is a legal and privacy professional with 15+ years of experience across technology, automotive, IT services, and regulatory compliance. Experienced to establish and lead global privacy governance framework, AI and compliance strategies across multiple jurisdictions.`
     },
 ];
 
