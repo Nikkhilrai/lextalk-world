@@ -19,7 +19,7 @@ const upcomingConferences = [
         country: "India",
         region: "South Asia",
         date: "June 11, 2026",
-        venue: "Bangalore",
+        venue: "Radisson Blu Atria, Bangalore",
         duration: "1 Day",
         image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop",
         status: "Open",
