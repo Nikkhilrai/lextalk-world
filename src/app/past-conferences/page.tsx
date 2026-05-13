@@ -104,7 +104,7 @@ const pastConferences = [
         venue: "AMA Conference Center, New York City",
         image: "https://lextalk.world/wp-content/uploads/2026/01/5-1-1024x554.jpg",
         stats: { people: "300+", speakers: "60+", awardees: "70+", countries: "15+" },
-        link: "https://lextalk.world/new-york-city-2025/",
+        link: "https://lextalk.world/new-york-2025/",
     },
     {
         year: "2025",
