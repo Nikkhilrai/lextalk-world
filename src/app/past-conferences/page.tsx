@@ -95,6 +95,50 @@ const pastConferences = [
         stats: { people: "600+", speakers: "100+", awardees: "30+", countries: "15+" },
         link: "https://lextalk.world/new-delhi-2025/",
     },
+    {
+        year: "2025",
+        city: "New York City",
+        country: "USA",
+        flag: "🇺🇸",
+        date: "June 12–13, 2025",
+        venue: "AMA Conference Center, New York City",
+        image: "https://lextalk.world/wp-content/uploads/2026/01/5-1-1024x554.jpg",
+        stats: { people: "300+", speakers: "60+", awardees: "70+", countries: "15+" },
+        link: "https://lextalk.world/new-york-city-2025/",
+    },
+    {
+        year: "2025",
+        city: "San Francisco",
+        country: "USA",
+        flag: "🇺🇸",
+        date: "Nov 19–20, 2025",
+        venue: "AMA Conference Center, San Francisco",
+        image: "https://lextalk.world/wp-content/uploads/2026/01/San-Fansico-4-1024x554.png",
+        stats: { people: "300+", speakers: "100+", awardees: "100+", countries: "20+" },
+        link: "https://lextalk.world/san-francisco-2025/",
+    },
+    {
+        year: "2024",
+        city: "New York City",
+        country: "USA",
+        flag: "🇺🇸",
+        date: "Nov 14, 2024",
+        venue: "AMA Conference Center, New York City",
+        image: "https://lextalk.world/wp-content/uploads/2026/01/6-1-1024x554.jpg",
+        stats: { people: "300+", speakers: "50+", awardees: "50+", countries: "15+" },
+        link: "https://lextalk.world/new-york-city-2024/",
+    },
+    {
+        year: "2026",
+        city: "Houston",
+        country: "USA",
+        flag: "🇺🇸",
+        date: "April 8–9, 2026",
+        venue: "Norris Conference Center, Houston",
+        image: "https://lextalk.world/wp-content/uploads/2026/01/Untitled-design-2.png",
+        stats: { people: "350+", speakers: "70+", awardees: "50+", countries: "20+" },
+        link: "https://lextalk.world/houston-2026/",
+    },
 ];
 
 const years = [...new Set(pastConferences.map(c => c.year))].sort((a, b) => Number(b) - Number(a));
@@ -120,7 +164,7 @@ export default function PastConferencesPage() {
                             {/* Eyebrow pill */}
                             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-amber-200 bg-amber-50 mb-8">
                                 <Globe size={12} className="text-amber-600" />
-                                <span className="text-amber-700 text-[11px] font-bold tracking-[0.22em] uppercase">Asia &amp; Middle East</span>
+                                <span className="text-amber-700 text-[11px] font-bold tracking-[0.22em] uppercase">Global Events</span>
                             </div>
 
                             <h1 className="text-5xl md:text-[72px] font-serif font-bold leading-tight text-slate-900 mb-6">
