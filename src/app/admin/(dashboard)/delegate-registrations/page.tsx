@@ -3,14 +3,153 @@
 import { useState, useEffect } from "react";
 import { StatCard } from "@/components/admin/StatCard";
 import {
-    Ticket, DollarSign, Search, CheckCircle, Clock, XCircle, Download, Mail, RefreshCw, Trash2, Eye, Send, Loader2
+    Ticket, DollarSign, Search, CheckCircle, Clock, Download, Mail,
+    RefreshCw, Trash2, Eye, Send, Loader2, X, User,
+    CreditCard, Tag, Hash, Calendar
 } from "lucide-react";
 import {
     getDelegateRegistrations,
     deleteDelegateRegistration,
-    updateDelegatePaymentStatus
 } from "@/actions/delegate-registration";
 
+/* ── Detail Modal ─────────────────────────────────────────────────── */
+function DetailModal({ reg, onClose }: { reg: any; onClose: () => void }) {
+    const getStatusColor = (status: string) => {
+        switch (status) {
+            case "success": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+            case "pending": return "bg-amber-500/10 text-amber-400 border-amber-500/30";
+            case "failed": return "bg-rose-500/10 text-rose-400 border-rose-500/30";
+            default: return "bg-slate-500/10 text-slate-400 border-slate-500/30";
+        }
+    };
+
+    const Field = ({ label, value }: { label: string; value?: string | null }) => (
+        value ? (
+            <div className="flex flex-col gap-0.5">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{label}</span>
+                <span className="text-sm text-slate-200 break-all">{value}</span>
+            </div>
+        ) : null
+    );
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative z-10 w-full max-w-lg bg-[#1a1d21] border border-white/10 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+                {/* Header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#212946]">
+                    <div>
+                        <h3 className="text-white font-bold text-lg">{reg.firstName} {reg.lastName}</h3>
+                        <p className="text-slate-400 text-xs mt-0.5">{reg.email}</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase border ${getStatusColor(reg.paymentStatus)}`}>
+                            {reg.paymentStatus}
+                        </span>
+                        <button onClick={onClose} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                            <X size={14} className="text-slate-400" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Body */}
+                <div className="overflow-y-auto p-6 space-y-6">
+                    {/* Personal */}
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                            <User size={11} /> Personal Details
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                            <Field label="First Name" value={reg.firstName} />
+                            <Field label="Last Name" value={reg.lastName} />
+                            <Field label="Email" value={reg.email} />
+                            <Field label="Phone" value={reg.phone} />
+                            <Field label="Organisation" value={reg.organization} />
+                            <Field label="Designation" value={reg.designation} />
+                            <Field label="Country" value={reg.country} />
+                        </div>
+                    </div>
+
+                    {/* Pass */}
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                            <Ticket size={11} /> Pass Details
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                            <Field label="Pass Type" value={reg.passType?.replace(/-/g, ' ').toUpperCase()} />
+                            <Field label="Category" value={reg.passCategory?.toUpperCase()} />
+                            <Field label="Conference" value={reg.conferenceSlug} />
+                            <Field label="Payment Type" value={reg.paymentType} />
+                        </div>
+                    </div>
+
+                    {/* Payment */}
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                            <CreditCard size={11} /> Payment Details
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                            <Field label="Status" value={reg.paymentStatus} />
+                            <Field label="Currency" value={reg.currency} />
+                            <Field label="Original Price" value={reg.originalPrice != null ? `${reg.currency} ${reg.originalPrice}` : null} />
+                            <Field label="Discounted Price" value={reg.discountedPrice != null ? `${reg.currency} ${reg.discountedPrice}` : null} />
+                            <Field label="Razorpay Order ID" value={reg.razorpayOrderId} />
+                            <Field label="Razorpay Payment ID" value={reg.razorpayPaymentId} />
+                        </div>
+                    </div>
+
+                    {/* Coupon */}
+                    {reg.couponCode && (
+                        <div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                                <Tag size={11} /> Coupon
+                            </p>
+                            <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                                <Field label="Coupon Code" value={reg.couponCode} />
+                                <Field label="Discount %" value={reg.couponDiscount != null ? `${reg.couponDiscount}%` : null} />
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Ticket */}
+                    {reg.ticketNumber && (
+                        <div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                                <Hash size={11} /> Ticket
+                            </p>
+                            <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                                <Field label="Ticket Number" value={reg.ticketNumber} />
+                                <Field label="Email Sent" value={reg.emailSent ? "Yes" : "No"} />
+                            </div>
+                            {reg.ticketId && (
+                                <a
+                                    href={`/api/delegate-registration/ticket/${reg.ticketId}/download`}
+                                    className="mt-2 inline-flex items-center gap-1.5 text-xs text-amber-500 hover:text-amber-400 transition-colors"
+                                >
+                                    <Download size={12} /> Download Ticket PDF
+                                </a>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Meta */}
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500 mb-3 flex items-center gap-2">
+                            <Calendar size={11} /> Timestamps
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/5">
+                            <Field label="Registered At" value={reg.createdAt ? new Date(reg.createdAt).toLocaleString("en-IN") : null} />
+                            <Field label="Last Updated" value={reg.updatedAt ? new Date(reg.updatedAt).toLocaleString("en-IN") : null} />
+                            <Field label="Registration ID" value={reg.id} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* ── Main Page ────────────────────────────────────────────────────── */
 export default function DelegateRegistrationsPage() {
     const [registrations, setRegistrations] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -19,13 +158,9 @@ export default function DelegateRegistrationsPage() {
     const [passTypeFilter, setPassTypeFilter] = useState("all");
     const [conferenceFilter, setConferenceFilter] = useState("all");
     const [sendingPass, setSendingPass] = useState<string | null>(null);
+    const [selectedReg, setSelectedReg] = useState<any | null>(null);
     const [stats, setStats] = useState({
-        total: 0,
-        paid: 0,
-        pending: 0,
-        free: 0,
-        revenueINR: 0,
-        revenueUSD: 0
+        total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0
     });
 
     const fetchData = async () => {
@@ -34,22 +169,17 @@ export default function DelegateRegistrationsPage() {
             const res = await getDelegateRegistrations();
             if (res.success) {
                 setRegistrations(res.registrations);
-
-                // Calculate stats
                 const s = res.registrations.reduce((acc: any, reg: any) => {
                     acc.total++;
                     if (reg.paymentStatus === "success") acc.paid++;
                     else if (reg.paymentStatus === "pending") acc.pending++;
-
                     if (reg.paymentType === "free") acc.free++;
-
                     if (reg.paymentStatus === "success") {
-                        if (reg.currency === "INR") acc.revenueINR += reg.discountedPrice * 83; // approx if not stored as INR
+                        if (reg.currency === "INR") acc.revenueINR += reg.discountedPrice;
                         else acc.revenueUSD += reg.discountedPrice;
                     }
                     return acc;
                 }, { total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0 });
-
                 setStats(s);
             }
         } catch (error) {
@@ -59,9 +189,7 @@ export default function DelegateRegistrationsPage() {
         }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    useEffect(() => { fetchData(); }, []);
 
     const handleDelete = async (id: string) => {
         if (!confirm("Are you sure you want to delete this registration?")) return;
@@ -79,9 +207,7 @@ export default function DelegateRegistrationsPage() {
             const data = await res.json();
             if (data.success) alert("Email sent!");
             else alert(data.error);
-        } catch (err) {
-            alert("Resend failed.");
-        }
+        } catch { alert("Resend failed."); }
     };
 
     const handleSendPass = async (regId: string, email: string) => {
@@ -96,11 +222,8 @@ export default function DelegateRegistrationsPage() {
             const data = await res.json();
             if (data.success) alert(`✓ Pass sent to ${email}`);
             else alert(`Failed: ${data.error}`);
-        } catch {
-            alert("Failed to send pass.");
-        } finally {
-            setSendingPass(null);
-        }
+        } catch { alert("Failed to send pass."); }
+        finally { setSendingPass(null); }
     };
 
     const filtered = registrations.filter(reg => {
@@ -108,11 +231,9 @@ export default function DelegateRegistrationsPage() {
             `${reg.firstName} ${reg.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
             reg.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
             (reg.ticketNumber && reg.ticketNumber.toLowerCase().includes(searchQuery.toLowerCase()));
-
         const matchesStatus = statusFilter === "all" || reg.paymentStatus === statusFilter;
         const matchesPass = passTypeFilter === "all" || reg.passType === passTypeFilter;
         const matchesConference = conferenceFilter === "all" || (reg.conferenceSlug || "").includes(conferenceFilter);
-
         return matchesSearch && matchesStatus && matchesPass && matchesConference;
     });
 
@@ -127,6 +248,8 @@ export default function DelegateRegistrationsPage() {
 
     return (
         <div className="space-y-6">
+            {selectedReg && <DetailModal reg={selectedReg} onClose={() => setSelectedReg(null)} />}
+
             <div className="flex justify-between items-end">
                 <div>
                     <h4 className="text-xl font-bold text-white">Delegate Registrations</h4>
@@ -164,23 +287,13 @@ export default function DelegateRegistrationsPage() {
                             className="w-full pl-10 pr-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                         />
                     </div>
-
-                    <select
-                        value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value)}
-                        className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200"
-                    >
+                    <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200">
                         <option value="all">Status: All</option>
                         <option value="success">Paid</option>
                         <option value="pending">Pending</option>
                         <option value="failed">Failed</option>
                     </select>
-
-                    <select
-                        value={passTypeFilter}
-                        onChange={(e) => setPassTypeFilter(e.target.value)}
-                        className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200"
-                    >
+                    <select value={passTypeFilter} onChange={(e) => setPassTypeFilter(e.target.value)} className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200">
                         <option value="all">Pass: All</option>
                         <option value="delegate">Delegate</option>
                         <option value="delegate-vip">Delegate VIP</option>
@@ -194,19 +307,14 @@ export default function DelegateRegistrationsPage() {
                         <option value="professional">Professional</option>
                         <option value="global-speaker">Global Speaker</option>
                     </select>
-
-                    <select
-                        value={conferenceFilter}
-                        onChange={(e) => setConferenceFilter(e.target.value)}
-                        className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200"
-                    >
+                    <select value={conferenceFilter} onChange={(e) => setConferenceFilter(e.target.value)} className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200">
                         <option value="all">Event: All</option>
                         <option value="bangalore">Bangalore 2026</option>
                         <option value="dubai">Dubai 2026</option>
                     </select>
                 </div>
 
-                {/* Table Data */}
+                {/* Table */}
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead className="bg-[#212946] text-slate-400 text-xs uppercase font-bold tracking-wider">
@@ -214,7 +322,7 @@ export default function DelegateRegistrationsPage() {
                                 <th className="px-6 py-4">Attendee</th>
                                 <th className="px-6 py-4">Pass / Category</th>
                                 <th className="px-6 py-4">Payment</th>
-                                <th className="px-6 py-4">Ticket Details</th>
+                                <th className="px-6 py-4">Ticket</th>
                                 <th className="px-6 py-4">Email</th>
                                 <th className="px-6 py-4 text-center">Actions</th>
                             </tr>
@@ -230,7 +338,11 @@ export default function DelegateRegistrationsPage() {
                                 <tr><td colSpan={6} className="px-6 py-20 text-center text-slate-500">No registrations found matching criteria.</td></tr>
                             ) : (
                                 filtered.map((reg) => (
-                                    <tr key={reg.id} className="hover:bg-white/[0.02] transition-colors">
+                                    <tr
+                                        key={reg.id}
+                                        className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                                        onClick={() => setSelectedReg(reg)}
+                                    >
                                         <td className="px-6 py-4">
                                             <div className="flex flex-col">
                                                 <span className="text-white font-semibold">{reg.firstName} {reg.lastName}</span>
@@ -257,35 +369,24 @@ export default function DelegateRegistrationsPage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="flex flex-col gap-0.5">
-                                                {reg.phone && (
-                                                    <span className="text-xs text-slate-300">{reg.phone}</span>
-                                                )}
-                                                {reg.designation && (
-                                                    <span className="text-[11px] text-slate-500">{reg.designation}</span>
-                                                )}
-                                                {reg.country && (
-                                                    <span className="text-[11px] text-slate-500">{reg.country}</span>
-                                                )}
-                                                {reg.ticketNumber && (
-                                                    <>
-                                                        <span className="text-xs font-mono text-emerald-400 mt-1">{reg.ticketNumber}</span>
-                                                        <a
-                                                            href={`/api/delegate-registration/ticket/${reg.ticketId}/download`}
-                                                            className="text-[10px] text-slate-500 hover:text-amber-500 flex items-center gap-1"
-                                                        >
-                                                            <Download size={10} /> Download PDF
-                                                        </a>
-                                                    </>
-                                                )}
-                                                {!reg.phone && !reg.designation && !reg.country && !reg.ticketNumber && (
-                                                    <span className="text-slate-600">-</span>
-                                                )}
-                                            </div>
+                                            {reg.ticketNumber ? (
+                                                <div className="flex flex-col gap-0.5">
+                                                    <span className="text-xs font-mono text-emerald-400">{reg.ticketNumber}</span>
+                                                    <a
+                                                        href={`/api/delegate-registration/ticket/${reg.ticketId}/download`}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="text-[10px] text-slate-500 hover:text-amber-500 flex items-center gap-1"
+                                                    >
+                                                        <Download size={10} /> PDF
+                                                    </a>
+                                                </div>
+                                            ) : (
+                                                <span className="text-slate-600 text-xs">—</span>
+                                            )}
                                         </td>
                                         <td className="px-6 py-4 text-center">
                                             {reg.emailSent ? (
-                                                <span className="text-emerald-500 flex items-center justify-center gap-1" title="Initial confirmation sent">
+                                                <span className="text-emerald-500 flex items-center justify-center gap-1">
                                                     <CheckCircle size={14} /> <span className="text-[10px]">SENT</span>
                                                 </span>
                                             ) : (
@@ -294,8 +395,15 @@ export default function DelegateRegistrationsPage() {
                                                 </span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
                                             <div className="flex items-center justify-center gap-2">
+                                                <button
+                                                    onClick={() => setSelectedReg(reg)}
+                                                    className="p-1.5 bg-slate-500/10 text-slate-400 rounded hover:bg-slate-500 hover:text-white transition-all"
+                                                    title="View Details"
+                                                >
+                                                    <Eye size={16} />
+                                                </button>
                                                 <button
                                                     onClick={() => handleResendEmail(reg.id)}
                                                     className="p-1.5 bg-[#405189]/20 text-[#abb9e8] rounded hover:bg-[#405189] hover:text-white transition-all"
@@ -303,8 +411,6 @@ export default function DelegateRegistrationsPage() {
                                                 >
                                                     <Mail size={16} />
                                                 </button>
-
-                                                {/* Send Entry Pass — Bangalore physical only */}
                                                 {(reg.conferenceSlug || "").includes("bangalore") &&
                                                     reg.paymentStatus === "success" &&
                                                     !reg.passType?.includes("virtual") && (
@@ -316,11 +422,9 @@ export default function DelegateRegistrationsPage() {
                                                     >
                                                         {sendingPass === reg.id
                                                             ? <Loader2 size={16} className="animate-spin" />
-                                                            : <Send size={16} />
-                                                        }
+                                                            : <Send size={16} />}
                                                     </button>
                                                 )}
-
                                                 <button
                                                     onClick={() => handleDelete(reg.id)}
                                                     className="p-1.5 bg-rose-500/10 text-rose-500 rounded hover:bg-rose-500 hover:text-white transition-all"
