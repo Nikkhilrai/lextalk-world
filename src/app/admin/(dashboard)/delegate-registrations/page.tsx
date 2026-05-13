@@ -257,17 +257,31 @@ export default function DelegateRegistrationsPage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            {reg.ticketNumber ? (
-                                                <div className="flex flex-col">
-                                                    <span className="text-xs font-mono text-emerald-400">{reg.ticketNumber}</span>
-                                                    <a
-                                                        href={`/api/delegate-registration/ticket/${reg.ticketId}/download`}
-                                                        className="text-[10px] text-slate-500 hover:text-amber-500 flex items-center gap-1 mt-1"
-                                                    >
-                                                        <Download size={10} /> Download PDF
-                                                    </a>
-                                                </div>
-                                            ) : <span className="text-slate-600">-</span>}
+                                            <div className="flex flex-col gap-0.5">
+                                                {reg.phone && (
+                                                    <span className="text-xs text-slate-300">{reg.phone}</span>
+                                                )}
+                                                {reg.designation && (
+                                                    <span className="text-[11px] text-slate-500">{reg.designation}</span>
+                                                )}
+                                                {reg.country && (
+                                                    <span className="text-[11px] text-slate-500">{reg.country}</span>
+                                                )}
+                                                {reg.ticketNumber && (
+                                                    <>
+                                                        <span className="text-xs font-mono text-emerald-400 mt-1">{reg.ticketNumber}</span>
+                                                        <a
+                                                            href={`/api/delegate-registration/ticket/${reg.ticketId}/download`}
+                                                            className="text-[10px] text-slate-500 hover:text-amber-500 flex items-center gap-1"
+                                                        >
+                                                            <Download size={10} /> Download PDF
+                                                        </a>
+                                                    </>
+                                                )}
+                                                {!reg.phone && !reg.designation && !reg.country && !reg.ticketNumber && (
+                                                    <span className="text-slate-600">-</span>
+                                                )}
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 text-center">
                                             {reg.emailSent ? (
