@@ -191,6 +191,40 @@ export default function DelegateRegistrationsPage() {
 
     useEffect(() => { fetchData(); }, []);
 
+    const handleExportCSV = () => {
+        const headers = [
+            "First Name", "Last Name", "Email", "Phone", "Organisation", "Designation", "Country",
+            "Pass Type", "Category", "Conference", "Payment Status", "Payment Type",
+            "Currency", "Original Price", "Discounted Price",
+            "Coupon Code", "Coupon Discount %",
+            "Razorpay Order ID", "Razorpay Payment ID",
+            "Ticket Number", "Email Sent", "Registered At",
+        ];
+        const escape = (v: any) => {
+            const s = v == null ? "" : String(v);
+            return s.includes(",") || s.includes('"') || s.includes("\n")
+                ? `"${s.replace(/"/g, '""')}"` : s;
+        };
+        const rows = filtered.map(r => [
+            r.firstName, r.lastName, r.email, r.phone, r.organization, r.designation, r.country,
+            r.passType, r.passCategory, r.conferenceSlug, r.paymentStatus, r.paymentType,
+            r.currency, r.originalPrice, r.discountedPrice,
+            r.couponCode, r.couponDiscount,
+            r.razorpayOrderId, r.razorpayPaymentId,
+            r.ticketNumber, r.emailSent ? "Yes" : "No",
+            r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN") : "",
+        ].map(escape).join(","));
+
+        const csv = [headers.join(","), ...rows].join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `delegate-registrations-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
     const handleDelete = async (id: string) => {
         if (!confirm("Are you sure you want to delete this registration?")) return;
         const res = await deleteDelegateRegistration(id);
@@ -259,7 +293,7 @@ export default function DelegateRegistrationsPage() {
                     <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
                         <RefreshCw size={18} />
                     </button>
-                    <button className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
+                    <button onClick={handleExportCSV} className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
                         <Download size={16} /> Export CSV
                     </button>
                 </div>
