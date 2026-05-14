@@ -52,7 +52,7 @@ const PASSES: PassConfig[] = [
     {
         id: "delegate-vip",
         name: "Corporate Counsel Pass",
-        usdPrice: 299,
+        usdPrice: 79,
         inrPrice: 7499,
         usdOriginalPrice: 799,
         inrOriginalPrice: 14999,
