@@ -101,8 +101,13 @@ Amit’s influence on policy, commitment to legal scholarship, and advisory work
     },
     {
         name: "Prashant Srivastava",
-        title: "Head of Contracts & Attorney Regional Counsel, Hewlett Packard Enterprise",
+        title: "Attorney Regional Counsel, Head of Contracts & Risk",
         image: "/bangalore-2026/speakers-images/prashant-srivastava.jpg",
+        bio: `A tenured & accomplished, In-house counsel and Contracts Management leader with 15+ years of experience managing high perfmorming legal and contracts functions across multiple Fortune 500 companies. 
+
+Once amongst the pool of youngest GCs/Legal Heads, Prashant is also a qualified Company Secretary.
+
+Currently, he is designated as the Attorney Regional Counsel & Head of Contracts & Risk within HPE.`
     },
     {
         name: "Deepalakshmi Vadivelan",
