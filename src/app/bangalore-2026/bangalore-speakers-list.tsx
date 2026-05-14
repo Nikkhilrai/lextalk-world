@@ -174,6 +174,16 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
 
 He holds a Certificate with Honours in AI & Law from Lund University and has been an active voice on the responsible adoption of AI in legal practice by designing practitioner-focused workshops and developing original frameworks on AI reliability in legal contexts. He speaks and writes on what it means to be a human-led, AI-assisted practice in an era of rapid technological change.`
     },
+    {
+        name: "Balaji Mohan",
+        title: "Director - Legal, Trianz",
+        image: "/bangalore-2026/speakers-images/Balaji Mohan.png",
+    },
+    {
+        name: "Yawar Usmani",
+        title: "Group General Counsel & Company Secretary, MooMark",
+        image: "/bangalore-2026/speakers-images/YAWAR USMANI.png",
+    },
 ];
 
 interface Speaker {
