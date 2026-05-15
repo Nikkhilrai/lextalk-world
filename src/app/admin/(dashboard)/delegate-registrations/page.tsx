@@ -14,6 +14,29 @@ import {
 
 /* ── Detail Modal ─────────────────────────────────────────────────── */
 function DetailModal({ reg, onClose }: { reg: any; onClose: () => void }) {
+    const [altEmail, setAltEmail] = useState("");
+    const [sending, setSending] = useState(false);
+    const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">("idle");
+
+    const handleSendToAlt = async () => {
+        if (!altEmail.trim()) return;
+        setSending(true);
+        setSendStatus("idle");
+        try {
+            const res = await fetch("/api/delegate-registration/resend-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ regId: reg.id, overrideEmail: altEmail.trim() }),
+            });
+            const data = await res.json();
+            setSendStatus(data.success ? "success" : "error");
+        } catch {
+            setSendStatus("error");
+        } finally {
+            setSending(false);
+        }
+    };
+
     const getStatusColor = (status: string) => {
         switch (status) {
             case "success": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
@@ -142,6 +165,41 @@ function DetailModal({ reg, onClose }: { reg: any; onClose: () => void }) {
                             <Field label="Last Updated" value={reg.updatedAt ? new Date(reg.updatedAt).toLocaleString("en-IN") : null} />
                             <Field label="Registration ID" value={reg.id} />
                         </div>
+                    </div>
+
+                    {/* Send to alternate email */}
+                    <div className="p-4 bg-[#405189]/10 rounded-xl border border-[#405189]/30">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#abb9e8] mb-3 flex items-center gap-2">
+                            <Mail size={11} /> Forward Confirmation to Another Email
+                        </p>
+                        <p className="text-[11px] text-slate-500 mb-3">
+                            Sends the original confirmation email to a different address (e.g. company email for reimbursement). Registered email stays unchanged.
+                        </p>
+                        <div className="flex gap-2">
+                            <input
+                                type="email"
+                                value={altEmail}
+                                onChange={e => { setAltEmail(e.target.value); setSendStatus("idle"); }}
+                                placeholder="e.g. name@company.com"
+                                className="flex-1 px-3 py-2 bg-[#1a1d21] border border-white/10 rounded-lg text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-[#405189]/50"
+                            />
+                            <button
+                                onClick={handleSendToAlt}
+                                disabled={sending || !altEmail.trim()}
+                                className="px-4 py-2 bg-[#405189] hover:bg-[#4e63a8] text-white text-xs font-bold rounded-lg transition-all disabled:opacity-40 flex items-center gap-1.5"
+                            >
+                                {sending ? <Loader2 size={13} className="animate-spin" /> : <Send size={13} />}
+                                Send
+                            </button>
+                        </div>
+                        {sendStatus === "success" && (
+                            <p className="mt-2 text-xs text-emerald-400 flex items-center gap-1.5">
+                                <CheckCircle size={12} /> Confirmation sent to {altEmail}
+                            </p>
+                        )}
+                        {sendStatus === "error" && (
+                            <p className="mt-2 text-xs text-rose-400">Failed to send. Please try again.</p>
+                        )}
                     </div>
                 </div>
             </div>

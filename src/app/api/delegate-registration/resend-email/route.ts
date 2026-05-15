@@ -5,7 +5,7 @@ import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { regId } = body;
+        const { regId, overrideEmail } = body;
 
         if (!regId) {
             return NextResponse.json({ success: false, error: "Missing registration ID" }, { status: 400 });
@@ -24,11 +24,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: false, error: "Cannot send ticket for unpaid registration" }, { status: 400 });
         }
 
-        // Trigger email
+        // Trigger email — send to overrideEmail if provided, otherwise registered email
         const emailResult = await sendDelegateConfirmationEmail({
             firstName: registration.firstName,
             lastName: registration.lastName,
-            email: registration.email,
+            email: overrideEmail?.trim() || registration.email,
             passType: registration.passType,
             passCategory: registration.passCategory,
             ticketNumber: registration.ticketNumber,
