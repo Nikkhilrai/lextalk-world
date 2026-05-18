@@ -182,8 +182,15 @@ He holds a Certificate with Honours in AI & Law from Lund University and has bee
     },
     {
         name: "Balaji Mohan",
-        title: "Director - Legal, Trianz",
+        title: "Director, Head of Legal | Trianz Digital Consulting Private Limited",
         image: "/bangalore-2026/speakers-images/Balaji Mohan.png",
+        bio: `Balaji Mohan is a senior technology and commercial lawyer with over 22 years of experience advising high-growth technology enterprises on cross-border legal strategy, digital regulation, and complex multi-jurisdictional transactions.
+
+As Director and Head of Legal at Trianz Digital Consulting, Inc. — a US-headquartered technology platforms company operating across the United States, India, and Singapore — Balaji anchors the company's global legal function, with responsibility spanning enterprise contract governance, intellectual property portfolio management, data protection compliance, and pre-litigation risk strategy across jurisdictions.
+
+His regulatory practice covers the full spectrum of Asia-Pacific and global digital, privacy, and AI law. He has structured and advised on technology transactions across multiple jurisdictions, bringing a practitioner's perspective to the legal and regulatory challenges facing technology businesses operating at scale.
+
+Prior to Trianz, Balaji held senior leadership roles at EXLService and served as Vice President and Head of Legal at Avanze, establishing a strong track record as a leader in technology law, commercial transactions, and cross-border legal operations.`
     },
     {
         name: "Yawar Usmani",
