@@ -88,6 +88,7 @@ Amit’s influence on policy, commitment to legal scholarship, and advisory work
         name: "Ankita Choudhary",
         title: "Head - Legal Advisory and Contracts at Nuvama Group",
         image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png",
+        bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments. Proven expertise in legal advisory, contract lifecycle management, legal risk mitigation, litigation strategy, and intellectual property protection. Adept at setting up legal frameworks and policies, driving standardization, enabling business growth with pragmatic legal solutions, and managing strategic transactions and special projects. Recognized for consistent leadership growth, team-building acumen, and collaborative engagement with senior stakeholders and external counsels. Known for being a trusted legal partner across business verticals, aligning legal strategy with organizational goals to support robust and compliant business operations.`
     },
     {
         name: "Hena Datta",
