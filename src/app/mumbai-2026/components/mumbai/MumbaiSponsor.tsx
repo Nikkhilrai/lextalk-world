@@ -107,6 +107,23 @@ export function MumbaiSponsor() {
                             </div>
                         </div>
                     </div>
+                    {/* Wellness & Consciousness Partner */}
+                    <div className="md:col-span-2 lg:col-span-3 flex flex-col items-center mt-4">
+                        <div className="flex items-center gap-4 w-full max-w-lg mb-8">
+                            <div className="flex-1 h-[1px] bg-gradient-to-r from-purple-200 via-purple-300 to-purple-200" />
+                            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-[0.2em] whitespace-nowrap">Wellness & Consciousness Partner</h4>
+                            <div className="flex-1 h-[1px] bg-gradient-to-l from-purple-200 via-purple-300 to-purple-200" />
+                        </div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                        >
+                            <a href="https://mysticverseglobal.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-90 transition-opacity duration-300">
+                                <Image src="/images/footer/mysticverseglobal.png" alt="MysticVerse Global" width={240} height={120} className="object-contain mix-blend-multiply" />
+                            </a>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

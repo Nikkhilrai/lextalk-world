@@ -860,6 +860,31 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
+                    {/* Wellness & Consciousness Partner */}
+                    <div className="relative mt-20">
+                        <div className="flex flex-col items-center relative z-10">
+                            <div className="mb-10 flex items-center gap-4 w-full max-w-lg">
+                                <div className="flex-1 h-[1px] bg-gradient-to-r from-purple-200 via-purple-300 to-purple-200" />
+                                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-600 whitespace-nowrap">Wellness & Consciousness Partner</p>
+                                <div className="flex-1 h-[1px] bg-gradient-to-l from-purple-200 via-purple-300 to-purple-200" />
+                            </div>
+                            <a
+                                href="https://mysticverseglobal.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:opacity-90 transition-opacity duration-300"
+                            >
+                                <Image
+                                    src="/images/footer/mysticverseglobal.png"
+                                    alt="MysticVerse Global"
+                                    width={240}
+                                    height={120}
+                                    className="object-contain mix-blend-multiply"
+                                />
+                            </a>
+                        </div>
+                    </div>
+
                     {/* Partner */}
                     <div className="relative mt-20">
                         <div className="flex flex-col items-center relative z-10">

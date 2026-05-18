@@ -34,6 +34,13 @@ const tiers = [
             { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
         ],
     },
+    {
+        label: "Wellness & Consciousness Partner",
+        accent: "from-purple-200 via-purple-300 to-purple-200",
+        sponsors: [
+            { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/", w: 240, h: 120 },
+        ],
+    },
 ];
 
 export function BangaloreSponsor() {
