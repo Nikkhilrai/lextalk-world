@@ -189,6 +189,11 @@ He holds a Certificate with Honours in AI & Law from Lund University and has bee
         title: "Group General Counsel & Company Secretary, MooMark",
         image: "/bangalore-2026/speakers-images/YAWAR USMANI.png",
     },
+    {
+        name: "Deepti Aggarwal",
+        title: "Associate Director, Regulatory Affairs & Drug Development Solutions (RADDS), IQVIA",
+        image: "/bangalore-2026/speakers-images/Deepti Aggarwal.png",
+    },
 ];
 
 interface Speaker {
