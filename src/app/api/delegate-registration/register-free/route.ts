@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
                 type: "TICKET_PURCHASE",
                 message: `Free ticket registered by ${customerDetails.firstName} ${customerDetails.lastName}`,
                 referenceId: registration.id,
-                link: `/admin/registrations/${registration.id}`,
+                link: `/admin/delegate-registrations`,
             }
         }).catch((err: any) => console.error("Notification error:", err));
 
