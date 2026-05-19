@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 
-function generateTicketNumber(): string {
+function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = "LTW-DXB26-";
+    const prefix = conferenceSlug?.includes("bangalore") ? "LTW-BLR26-" : "LTW-DXB26-";
+    let result = prefix;
     for (let i = 0; i < 6; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -40,7 +41,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Generate unique ticket number
-        let ticketNumber = generateTicketNumber();
+        let ticketNumber = generateTicketNumber(conferenceSlug);
         let attempts = 0;
         while (attempts < 5) {
             const exists = await prisma.delegateRegistration.findFirst({
