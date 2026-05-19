@@ -120,7 +120,7 @@ function ConfirmationContent() {
                         <div className="space-y-4">
                             <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-400 border-b border-slate-100 pb-2">Event Information</p>
                             <DetailItem icon={Calendar} label="Date" value="June 11, Thursday, 2026" />
-                            <DetailItem icon={MapPin} label="Location" value="Bangalore, India" />
+                            <DetailItem icon={MapPin} label="Venue" value="Radisson Blu Atria, 1 Palace Rd, Bengaluru" />
                             <DetailItem icon={CheckCircle} label="Registration ID" value={registration.ticketNumber} />
                         </div>
                     </div>

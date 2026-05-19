@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
                 passCategory: registration.passCategory,
                 ticketNumber: registration.ticketNumber,
                 ticketId: registration.ticketId,
+                conferenceSlug,
             });
 
             if (emailResult.success) {

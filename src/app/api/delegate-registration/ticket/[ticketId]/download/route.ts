@@ -43,12 +43,31 @@ export async function GET(
             });
         }
 
+        const isBangalore = (registration.conferenceSlug || "").includes("bangalore");
+        const isMumbai = (registration.conferenceSlug || "").includes("mumbai");
+
+        const eventName = isBangalore
+            ? "LexTalk World Bangalore 2026"
+            : isMumbai
+                ? "LexTalk World Mumbai 2026"
+                : "LexTalk World Dubai 2026";
+        const eventDate = isBangalore
+            ? "June 11, 2026"
+            : isMumbai
+                ? "TBA"
+                : "13-14 May, 2026";
+        const eventVenue = isBangalore
+            ? "Radisson Blu Atria, 1 Palace Road, Bengaluru"
+            : isMumbai
+                ? "TBA, Mumbai"
+                : "TBA, Dubai";
+
         // Generate PDF
         const pdfBuffer = await generateTicketPDF({
             attendeeName: `${registration.firstName} ${registration.lastName}`,
-            eventName: "LexTalk World Dubai 2026",
-            eventDate: "13-14 May, 2026",
-            eventVenue: "To be announced",
+            eventName,
+            eventDate,
+            eventVenue,
             passType: registration.passType.replace(/-/g, ' ').toUpperCase(),
             ticketNumber: registration.ticketNumber || 'REG-PENDING',
             ticketId: finalTicketId,
