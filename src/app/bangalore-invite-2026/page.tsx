@@ -63,7 +63,7 @@ export default function BangaloreInvitePage() {
 
     return (
         <main className="min-h-screen bg-white">
-            <Navbar variant="light" />
+            <Navbar />
 
             {/* Hero Banner */}
             <section className="relative pt-24 pb-0 overflow-hidden bg-slate-900">
