@@ -140,9 +140,12 @@ async function sendConfirmationEmail(data: any) {
                             the event, registration process, and exclusive early bird offers.
                         </p>
                         
-                        <div style="margin-top: 25px; text-align: center;">
+                        <div style="margin-top: 25px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
                             <a href="https://lextalkworld.in/dubai-2026" style="display: inline-block; background: #f59e0b; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
                                 Learn More About The Event →
+                            </a>
+                            <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                                in Follow Us on LinkedIn
                             </a>
                         </div>
                         
