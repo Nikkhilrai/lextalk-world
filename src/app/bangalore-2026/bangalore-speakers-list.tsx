@@ -202,6 +202,18 @@ Prior to Trianz, Balaji held senior leadership roles at EXLService and served as
         title: "Associate Director, Regulatory Affairs & Drug Development Solutions (RADDS), IQVIA",
         image: "/bangalore-2026/speakers-images/Deepti Aggarwal.png",
     },
+    {
+        name: "Punya Patra",
+        title: "Head of Legal Innovation Hub, Novartis",
+        image: "/bangalore-2026/speakers-images/Punya Patra.png",
+        bio: `Punya Chandan Patra is a seasoned legal innovation and transformation leader with over 25+ years of experience driving strategic change across global organizations. Currently serving as Head of the Legal Innovation Hub at Novartis, he leads the design and implementation of next-generation legal service delivery models, with a focus on Responsible AI, digital transformation, and enterprise-wide efficiency.
+
+Throughout his career spanning leadership roles at Novartis, PwC, TCS, and CPA Global, Punya has been instrumental in building and scaling global legal operations, establishing high-performing Centers of Excellence, and delivering complex programs across contract lifecycle management, litigation support, regulatory compliance, and data governance.
+
+Known for his ability to translate vision into execution, bridge legal expertise with technology, he has spearheaded initiatives in legal tech adoption, eDiscovery, and AI-enabled contract management—helping organizations navigate evolving challenges. Punya has built and led high-performing global teams, delivered large-scale transformation programs, and contributed to shaping the future of legal services. His work consistently focuses on managing risk, strengthening compliance, and enabling resilient legal frameworks in an increasingly data-driven world.
+
+A trusted advisor to senior leadership, Punya brings a unique combination of strategic vision, operational excellence, and deep domain expertise—making him a sought-after speaker on the future of legal services, innovation, and risk management.`
+    },
 ];
 
 interface Speaker {
