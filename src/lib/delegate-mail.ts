@@ -154,7 +154,7 @@ function bangaloreEmailHtml(data: EmailData): string {
               <a href="https://www.linkedin.com/company/lextalkworld-apac-me/"
                  target="_blank"
                  style="display:block;text-align:center;background:#0077b5;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
-                in Follow Us on LinkedIn
+                Follow Us on LinkedIn
               </a>
             </td>
           </tr>
@@ -244,7 +244,7 @@ function dubaiEmailHtml(data: EmailData): string {
               <a href="https://www.linkedin.com/company/lextalkworld-apac-me/"
                  target="_blank"
                  style="display:block;text-align:center;background:#0077b5;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
-                in Follow Us on LinkedIn
+                Follow Us on LinkedIn
               </a>
             </td>
           </tr>

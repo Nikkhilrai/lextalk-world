@@ -145,7 +145,7 @@ async function sendConfirmationEmail(data: any) {
                                 Learn More About The Event →
                             </a>
                             <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
-                                in Follow Us on LinkedIn
+                                Follow Us on LinkedIn
                             </a>
                         </div>
                         
