@@ -139,6 +139,26 @@ function bangaloreEmailHtml(data: EmailData): string {
           Warm regards,<br>
           <strong style="color:#f59e0b;">The LexTalk World Team</strong>
         </p>
+
+        <!-- CTA Buttons -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:32px;">
+          <tr>
+            <td style="padding:0 8px 0 0;" width="50%">
+              <a href="https://lextalkworld.in/bangalore-2026/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#0f172a;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                🌐 View Event Page
+              </a>
+            </td>
+            <td style="padding:0 0 0 8px;" width="50%">
+              <a href="https://www.linkedin.com/company/lextalkworld-apac-me/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#0077b5;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                in Follow Us on LinkedIn
+              </a>
+            </td>
+          </tr>
+        </table>
       </td></tr>
 
       <!-- Footer -->
@@ -209,6 +229,26 @@ function dubaiEmailHtml(data: EmailData): string {
             View Digital Ticket →
           </a>
         </div>
+
+        <!-- CTA Buttons -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;">
+          <tr>
+            <td style="padding:0 8px 0 0;" width="50%">
+              <a href="https://lextalkworld.in/dubai-2026/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                🌐 View Event Page
+              </a>
+            </td>
+            <td style="padding:0 0 0 8px;" width="50%">
+              <a href="https://www.linkedin.com/company/lextalkworld-apac-me/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#0077b5;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                in Follow Us on LinkedIn
+              </a>
+            </td>
+          </tr>
+        </table>
       </td></tr>
 
       <tr><td style="background:#0f172a;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
