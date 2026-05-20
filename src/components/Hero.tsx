@@ -78,7 +78,7 @@ export function Hero() {
                     poster="/dubai-event/why-attend/Networking_edited.avif"
                     className="object-cover w-full h-full"
                 >
-                    <source src="/lextalk-hero.mp4" type="video/mp4" />
+                    <source src="/background/lextalk-hero-2.mp4" type="video/mp4" />
                 </video>
                 {/* Reverted to Lighter Overlay */}
                 <div className="absolute inset-0 bg-slate-900/40" />
