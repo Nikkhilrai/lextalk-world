@@ -211,25 +211,42 @@ export function Hero() {
                         </Link>
 
                         {/* Card 2: Middle (Bangalore) */}
-                        <Link href="#" className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[12deg] hover:rotate-[6deg] transition-all duration-500 z-20 overflow-hidden group cursor-pointer block text-left">
-                            <Image
-                                src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=800&auto=format&fit=crop"
-                                alt="Bangalore"
-                                fill
-                                className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        June 11, 2026
-                                    </span>
+                        <motion.div
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute top-[5%] right-[10%] lg:right-[15%] z-20"
+                            style={{ rotate: 12 }}
+                            whileHover={{ rotate: 6, scale: 1.04, transition: { duration: 0.3 } }}
+                        >
+                            <Link href="/bangalore-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer block text-left relative">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=800&auto=format&fit=crop"
+                                    alt="Bangalore"
+                                    fill
+                                    className="object-cover opacity-70 group-hover:opacity-85 group-hover:scale-110 transition-all duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+
+                                {/* Upcoming Badge */}
+                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                    Upcoming
                                 </div>
-                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Bangalore</h3>
-                                <div className="text-slate-300 text-[10px] uppercase tracking-tighter">India</div>
-                            </div>
-                        </Link>
+
+                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
+                                            June 11, 2026
+                                        </span>
+                                    </div>
+                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Bangalore</h3>
+                                    <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
+                                        <MapPin className="w-3 h-3" />
+                                        <span>Bangalore, India</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        </motion.div>
 
                         {/* Card 3: Front (Dubai - Featured) */}
                         <Link href="/dubai-2026" className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] z-30 overflow-hidden group cursor-pointer hover:-translate-y-3 transition-all duration-500 block text-left">
