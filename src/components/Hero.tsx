@@ -56,6 +56,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [bangaloreCount, setBangaloreCount] = useState<number | null>(null);
+    const [topCard, setTopCard] = useState<"bangalore" | "mumbai" | "dubai">("bangalore");
 
     useEffect(() => {
         fetch("/api/event-stats")
@@ -197,54 +198,76 @@ export function Hero() {
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/60" />
                         </div>
 
-                        {/* Card 1: Back (Mumbai) */}
-                        <Link href="/mumbai-2026" className="absolute top-[15%] left-[5%] lg:left-[10%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[-8deg] hover:rotate-[-4deg] transition-all duration-500 z-10 overflow-hidden group cursor-pointer block">
-                            <Image
-                                src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop"
-                                alt="Mumbai"
-                                fill
-                                className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        Dec 10-11, 2026
-                                    </span>
-                                </div>
-                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
-                                <div className="text-slate-300 text-[10px] uppercase tracking-tighter">India</div>
-                            </div>
-                        </Link>
-
-                        {/* Card 2: Back-right (Dubai) */}
-                        <Link href="/dubai-2026" className="absolute top-[5%] right-[10%] lg:right-[15%] w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl transform rotate-[12deg] hover:rotate-[6deg] transition-all duration-500 z-20 overflow-hidden group cursor-pointer block text-left">
-                            <Image
-                                src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
-                                alt="Dubai"
-                                fill
-                                className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-                                        Sep 9-10, 2026
-                                    </span>
-                                </div>
-                                <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Dubai</h3>
-                                <div className="text-slate-300 text-[10px] uppercase tracking-tighter">UAE</div>
-                            </div>
-                        </Link>
-
-                        {/* Card 3: Front (Bangalore - Featured) */}
+                        {/* Card 1: Mumbai */}
                         <motion.div
+                            className="absolute top-[15%] left-[5%] lg:left-[10%]"
+                            style={{ zIndex: topCard === "mumbai" ? 40 : 10 }}
+                            animate={{ rotate: -8 }}
+                            whileHover={{ rotate: 0, scale: 1.08, y: -12, zIndex: 40, transition: { duration: 0.35, ease: "easeOut" } }}
+                            onHoverStart={() => setTopCard("mumbai")}
+                            onHoverEnd={() => setTopCard("bangalore")}
+                        >
+                            <Link href="/mumbai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer block relative">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop"
+                                    alt="Mumbai"
+                                    fill
+                                    className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Dec 10-11, 2026</span>
+                                    </div>
+                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
+                                    <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
+                                        <MapPin className="w-3 h-3" />
+                                        <span>Mumbai, India</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        </motion.div>
+
+                        {/* Card 2: Dubai */}
+                        <motion.div
+                            className="absolute top-[5%] right-[10%] lg:right-[15%]"
+                            style={{ zIndex: topCard === "dubai" ? 40 : 20 }}
+                            animate={{ rotate: 12 }}
+                            whileHover={{ rotate: 0, scale: 1.08, y: -12, zIndex: 40, transition: { duration: 0.35, ease: "easeOut" } }}
+                            onHoverStart={() => setTopCard("dubai")}
+                            onHoverEnd={() => setTopCard("bangalore")}
+                        >
+                            <Link href="/dubai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer block text-left relative">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
+                                    alt="Dubai"
+                                    fill
+                                    className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Sep 9-10, 2026</span>
+                                    </div>
+                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Dubai</h3>
+                                    <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
+                                        <MapPin className="w-3 h-3" />
+                                        <span>Dubai, UAE</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        </motion.div>
+
+                        {/* Card 3: Bangalore — Featured (front) */}
+                        <motion.div
+                            className="absolute bottom-[5%] left-1/2 -translate-x-1/2"
+                            style={{ zIndex: topCard === "bangalore" ? 30 : 20 }}
                             animate={{ y: [0, -12, 0] }}
                             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute bottom-[5%] left-1/2 -translate-x-1/2 z-30"
                             whileHover={{ y: -18, scale: 1.03, transition: { duration: 0.3 } }}
+                            onHoverStart={() => setTopCard("bangalore")}
                         >
                             <Link href="/bangalore-2026" className="w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.4)] overflow-hidden group cursor-pointer block text-left relative">
                                 <Image
@@ -254,18 +277,13 @@ export function Hero() {
                                     className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
-
-                                {/* Featured Badge */}
                                 <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
                                     Featured
                                 </div>
-
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
                                     <div className="flex items-center gap-2 mb-2 lg:mb-3">
                                         <Calendar className="w-3 h-3 lg:w-4 lg:h-4 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">
-                                            June 11, 2026
-                                        </span>
+                                        <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">June 11, 2026</span>
                                     </div>
                                     <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Bangalore</h3>
                                     <div className="flex items-center gap-2 text-slate-300 text-xs lg:text-sm mb-3 lg:mb-4">
