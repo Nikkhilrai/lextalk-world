@@ -202,12 +202,22 @@ export function Hero() {
                         <motion.div
                             className="absolute top-[15%] left-[5%] lg:left-[10%]"
                             style={{ zIndex: topCard === "mumbai" ? 40 : 10 }}
-                            animate={{ rotate: -8 }}
-                            whileHover={{ rotate: 0, scale: 1.08, y: -12, zIndex: 40, transition: { duration: 0.35, ease: "easeOut" } }}
+                            animate={{ rotate: topCard === "mumbai" ? 0 : -8 }}
+                            whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                             onHoverStart={() => setTopCard("mumbai")}
                             onHoverEnd={() => setTopCard("bangalore")}
                         >
-                            <Link href="/mumbai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer block relative">
+                            {/* Glow ring */}
+                            <motion.div
+                                className="absolute -inset-[3px] rounded-2xl lg:rounded-3xl pointer-events-none"
+                                animate={{ opacity: topCard === "mumbai" ? 1 : 0, scale: topCard === "mumbai" ? 1 : 0.95 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ background: "linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b)", padding: 2 }}
+                            >
+                                <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-slate-800" />
+                            </motion.div>
+                            <Link href="/mumbai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block relative"
+                                style={{ boxShadow: topCard === "mumbai" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
                                 <Image
                                     src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop"
                                     alt="Mumbai"
@@ -215,6 +225,8 @@ export function Hero() {
                                     className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                                {/* Shimmer sweep */}
+                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
@@ -233,12 +245,22 @@ export function Hero() {
                         <motion.div
                             className="absolute top-[5%] right-[10%] lg:right-[15%]"
                             style={{ zIndex: topCard === "dubai" ? 40 : 20 }}
-                            animate={{ rotate: 12 }}
-                            whileHover={{ rotate: 0, scale: 1.08, y: -12, zIndex: 40, transition: { duration: 0.35, ease: "easeOut" } }}
+                            animate={{ rotate: topCard === "dubai" ? 0 : 12 }}
+                            whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                             onHoverStart={() => setTopCard("dubai")}
                             onHoverEnd={() => setTopCard("bangalore")}
                         >
-                            <Link href="/dubai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden group cursor-pointer block text-left relative">
+                            {/* Glow ring */}
+                            <motion.div
+                                className="absolute -inset-[3px] rounded-2xl lg:rounded-3xl pointer-events-none"
+                                animate={{ opacity: topCard === "dubai" ? 1 : 0, scale: topCard === "dubai" ? 1 : 0.95 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ background: "linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b)", padding: 2 }}
+                            >
+                                <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-slate-800" />
+                            </motion.div>
+                            <Link href="/dubai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
+                                style={{ boxShadow: topCard === "dubai" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
                                 <Image
                                     src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
                                     alt="Dubai"
@@ -246,6 +268,8 @@ export function Hero() {
                                     className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+                                {/* Shimmer sweep */}
+                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
@@ -264,12 +288,13 @@ export function Hero() {
                         <motion.div
                             className="absolute bottom-[5%] left-1/2 -translate-x-1/2"
                             style={{ zIndex: topCard === "bangalore" ? 30 : 20 }}
-                            animate={{ y: [0, -12, 0] }}
-                            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                            whileHover={{ y: -18, scale: 1.03, transition: { duration: 0.3 } }}
+                            animate={{ y: topCard === "bangalore" ? [0, -12, 0] : 0 }}
+                            transition={{ duration: 3.5, repeat: topCard === "bangalore" ? Infinity : 0, ease: "easeInOut" }}
+                            whileHover={{ y: -20, scale: 1.05, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                             onHoverStart={() => setTopCard("bangalore")}
                         >
-                            <Link href="/bangalore-2026" className="w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.4)] overflow-hidden group cursor-pointer block text-left relative">
+                            <Link href="/bangalore-2026" className="w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
+                                style={{ boxShadow: "0 25px 60px rgba(245,158,11,0.25), 0 10px 40px rgba(0,0,0,0.4)" }}>
                                 <Image
                                     src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=800&auto=format&fit=crop"
                                     alt="Bangalore"
@@ -277,6 +302,8 @@ export function Hero() {
                                     className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
+                                {/* Shimmer sweep */}
+                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
                                 <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
                                     Featured
                                 </div>
