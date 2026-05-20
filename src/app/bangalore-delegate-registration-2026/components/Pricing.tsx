@@ -706,7 +706,7 @@ function CouponBanner() {
 
             {/* Expiry note */}
             <div className="relative z-10 text-center pb-2.5 -mt-1">
-                <p className="text-[10px] text-white/70 font-semibold">Offer expires May 20, 2026 at midnight</p>
+                <p className="text-[10px] text-white/70 font-semibold">Offer expires May 27, 2026 at midnight</p>
             </div>
         </motion.div>
     );
