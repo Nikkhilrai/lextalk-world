@@ -94,7 +94,7 @@ export default function BangaloreInvitePage() {
                             <div className="w-px h-4 bg-slate-700" />
                             <div className="flex items-center gap-2">
                                 <Users size={15} className="text-amber-400" />
-                                <span>500+ Delegates</span>
+                                <span>300+ Delegates</span>
                             </div>
                         </div>
                     </div>
@@ -126,9 +126,9 @@ export default function BangaloreInvitePage() {
                             {/* Stats */}
                             <div className="grid grid-cols-2 gap-4">
                                 {[
-                                    { value: "500+", label: "Delegates" },
+                                    { value: "300+", label: "Delegates" },
                                     { value: "50+", label: "Speakers" },
-                                    { value: "15+", label: "Nations" },
+                                    { value: "10+", label: "Nations" },
                                     { value: "1 Day", label: "Conference" },
                                 ].map((s, i) => (
                                     <div key={i} className="bg-white rounded-2xl border border-slate-100 p-4 shadow-sm">
