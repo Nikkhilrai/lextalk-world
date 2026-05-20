@@ -55,6 +55,14 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
 export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const [bangaloreCount, setBangaloreCount] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetch("/api/event-stats")
+            .then(r => r.json())
+            .then(d => setBangaloreCount(d.bangalore))
+            .catch(() => {});
+    }, []);
 
     return (
         <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-32 md:pt-72 lg:pt-40 pb-2 md:pb-8 overflow-hidden bg-slate-900">
@@ -270,7 +278,9 @@ export function Hero() {
                                             <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-emerald-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-emerald-800">MK</div>
                                             <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-blue-800">BT</div>
                                         </div>
-                                        <span className="text-slate-400 text-xs lg:text-sm">+100 registered</span>
+                                        <span className="text-slate-400 text-xs lg:text-sm">
+                                            {bangaloreCount !== null ? `+${bangaloreCount} registered` : "registrations open"}
+                                        </span>
                                     </div>
                                 </div>
                             </Link>
