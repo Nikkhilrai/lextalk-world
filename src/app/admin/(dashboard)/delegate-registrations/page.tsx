@@ -263,15 +263,18 @@ export default function DelegateRegistrationsPage() {
             return s.includes(",") || s.includes('"') || s.includes("\n")
                 ? `"${s.replace(/"/g, '""')}"` : s;
         };
-        const toRow = (r: any) => [
+        const toRow = (r: any) => {
+            const isFree = r.paymentType === "free";
+            return [
             r.firstName, r.lastName, r.email, r.phone, r.organization, r.designation, r.country,
             r.passType, r.passCategory, r.conferenceSlug, r.paymentStatus, r.paymentType,
-            r.currency, r.originalPrice, r.discountedPrice,
+            isFree ? "FREE" : r.currency, isFree ? 0 : r.originalPrice, isFree ? 0 : r.discountedPrice,
             r.couponCode, r.couponDiscount,
             r.razorpayOrderId, r.razorpayPaymentId,
             r.ticketNumber, r.emailSent ? "Yes" : "No",
             r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN") : "",
-        ].map(escape).join(",");
+            ].map(escape).join(",");
+        };
 
         const free = filtered.filter(r => r.paymentType === "free");
         const paid = filtered.filter(r => r.paymentStatus === "success" && r.paymentType !== "free");
