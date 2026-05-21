@@ -370,8 +370,16 @@ export default function DelegateRegistrationsPage() {
                     <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
                         <RefreshCw size={18} />
                     </button>
-                    <button onClick={handleExportCSV} className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
-                        <Download size={16} /> Export CSV
+                    <button
+                        onClick={() => {
+                            const params = new URLSearchParams();
+                            if (conferenceFilter !== "all") params.set("conference", conferenceFilter);
+                            if (statusFilter     !== "all") params.set("status",     statusFilter);
+                            if (passTypeFilter   !== "all") params.set("passType",   passTypeFilter);
+                            window.open(`/api/admin/export-registrations?${params}`, "_blank");
+                        }}
+                        className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
+                        <Download size={16} /> Export Excel
                     </button>
                 </div>
             </div>
