@@ -263,7 +263,7 @@ export default function DelegateRegistrationsPage() {
             return s.includes(",") || s.includes('"') || s.includes("\n")
                 ? `"${s.replace(/"/g, '""')}"` : s;
         };
-        const rows = filtered.map(r => [
+        const toRow = (r: any) => [
             r.firstName, r.lastName, r.email, r.phone, r.organization, r.designation, r.country,
             r.passType, r.passCategory, r.conferenceSlug, r.paymentStatus, r.paymentType,
             r.currency, r.originalPrice, r.discountedPrice,
@@ -271,10 +271,26 @@ export default function DelegateRegistrationsPage() {
             r.razorpayOrderId, r.razorpayPaymentId,
             r.ticketNumber, r.emailSent ? "Yes" : "No",
             r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN") : "",
-        ].map(escape).join(","));
+        ].map(escape).join(",");
 
-        const csv = [headers.join(","), ...rows].join("\n");
-        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const free = filtered.filter(r => r.paymentType === "free");
+        const paid = filtered.filter(r => r.paymentStatus === "success" && r.paymentType !== "free");
+        const unpaid = filtered.filter(r => r.paymentStatus !== "success" && r.paymentType !== "free");
+
+        const section = (title: string, rows: any[]) => [
+            `"===== ${title} (${rows.length}) ====="`,
+            headers.join(","),
+            ...rows.map(toRow),
+            "",
+        ].join("\n");
+
+        const csv = [
+            section("FREE REGISTRATIONS", free),
+            section("PAID REGISTRATIONS", paid),
+            section("REGISTERED — PAYMENT PENDING", unpaid),
+        ].join("\n");
+
+        const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
