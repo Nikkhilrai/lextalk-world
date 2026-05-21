@@ -103,7 +103,7 @@ export async function GET(req: NextRequest) {
         const bannerRow = ws.getRow(currentRow);
         ws.mergeCells(currentRow, 1, currentRow, COLUMNS.length);
         const bannerCell = bannerRow.getCell(1);
-        bannerCell.value  = `  ${section.label}   ·   ${rows.length} record${rows.length !== 1 ? "s" : ""}`;
+        bannerCell.value  = `  ${section.label}`;
         bannerCell.style  = {
             fill: { type: "pattern", pattern: "solid", fgColor: { argb: "FF" + section.headerFill } },
             font: { bold: true, size: 12, color: { argb: "FFFFFFFF" }, name: "Calibri" },

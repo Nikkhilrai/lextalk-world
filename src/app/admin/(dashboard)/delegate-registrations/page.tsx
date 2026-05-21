@@ -370,6 +370,9 @@ export default function DelegateRegistrationsPage() {
                     <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
                         <RefreshCw size={18} />
                     </button>
+                    <button onClick={handleExportCSV} className="px-4 py-2 bg-slate-600 text-white text-sm font-medium rounded hover:bg-slate-500 transition-all flex items-center gap-2">
+                        <Download size={16} /> Export CSV
+                    </button>
                     <button
                         onClick={() => {
                             const params = new URLSearchParams();
