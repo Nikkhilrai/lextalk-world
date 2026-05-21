@@ -620,7 +620,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
 /* ═══════════════════════════════════════════════
    Pricing Section
    ═══════════════════════════════════════════════ */
-const COUPON_EXPIRY = new Date("2026-05-20T23:59:59+05:30");
+const COUPON_EXPIRY = new Date("2026-05-27T23:59:59+05:30");
 const COUPON_CODE = "EARLY30";
 
 function CouponBanner() {
