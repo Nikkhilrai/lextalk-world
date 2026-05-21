@@ -5,7 +5,7 @@ import { StatCard } from "@/components/admin/StatCard";
 import {
     Ticket, DollarSign, Search, CheckCircle, Clock, Download, Mail,
     RefreshCw, Trash2, Eye, Send, Loader2, X, User,
-    CreditCard, Tag, Hash, Calendar
+    CreditCard, Tag, Hash, Calendar, TableProperties
 } from "lucide-react";
 import {
     getDelegateRegistrations,
@@ -217,6 +217,8 @@ export default function DelegateRegistrationsPage() {
     const [conferenceFilter, setConferenceFilter] = useState("all");
     const [sendingPass, setSendingPass] = useState<string | null>(null);
     const [selectedReg, setSelectedReg] = useState<any | null>(null);
+    const [syncing, setSyncing] = useState(false);
+    const [syncStatus, setSyncStatus] = useState<{ ok: boolean; msg: string } | null>(null);
     const [stats, setStats] = useState({
         total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0
     });
@@ -302,6 +304,25 @@ export default function DelegateRegistrationsPage() {
         URL.revokeObjectURL(url);
     };
 
+    const handleSyncToSheets = async () => {
+        setSyncing(true);
+        setSyncStatus(null);
+        try {
+            const res = await fetch("/api/admin/sync-to-sheets", { method: "POST" });
+            const data = await res.json();
+            if (data.success) {
+                setSyncStatus({ ok: true, msg: `Synced ${data.synced} records` });
+            } else {
+                setSyncStatus({ ok: false, msg: data.error || "Sync failed" });
+            }
+        } catch {
+            setSyncStatus({ ok: false, msg: "Network error" });
+        } finally {
+            setSyncing(false);
+            setTimeout(() => setSyncStatus(null), 5000);
+        }
+    };
+
     const handleDelete = async (id: string) => {
         if (!confirm("Are you sure you want to delete this registration?")) return;
         const res = await deleteDelegateRegistration(id);
@@ -366,24 +387,38 @@ export default function DelegateRegistrationsPage() {
                     <h4 className="text-xl font-bold text-white">Delegate Registrations</h4>
                     <p className="text-sm text-[#878a99]">Manage conference attendees and payments</p>
                 </div>
-                <div className="flex gap-2">
-                    <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
-                        <RefreshCw size={18} />
-                    </button>
-                    <button onClick={handleExportCSV} className="px-4 py-2 bg-slate-600 text-white text-sm font-medium rounded hover:bg-slate-500 transition-all flex items-center gap-2">
-                        <Download size={16} /> Export CSV
-                    </button>
-                    <button
-                        onClick={() => {
-                            const params = new URLSearchParams();
-                            if (conferenceFilter !== "all") params.set("conference", conferenceFilter);
-                            if (statusFilter     !== "all") params.set("status",     statusFilter);
-                            if (passTypeFilter   !== "all") params.set("passType",   passTypeFilter);
-                            window.open(`/api/admin/export-registrations?${params}`, "_blank");
-                        }}
-                        className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
-                        <Download size={16} /> Export Excel
-                    </button>
+                <div className="flex flex-col items-end gap-2">
+                    <div className="flex gap-2">
+                        <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
+                            <RefreshCw size={18} />
+                        </button>
+                        <button onClick={handleExportCSV} className="px-4 py-2 bg-slate-600 text-white text-sm font-medium rounded hover:bg-slate-500 transition-all flex items-center gap-2">
+                            <Download size={16} /> Export CSV
+                        </button>
+                        <button
+                            onClick={() => {
+                                const params = new URLSearchParams();
+                                if (conferenceFilter !== "all") params.set("conference", conferenceFilter);
+                                if (statusFilter     !== "all") params.set("status",     statusFilter);
+                                if (passTypeFilter   !== "all") params.set("passType",   passTypeFilter);
+                                window.open(`/api/admin/export-registrations?${params}`, "_blank");
+                            }}
+                            className="px-4 py-2 bg-[#0ab39c] text-white text-sm font-medium rounded hover:bg-[#099885] transition-all flex items-center gap-2">
+                            <Download size={16} /> Export Excel
+                        </button>
+                        <button
+                            onClick={handleSyncToSheets}
+                            disabled={syncing}
+                            className="px-4 py-2 bg-[#1a7a4a] text-white text-sm font-medium rounded hover:bg-[#15683e] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                            {syncing ? <Loader2 size={16} className="animate-spin" /> : <TableProperties size={16} />}
+                            {syncing ? "Syncing…" : "Sync to Google Sheet"}
+                        </button>
+                    </div>
+                    {syncStatus && (
+                        <span className={`text-xs font-medium ${syncStatus.ok ? "text-emerald-400" : "text-rose-400"}`}>
+                            {syncStatus.ok ? "✓" : "✗"} {syncStatus.msg}
+                        </span>
+                    )}
                 </div>
             </div>
 
