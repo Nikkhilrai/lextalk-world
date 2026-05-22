@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = "LexTalk World <newsletter@lextalkworld.com>";
+const FROM = "LexTalk World <noreply@lextalkworld.in>";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.com";
 
 export function buildNewsletterHtml(params: {
