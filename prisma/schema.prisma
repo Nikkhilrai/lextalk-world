@@ -121,10 +121,18 @@ model Advisor {
 
 // Newsletter Subscriber Model
 model Subscriber {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  status    String   @default("Subscribed") // Subscribed, Unsubscribed
-  createdAt DateTime @default(now())
+  id               String   @id @default(cuid())
+  email            String   @unique
+  firstName        String?
+  lastName         String?
+  source           String?  // website, delegate, lead, manual
+  status           String   @default("Subscribed") // Subscribed, Unsubscribed
+  unsubscribeToken String?  @unique
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+
+  @@index([email])
+  @@index([status])
 }
 
 // Speaker Model
@@ -543,4 +551,37 @@ model SpeakerApplication {
   @@index([email])
   @@index([status])
   @@index([createdAt])
+}
+
+// Newsletter Models
+model Newsletter {
+  id             String           @id @default(cuid())
+  subject        String
+  previewText    String?
+  htmlContent    String           @db.Text
+  status         String           @default("draft") // draft | sending | sent | failed
+  recipientCount Int              @default(0)
+  sentAt         DateTime?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sends          NewsletterSend[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model NewsletterSend {
+  id           String     @id @default(cuid())
+  newsletterId String
+  email        String
+  name         String?
+  source       String     // delegate | lead | subscriber | sponsorship | counsel
+  status       String     @default("sent") // sent | failed
+  error        String?
+  sentAt       DateTime   @default(now())
+  newsletter   Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
+
+  @@index([newsletterId])
+  @@index([email])
+  @@index([status])
 }
