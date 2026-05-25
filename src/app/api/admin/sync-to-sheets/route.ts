@@ -18,7 +18,7 @@ function rowValues(r: any): (string | number)[] {
         r.firstName        || "",
         r.lastName         || "",
         r.email            || "",
-        r.phone            || "",
+        r.phone ? String(r.phone) : "",
         r.organization     || "",
         r.designation      || "",
         r.country          || "",
@@ -36,7 +36,7 @@ function rowValues(r: any): (string | number)[] {
         r.razorpayPaymentId || "",
         r.ticketNumber     || "",
         r.emailSent ? "Yes" : "No",
-        r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN") : "",
+        r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) : "",
     ];
 }
 
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
         rows.push([]); // spacer
     };
 
-    rows.push([`Last synced: ${new Date().toLocaleString("en-IN")}`]);
+    rows.push([`Last synced: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} (IST)`]);
     rows.push([`Total: ${all.length}  |  Free: ${free.length}  |  Paid: ${paid.length}  |  Pending: ${pending.length}`]);
     rows.push([]);
 
