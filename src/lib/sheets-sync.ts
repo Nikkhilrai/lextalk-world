@@ -11,3 +11,8 @@ export function triggerAgendaSync() {
     fetch(`${BASE}/api/admin/sync-agenda-downloads-to-sheets`, { method: "POST" })
         .catch(() => {});
 }
+
+export function triggerLeadsSync() {
+    fetch(`${BASE}/api/admin/sync-leads-to-sheets`, { method: "POST" })
+        .catch(() => {});
+}

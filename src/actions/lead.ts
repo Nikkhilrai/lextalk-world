@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
+import { triggerLeadsSync } from "@/lib/sheets-sync";
 
 // Initialize Resend with API key
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
@@ -227,6 +228,9 @@ export async function createLead(data: any) {
             status: "New",
             createdAt: new Date().toISOString()
         });
+
+        // Sync full "Interest Form (Website)" sheet tab
+        triggerLeadsSync();
 
         // Send email notification (don't await to avoid slowing down the response)
         sendNotificationEmail(data);

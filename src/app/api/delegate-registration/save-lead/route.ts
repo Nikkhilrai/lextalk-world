@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { triggerLeadsSync } from "@/lib/sheets-sync";
 
 export async function POST(request: NextRequest) {
     try {
@@ -133,6 +134,9 @@ export async function POST(request: NextRequest) {
                 }
             }).catch((err: any) => console.error("Notification error:", err));
         }
+
+        // Sync "Interest Form (Website)" sheet tab
+        triggerLeadsSync();
 
         // Revalidate both admin dashboards to show new lead
         revalidatePath("/admin/delegate-registrations");
