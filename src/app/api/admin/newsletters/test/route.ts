@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendNewsletterEmail } from "@/lib/newsletter-mail";
 
-const TEST_EMAIL = "himmu1144@gmail.com";
+const TEST_EMAIL = "nikhil@mantranexvista.com";
 const TEST_NAME  = "Nikhil (Test)";
 
 export async function POST(req: NextRequest) {
