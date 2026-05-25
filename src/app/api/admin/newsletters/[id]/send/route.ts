@@ -36,6 +36,7 @@ async function sendInBackground(newsletterId: string, sources: AudienceSource[])
                         subject: newsletter.subject,
                         htmlContent: newsletter.htmlContent,
                         unsubscribeToken: recipient.unsubscribeToken,
+                        previewText: newsletter.previewText || undefined,
                     });
 
                     await db.newsletterSend.create({

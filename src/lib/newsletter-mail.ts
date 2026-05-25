@@ -7,10 +7,12 @@ export function buildNewsletterHtml(params: {
     htmlContent: string;
     recipientName: string;
     unsubscribeToken: string;
+    previewText?: string;
 }): string {
-    const { subject, htmlContent, recipientName, unsubscribeToken } = params;
+    const { subject, htmlContent, recipientName, unsubscribeToken, previewText } = params;
     const unsubscribeUrl = `${BASE_URL}/unsubscribe?token=${unsubscribeToken}`;
     const greeting = recipientName ? `Hi ${recipientName.split(" ")[0]},` : "Hi there,";
+    const preheader = previewText || "This week's top reads on law, AI & data privacy from LexTalk World.";
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -21,6 +23,8 @@ export function buildNewsletterHtml(params: {
   <title>${subject}</title>
 </head>
 <body style="margin:0;padding:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;">
+<!-- Preheader text: hidden but shows in inbox preview -->
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">${preheader}&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌</div>
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:40px 0;">
   <tr><td align="center">
     <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
@@ -80,6 +84,7 @@ export async function sendNewsletterEmail(params: {
     subject: string;
     htmlContent: string;
     unsubscribeToken: string;
+    previewText?: string;
 }): Promise<{ success: boolean; error?: string }> {
     const apiKey = process.env.BREVO_API_KEY;
     if (!apiKey) return { success: false, error: "BREVO_API_KEY not configured" };
@@ -89,6 +94,7 @@ export async function sendNewsletterEmail(params: {
         htmlContent: params.htmlContent,
         recipientName: params.name,
         unsubscribeToken: params.unsubscribeToken,
+        previewText: params.previewText,
     });
 
     const unsubscribeUrl = `${BASE_URL}/unsubscribe?token=${params.unsubscribeToken}`;
@@ -104,6 +110,7 @@ export async function sendNewsletterEmail(params: {
             body: JSON.stringify({
                 sender: FROM,
                 to: [{ email: params.to, name: params.name || params.to }],
+                replyTo: { email: "hello@lextalkworld.in", name: "LexTalk World" },
                 subject: params.subject,
                 htmlContent: html,
                 headers: {
