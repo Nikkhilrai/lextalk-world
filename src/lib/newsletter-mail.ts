@@ -11,9 +11,10 @@ export function buildNewsletterHtml(params: {
 }): string {
     const { subject, htmlContent, recipientName, unsubscribeToken, previewText } = params;
     const unsubscribeUrl = `${BASE_URL}/unsubscribe?token=${unsubscribeToken}`;
-    // Only use the name if it looks like a real name (not an email username like "nikkhhilrai")
-    const firstName = recipientName?.split(" ")[0] || "";
-    const looksLikeName = firstName.length > 0 && /[A-Z]/.test(firstName);
+    // Capitalise first letter; fall back to "Hi there," if name looks like an email username
+    const rawFirst = recipientName?.split(" ")[0] || "";
+    const firstName = rawFirst.charAt(0).toUpperCase() + rawFirst.slice(1).toLowerCase();
+    const looksLikeName = rawFirst.length > 1 && /[a-zA-Z]/.test(rawFirst) && !/\d/.test(rawFirst) && rawFirst.length <= 30;
     const greeting = looksLikeName ? `Hi ${firstName},` : "Hi there,";
     const preheader = previewText || "This week's top reads on law, AI & data privacy from LexTalk World.";
 
