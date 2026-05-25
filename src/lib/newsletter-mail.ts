@@ -46,21 +46,14 @@ export function buildNewsletterHtml(params: {
       <tr><td style="height:1px;background:#e2e8f0;"></td></tr>
 
       <!-- Footer -->
-      <tr><td style="background:#f8fafc;border-radius:0 0 12px 12px;padding:24px 40px;border:1px solid #e2e8f0;border-top:none;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="text-align:center;">
-              <p style="margin:0 0 8px;color:#0f172a;font-size:13px;font-weight:700;">LexTalk World</p>
-              <p style="margin:0 0 12px;color:#94a3b8;font-size:11px;">The Global Platform for Legal Professionals</p>
-              <p style="margin:0;color:#94a3b8;font-size:10px;line-height:1.8;">
-                You're receiving this because you engaged with LexTalk World.<br>
-                <a href="${unsubscribeUrl}" style="color:#f59e0b;text-decoration:underline;">Unsubscribe</a>
-                &nbsp;·&nbsp;
-                <a href="https://lextalkworld.in" style="color:#94a3b8;text-decoration:none;">lextalkworld.in</a>
-              </p>
-            </td>
-          </tr>
-        </table>
+      <tr><td style="background:#f8fafc;border-radius:0 0 12px 12px;padding:24px 40px;border:1px solid #e2e8f0;border-top:none;text-align:center;">
+        <p style="margin:0 0 4px;color:#0f172a;font-size:13px;font-weight:700;">LexTalk World &nbsp;·&nbsp; <span style="font-weight:400;color:#94a3b8;">The Global Platform for Legal Professionals</span></p>
+        <p style="margin:0;color:#94a3b8;font-size:10px;line-height:1.8;">
+          You're receiving this because you engaged with LexTalk World. &nbsp;
+          <a href="${unsubscribeUrl}" style="color:#f59e0b;text-decoration:underline;">Unsubscribe</a>
+          &nbsp;·&nbsp;
+          <a href="https://lextalkworld.in" style="color:#94a3b8;text-decoration:none;">lextalkworld.in</a>
+        </p>
       </td></tr>
 
     </table>
