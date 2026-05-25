@@ -1,6 +1,6 @@
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const FROM = { name: "LexTalk World", email: "newsletter@lextalkworld.in" };
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
 
 export function buildNewsletterHtml(params: {
     subject: string;
