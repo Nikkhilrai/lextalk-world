@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { triggerAgendaSync } from "@/lib/sheets-sync";
 
 export async function POST(request: NextRequest) {
     try {
@@ -17,6 +18,9 @@ export async function POST(request: NextRequest) {
         const agendaDownload = await prisma.agendaDownload.create({
             data: { fullName, email, designation, organization, phone, eventSlug, downloaded: true }
         });
+
+        // Auto-sync to Google Sheets
+        triggerAgendaSync();
 
         // Fire-and-forget notification
         prisma.notification.create({

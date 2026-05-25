@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 import { generateBangalorePassPDF, BangalorePassTitle } from "@/lib/bangalore-pass-puppeteer";
+import { triggerDelegateSync } from "@/lib/sheets-sync";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -143,6 +144,8 @@ export async function POST(request: NextRequest) {
         } catch (emailError) {
             console.error("Failed to send confirmation email:", emailError);
         }
+
+        triggerDelegateSync();
 
         return NextResponse.json({
             success: true,

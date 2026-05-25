@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
+import { triggerDelegateSync } from "@/lib/sheets-sync";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -107,6 +108,8 @@ export async function POST(request: NextRequest) {
         } catch (emailError) {
             console.error("Failed to send initial free confirmation email:", emailError);
         }
+
+        triggerDelegateSync();
 
         return NextResponse.json({
             success: true,
