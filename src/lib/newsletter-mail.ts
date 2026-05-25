@@ -1,7 +1,5 @@
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = "LexTalk World <noreply@lextalkworld.in>";
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const FROM = { name: "LexTalk World", email: "newsletter@lextalkworld.in" };
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.com";
 
 export function buildNewsletterHtml(params: {
@@ -79,26 +77,44 @@ export async function sendNewsletterEmail(params: {
     htmlContent: string;
     unsubscribeToken: string;
 }): Promise<{ success: boolean; error?: string }> {
+    const apiKey = process.env.BREVO_API_KEY;
+    if (!apiKey) return { success: false, error: "BREVO_API_KEY not configured" };
+
+    const html = buildNewsletterHtml({
+        subject: params.subject,
+        htmlContent: params.htmlContent,
+        recipientName: params.name,
+        unsubscribeToken: params.unsubscribeToken,
+    });
+
+    const unsubscribeUrl = `${BASE_URL}/unsubscribe?token=${params.unsubscribeToken}`;
+
     try {
-        const html = buildNewsletterHtml({
-            subject: params.subject,
-            htmlContent: params.htmlContent,
-            recipientName: params.name,
-            unsubscribeToken: params.unsubscribeToken,
-        });
-
-        const { error } = await resend.emails.send({
-            from: FROM,
-            to: params.to,
-            subject: params.subject,
-            html,
+        const res = await fetch(BREVO_API_URL, {
+            method: "POST",
             headers: {
-                "List-Unsubscribe": `<${process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.com"}/unsubscribe?token=${params.unsubscribeToken}>`,
-                "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                "accept": "application/json",
+                "content-type": "application/json",
+                "api-key": apiKey,
             },
+            body: JSON.stringify({
+                sender: FROM,
+                to: [{ email: params.to, name: params.name || params.to }],
+                subject: params.subject,
+                htmlContent: html,
+                headers: {
+                    "List-Unsubscribe": `<${unsubscribeUrl}>`,
+                    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                },
+            }),
         });
 
-        if (error) return { success: false, error: error.message };
+        if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            const msg = (body as any)?.message || `Brevo error ${res.status}`;
+            return { success: false, error: msg };
+        }
+
         return { success: true };
     } catch (err: any) {
         return { success: false, error: err.message };
