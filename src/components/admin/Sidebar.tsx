@@ -21,6 +21,14 @@ const NAV_GROUPS = [
         ]
     },
     {
+        title: "MARKETING",
+        items: [
+            { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
+            { label: "Contact Messages", href: "/admin/contact-messages", icon: MessageCircle },
+            { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
+        ]
+    },
+    {
         title: "APPS",
         items: [
             { label: "Conferences", href: "/admin/conferences", icon: Calendar },
@@ -32,11 +40,8 @@ const NAV_GROUPS = [
             { label: "Delegate Coupons", href: "/admin/delegate-coupons", icon: Tag },
             { label: "Speaker Applications", href: "/admin/speaker-applications", icon: Mic },
             { label: "Counsel Exchange", href: "/admin/counsel-exchange-access", icon: Lock },
-            { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
-            { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
-            { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
-            { label: "Chat", href: "#", icon: MessageCircle, badge: "New" }, // Placeholder
+            { label: "Chat", href: "#", icon: MessageCircle, badge: "New" },
         ]
     },
     {
