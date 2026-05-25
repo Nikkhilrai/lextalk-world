@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { buildAudience, AudienceSource } from "@/lib/newsletter-audience";
 import { sendNewsletterEmail } from "@/lib/newsletter-mail";
 
+export const maxDuration = 300; // 5 minutes — enough for 300 recipients
+
 const BATCH_SIZE = 50;
 const BATCH_DELAY_MS = 800;
 
@@ -82,10 +84,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     }
 
     const body = await req.json().catch(() => ({}));
-    const sources: AudienceSource[] = body.sources || ["delegates", "leads", "subscribers", "sponsorship", "counsel"];
+    const sources: AudienceSource[] = body.sources || ["delegates", "leads", "sponsorship", "counsel"];
 
-    // Kick off async — respond immediately
-    sendInBackground(id, sources).catch(console.error);
+    // Process synchronously — Vercel kills fire-and-forget tasks after response
+    await sendInBackground(id, sources);
 
-    return NextResponse.json({ success: true, message: "Newsletter send started" });
+    return NextResponse.json({ success: true, message: "Newsletter sent" });
 }
