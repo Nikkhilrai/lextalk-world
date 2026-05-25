@@ -54,8 +54,9 @@ function ComposeTab() {
     const [sources, setSources]         = useState<AudienceSource[]>([...ALL_SOURCES]);
     const [audienceCounts, setAudienceCounts] = useState<Record<string, number>>({});
     const [totalAudience, setTotalAudience]   = useState<number | null>(null);
-    const [sending, setSending]   = useState(false);
-    const [saving, setSaving]     = useState(false);
+    const [sending, setSending]     = useState(false);
+    const [saving, setSaving]       = useState(false);
+    const [testSending, setTestSending] = useState(false);
     const [showPreview, setShowPreview] = useState(false);
     const [status, setStatus] = useState<{ ok: boolean; msg: string } | null>(null);
 
@@ -91,6 +92,27 @@ function ComposeTab() {
         } catch {
             setStatus({ ok: false, msg: "Network error" });
         } finally { setSaving(false); }
+    };
+
+    const handleSendTest = async () => {
+        if (!subject.trim() || !htmlContent.trim()) {
+            setStatus({ ok: false, msg: "Subject and body are required to send a test" }); return;
+        }
+        setTestSending(true); setStatus(null);
+        try {
+            const res = await fetch("/api/admin/newsletters/test", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ subject, htmlContent }),
+            });
+            const data = await res.json();
+            setStatus(data.success
+                ? { ok: true, msg: `Test email sent to ${data.sentTo}` }
+                : { ok: false, msg: data.error || "Test send failed" }
+            );
+        } catch {
+            setStatus({ ok: false, msg: "Network error" });
+        } finally { setTestSending(false); }
     };
 
     const handleSend = async () => {
@@ -192,7 +214,7 @@ function ComposeTab() {
                         </div>
                     )}
 
-                    <div className="flex gap-3 pt-2">
+                    <div className="flex flex-wrap gap-3 pt-2">
                         <button
                             onClick={handleSaveDraft}
                             disabled={saving}
@@ -200,6 +222,15 @@ function ComposeTab() {
                         >
                             {saving ? <Loader2 size={14} className="animate-spin" /> : <FileText size={14} />}
                             Save Draft
+                        </button>
+                        <button
+                            onClick={handleSendTest}
+                            disabled={testSending}
+                            className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
+                            title="Sends a test to himmu1144@gmail.com"
+                        >
+                            {testSending ? <Loader2 size={14} className="animate-spin" /> : <Mail size={14} />}
+                            {testSending ? "Sending…" : "Send Test"}
                         </button>
                         <button
                             onClick={handleSend}
