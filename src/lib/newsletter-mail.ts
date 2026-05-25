@@ -11,7 +11,10 @@ export function buildNewsletterHtml(params: {
 }): string {
     const { subject, htmlContent, recipientName, unsubscribeToken, previewText } = params;
     const unsubscribeUrl = `${BASE_URL}/unsubscribe?token=${unsubscribeToken}`;
-    const greeting = recipientName ? `Hi ${recipientName.split(" ")[0]},` : "Hi there,";
+    // Only use the name if it looks like a real name (not an email username like "nikkhhilrai")
+    const firstName = recipientName?.split(" ")[0] || "";
+    const looksLikeName = firstName.length > 0 && /[A-Z]/.test(firstName);
+    const greeting = looksLikeName ? `Hi ${firstName},` : "Hi there,";
     const preheader = previewText || "This week's top reads on law, AI & data privacy from LexTalk World.";
 
     return `<!DOCTYPE html>
