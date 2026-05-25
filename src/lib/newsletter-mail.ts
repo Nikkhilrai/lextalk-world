@@ -27,7 +27,8 @@ export function buildNewsletterHtml(params: {
 
       <!-- Header -->
       <tr><td style="background:#0f172a;border-radius:12px 12px 0 0;padding:32px 40px;text-align:center;">
-        <p style="margin:0 0 6px;color:#f59e0b;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">LexTalk World</p>
+        <p style="margin:0 0 4px;color:#f59e0b;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">LexTalk World</p>
+        <p style="margin:0 0 10px;color:#94a3b8;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;">APAC &amp; Middle East</p>
         <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;line-height:1.3;">${subject}</h1>
       </td></tr>
 
