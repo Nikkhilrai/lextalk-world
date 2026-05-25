@@ -63,11 +63,7 @@ Beyond corporate roles, Amit is a prominent industry voice, frequently speaking 
 
 Amit’s influence on policy, commitment to legal scholarship, and advisory work have shaped privacy, labor, and corporate governance frameworks. His leadership continues to advance the legal profession and guide organizations within an evolving regulatory landscape.`
     },
-    {
-        name: "Tanin Chakraborty",
-        title: "Senior Director, Global DPO, Biocon Biologics",
-        image: "/bangalore-2026/speakers-images/Tanin-Chakraborty.png",
-    },
+
     {
         name: "Arvind Subramaniam",
         title: "Data Privacy Officer, M2P Fintech",
@@ -201,6 +197,11 @@ Prior to Trianz, Balaji held senior leadership roles at EXLService and served as
         name: "Deepti Aggarwal",
         title: "Associate Director, Regulatory Affairs & Drug Development Solutions (RADDS), IQVIA",
         image: "/bangalore-2026/speakers-images/Deepti Aggarwal.png",
+    },
+    {
+        name: "Yogesh Naik",
+        title: "Senior Legal Counsel, Volvo Group India",
+        image: "/bangalore-2026/speakers-images/YOGESH NAIK.png",
     },
 ];
 
