@@ -95,15 +95,13 @@ function ComposeTab() {
     };
 
     const handleSendTest = async () => {
-        if (!subject.trim() || !htmlContent.trim()) {
-            setStatus({ ok: false, msg: "Subject and body are required to send a test" }); return;
-        }
         setTestSending(true); setStatus(null);
         try {
             const res = await fetch("/api/admin/newsletters/test", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ subject, htmlContent }),
+                // Pass whatever's in the form — route falls back to pre-built newsletter if empty
+                body: JSON.stringify({ subject: subject.trim(), htmlContent: htmlContent.trim() }),
             });
             const data = await res.json();
             setStatus(data.success
