@@ -25,6 +25,8 @@ export default function AgendaDownloadsPage() {
     const [selectedEventForUpload, setSelectedEventForUpload] = useState("");
     const [viewingEntry, setViewingEntry] = useState<AgendaDownload | null>(null);
     const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
+    const [syncing, setSyncing] = useState(false);
+    const [syncStatus, setSyncStatus] = useState<{ ok: boolean; msg: string } | null>(null);
     const [conferences, setConferences] = useState<{ name: string; slug: string }[]>([]);
 
     useEffect(() => {
@@ -113,6 +115,25 @@ export default function AgendaDownloadsPage() {
             alert("Failed to delete entry. Please try again.");
         } finally {
             setDeleteLoading(null);
+        }
+    };
+
+    const handleSyncToSheets = async () => {
+        setSyncing(true);
+        setSyncStatus(null);
+        try {
+            const res = await fetch("/api/admin/sync-agenda-downloads-to-sheets", { method: "POST" });
+            const data = await res.json();
+            if (data.success) {
+                setSyncStatus({ ok: true, msg: `✓ Synced ${data.synced} records` });
+                setTimeout(() => setSyncStatus(null), 3000);
+            } else {
+                setSyncStatus({ ok: false, msg: data.error || "Failed to sync" });
+            }
+        } catch {
+            setSyncStatus({ ok: false, msg: "Network error" });
+        } finally {
+            setSyncing(false);
         }
     };
 
@@ -312,8 +333,8 @@ export default function AgendaDownloadsPage() {
 
             {/* Filters & Export */}
             <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-6">
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="flex-1 relative">
+                <div className="flex flex-wrap gap-3">
+                    <div className="flex-1 min-w-[200px] relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                         <input
                             type="text"
@@ -346,6 +367,25 @@ export default function AgendaDownloadsPage() {
                     >
                         <FileText size={20} />
                         Export PDF
+                    </button>
+                    <button
+                        onClick={handleSyncToSheets}
+                        disabled={syncing}
+                        className={`px-6 py-3 font-semibold rounded-lg transition flex items-center gap-2 whitespace-nowrap ${
+                            syncing 
+                                ? "bg-emerald-600/50 text-white cursor-wait" 
+                                : syncStatus?.ok 
+                                    ? "bg-emerald-600 text-white"
+                                    : syncStatus?.ok === false
+                                        ? "bg-red-600 text-white"
+                                        : "bg-emerald-600 text-white hover:bg-emerald-700"
+                        }`}
+                        title="Sync all agenda downloads to Google Sheets"
+                    >
+                        <svg className={`w-5 h-5 ${syncing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        {syncStatus ? syncStatus.msg : syncing ? "Syncing..." : "Sync to Google Sheet"}
                     </button>
                 </div>
             </div>
