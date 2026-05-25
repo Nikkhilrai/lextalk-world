@@ -58,7 +58,19 @@ function ComposeTab() {
     const [saving, setSaving]       = useState(false);
     const [testSending, setTestSending] = useState(false);
     const [showPreview, setShowPreview] = useState(false);
+    const [testEmails, setTestEmails]   = useState("nikhil@mantranexvista.com");
     const [status, setStatus] = useState<{ ok: boolean; msg: string } | null>(null);
+
+    // Auto-fill compose form with pre-built newsletter on mount
+    useEffect(() => {
+        fetch("/api/admin/newsletters/test")
+            .then(r => r.json())
+            .then(d => {
+                if (d.subject)     setSubject(d.subject);
+                if (d.htmlContent) setHtmlContent(d.htmlContent);
+            })
+            .catch(() => {});
+    }, []);
 
     const fetchAudience = useCallback(async () => {
         if (sources.length === 0) { setTotalAudience(0); setAudienceCounts({}); return; }
@@ -95,13 +107,15 @@ function ComposeTab() {
     };
 
     const handleSendTest = async () => {
+        if (!testEmails.trim()) {
+            setStatus({ ok: false, msg: "Enter at least one test email address" }); return;
+        }
         setTestSending(true); setStatus(null);
         try {
             const res = await fetch("/api/admin/newsletters/test", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                // Pass whatever's in the form — route falls back to pre-built newsletter if empty
-                body: JSON.stringify({ subject: subject.trim(), htmlContent: htmlContent.trim() }),
+                body: JSON.stringify({ subject: subject.trim(), htmlContent: htmlContent.trim(), testEmails }),
             });
             const data = await res.json();
             setStatus(data.success
@@ -212,7 +226,20 @@ function ComposeTab() {
                         </div>
                     )}
 
-                    <div className="flex flex-wrap gap-3 pt-2">
+                    <div className="pt-2 space-y-3">
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">
+                                Test Recipients <span className="text-slate-600 font-normal normal-case">(comma-separated)</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={testEmails}
+                                onChange={e => setTestEmails(e.target.value)}
+                                placeholder="email1@example.com, email2@example.com"
+                                className="w-full bg-[#0f172a] border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-amber-500/50"
+                            />
+                        </div>
+                    <div className="flex flex-wrap gap-3">
                         <button
                             onClick={handleSaveDraft}
                             disabled={saving}
@@ -225,7 +252,6 @@ function ComposeTab() {
                             onClick={handleSendTest}
                             disabled={testSending}
                             className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
-                            title="Sends a test to himmu1144@gmail.com"
                         >
                             {testSending ? <Loader2 size={14} className="animate-spin" /> : <Mail size={14} />}
                             {testSending ? "Sending…" : "Send Test"}
@@ -238,6 +264,7 @@ function ComposeTab() {
                             {sending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                             {sending ? "Sending…" : "Send Newsletter"}
                         </button>
+                    </div>
                     </div>
                 </div>
             </div>

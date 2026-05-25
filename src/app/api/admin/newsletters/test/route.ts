@@ -183,28 +183,40 @@ const NEWSLETTER_HTML = `
 </p>
 `;
 
+// GET — returns the pre-built newsletter so the compose form can auto-fill
+export async function GET() {
+    return NextResponse.json({ subject: NEWSLETTER_SUBJECT, htmlContent: NEWSLETTER_HTML });
+}
+
 export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
 
-    // Allow override via body, fall back to the pre-built newsletter
-    const subject     = (body as any).subject     || NEWSLETTER_SUBJECT;
-    const htmlContent = (body as any).htmlContent || NEWSLETTER_HTML;
+    const subject     = (body as any).subject?.trim()     || NEWSLETTER_SUBJECT;
+    const htmlContent = (body as any).htmlContent?.trim() || NEWSLETTER_HTML;
 
-    if (!subject?.trim() || !htmlContent?.trim()) {
-        return NextResponse.json({ error: "subject and htmlContent are required" }, { status: 400 });
+    // Support sending to multiple recipients (comma-separated emails)
+    const rawEmails: string = (body as any).testEmails || TEST_EMAIL;
+    const recipients = rawEmails
+        .split(",")
+        .map((e: string) => e.trim())
+        .filter(Boolean);
+
+    const results = await Promise.all(
+        recipients.map(email =>
+            sendNewsletterEmail({
+                to: email,
+                name: email.split("@")[0],
+                subject: `[TEST] ${subject}`,
+                htmlContent,
+                unsubscribeToken: "test-preview-token",
+            })
+        )
+    );
+
+    const failed = results.filter(r => !r.success);
+    if (failed.length === results.length) {
+        return NextResponse.json({ error: failed[0].error }, { status: 500 });
     }
 
-    const result = await sendNewsletterEmail({
-        to: TEST_EMAIL,
-        name: TEST_NAME,
-        subject: `[TEST] ${subject}`,
-        htmlContent,
-        unsubscribeToken: "test-preview-token",
-    });
-
-    if (!result.success) {
-        return NextResponse.json({ error: result.error }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true, sentTo: TEST_EMAIL });
+    return NextResponse.json({ success: true, sentTo: recipients.join(", ") });
 }
