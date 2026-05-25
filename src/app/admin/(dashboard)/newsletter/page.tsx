@@ -51,7 +51,7 @@ function ComposeTab() {
     const [subject, setSubject]         = useState("");
     const [previewText, setPreviewText] = useState("");
     const [htmlContent, setHtmlContent] = useState("");
-    const [sources, setSources]         = useState<AudienceSource[]>([...ALL_SOURCES]);
+    const [sources, setSources]         = useState<AudienceSource[]>(["delegates", "leads", "sponsorship", "counsel"]);
     const [audienceCounts, setAudienceCounts] = useState<Record<string, number>>({});
     const [totalAudience, setTotalAudience]   = useState<number | null>(null);
     const [sending, setSending]     = useState(false);

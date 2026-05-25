@@ -7,9 +7,5 @@ export async function GET(req: NextRequest) {
     const sources = sourcesParam.split(",").filter(Boolean) as AudienceSource[];
 
     const counts = await getAudienceCounts(sources);
-
-    // compute total from unique merge (approximate — exact dedup requires full query)
-    const total = counts.delegates + counts.leads + counts.subscribers + counts.sponsorship + counts.counsel;
-
-    return NextResponse.json({ ...counts, total });
+    return NextResponse.json(counts);
 }

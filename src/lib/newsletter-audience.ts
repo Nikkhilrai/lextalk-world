@@ -62,16 +62,30 @@ export async function getAudienceCounts(sources: AudienceSource[]): Promise<Audi
         db.counselExchangeRequest.findMany({ select: { email: true } }),
     ]);
 
-    const count = (rows: any[]) =>
-        new Set(rows.map((r: any) => r.email.toLowerCase()).filter((e: string) => !unsubscribed.has(e))).size;
+    const clean = (rows: any[]) =>
+        rows.map((r: any) => r.email.toLowerCase()).filter((e: string) => !unsubscribed.has(e));
+
+    const delegateEmails    = new Set(clean(delegateRows));
+    const leadEmails        = new Set(clean(leadRows));
+    const subscriberEmails  = new Set(clean(subscriberRows));
+    const sponsorEmails     = new Set(clean(sponsorRows));
+    const counselEmails     = new Set(clean(counselRows));
+
+    // Deduplicated total across selected sources only
+    const merged = new Set<string>();
+    if (sources.includes("delegates"))   delegateEmails.forEach(e => merged.add(e));
+    if (sources.includes("leads"))       leadEmails.forEach(e => merged.add(e));
+    if (sources.includes("subscribers")) subscriberEmails.forEach(e => merged.add(e));
+    if (sources.includes("sponsorship")) sponsorEmails.forEach(e => merged.add(e));
+    if (sources.includes("counsel"))     counselEmails.forEach(e => merged.add(e));
 
     return {
-        delegates: count(delegateRows),
-        leads: count(leadRows),
-        subscribers: count(subscriberRows),
-        sponsorship: count(sponsorRows),
-        counsel: count(counselRows),
-        total: 0, // computed below
+        delegates:   delegateEmails.size,
+        leads:       leadEmails.size,
+        subscribers: subscriberEmails.size,
+        sponsorship: sponsorEmails.size,
+        counsel:     counselEmails.size,
+        total:       merged.size,
     };
 }
 
