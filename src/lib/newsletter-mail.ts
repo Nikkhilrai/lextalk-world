@@ -49,6 +49,16 @@ export function buildNewsletterHtml(params: {
       <!-- Footer -->
       <tr><td style="background:#f8fafc;border-radius:0 0 12px 12px;padding:24px 40px;border:1px solid #e2e8f0;border-top:none;text-align:center;">
         <p style="margin:0 0 4px;color:#0f172a;font-size:13px;font-weight:700;">LexTalk World &nbsp;·&nbsp; <span style="font-weight:400;color:#94a3b8;">The Global Platform for Legal Professionals</span></p>
+
+        <!-- Social links -->
+        <p style="margin:12px 0;">
+          <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" style="display:inline-block;margin:0 5px;padding:6px 12px;background:#0a66c2;color:#ffffff;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;">LinkedIn</a>
+          <a href="https://x.com/LextalkWorldME" style="display:inline-block;margin:0 5px;padding:6px 12px;background:#000000;color:#ffffff;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;">X</a>
+          <a href="https://www.instagram.com/lextalkworldapacandme/" style="display:inline-block;margin:0 5px;padding:6px 12px;background:#e1306c;color:#ffffff;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61585120593750" style="display:inline-block;margin:0 5px;padding:6px 12px;background:#1877f2;color:#ffffff;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;">Facebook</a>
+          <a href="https://www.youtube.com/@LextalkWorldAPACandME" style="display:inline-block;margin:0 5px;padding:6px 12px;background:#ff0000;color:#ffffff;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;">YouTube</a>
+        </p>
+
         <p style="margin:0;color:#94a3b8;font-size:10px;line-height:1.8;">
           You're receiving this because you engaged with LexTalk World. &nbsp;
           <a href="${unsubscribeUrl}" style="color:#f59e0b;text-decoration:underline;">Unsubscribe</a>
