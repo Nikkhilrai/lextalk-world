@@ -56,7 +56,7 @@ export function buildNewsletterHtml(params: {
                 You're receiving this because you engaged with LexTalk World.<br>
                 <a href="${unsubscribeUrl}" style="color:#f59e0b;text-decoration:underline;">Unsubscribe</a>
                 &nbsp;·&nbsp;
-                <a href="https://lextalkworld.com" style="color:#94a3b8;text-decoration:none;">lextalkworld.com</a>
+                <a href="https://lextalkworld.in" style="color:#94a3b8;text-decoration:none;">lextalkworld.in</a>
               </p>
             </td>
           </tr>
