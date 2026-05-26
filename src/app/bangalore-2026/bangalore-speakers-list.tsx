@@ -14,6 +14,11 @@ const speakers: any[] = [
         isGuestOfHonor: true,
     },
     {
+        name: "Dr. Lalit Bhasin",
+        title: "President, Society of Indian Law Firms, India",
+        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
+    },
+    {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners Advocates",
         image: "/bangalore-2026/speakers-images/Aniket Gautam.png",
@@ -32,11 +37,6 @@ const speakers: any[] = [
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
         image: "/bangalore-2026/speakers-images/Sunjjoy Jaiin.png",
-    },
-    {
-        name: "Dr. Lalit Bhasin",
-        title: "President, Society of Indian Law Firms, India",
-        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
     },
     {
         name: "Jaya Kathju",
