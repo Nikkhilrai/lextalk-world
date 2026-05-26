@@ -51,11 +51,6 @@ const speakers: any[] = [
         bio: `Priyesh Sharma, Assistant Vice President (Legal) at Knowledge Realty Trust, is a seasoned corporate lawyer with over 15 years of experience in mergers & acquisitions, private equity/venture capital, and real estate transactions. He has been associated with some of India’s leading law firms, including JSA, AZB & Partners, and Cyril Amarchand Mangaldas, and has previously headed the M&A practice at ARA Law. He has advised on several high-value acquisitions and investment transactions in recent years including the largest ever real estate acquisitions and the REITs and has been consistently recognised for his contributions to the field. His accolades include being named a Rising Star- 40 under 40 by Legal Era (2026) ,  Rising Star in M&A and Real Estate (Education Leaders 2025), featuring in Enterprise’s Global Leadership List 2025, inclusion in TradeFlock’s Top Real Estate Leadership List 2024, and recognition as Young Achiever of the Year (Legal Era 2023), among others.`
     },
     {
-        name: "Shirish Pillai",
-        title: "Senior Director, Enterprise Risk Management, Nasdaq",
-        image: "/bangalore-2026/speakers-images/Shirish-Pillai.png",
-    },
-    {
         name: "Debasish Roychowdhury",
         title: "General Counsel and Head Legal, Compliance and Secretarial, In-solutions Global Ltd.",
         image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png",
