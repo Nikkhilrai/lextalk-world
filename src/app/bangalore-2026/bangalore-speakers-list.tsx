@@ -21,22 +21,22 @@ const speakers: any[] = [
     {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners Advocates",
-        image: "/bangalore-2026/speakers-images/Aniket%20Gautam.png",
+        image: "/bangalore-2026/speakers-images/Aniket-Gautam.png",
     },
     {
         name: "Velmuruga Venkatesh",
         title: "Executive Director – Technology Risk Policy, Governance Risk Reporting & Regulatory Compliance, Wells Fargo",
-        image: "/bangalore-2026/speakers-images/Velmuruga%20Venkatesh.png",
+        image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png",
     },
     {
         name: "Kapil Singhal",
         title: "Chief Executive Officer (CEO), Case Docker",
-        image: "/bangalore-2026/speakers-images/Kapil%20Singhal.png",
+        image: "/bangalore-2026/speakers-images/Kapil-Singhal.png",
     },
     {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
-        image: "/bangalore-2026/speakers-images/Sunjjoy%20Jaiin.png",
+        image: "/bangalore-2026/speakers-images/Sunjjoy-Jaiin.png",
     },
     {
         name: "Jaya Kathju",
@@ -321,6 +321,7 @@ export default function BangaloreSpeakersList() {
                                                     alt={speaker.name}
                                                     width={400}
                                                     height={500}
+                                                    unoptimized
                                                     className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
                                                 />
                                             ) : (
