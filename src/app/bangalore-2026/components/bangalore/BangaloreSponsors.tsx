@@ -10,6 +10,11 @@ const categories = [
         ]
     },
     {
+        name: "Gold Sponsor", size: "md", items: [
+            { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png" },
+        ]
+    },
+    {
         name: "Global Partners", size: "md", items: [
             { name: "Counselling Association", logo: "/dubai-event/logos/2.png" },
             { name: "Global Innovation", logo: "/dubai-event/logos/4.png" }
