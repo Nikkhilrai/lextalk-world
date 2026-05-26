@@ -27,6 +27,11 @@ const speakers: any[] = [
         name: "Velmuruga Venkatesh",
         title: "Executive Director – Technology Risk Policy, Governance Risk Reporting & Regulatory Compliance, Wells Fargo",
         image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png",
+        bio: `A results-driven Governance, Risk and Compliance professional with 29+ years of expertise across Risk Management, Regulatory Compliance, Financial Crimes, IT Risk, Cybersecurity, BCP/DR, Audit, and Data Privacy. Currently serving as Executive Director in GRC at Wells Fargo, he brings deep knowledge of global standards in highly regulated environments.
+
+He holds a Master's in Business Law from NLSIU, an MBA from Symbiosis Institute, and has completed the Senior Management Program at IIM Calcutta. His certifications include CRISC, CDPSE, ISO 27001 Lead Implementer, ISO 31000, and COBIT 5.
+
+An active industry leader, Velmuruga has served 16+ years on the ISACA Bangalore Chapter Board including two terms as President. He is an Honorary Member of the NCSRC Core Committee (Karnataka), Advisory Council Member at NCDRC, and a CyberCrime Intervention Officer at ISAC.`,
     },
     {
         name: "Kapil Singhal",
