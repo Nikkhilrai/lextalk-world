@@ -21,22 +21,22 @@ const speakers: any[] = [
     {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners Advocates",
-        image: "/bangalore-2026/speakers-images/Aniket Gautam.png",
+        image: "/bangalore-2026/speakers-images/Aniket-Gautam.png",
     },
     {
         name: "Velmuruga Venkatesh",
         title: "Executive Director – Technology Risk Policy, Governance Risk Reporting & Regulatory Compliance, Wells Fargo",
-        image: "/bangalore-2026/speakers-images/Velmuruga Venkatesh.png",
+        image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png",
     },
     {
         name: "Kapil Singhal",
         title: "Chief Executive Officer (CEO), Case Docker",
-        image: "/bangalore-2026/speakers-images/Kapil Singhal.png",
+        image: "/bangalore-2026/speakers-images/Kapil-Singhal.png",
     },
     {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
-        image: "/bangalore-2026/speakers-images/Sunjjoy Jaiin.png",
+        image: "/bangalore-2026/speakers-images/Sunjjoy-Jaiin.png",
     },
     {
         name: "Jaya Kathju",
