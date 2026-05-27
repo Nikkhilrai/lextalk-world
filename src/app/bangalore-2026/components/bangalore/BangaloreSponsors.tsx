@@ -45,9 +45,14 @@ export function BangaloreSponsors() {
                                         className={`relative group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 flex items-center justify-center p-8 ${cat.size === 'lg' ? 'w-64 h-40 md:w-80 md:h-48' : 'w-48 h-28 md:w-56 md:h-36'
                                             }`}
                                     >
-                                        <div className="relative w-full h-full grayscale hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100">
-                                            <Image src={item.logo} alt={item.name} fill className="object-contain" />
-                                        </div>
+                                        <Image
+                                            src={item.logo}
+                                            alt={item.name}
+                                            width={200}
+                                            height={100}
+                                            unoptimized
+                                            className="object-contain w-full h-full grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-500"
+                                        />
                                     </motion.div>
                                 ))}
                             </div>
