@@ -424,7 +424,7 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                                 <Tag size={11} className="text-amber-400" />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-[10px] text-amber-300/70 font-medium">Apply coupon for 30% off</p>
+                                <p className="text-[10px] text-amber-300/70 font-medium">Apply coupon for 30% off · <span className="text-red-400 font-bold">Expires 31 May</span></p>
                                 <button
                                     onClick={() => { setCouponInput(COUPON_CODE); setCouponError(""); }}
                                     className="text-[11px] font-black text-amber-400 hover:text-amber-300 tracking-widest transition-colors"
