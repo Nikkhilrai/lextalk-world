@@ -7,9 +7,10 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PhoneInput } from "@/components/PhoneInput";
 import { CountrySelect } from "@/components/CountrySelect";
+import Image from "next/image";
 import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle,
-    ShieldCheck, Tag, X, BadgeCheck, Users, Mic,
+    ShieldCheck, Tag, X, BadgeCheck, Mic,
     Wifi, Coffee, Award, BookOpen, Star, CheckCircle2,
     Calendar, MapPin, Zap, Share2, LayoutGrid,
 } from "lucide-react";
@@ -559,10 +560,10 @@ export default function BangaloreSILFCorporateCounselPass() {
 
                             {/* SILF Association Banner */}
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.05 }}
-                                className="flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl mb-6"
+                                className="flex items-center gap-4 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl mb-6"
                             >
-                                <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0">
-                                    <Users size={15} className="text-amber-400" />
+                                <div className="bg-white rounded-lg p-1.5 flex-shrink-0">
+                                    <Image src="/associations/SILF.png" alt="Society Of Indian Law Firms" width={80} height={40} unoptimized className="object-contain h-8 w-auto" />
                                 </div>
                                 <div>
                                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 mb-0.5">In Association With</p>
