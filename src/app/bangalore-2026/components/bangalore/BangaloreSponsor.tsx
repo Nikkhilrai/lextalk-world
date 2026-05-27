@@ -17,6 +17,8 @@ const tiers = [
         accent: "from-amber-200 via-amber-400 to-amber-200",
         sponsors: [
             { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/", w: 260, h: 130 },
+            { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: null, w: 220, h: 110 },
+            { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/", w: 220, h: 110 },
         ],
     },
     {
