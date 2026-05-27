@@ -12,7 +12,7 @@ const categories = [
     {
         name: "Gold Sponsor", size: "md", items: [
             { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png" },
-            { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM Logo Blue.png" },
+            { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png" },
         ]
     },
     {
