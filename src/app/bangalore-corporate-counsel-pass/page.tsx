@@ -18,9 +18,11 @@ import { motion, AnimatePresence } from "framer-motion";
 declare global { interface Window { Razorpay: any; } }
 
 const ORIGINAL_PRICE = 9999;
-const COUPON_PRICE = 6999;
-const COUPON_CODE = "EXCLUSIVE30";
 const GST_RATE = 0.18;
+
+function calcPrice(discountPct: number) {
+    return Math.round(ORIGINAL_PRICE * (1 - discountPct / 100));
+}
 
 const AUDIENCE = [
     "In-House Counsel",
@@ -47,8 +49,8 @@ interface FormData {
 }
 
 /* ── Registration Modal ── */
-function RegistrationModal({ isOpen, onClose, couponApplied }: {
-    isOpen: boolean; onClose: () => void; couponApplied: boolean;
+function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, appliedCode }: {
+    isOpen: boolean; onClose: () => void; couponApplied: boolean; discountPct: number; appliedCode: string;
 }) {
     const router = useRouter();
     const [step, setStep] = useState<1 | 2>(1);
@@ -62,8 +64,9 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
     const [processStep, setProcessStep] = useState(0);
     const [error, setError] = useState<string | null>(null);
 
-    const price = couponApplied ? COUPON_PRICE : ORIGINAL_PRICE;
-    const total = Math.round(price * (1 + GST_RATE));
+    const price = couponApplied ? calcPrice(discountPct) : ORIGINAL_PRICE;
+    const isFree = price === 0;
+    const total = isFree ? 0 : Math.round(price * (1 + GST_RATE));
 
     const steps = [
         "Securing your registration…",
@@ -182,6 +185,39 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
         }
     };
 
+    const handleFreeRegistration = async () => {
+        setIsProcessing(true); setError(null);
+        try {
+            const res = await fetch("/api/delegate-registration/register-free", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    passType: "corporate-counsel",
+                    passCategory: "individual",
+                    customerDetails: formData,
+                    conferenceSlug: "bangalore-2026",
+                }),
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error || "Registration failed");
+
+            // Increment coupon usage
+            await fetch("/api/delegate-coupons/use", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code: appliedCode }),
+            }).catch(() => {});
+
+            setTimeout(() => {
+                onClose();
+                router.push(`/bangalore-delegate-confirmation-2026?regId=${data.id}`);
+            }, 3000);
+        } catch (err: any) {
+            setError(err.message || "Something went wrong");
+            setIsProcessing(false);
+        }
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -203,7 +239,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                 {couponApplied && (
                                     <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 rounded-full border border-green-200">
                                         <Tag size={10} className="text-green-600" />
-                                        <span className="text-[9px] font-bold text-green-700 uppercase tracking-wide">{COUPON_CODE}</span>
+                                        <span className="text-[9px] font-bold text-green-700 uppercase tracking-wide">{appliedCode}</span>
                                     </div>
                                 )}
                                 <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
@@ -274,7 +310,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                         <button type="submit" disabled={isSaving}
                                             className="w-full group flex items-center justify-center gap-2 py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-2xl transition-all duration-300 disabled:opacity-60 active:scale-[0.98]"
                                         >
-                                            {isSaving ? <><Loader2 size={15} className="animate-spin" /> Saving…</> : <>Review & Pay <ArrowRight size={14} /></>}
+                                            {isSaving ? <><Loader2 size={15} className="animate-spin" /> Saving…</> : isFree ? <>Continue to Register <ArrowRight size={14} /></> : <>Review & Pay <ArrowRight size={14} /></>}
                                         </button>
                                         <button type="button" onClick={onClose} className="w-full py-1.5 text-[10px] text-slate-400 hover:text-slate-600 font-bold uppercase tracking-widest transition-colors">Cancel</button>
                                     </motion.form>
@@ -307,17 +343,19 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                             </div>
                                             {couponApplied && (
                                                 <div className="flex justify-between text-sm">
-                                                    <span className="flex items-center gap-1.5 text-green-700"><Tag size={10} /> {COUPON_CODE} (30% off)</span>
-                                                    <span className="text-green-700 font-semibold">−₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")}</span>
+                                                    <span className="flex items-center gap-1.5 text-green-700"><Tag size={10} /> {appliedCode} ({discountPct}% off)</span>
+                                                    <span className="text-green-700 font-semibold">−₹{(ORIGINAL_PRICE - price).toLocaleString("en-IN")}</span>
                                                 </div>
                                             )}
-                                            <div className="flex justify-between text-sm">
-                                                <span className="text-slate-500">GST (18%)</span>
-                                                <span className="text-slate-700">₹{(total - price).toLocaleString("en-IN")}</span>
-                                            </div>
+                                            {!isFree && (
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-slate-500">GST (18%)</span>
+                                                    <span className="text-slate-700">₹{(total - price).toLocaleString("en-IN")}</span>
+                                                </div>
+                                            )}
                                             <div className="flex justify-between text-base font-black border-t border-amber-200 pt-2 mt-1">
                                                 <span className="text-slate-900">Total</span>
-                                                <span className="text-slate-900">₹{total.toLocaleString("en-IN")}</span>
+                                                <span className="text-slate-900">{isFree ? "FREE" : `₹${total.toLocaleString("en-IN")}`}</span>
                                             </div>
                                         </div>
                                         {error && (
@@ -325,14 +363,25 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                                 <AlertCircle size={13} /> {error}
                                             </div>
                                         )}
-                                        <button onClick={handlePayment} disabled={isProcessing}
-                                            className="group relative w-full flex flex-col items-center justify-center p-5 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(245,158,11,0.5)] transition-all duration-300 active:scale-[0.98] disabled:opacity-50 shadow-lg"
-                                        >
-                                            <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-slate-900/60">Pay via Razorpay</span>
-                                            <span className="text-2xl font-black">₹{total.toLocaleString("en-IN")}</span>
-                                            <span className="text-[9px] mt-1 text-slate-900/50">₹{price.toLocaleString("en-IN")} + 18% GST</span>
-                                            <div className="absolute top-3 right-3"><Sparkles size={14} fill="currentColor" className="text-slate-900/20" /></div>
-                                        </button>
+                                        {isFree ? (
+                                            <button onClick={handleFreeRegistration} disabled={isProcessing}
+                                                className="group relative w-full flex flex-col items-center justify-center p-5 bg-gradient-to-br from-emerald-400 to-emerald-600 text-white rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(52,211,153,0.5)] transition-all duration-300 active:scale-[0.98] disabled:opacity-50 shadow-lg"
+                                            >
+                                                <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-white/70">100% Discount Applied</span>
+                                                <span className="text-2xl font-black">Register for Free</span>
+                                                <span className="text-[9px] mt-1 text-white/60">No payment required</span>
+                                                <div className="absolute top-3 right-3"><CheckCircle2 size={14} className="text-white/30" /></div>
+                                            </button>
+                                        ) : (
+                                            <button onClick={handlePayment} disabled={isProcessing}
+                                                className="group relative w-full flex flex-col items-center justify-center p-5 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(245,158,11,0.5)] transition-all duration-300 active:scale-[0.98] disabled:opacity-50 shadow-lg"
+                                            >
+                                                <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-slate-900/60">Pay via Razorpay</span>
+                                                <span className="text-2xl font-black">₹{total.toLocaleString("en-IN")}</span>
+                                                <span className="text-[9px] mt-1 text-slate-900/50">₹{price.toLocaleString("en-IN")} + 18% GST</span>
+                                                <div className="absolute top-3 right-3"><Sparkles size={14} fill="currentColor" className="text-slate-900/20" /></div>
+                                            </button>
+                                        )}
                                         <button onClick={() => setStep(1)} className="w-full py-1.5 text-[10px] text-slate-400 hover:text-slate-600 font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1">
                                             <ArrowRight size={12} className="rotate-180" /> Edit details
                                         </button>
@@ -368,8 +417,10 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
 }
 
 /* ── Pass Card ── */
-function PassCard({ couponApplied, couponInput, setCouponInput, couponError, setCouponError, onApplyCoupon, onRemoveCoupon, onRegister }: {
+function PassCard({ couponApplied, discountPct, appliedCode, couponInput, setCouponInput, couponError, setCouponError, onApplyCoupon, onRemoveCoupon, onRegister, validatingCoupon }: {
     couponApplied: boolean;
+    discountPct: number;
+    appliedCode: string;
     couponInput: string;
     setCouponInput: (v: string) => void;
     couponError: string;
@@ -377,9 +428,11 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
     onApplyCoupon: () => void;
     onRemoveCoupon: () => void;
     onRegister: () => void;
+    validatingCoupon: boolean;
 }) {
-    const price = couponApplied ? COUPON_PRICE : ORIGINAL_PRICE;
-    const total = Math.round(price * (1 + GST_RATE));
+    const price = couponApplied ? calcPrice(discountPct) : ORIGINAL_PRICE;
+    const isFree = price === 0;
+    const total = isFree ? 0 : Math.round(price * (1 + GST_RATE));
 
     return (
         <div className="relative">
@@ -439,16 +492,24 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                             {couponApplied && (
                                 <span className="text-lg font-bold text-slate-600 line-through">₹{ORIGINAL_PRICE.toLocaleString("en-IN")}</span>
                             )}
-                            <span className="text-4xl font-black text-white leading-none">₹{price.toLocaleString("en-IN")}</span>
-                            <span className="text-slate-400 text-xs">+ GST</span>
+                            {isFree ? (
+                                <span className="text-4xl font-black text-emerald-400 leading-none">FREE</span>
+                            ) : (
+                                <>
+                                    <span className="text-4xl font-black text-white leading-none">₹{price.toLocaleString("en-IN")}</span>
+                                    <span className="text-slate-400 text-xs">+ GST</span>
+                                </>
+                            )}
                         </div>
-                        <p className="text-slate-500 text-[11px]">
-                            Total: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> incl. 18% GST
-                        </p>
+                        {!isFree && (
+                            <p className="text-slate-500 text-[11px]">
+                                Total: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> incl. 18% GST
+                            </p>
+                        )}
                         {couponApplied && (
                             <div className="flex items-center gap-2 mt-2.5 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-xl">
                                 <CheckCircle2 size={12} className="text-green-400" />
-                                <span className="text-green-400 text-[11px] font-semibold">{COUPON_CODE} applied — ₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")} saved</span>
+                                <span className="text-green-400 text-[11px] font-semibold">{appliedCode} — {discountPct}% off{isFree ? " (FREE)" : ` · ₹${(ORIGINAL_PRICE - price).toLocaleString("en-IN")} saved`}</span>
                                 <button onClick={onRemoveCoupon} className="ml-auto text-[9px] text-green-600 hover:text-red-400 font-bold transition-colors">Remove</button>
                             </div>
                         )}
@@ -482,10 +543,10 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                                         className="w-full pl-8 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-500/40 transition-all uppercase tracking-widest"
                                     />
                                 </div>
-                                <button onClick={onApplyCoupon} disabled={!couponInput.trim()}
-                                    className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-40"
+                                <button onClick={onApplyCoupon} disabled={!couponInput.trim() || validatingCoupon}
+                                    className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-40 flex items-center gap-1.5"
                                 >
-                                    Apply
+                                    {validatingCoupon ? <><Loader2 size={10} className="animate-spin" /> Checking…</> : "Apply"}
                                 </button>
                             </div>
                             {couponError && (
@@ -523,16 +584,45 @@ export default function BangaloreCorporateCounselPass() {
     const [couponInput, setCouponInput] = useState("");
     const [couponApplied, setCouponApplied] = useState(false);
     const [couponError, setCouponError] = useState("");
+    const [couponDiscountPct, setCouponDiscountPct] = useState(0);
+    const [appliedCode, setAppliedCode] = useState("");
+    const [validatingCoupon, setValidatingCoupon] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
 
-    const handleApplyCoupon = () => {
-        if (couponInput.trim().toUpperCase() === COUPON_CODE) {
-            setCouponApplied(true); setCouponError("");
-        } else {
-            setCouponError("Invalid coupon code. Try EXCLUSIVE30.");
+    const handleApplyCoupon = async () => {
+        const code = couponInput.trim().toUpperCase();
+        if (!code) return;
+
+        // Keep EXCLUSIVE30 working as a hardcoded fallback
+        if (code === "EXCLUSIVE30") {
+            setCouponApplied(true); setCouponDiscountPct(30); setAppliedCode("EXCLUSIVE30"); setCouponError("");
+            return;
         }
+
+        setValidatingCoupon(true); setCouponError("");
+        try {
+            const res = await fetch("/api/delegate-coupons/validate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code, passType: "corporate-counsel", conferenceSlug: "bangalore-2026" }),
+            });
+            const data = await res.json();
+            if (data.valid) {
+                setCouponApplied(true); setCouponDiscountPct(data.discountPct); setAppliedCode(code); setCouponError("");
+            } else {
+                setCouponError(data.error || "Invalid coupon code.");
+            }
+        } catch {
+            setCouponError("Failed to validate. Please try again.");
+        } finally {
+            setValidatingCoupon(false);
+        }
+    };
+
+    const handleRemoveCoupon = () => {
+        setCouponApplied(false); setCouponDiscountPct(0); setAppliedCode(""); setCouponInput(""); setCouponError("");
     };
 
     return (
@@ -616,13 +706,16 @@ export default function BangaloreCorporateCounselPass() {
                             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }} transition={{ duration: 0.7, delay: 0.35 }}>
                                 <PassCard
                                     couponApplied={couponApplied}
+                                    discountPct={couponDiscountPct}
+                                    appliedCode={appliedCode}
                                     couponInput={couponInput}
                                     setCouponInput={setCouponInput}
                                     couponError={couponError}
                                     setCouponError={setCouponError}
                                     onApplyCoupon={handleApplyCoupon}
-                                    onRemoveCoupon={() => { setCouponApplied(false); setCouponInput(""); }}
+                                    onRemoveCoupon={handleRemoveCoupon}
                                     onRegister={() => setModalOpen(true)}
+                                    validatingCoupon={validatingCoupon}
                                 />
                             </motion.div>
                         </div>
@@ -637,6 +730,8 @@ export default function BangaloreCorporateCounselPass() {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 couponApplied={couponApplied}
+                discountPct={couponDiscountPct}
+                appliedCode={appliedCode}
             />
         </main>
     );
