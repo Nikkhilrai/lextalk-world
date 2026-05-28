@@ -10,26 +10,16 @@ import { CountrySelect } from "@/components/CountrySelect";
 import Image from "next/image";
 import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle,
-    ShieldCheck, Tag, X, BadgeCheck, Mic,
-    Wifi, Coffee, Award, BookOpen, Star, CheckCircle2,
+    ShieldCheck, X, BadgeCheck, Mic,
+    Wifi, Coffee, Award, BookOpen, Star,
     Calendar, MapPin, Zap, Share2, LayoutGrid,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 declare global { interface Window { Razorpay: any; } }
 
-const ORIGINAL_PRICE = 9999;
-const COUPON_PRICE = 6999;
-const COUPON_CODE = "SILF30";
+const PRICE = 8749;
 const GST_RATE = 0.18;
-
-const AUDIENCE = [
-    "In-House Counsel",
-    "Data Privacy Officers",
-    "Cybersecurity Officers",
-    "Compliance Officers",
-    "Legal Managers",
-];
 
 const FEATURES = [
     { icon: Star,       text: "Full-day conference access" },
@@ -50,9 +40,7 @@ interface FormData {
 }
 
 /* ── Registration Modal ── */
-function RegistrationModal({ isOpen, onClose, couponApplied }: {
-    isOpen: boolean; onClose: () => void; couponApplied: boolean;
-}) {
+function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const router = useRouter();
     const [step, setStep] = useState<1 | 2>(1);
     const [registrationId, setRegistrationId] = useState<string | null>(null);
@@ -65,8 +53,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
     const [processStep, setProcessStep] = useState(0);
     const [error, setError] = useState<string | null>(null);
 
-    const price = couponApplied ? COUPON_PRICE : ORIGINAL_PRICE;
-    const total = Math.round(price * (1 + GST_RATE));
+    const total = Math.round(PRICE * (1 + GST_RATE));
 
     const steps = [
         "Securing your registration…",
@@ -112,8 +99,8 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                     passType: "corporate-counsel",
                     passCategory: "individual",
                     conferenceSlug: "bangalore-2026",
-                    originalPrice: price,
-                    discountedPrice: price,
+                    originalPrice: PRICE,
+                    discountedPrice: PRICE,
                 }),
             });
             const data = await res.json();
@@ -136,10 +123,8 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                     passType: "corporate-counsel", passCategory: "individual",
                     paymentType: "india", customerDetails: formData,
                     conferenceSlug: "bangalore-2026",
-                    originalPrice: price, discountedPrice: price,
-                    baseInrPrice: price, baseUsdPrice: price,
-                    couponCode: couponApplied ? COUPON_CODE : null,
-                    couponDiscount: couponApplied ? 30 : null,
+                    originalPrice: PRICE, discountedPrice: PRICE,
+                    baseInrPrice: PRICE, baseUsdPrice: PRICE,
                     registrationId,
                 }),
             });
@@ -152,7 +137,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                 amount: orderData.amount,
                 currency: "INR",
                 name: "LexTalk World",
-                description: "Corporate Counsel Exclusive Pass — Bangalore 2026",
+                description: "SILF Member Exclusive Pass — Bangalore 2026",
                 order_id: orderData.orderId,
                 handler: async (response: any) => {
                     setIsProcessing(true);
@@ -199,20 +184,12 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                     >
                         <div className="relative flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
                             <div>
-                                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-600 mb-0.5">Corporate Counsel · Bangalore 2026</p>
+                                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-600 mb-0.5">SILF Member · Bangalore 2026</p>
                                 <h3 className="font-serif text-lg font-bold text-slate-900">{step === 1 ? "Your Details" : "Review & Pay"}</h3>
                             </div>
-                            <div className="flex items-center gap-3">
-                                {couponApplied && (
-                                    <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 rounded-full border border-green-200">
-                                        <Tag size={10} className="text-green-600" />
-                                        <span className="text-[9px] font-bold text-green-700 uppercase tracking-wide">{COUPON_CODE}</span>
-                                    </div>
-                                )}
-                                <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                                    <X size={14} className="text-slate-500" />
-                                </button>
-                            </div>
+                            <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                                <X size={14} className="text-slate-500" />
+                            </button>
                         </div>
                         <div className="h-0.5 w-full bg-slate-100">
                             <motion.div animate={{ width: step === 1 ? "50%" : "100%" }}
@@ -287,7 +264,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                             <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-3">Registration Summary</p>
                                             <div className="space-y-1.5 text-sm">
                                                 {[
-                                                    { label: "Pass", value: "Corporate Counsel Exclusive" },
+                                                    { label: "Pass", value: "SILF Member Exclusive" },
                                                     { label: "Event", value: "LexTalk World Bangalore 2026" },
                                                     { label: "Date", value: "June 11, Thursday, 2026" },
                                                     { label: "Attendee", value: `${formData.firstName} ${formData.lastName}` },
@@ -303,20 +280,11 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                             <p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-2">Price Breakdown</p>
                                             <div className="flex justify-between text-sm">
                                                 <span className="text-slate-500">Base price</span>
-                                                <div className="flex items-center gap-2">
-                                                    {couponApplied && <span className="line-through text-slate-400 text-xs">₹{ORIGINAL_PRICE.toLocaleString("en-IN")}</span>}
-                                                    <span className="font-semibold text-slate-900">₹{price.toLocaleString("en-IN")}</span>
-                                                </div>
+                                                <span className="font-semibold text-slate-900">₹{PRICE.toLocaleString("en-IN")}</span>
                                             </div>
-                                            {couponApplied && (
-                                                <div className="flex justify-between text-sm">
-                                                    <span className="flex items-center gap-1.5 text-green-700"><Tag size={10} /> {COUPON_CODE} (30% off)</span>
-                                                    <span className="text-green-700 font-semibold">−₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")}</span>
-                                                </div>
-                                            )}
                                             <div className="flex justify-between text-sm">
                                                 <span className="text-slate-500">GST (18%)</span>
-                                                <span className="text-slate-700">₹{(total - price).toLocaleString("en-IN")}</span>
+                                                <span className="text-slate-700">₹{(total - PRICE).toLocaleString("en-IN")}</span>
                                             </div>
                                             <div className="flex justify-between text-base font-black border-t border-amber-200 pt-2 mt-1">
                                                 <span className="text-slate-900">Total</span>
@@ -333,7 +301,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-slate-900/60">Pay via Razorpay</span>
                                             <span className="text-2xl font-black">₹{total.toLocaleString("en-IN")}</span>
-                                            <span className="text-[9px] mt-1 text-slate-900/50">₹{price.toLocaleString("en-IN")} + 18% GST</span>
+                                            <span className="text-[9px] mt-1 text-slate-900/50">₹{PRICE.toLocaleString("en-IN")} + 18% GST</span>
                                             <div className="absolute top-3 right-3"><Sparkles size={14} fill="currentColor" className="text-slate-900/20" /></div>
                                         </button>
                                         <button onClick={() => setStep(1)} className="w-full py-1.5 text-[10px] text-slate-400 hover:text-slate-600 font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1">
@@ -371,18 +339,8 @@ function RegistrationModal({ isOpen, onClose, couponApplied }: {
 }
 
 /* ── Pass Card ── */
-function PassCard({ couponApplied, couponInput, setCouponInput, couponError, setCouponError, onApplyCoupon, onRemoveCoupon, onRegister }: {
-    couponApplied: boolean;
-    couponInput: string;
-    setCouponInput: (v: string) => void;
-    couponError: string;
-    setCouponError: (v: string) => void;
-    onApplyCoupon: () => void;
-    onRemoveCoupon: () => void;
-    onRegister: () => void;
-}) {
-    const price = couponApplied ? COUPON_PRICE : ORIGINAL_PRICE;
-    const total = Math.round(price * (1 + GST_RATE));
+function PassCard({ onRegister }: { onRegister: () => void }) {
+    const total = Math.round(PRICE * (1 + GST_RATE));
 
     return (
         <div className="relative">
@@ -397,7 +355,7 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                     <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/25 rounded-full">
                             <ShieldCheck size={10} className="text-amber-400" />
-                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">Exclusive Pass</span>
+                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">SILF Member Pass</span>
                         </div>
                         <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
                             <span className="relative flex h-1.5 w-1.5">
@@ -409,7 +367,7 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                     </div>
 
                     {/* Name + event */}
-                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">Exclusive Pass</h2>
+                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">SILF Member Exclusive Pass</h2>
                     <div className="flex gap-3 mb-5">
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> June 11, 2026</span>
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Bangalore, India</span>
@@ -417,48 +375,19 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
 
                     <div className="h-px bg-white/6 mb-5" />
 
-                    {/* Coupon hint banner — always show unless applied */}
-                    {!couponApplied && (
-                        <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-amber-500/8 border border-amber-500/20 rounded-xl mb-5">
-                            <div className="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                                <Tag size={11} className="text-amber-400" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="text-[10px] text-amber-300/70 font-medium">Apply coupon for 30% off · <span className="text-red-400 font-bold">Expires 31 May</span></p>
-                                <button
-                                    onClick={() => { setCouponInput(COUPON_CODE); setCouponError(""); }}
-                                    className="text-[11px] font-black text-amber-400 hover:text-amber-300 tracking-widest transition-colors"
-                                >
-                                    {COUPON_CODE}
-                                </button>
-                            </div>
-                            <span className="text-[10px] font-bold text-amber-400 whitespace-nowrap">Save ₹3,000</span>
-                        </div>
-                    )}
-
                     {/* Price */}
                     <div className="mb-5">
                         <div className="flex items-baseline gap-2 mb-1">
-                            {couponApplied && (
-                                <span className="text-lg font-bold text-slate-600 line-through">₹{ORIGINAL_PRICE.toLocaleString("en-IN")}</span>
-                            )}
-                            <span className="text-4xl font-black text-white leading-none">₹{price.toLocaleString("en-IN")}</span>
+                            <span className="text-4xl font-black text-white leading-none">₹{PRICE.toLocaleString("en-IN")}</span>
                             <span className="text-slate-400 text-xs">+ GST</span>
                         </div>
                         <p className="text-slate-500 text-[11px]">
                             Total: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> incl. 18% GST
                         </p>
-                        {couponApplied && (
-                            <div className="flex items-center gap-2 mt-2.5 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-xl">
-                                <CheckCircle2 size={12} className="text-green-400" />
-                                <span className="text-green-400 text-[11px] font-semibold">{COUPON_CODE} applied — ₹{(ORIGINAL_PRICE - COUPON_PRICE).toLocaleString("en-IN")} saved</span>
-                                <button onClick={onRemoveCoupon} className="ml-auto text-[9px] text-green-600 hover:text-red-400 font-bold transition-colors">Remove</button>
-                            </div>
-                        )}
                     </div>
 
                     {/* Features */}
-                    <div className="mb-5">
+                    <div className="mb-6">
                         <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">Includes</p>
                         <ul className="space-y-2">
                             {FEATURES.map(({ text }) => (
@@ -471,33 +400,6 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
                             ))}
                         </ul>
                     </div>
-
-                    {/* Coupon input */}
-                    {!couponApplied && (
-                        <div className="mb-5">
-                            <div className="flex gap-2">
-                                <div className="relative flex-1">
-                                    <Tag size={11} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-                                    <input
-                                        type="text" value={couponInput}
-                                        onChange={e => { setCouponInput(e.target.value.toUpperCase()); setCouponError(""); }}
-                                        placeholder="Enter coupon code"
-                                        className="w-full pl-8 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-500/40 transition-all uppercase tracking-widest"
-                                    />
-                                </div>
-                                <button onClick={onApplyCoupon} disabled={!couponInput.trim()}
-                                    className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-40"
-                                >
-                                    Apply
-                                </button>
-                            </div>
-                            {couponError && (
-                                <p className="flex items-center gap-1.5 text-[10px] text-red-400 font-medium mt-1.5">
-                                    <AlertCircle size={10} /> {couponError}
-                                </p>
-                            )}
-                        </div>
-                    )}
 
                     {/* CTA */}
                     <button onClick={onRegister}
@@ -523,20 +425,9 @@ function PassCard({ couponApplied, couponInput, setCouponInput, couponError, set
 /* ── Main Page ── */
 export default function BangaloreSILFCorporateCounselPass() {
     const [loaded, setLoaded] = useState(false);
-    const [couponInput, setCouponInput] = useState("");
-    const [couponApplied, setCouponApplied] = useState(false);
-    const [couponError, setCouponError] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
-
-    const handleApplyCoupon = () => {
-        if (couponInput.trim().toUpperCase() === COUPON_CODE) {
-            setCouponApplied(true); setCouponError("");
-        } else {
-            setCouponError("Invalid coupon code. Try SILF30.");
-        }
-    };
 
     return (
         <main className="bg-[#050a15] min-h-screen">
@@ -581,7 +472,7 @@ export default function BangaloreSILFCorporateCounselPass() {
                             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 24 }} transition={{ duration: 0.7, delay: 0.2 }}
                                 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5"
                             >
-                                Corporate Counsel
+                                SILF Member
                                 <span className="block bg-gradient-to-r from-amber-300 via-amber-500 to-amber-400 bg-clip-text text-transparent">
                                     Exclusive Pass
                                 </span>
@@ -593,18 +484,14 @@ export default function BangaloreSILFCorporateCounselPass() {
                                 A curated experience built for legal and compliance leadership at India&apos;s premier legal summit.
                             </motion.p>
 
-                            {/* Audience */}
+                            {/* For */}
                             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 14 }} transition={{ duration: 0.6, delay: 0.4 }}
                                 className="mb-10"
                             >
                                 <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-600 mb-4">For</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {AUDIENCE.map(role => (
-                                        <span key={role} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/70 text-xs font-medium hover:border-amber-500/30 hover:text-amber-400 transition-colors">
-                                            {role}
-                                        </span>
-                                    ))}
-                                </div>
+                                <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/70 text-xs font-medium">
+                                    Legal Compliance (SILF Member)
+                                </span>
                             </motion.div>
 
                             {/* Feature grid */}
@@ -630,16 +517,7 @@ export default function BangaloreSILFCorporateCounselPass() {
                         {/* ── Right: Sticky Pass Card ── */}
                         <div className="lg:sticky lg:top-28">
                             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }} transition={{ duration: 0.7, delay: 0.35 }}>
-                                <PassCard
-                                    couponApplied={couponApplied}
-                                    couponInput={couponInput}
-                                    setCouponInput={setCouponInput}
-                                    couponError={couponError}
-                                    setCouponError={setCouponError}
-                                    onApplyCoupon={handleApplyCoupon}
-                                    onRemoveCoupon={() => { setCouponApplied(false); setCouponInput(""); }}
-                                    onRegister={() => setModalOpen(true)}
-                                />
+                                <PassCard onRegister={() => setModalOpen(true)} />
                             </motion.div>
                         </div>
 
@@ -649,11 +527,7 @@ export default function BangaloreSILFCorporateCounselPass() {
 
             <Footer />
 
-            <RegistrationModal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                couponApplied={couponApplied}
-            />
+            <RegistrationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
         </main>
     );
 }
