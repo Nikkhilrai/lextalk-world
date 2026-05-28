@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
         const coupon = await prismaClient.delegateCoupon.upsert({
             where: { code: "ASGPARTNER" },
-            update: {},
+            update: { usedCount: 0, maxUses: 3, isActive: true },
             create: {
                 code: "ASGPARTNER",
                 name: "ASG Partners VIP Pass",
