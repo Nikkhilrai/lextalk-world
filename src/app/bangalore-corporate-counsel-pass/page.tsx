@@ -138,8 +138,8 @@ function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, applie
                     conferenceSlug: "bangalore-2026",
                     originalPrice: price, discountedPrice: price,
                     baseInrPrice: price, baseUsdPrice: price,
-                    couponCode: couponApplied ? COUPON_CODE : null,
-                    couponDiscount: couponApplied ? 30 : null,
+                    couponCode: couponApplied ? appliedCode : null,
+                    couponDiscount: couponApplied ? discountPct : null,
                     registrationId,
                 }),
             });
