@@ -44,6 +44,13 @@ const tiers = [
         ],
     },
     {
+        label: "Ecosystem Partner",
+        accent: "from-emerald-200 via-emerald-400 to-emerald-200",
+        sponsors: [
+            { name: "Mike Legal", logo: "/bangalore-2026/Sponsor/Mike-Legal.png", href: null, w: 220, h: 110 },
+        ],
+    },
+    {
         label: "Wellness & Consciousness Partner",
         accent: "from-purple-200 via-purple-300 to-purple-200",
         sponsors: [
