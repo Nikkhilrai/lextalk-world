@@ -12,7 +12,7 @@ import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle,
     ShieldCheck, X, BadgeCheck, Mic,
     Wifi, Coffee, Award, BookOpen, Star,
-    Calendar, MapPin, Zap, Share2, LayoutGrid,
+    Calendar, MapPin, Zap, Share2, LayoutGrid, Users,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -30,8 +30,8 @@ const FEATURES = [
     { icon: BadgeCheck, text: "Digital spotlight across social platforms" },
     { icon: BookOpen,   text: "Delegate kit" },
     { icon: Award,      text: "Participation certification" },
-    { icon: Share2,     text: "Social media mention opportunities during the event cycle" },
-    { icon: LayoutGrid, text: "Logo visibility across the \"Represented By Global Corporates, Law Firms & Innovators\" showcase loop" },
+    { icon: Share2,     text: "Social media mention during the event cycle" },
+    { icon: LayoutGrid, text: "Logo in the \"Represented By\" showcase loop" },
 ];
 
 interface FormData {
@@ -182,6 +182,8 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                         transition={{ type: "spring", damping: 28, stiffness: 350 }}
                         className="relative z-10 w-full sm:max-w-md bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden sm:mb-8"
                     >
+                        {/* Modal header with SILF accent */}
+                        <div className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500" />
                         <div className="relative flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
                             <div>
                                 <p className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-600 mb-0.5">SILF Member · Bangalore 2026</p>
@@ -229,8 +231,8 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
                                             {[
-                                                { name: "organization", label: "Organisation", placeholder: "Company / Corp" },
-                                                { name: "designation", label: "Designation", placeholder: "e.g. General Counsel" },
+                                                { name: "organization", label: "Organisation", placeholder: "Law Firm / Company" },
+                                                { name: "designation", label: "Designation", placeholder: "e.g. Partner" },
                                             ].map(f => (
                                                 <div key={f.name} className="space-y-1.5">
                                                     <label className="text-[9px] font-bold uppercase tracking-wider text-slate-400">{f.label}</label>
@@ -279,7 +281,7 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                                         <div className="p-4 bg-amber-50/60 border border-amber-100 rounded-2xl space-y-2">
                                             <p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-2">Price Breakdown</p>
                                             <div className="flex justify-between text-sm">
-                                                <span className="text-slate-500">Base price</span>
+                                                <span className="text-slate-500">SILF Member Price</span>
                                                 <span className="font-semibold text-slate-900">₹{PRICE.toLocaleString("en-IN")}</span>
                                             </div>
                                             <div className="flex justify-between text-sm">
@@ -344,58 +346,73 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 
     return (
         <div className="relative">
-            <div className="absolute -inset-3 bg-gradient-to-br from-amber-400/15 via-amber-500/8 to-transparent rounded-[2rem] blur-2xl pointer-events-none" />
+            {/* Outer glow */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent rounded-[2.5rem] blur-3xl pointer-events-none" />
 
-            <div className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                <div className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500" />
-                <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-amber-400/6 to-transparent pointer-events-none" />
+            <div className="relative bg-gradient-to-b from-[#0d1a2e] to-[#0f172a] rounded-3xl overflow-hidden border border-amber-500/20 shadow-2xl">
+                {/* Top gold bar */}
+                <div className="h-[3px] bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500" />
+
+                {/* SILF logo strip */}
+                <div className="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-white/[0.06]">
+                    <div className="bg-white/95 rounded-lg px-3 py-1.5 flex-shrink-0">
+                        <Image src="/associations/SILF.png" alt="SILF" width={72} height={32} unoptimized className="object-contain h-6 w-auto" />
+                    </div>
+                    <div className="h-6 w-px bg-white/10" />
+                    <p className="text-slate-400 text-[10px] font-semibold tracking-wide">Exclusive Member Pricing</p>
+                    <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                        <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                        </span>
+                        <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-wider">Open</span>
+                    </div>
+                </div>
 
                 <div className="p-6">
-                    {/* Top row */}
-                    <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/25 rounded-full">
-                            <ShieldCheck size={10} className="text-amber-400" />
-                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">SILF Member Pass</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-                            <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                    {/* Pass title & meta */}
+                    <div className="mb-6">
+                        <p className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-500/70 mb-1.5">LexTalk World · Bangalore 2026</p>
+                        <h2 className="font-serif text-3xl font-bold text-white leading-tight mb-4">
+                            SILF Member<br />
+                            <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">Exclusive Pass</span>
+                        </h2>
+                        <div className="flex flex-wrap gap-4">
+                            <span className="flex items-center gap-1.5 text-slate-400 text-xs">
+                                <Calendar size={11} className="text-amber-500/70" /> June 11, 2026
                             </span>
-                            <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-wider">Open</span>
+                            <span className="flex items-center gap-1.5 text-slate-400 text-xs">
+                                <MapPin size={11} className="text-amber-500/70" /> Bangalore, India
+                            </span>
+                            <span className="flex items-center gap-1.5 text-slate-400 text-xs">
+                                <Users size={11} className="text-amber-500/70" /> Legal Compliance
+                            </span>
                         </div>
                     </div>
 
-                    {/* Name + event */}
-                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">SILF Member Exclusive Pass</h2>
-                    <div className="flex gap-3 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> June 11, 2026</span>
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Bangalore, India</span>
-                    </div>
-
-                    <div className="h-px bg-white/6 mb-5" />
-
-                    {/* Price */}
-                    <div className="mb-5">
-                        <div className="flex items-baseline gap-2 mb-1">
-                            <span className="text-4xl font-black text-white leading-none">₹{PRICE.toLocaleString("en-IN")}</span>
-                            <span className="text-slate-400 text-xs">+ GST</span>
+                    {/* Price block */}
+                    <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-amber-500/8 to-amber-400/4 border border-amber-500/15">
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-500/60 mb-2">SILF Member Price</p>
+                        <div className="flex items-end gap-2">
+                            <span className="text-5xl font-black text-white leading-none">₹{PRICE.toLocaleString("en-IN")}</span>
+                            <span className="text-slate-400 text-sm mb-1">+ GST</span>
                         </div>
-                        <p className="text-slate-500 text-[11px]">
-                            Total: <span className="text-slate-300 font-semibold">₹{total.toLocaleString("en-IN")}</span> incl. 18% GST
+                        <p className="text-slate-500 text-xs mt-1.5">
+                            Total payable: <span className="text-amber-400 font-bold">₹{total.toLocaleString("en-IN")}</span>
+                            <span className="text-slate-600"> incl. 18% GST</span>
                         </p>
                     </div>
 
                     {/* Features */}
                     <div className="mb-6">
-                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">Includes</p>
-                        <ul className="space-y-2">
-                            {FEATURES.map(({ text }) => (
-                                <li key={text} className="flex items-center gap-2.5">
-                                    <div className="w-4 h-4 rounded-md bg-amber-500/12 flex items-center justify-center flex-shrink-0">
-                                        <Check size={9} strokeWidth={3} className="text-amber-400" />
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">What&apos;s Included</p>
+                        <ul className="space-y-2.5">
+                            {FEATURES.map(({ icon: Icon, text }) => (
+                                <li key={text} className="flex items-start gap-3">
+                                    <div className="w-5 h-5 rounded-md bg-amber-500/12 border border-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Icon size={10} className="text-amber-400" />
                                     </div>
-                                    <span className="text-slate-400 text-xs leading-snug">{text}</span>
+                                    <span className="text-slate-400 text-xs leading-relaxed">{text}</span>
                                 </li>
                             ))}
                         </ul>
@@ -403,18 +420,22 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 
                     {/* CTA */}
                     <button onClick={onRegister}
-                        className="group w-full flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/15 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.98] relative overflow-hidden"
+                        className="group w-full relative flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[12px] uppercase tracking-widest rounded-2xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 active:scale-[0.98] overflow-hidden"
                     >
-                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-                        <Sparkles size={13} />
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                        <Sparkles size={14} />
                         Secure Your Pass
-                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    <div className="flex items-center justify-center gap-3 mt-4">
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
+                    <div className="flex items-center justify-center gap-4 mt-4">
+                        <div className="flex items-center gap-1.5 text-slate-700 text-[10px]">
+                            <ShieldCheck size={10} className="text-slate-600" /> Razorpay Secured
+                        </div>
                         <div className="w-px h-3 bg-slate-800" />
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
+                        <div className="flex items-center gap-1.5 text-slate-700 text-[10px]">
+                            <Zap size={10} className="text-slate-600" /> Instant Confirmation
+                        </div>
                     </div>
                 </div>
             </div>
@@ -423,7 +444,7 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 }
 
 /* ── Main Page ── */
-export default function BangaloreSILFCorporateCounselPass() {
+export default function BangaloreSILFMemberExclusivePass() {
     const [loaded, setLoaded] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -435,88 +456,119 @@ export default function BangaloreSILFCorporateCounselPass() {
             <Navbar />
 
             <section className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-                {/* Background glows */}
+                {/* Background */}
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-amber-500/6 rounded-full blur-[180px]" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-400/4 rounded-full blur-[140px]" />
-                    <div className="absolute inset-0 opacity-[0.015]"
-                        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-500/5 rounded-full blur-[200px]" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[500px] bg-amber-400/3 rounded-full blur-[160px]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-500/3 rounded-full blur-[120px]" />
+                    <div className="absolute inset-0 opacity-[0.012]"
+                        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
                 </div>
 
                 <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-                        {/* ── Left: Info ── */}
-                        <div className="lg:pt-8">
+                        {/* ── Left ── */}
+                        <div className="lg:pt-6">
 
-                            {/* SILF Association Banner */}
-                            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.05 }}
-                                className="flex items-center gap-4 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl mb-6"
+                            {/* SILF Partnership Banner */}
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }} transition={{ duration: 0.6, delay: 0.05 }}>
+                                <div className="inline-flex items-center gap-3 pl-3 pr-5 py-2.5 bg-gradient-to-r from-amber-500/10 to-white/5 border border-amber-500/20 rounded-2xl mb-8">
+                                    <div className="bg-white rounded-lg px-2.5 py-1.5 flex-shrink-0">
+                                        <Image src="/associations/SILF.png" alt="SILF" width={72} height={30} unoptimized className="object-contain h-6 w-auto" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[8px] font-black uppercase tracking-[0.2em] text-amber-500/60 leading-none mb-0.5">In Association With</p>
+                                        <p className="text-white/80 text-xs font-semibold leading-none">Society Of Indian Law Firms</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Event badge */}
+                            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.5, delay: 0.15 }}
+                                className="flex items-center gap-2 mb-5"
                             >
-                                <div className="bg-white rounded-lg p-1.5 flex-shrink-0">
-                                    <Image src="/associations/SILF.png" alt="Society Of Indian Law Firms" width={80} height={40} unoptimized className="object-contain h-8 w-auto" />
-                                </div>
-                                <div>
-                                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 mb-0.5">In Association With</p>
-                                    <p className="text-white/80 text-sm font-semibold">Society Of Indian Law Firms <span className="text-amber-400">(SILF)</span></p>
-                                </div>
-                            </motion.div>
-
-                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }} transition={{ duration: 0.6, delay: 0.1 }}>
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/25 rounded-full mb-6">
-                                    <ShieldCheck size={12} className="text-amber-400" />
-                                    <span className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.25em]">LexTalk World · Bangalore 2026</span>
+                                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-white/10 rounded-full">
+                                    <ShieldCheck size={11} className="text-amber-400" />
+                                    <span className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">LexTalk World</span>
+                                    <span className="text-slate-700">·</span>
+                                    <span className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.2em]">Bangalore 2026</span>
                                 </div>
                             </motion.div>
 
+                            {/* Heading */}
                             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 24 }} transition={{ duration: 0.7, delay: 0.2 }}
-                                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5"
+                                className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6"
                             >
                                 SILF Member
-                                <span className="block bg-gradient-to-r from-amber-300 via-amber-500 to-amber-400 bg-clip-text text-transparent">
+                                <span className="block bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300 bg-clip-text text-transparent mt-1">
                                     Exclusive Pass
                                 </span>
                             </motion.h1>
 
-                            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
-                                className="text-slate-400 text-base leading-relaxed mb-8 max-w-lg"
+                            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 14 }} transition={{ duration: 0.6, delay: 0.3 }}
+                                className="text-slate-400 text-base leading-relaxed mb-6 max-w-md"
                             >
-                                A curated experience built for legal and compliance leadership at India&apos;s premier legal summit.
+                                A curated conference experience exclusively for SILF members — built for India&apos;s leading legal and compliance professionals.
                             </motion.p>
 
-                            {/* For */}
-                            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 14 }} transition={{ duration: 0.6, delay: 0.4 }}
-                                className="mb-10"
+                            {/* For badge */}
+                            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 12 }} transition={{ duration: 0.5, delay: 0.35 }}
+                                className="flex items-center gap-3 mb-10"
                             >
-                                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-600 mb-4">For</p>
-                                <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/70 text-xs font-medium">
-                                    Legal Compliance (SILF Member)
-                                </span>
+                                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-600">For</p>
+                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 rounded-full">
+                                    <Users size={11} className="text-amber-400" />
+                                    <span className="text-amber-300/80 text-xs font-semibold">Legal Compliance (SILF Member)</span>
+                                </div>
+                            </motion.div>
+
+                            {/* Divider */}
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: loaded ? 1 : 0 }} transition={{ duration: 0.5, delay: 0.4 }}
+                                className="flex items-center gap-3 mb-8"
+                            >
+                                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-700">What You Get</span>
+                                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                             </motion.div>
 
                             {/* Feature grid */}
-                            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 14 }} transition={{ duration: 0.6, delay: 0.5 }}>
-                                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-600 mb-4">What you get</p>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {FEATURES.map(({ icon: Icon, text }, i) => (
-                                        <motion.div key={text}
-                                            initial={{ opacity: 0, x: -12 }} animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : -12 }}
-                                            transition={{ delay: 0.5 + i * 0.06, duration: 0.4 }}
-                                            className="flex items-center gap-3 p-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:border-amber-500/20 hover:bg-white/[0.05] transition-all"
-                                        >
-                                            <div className="w-7 h-7 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
-                                                <Icon size={13} className="text-amber-400" />
-                                            </div>
-                                            <span className="text-slate-300 text-xs leading-snug">{text}</span>
-                                        </motion.div>
-                                    ))}
-                                </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {FEATURES.map(({ icon: Icon, text }, i) => (
+                                    <motion.div key={text}
+                                        initial={{ opacity: 0, x: -12 }} animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : -12 }}
+                                        transition={{ delay: 0.42 + i * 0.05, duration: 0.4 }}
+                                        className="flex items-start gap-3 p-3.5 bg-white/[0.03] border border-white/[0.05] rounded-xl hover:border-amber-500/20 hover:bg-white/[0.05] transition-all group/feat"
+                                    >
+                                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500/15 to-amber-400/5 border border-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover/feat:border-amber-500/25 transition-colors">
+                                            <Icon size={13} className="text-amber-400" />
+                                        </div>
+                                        <span className="text-slate-400 text-xs leading-relaxed pt-1">{text}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Event details strip */}
+                            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 12 }} transition={{ duration: 0.5, delay: 0.9 }}
+                                className="mt-8 grid grid-cols-3 gap-3"
+                            >
+                                {[
+                                    { icon: Calendar, label: "Date", value: "June 11, 2026" },
+                                    { icon: MapPin,   label: "City", value: "Bangalore, India" },
+                                    { icon: Users,    label: "Format", value: "In-Person" },
+                                ].map(({ icon: Icon, label, value }) => (
+                                    <div key={label} className="p-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-center">
+                                        <Icon size={14} className="text-amber-500/60 mx-auto mb-1.5" />
+                                        <p className="text-[8px] uppercase tracking-widest text-slate-600 font-bold mb-0.5">{label}</p>
+                                        <p className="text-slate-300 text-[11px] font-semibold">{value}</p>
+                                    </div>
+                                ))}
                             </motion.div>
                         </div>
 
-                        {/* ── Right: Sticky Pass Card ── */}
-                        <div className="lg:sticky lg:top-28">
-                            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }} transition={{ duration: 0.7, delay: 0.35 }}>
+                        {/* ── Right: Pass Card ── */}
+                        <div className="lg:sticky lg:top-24">
+                            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }} transition={{ duration: 0.7, delay: 0.3 }}>
                                 <PassCard onRegister={() => setModalOpen(true)} />
                             </motion.div>
                         </div>
@@ -526,7 +578,6 @@ export default function BangaloreSILFCorporateCounselPass() {
             </section>
 
             <Footer />
-
             <RegistrationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
         </main>
     );
