@@ -476,10 +476,10 @@ function PassCard({ couponApplied, discountPct, appliedCode, couponInput, setCou
                             <div className="flex-1 min-w-0">
                                 <p className="text-[10px] text-amber-300/70 font-medium">Apply coupon for 30% off · <span className="text-red-400 font-bold">Expires 31 May</span></p>
                                 <button
-                                    onClick={() => { setCouponInput(COUPON_CODE); setCouponError(""); }}
+                                    onClick={() => { setCouponInput("EXCLUSIVE30"); setCouponError(""); }}
                                     className="text-[11px] font-black text-amber-400 hover:text-amber-300 tracking-widest transition-colors"
                                 >
-                                    {COUPON_CODE}
+                                    EXCLUSIVE30
                                 </button>
                             </div>
                             <span className="text-[10px] font-bold text-amber-400 whitespace-nowrap">Save ₹3,000</span>
