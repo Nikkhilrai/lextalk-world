@@ -5,6 +5,13 @@ import { motion } from "framer-motion";
 
 const tiers = [
     {
+        label: "Supporting Association",
+        accent: "from-purple-200 via-purple-400 to-purple-200",
+        sponsors: [
+            { name: "Society Of Indian Law Firms (SILF)", logo: "/associations/SILF.png", href: "https://silf.in/", w: 220, h: 110 },
+        ],
+    },
+    {
         label: "Diamond Sponsors",
         accent: "from-sky-200 via-sky-400 to-sky-200",
         sponsors: [
