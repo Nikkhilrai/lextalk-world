@@ -3,6 +3,16 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const globalCorporateLogos = [
+    { name: "Corporate 1", logo: "/bangalore-2026/Sponsor/Global-Corporates/1b.png" },
+    { name: "Corporate 2", logo: "/bangalore-2026/Sponsor/Global-Corporates/2b.png" },
+    { name: "Corporate 3", logo: "/bangalore-2026/Sponsor/Global-Corporates/3b.png" },
+    { name: "Corporate 4", logo: "/bangalore-2026/Sponsor/Global-Corporates/4b.png" },
+    { name: "Corporate 5", logo: "/bangalore-2026/Sponsor/Global-Corporates/5b.png" },
+    { name: "Corporate 6", logo: "/bangalore-2026/Sponsor/Global-Corporates/6b.png" },
+    { name: "SILF",        logo: "/bangalore-2026/Sponsor/Global-Corporates/SILF.png" },
+];
+
 const tiers = [
     {
         label: "Supporting Association",
@@ -143,6 +153,51 @@ export function BangaloreSponsor() {
                     ))}
                 </div>
 
+                {/* ── Trusted by marquee ── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-24"
+                >
+                    <style>{`
+                        @keyframes marqueeLogos {
+                            from { transform: translateX(0); }
+                            to   { transform: translateX(-50%); }
+                        }
+                    `}</style>
+
+                    {/* Label */}
+                    <div className="flex items-center gap-4 w-full max-w-lg mx-auto mb-10">
+                        <div className="flex-1 h-[1px] bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200" />
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 whitespace-nowrap text-center">
+                            Trusted by Global Corporates, Law Firms &amp; Innovators
+                        </span>
+                        <div className="flex-1 h-[1px] bg-gradient-to-l from-slate-200 via-slate-400 to-slate-200" />
+                    </div>
+
+                    {/* Marquee strip */}
+                    <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+                        <div
+                            className="flex items-center gap-12 w-max"
+                            style={{ animation: "marqueeLogos 28s linear infinite" }}
+                        >
+                            {[...globalCorporateLogos, ...globalCorporateLogos].map((logo, i) => (
+                                <div key={i} className="flex-shrink-0 flex items-center justify-center h-14">
+                                    <Image
+                                        src={logo.logo}
+                                        alt={logo.name}
+                                        width={120}
+                                        height={56}
+                                        unoptimized
+                                        className="object-contain max-h-14 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 mix-blend-multiply"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
 
             </div>
         </section>
