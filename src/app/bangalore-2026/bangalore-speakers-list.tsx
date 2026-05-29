@@ -17,7 +17,7 @@ const speakers: any[] = [
         name: "THE HON'BLE JUSTICE G. SHYAM PRASAD",
         title: "Former Judge, High Court of Judicature at Hyderabad | Senior Counsel, Supreme Court of India",
         image: "/bangalore-2026/speakers-images/G-Shyam-Prasad.jpeg",
-        isGuestOfHonor: true,
+        isCentred: true,
         bio: `Justice G Shyam Prasad is a distinguished jurist with over three decades of judicial experience, was elevated as a Judge of the High Court of Judicature at Hyderabad for the States of Telangana and Andhra Pradesh on 20 May 2016.
 
 Prior to elevation, he served in several key judicial and administrative roles, including Principal District Judge, Metropolitan Sessions Judge, Presiding Officer of the State Transport Appellate Tribunal, Industrial Tribunal and Labour Court, and Member Secretary of the Andhra Pradesh State Legal Services Authority. He has also served as the chairman for the High Power Committee medical education and the Hyderabad Metro Fare Fixation Committee.
@@ -315,12 +315,12 @@ export default function BangaloreSpeakersList() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: idx * 0.06 }}
-                                className={`group ${speaker.isGuestOfHonor ? "sm:col-span-2 lg:col-span-3" : ""} ${speaker.bio ? "cursor-pointer" : ""}`}
+                                className={`group ${(speaker.isGuestOfHonor || speaker.isCentred) ? "sm:col-span-2 lg:col-span-3" : ""} ${speaker.bio ? "cursor-pointer" : ""}`}
                                 onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                             >
-                                <div className={`relative flex flex-col items-center text-center ${speaker.isGuestOfHonor ? "max-w-sm mx-auto" : ""}`}>
+                                <div className={`relative flex flex-col items-center text-center ${(speaker.isGuestOfHonor || speaker.isCentred) ? "max-w-xs mx-auto" : ""}`}>
 
-                                    {/* Guest of Honor Badge */}
+                                    {/* Guest of Honor Badge — only for isGuestOfHonor, not isCentred */}
                                     {speaker.isGuestOfHonor && (
                                         <div className="mb-5 flex flex-col items-center gap-2">
                                             <span className="inline-block px-6 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[9px] md:text-[10px] font-black tracking-[0.2em] uppercase rounded-full shadow-lg shadow-amber-900/20">
@@ -330,7 +330,7 @@ export default function BangaloreSpeakersList() {
                                     )}
 
                                     {/* Square portrait with structured frame */}
-                                    <div className={`relative mb-6 w-full ${speaker.isGuestOfHonor ? "max-w-[320px]" : "max-w-[280px]"}`}>
+                                    <div className={`relative mb-6 w-full ${speaker.isGuestOfHonor ? "max-w-[320px]" : speaker.isCentred ? "max-w-[240px]" : "max-w-[280px]"}`}>
                                         {/* Outer thin formal frame */}
                                         <div className={`absolute -inset-4 border transition-all duration-500 rounded-lg ${speaker.isGuestOfHonor ? "border-amber-400/40 group-hover:border-amber-500/60" : "border-slate-200/50 group-hover:border-amber-400/30"}`} />
 
@@ -358,12 +358,12 @@ export default function BangaloreSpeakersList() {
                                         </div>
 
                                         {/* Bottom formal accent line */}
-                                        <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] rounded-full shadow-sm ${speaker.isGuestOfHonor ? "w-20 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" : "w-12 bg-amber-500"}`} />
+                                        <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] rounded-full shadow-sm ${speaker.isGuestOfHonor ? "w-20 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" : speaker.isCentred ? "w-16 bg-amber-500/70" : "w-12 bg-amber-500"}`} />
                                     </div>
 
                                     {/* Text content */}
                                     <div className="pt-2 flex flex-col items-center max-w-[320px]">
-                                        <h3 className={`font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight ${speaker.isGuestOfHonor ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"}`}>
+                                        <h3 className={`font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight ${speaker.isGuestOfHonor ? "text-2xl md:text-3xl" : speaker.isCentred ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}>
                                             {speaker.name}
                                         </h3>
 
