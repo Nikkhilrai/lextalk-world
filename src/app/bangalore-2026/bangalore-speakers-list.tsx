@@ -224,6 +224,16 @@ Prior to Trianz, Balaji held senior leadership roles at EXLService and served as
         image: "/bangalore-2026/speakers-images/YOGESH NAIK.png",
     },
     {
+        name: "Antony Alex",
+        title: "Founder & CEO, Rainmaker",
+        image: "/bangalore-2026/speakers-images/Antony-Alex.png",
+        bio: `Antony Alex is the Founder and CEO of Rainmaker and a pioneering entrepreneur in the legal, compliance, and leadership training sectors. A graduate of N.L.S.I.U., Bangalore, Antony is driven by the belief that culture and compliance form the soul of an organization. Under his leadership, Rainmaker transforms regulatory training from a routine "checkbox activity" into an engaging journey, utilizing OTT-style dramatized storytelling to weave ethical practices into the daily fabric of corporate life.
+
+Drawing from his extensive background in establishing corporate grievance mechanisms and anti-corruption protocols, Antony focuses on guiding enterprises through complex regulatory shifts. For his LexTalk World 2026 session, he brings this deep operational expertise to India's Digital Personal Data Protection Act, 2023, providing actionable insights into how companies can successfully transition from high-level privacy policy formulation to practical, everyday execution.
+
+Prior to founding Rainmaker in 2016, Antony established Kochhar & Co's Mumbai office and co-founded Pangea3, playing a pivotal role in scaling it into the world's largest Legal Process Outsourcing (LPO) provider. A champion of transformative leadership, his personal interests include spending time with his family, playing pickleball and pursuing adventure sports like deep-sea diving and paragliding.`,
+    },
+    {
         name: "Punya Patra",
         title: "Head Legal Innovation Hub, Novartis",
         image: "/bangalore-2026/speakers-images/Punya Patra.png",
