@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// One-time setup: hit GET /api/admin/init-coupons?secret=YOUR_SETUP_SECRET
-// Creates the ASG Partners coupon if it doesn't already exist.
+// Hit GET /api/admin/init-coupons?secret=YOUR_SETUP_SECRET to create / reset all partner coupons.
+
+const PARTNER_COUPONS = [
+    { code: "ASGPARTNER",  name: "ASG Partners VIP Pass" },
+    { code: "ABIZPARTNER", name: "ABiz VIP Pass" },
+    { code: "RMPARTNER",   name: "Rainmaker VIP Pass" },
+];
 
 export async function GET(request: NextRequest) {
     const secret = request.nextUrl.searchParams.get("secret");
@@ -13,32 +18,36 @@ export async function GET(request: NextRequest) {
     try {
         const prismaClient = prisma as any;
 
-        const coupon = await prismaClient.delegateCoupon.upsert({
-            where: { code: "ASGPARTNER" },
-            update: { usedCount: 0, maxUses: 3, isActive: true },
-            create: {
-                code: "ASGPARTNER",
-                name: "ASG Partners VIP Pass",
-                discountPct: 100,
-                validFrom: new Date("2026-01-01"),
-                validUntil: new Date("2026-12-31"),
-                maxUses: 3,
-                usedCount: 0,
-                isActive: true,
-                conferenceSlug: "bangalore-2026",
-                applicableTo: "corporate-counsel",
-            },
-        });
+        const results = await Promise.all(
+            PARTNER_COUPONS.map(({ code, name }) =>
+                prismaClient.delegateCoupon.upsert({
+                    where: { code },
+                    update: { usedCount: 0, maxUses: 3, isActive: true },
+                    create: {
+                        code,
+                        name,
+                        discountPct: 100,
+                        validFrom: new Date("2026-01-01"),
+                        validUntil: new Date("2026-12-31"),
+                        maxUses: 3,
+                        usedCount: 0,
+                        isActive: true,
+                        conferenceSlug: "bangalore-2026",
+                        applicableTo: "corporate-counsel",
+                    },
+                })
+            )
+        );
 
         return NextResponse.json({
             success: true,
-            coupon: {
-                code: coupon.code,
-                discountPct: coupon.discountPct,
-                maxUses: coupon.maxUses,
-                usedCount: coupon.usedCount,
-                isActive: coupon.isActive,
-            },
+            coupons: results.map(c => ({
+                code: c.code,
+                discountPct: c.discountPct,
+                maxUses: c.maxUses,
+                usedCount: c.usedCount,
+                isActive: c.isActive,
+            })),
         });
     } catch (error: any) {
         console.error("Init coupon error:", error);
