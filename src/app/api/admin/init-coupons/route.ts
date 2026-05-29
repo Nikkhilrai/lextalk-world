@@ -4,9 +4,9 @@ import { prisma } from "@/lib/prisma";
 // Hit GET /api/admin/init-coupons?secret=YOUR_SETUP_SECRET to create / reset all partner coupons.
 
 const PARTNER_COUPONS = [
-    { code: "ASGPARTNER",  name: "ASG Partners VIP Pass" },
-    { code: "ABIZPARTNER", name: "ABiz VIP Pass" },
-    { code: "RMPARTNER",   name: "Rainmaker VIP Pass" },
+    { code: "ASGPARTNER", name: "ASG Partners VIP Pass" },
+    { code: "ABIZ2026",   name: "ABiz VIP Pass" },
+    { code: "RAINMAKER",  name: "Rainmaker VIP Pass" },
 ];
 
 export async function GET(request: NextRequest) {
