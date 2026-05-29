@@ -17,6 +17,7 @@ const speakers: any[] = [
         name: "THE HON'BLE JUSTICE G. SHYAM PRASAD",
         title: "Former Judge, High Court of Judicature at Hyderabad | Senior Counsel, Supreme Court of India",
         image: "/bangalore-2026/speakers-images/G-Shyam-Prasad.jpeg",
+        isGuestOfHonor: true,
         bio: `Justice G Shyam Prasad is a distinguished jurist with over three decades of judicial experience, was elevated as a Judge of the High Court of Judicature at Hyderabad for the States of Telangana and Andhra Pradesh on 20 May 2016.
 
 Prior to elevation, he served in several key judicial and administrative roles, including Principal District Judge, Metropolitan Sessions Judge, Presiding Officer of the State Transport Appellate Tribunal, Industrial Tribunal and Labour Court, and Member Secretary of the Andhra Pradesh State Legal Services Authority. He has also served as the chairman for the High Power Committee medical education and the Hyderabad Metro Fare Fixation Committee.
