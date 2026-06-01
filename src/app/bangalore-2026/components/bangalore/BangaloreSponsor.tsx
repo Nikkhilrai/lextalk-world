@@ -36,6 +36,7 @@ const tiers = [
             { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/", w: 260, h: 130 },
             { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: "https://www.abizcon.com/", w: 220, h: 110 },
             { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/", w: 220, h: 110 },
+            { name: "Amadi", logo: "/bangalore-2026/Sponsor/Amadi.jpg", href: null, w: 220, h: 110 },
         ],
     },
     {
