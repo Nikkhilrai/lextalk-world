@@ -13,6 +13,7 @@ import { BangaloreMoreThanAConference } from "./components/bangalore/BangaloreMo
 import { BangaloreSponsor } from "./components/bangalore/BangaloreSponsor";
 import { BangaloreConferenceThemes } from "./components/bangalore/BangaloreConferenceThemes";
 import { BangaloreFeaturedSpeakers } from "./components/bangalore/BangaloreFeaturedSpeakers";
+import { BangaloreSILFLetter } from "./components/bangalore/BangaloreSILFLetter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
@@ -51,6 +52,7 @@ export default function Bangalore2026Page() {
                 <BangaloreKeyHighlights />
                 <BangaloreFeaturedIn />
                 <BangaloreAbout />
+                <BangaloreSILFLetter />
                 <BangaloreWhyMatters />
                 <BangaloreConferenceThemes />
                 <BangaloreWhoYouWillMeet />
