@@ -48,13 +48,6 @@ const tiers = [
         ],
     },
     {
-        label: "Venue Partner",
-        accent: "from-slate-200 via-slate-300 to-slate-200",
-        sponsors: [
-            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
-        ],
-    },
-    {
         label: "Ecosystem Partner",
         accent: "from-emerald-200 via-emerald-400 to-emerald-200",
         sponsors: [
@@ -66,6 +59,13 @@ const tiers = [
         accent: "from-purple-200 via-purple-300 to-purple-200",
         sponsors: [
             { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/", w: 240, h: 120 },
+        ],
+    },
+    {
+        label: "Venue Partner",
+        accent: "from-slate-200 via-slate-300 to-slate-200",
+        sponsors: [
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
         ],
     },
 ];
