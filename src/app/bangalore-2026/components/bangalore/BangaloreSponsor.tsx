@@ -40,6 +40,13 @@ const tiers = [
         ],
     },
     {
+        label: "Knowledge Partner",
+        accent: "from-blue-200 via-blue-400 to-blue-200",
+        sponsors: [
+            { name: "Arthashastra Legal", logo: "/bangalore-2026/Sponsor/Artha-Logo-Trans-scaled.png", href: "https://arthashastralegal.com/", w: 220, h: 110 },
+        ],
+    },
+    {
         label: "Premium Exhibitor",
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
@@ -59,13 +66,6 @@ const tiers = [
         accent: "from-purple-200 via-purple-300 to-purple-200",
         sponsors: [
             { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/", w: 240, h: 120 },
-        ],
-    },
-    {
-        label: "Knowledge Partner",
-        accent: "from-blue-200 via-blue-400 to-blue-200",
-        sponsors: [
-            { name: "Arthashastra Legal", logo: "/bangalore-2026/Sponsor/Artha-Logo-Trans-scaled.png", href: "https://arthashastralegal.com/", w: 220, h: 110 },
         ],
     },
     {
