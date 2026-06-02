@@ -457,7 +457,7 @@ export default function BangaloreDuoCounselPass() {
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
                                 className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg font-light"
                             >
-                                Bring a colleague. Two passes to India&apos;s premier in-house legal summit — one seamless registration, one invoice.
+                                Bring a colleague. Two passes to India&apos;s premier in-house legal summit.
                             </motion.p>
 
                             {/* Audience tags */}
