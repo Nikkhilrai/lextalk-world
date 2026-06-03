@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
+import { buildNewsletterHtml } from "@/lib/newsletter-mail";
 
 // POST /api/admin/resend-to-specific?secret=YOUR_SETUP_SECRET
 // Body: { emails: ["a@b.com", "c@d.com"], newsletterId?: "optional-id" }
@@ -47,11 +48,20 @@ export async function POST(request: NextRequest) {
         const results = [];
         for (const email of emails) {
             try {
+                const token = await ensureToken(email);
+                const html = buildNewsletterHtml({
+                    subject: newsletter.subject,
+                    htmlContent: newsletter.htmlContent,
+                    recipientName: email.split("@")[0],
+                    unsubscribeToken: token,
+                    previewText: newsletter.previewText || undefined,
+                });
+
                 const { error } = await resend.emails.send({
                     from: "LexTalk World <newsletter@lextalkworld.in>",
                     to: email,
                     subject: newsletter.subject,
-                    html: newsletter.htmlContent,
+                    html,
                 });
 
                 await db.newsletterSend.create({
