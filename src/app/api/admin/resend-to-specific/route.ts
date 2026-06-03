@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendNewsletterEmail } from "@/lib/newsletter-mail";
+import { Resend } from "resend";
 
 // POST /api/admin/resend-to-specific?secret=YOUR_SETUP_SECRET
 // Body: { emails: ["a@b.com", "c@d.com"], newsletterId?: "optional-id" }
@@ -42,30 +42,33 @@ export async function POST(request: NextRequest) {
 
         if (!newsletter) return NextResponse.json({ error: "No newsletter found" }, { status: 404 });
 
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
         const results = [];
         for (const email of emails) {
-            const token = await ensureToken(email);
-            const result = await sendNewsletterEmail({
-                to: email,
-                name: email.split("@")[0],
-                subject: newsletter.subject,
-                htmlContent: newsletter.htmlContent,
-                unsubscribeToken: token,
-                previewText: newsletter.previewText || undefined,
-            });
+            try {
+                const { error } = await resend.emails.send({
+                    from: "LexTalk World <newsletter@lextalkworld.in>",
+                    to: email,
+                    subject: newsletter.subject,
+                    html: newsletter.htmlContent,
+                });
 
-            await db.newsletterSend.create({
-                data: {
-                    newsletterId: newsletter.id,
-                    email,
-                    name: email.split("@")[0],
-                    source: "manual-resend",
-                    status: result.success ? "sent" : "failed",
-                    error: result.error || null,
-                },
-            }).catch(() => {});
+                await db.newsletterSend.create({
+                    data: {
+                        newsletterId: newsletter.id,
+                        email,
+                        name: email.split("@")[0],
+                        source: "manual-resend",
+                        status: error ? "failed" : "sent",
+                        error: error?.message || null,
+                    },
+                }).catch(() => {});
 
-            results.push({ email, success: result.success, error: result.error });
+                results.push({ email, success: !error, error: error?.message });
+            } catch (err: any) {
+                results.push({ email, success: false, error: err.message });
+            }
         }
 
         return NextResponse.json({
