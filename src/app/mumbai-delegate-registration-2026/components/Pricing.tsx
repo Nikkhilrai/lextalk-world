@@ -685,22 +685,53 @@ export default function MumbaiDelegatePricing() {
 
                 {/* Early Bird Coupon Banner */}
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex items-center justify-between gap-4 px-5 py-4 bg-gradient-to-r from-amber-500/10 to-amber-400/5 border border-amber-400/30 rounded-2xl mb-8"
+                    className="relative overflow-hidden rounded-2xl mb-8"
                 >
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                            <Tag size={14} className="text-amber-600" />
+                    {/* Animated background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_100%] animate-[shimmer_3s_linear_infinite]" />
+                    <div className="absolute inset-[2px] rounded-[14px] bg-gradient-to-r from-slate-900 via-[#1a1000] to-slate-900" />
+
+                    {/* Glow */}
+                    <div className="absolute inset-0 bg-amber-500/10 blur-xl" />
+
+                    <style>{`
+                        @keyframes shimmer {
+                            0% { background-position: 200% center; }
+                            100% { background-position: -200% center; }
+                        }
+                    `}</style>
+
+                    <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-5">
+                        <div className="flex items-center gap-4 text-center sm:text-left">
+                            {/* Bolt icon */}
+                            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-500/40">
+                                <Sparkles size={18} className="text-slate-950" fill="currentColor" />
+                            </div>
+                            <div>
+                                <p className="text-white font-black text-base md:text-lg uppercase tracking-wide leading-tight">
+                                    Early Bird Offer &nbsp;·&nbsp;
+                                    <span className="text-amber-400">30% Off</span>
+                                </p>
+                                <p className="text-slate-400 text-[11px] mt-0.5">
+                                    Apply coupon at checkout &nbsp;·&nbsp; <span className="text-amber-500/80 font-semibold">Valid until Oct 31, 2026</span>
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-[11px] font-black text-amber-700 uppercase tracking-widest">Early Bird Offer — 30% Off</p>
-                            <p className="text-[10px] text-slate-500 mt-0.5">Apply coupon at checkout · Valid until Oct 31, 2026</p>
+
+                        {/* Code pill */}
+                        <div className="flex items-center gap-2 shrink-0">
+                            <div className="relative px-5 py-2.5 border-2 border-dashed border-amber-400/60 rounded-xl bg-amber-500/10">
+                                <span className="text-amber-300 text-base font-black tracking-[0.3em]">EARLY30</span>
+                                {/* Ping dot */}
+                                <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500" />
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex items-center gap-2 px-4 py-2 bg-amber-500 rounded-xl shrink-0">
-                        <span className="text-slate-950 text-[11px] font-black tracking-widest">EARLY30</span>
                     </div>
                 </motion.div>
 
