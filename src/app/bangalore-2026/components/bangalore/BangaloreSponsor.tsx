@@ -50,7 +50,7 @@ const tiers = [
         label: "Premium Exhibitor",
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
-            { name: "Presolv360", logo: "/bangalore-2026/Sponsor/presolv360.jpeg", href: "https://presolv360.com/", w: 300, h: 140 },
+            { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/", w: 220, h: 110 },
             { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null, w: 260, h: 130 },
         ],
     },
