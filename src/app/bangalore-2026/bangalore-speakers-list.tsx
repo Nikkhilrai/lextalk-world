@@ -157,11 +157,6 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
         bio: `Iqbal is a renowned legal professional and celebrated panel speaker, widely recognized across India's legal and corporate circles for his sharp intellect, cross-industry depth, and ability to translate complex legal landscapes into compelling, actionable insight. A sought-after voice at legal forums and industry panels across the country, he has also served as an Industry Expert Faculty at ICSI, leading sessions on Contract Drafting and Negotiation for Leadership and Development programs, a role that speaks to both his mastery of the subject and his commitment to elevating the profession. His excellence has earned him back-to-back recognition as one of India's Top In-House Counsels (2021 & 2022) by Forbes India, a place among the Top 50 Legal Professionals in India by Asian Legal Business (India Rising Stars) c/o Thomson Reuters, and the Indian Archivers Award by the Indian Archivists Forum (IAF), with his perspectives further amplified through a featured interview in Lex Witness Magazine. Over a career spanning 12+ years across IT/ITES, Software, FinTech, Pharmaceuticals & Healthcare, Energy, Environmental, and Manufacturing industries, Iqbal has carved a niche in Legal Counsel, Contract Drafting and Negotiation, Contract Lifecycle Management, and Arbitration, earning the trust of C-suite leaders and stakeholders alike through his meticulous attention to detail, commercial awareness, and command over a wide regulatory spectrum including Intellectual Property Rights, GDPR, CGMP, FDA, FIDIC, Incoterms® 2010, and Corporate & International Business law.`
     },
     {
-        name: "Alpa Sood",
-        title: "Director - Legal, Marvell Technology",
-        image: "/bangalore-2026/speakers-images/Alpa-Sood.png",
-    },
-    {
         name: "Sathish Kolar Ramamoorthy",
         title: "General Counsel VP Legal & CS, Manipal Health Enterprises PVT. LTD.",
         image: "/bangalore-2026/speakers-images/Sathish-Kolar-Ramamoorthy.png",
