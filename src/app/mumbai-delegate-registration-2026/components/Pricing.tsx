@@ -683,6 +683,27 @@ export default function MumbaiDelegatePricing() {
                     </div>
                 </div>
 
+                {/* Early Bird Coupon Banner */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="flex items-center justify-between gap-4 px-5 py-4 bg-gradient-to-r from-amber-500/10 to-amber-400/5 border border-amber-400/30 rounded-2xl mb-8"
+                >
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                            <Tag size={14} className="text-amber-600" />
+                        </div>
+                        <div>
+                            <p className="text-[11px] font-black text-amber-700 uppercase tracking-widest">Early Bird Offer — 30% Off</p>
+                            <p className="text-[10px] text-slate-500 mt-0.5">Apply coupon at checkout · Valid until Oct 31, 2026</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-amber-500 rounded-xl shrink-0">
+                        <span className="text-slate-950 text-[11px] font-black tracking-widest">EARLY30</span>
+                    </div>
+                </motion.div>
+
                 {/* Pass Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
                     {PASSES.map((pass, i) => {
