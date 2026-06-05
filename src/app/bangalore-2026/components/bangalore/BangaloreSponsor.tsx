@@ -50,7 +50,7 @@ const tiers = [
         label: "Premium Exhibitor",
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
-            { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/", w: 220, h: 110 },
+            { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/", w: 220, h: 110, showName: true },
             { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null, w: 260, h: 130 },
         ],
     },
@@ -135,13 +135,18 @@ export function BangaloreSponsor() {
                             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
                                 {tier.sponsors.map((s, j) => {
                                     const img = (
-                                        <Image
-                                            src={s.logo}
-                                            alt={s.name}
-                                            width={s.w}
-                                            height={s.h}
-                                            className="object-contain mix-blend-multiply"
-                                        />
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Image
+                                                src={s.logo}
+                                                alt={s.name}
+                                                width={s.w}
+                                                height={s.h}
+                                                className="object-contain mix-blend-multiply"
+                                            />
+                                            {(s as any).showName && (
+                                                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{s.name}</span>
+                                            )}
+                                        </div>
                                     );
                                     return (
                                         <motion.div
