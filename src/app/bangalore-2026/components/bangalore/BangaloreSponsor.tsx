@@ -59,6 +59,7 @@ const tiers = [
         accent: "from-emerald-200 via-emerald-400 to-emerald-200",
         sponsors: [
             { name: "Mike Legal", logo: "/bangalore-2026/Sponsor/Mike-Legal.png", href: "https://mikelegal.com/", w: 220, h: 110 },
+            { name: "Netrika", logo: "/bangalore-2026/Sponsor/Netrika-Logo.png", href: "https://www.netrika.com/", w: 220, h: 110 },
         ],
     },
     {
