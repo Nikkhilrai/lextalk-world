@@ -39,7 +39,8 @@ export function EventsList() {
                 "15+ Exhibitors"
             ],
             link: "/bangalore-2026",
-            agendaLink: "#",
+            agendaLink: "/bangalore-2026#agenda",
+            publishedAgenda: true,
             stats: { delegates: "300+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "1 Day" }
         },
         {
@@ -230,16 +231,25 @@ export function EventsList() {
                                         {event.status === "Coming Soon" ? "Notify Me" : "View Details"}
                                         {event.status !== "Coming Soon" && <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4" />}
                                     </Link>
-                                    <button
-                                        onClick={() => setSelectedAgendaSlug(event.link.split("/").pop())}
-                                        disabled={event.status === "Coming Soon"}
-                                        className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon"
-                                            ? "border-slate-100 text-slate-300 cursor-not-allowed hidden sm:flex"
-                                            : "border-slate-200 text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 hidden sm:flex"
-                                            }`}
-                                    >
-                                        Agenda
-                                    </button>
+                                    {(event as any).publishedAgenda ? (
+                                        <Link
+                                            href={(event as any).agendaLink}
+                                            className="px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 transition-all duration-300 hidden sm:flex items-center justify-center gap-1.5"
+                                        >
+                                            View Agenda
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            onClick={() => setSelectedAgendaSlug(event.link.split("/").pop())}
+                                            disabled={event.status === "Coming Soon"}
+                                            className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon"
+                                                ? "border-slate-100 text-slate-300 cursor-not-allowed hidden sm:flex"
+                                                : "border-slate-200 text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 hidden sm:flex"
+                                                }`}
+                                        >
+                                            Agenda
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
