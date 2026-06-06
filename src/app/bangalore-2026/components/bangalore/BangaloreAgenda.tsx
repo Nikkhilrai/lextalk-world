@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
 
 type Speaker = { name: string; designation: string; image?: string };
 type SessionType = "registration" | "opening" | "inauguration" | "keynote" | "panel" | "casestudy" | "break" | "roundtable" | "vvip" | "awards" | "closing";
@@ -195,10 +195,19 @@ const agenda: Session[] = [
     },
 ];
 
-function SpeakerAvatar({ sp }: { sp: Speaker }) {
+function SpeakerAvatar({ sp, index = 0 }: { sp: Speaker; index?: number }) {
     return (
-        <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-white/10 bg-slate-800">
+        <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.06, ease: "easeOut" }}
+            className="flex items-center gap-3 group/avatar"
+        >
+            <motion.div
+                whileHover={{ scale: 1.1, ring: 2 }}
+                transition={{ duration: 0.2 }}
+                className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-white/10 bg-slate-800 group-hover/avatar:ring-amber-500/40 transition-all duration-200"
+            >
                 {sp.image ? (
                     <Image
                         src={sp.image}
@@ -213,12 +222,12 @@ function SpeakerAvatar({ sp }: { sp: Speaker }) {
                         {sp.name.charAt(0)}
                     </div>
                 )}
-            </div>
+            </motion.div>
             <div className="min-w-0">
-                <p className="text-white/85 text-xs font-semibold leading-tight truncate">{sp.name}</p>
+                <p className="text-white/85 text-xs font-semibold leading-tight truncate group-hover/avatar:text-amber-400 transition-colors duration-200">{sp.name}</p>
                 <p className="text-slate-500 text-[11px] leading-tight mt-0.5 line-clamp-2">{sp.designation}</p>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
@@ -253,25 +262,44 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: -12 }}
+            initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, delay: index * 0.03 }}
+            transition={{ duration: 0.5, delay: index * 0.04, ease: [0.25, 0.1, 0.25, 1] }}
             className="flex gap-4 md:gap-8 items-start py-2"
         >
             {/* Time */}
             <div className="w-28 md:w-36 flex-shrink-0 text-right pt-3">
-                <span className="text-[10px] md:text-xs text-slate-400 font-semibold tabular-nums leading-tight">{session.time}</span>
+                <motion.span
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.04 + 0.15 }}
+                    className="text-[10px] md:text-xs text-slate-400 font-semibold tabular-nums leading-tight block"
+                >
+                    {session.time}
+                </motion.span>
             </div>
 
-            {/* Timeline spine */}
+            {/* Timeline dot with pulse ring */}
             <div className="flex flex-col items-center flex-shrink-0 pt-3">
-                <div className={`w-3 h-3 rounded-full ring-2 ring-offset-2 ring-offset-[#050a15] ${cfg.dot} flex-shrink-0`} />
+                <div className="relative flex-shrink-0">
+                    <div className={`w-3 h-3 rounded-full ${cfg.dot} relative z-10`} />
+                    <motion.div
+                        className={`absolute inset-0 rounded-full ${cfg.dot} opacity-40`}
+                        animate={{ scale: [1, 2, 1], opacity: [0.4, 0, 0.4] }}
+                        transition={{ duration: 2.5, repeat: Infinity, delay: index * 0.15, ease: "easeInOut" }}
+                    />
+                </div>
                 <div className="w-[1px] flex-1 bg-gradient-to-b from-white/10 to-transparent mt-1 min-h-[32px]" />
             </div>
 
             {/* Card */}
-            <div className={`flex-1 mb-4 rounded-2xl border ${cfg.border} bg-white/[0.03] hover:bg-white/[0.05] transition-colors duration-200 overflow-hidden`}>
+            <motion.div
+                whileHover={{ y: -3, boxShadow: "0 12px 40px rgba(0,0,0,0.4)" }}
+                transition={{ duration: 0.2 }}
+                className={`flex-1 mb-4 rounded-2xl border ${cfg.border} bg-white/[0.03] overflow-hidden group/card`}
+            >
                 <div
                     className={`p-4 md:p-5 ${hasExpandable && session.speakers!.length > 1 ? "cursor-pointer" : ""}`}
                     onClick={() => hasExpandable && session.speakers!.length > 1 && setOpen(v => !v)}
@@ -284,12 +312,12 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                                 </span>
                                 <span className="text-[10px] text-slate-600 font-medium">{session.duration}</span>
                             </div>
-                            <h3 className="text-white/90 text-sm md:text-base font-semibold leading-snug">{session.title}</h3>
+                            <h3 className="text-white/90 text-sm md:text-base font-semibold leading-snug group-hover/card:text-white transition-colors duration-200">{session.title}</h3>
                         </div>
                         {hasExpandable && session.speakers!.length > 1 && (
                             <motion.div
                                 animate={{ rotate: open ? 180 : 0 }}
-                                transition={{ duration: 0.25 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
                                 className="flex-shrink-0 mt-1"
                             >
                                 <svg className="w-4 h-4 text-slate-500" viewBox="0 0 16 16" fill="none">
@@ -302,7 +330,7 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                     {/* Single speaker shown inline */}
                     {session.speakers?.length === 1 && (
                         <div className="mt-3">
-                            <SpeakerAvatar sp={session.speakers[0]} />
+                            <SpeakerAvatar sp={session.speakers[0]} index={0} />
                         </div>
                     )}
                 </div>
@@ -316,12 +344,12 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                transition={{ duration: 0.35, ease: "easeInOut" }}
                                 className="overflow-hidden"
                             >
                                 <div className="border-t border-white/5 px-4 md:px-5 py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {session.speakers!.map((sp, si) => (
-                                        <SpeakerAvatar key={si} sp={sp} />
+                                        <SpeakerAvatar key={si} sp={sp} index={si} />
                                     ))}
                                 </div>
                             </motion.div>
@@ -331,19 +359,26 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
                                 className="px-4 md:px-5 pb-4"
                             >
                                 {/* Avatar strip preview */}
                                 <div className="flex items-center gap-2">
                                     <div className="flex -space-x-2">
                                         {session.speakers!.slice(0, 5).map((sp, si) => (
-                                            <div key={si} className="w-7 h-7 rounded-full overflow-hidden ring-2 ring-[#050a15] bg-slate-800 flex-shrink-0">
+                                            <motion.div
+                                                key={si}
+                                                initial={{ opacity: 0, x: -4 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: si * 0.05 }}
+                                                className="w-7 h-7 rounded-full overflow-hidden ring-2 ring-[#050a15] bg-slate-800 flex-shrink-0"
+                                            >
                                                 {sp.image ? (
                                                     <Image src={sp.image} alt={sp.name} width={28} height={28} unoptimized className="w-full h-full object-cover object-top" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-[9px] text-slate-400 font-bold">{sp.name.charAt(0)}</div>
                                                 )}
-                                            </div>
+                                            </motion.div>
                                         ))}
                                         {session.speakers!.length > 5 && (
                                             <div className="w-7 h-7 rounded-full bg-slate-800 ring-2 ring-[#050a15] flex items-center justify-center text-[9px] text-slate-400 font-bold">
@@ -359,12 +394,16 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                         )}
                     </AnimatePresence>
                 )}
-            </div>
+            </motion.div>
         </motion.div>
     );
 }
 
 export function BangaloreAgenda() {
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: timelineRef, offset: ["start 0.8", "end 0.2"] });
+    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
     return (
         <section id="agenda" className="relative bg-[#050a15] py-24 md:py-32 overflow-hidden">
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/6 to-transparent rounded-full blur-[120px] pointer-events-none" />
@@ -413,8 +452,16 @@ export function BangaloreAgenda() {
                 </motion.div>
 
                 {/* Timeline */}
-                <div className="relative">
-                    <div className="absolute left-[calc(7rem+1.25rem)] md:left-[calc(9rem+1.25rem)] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent pointer-events-none" />
+                <div className="relative" ref={timelineRef}>
+                    {/* Static faint track */}
+                    <div className="absolute left-[calc(7rem+1.25rem)] md:left-[calc(9rem+1.25rem)] top-0 bottom-0 w-[1px] bg-white/5 pointer-events-none" />
+                    {/* Scroll-driven fill line */}
+                    <div className="absolute left-[calc(7rem+1.25rem)] md:left-[calc(9rem+1.25rem)] top-0 bottom-0 w-[1px] overflow-hidden pointer-events-none">
+                        <motion.div
+                            style={{ height: lineHeight }}
+                            className="w-full bg-gradient-to-b from-amber-500/60 via-blue-400/40 to-indigo-500/40 origin-top"
+                        />
+                    </div>
                     {agenda.map((session, i) => (
                         <AgendaItem key={i} session={session} index={i} />
                     ))}
