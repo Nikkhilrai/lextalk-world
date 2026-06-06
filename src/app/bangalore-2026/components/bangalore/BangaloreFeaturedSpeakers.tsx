@@ -100,7 +100,7 @@ A recognized thought leader and keynote speaker, Debasish is widely respected fo
     },
     {
         name: "Ankita Choudhary",
-        title: "Head – Legal Advisory & Contracts, Nuvama Group",
+        title: "Head of Legal, Nuvama Group",
         image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png",
         bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments.
 
