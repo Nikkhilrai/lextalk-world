@@ -36,116 +36,6 @@ function darkenHex(hex: string, amount = 0.28): string {
     return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 }
 
-// Bangalore skyline — uses curved paths, ellipses, and arches (not plain rectangles).
-// Layout: modern offices → temple gopuram → Vidhana Soudha (dome) → UB City towers → right terrace
-const SKYLINE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="white" preserveAspectRatio="xMidYMax meet">
-
-  <!-- Ground baseline -->
-  <rect x="0" y="78" width="360" height="2"/>
-
-  <!-- Left low-rise cluster (varied rooflines) -->
-  <path d="M0 78 L0 65 L8 65 L8 72 L16 72 L16 60 L20 56 L24 60 L24 72 L32 72 L32 65 L40 65 L40 78 Z"/>
-
-  <!-- South-Indian temple gopuram (stepped pyramid with kalasha finial) -->
-  <path d="M42 78 L42 68 L72 68 L72 78 Z"/>
-  <!-- Arched gateway -->
-  <path d="M52 78 L52 70 Q57 65 62 70 L62 78 Z" fill="white"/>
-  <path d="M44 68 L44 60 L70 60 L70 68 Z"/>
-  <path d="M47 60 L47 52 L67 52 L67 60 Z"/>
-  <path d="M50 52 L50 44 L64 44 L64 52 Z"/>
-  <path d="M53 44 L53 38 L61 38 L61 44 Z"/>
-  <path d="M55 38 L55 33 L59 33 L59 38 Z"/>
-  <!-- Kalasha (pot finial) -->
-  <ellipse cx="57" cy="30" rx="5" ry="4"/>
-  <circle cx="57" cy="25" r="2.5"/>
-  <!-- Tier mouldings -->
-  <rect x="44" y="62" width="26" height="1" opacity="0.4"/>
-  <rect x="47" y="54" width="20" height="1" opacity="0.4"/>
-  <rect x="50" y="46" width="14" height="1" opacity="0.4"/>
-
-  <!-- Mid office between temple and Vidhana Soudha -->
-  <path d="M74 78 L74 56 L78 52 L82 56 L82 78 Z"/>
-  <path d="M84 78 L84 62 L94 62 L94 78 Z"/>
-  <rect x="85" y="59" width="8" height="3" opacity="0.4"/>
-
-  <!-- ═══ Vidhana Soudha (Karnataka Legislature) ═══ -->
-  <!-- Grand staircase base -->
-  <path d="M96 78 L96 72 L98 70 L178 70 L180 72 L180 78 Z"/>
-  <!-- Main body tiers -->
-  <path d="M99 70 L99 62 L177 62 L177 70 Z"/>
-  <path d="M103 62 L103 54 L173 54 L173 62 Z"/>
-  <path d="M107 54 L107 46 L169 46 L169 54 Z"/>
-  <path d="M111 46 L111 40 L165 40 L165 46 Z"/>
-  <!-- Side pavilion towers -->
-  <path d="M111 46 L111 34 L121 34 L121 46 Z"/>
-  <path d="M155 46 L155 34 L165 34 L165 46 Z"/>
-  <!-- Pavilion domes -->
-  <ellipse cx="116" cy="31" rx="7" ry="5"/>
-  <circle cx="116" cy="25" r="2"/>
-  <ellipse cx="160" cy="31" rx="7" ry="5"/>
-  <circle cx="160" cy="25" r="2"/>
-  <!-- Central dome drum -->
-  <path d="M126 40 L126 30 L150 30 L150 40 Z"/>
-  <!-- Main dome (filled ellipse) -->
-  <ellipse cx="138" cy="26" rx="14" ry="9"/>
-  <!-- Dome lantern neck -->
-  <rect x="135" y="15" width="6" height="8"/>
-  <!-- Globe finial -->
-  <circle cx="138" cy="13" r="3.5"/>
-  <!-- Arched central entrance -->
-  <path d="M131 70 L131 62 Q138 57 145 62 L145 70 Z" fill="white"/>
-  <!-- Facade columns -->
-  <rect x="101" y="70" width="3" height="8" opacity="0.4"/>
-  <rect x="109" y="70" width="3" height="8" opacity="0.4"/>
-  <rect x="164" y="70" width="3" height="8" opacity="0.4"/>
-  <rect x="172" y="70" width="3" height="8" opacity="0.4"/>
-  <!-- Horizontal mouldings on tiers -->
-  <rect x="99"  y="64" width="78" height="1" opacity="0.35"/>
-  <rect x="103" y="56" width="70" height="1" opacity="0.35"/>
-
-  <!-- ═══ UB City glass towers (modern Bangalore) ═══ -->
-  <!-- Tower 1 — tallest, slight taper at top -->
-  <path d="M184 78 L184 30 L186 28 L198 28 L200 30 L200 78 Z"/>
-  <!-- Rooftop antenna -->
-  <rect x="191" y="22" width="2" height="8"/>
-  <circle cx="192" cy="20" r="2"/>
-  <!-- Floor lines -->
-  <rect x="184" y="48" width="16" height="1" opacity="0.35"/>
-  <rect x="184" y="58" width="16" height="1" opacity="0.35"/>
-  <rect x="184" y="68" width="16" height="1" opacity="0.35"/>
-  <!-- Tower 2 -->
-  <path d="M203 78 L203 40 L205 38 L217 38 L219 40 L219 78 Z"/>
-  <rect x="203" y="34" width="2" height="6"/>
-  <rect x="203" y="55" width="16" height="1" opacity="0.35"/>
-  <rect x="203" y="65" width="16" height="1" opacity="0.35"/>
-  <!-- Tower 3 -->
-  <path d="M222 78 L222 48 L224 46 L234 46 L236 48 L236 78 Z"/>
-  <rect x="222" y="62" width="14" height="1" opacity="0.35"/>
-  <rect x="222" y="72" width="14" height="1" opacity="0.35"/>
-
-  <!-- Right cluster -->
-  <path d="M238 78 L238 58 L240 56 L252 56 L254 58 L254 78 Z"/>
-  <path d="M256 78 L256 64 L266 64 L266 78 Z"/>
-  <rect x="257" y="61" width="8" height="3" opacity="0.35"/>
-
-  <!-- Right small temple / minaret -->
-  <path d="M270 78 L270 68 L286 68 L286 78 Z"/>
-  <path d="M273 68 L273 60 L283 60 L283 68 Z"/>
-  <path d="M276 60 L276 52 L280 52 L280 60 Z"/>
-  <path d="M277 52 L277 46 L279 46 L279 52 Z"/>
-  <ellipse cx="278" cy="43" rx="4" ry="4"/>
-  <circle cx="278" cy="38" r="2"/>
-  <!-- Arch at base -->
-  <path d="M270 68 L270 62 Q278 58 286 62 L286 68 Z" fill="white"/>
-
-  <!-- Far-right low buildings -->
-  <path d="M288 78 L288 65 L294 60 L300 65 L300 78 Z"/>
-  <path d="M302 78 L302 68 L314 68 L314 78 Z"/>
-  <path d="M316 78 L316 70 L328 70 L328 78 Z"/>
-  <path d="M330 78 L330 72 L342 72 L342 78 Z"/>
-  <path d="M344 78 L344 74 L360 74 L360 78 Z"/>
-
-</svg>`;
 
 async function buildHtml(data: BangalorePassData): Promise<string> {
     const verifyUrl = `https://lextalkworld.in/verify/bangalore/${data.ticketNumber}`;
@@ -360,46 +250,53 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
   .footer {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 128px;
+    height: 108px;
     background: linear-gradient(155deg, ${themeColor} 0%, ${darkColor} 100%);
     overflow: hidden;
   }
-  /* Decorative bottom-left circle */
-  .footer-circle {
+  /* Wave separator — white shape that creates organic boundary with the white card area */
+  .footer-wave {
     position: absolute;
-    bottom: -35px; left: -35px;
-    width: 130px; height: 130px;
+    top: 0; left: 0; right: 0;
+    height: 24px;
+    pointer-events: none;
+  }
+  .footer-wave svg { display:block; width:100%; height:24px; }
+  /* Dot texture — same as header for visual consistency */
+  .footer-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 13px 13px;
+    pointer-events: none;
+  }
+  /* Large decorative circle bottom-left */
+  .footer-circle-lg {
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 150px; height: 150px;
     border-radius: 50%;
     background: rgba(255,255,255,0.05);
     pointer-events: none;
   }
-
-  .skyline-wrap {
+  /* Small circle ring top-right */
+  .footer-circle-sm {
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 80px;
-    opacity: 0.72;
-  }
-  .skyline-wrap svg { width:100%; height:100%; }
-
-  /* Gradient fade that blends skyline into footer bottom */
-  .skyline-fade {
-    position: absolute;
-    bottom: 44px; left: 0; right: 0;
-    height: 24px;
-    background: linear-gradient(to bottom, transparent, ${themeColor});
+    top: 14px; right: 90px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
     pointer-events: none;
   }
-
-  .footer-bar {
+  .footer-content {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 44px;
+    height: 84px;
     display: flex;
     align-items: center;
-    padding: 0 86px 0 14px;
+    padding: 0 88px 0 16px;
   }
-  .footer-left { display:flex; flex-direction:column; gap:2px; }
+  .footer-left { display:flex; flex-direction:column; gap:3px; }
   .footer-url {
     color: rgba(255,255,255,0.93);
     font-size: 9.5px;
@@ -407,23 +304,23 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
     letter-spacing: 0.4px;
   }
   .footer-ticket {
-    color: rgba(255,255,255,0.42);
+    color: rgba(255,255,255,0.4);
     font-size: 7.5px;
     font-family: 'Courier New', monospace;
     letter-spacing: 1.5px;
   }
 
-  /* QR code — elevated white box over footer */
+  /* QR code — elevated white box */
   .qr-box {
     position: absolute;
-    bottom: 7px; right: 10px;
-    width: 70px; height: 70px;
+    bottom: 10px; right: 10px;
+    width: 72px; height: 72px;
     background: white;
     padding: 4px;
-    border-radius: 3px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
   }
-  .qr-box img { width:62px; height:62px; display:block; }
+  .qr-box img { width:64px; height:64px; display:block; }
 </style>
 </head>
 <body>
@@ -463,10 +360,15 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-circle"></div>
-    <div class="skyline-wrap">${SKYLINE_SVG}</div>
-    <div class="skyline-fade"></div>
-    <div class="footer-bar">
+    <div class="footer-wave">
+      <svg viewBox="0 0 360 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L360 0 L360 10 Q270 24 180 14 Q90 4 0 20 Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="footer-dots"></div>
+    <div class="footer-circle-lg"></div>
+    <div class="footer-circle-sm"></div>
+    <div class="footer-content">
       <div class="footer-left">
         <div class="footer-url">www.lextalkworld.in</div>
         <div class="footer-ticket">${badgeId}</div>
