@@ -235,6 +235,26 @@ Prior to founding Rainmaker in 2016, Antony established Kochhar & Co's Mumbai of
         image: "/bangalore-2026/speakers-images/Punya Patra.png",
         bio: `Punya Chandan Patra is a seasoned legal innovation and transformation leader with over 25+ years of experience driving strategic change across global organizations. Currently serving as Head of the Legal Innovation Hub at Novartis, he leads the design and implementation of next-generation legal service delivery models, with a focus on Responsible AI, digital transformation, and enterprise-wide efficiency. Throughout his career spanning leadership roles at Novartis, PwC, TCS, and CPA Global, Punya has been instrumental in building and scaling global legal operations, establishing high-performing Centers of Excellence, and delivering complex programs across contract lifecycle management, litigation support, regulatory compliance, and data governance. Known for his ability to translate vision into execution, bridge legal expertise with technology, he has spearheaded initiatives in legal tech adoption, eDiscovery, and AI-enabled contract management—helping organizations navigate evolving challenges. Punya has built and led high-performing global teams, delivered large-scale transformation programs, and contributed to shaping the future of legal services. His work consistently focuses on managing risk, strengthening compliance, and enabling resilient legal frameworks in an increasingly data-driven world. A trusted advisor to senior leadership, Punya brings a unique combination of strategic vision, operational excellence, and deep domain expertise—making him a sought-after speaker on the future of legal services, innovation, and risk management.`,
     },
+    {
+        name: "Nishi Shafton Williams",
+        title: "Senior Manager – Service Delivery, ABiz Corporation",
+        image: "/bangalore-2026/speakers-images/Nishi Shafton Williams.png",
+        bio: `Nishi Shafton Williams is a contracts and legal operations professional with over 13 years of experience, specialising in contract lifecycle management, CLM implementation, and legal operations transformation. She leads multi-pod delivery teams executing complex contract management, metadata extraction, obligation management, and IP governance programs for global clients across healthcare, technology, and professional services.
+
+Her focus areas include solution design, quality governance, AI-enabled contract operations, executive reporting, and building high-performing offshore delivery teams. Nishi holds a Corporate Membership with WCC and has attained the Contracts & Commercial Management Practitioner Certification from WCC (formerly IACCM).
+
+A distinguished academic achiever, she ranked 1st in Human Rights, Intellectual Property Rights, Taxation Laws, Land Laws, Political Science and History, with an Overall 3rd Rank in BA LLB.`,
+    },
+    {
+        name: "Gurupyari Dwivedi",
+        title: "Vice President – Service Delivery, ABiz Corporation",
+        image: "/bangalore-2026/speakers-images/Gurupyari Dwivedi.png",
+        bio: `Gurupyari Dwivedi (aka GP) is a seasoned service delivery and legal operations leader with extensive experience in driving contract management excellence, operational efficiency, and client-centric outcomes. As Vice President – Service Delivery at ABiz Corporation, she aligns legal and commercial operations with business strategy to deliver measurable value — recognised for building scalable delivery models, strengthening governance frameworks, and enabling teams to achieve consistent, high-quality results.
+
+GP leads end-to-end service delivery for global contracts management and legal support engagements, overseeing complex client portfolios, driving delivery transformation initiatives, and ensuring alignment between client objectives, operational execution, and risk management. She is known for setting up and mentoring high-performing teams and fostering a culture of accountability, collaboration, and continuous improvement.
+
+She holds a Master's in English from IGNOU, a Bachelor's in Law from Janhit College (CCS University), a Bachelor's in Commerce from Delhi University, and a CCM Practitioner certification from World Commerce and Contracting. A recognised industry voice, GP has served as Moderator at the WorldCC Roadshow and was named among Women Leaders in Legal Consultants by Women Entrepreneur India Magazine (October 2023).`,
+    },
 ];
 
 interface Speaker {
