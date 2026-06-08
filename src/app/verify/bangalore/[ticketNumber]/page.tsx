@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { CheckCircle, XCircle, User, Building2, Briefcase, Calendar, MapPin, Hash } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CheckInButton } from "./CheckInButton";
 
 interface PageProps {
     params: Promise<{ ticketNumber: string }>;
@@ -47,6 +48,7 @@ export default async function BangaloreVerifyPage(props: PageProps) {
         : "DELEGATE";
 
     const titleColor = title === "AWARDEE" ? "bg-purple-600" : "bg-amber-500";
+    const alreadyCheckedIn = !!registration?.checkedInAt;
 
     return (
         <main className="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-4">
@@ -56,7 +58,6 @@ export default async function BangaloreVerifyPage(props: PageProps) {
                 <div className={`p-6 text-center ${isValid ? "bg-[#0f172a]" : "bg-red-600"}`}>
                     {isValid ? (
                         <>
-                            {/* Badge title strip */}
                             <div className={`inline-block px-6 py-1.5 rounded-full mb-4 ${titleColor}`}>
                                 <span className="text-white font-black text-sm tracking-[0.2em]">{title}</span>
                             </div>
@@ -75,7 +76,6 @@ export default async function BangaloreVerifyPage(props: PageProps) {
                     )}
                 </div>
 
-                {/* Amber accent bar */}
                 {isValid && <div className="h-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500" />}
 
                 {isValid && registration ? (
@@ -145,7 +145,14 @@ export default async function BangaloreVerifyPage(props: PageProps) {
                             </div>
                         </div>
 
-                        {/* Status chip */}
+                        {/* Check-in button / status */}
+                        <CheckInButton
+                            ticketNumber={registration.ticketNumber!}
+                            alreadyCheckedIn={alreadyCheckedIn}
+                            checkedInAt={registration.checkedInAt ? registration.checkedInAt.toISOString() : null}
+                        />
+
+                        {/* Payment confirmed chip */}
                         <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
                                 <CheckCircle size={11} />

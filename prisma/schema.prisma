@@ -448,7 +448,11 @@ model DelegateRegistration {
   ticketNumber      String?  @unique
   ticketId          String?  @unique @default(uuid())
   emailSent         Boolean  @default(false)
-  
+
+  // Check-in
+  checkedInAt       DateTime?         // Set when delegate is scanned at the door
+  checkedInBy       String?           // Staff name or device ID that scanned
+
   // Timestamps
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

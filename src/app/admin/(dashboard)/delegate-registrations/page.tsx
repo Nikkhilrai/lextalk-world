@@ -216,6 +216,8 @@ export default function DelegateRegistrationsPage() {
     const [passTypeFilter, setPassTypeFilter] = useState("all");
     const [conferenceFilter, setConferenceFilter] = useState("all");
     const [sendingPass, setSendingPass] = useState<string | null>(null);
+    const [bulkSending, setBulkSending] = useState(false);
+    const [bulkResult, setBulkResult] = useState<{ sent: number; failed: number } | null>(null);
     const [selectedReg, setSelectedReg] = useState<any | null>(null);
     const [syncing, setSyncing] = useState(false);
     const [syncStatus, setSyncStatus] = useState<{ ok: boolean; msg: string } | null>(null);
@@ -358,6 +360,36 @@ export default function DelegateRegistrationsPage() {
         finally { setSendingPass(null); }
     };
 
+    const handleBulkSendPasses = async () => {
+        const eligible = registrations.filter(r =>
+            r.conferenceSlug?.includes("bangalore") &&
+            r.paymentStatus === "success" &&
+            !r.passType?.includes("virtual") &&
+            r.ticketNumber
+        );
+        if (eligible.length === 0) { alert("No eligible Bangalore physical delegates found."); return; }
+        if (!confirm(`Send passes to all ${eligible.length} eligible Bangalore delegates? This may take a few minutes.`)) return;
+
+        setBulkSending(true);
+        setBulkResult(null);
+        let sent = 0, failed = 0;
+
+        for (const reg of eligible) {
+            try {
+                const res = await fetch("/api/delegate-registration/send-pass", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ registrationId: reg.id }),
+                });
+                const data = await res.json();
+                if (data.success) sent++; else failed++;
+            } catch { failed++; }
+        }
+
+        setBulkSending(false);
+        setBulkResult({ sent, failed });
+    };
+
     const filtered = registrations.filter(reg => {
         const matchesSearch =
             `${reg.firstName} ${reg.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -413,12 +445,26 @@ export default function DelegateRegistrationsPage() {
                             {syncing ? <Loader2 size={16} className="animate-spin" /> : <TableProperties size={16} />}
                             {syncing ? "Syncing…" : "Sync to Google Sheet"}
                         </button>
+                        <button
+                            onClick={handleBulkSendPasses}
+                            disabled={bulkSending}
+                            className="px-4 py-2 bg-amber-600 text-white text-sm font-medium rounded hover:bg-amber-700 transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                            {bulkSending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                            {bulkSending ? "Sending Passes…" : "Bulk Send Passes"}
+                        </button>
                     </div>
-                    {syncStatus && (
-                        <span className={`text-xs font-medium ${syncStatus.ok ? "text-emerald-400" : "text-rose-400"}`}>
-                            {syncStatus.ok ? "✓" : "✗"} {syncStatus.msg}
-                        </span>
-                    )}
+                    <div className="flex items-center gap-3">
+                        {syncStatus && (
+                            <span className={`text-xs font-medium ${syncStatus.ok ? "text-emerald-400" : "text-rose-400"}`}>
+                                {syncStatus.ok ? "✓" : "✗"} {syncStatus.msg}
+                            </span>
+                        )}
+                        {bulkResult && (
+                            <span className="text-xs font-medium text-emerald-400">
+                                ✓ Passes sent: {bulkResult.sent} &nbsp;|&nbsp; Failed: {bulkResult.failed}
+                            </span>
+                        )}
+                    </div>
                 </div>
             </div>
 
