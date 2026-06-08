@@ -294,7 +294,7 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
     height: 84px;
     display: flex;
     align-items: center;
-    padding: 0 88px 0 16px;
+    padding: 0 106px 0 16px;
   }
   .footer-left { display:flex; flex-direction:column; gap:3px; }
   .footer-url {
@@ -313,14 +313,14 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
   /* QR code — elevated white box */
   .qr-box {
     position: absolute;
-    bottom: 10px; right: 10px;
-    width: 72px; height: 72px;
+    bottom: 8px; right: 8px;
+    width: 90px; height: 90px;
     background: white;
     padding: 4px;
     border-radius: 4px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.2);
   }
-  .qr-box img { width:64px; height:64px; display:block; }
+  .qr-box img { width:82px; height:82px; display:block; }
 </style>
 </head>
 <body>
