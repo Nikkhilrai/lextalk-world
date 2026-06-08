@@ -36,78 +36,115 @@ function darkenHex(hex: string, amount = 0.28): string {
     return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 }
 
-// Bangalore landmarks silhouette — white paths on colored bg
-// Vidhana Soudha dome (center), gopuram (left), UB City highrises (right)
+// Bangalore skyline — uses curved paths, ellipses, and arches (not plain rectangles).
+// Layout: modern offices → temple gopuram → Vidhana Soudha (dome) → UB City towers → right terrace
 const SKYLINE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="white" preserveAspectRatio="xMidYMax meet">
-  <rect x="0" y="62" width="12" height="18"/>
-  <rect x="14" y="54" width="16" height="26"/>
-  <rect x="17" y="46" width="10" height="8"/>
 
-  <!-- South Indian temple gopuram -->
-  <rect x="32" y="64" width="24" height="16"/>
-  <rect x="36" y="56" width="16" height="8"/>
-  <rect x="40" y="48" width="8" height="8"/>
-  <rect x="43" y="40" width="2" height="8"/>
-  <path d="M32 64 Q44 56 56 64" fill="white"/>
+  <!-- Ground baseline -->
+  <rect x="0" y="78" width="360" height="2"/>
 
-  <rect x="58" y="48" width="14" height="32"/>
-  <rect x="61" y="40" width="8" height="8"/>
-  <rect x="74" y="56" width="12" height="24"/>
+  <!-- Left low-rise cluster (varied rooflines) -->
+  <path d="M0 78 L0 65 L8 65 L8 72 L16 72 L16 60 L20 56 L24 60 L24 72 L32 72 L32 65 L40 65 L40 78 Z"/>
 
-  <!-- Vidhana Soudha — wide legislative building -->
-  <rect x="88" y="52" width="90" height="28"/>
-  <rect x="92" y="44" width="82" height="8"/>
-  <rect x="96" y="36" width="74" height="8"/>
-  <rect x="100" y="28" width="66" height="8"/>
-  <!-- Central dome -->
-  <path d="M124 28 Q133 13 142 28 Z"/>
-  <circle cx="133" cy="11" r="3.5"/>
-  <!-- Side smaller domes -->
-  <path d="M104 30 Q111 21 118 30 Z"/>
-  <path d="M148 30 Q155 21 162 30 Z"/>
+  <!-- South-Indian temple gopuram (stepped pyramid with kalasha finial) -->
+  <path d="M42 78 L42 68 L72 68 L72 78 Z"/>
+  <!-- Arched gateway -->
+  <path d="M52 78 L52 70 Q57 65 62 70 L62 78 Z" fill="white"/>
+  <path d="M44 68 L44 60 L70 60 L70 68 Z"/>
+  <path d="M47 60 L47 52 L67 52 L67 60 Z"/>
+  <path d="M50 52 L50 44 L64 44 L64 52 Z"/>
+  <path d="M53 44 L53 38 L61 38 L61 44 Z"/>
+  <path d="M55 38 L55 33 L59 33 L59 38 Z"/>
+  <!-- Kalasha (pot finial) -->
+  <ellipse cx="57" cy="30" rx="5" ry="4"/>
+  <circle cx="57" cy="25" r="2.5"/>
+  <!-- Tier mouldings -->
+  <rect x="44" y="62" width="26" height="1" opacity="0.4"/>
+  <rect x="47" y="54" width="20" height="1" opacity="0.4"/>
+  <rect x="50" y="46" width="14" height="1" opacity="0.4"/>
+
+  <!-- Mid office between temple and Vidhana Soudha -->
+  <path d="M74 78 L74 56 L78 52 L82 56 L82 78 Z"/>
+  <path d="M84 78 L84 62 L94 62 L94 78 Z"/>
+  <rect x="85" y="59" width="8" height="3" opacity="0.4"/>
+
+  <!-- ═══ Vidhana Soudha (Karnataka Legislature) ═══ -->
+  <!-- Grand staircase base -->
+  <path d="M96 78 L96 72 L98 70 L178 70 L180 72 L180 78 Z"/>
+  <!-- Main body tiers -->
+  <path d="M99 70 L99 62 L177 62 L177 70 Z"/>
+  <path d="M103 62 L103 54 L173 54 L173 62 Z"/>
+  <path d="M107 54 L107 46 L169 46 L169 54 Z"/>
+  <path d="M111 46 L111 40 L165 40 L165 46 Z"/>
+  <!-- Side pavilion towers -->
+  <path d="M111 46 L111 34 L121 34 L121 46 Z"/>
+  <path d="M155 46 L155 34 L165 34 L165 46 Z"/>
+  <!-- Pavilion domes -->
+  <ellipse cx="116" cy="31" rx="7" ry="5"/>
+  <circle cx="116" cy="25" r="2"/>
+  <ellipse cx="160" cy="31" rx="7" ry="5"/>
+  <circle cx="160" cy="25" r="2"/>
+  <!-- Central dome drum -->
+  <path d="M126 40 L126 30 L150 30 L150 40 Z"/>
+  <!-- Main dome (filled ellipse) -->
+  <ellipse cx="138" cy="26" rx="14" ry="9"/>
+  <!-- Dome lantern neck -->
+  <rect x="135" y="15" width="6" height="8"/>
+  <!-- Globe finial -->
+  <circle cx="138" cy="13" r="3.5"/>
+  <!-- Arched central entrance -->
+  <path d="M131 70 L131 62 Q138 57 145 62 L145 70 Z" fill="white"/>
   <!-- Facade columns -->
-  <rect x="94" y="52" width="3" height="14" opacity="0.55"/>
-  <rect x="102" y="52" width="3" height="14" opacity="0.55"/>
-  <rect x="163" y="52" width="3" height="14" opacity="0.55"/>
-  <rect x="171" y="52" width="3" height="14" opacity="0.55"/>
+  <rect x="101" y="70" width="3" height="8" opacity="0.4"/>
+  <rect x="109" y="70" width="3" height="8" opacity="0.4"/>
+  <rect x="164" y="70" width="3" height="8" opacity="0.4"/>
+  <rect x="172" y="70" width="3" height="8" opacity="0.4"/>
+  <!-- Horizontal mouldings on tiers -->
+  <rect x="99"  y="64" width="78" height="1" opacity="0.35"/>
+  <rect x="103" y="56" width="70" height="1" opacity="0.35"/>
 
-  <!-- UB City — modern glass towers -->
-  <rect x="182" y="32" width="18" height="48"/>
-  <rect x="185" y="24" width="5" height="8"/>
-  <rect x="193" y="24" width="5" height="8"/>
-  <rect x="202" y="40" width="16" height="40"/>
-  <rect x="205" y="32" width="10" height="8"/>
-  <rect x="220" y="44" width="14" height="36"/>
+  <!-- ═══ UB City glass towers (modern Bangalore) ═══ -->
+  <!-- Tower 1 — tallest, slight taper at top -->
+  <path d="M184 78 L184 30 L186 28 L198 28 L200 30 L200 78 Z"/>
+  <!-- Rooftop antenna -->
+  <rect x="191" y="22" width="2" height="8"/>
+  <circle cx="192" cy="20" r="2"/>
+  <!-- Floor lines -->
+  <rect x="184" y="48" width="16" height="1" opacity="0.35"/>
+  <rect x="184" y="58" width="16" height="1" opacity="0.35"/>
+  <rect x="184" y="68" width="16" height="1" opacity="0.35"/>
+  <!-- Tower 2 -->
+  <path d="M203 78 L203 40 L205 38 L217 38 L219 40 L219 78 Z"/>
+  <rect x="203" y="34" width="2" height="6"/>
+  <rect x="203" y="55" width="16" height="1" opacity="0.35"/>
+  <rect x="203" y="65" width="16" height="1" opacity="0.35"/>
+  <!-- Tower 3 -->
+  <path d="M222 78 L222 48 L224 46 L234 46 L236 48 L236 78 Z"/>
+  <rect x="222" y="62" width="14" height="1" opacity="0.35"/>
+  <rect x="222" y="72" width="14" height="1" opacity="0.35"/>
 
-  <rect x="238" y="54" width="16" height="26"/>
-  <rect x="241" y="46" width="10" height="8"/>
-  <rect x="256" y="58" width="14" height="22"/>
+  <!-- Right cluster -->
+  <path d="M238 78 L238 58 L240 56 L252 56 L254 58 L254 78 Z"/>
+  <path d="M256 78 L256 64 L266 64 L266 78 Z"/>
+  <rect x="257" y="61" width="8" height="3" opacity="0.35"/>
 
-  <!-- Right temple -->
-  <rect x="272" y="64" width="20" height="16"/>
-  <rect x="275" y="56" width="14" height="8"/>
-  <rect x="278" y="48" width="8" height="8"/>
-  <rect x="281" y="40" width="2" height="8"/>
+  <!-- Right small temple / minaret -->
+  <path d="M270 78 L270 68 L286 68 L286 78 Z"/>
+  <path d="M273 68 L273 60 L283 60 L283 68 Z"/>
+  <path d="M276 60 L276 52 L280 52 L280 60 Z"/>
+  <path d="M277 52 L277 46 L279 46 L279 52 Z"/>
+  <ellipse cx="278" cy="43" rx="4" ry="4"/>
+  <circle cx="278" cy="38" r="2"/>
+  <!-- Arch at base -->
+  <path d="M270 68 L270 62 Q278 58 286 62 L286 68 Z" fill="white"/>
 
-  <rect x="294" y="58" width="14" height="22"/>
-  <rect x="310" y="52" width="16" height="28"/>
-  <rect x="313" y="44" width="10" height="8"/>
-  <rect x="328" y="60" width="14" height="20"/>
-  <rect x="344" y="64" width="16" height="16"/>
+  <!-- Far-right low buildings -->
+  <path d="M288 78 L288 65 L294 60 L300 65 L300 78 Z"/>
+  <path d="M302 78 L302 68 L314 68 L314 78 Z"/>
+  <path d="M316 78 L316 70 L328 70 L328 78 Z"/>
+  <path d="M330 78 L330 72 L342 72 L342 78 Z"/>
+  <path d="M344 78 L344 74 L360 74 L360 78 Z"/>
 
-  <!-- Subtle window details -->
-  <rect x="61" y="52" width="3" height="4" opacity="0.45"/>
-  <rect x="67" y="52" width="3" height="4" opacity="0.45"/>
-  <rect x="61" y="60" width="3" height="4" opacity="0.45"/>
-  <rect x="67" y="60" width="3" height="4" opacity="0.45"/>
-  <rect x="184" y="36" width="2" height="4" opacity="0.4"/>
-  <rect x="190" y="36" width="2" height="4" opacity="0.4"/>
-  <rect x="184" y="46" width="2" height="4" opacity="0.4"/>
-  <rect x="190" y="46" width="2" height="4" opacity="0.4"/>
-  <rect x="204" y="44" width="2" height="4" opacity="0.4"/>
-  <rect x="210" y="44" width="2" height="4" opacity="0.4"/>
-  <rect x="204" y="54" width="2" height="4" opacity="0.4"/>
-  <rect x="210" y="54" width="2" height="4" opacity="0.4"/>
 </svg>`;
 
 async function buildHtml(data: BangalorePassData): Promise<string> {
