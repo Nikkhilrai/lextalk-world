@@ -11,289 +11,368 @@ interface BangalorePassData {
     ticketNumber: string;
 }
 
-const TITLE_COLORS: Record<BangalorePassTitle, { bg: string; text: string; sub: string }> = {
-    DELEGATE: { bg: "#F59E0B", text: "#ffffff", sub: "#0f172a" },
-    AWARDEE: { bg: "#7c3aed", text: "#ffffff", sub: "#ffffff" },
-    PARTICIPANT: { bg: "#0ea5e9", text: "#ffffff", sub: "#0f172a" },
+// Maps internal passType → badge category label + theme color (matches LTW lanyard template)
+const PASS_CATEGORY: Record<string, { label: string; color: string }> = {
+    "delegate":           { label: "DELEGATES", color: "#1B5F7A" },
+    "delegate-vip":       { label: "DELEGATES", color: "#1B5F7A" },
+    "student":            { label: "DELEGATES", color: "#1B5F7A" },
+    "corporate-counsel":  { label: "DELEGATES", color: "#1B5F7A" },
+    "standard-physical":  { label: "DELEGATES", color: "#1B5F7A" },
+    "premium-physical":   { label: "DELEGATES", color: "#1B5F7A" },
+    "exclusive-physical": { label: "DELEGATES", color: "#1B5F7A" },
+    "awardee":            { label: "AWARDEES",  color: "#7C3AED" },
+    "vendor-vip":         { label: "SPONSORS",  color: "#B91C1C" },
+    "sponsor":            { label: "SPONSORS",  color: "#B91C1C" },
+    "speaker":            { label: "SPEAKERS",  color: "#166534" },
+    "organiser":          { label: "ORGANISER", color: "#111827" },
 };
+const DEFAULT_CATEGORY = { label: "DELEGATES", color: "#1B5F7A" };
 
-function passTypeName(pt: string) {
-    const map: Record<string, string> = {
-        "delegate": "Delegate Pass",
-        "delegate-vip": "Delegate VIP Pass",
-        "student": "Student Pass",
-        "vendor-vip": "Vendor Pass",
-        "corporate-counsel": "Corporate Counsel Pass",
-        "standard-physical": "Standard Pass",
-        "premium-physical": "Premium Pass",
-        "exclusive-physical": "Exclusive Pass",
-    };
-    return map[pt] || pt.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-}
+// Bangalore city skyline silhouette — white on colored background.
+// Features: Vidhana Soudha dome (center), South Indian temple gopuram (left-center),
+// UB City-style highrises (right-center), smaller buildings flanking.
+const SKYLINE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="white" preserveAspectRatio="xMidYMax meet">
+  <!-- Left outer buildings -->
+  <rect x="0" y="60" width="14" height="20"/>
+  <rect x="16" y="52" width="18" height="28"/>
+  <rect x="19" y="44" width="12" height="8"/>
+  <rect x="36" y="58" width="12" height="22"/>
+
+  <!-- Temple gopuram (stepped pyramid with finial) -->
+  <rect x="50" y="62" width="26" height="18"/>
+  <rect x="54" y="54" width="18" height="8"/>
+  <rect x="58" y="46" width="10" height="8"/>
+  <rect x="61" y="38" width="4" height="8"/>
+  <rect x="62" y="30" width="2" height="8"/>
+  <path d="M50 62 Q63 54 76 62" fill="white"/>
+
+  <!-- Office cluster -->
+  <rect x="80" y="46" width="16" height="34"/>
+  <rect x="83" y="38" width="10" height="8"/>
+  <rect x="98" y="54" width="14" height="26"/>
+
+  <!-- Vidhana Soudha — wide classical building with dome -->
+  <rect x="114" y="50" width="82" height="30"/>
+  <rect x="118" y="42" width="74" height="8"/>
+  <rect x="122" y="34" width="66" height="8"/>
+  <rect x="126" y="26" width="58" height="8"/>
+  <!-- Central dome -->
+  <path d="M148 26 Q155 12 162 26 Z"/>
+  <circle cx="155" cy="10" r="3.5"/>
+  <!-- Side domes -->
+  <path d="M129 28 Q136 20 143 28 Z"/>
+  <path d="M167 28 Q174 20 181 28 Z"/>
+  <!-- Facade columns -->
+  <rect x="120" y="50" width="3" height="14" opacity="0.55"/>
+  <rect x="128" y="50" width="3" height="14" opacity="0.55"/>
+  <rect x="179" y="50" width="3" height="14" opacity="0.55"/>
+  <rect x="187" y="50" width="3" height="14" opacity="0.55"/>
+
+  <!-- UB City / modern highrises -->
+  <rect x="200" y="30" width="20" height="50"/>
+  <rect x="203" y="22" width="6" height="8"/>
+  <rect x="212" y="22" width="6" height="8"/>
+  <rect x="222" y="38" width="18" height="42"/>
+  <rect x="225" y="30" width="12" height="8"/>
+  <rect x="242" y="44" width="16" height="36"/>
+
+  <!-- Right buildings -->
+  <rect x="260" y="52" width="18" height="28"/>
+  <rect x="263" y="44" width="12" height="8"/>
+
+  <!-- Second temple / minaret right side -->
+  <rect x="282" y="62" width="20" height="18"/>
+  <rect x="285" y="54" width="14" height="8"/>
+  <rect x="288" y="46" width="8" height="8"/>
+  <rect x="291" y="38" width="2" height="8"/>
+
+  <!-- Far right -->
+  <rect x="306" y="56" width="16" height="24"/>
+  <rect x="324" y="50" width="18" height="30"/>
+  <rect x="344" y="60" width="16" height="20"/>
+
+  <!-- Window details on key buildings -->
+  <rect x="84" y="50" width="3" height="4" opacity="0.45"/>
+  <rect x="90" y="50" width="3" height="4" opacity="0.45"/>
+  <rect x="84" y="58" width="3" height="4" opacity="0.45"/>
+  <rect x="90" y="58" width="3" height="4" opacity="0.45"/>
+  <rect x="202" y="34" width="3" height="5" opacity="0.4"/>
+  <rect x="209" y="34" width="3" height="5" opacity="0.4"/>
+  <rect x="202" y="44" width="3" height="5" opacity="0.4"/>
+  <rect x="209" y="44" width="3" height="5" opacity="0.4"/>
+  <rect x="224" y="42" width="3" height="5" opacity="0.4"/>
+  <rect x="231" y="42" width="3" height="5" opacity="0.4"/>
+  <rect x="224" y="52" width="3" height="5" opacity="0.4"/>
+  <rect x="231" y="52" width="3" height="5" opacity="0.4"/>
+</svg>`;
 
 async function buildHtml(data: BangalorePassData): Promise<string> {
     const verifyUrl = `https://lextalkworld.in/verify/bangalore/${data.ticketNumber}`;
     const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
-        margin: 2,
-        width: 280,
-        color: { dark: "#0f172a", light: "#ffffff" },
+        margin: 1,
+        width: 200,
+        color: { dark: "#111827", light: "#ffffff" },
     });
 
-    const colors = TITLE_COLORS[data.passTitle];
-    const passName = passTypeName(data.passType);
+    const category = PASS_CATEGORY[data.passType] ?? DEFAULT_CATEGORY;
+    const { label: passLabel, color: themeColor } = category;
     const nameDisplay = data.attendeeName.toUpperCase();
+
+    // Embed logo as base64 for reliable rendering in Puppeteer (no external HTTP needed)
+    let logoSrc = "";
+    try {
+        const fs = await import("fs");
+        const path = await import("path");
+        const logoPath = path.join(process.cwd(), "public/logo/lextalkworld_logo.png");
+        const buf = fs.readFileSync(logoPath);
+        logoSrc = `data:image/png;base64,${buf.toString("base64")}`;
+    } catch {
+        // logo will fall back to text
+    }
+
+    // Show last 6 chars of ticket number as the badge ID (e.g. AB3X9K)
+    const badgeId = data.ticketNumber.replace(/^LTW-BLR26-/i, "").toUpperCase();
 
     return `<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    width: 400px;
-    height: 700px;
-    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    width: 360px;
+    height: 520px;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
     background: white;
     overflow: hidden;
   }
-
-  /* ── Title Header ── */
-  .header {
-    background: ${colors.bg};
-    padding: 22px 24px 16px;
-    text-align: center;
-    position: relative;
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: rgba(0,0,0,0.15);
-  }
-  .pass-title {
-    font-size: 46px;
-    font-weight: 900;
-    color: ${colors.text};
-    letter-spacing: 6px;
-    line-height: 1;
-  }
-  .entry-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: ${colors.sub};
-    margin-top: 5px;
-    text-transform: uppercase;
-  }
-
-  /* ── Navy Branding ── */
-  .branding {
-    background: #0f172a;
-    padding: 22px 24px 18px;
-    text-align: center;
+  .card {
+    width: 360px;
+    height: 520px;
+    background: white;
     position: relative;
     overflow: hidden;
   }
-  .branding-dots {
+
+  /* ── HEADER: colored top with curved bottom-left ── */
+  .header {
     position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
-    background-size: 16px 16px;
-    opacity: 0.6;
+    top: 0; left: 0; right: 0;
+    height: 208px;
+    background: ${themeColor};
+    border-radius: 0 0 0 110px;
+    display: flex;
+    align-items: flex-start;
+    padding: 18px 15px 0 18px;
   }
-  .branding-inner { position: relative; z-index: 1; }
-  .event-name {
-    font-size: 22px;
+  .pass-label {
+    flex: 0 0 auto;
+    color: rgba(255,255,255,0.95);
+    font-size: 17px;
     font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 3px;
+    letter-spacing: 1.2px;
+    padding-top: 6px;
+    text-transform: uppercase;
   }
-  .amber-line {
-    width: 60px;
-    height: 2px;
-    background: #F59E0B;
-    margin: 10px auto;
-    border-radius: 2px;
+  .event-info {
+    flex: 1;
+    text-align: right;
+    color: white;
+    padding-left: 8px;
+  }
+  .event-brand {
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.3px;
   }
   .event-sub {
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1.55;
+    margin-top: 4px;
+    opacity: 0.92;
+  }
+  .event-date {
+    font-size: 19px;
+    font-weight: 900;
+    margin-top: 8px;
+    line-height: 1;
+  }
+  .event-venue {
     font-size: 9px;
     font-weight: 700;
-    color: #F59E0B;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-  }
-  .date-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .date-box {
-    background: #F59E0B;
-    color: #0f172a;
-    font-size: 32px;
-    font-weight: 900;
-    width: 58px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(245,158,11,0.4);
-  }
-  .month-block {
-    background: #1e293b;
-    border-radius: 10px;
-    padding: 8px 14px;
-    text-align: center;
-    border: 1px solid #334155;
-  }
-  .month-block .month { color: #f1f5f9; font-size: 13px; font-weight: 800; letter-spacing: 1px; }
-  .month-block .year  { color: #64748b; font-size: 11px; font-weight: 600; margin-top: 1px; }
-  .city-block { text-align: left; }
-  .city-name    { color: #F59E0B; font-size: 15px; font-weight: 800; letter-spacing: 1px; }
-  .city-country { color: #64748b; font-size: 10px; font-weight: 600; margin-top: 1px; }
-  .venue {
-    font-size: 10px;
-    color: #475569;
-    margin-top: 12px;
-    letter-spacing: 0.5px;
+    margin-top: 5px;
+    line-height: 1.5;
+    opacity: 0.88;
   }
 
-  /* ── White Card ── */
-  .card {
-    background: #ffffff;
-    padding: 20px 24px 16px;
-    border-top: 3px solid #F59E0B;
-    flex: 1;
+  /* ── LOGO ── */
+  .logo-area {
+    position: absolute;
+    top: 208px; left: 0; right: 0;
+    height: 74px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
   }
-  .field-label {
-    font-size: 8px;
-    font-weight: 800;
-    color: #94a3b8;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-bottom: 3px;
+  .logo-img {
+    width: 180px;
+    height: auto;
+  }
+  .logo-fallback {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: ${themeColor};
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    position: absolute;
+    top: 282px;
+    left: 22px; right: 22px;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  /* ── ATTENDEE ── */
+  .attendee {
+    position: absolute;
+    top: 290px; left: 0; right: 0;
+    padding: 0 18px;
+    text-align: center;
   }
   .attendee-name {
     font-size: 24px;
     font-weight: 900;
-    color: #0f172a;
+    color: ${themeColor};
     line-height: 1.1;
-    margin-bottom: 14px;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  .attendee-desg {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 6px;
+    line-height: 1.35;
     word-break: break-word;
   }
-  .org-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 2px;
-  }
-  .designation {
+  .attendee-org {
     font-size: 11px;
-    color: #64748b;
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-  .qr-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 4px;
-  }
-  .qr-wrapper {
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 8px;
-    display: inline-block;
-    background: #fff;
-  }
-  .qr-img { width: 120px; height: 120px; display: block; }
-  .pass-id {
-    font-size: 10px;
-    font-family: 'Courier New', monospace;
-    color: #94a3b8;
-    margin-top: 8px;
-    letter-spacing: 1px;
-  }
-  .pass-chip {
-    background: #fffbeb;
-    border: 1px solid #fde68a;
-    border-radius: 100px;
-    padding: 4px 14px;
-    font-size: 8px;
-    font-weight: 800;
-    color: #b45309;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 8px;
+    font-weight: 600;
+    color: #4b5563;
+    margin-top: 2px;
+    line-height: 1.3;
+    word-break: break-word;
   }
 
-  /* ── Footer ── */
+  /* ── FOOTER ── */
   .footer {
-    background: #0f172a;
-    border-top: 2px solid #F59E0B;
-    padding: 12px 24px;
-    text-align: center;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 128px;
+    background: ${themeColor};
+    overflow: visible;
   }
-  .footer-url  { color: #F59E0B; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
-  .footer-note { color: #475569; font-size: 8.5px; margin-top: 3px; letter-spacing: 0.5px; }
+  .skyline-wrap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 82px;
+    opacity: 0.82;
+  }
+  .skyline-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+  .footer-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 0 84px 0 14px;
+  }
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .footer-url {
+    color: rgba(255,255,255,0.95);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .footer-ticket {
+    color: rgba(255,255,255,0.55);
+    font-size: 8px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+  /* QR box floats over skyline + footer bar (right side) */
+  .qr-box {
+    position: absolute;
+    bottom: 7px;
+    right: 10px;
+    width: 70px;
+    height: 70px;
+    background: white;
+    padding: 3px;
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.5);
+  }
+  .qr-box img {
+    width: 64px;
+    height: 64px;
+    display: block;
+  }
 </style>
 </head>
 <body>
+<div class="card">
 
   <div class="header">
-    <div class="pass-title">${data.passTitle}</div>
-    <div class="entry-label">Entry Pass</div>
-  </div>
-
-  <div class="branding">
-    <div class="branding-dots"></div>
-    <div class="branding-inner">
-      <div class="event-name">LEXTALK WORLD</div>
-      <div class="amber-line"></div>
-      <div class="event-sub">Global Legal Conference &amp; Awards</div>
-      <div class="date-row">
-        <div class="date-box">11</div>
-        <div class="month-block">
-          <div class="month">JUNE</div>
-          <div class="year">2026</div>
-        </div>
-        <div class="city-block">
-          <div class="city-name">BANGALORE</div>
-          <div class="city-country">INDIA</div>
-        </div>
-      </div>
-      <div class="venue">Radisson Blu Atria, Palace Rd, Bengaluru</div>
+    <div class="pass-label">${passLabel}</div>
+    <div class="event-info">
+      <div class="event-brand">LexTalk World</div>
+      <div class="event-sub">Conference &amp; Exhibition<br>Middle East &amp; APAC</div>
+      <div class="event-date">11 June 2026</div>
+      <div class="event-venue">Radisson Blu Atria,<br>Bangalore, INDIA</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="field-label">Attendee Name</div>
+  <div class="logo-area">
+    ${logoSrc
+        ? `<img class="logo-img" src="${logoSrc}" />`
+        : `<div class="logo-fallback">LEXTALK WORLD</div>`
+    }
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="attendee">
     <div class="attendee-name">${nameDisplay}</div>
-
-    ${data.organization ? `
-    <div class="field-label">Organisation</div>
-    <div class="org-name">${data.organization}</div>
-    ${data.designation ? `<div class="designation">${data.designation}</div>` : ""}
-    ` : ""}
-
-    <div class="qr-section">
-      <div class="qr-wrapper">
-        <img class="qr-img" src="${qrDataUrl}" />
-      </div>
-      <div class="pass-id">${data.ticketNumber}</div>
-      <div class="pass-chip">${passName}</div>
-    </div>
+    ${data.designation ? `<div class="attendee-desg">${data.designation}</div>` : ""}
+    ${data.organization ? `<div class="attendee-org">${data.organization}</div>` : ""}
   </div>
 
   <div class="footer">
-    <div class="footer-url">lextalkworld.in</div>
-    <div class="footer-note">Present this pass at the registration desk on June 11, 2026</div>
+    <div class="skyline-wrap">${SKYLINE_SVG}</div>
+    <div class="footer-bar">
+      <div class="footer-left">
+        <div class="footer-url">www.lextalkworld.in</div>
+        <div class="footer-ticket">${badgeId}</div>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="${qrDataUrl}" />
+    </div>
   </div>
 
+</div>
 </body>
 </html>`;
 }
@@ -305,23 +384,18 @@ export async function generateBangalorePassPDF(data: BangalorePassData): Promise
         const isDev = process.env.NODE_ENV === "development";
 
         if (isDev) {
-            // Local: use system Chrome
             const puppeteer = await import("puppeteer-core");
             browser = await puppeteer.default.launch({
-                executablePath:
-                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
                 headless: true,
                 args: ["--no-sandbox", "--disable-setuid-sandbox"],
             });
         } else {
-            // Production (Vercel): use @sparticuz/chromium-min
             const chromium = await import("@sparticuz/chromium-min");
             const puppeteer = await import("puppeteer-core");
-
             const executablePath = await chromium.default.executablePath(
                 "https://github.com/Sparticuz/chromium/releases/download/v131.0.0/chromium-v131.0.0-pack.tar"
             );
-
             browser = await puppeteer.default.launch({
                 args: chromium.default.args,
                 defaultViewport: chromium.default.defaultViewport,
@@ -331,14 +405,14 @@ export async function generateBangalorePassPDF(data: BangalorePassData): Promise
         }
 
         const page = await browser.newPage();
-        await page.setViewport({ width: 400, height: 700 });
+        await page.setViewport({ width: 360, height: 520 });
 
         const html = await buildHtml(data);
-        await page.setContent(html, { waitUntil: "domcontentloaded" });
+        await page.setContent(html, { waitUntil: "networkidle0" });
 
         const pdfBuffer = await page.pdf({
-            width: "400px",
-            height: "700px",
+            width: "90mm",
+            height: "130mm",
             printBackground: true,
             pageRanges: "1",
         });
