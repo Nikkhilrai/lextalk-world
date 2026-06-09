@@ -98,7 +98,7 @@ const agenda: Session[] = [
     {
         time: "11:35 AM – 11:55 AM",
         type: "casestudy",
-        title: "Case Study Presentation by ABiz",
+        title: "Turning AI into Business Value in Legal Operations and Contract Management",
         duration: "20 min",
     },
     {
