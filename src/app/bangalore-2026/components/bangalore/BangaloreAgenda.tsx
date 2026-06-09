@@ -12,6 +12,7 @@ type Session = {
     type: SessionType;
     title: string;
     subtitle?: string;
+    logo?: string;
     duration: string;
     speakers?: Speaker[];
     isBreak?: boolean;
@@ -102,6 +103,7 @@ const agenda: Session[] = [
         title: "Case Study Presentation by ABiz",
         subtitle: "Turning AI into Business Value in Legal Operations and Contract Management",
         duration: "20 min",
+        logo: "/bangalore-2026/Sponsor/ABiz Logo.png",
     },
     {
         time: "11:55 AM – 12:45 PM",
@@ -313,7 +315,19 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                                 </span>
                                 <span className="text-[10px] text-slate-600 font-medium">{session.duration}</span>
                             </div>
-                            <h3 className="text-white/90 text-sm md:text-base font-semibold leading-snug group-hover/card:text-white transition-colors duration-200">{session.title}</h3>
+                            <div className="flex items-center gap-3 flex-wrap">
+                                <h3 className="text-white/90 text-sm md:text-base font-semibold leading-snug group-hover/card:text-white transition-colors duration-200">{session.title}</h3>
+                                {session.logo && (
+                                    <Image
+                                        src={session.logo}
+                                        alt="Presenter logo"
+                                        width={64}
+                                        height={28}
+                                        unoptimized
+                                        className="object-contain h-7 w-auto opacity-80 mix-blend-luminosity group-hover/card:opacity-100 transition-opacity duration-200"
+                                    />
+                                )}
+                            </div>
                             {session.subtitle && (
                                 <p className="text-slate-400 text-xs md:text-sm mt-1 leading-snug">{session.subtitle}</p>
                             )}
