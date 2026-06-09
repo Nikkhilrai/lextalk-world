@@ -182,7 +182,7 @@ const agenda: Session[] = [
     {
         time: "5:00 PM – 5:30 PM",
         type: "awards",
-        title: "LTW Legal Excellence Awards 2026",
+        title: "Legal Honor Global Awards 2026",
         duration: "30 min",
     },
     {
