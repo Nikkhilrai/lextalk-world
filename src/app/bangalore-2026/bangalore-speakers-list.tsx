@@ -259,6 +259,7 @@ She holds a Master's in English from IGNOU, a Bachelor's in Law from Janhit Coll
         name: "Rovena David",
         title: "General Counsel, StoveKraft Limited",
         image: "/bangalore-2026/speakers-images/Rovena David.png",
+        bio: `Rovena David is the General Counsel of Stovekraft Limited, bringing over 17 years of rich experience in corporate legal practice. Over the course of her career, she has held key roles at leading organisations including Titan, Wipro Enterprises, Hindustan Unilever, and Herbalife International, building deep expertise across a wide range of corporate legal functions.`,
     },
     {
         name: "Gaurav Sahay",
