@@ -11,6 +11,7 @@ type Session = {
     time: string;
     type: SessionType;
     title: string;
+    subtitle?: string;
     duration: string;
     speakers?: Speaker[];
     isBreak?: boolean;
@@ -98,7 +99,8 @@ const agenda: Session[] = [
     {
         time: "11:35 AM – 11:55 AM",
         type: "casestudy",
-        title: "Turning AI into Business Value in Legal Operations and Contract Management",
+        title: "Case Study Presentation by ABiz",
+        subtitle: "Turning AI into Business Value in Legal Operations and Contract Management",
         duration: "20 min",
     },
     {
@@ -312,6 +314,9 @@ function AgendaItem({ session, index }: { session: Session; index: number }) {
                                 <span className="text-[10px] text-slate-600 font-medium">{session.duration}</span>
                             </div>
                             <h3 className="text-white/90 text-sm md:text-base font-semibold leading-snug group-hover/card:text-white transition-colors duration-200">{session.title}</h3>
+                            {session.subtitle && (
+                                <p className="text-slate-400 text-xs md:text-sm mt-1 leading-snug">{session.subtitle}</p>
+                            )}
                         </div>
                         {hasExpandable && session.speakers!.length > 1 && (
                             <motion.div
