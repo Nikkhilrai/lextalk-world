@@ -69,7 +69,7 @@ const agenda: Session[] = [
         duration: "50 min",
         speakers: [
             { name: "Jaya Kathju",          designation: "Associate Director - Legal, Eli Lilly",                                        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png" },
-            { name: "Gaurav Sahay",         designation: "Founder/Partner, Arthashastra Legal" },
+            { name: "Gaurav Sahay",         designation: "Founder/Partner, Arthashastra Legal",                                       image: "/bangalore-2026/speakers-images/Gaurav Sahay.png" },
             { name: "Priyesh Sharma",       designation: "Assistant VP Legal, Knowledge Realty Trust",                                   image: "/bangalore-2026/speakers-images/Priyesh Sharma.png" },
             { name: "Hena Datta",           designation: "Head of Legal, Emmvee Group",                                                  image: "/bangalore-2026/speakers-images/Hena-Datta.png" },
             { name: "Smitha Chandrashekar", designation: "Legal Director, Harman International",                                         image: "/bangalore-2026/speakers-images/Smitha-Chandrashekar.png" },
@@ -108,6 +108,7 @@ const agenda: Session[] = [
         duration: "50 min",
         speakers: [
             { name: "Saurabh Anand",          designation: "Lead Counsel, Akamai Technologies" },
+            { name: "Rovena David",            designation: "General Counsel, StoveKraft Limited",                                         image: "/bangalore-2026/speakers-images/Rovena David.png" },
             { name: "Deepalakshmi Vadivelan",  designation: "General Counsel & SVP Legal, Global DPO, Quess Corp Limited",                 image: "/bangalore-2026/speakers-images/Deepalakshmi-Vadivelan.png" },
             { name: "Krishna Chellapilla",     designation: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",       image: "/bangalore-2026/speakers-images/Krishna-Chellapilla.png" },
             { name: "Iqbal Tauseef",           designation: "Executive Director – Legal Head - India & Global Contracts COE, TTEC",        image: "/bangalore-2026/speakers-images/Iqbal-Tauseef.png" },

@@ -255,6 +255,16 @@ GP leads end-to-end service delivery for global contracts management and legal s
 
 She holds a Master's in English from IGNOU, a Bachelor's in Law from Janhit College (CCS University), a Bachelor's in Commerce from Delhi University, and a CCM Practitioner certification from World Commerce and Contracting. A recognised industry voice, GP has served as Moderator at the WorldCC Roadshow and was named among Women Leaders in Legal Consultants by Women Entrepreneur India Magazine (October 2023).`,
     },
+    {
+        name: "Rovena David",
+        title: "General Counsel, StoveKraft Limited",
+        image: "/bangalore-2026/speakers-images/Rovena David.png",
+    },
+    {
+        name: "Gaurav Sahay",
+        title: "Founder/Partner, Arthashastra Legal",
+        image: "/bangalore-2026/speakers-images/Gaurav Sahay.png",
+    },
 ];
 
 interface Speaker {
