@@ -106,7 +106,7 @@ export function BangaloreLegalTechReport() {
     }
 
     return (
-        <section ref={sectionRef} className="relative bg-[#050a15] py-16 overflow-hidden">
+        <section id="legal-tech-report" ref={sectionRef} className="relative bg-[#050a15] py-16 overflow-hidden">
 
             {/* Animated background orbs */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
