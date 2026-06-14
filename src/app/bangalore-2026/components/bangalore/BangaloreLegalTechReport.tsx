@@ -30,7 +30,7 @@ const STATS = [
     { value: "10", label: "Chapters" },
     { value: "50+", label: "Expert Insights" },
     { value: "2026", label: "Bangalore Edition" },
-    { value: "Free", label: "Download" },
+    { value: "PDF", label: "Download" },
 ];
 
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -298,9 +298,9 @@ export function BangaloreLegalTechReport() {
                                 <svg className="relative w-4 h-4" viewBox="0 0 16 16" fill="none">
                                     <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                                <span className="relative">Download Free Report</span>
+                                <span className="relative">Download Report</span>
                             </motion.button>
-                            <span className="text-xs text-slate-600">No cost · Instant access</span>
+                            <span className="text-xs text-slate-600">Instant access</span>
                         </motion.div>
                     </div>
 
@@ -530,7 +530,7 @@ export function BangaloreLegalTechReport() {
                                                             <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                                             </svg>
-                                                            Download Report — Free
+                                                            Download Report
                                                         </>
                                                     )}
                                                 </span>
