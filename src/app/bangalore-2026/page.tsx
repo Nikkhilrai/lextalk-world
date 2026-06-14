@@ -14,6 +14,7 @@ import { BangaloreSponsor } from "./components/bangalore/BangaloreSponsor";
 import { BangaloreConferenceThemes } from "./components/bangalore/BangaloreConferenceThemes";
 import { BangaloreFeaturedSpeakers } from "./components/bangalore/BangaloreFeaturedSpeakers";
 import { BangaloreAgenda } from "./components/bangalore/BangaloreAgenda";
+import { BangaloreLegalTechReport } from "./components/bangalore/BangaloreLegalTechReport";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventSelectionModal } from "@/components/EventSelectionModal";
@@ -67,6 +68,7 @@ export default function Bangalore2026Page() {
             </div>
             <BangaloreFeaturedSpeakers />
             <BangaloreAgenda />
+            <BangaloreLegalTechReport />
             <div className="relative bg-white">
                 <BangaloreGlobalLegacy />
                 <BangaloreAdvisoryBoard />
