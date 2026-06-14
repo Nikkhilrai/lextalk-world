@@ -106,7 +106,7 @@ export function BangaloreLegalTechReport() {
     }
 
     return (
-        <section ref={sectionRef} className="relative bg-[#050a15] py-28 overflow-hidden">
+        <section ref={sectionRef} className="relative bg-[#050a15] py-16 overflow-hidden">
 
             {/* Animated background orbs */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -139,7 +139,7 @@ export function BangaloreLegalTechReport() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
+                    className="text-center mb-10"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -158,7 +158,7 @@ export function BangaloreLegalTechReport() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.2 }}
-                        className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight mb-5"
+                        className="text-3xl lg:text-4xl font-serif font-bold text-white leading-tight mb-4"
                     >
                         Final Legal Tech{" "}
                         <span className="relative inline-block">
@@ -179,7 +179,7 @@ export function BangaloreLegalTechReport() {
                         initial={{ opacity: 0, y: 15 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.35 }}
-                        className="text-slate-400 text-base lg:text-lg leading-relaxed max-w-2xl mx-auto"
+                        className="text-slate-400 text-sm leading-relaxed max-w-xl mx-auto"
                     >
                         A comprehensive post-event report from LexTalk World Bangalore 2026 — capturing the most critical legal technology insights, expert perspectives, and actionable takeaways from India's premier legal conference.
                     </motion.p>
@@ -190,7 +190,7 @@ export function BangaloreLegalTechReport() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10"
                 >
                     {STATS.map((s, i) => (
                         <motion.div
@@ -198,17 +198,17 @@ export function BangaloreLegalTechReport() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={inView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
-                            className="relative group text-center px-6 py-5 rounded-xl border border-slate-700/40 bg-slate-900/40 backdrop-blur hover:border-amber-500/30 hover:bg-slate-800/40 transition-all duration-300"
+                            className="relative group text-center px-4 py-3.5 rounded-xl border border-slate-700/40 bg-slate-900/40 backdrop-blur hover:border-amber-500/30 hover:bg-slate-800/40 transition-all duration-300"
                         >
                             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-amber-500/0 to-amber-500/0 group-hover:from-amber-500/5 group-hover:to-transparent transition-all duration-300" />
-                            <p className="text-2xl font-serif font-bold text-amber-400 mb-1">{s.value}</p>
-                            <p className="text-xs text-slate-500 tracking-wider uppercase">{s.label}</p>
+                            <p className="text-xl font-serif font-bold text-amber-400 mb-0.5">{s.value}</p>
+                            <p className="text-[10px] text-slate-500 tracking-wider uppercase">{s.label}</p>
                         </motion.div>
                     ))}
                 </motion.div>
 
                 {/* Main grid */}
-                <div className="grid lg:grid-cols-[1fr_380px] gap-12 xl:gap-20 items-start">
+                <div className="grid lg:grid-cols-[1fr_320px] gap-10 items-start">
 
                     {/* Left — Table of Contents */}
                     <div ref={tocRef}>
@@ -239,7 +239,7 @@ export function BangaloreLegalTechReport() {
                                         transition={{ duration: 0.45, delay: 0.25 + i * 0.07, ease: "easeOut" }}
                                         onMouseEnter={() => setHoveredRow(i)}
                                         onMouseLeave={() => setHoveredRow(null)}
-                                        className="relative flex items-center gap-4 px-4 py-3.5 rounded-xl cursor-default group"
+                                        className="relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-default group"
                                     >
                                         {/* Row bg */}
                                         <motion.div
@@ -255,11 +255,11 @@ export function BangaloreLegalTechReport() {
                                         />
 
                                         {/* Number dot */}
-                                        <div className="relative z-10 w-11 h-11 shrink-0 rounded-full border border-slate-700/60 bg-slate-900 group-hover:border-amber-500/40 group-hover:bg-slate-800 transition-all duration-300 flex items-center justify-center">
+                                        <div className="relative z-10 w-8 h-8 shrink-0 rounded-full border border-slate-700/60 bg-slate-900 group-hover:border-amber-500/40 group-hover:bg-slate-800 transition-all duration-300 flex items-center justify-center">
                                             <span className="text-xs font-mono font-bold text-slate-500 group-hover:text-amber-400 transition-colors duration-300">{item.n}</span>
                                         </div>
 
-                                        <span className="relative z-10 text-sm text-slate-400 group-hover:text-white transition-colors duration-300 leading-snug">
+                                        <span className="relative z-10 text-xs text-slate-400 group-hover:text-white transition-colors duration-300 leading-snug">
                                             {item.title}
                                         </span>
 
@@ -281,13 +281,13 @@ export function BangaloreLegalTechReport() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={tocInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.6, delay: 1.1 }}
-                            className="mt-10 flex items-center gap-4"
+                            className="mt-7 flex items-center gap-4"
                         >
                             <motion.button
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
                                 onClick={() => setOpen(true)}
-                                className="relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-sm text-slate-950 overflow-hidden group"
+                                className="relative inline-flex items-center gap-2.5 px-6 py-3 rounded-full font-semibold text-sm text-slate-950 overflow-hidden group"
                             >
                                 <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 transition-all duration-300 group-hover:from-amber-300 group-hover:via-amber-400 group-hover:to-amber-500" />
                                 <motion.span
@@ -320,12 +320,12 @@ export function BangaloreLegalTechReport() {
                             <div className="relative rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 overflow-hidden shadow-2xl" onClick={() => setOpen(true)}>
 
                                 {/* Cover header */}
-                                <div className="relative px-7 pt-8 pb-7 overflow-hidden">
+                                <div className="relative px-5 pt-6 pb-5 overflow-hidden">
                                     {/* Decorative circles */}
                                     <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-amber-500/8 blur-2xl translate-x-10 -translate-y-10" />
                                     <div className="absolute bottom-0 left-0 w-28 h-28 rounded-full bg-blue-500/8 blur-xl -translate-x-6 translate-y-6" />
 
-                                    <div className="relative flex items-center gap-2 mb-6">
+                                    <div className="relative flex items-center gap-2 mb-4">
                                         <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.4)]">
                                             <svg className="w-3.5 h-3.5 text-slate-950" viewBox="0 0 14 14" fill="none">
                                                 <path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -350,7 +350,7 @@ export function BangaloreLegalTechReport() {
                                 <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mx-4" />
 
                                 {/* TOC preview inside card */}
-                                <div className="px-7 py-5 space-y-2.5">
+                                <div className="px-5 py-4 space-y-2">
                                     {TOC.slice(0, 6).map((item, i) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <span className="text-[10px] font-mono text-amber-500/60 w-5 shrink-0">{item.n}</span>
@@ -366,7 +366,7 @@ export function BangaloreLegalTechReport() {
                                 </div>
 
                                 {/* Click to download strip */}
-                                <div className="relative mx-4 mb-4 px-5 py-3.5 rounded-xl bg-gradient-to-r from-amber-500/15 to-amber-600/10 border border-amber-500/25 flex items-center justify-between group/btn hover:from-amber-500/25 hover:to-amber-600/20 transition-all duration-300">
+                                <div className="relative mx-3 mb-3 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500/15 to-amber-600/10 border border-amber-500/25 flex items-center justify-between group/btn hover:from-amber-500/25 hover:to-amber-600/20 transition-all duration-300">
                                     <div>
                                         <p className="text-xs font-semibold text-amber-400">Get Full Report</p>
                                         <p className="text-[10px] text-slate-500 mt-0.5">Free · Fill quick details</p>
