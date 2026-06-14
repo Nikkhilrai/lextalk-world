@@ -230,7 +230,7 @@ export function BangaloreLegalTechReport() {
                                 className="absolute left-[22px] top-3 bottom-3 w-px bg-gradient-to-b from-amber-500/40 via-amber-500/20 to-transparent origin-top"
                             />
 
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 {TOC.map((item, i) => (
                                     <motion.div
                                         key={i}
@@ -239,34 +239,31 @@ export function BangaloreLegalTechReport() {
                                         transition={{ duration: 0.45, delay: 0.25 + i * 0.07, ease: "easeOut" }}
                                         onMouseEnter={() => setHoveredRow(i)}
                                         onMouseLeave={() => setHoveredRow(null)}
-                                        className="relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-default group"
+                                        className="relative flex items-center gap-3 px-3 py-1.5 rounded-lg cursor-default group"
                                     >
-                                        {/* Row bg */}
                                         <motion.div
                                             animate={{ opacity: hoveredRow === i ? 1 : 0 }}
                                             transition={{ duration: 0.2 }}
-                                            className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500/8 to-transparent border border-amber-500/15"
+                                            className="absolute inset-0 rounded-lg bg-gradient-to-r from-amber-500/8 to-transparent border border-amber-500/15"
                                         />
-                                        {/* Left border accent */}
                                         <motion.div
                                             animate={{ scaleY: hoveredRow === i ? 1 : 0, opacity: hoveredRow === i ? 1 : 0 }}
                                             transition={{ duration: 0.2 }}
-                                            className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-amber-400 origin-center"
+                                            className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-amber-400 origin-center"
                                         />
 
-                                        {/* Number dot */}
-                                        <div className="relative z-10 w-8 h-8 shrink-0 rounded-full border border-slate-700/60 bg-slate-900 group-hover:border-amber-500/40 group-hover:bg-slate-800 transition-all duration-300 flex items-center justify-center">
-                                            <span className="text-xs font-mono font-bold text-slate-500 group-hover:text-amber-400 transition-colors duration-300">{item.n}</span>
+                                        <div className="relative z-10 w-6 h-6 shrink-0 rounded-full border border-slate-700/60 bg-slate-900 group-hover:border-amber-500/40 group-hover:bg-slate-800 transition-all duration-300 flex items-center justify-center">
+                                            <span className="text-[9px] font-mono font-bold text-slate-500 group-hover:text-amber-400 transition-colors duration-300">{item.n}</span>
                                         </div>
 
-                                        <span className="relative z-10 text-xs text-slate-400 group-hover:text-white transition-colors duration-300 leading-snug">
+                                        <span className="relative z-10 text-[11px] text-slate-400 group-hover:text-white transition-colors duration-300 leading-snug">
                                             {item.title}
                                         </span>
 
                                         <motion.svg
                                             animate={{ opacity: hoveredRow === i ? 1 : 0, x: hoveredRow === i ? 0 : -6 }}
                                             transition={{ duration: 0.2 }}
-                                            className="relative z-10 ml-auto shrink-0 w-3.5 h-3.5 text-amber-400"
+                                            className="relative z-10 ml-auto shrink-0 w-3 h-3 text-amber-400"
                                             viewBox="0 0 14 14" fill="none"
                                         >
                                             <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
