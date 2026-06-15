@@ -1,0 +1,219 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+const globalCorporateLogos = [
+    { name: "Corporate 1", logo: "/bangalore-2026/Sponsor/Global-Corporates/1b.png" },
+    { name: "Corporate 2", logo: "/bangalore-2026/Sponsor/Global-Corporates/2b.png" },
+    { name: "Corporate 3", logo: "/bangalore-2026/Sponsor/Global-Corporates/3b.png" },
+    { name: "Corporate 4", logo: "/bangalore-2026/Sponsor/Global-Corporates/4b.png" },
+    { name: "Corporate 5", logo: "/bangalore-2026/Sponsor/Global-Corporates/5b.png" },
+    { name: "Corporate 6", logo: "/bangalore-2026/Sponsor/Global-Corporates/6b.png" },
+    { name: "SILF",        logo: "/bangalore-2026/Sponsor/Global-Corporates/SILF.png" },
+];
+
+const tiers = [
+    {
+        label: "Supporting Association",
+        accent: "from-purple-200 via-purple-400 to-purple-200",
+        sponsors: [
+            { name: "Society Of Indian Law Firms (SILF)", logo: "/associations/SILF.png", href: "https://silf.in/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Diamond Sponsors",
+        accent: "from-sky-200 via-sky-400 to-sky-200",
+        sponsors: [
+            { name: "Case Docker", logo: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/", w: 220, h: 110 },
+            { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp", href: "https://home.lexcorp.org.in/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Gold Sponsor",
+        accent: "from-amber-200 via-amber-400 to-amber-200",
+        sponsors: [
+            { name: "Amadi", logo: "/bangalore-2026/Sponsor/Amadi.jpg", href: null, w: 220, h: 110 },
+            { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/", w: 260, h: 130 },
+            { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: "https://www.abizcon.com/", w: 220, h: 110 },
+            { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Knowledge Partner",
+        accent: "from-blue-200 via-blue-400 to-blue-200",
+        sponsors: [
+            { name: "Arthashastra Legal", logo: "/bangalore-2026/Sponsor/Artha-Logo-Trans-scaled.png", href: "https://arthashastralegal.com/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Premium Exhibitor",
+        accent: "from-slate-200 via-slate-300 to-slate-200",
+        sponsors: [
+            { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/", w: 220, h: 110, showName: true },
+            { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null, w: 260, h: 130 },
+        ],
+    },
+    {
+        label: "Ecosystem Partner",
+        accent: "from-emerald-200 via-emerald-400 to-emerald-200",
+        sponsors: [
+            { name: "Mike Legal", logo: "/bangalore-2026/Sponsor/Mike-Legal.png", href: "https://mikelegal.com/", w: 220, h: 110 },
+            { name: "Netrika", logo: "/bangalore-2026/Sponsor/Netrika-Logo.png", href: "https://www.netrika.com/", w: 220, h: 110 },
+        ],
+    },
+    {
+        label: "Wellness & Consciousness Partner",
+        accent: "from-purple-200 via-purple-300 to-purple-200",
+        sponsors: [
+            { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/", w: 240, h: 120 },
+        ],
+    },
+    {
+        label: "Venue Partner",
+        accent: "from-slate-200 via-slate-300 to-slate-200",
+        sponsors: [
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
+        ],
+    },
+];
+
+export function BangaloreSponsor() {
+    return (
+        <section id="sponsors" className="relative py-24 md:py-36 bg-white overflow-hidden">
+            {/* Subtle ambient glow */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/4 to-transparent rounded-full blur-3xl -translate-y-1/3 translate-x-1/4 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-amber-500/4 to-transparent rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+            <div className="container mx-auto px-4 relative z-10 max-w-5xl">
+
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-24"
+                >
+                    <span className="text-amber-600 font-bold tracking-[0.35em] text-xs md:text-sm uppercase mb-4 block">
+                        Our Strategic Partners
+                    </span>
+                    <h2 className="text-5xl md:text-7xl font-serif font-bold text-slate-900 mb-6 tracking-tight">
+                        Sponsors
+                    </h2>
+                    <div className="flex items-center justify-center gap-3 mb-5">
+                        <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-amber-400" />
+                        <div className="w-2 h-2 rounded-full bg-amber-500" />
+                        <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-amber-400" />
+                    </div>
+                    <p className="text-slate-400 text-sm md:text-base font-light max-w-md mx-auto">
+                        We are proud to partner with leading organisations that share our commitment to the legal community.
+                    </p>
+                </motion.div>
+
+                {/* Tiers */}
+                <div className="flex flex-col gap-20">
+                    {tiers.map((tier, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-60px" }}
+                            transition={{ duration: 0.5, delay: i * 0.07 }}
+                            className="flex flex-col items-center"
+                        >
+                            {/* Tier label with ruled lines */}
+                            <div className="flex items-center gap-4 w-full max-w-lg mb-12">
+                                <div className={`flex-1 h-[1px] bg-gradient-to-r ${tier.accent}`} />
+                                <span className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-slate-600 whitespace-nowrap">
+                                    {tier.label}
+                                </span>
+                                <div className={`flex-1 h-[1px] bg-gradient-to-l ${tier.accent}`} />
+                            </div>
+
+                            {/* Logos */}
+                            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                                {tier.sponsors.map((s, j) => {
+                                    const img = (
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Image
+                                                src={s.logo}
+                                                alt={s.name}
+                                                width={s.w}
+                                                height={s.h}
+                                                className="object-contain mix-blend-multiply"
+                                            />
+                                            {(s as any).showName && (
+                                                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{s.name}</span>
+                                            )}
+                                        </div>
+                                    );
+                                    return (
+                                        <motion.div
+                                            key={j}
+                                            whileHover={{ scale: 1.04 }}
+                                            transition={{ duration: 0.25 }}
+                                        >
+                                            {s.href ? (
+                                                <a href={s.href} target="_blank" rel="noopener noreferrer">
+                                                    {img}
+                                                </a>
+                                            ) : img}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* ── Trusted by marquee ── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-24"
+                >
+                    <style>{`
+                        @keyframes marqueeLogos {
+                            from { transform: translateX(0); }
+                            to   { transform: translateX(-50%); }
+                        }
+                    `}</style>
+
+                    {/* Label */}
+                    <div className="flex items-center gap-4 w-full max-w-lg mx-auto mb-10">
+                        <div className="flex-1 h-[1px] bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200" />
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 whitespace-nowrap text-center">
+                            Trusted by Global Corporates, Law Firms &amp; Innovators
+                        </span>
+                        <div className="flex-1 h-[1px] bg-gradient-to-l from-slate-200 via-slate-400 to-slate-200" />
+                    </div>
+
+                    {/* Marquee strip */}
+                    <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+                        <div
+                            className="flex items-center gap-12 w-max"
+                            style={{ animation: "marqueeLogos 28s linear infinite" }}
+                        >
+                            {[...globalCorporateLogos, ...globalCorporateLogos].map((logo, i) => (
+                                <div key={i} className="flex-shrink-0 flex items-center justify-center h-14">
+                                    <Image
+                                        src={logo.logo}
+                                        alt={logo.name}
+                                        width={120}
+                                        height={56}
+                                        unoptimized
+                                        className="object-contain max-h-14 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 mix-blend-multiply"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+
+            </div>
+        </section>
+    );
+}
