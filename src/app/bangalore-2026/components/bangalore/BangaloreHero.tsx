@@ -11,7 +11,7 @@ const navTabs = [
     { label: "Agenda", href: "#agenda" },
     { label: "Speakers", href: "/bangalore-2026/speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
-    { label: "Past Event Images", href: "https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93" },
+    { label: "Event Images", href: "https://drive.google.com/drive/folders/1F8MHORjV5t9SOGhWb8weI709H_YsBrKW?usp=sharing" },
     { label: "Sponsorship", href: "/sponsor" },
 ];
 
@@ -93,7 +93,7 @@ export function BangaloreHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?:
                                 key={index}
                                 href={tab.href}
                                 className={commonClasses}
-                                target={tab.label === "Past Event Images" ? "_blank" : undefined}
+                                target={tab.label === "Event Images" ? "_blank" : undefined}
                             >
                                 {tab.label}
                             </Link>
