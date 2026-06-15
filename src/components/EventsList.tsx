@@ -2,21 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Calendar, ArrowRight, Users, Clock } from "lucide-react";
+import { MapPin, ArrowRight, Users, Clock } from "lucide-react";
 import { useState } from "react";
 import { AgendaModal } from "./AgendaModal";
-
-const event = {
-    city: "Dubai",
-    month: "SEP",
-    days: "9-10",
-    year: "2026",
-    venue: "Dubai",
-    image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200&auto=format&fit=crop",
-    status: "Registrations Open",
-    region: "Middle East",
-    description: "Join 500+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
-};
 
 export function EventsList() {
     const [selectedAgendaSlug, setSelectedAgendaSlug] = useState<string | null>(null);
