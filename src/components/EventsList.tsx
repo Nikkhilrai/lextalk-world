@@ -52,31 +52,6 @@ export function EventsList() {
         }
     ];
 
-    const pastEvents = [
-        {
-            city: "Bangalore",
-            month: "JUN",
-            days: "11",
-            year: "2026",
-            venue: "India",
-            image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop",
-            status: "Completed",
-            region: "South Asia",
-            description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
-            highlights: [
-                "300+ Global Legal Professionals",
-                "50+ Renowned Speakers",
-                "Top 30 Legal Honor Global Awardees",
-                "15+ Exhibitors"
-            ],
-            link: "/bangalore-2026",
-            agendaLink: "/bangalore-2026#agenda",
-            publishedAgenda: true,
-            imagesLink: "https://drive.google.com/drive/folders/1F8MHORjV5t9SOGhWb8weI709H_YsBrKW?usp=sharing",
-            stats: { delegates: "300+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "1 Day" }
-        },
-    ];
-
     return (
         <section className="py-20 bg-slate-50 overflow-hidden relative">
             {/* Animated Background - Global Dots Pattern */}
@@ -245,86 +220,6 @@ export function EventsList() {
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Past Conferences */}
-                <div className="mt-16">
-                    <div className="text-center mb-8">
-                        <span className="inline-block text-xs font-bold text-slate-400 tracking-[0.2em] uppercase mb-2">Completed Events</span>
-                        <h3 className="text-2xl font-serif font-bold text-slate-700">Past Conferences</h3>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-xl mx-auto px-2 sm:px-0">
-                        {pastEvents.map((event: any, index: number) => (
-                            <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col h-full opacity-90 hover:opacity-100 transition-all duration-300">
-
-                                {/* Image */}
-                                <div className="relative h-40 sm:h-48 overflow-hidden shrink-0">
-                                    <Image src={event.image} alt={event.city} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-
-                                    {/* Date Badge */}
-                                    <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg z-10 min-w-[60px]">
-                                        <div className="text-center">
-                                            <div className="text-slate-500 font-bold text-[9px] tracking-widest">{event.month}</div>
-                                            <div className="text-lg font-serif font-bold text-slate-900 leading-none my-0.5">{event.days}</div>
-                                            <div className="text-slate-400 text-[9px]">{event.year}</div>
-                                        </div>
-                                    </div>
-
-                                    {/* Completed Badge */}
-                                    <div className="absolute top-2.5 right-2.5">
-                                        <span className="px-2.5 py-1 bg-slate-600/90 backdrop-blur-sm text-white text-[9px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1.5">
-                                            <svg className="w-2.5 h-2.5" viewBox="0 0 10 10" fill="none">
-                                                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                            Completed
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Content */}
-                                <div className="p-4 sm:p-5 flex flex-col flex-grow">
-                                    <div className="flex items-center gap-1.5 text-slate-400 mb-1.5">
-                                        <MapPin className="w-3 h-3" />
-                                        <span className="text-[9px] font-bold uppercase tracking-wider">{event.region}</span>
-                                    </div>
-                                    <h3 className="text-xl font-serif font-bold text-slate-700 mb-1">{event.city}</h3>
-                                    <p className="text-slate-400 text-[11px] mb-3 flex items-center gap-2">
-                                        <span className="w-3 h-px bg-slate-300" />{event.venue}
-                                    </p>
-
-                                    {event.highlights && (
-                                        <div className="mb-4 flex-grow">
-                                            <ul className="grid grid-cols-2 gap-x-2 gap-y-1.5">
-                                                {event.highlights.map((h: string, i: number) => (
-                                                    <li key={i} className="flex items-start gap-1.5 text-[10px] text-slate-500 leading-tight">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1 shrink-0" />
-                                                        {h}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-
-                                    <div className="flex gap-2 mt-auto pt-3 border-t border-slate-100">
-                                        <Link href={event.link} className="flex-1 px-3 py-2 bg-slate-800 text-white font-semibold rounded-lg text-xs flex items-center justify-center gap-1.5 hover:bg-slate-700 transition-colors">
-                                            View Event <ArrowRight className="w-3 h-3" />
-                                        </Link>
-                                        {event.imagesLink && (
-                                            <a href={event.imagesLink} target="_blank" rel="noopener noreferrer" className="px-3 py-2 border border-slate-200 text-slate-500 font-semibold rounded-lg text-xs flex items-center justify-center gap-1.5 hover:border-amber-300 hover:text-amber-700 hover:bg-amber-50 transition-colors">
-                                                Photos
-                                            </a>
-                                        )}
-                                        {event.publishedAgenda && (
-                                            <Link href={event.agendaLink} className="px-3 py-2 border border-slate-200 text-slate-500 font-semibold rounded-lg text-xs hidden sm:flex items-center justify-center gap-1.5 hover:border-amber-300 hover:text-amber-700 hover:bg-amber-50 transition-colors">
-                                                Agenda
-                                            </Link>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
             <AgendaModal
