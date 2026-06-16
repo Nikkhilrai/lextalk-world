@@ -30,6 +30,19 @@ export async function deleteDelegateRegistration(id: string) {
     }
 }
 
+export async function getDelegateRegistrationById(id: string) {
+    try {
+        const prismaClient = prisma as any;
+        const registration = await prismaClient.delegateRegistration.findUnique({
+            where: { id },
+        });
+        return { success: true, registration };
+    } catch (error) {
+        console.error("Failed to fetch delegate registration:", error);
+        return { success: false, registration: null };
+    }
+}
+
 export async function updateDelegatePaymentStatus(id: string, status: string) {
     try {
         const prismaClient = prisma as any;
