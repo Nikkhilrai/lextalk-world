@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Camera, ExternalLink, Images, Star } from "lucide-react";
 
+const GALLERY_PAGE = "/bangalore-2026/gallery";
 const PHOTOBUCKET_URL = "https://photobucket.com/share/f229bd34-ec05-49ce-b608-8e77c0855797";
 
 const mosaicItems = [
@@ -121,19 +123,16 @@ export function BangaloreEventGallery() {
                         <Images size={14} className="text-amber-500" />
                         Full photo album hosted on Photobucket
                     </p>
-                    <a
-                        href={PHOTOBUCKET_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        href={GALLERY_PAGE}
                         className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base rounded-full shadow-xl shadow-amber-500/25 hover:from-amber-400 hover:to-amber-500 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-amber-500/35 transition-all duration-300"
                     >
                         <Camera size={18} />
                         Browse Event Gallery
-                        <ExternalLink size={16} />
-                    </a>
+                    </Link>
                     <p className="text-slate-600 text-xs mt-4 flex items-center justify-center gap-1.5">
                         <Star size={10} className="text-amber-600 fill-amber-600" />
-                        Opens in a new tab
+                        lextalkworld.in/bangalore-2026/gallery
                     </p>
                 </motion.div>
 
