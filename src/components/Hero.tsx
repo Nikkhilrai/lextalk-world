@@ -304,8 +304,8 @@ export function Hero() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                                 {/* Shimmer sweep */}
                                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Featured
+                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-slate-600/90 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                    Completed
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
                                     <div className="flex items-center gap-2 mb-2 lg:mb-3">
@@ -324,7 +324,7 @@ export function Hero() {
                                             <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-[10px] lg:text-xs font-bold text-blue-800">BT</div>
                                         </div>
                                         <span className="text-slate-400 text-xs lg:text-sm">
-                                            {bangaloreCount !== null ? `+${bangaloreCount} registered` : "registrations open"}
+                                            {bangaloreCount !== null ? `+${bangaloreCount} attended` : "Event Completed"}
                                         </span>
                                     </div>
                                 </div>

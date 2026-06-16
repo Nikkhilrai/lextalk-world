@@ -13,34 +13,6 @@ import { PastConferencesSection } from "@/components/PastConferencesSection";
 
 const upcomingConferences = [
     {
-        id: "bangalore-2026",
-        name: "LexTalk World South Asia",
-        city: "Bangalore",
-        country: "India",
-        region: "South Asia",
-        date: "June 11, 2026",
-        venue: "Radisson Blu Atria, Bangalore",
-        duration: "1 Day",
-        image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1200&auto=format&fit=crop",
-        status: "Open",
-        featured: false,
-        stats: {
-            "Legal Professionals": "300+",
-            speakers: "50+",
-            awardees: "30",
-            exhibitors: "15+",
-        },
-        description: "Experience the future of law in India's technology capital. An exclusive summit focused on Legal Tech and AI.",
-        highlights: [
-            "300+ Global Legal Professionals",
-            "50+ Renowned Speakers",
-            "Top 30 Legal Honor Global Awardees",
-            "15+ Exhibitors",
-        ],
-        link: "/bangalore-2026",
-        earlyBird: false,
-    },
-    {
         id: "dubai-2026",
         name: "LexTalk World Middle East",
         city: "Dubai",
