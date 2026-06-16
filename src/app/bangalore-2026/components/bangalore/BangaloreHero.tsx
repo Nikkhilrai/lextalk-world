@@ -11,7 +11,7 @@ const navTabs = [
     { label: "Agenda", href: "#agenda" },
     { label: "Speakers", href: "/bangalore-2026/speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
-    { label: "Event Images", href: "https://photobucket.com/share/f229bd34-ec05-49ce-b608-8e77c0855797" },
+    { label: "Event Gallery", href: "#event-gallery" },
     { label: "Sponsorship", href: "/sponsor" },
 ];
 
