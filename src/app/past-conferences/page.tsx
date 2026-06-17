@@ -218,11 +218,6 @@ export default function PastConferencesPage() {
                                         transition={{ duration: 0.5 }}
                                         className="relative flex items-center gap-5 mb-10 overflow-hidden"
                                     >
-                                        {/* Faint large year watermark */}
-                                        <span className="absolute -left-2 text-[100px] md:text-[120px] font-serif font-black text-slate-900/[0.04] leading-none select-none pointer-events-none">
-                                            {year}
-                                        </span>
-
                                         <div className="relative z-10 flex items-center gap-4">
                                             <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/25 flex-shrink-0">
                                                 <span className="text-white text-sm font-black">{year.slice(2)}</span>
