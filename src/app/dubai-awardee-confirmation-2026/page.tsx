@@ -39,7 +39,7 @@ const passes = [
         id: "exclusive-pass-dubai-2026",
         name: "Exclusive Pass",
         price: 2500,
-        image: "/passes/Exclusive Pass.webp",
+        image: "",
         tier: "Exclusive",
         benefits: [
             "All Premium Pass Benefits, PLUS:",
@@ -93,19 +93,26 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
     return (
         <div className={`relative bg-white rounded-2xl shadow-xl border-2 ${colors.border} overflow-hidden hover:shadow-2xl hover:-translate-y-2 active:scale-[0.98] active:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/50 transition-all duration-300 flex flex-col min-h-[700px] group cursor-pointer`}>
             {/* Pass Image */}
-            <div className="relative h-52 w-full overflow-hidden">
-                <Image
-                    src={pass.image}
-                    alt={pass.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                {/* Tier Badge */}
-                <div className={`absolute top-3 right-3 ${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider shadow-lg`}>
-                    {pass.tier}
+            {pass.image ? (
+                <div className="relative h-52 w-full overflow-hidden">
+                    <Image
+                        src={pass.image}
+                        alt={pass.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className={`absolute top-3 right-3 ${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider shadow-lg`}>
+                        {pass.tier}
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <div className={`relative h-16 w-full bg-gradient-to-r ${colors.gradient} flex items-center justify-end px-4`}>
+                    <div className={`${colors.badge} text-xs font-bold text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider shadow-lg`}>
+                        {pass.tier}
+                    </div>
+                </div>
+            )}
 
             {/* Header with Gradient */}
             <div className={`bg-gradient-to-r ${colors.gradient} px-6 py-4`}>
