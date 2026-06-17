@@ -38,12 +38,13 @@ const passes = [
     {
         id: "exclusive-pass-dubai-2026",
         name: "Exclusive Pass",
-        price: 2000,
+        price: 2500,
         image: "/passes/Exclusive Pass.webp",
         tier: "Exclusive",
         benefits: [
             "All Premium Pass Benefits, PLUS:",
             "Speaking Opportunity – Participate in a panel discussion or speaking session during the conference",
+            "Logo branding titles as sponsored by the Knowledge Partner",
         ],
     },
 ];
