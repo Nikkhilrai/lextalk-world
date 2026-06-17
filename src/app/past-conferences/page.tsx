@@ -156,7 +156,6 @@ const years = [...new Set(pastConferences.map(c => c.year))].sort((a, b) => Numb
 
 const totalStats = {
     events: pastConferences.length,
-    delegates: "7,000+",
     countries: "30+",
     cities: [...new Set(pastConferences.map(c => c.city))].length,
 };
@@ -170,10 +169,40 @@ export default function PastConferencesPage() {
             <section className="relative pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden">
                 {/* Background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0f1420] to-slate-950" />
-                <div className="absolute inset-0 opacity-[0.025]"
-                    style={{ backgroundImage: 'radial-gradient(#f59e0b 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+                {/* Grid lines */}
+                <div className="absolute inset-0 opacity-[0.04]"
+                    style={{ backgroundImage: 'linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
+
+                {/* Diagonal accent lines */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-0 left-[20%] w-px h-full bg-gradient-to-b from-transparent via-amber-500/10 to-transparent" />
+                    <div className="absolute top-0 right-[25%] w-px h-full bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+                    <div className="absolute top-[30%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/10 to-transparent" />
+                </div>
+
+                {/* Glowing orbs */}
                 <div className="absolute top-0 left-1/3 w-[700px] h-[500px] bg-amber-500/8 rounded-full blur-[140px] pointer-events-none" />
                 <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute top-1/2 left-0 w-[300px] h-[300px] bg-amber-600/5 rounded-full blur-[100px] pointer-events-none" />
+
+                {/* Decorative corner element */}
+                <div className="absolute top-32 right-8 md:right-16 opacity-10 pointer-events-none">
+                    <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
+                        <circle cx="90" cy="90" r="88" stroke="#f59e0b" strokeWidth="0.5" />
+                        <circle cx="90" cy="90" r="65" stroke="#f59e0b" strokeWidth="0.5" />
+                        <circle cx="90" cy="90" r="42" stroke="#f59e0b" strokeWidth="0.5" />
+                        <line x1="2" y1="90" x2="178" y2="90" stroke="#f59e0b" strokeWidth="0.5" />
+                        <line x1="90" y1="2" x2="90" y2="178" stroke="#f59e0b" strokeWidth="0.5" />
+                    </svg>
+                </div>
+                <div className="absolute bottom-16 left-8 md:left-16 opacity-[0.06] pointer-events-none rotate-45">
+                    <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                        <rect x="1" y="1" width="118" height="118" stroke="#f59e0b" strokeWidth="0.5" />
+                        <rect x="20" y="20" width="80" height="80" stroke="#f59e0b" strokeWidth="0.5" />
+                        <rect x="40" y="40" width="40" height="40" stroke="#f59e0b" strokeWidth="0.5" />
+                    </svg>
+                </div>
 
                 <div className="container mx-auto px-4 relative z-10">
                     <motion.div
@@ -199,10 +228,9 @@ export default function PastConferencesPage() {
                         </p>
 
                         {/* Hero Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
+                        <div className="grid grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
                             {[
                                 { value: `${totalStats.events}`, label: "Events Hosted" },
-                                { value: totalStats.delegates, label: "Delegates" },
                                 { value: totalStats.countries, label: "Countries" },
                                 { value: `${totalStats.cities}`, label: "Cities" },
                             ].map((s, i) => (
