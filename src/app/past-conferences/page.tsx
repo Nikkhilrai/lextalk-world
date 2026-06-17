@@ -130,6 +130,17 @@ const pastConferences = [
     },
     {
         year: "2026",
+        city: "Bangalore",
+        country: "India",
+        flag: "🇮🇳",
+        date: "June 11, 2026",
+        venue: "Radisson Blu Atria, Bangalore",
+        image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=1200&auto=format&fit=crop",
+        stats: { people: "300+", speakers: "50+", awardees: "30+", countries: "10+" },
+        link: "/bangalore-2026",
+    },
+    {
+        year: "2026",
         city: "Houston",
         country: "USA",
         flag: "🇺🇸",
@@ -236,8 +247,8 @@ export default function PastConferencesPage() {
                                             <motion.a
                                                 key={`${conf.city}-${conf.year}-${ci}`}
                                                 href={conf.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                target={conf.link.startsWith("/") ? undefined : "_blank"}
+                                                rel={conf.link.startsWith("/") ? undefined : "noopener noreferrer"}
                                                 initial={{ opacity: 0, y: 28 }}
                                                 whileInView={{ opacity: 1, y: 0 }}
                                                 viewport={{ once: true }}
