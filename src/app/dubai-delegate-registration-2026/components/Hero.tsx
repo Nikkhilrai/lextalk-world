@@ -97,7 +97,7 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-full mb-6 backdrop-blur-sm">
                         <Sparkles size={12} className="text-amber-400" />
                         <span className="text-amber-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-                            Dubai 2026 · September 9-10, 2026
+                            Dubai 2026 · 9th – 10th Sep 2026
                         </span>
                     </div>
 

@@ -55,6 +55,7 @@ const EVENTS = [
         duration: "1 Day",
         delegates: "300+",
         href: "/bangalore-delegate-registration-2026",
+        completed: true,
         accent: "amber",
         gradient: "from-amber-500 to-amber-600",
         hoverGradient: "from-amber-400 to-amber-500",
@@ -141,17 +142,19 @@ function EventCard({
     index: number;
     loaded: boolean;
 }) {
+    const isCompleted = (event as any).completed === true;
+
     return (
         <div
             className={`group relative transition-all duration-1000 ${
                 loaded
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-12"
-            }`}
+            } ${isCompleted ? "opacity-60 pointer-events-none" : ""}`}
             style={{ transitionDelay: `${400 + index * 200}ms` }}
         >
             <div
-                className={`relative rounded-3xl overflow-hidden border border-white/[0.08] ${event.borderHover} transition-all duration-500 hover:shadow-2xl ${event.shadowHover} hover:-translate-y-2`}
+                className={`relative rounded-3xl overflow-hidden border border-white/[0.08] ${!isCompleted ? event.borderHover : ""} transition-all duration-500 ${!isCompleted ? `hover:shadow-2xl ${event.shadowHover} hover:-translate-y-2` : ""}`}
             >
                 {/* Card background */}
                 <div
@@ -181,13 +184,20 @@ function EventCard({
                         >
                             {event.city}, {event.country}
                         </span>
-                        <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider text-emerald-400 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
-                            <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                        {isCompleted ? (
+                            <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1.5 bg-slate-500/10 rounded-full border border-slate-500/20">
+                                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 inline-block" />
+                                Completed
                             </span>
-                            Registration Open
-                        </span>
+                        ) : (
+                            <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider text-emerald-400 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                                <span className="relative flex h-1.5 w-1.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                                </span>
+                                Registration Open
+                            </span>
+                        )}
                     </div>
 
                     {/* Event title */}
@@ -271,19 +281,25 @@ function EventCard({
                     </div>
 
                     {/* CTA Button */}
-                    <Link
-                        href={event.href}
-                        className={`group/btn relative w-full flex items-center justify-center gap-3 py-4 ${event.btnClass} font-black text-sm uppercase tracking-[0.15em] rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl active:scale-[0.98] overflow-hidden`}
-                    >
-                        <Sparkles size={15} />
-                        Secure Your {event.city} Pass
-                        <ArrowRight
-                            size={15}
-                            className="group-hover/btn:translate-x-1 transition-transform duration-300"
-                        />
-                        {/* Shimmer */}
-                        <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                    </Link>
+                    {isCompleted ? (
+                        <div className="w-full flex items-center justify-center gap-3 py-4 bg-slate-700/50 text-slate-400 font-black text-sm uppercase tracking-[0.15em] rounded-2xl border border-slate-600/30 cursor-not-allowed select-none">
+                            Event Completed
+                        </div>
+                    ) : (
+                        <Link
+                            href={event.href}
+                            className={`group/btn relative w-full flex items-center justify-center gap-3 py-4 ${event.btnClass} font-black text-sm uppercase tracking-[0.15em] rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl active:scale-[0.98] overflow-hidden`}
+                        >
+                            <Sparkles size={15} />
+                            Secure Your {event.city} Pass
+                            <ArrowRight
+                                size={15}
+                                className="group-hover/btn:translate-x-1 transition-transform duration-300"
+                            />
+                            {/* Shimmer */}
+                            <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>

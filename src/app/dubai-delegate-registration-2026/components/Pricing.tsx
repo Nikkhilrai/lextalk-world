@@ -54,7 +54,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         name: "Delegate Pass",
         originalPrice: 399,
         discountedPrice: 199,
-        priceLabel: "Early Bird till 15th March",
+        priceLabel: "Early Bird",
         idealFor: "Legal professionals, in-house counsel, law firm associates",
         ctaText: "Register as Delegate",
         inrPrice: 18000,
@@ -93,7 +93,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         name: "Vendor VIP Pass",
         originalPrice: 1999,
         discountedPrice: 999,
-        priceLabel: "Early Bird valid till 15th March",
+        priceLabel: "Early Bird",
         idealFor: "Legal tech companies, consultants, solution providers actively pitching",
         ctaText: "Register as Vendor VIP",
         inrPrice: 90000,
@@ -851,10 +851,10 @@ export default function Pricing() {
                                     <p className="text-white font-black text-xs uppercase tracking-[0.2em]">Live Registration Update</p>
                                 </div>
                                 <h3 className="text-white font-serif text-xl md:text-2xl font-black italic tracking-tight leading-none mb-1">
-                                    URGENT: PRICES JUMPING SOON!
+                                    LIMITED SEATS — PRICES INCREASE SOON!
                                 </h3>
                                 <p className="text-white/90 text-[11px] font-bold uppercase tracking-widest bg-black/20 px-2 py-0.5 rounded-md inline-block">
-                                    Final Early Bird Deadline: March 15th
+                                    Secure Early Bird Pricing Before Seats Fill Up
                                 </p>
                             </div>
                         </div>
