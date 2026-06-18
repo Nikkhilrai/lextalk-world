@@ -11,7 +11,7 @@ const navTabs = [
     { label: "Agenda", href: "#agenda" },
     { label: "Speakers", href: "#speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
-    { label: "Past Event Images", href: "https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93" },
+    { label: "Past Event Images", href: "/bangalore-2026/gallery" },
     { label: "Sponsorship", href: "/sponsor" },
 ];
 
@@ -92,7 +92,7 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                                 key={index}
                                 href={tab.href}
                                 className={commonClasses}
-                                target={tab.label === "Past Event Images" ? "_blank" : undefined}
+                                target={tab.href.startsWith("http") ? "_blank" : undefined}
                             >
                                 {tab.label}
                             </Link>
