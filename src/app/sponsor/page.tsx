@@ -705,6 +705,107 @@ export default function SponsorshipPage() {
                         </div>
                     </div>
 
+                    {/* Bangalore 2026 Sponsors & Partners */}
+                    <div className="mb-24">
+                        <div className="flex flex-col items-center mb-10">
+                            <div className="transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-orange-100 via-white to-orange-100 border-2 border-orange-200 rounded-full shadow-[0_10px_25px_-5px_rgba(234,88,12,0.12)]">
+                                    <h3 className="text-base md:text-lg font-serif font-bold text-orange-900 uppercase tracking-widest whitespace-nowrap">
+                                        Bangalore 2026 — Past Sponsors
+                                    </h3>
+                                </div>
+                            </div>
+                            <p className="text-sm text-slate-500 mt-3 font-medium">LexTalk World Bangalore, May 2026</p>
+                        </div>
+
+                        <div className="space-y-10 px-4">
+                            {[
+                                {
+                                    tierLabel: "Supporting Association",
+                                    sponsors: [
+                                        { name: "Society Of Indian Law Firms (SILF)", logo: "/associations/SILF.png", href: "https://silf.in/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Diamond Sponsors",
+                                    sponsors: [
+                                        { name: "Case Docker", logo: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
+                                        { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp", href: "https://home.lexcorp.org.in/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Gold Sponsors",
+                                    sponsors: [
+                                        { name: "Amadi", logo: "/bangalore-2026/Sponsor/Amadi.jpg", href: "https://www.amadi.io/" },
+                                        { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/" },
+                                        { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: "https://www.abizcon.com/" },
+                                        { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Knowledge Partner",
+                                    sponsors: [
+                                        { name: "Arthashastra Legal", logo: "/bangalore-2026/Sponsor/Artha-Logo-Trans-scaled.png", href: "https://arthashastralegal.com/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Premium Exhibitors",
+                                    sponsors: [
+                                        { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/" },
+                                        { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Ecosystem Partners",
+                                    sponsors: [
+                                        { name: "Mike Legal", logo: "/bangalore-2026/Sponsor/Mike-Legal.png", href: "https://mikelegal.com/" },
+                                        { name: "Netrika", logo: "/bangalore-2026/Sponsor/Netrika-Logo.png", href: "https://www.netrika.com/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Wellness & Consciousness Partner",
+                                    sponsors: [
+                                        { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/" },
+                                    ]
+                                },
+                                {
+                                    tierLabel: "Venue Partner",
+                                    sponsors: [
+                                        { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null },
+                                    ]
+                                },
+                            ].map((tier, tIdx) => (
+                                <div key={tIdx}>
+                                    <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">{tier.tierLabel}</p>
+                                    <div className="flex flex-wrap justify-center gap-5">
+                                        {tier.sponsors.map((sponsor, idx) => {
+                                            const cardClasses = "group relative w-[180px] h-[110px] bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-orange-300/60 hover:-translate-y-1 transition-all duration-300";
+                                            const inner = (
+                                                <div className="relative w-full h-full">
+                                                    <Image
+                                                        src={sponsor.logo}
+                                                        alt={sponsor.name}
+                                                        fill
+                                                        className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                                                    />
+                                                </div>
+                                            );
+                                            return sponsor.href ? (
+                                                <a key={idx} href={sponsor.href} target="_blank" rel="noopener noreferrer" className={cardClasses}>
+                                                    {inner}
+                                                </a>
+                                            ) : (
+                                                <div key={idx} className={cardClasses}>
+                                                    {inner}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Knowledge Partners */}
                     <div className="mt-20">
                         <div className="flex flex-col items-center">
