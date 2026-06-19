@@ -17,9 +17,12 @@ interface AgendaModalProps {
     isOpen: boolean;
     onClose: () => void;
     eventSlug: string;
+    title?: string;
+    subtitle?: string;
+    downloadLabel?: string;
 }
 
-export function AgendaModal({ isOpen, onClose, eventSlug }: AgendaModalProps) {
+export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda", subtitle = "Unlock the full schedule & speaker lineup", downloadLabel = "Download Agenda" }: AgendaModalProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -113,7 +116,7 @@ export function AgendaModal({ isOpen, onClose, eventSlug }: AgendaModalProps) {
                                 <Check className="w-8 h-8 text-white" />
                             </div>
                         </div>
-                        <h3 className="text-3xl font-serif text-white mb-3">Agenda Downloaded</h3>
+                        <h3 className="text-3xl font-serif text-white mb-3">{title} Downloaded</h3>
                         <p className="text-slate-400 max-w-xs leading-relaxed">
                             Thank you! The PDF has been sent to your downloads folder.
                         </p>
@@ -123,10 +126,13 @@ export function AgendaModal({ isOpen, onClose, eventSlug }: AgendaModalProps) {
                         {/* Header */}
                         <div className="mb-10 text-center relative z-10">
                             <h2 className="text-3xl md:text-4xl font-serif text-white mb-2">
-                                Event <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Agenda</span>
+                                {title.split(" ").slice(0, -1).join(" ")}{" "}
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
+                                    {title.split(" ").slice(-1)[0]}
+                                </span>
                             </h2>
                             <p className="text-slate-400 text-sm tracking-wide uppercase">
-                                Unlock the full schedule & speaker lineup
+                                {subtitle}
                             </p>
                         </div>
 
@@ -250,7 +256,7 @@ export function AgendaModal({ isOpen, onClose, eventSlug }: AgendaModalProps) {
                                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                                             ) : (
                                                 <>
-                                                    <span className="font-bold text-white tracking-widest uppercase text-sm">Download Agenda</span>
+                                                    <span className="font-bold text-white tracking-widest uppercase text-sm">{downloadLabel}</span>
                                                     <Download className="w-4 h-4 text-white group-hover:translate-y-1 transition-transform" />
                                                 </>
                                             )}

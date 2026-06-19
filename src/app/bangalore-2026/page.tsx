@@ -18,9 +18,12 @@ import { BangaloreLegalTechReport } from "./components/bangalore/BangaloreLegalT
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventSelectionModal } from "@/components/EventSelectionModal";
+import { BangaloreShowguide } from "./components/bangalore/BangaloreShowguide";
+import { AgendaModal } from "@/components/AgendaModal";
 
 export default function Bangalore2026Page() {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isShowguideModalOpen, setIsShowguideModalOpen] = useState(false);
 
     return (
         <main className="min-h-screen bg-slate-950">
@@ -51,6 +54,14 @@ export default function Bangalore2026Page() {
                 isOpen={isRegisterModalOpen}
                 onClose={() => setIsRegisterModalOpen(false)}
             />
+            <AgendaModal
+                isOpen={isShowguideModalOpen}
+                onClose={() => setIsShowguideModalOpen(false)}
+                eventSlug="bangalore-2026-showguide"
+                title="Event Show Guide"
+                subtitle="Download the official Bangalore 2026 Show Guide"
+                downloadLabel="Download Show Guide"
+            />
 
             <BangaloreHero
                 onOpenAgenda={() => { window.location.href = "#agenda"; }}
@@ -68,6 +79,7 @@ export default function Bangalore2026Page() {
             </div>
             <BangaloreFeaturedSpeakers />
             <BangaloreAgenda />
+            <BangaloreShowguide onOpen={() => setIsShowguideModalOpen(true)} />
             <BangaloreLegalTechReport />
             <div className="relative bg-white">
                 <BangaloreGlobalLegacy />
