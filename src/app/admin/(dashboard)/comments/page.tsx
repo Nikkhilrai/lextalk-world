@@ -188,7 +188,7 @@ export default function CommentsAdminPage() {
 
                                     {/* Post link */}
                                     <a
-                                        href={`/blog/${comment.postSlug}`}
+                                        href={`/blog-news/${comment.postSlug}`}
                                         target="_blank"
                                         className="inline-flex items-center gap-1 text-amber-400 text-sm hover:underline mb-3"
                                     >

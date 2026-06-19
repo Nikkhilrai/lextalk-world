@@ -17,7 +17,7 @@ interface NavLink {
 const navItems: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Upcoming Conference", href: "/conferences" },
-    { name: "Blog", href: "/blog" },
+    { name: "Blog/News", href: "/blog-news" },
     { name: "Sponsor", href: "/sponsor" },
     {
         name: "More",

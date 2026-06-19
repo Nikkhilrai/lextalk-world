@@ -163,7 +163,7 @@ export default function BlogPage() {
                                 <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Featured Article</span>
                             </div>
 
-                            <Link href={`/blog/${featuredPost.slug}`} className="group block">
+                            <Link href={`/blog-news/${featuredPost.slug}`} className="group block">
                                 <div className="grid md:grid-cols-2 gap-0 bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-amber-200 hover:shadow-2xl transition-all duration-500">
                                     {/* Image */}
                                     <div className="relative h-64 md:h-full md:min-h-[420px] overflow-hidden">
@@ -269,7 +269,7 @@ export default function BlogPage() {
                                         {paginatedPosts.map((post) => (
                                             <Link
                                                 key={post.id}
-                                                href={`/blog/${post.slug}`}
+                                                href={`/blog-news/${post.slug}`}
                                                 className="group block bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-amber-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-400"
                                             >
                                                 {/* Image */}

@@ -40,7 +40,7 @@ export default function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) 
                 {relatedPosts.map((post) => (
                     <Link
                         key={post.id}
-                        href={`/blog/${post.slug}`}
+                        href={`/blog-news/${post.slug}`}
                         className="group block bg-slate-50 dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-700 hover:border-amber-200 dark:hover:border-amber-500/50 hover:shadow-lg transition-all duration-300"
                     >
                         {/* Image */}

@@ -134,7 +134,7 @@ export default async function BlogPostPage({
 
                             {/* Back link */}
                             <Link
-                                href="/blog"
+                                href="/blog-news"
                                 className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors mb-6 font-medium text-sm group"
                             >
                                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
