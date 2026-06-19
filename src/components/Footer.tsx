@@ -94,7 +94,7 @@ export function Footer() {
                                 { href: "/conferences", label: "Conferences" },
                                 { href: "/awardees", label: "Awardees" },
                                 { href: "/sponsor", label: "Become a Sponsor" },
-                                { href: "/blog", label: "Blog" },
+                                { href: "/blog", label: "Blog/News" },
                             ].map(({ href, label }) => (
                                 <li key={href}>
                                     <Link href={href} className="text-xs text-slate-400 hover:text-amber-500 transition-colors inline-flex items-center group">

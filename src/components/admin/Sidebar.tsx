@@ -54,7 +54,7 @@ const NAV_GROUPS = [
             { label: "Sponsors", href: "/admin/sponsors", icon: HeartHandshake },
             { label: "Awards", href: "/admin/awards", icon: Trophy },
             { label: "Advisory Board", href: "/admin/advisors", icon: Users },
-            { label: "Blog", href: "/admin/blog", icon: BookOpen },
+            { label: "Blog/News", href: "/admin/blog", icon: BookOpen },
             { label: "Comments", href: "/admin/comments", icon: MessageCircle },
             { label: "Authentication", href: "/admin/settings", icon: Shield },
         ]
@@ -66,7 +66,7 @@ const BLOG_EDITOR_NAV = [
     {
         title: "CONTENT",
         items: [
-            { label: "Blog Posts", href: "/admin/blog", icon: BookOpen },
+            { label: "Blog/News Posts", href: "/admin/blog", icon: BookOpen },
             { label: "Comments", href: "/admin/comments", icon: MessageCircle },
         ]
     }
