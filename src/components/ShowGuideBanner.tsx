@@ -155,12 +155,14 @@ export function ShowGuideBanner() {
                                         className="absolute -inset-4 bg-amber-500/20 rounded-3xl blur-2xl pointer-events-none"
                                     />
 
-                                    {/* Cover image */}
-                                    <motion.div
+                                    {/* Cover image — clickable */}
+                                    <motion.button
+                                        onClick={() => setIsModalOpen(true)}
                                         whileHover={{ scale: 1.03, rotateY: 3 }}
                                         transition={{ duration: 0.4 }}
-                                        className="relative w-52 rounded-2xl overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)] border border-amber-500/25"
+                                        className="relative w-52 rounded-2xl overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)] border border-amber-500/25 cursor-pointer group/cover"
                                         style={{ transformStyle: "preserve-3d" }}
+                                        aria-label="Download Show Guide"
                                     >
                                         <Image
                                             src="/bangalore-2026/document/final-showguide-bangalore.png"
@@ -172,7 +174,16 @@ export function ShowGuideBanner() {
                                         />
                                         {/* Subtle gold sheen overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/5 via-transparent to-amber-300/10 pointer-events-none" />
-                                    </motion.div>
+                                        {/* Hover overlay with download hint */}
+                                        <div className="absolute inset-0 bg-black/0 group-hover/cover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                                            <div className="opacity-0 group-hover/cover:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
+                                                <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center shadow-lg">
+                                                    <Download size={16} className="text-slate-950" />
+                                                </div>
+                                                <span className="text-white text-[10px] font-bold uppercase tracking-wider">Download</span>
+                                            </div>
+                                        </div>
+                                    </motion.button>
 
                                     {/* Stacked shadow pages */}
                                     <div className="absolute -bottom-1 -right-2 w-52 h-full bg-slate-800/50 rounded-2xl border border-white/5 -z-10" />
