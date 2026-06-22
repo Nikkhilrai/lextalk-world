@@ -18,6 +18,7 @@ declare global {
 interface PassConfig {
     id: string;
     name: string;
+    tagline?: string;
     usdPrice: number;
     inrPrice: number;
     usdOriginalPrice?: number;
@@ -26,86 +27,92 @@ interface PassConfig {
     isPopular?: boolean;
     badge?: string;
     color: string;
+    idealFor?: string;
+    note?: string;
     features: string[];
 }
 
 const PASSES: PassConfig[] = [
     {
         id: "student",
-        name: "Student Pass",
+        name: "Student & Academic Pass",
+        tagline: "Accelerate your legal education.",
         usdPrice: 129,
-        inrPrice: 11600,
+        inrPrice: 11000,
         usdOriginalPrice: 129,
-        inrOriginalPrice: 11600,
+        inrOriginalPrice: 11000,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
+        idealFor: "Law students, LLM candidates, research scholars, young legal professionals, faculty.",
+        note: "Valid student or faculty ID required for verification.",
         features: [
-            "Full Day Conference Access",
-            "Access to General Networking Sessions",
-            "Participation Certificate",
-            "Access to Career & Mentorship Round",
+            "Full 2-Day Conference Access — Attend all sessions, keynotes and panels",
+            "Networking Opportunities — Access general networking breaks and events",
+            "Exhibition Access — Visit sponsor and tech exhibition booths",
+            "Learning Materials — Digital conference materials (slides, whitepapers)",
+            "Certificate of Participation — Official digital certificate for your resume",
         ],
     },
     {
         id: "delegate",
-        name: "Delegate Pass",
+        name: "Corporate Delegate Pass",
+        tagline: "Expand your corporate legal network.",
         usdPrice: 199,
         inrPrice: 18000,
         usdOriginalPrice: 399,
         inrOriginalPrice: 36000,
         icon: Users,
-        isPopular: true,
-        badge: "Most Popular",
-        color: "amber",
+        color: "slate",
+        idealFor: "Corporate Counsel, In-House Lawyers, IP Counsel, Compliance & Governance Leaders, Legal Operations professionals.",
         features: [
-            "Full Day Conference Access",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Morning Networking Breakfast",
-            "Delegate Kit + Certificate",
+            "Everything in Student & Academic Pass",
+            "Full 2-Day Access — All conference sessions and keynotes",
+            "Curated Networking — Facilitated introductions and networking access",
+            "Conference Kit — Branded delegate kit and event materials",
+            "Tech Expo Access — Explore legal tech and service partner exhibits",
+            "Networking Lunches — Guided group lunches to meet peers",
+            "Post-Event Content — Access session recordings and slides",
         ],
     },
     {
         id: "delegate-vip",
-        name: "Delegate VIP Pass",
-        usdPrice: 399,
-        inrPrice: 36000,
+        name: "Law Firm Exclusive Pass",
+        tagline: "Amplify your law firm's influence.",
+        usdPrice: 499,
+        inrPrice: 45000,
         usdOriginalPrice: 799,
         inrOriginalPrice: 72000,
         icon: Building2,
-        badge: "VIP",
-        color: "slate",
+        isPopular: true,
+        badge: "Most Popular",
+        color: "amber",
+        idealFor: "Law Firm Partners, Founders, Managing Partners, Senior Associates, Boutique firm leaders, Independent Practitioners.",
         features: [
-            "Full Day Conference Access",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Morning Networking Breakfast",
-            "Delegate Kit + Certificate",
-            "VIP Networking Lounge",
-            "Featured Networking Introduction",
-            "Media Byte Interview",
-            "Digital Spotlight",
+            "All Corporate Benefits — Everything in the Corporate Delegate Pass",
+            "One-to-One Introductions — Curated meetings with senior attendees",
+            "Spotlight Interview — Optional media interview feature",
+            "Featured Listing — Highlighted in attendee directory and website",
+            "Post-Event VIP Network — Ongoing connections with key attendees",
         ],
     },
     {
         id: "vendor-vip",
-        name: "Vendor VIP Pass",
-        usdPrice: 999,
-        inrPrice: 90000,
+        name: "Vendor & Business VIP Pass",
+        tagline: "Showcase your solutions to industry leaders.",
+        usdPrice: 899,
+        inrPrice: 80000,
         usdOriginalPrice: 1999,
-        inrOriginalPrice: 180000,
-        icon: Building2,
+        inrOriginalPrice: 160000,
+        icon: Globe,
         badge: "Business",
         color: "slate",
+        idealFor: "Legal Technology Companies, AI Solution Providers, Contract Management Platforms, Consulting & Service Firms, E-Discovery/Forensic Experts, Outsourcing Providers.",
         features: [
-            "Full Conference Access",
-            "Structured Business Networking",
-            "Logo Placement on Website",
-            "Featured Vendor Listing",
-            "Media Byte Coverage",
-            "Social Media Brand Mention",
-            "Priority Business Introduction",
+            "All Law Firm Benefits — Everything in the Law Firm Exclusive Pass",
+            "Brand Exposure — Company logo on event materials and website",
+            "Featured Vendor Listing — Priority placement in the Ecosystem Partner",
+            "Media Coverage — Inclusion in press releases and social media campaigns",
         ],
     },
 ];
@@ -775,9 +782,12 @@ export default function MumbaiDelegatePricing() {
                                         </div>
                                     </div>
 
-                                    <h3 className="font-serif text-xl font-bold text-slate-900 mb-1">{pass.name}</h3>
-                                    {pass.badge && !pass.isPopular && (
-                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{pass.badge}</p>
+                                    <h3 className="font-serif text-xl font-bold text-slate-900 mb-0.5">{pass.name}</h3>
+                                    {pass.tagline && (
+                                        <p className="text-xs text-amber-600 font-semibold italic mb-1">{pass.tagline}</p>
+                                    )}
+                                    {pass.idealFor && (
+                                        <p className="text-[10px] text-slate-400 leading-snug border-l-2 border-amber-100 pl-2 mt-1">{pass.idealFor}</p>
                                     )}
 
                                     <div className="mt-5 pb-5 border-b border-slate-100">
