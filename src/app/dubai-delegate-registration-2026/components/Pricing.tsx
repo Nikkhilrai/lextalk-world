@@ -17,6 +17,7 @@ declare global {
 interface PassType {
     id: string;
     name: string;
+    tagline?: string;
     originalPrice: number;
     discountedPrice: number;
     features: string[];
@@ -33,78 +34,78 @@ interface PassType {
 const INDIVIDUAL_PASSES: PassType[] = [
     {
         id: "student",
-        name: "Student Pass",
+        name: "Student & Academic Pass",
+        tagline: "Accelerate your legal education.",
         originalPrice: 129,
         discountedPrice: 129,
         isStudent: true,
         priceLabel: "Flat Price",
-        idealFor: "Law students, LLM candidates, research scholars",
-        ctaText: "Register as Student",
-        note: "Valid student ID required at check-in",
+        idealFor: "Law students, LLM candidates, research scholars, young legal professionals, faculty.",
+        ctaText: "Register Now",
+        note: "Valid student or faculty ID required for verification.",
         inrPrice: 11600,
         features: [
-            "Full 2-Day Conference Access",
-            "Access to General Networking Sessions",
-            "Participation Certificate",
-            "Access to Career & Mentorship Round",
+            "Full 2-Day Conference Access — Attend all sessions, keynotes and panels",
+            "Networking Opportunities — Access general networking breaks and events",
+            "Exhibition Access — Visit sponsor and tech exhibition booths",
+            "Learning Materials — Digital conference materials (slides, whitepapers)",
+            "Certificate of Participation — Official digital certificate for your resume",
         ],
     },
     {
         id: "delegate",
-        name: "Delegate Pass",
+        name: "Corporate Delegate Pass",
+        tagline: "Expand your corporate legal network.",
         originalPrice: 399,
         discountedPrice: 199,
         priceLabel: "Early Bird",
-        idealFor: "Legal professionals, in-house counsel, law firm associates",
-        ctaText: "Register as Delegate",
+        idealFor: "Corporate Counsel, In-House Lawyers, IP Counsel, Compliance & Governance Leaders, Legal Operations professionals.",
+        ctaText: "Register Now",
         inrPrice: 18000,
         features: [
-            "Full 2-Day Conference Access",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Morning Networking Breakfast",
-            "Delegate Kit + Certificate",
+            "Everything in Student & Academic Pass",
+            "Full 2-Day Access — All conference sessions and keynotes",
+            "Curated Networking — Facilitated introductions and networking access",
+            "Conference Kit — Branded delegate kit and event materials",
+            "Tech Expo Access — Explore legal tech and service partner exhibits",
+            "Networking Lunches — Guided group lunches to meet peers",
+            "Post-Event Content — Access session recordings and slides",
         ],
     },
     {
         id: "delegate-vip",
-        name: "Delegate VIP Pass",
+        name: "Law Firm Exclusive Pass",
+        tagline: "Amplify your law firm's influence.",
         originalPrice: 799,
-        discountedPrice: 399,
+        discountedPrice: 499,
         isPopular: true,
         priceLabel: "Early Bird",
-        idealFor: "Partners, GCs, Founders, Senior Decision Makers",
-        ctaText: "Register as VIP Delegate",
-        inrPrice: 36000,
+        idealFor: "Law Firm Partners, Founders, Managing Partners, Senior Associates, Boutique firm leaders, Independent Practitioners.",
+        ctaText: "Register Now",
+        inrPrice: 45000,
         features: [
-            "Full 2-Day Conference Access",
-            "Structured Networking Sessions",
-            "Curated One-to-One Introductions",
-            "Morning Networking Breakfast",
-            "Delegate Kit + Certificate",
-            "VIP Networking Lounge",
-            "Featured Networking Introduction",
-            "Media Byte Interview",
-            "Digital Spotlight",
+            "All Corporate Benefits — Everything in the Corporate Delegate Pass",
+            "One-to-One Introductions — Curated meetings with senior attendees",
+            "Spotlight Interview — Optional media interview feature",
+            "Featured Listing — Highlighted in attendee directory and website",
+            "Post-Event VIP Network — Ongoing connections with key attendees",
         ],
     },
     {
         id: "vendor-vip",
-        name: "Vendor VIP Pass",
+        name: "Vendor & Business VIP Pass",
+        tagline: "Showcase your solutions to industry leaders.",
         originalPrice: 1999,
-        discountedPrice: 999,
+        discountedPrice: 899,
         priceLabel: "Early Bird",
-        idealFor: "Legal tech companies, consultants, solution providers actively pitching",
-        ctaText: "Register as Vendor VIP",
-        inrPrice: 90000,
+        idealFor: "Legal Technology Companies, AI Solution Providers, Contract Management Platforms, Consulting & Service Firms, E-Discovery/Forensic Experts, Outsourcing Providers.",
+        ctaText: "Register Now",
+        inrPrice: 81000,
         features: [
-            "Full Conference Access",
-            "Structured Business Networking",
-            "Logo Placement on Website",
-            "Featured Vendor Listing",
-            "Media Byte Coverage",
-            "Social Media Brand Mention",
-            "Priority Business Introduction",
+            "All Law Firm Benefits — Everything in the Law Firm Exclusive Pass",
+            "Brand Exposure — Company logo on event materials and website",
+            "Featured Vendor Listing — Priority placement in the Ecosystem Partner",
+            "Media Coverage — Inclusion in press releases and social media campaigns",
         ],
     },
 ];
@@ -726,7 +727,10 @@ function PassCard({ pass }: { pass: PassType }) {
                 <div className="p-6 flex flex-col flex-grow">
                     {/* Header */}
                     <div className="mb-6">
-                        <h3 className="font-serif font-bold text-xl text-slate-900 leading-tight mb-2">{pass.name}</h3>
+                        <h3 className="font-serif font-bold text-xl text-slate-900 leading-tight mb-1">{pass.name}</h3>
+                        {pass.tagline && (
+                            <p className="text-xs text-amber-600 font-semibold italic mb-2">{pass.tagline}</p>
+                        )}
                         <div className="flex flex-col">
                             <div className="flex items-baseline gap-2">
                                 <span className="text-3xl font-bold text-slate-900">${pass.discountedPrice}</span>
