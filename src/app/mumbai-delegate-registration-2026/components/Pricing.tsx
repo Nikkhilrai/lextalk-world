@@ -38,9 +38,9 @@ const PASSES: PassConfig[] = [
         name: "Student & Academic Pass",
         tagline: "Accelerate your legal education.",
         usdPrice: 129,
-        inrPrice: 11000,
+        inrPrice: 12000,
         usdOriginalPrice: 129,
-        inrOriginalPrice: 11000,
+        inrOriginalPrice: 12000,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
@@ -80,7 +80,7 @@ const PASSES: PassConfig[] = [
         name: "Law Firm Exclusive Pass",
         tagline: "Amplify your law firm's influence.",
         usdPrice: 499,
-        inrPrice: 45000,
+        inrPrice: 47000,
         usdOriginalPrice: 799,
         inrOriginalPrice: 72000,
         icon: Building2,
@@ -101,7 +101,7 @@ const PASSES: PassConfig[] = [
         name: "Vendor & Business VIP Pass",
         tagline: "Showcase your solutions to industry leaders.",
         usdPrice: 899,
-        inrPrice: 80000,
+        inrPrice: 84000,
         usdOriginalPrice: 1999,
         inrOriginalPrice: 160000,
         icon: Globe,
@@ -743,7 +743,7 @@ export default function MumbaiDelegatePricing() {
                 </motion.div>
 
                 {/* Pass Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {PASSES.map((pass, i) => {
                         const Icon = pass.icon;
                         return (
@@ -753,97 +753,99 @@ export default function MumbaiDelegatePricing() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                                className={`relative flex flex-col bg-white rounded-3xl overflow-hidden transition-all duration-300 group ${
+                                className={`relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-300 group ${
                                     pass.isPopular
-                                        ? "ring-2 ring-amber-400 shadow-xl shadow-amber-200/30 hover:shadow-2xl hover:shadow-amber-200/40 hover:-translate-y-2"
-                                        : "ring-1 ring-slate-200 hover:ring-slate-300 shadow-sm hover:shadow-xl hover:-translate-y-1"
+                                        ? "ring-2 ring-amber-400 shadow-xl shadow-amber-200/30 hover:shadow-2xl hover:shadow-amber-200/40 hover:-translate-y-1"
+                                        : "ring-1 ring-slate-200 hover:ring-slate-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
                                 }`}
                             >
                                 {pass.isPopular && (
-                                    <div className="h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+                                    <div className="h-0.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
                                 )}
 
                                 {pass.isPopular && (
-                                    <div className="absolute top-3 right-4 z-10">
-                                        <div className="px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-amber-400/20">
+                                    <div className="absolute top-2.5 right-3 z-10">
+                                        <div className="px-2.5 py-0.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-amber-400/20">
                                             Most Popular
                                         </div>
                                     </div>
                                 )}
 
-                                <div className="px-6 pt-7 pb-5">
-                                    <div className="mb-4">
-                                        <div className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                                <div className="px-5 pt-5 pb-3">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                                             pass.isPopular
-                                                ? "bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-lg shadow-amber-400/20"
+                                                ? "bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-md shadow-amber-400/20"
                                                 : "bg-slate-100 text-slate-500 group-hover:bg-slate-900 group-hover:text-white"
                                         }`}>
-                                            <Icon size={20} strokeWidth={1.5} />
+                                            <Icon size={16} strokeWidth={1.5} />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <h3 className="font-serif text-base font-bold text-slate-900 leading-tight">{pass.name}</h3>
+                                            {pass.tagline && (
+                                                <p className="text-[10px] text-amber-600 font-semibold italic leading-tight">{pass.tagline}</p>
+                                            )}
                                         </div>
                                     </div>
 
-                                    <h3 className="font-serif text-xl font-bold text-slate-900 mb-0.5">{pass.name}</h3>
-                                    {pass.tagline && (
-                                        <p className="text-xs text-amber-600 font-semibold italic mb-1">{pass.tagline}</p>
-                                    )}
                                     {pass.idealFor && (
-                                        <p className="text-[10px] text-slate-400 leading-snug border-l-2 border-amber-100 pl-2 mt-1">{pass.idealFor}</p>
+                                        <p className="text-[10px] text-slate-400 leading-snug border-l-2 border-amber-100 pl-2 mb-3">{pass.idealFor}</p>
                                     )}
 
-                                    <div className="mt-5 pb-5 border-b border-slate-100">
-                                        <div className="flex items-baseline flex-wrap gap-2">
-                                            <span className="text-4xl font-black text-slate-900 tracking-tight">
+                                    <div className="pb-3 border-b border-slate-100">
+                                        <div className="flex items-baseline flex-wrap gap-1.5">
+                                            <span className="text-2xl font-black text-slate-900 tracking-tight">
                                                 {currency === "INR"
                                                     ? `₹${pass.inrPrice.toLocaleString("en-IN")}`
                                                     : `$${pass.usdPrice}`}
                                             </span>
                                             {currency === "INR" ? (
                                                 pass.inrOriginalPrice && pass.inrOriginalPrice > pass.inrPrice && (
-                                                    <span className="text-slate-400 line-through text-base font-medium decoration-slate-400/60">
+                                                    <span className="text-slate-400 line-through text-sm font-medium decoration-slate-400/60">
                                                         ₹{pass.inrOriginalPrice.toLocaleString("en-IN")}
                                                     </span>
                                                 )
                                             ) : (
                                                 pass.usdOriginalPrice && pass.usdOriginalPrice > pass.usdPrice && (
-                                                    <span className="text-slate-400 line-through text-lg font-medium decoration-slate-400/60">
+                                                    <span className="text-slate-400 line-through text-sm font-medium decoration-slate-400/60">
                                                         ${pass.usdOriginalPrice}
                                                     </span>
                                                 )
                                             )}
-                                            <span className="text-xs text-slate-400 font-semibold">+ GST</span>
+                                            <span className="text-[10px] text-slate-400 font-semibold">+ GST</span>
                                         </div>
-                                        <p className="text-[10px] text-slate-400 mt-1 font-medium">per attendee · early bird pricing</p>
+                                        <p className="text-[9px] text-slate-400 mt-0.5 font-medium">per attendee · early bird pricing</p>
                                     </div>
                                 </div>
 
-                                <div className="flex-1 px-6 py-4">
-                                    <ul className="space-y-3">
+                                <div className="flex-1 px-5 py-3">
+                                    <ul className="space-y-2">
                                         {pass.features.map(f => (
-                                            <li key={f} className="flex items-start gap-2.5">
-                                                <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                            <li key={f} className="flex items-start gap-2">
+                                                <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                                                     pass.isPopular
                                                         ? "bg-amber-100 text-amber-600"
                                                         : "bg-slate-100 text-slate-500"
                                                 }`}>
-                                                    <Check size={9} strokeWidth={3} />
+                                                    <Check size={8} strokeWidth={3} />
                                                 </div>
-                                                <span className="text-[13px] text-slate-600 leading-relaxed">{f}</span>
+                                                <span className="text-[11px] text-slate-600 leading-snug">{f}</span>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
 
-                                <div className="px-6 pb-7 pt-3">
+                                <div className="px-5 pb-5 pt-2">
                                     <button
                                         onClick={() => setSelectedPass(pass)}
-                                        className={`w-full py-3.5 rounded-2xl font-bold text-[11px] uppercase tracking-widest transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 ${
+                                        className={`w-full py-2.5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-1.5 ${
                                             pass.isPopular
-                                                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-400 hover:to-amber-500 shadow-lg shadow-amber-400/20 hover:shadow-xl hover:shadow-amber-400/30"
+                                                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-400/20 hover:shadow-lg hover:shadow-amber-400/30"
                                                 : "bg-slate-900 text-white hover:bg-amber-500 transition-colors"
                                         }`}
                                     >
                                         Register Now
-                                        <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                        <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                                     </button>
                                 </div>
                             </motion.div>
