@@ -709,56 +709,53 @@ function PassCard({ pass }: { pass: PassType }) {
 
     return (
         <>
-            <div className={`relative flex flex-col bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/10 shadow-xl scale-[1.02]" : "border-slate-200 shadow-sm"} transition-all duration-300 hover:shadow-2xl hover:border-amber-200 h-full overflow-hidden`}>
+            <div className={`relative flex flex-col bg-white rounded-2xl border ${pass.isPopular ? "border-amber-400 ring-2 ring-amber-400/10 shadow-xl" : "border-slate-200 shadow-sm"} transition-all duration-300 hover:shadow-xl hover:border-amber-200 h-full overflow-hidden`}>
                 {pass.isPopular && (
-                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[10px] uppercase font-black px-3 py-1.5 rounded-bl-xl z-20 tracking-wider flex items-center gap-1 shadow-lg">
-                        <Sparkles size={12} fill="currentColor" /> Most Popular
+                    <div className="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[8px] uppercase font-black px-2.5 py-1 rounded-bl-xl z-20 tracking-wider flex items-center gap-1 shadow-lg">
+                        <Sparkles size={10} fill="currentColor" /> Most Popular
                     </div>
                 )}
                 {pass.isStudent && (
-                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] uppercase font-black px-3 py-1.5 rounded-bl-xl z-20 tracking-wider shadow-lg">
+                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-[8px] uppercase font-black px-2.5 py-1 rounded-bl-xl z-20 tracking-wider shadow-lg">
                         For Students
                     </div>
                 )}
-                <div className="absolute top-0 left-0 bg-red-600 text-white text-[9px] uppercase font-black px-3 py-1 rounded-br-xl z-20 animate-pulse">
-                    Limited Seats left
+                <div className="absolute top-0 left-0 bg-red-600 text-white text-[8px] uppercase font-black px-2.5 py-0.5 rounded-br-xl z-20 animate-pulse">
+                    Limited Seats
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="px-5 pt-5 pb-3 flex flex-col flex-grow">
                     {/* Header */}
-                    <div className="mb-6">
-                        <h3 className="font-serif font-bold text-xl text-slate-900 leading-tight mb-1">{pass.name}</h3>
+                    <div className="mb-3">
+                        <h3 className="font-serif font-bold text-base text-slate-900 leading-tight mb-0.5">{pass.name}</h3>
                         {pass.tagline && (
-                            <p className="text-xs text-amber-600 font-semibold italic mb-2">{pass.tagline}</p>
+                            <p className="text-[10px] text-amber-600 font-semibold italic mb-2">{pass.tagline}</p>
                         )}
-                        <div className="flex flex-col">
-                            <div className="flex items-baseline gap-2">
-                                <span className="text-3xl font-bold text-slate-900">${pass.discountedPrice}</span>
-                                {pass.originalPrice > pass.discountedPrice && (
-                                    <span className="text-slate-400 line-through text-sm font-medium decoration-slate-400/60">${pass.originalPrice}</span>
-                                )}
-                            </div>
+                        <div className="flex items-baseline gap-1.5">
+                            <span className="text-2xl font-bold text-slate-900">${pass.discountedPrice}</span>
+                            {pass.originalPrice > pass.discountedPrice && (
+                                <span className="text-slate-400 line-through text-sm font-medium decoration-slate-400/60">${pass.originalPrice}</span>
+                            )}
                             {pass.priceLabel && (
-                                <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-1 border border-amber-100 bg-amber-50 px-2 py-0.5 rounded-full self-start inline-flex items-center gap-1">
-                                    <Clock size={10} /> {pass.priceLabel}
+                                <span className="text-[9px] font-bold text-amber-600 uppercase tracking-widest border border-amber-100 bg-amber-50 px-1.5 py-0.5 rounded-full inline-flex items-center gap-0.5">
+                                    <Clock size={8} /> {pass.priceLabel}
                                 </span>
                             )}
                         </div>
                     </div>
 
                     {/* Ideal For Section */}
-                    <div className="mb-6">
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Perfect For:</p>
-                        <p className="text-xs text-slate-600 leading-relaxed italic border-l-2 border-amber-100 pl-3">{pass.idealFor}</p>
+                    <div className="mb-3">
+                        <p className="text-[10px] text-slate-400 leading-snug italic border-l-2 border-amber-100 pl-2">{pass.idealFor}</p>
                     </div>
 
                     {/* Features List */}
                     <div className="flex-grow">
-                        <ul className="space-y-3">
+                        <ul className="space-y-2">
                             {visibleFeatures.map((feature, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-[13px] text-slate-600 leading-snug">
-                                    <div className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-emerald-50 flex items-center justify-center">
-                                        <Check size={10} className="text-emerald-600 stroke-[4]" />
+                                <li key={idx} className="flex items-start gap-2 text-[11px] text-slate-600 leading-snug">
+                                    <div className="mt-0.5 flex-shrink-0 w-3.5 h-3.5 rounded-full bg-emerald-50 flex items-center justify-center">
+                                        <Check size={8} className="text-emerald-600 stroke-[4]" />
                                     </div>
                                     <span>{feature}</span>
                                 </li>
@@ -768,7 +765,7 @@ function PassCard({ pass }: { pass: PassType }) {
                         {hasMoreFeatures && (
                             <button
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="text-xs font-semibold text-amber-600 hover:text-amber-700 hover:underline flex items-center gap-1 mt-3 transition-colors"
+                                className="text-[10px] font-semibold text-amber-600 hover:text-amber-700 hover:underline flex items-center gap-1 mt-2 transition-colors"
                             >
                                 {isExpanded ? "View less" : `+ ${pass.features.length - 5} more benefits`}
                             </button>
@@ -777,25 +774,25 @@ function PassCard({ pass }: { pass: PassType }) {
 
                     {/* Note */}
                     {pass.note && (
-                        <div className="mt-6 p-3 bg-slate-50 rounded-xl border border-slate-100 flex gap-2 items-start">
-                            <ShieldCheck size={14} className="text-slate-400 mt-0.5" />
-                            <p className="text-[10px] text-slate-500 leading-relaxed font-medium">
+                        <div className="mt-3 p-2.5 bg-slate-50 rounded-lg border border-slate-100 flex gap-1.5 items-start">
+                            <ShieldCheck size={12} className="text-slate-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-[9px] text-slate-500 leading-relaxed font-medium">
                                 <span className="text-slate-700 font-bold">Requirement:</span> {pass.note}
                             </p>
                         </div>
                     )}
 
                     {/* Actions */}
-                    <div className="mt-8 pt-6 border-t border-slate-100">
+                    <div className="mt-4 pt-4 border-t border-slate-100">
                         <button
                             onClick={() => setModalOpen(true)}
-                            className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 bg-slate-900 text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-amber-500 hover:text-slate-950 hover:shadow-[0_10px_30px_-5px_rgba(245,158,11,0.4)] active:scale-[0.98]"
+                            className="w-full group relative flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:bg-amber-500 hover:text-slate-950 hover:shadow-[0_8px_20px_-5px_rgba(245,158,11,0.4)] active:scale-[0.98]"
                         >
                             {pass.ctaText || `Register as ${pass.name.split(' ')[0]}`}
-                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                            <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
                         </button>
-                        <div className="flex items-center justify-center gap-1.5 mt-4 opacity-50">
-                            <ShieldCheck size={12} className="text-slate-400" />
+                        <div className="flex items-center justify-center gap-1.5 mt-3 opacity-50">
+                            <ShieldCheck size={10} className="text-slate-400" />
                             <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Secure Global Registration</span>
                         </div>
                     </div>
