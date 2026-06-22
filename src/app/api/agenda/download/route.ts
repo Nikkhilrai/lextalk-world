@@ -33,7 +33,8 @@ export async function POST(request: NextRequest) {
         }).catch(err => console.error("Notification error:", err));
 
         // Always serve from static public/agendas/ folder
-        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf`;
+        // v param busts CDN cache when the file is replaced
+        const agendaUrl = `/agendas/${eventSlug}-agenda.pdf?v=${agendaDownload.id.slice(-6)}`;
 
         return NextResponse.json({
             success: true,
@@ -60,7 +61,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "Event slug is required" }, { status: 400 });
         }
 
-        return NextResponse.json({ agendaUrl: `/agendas/${eventSlug}-agenda.pdf` });
+        return NextResponse.json({ agendaUrl: `/agendas/${eventSlug}-agenda.pdf?v=latest` });
 
     } catch (error) {
         console.error("Error fetching agenda:", error);
