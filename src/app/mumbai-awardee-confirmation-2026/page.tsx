@@ -118,17 +118,19 @@ function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number |
             {/* Header */}
             <div className={`bg-gradient-to-r ${colors.gradient} px-6 py-4`}>
                 <h3 className="text-xl font-serif font-bold text-white">{pass.name}</h3>
-                <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-3xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
-                    <span className="text-white/60 text-sm">.00 USD</span>
-                </div>
                 {inrPrice ? (
-                    <div className="mt-1 flex items-center gap-1.5">
-                        <span className="text-white/80 text-sm font-semibold">≈ ₹{inrPrice.toLocaleString("en-IN")}</span>
-                        <span className="text-white/50 text-xs">INR</span>
-                    </div>
+                    <>
+                        <div className="flex items-baseline gap-1 mt-1">
+                            <span className="text-3xl font-extrabold text-white">₹{inrPrice.toLocaleString("en-IN")}</span>
+                            <span className="text-white/60 text-sm">INR</span>
+                        </div>
+                        <div className="mt-0.5 text-white/50 text-xs">≈ ${pass.price.toLocaleString()} USD</div>
+                    </>
                 ) : (
-                    <div className="mt-1 h-5 w-24 bg-white/10 rounded animate-pulse" />
+                    <>
+                        <div className="mt-1 h-9 w-36 bg-white/10 rounded animate-pulse" />
+                        <div className="mt-1 h-4 w-24 bg-white/10 rounded animate-pulse" />
+                    </>
                 )}
             </div>
 
