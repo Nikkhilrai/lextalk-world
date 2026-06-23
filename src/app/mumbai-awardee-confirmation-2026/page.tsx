@@ -6,6 +6,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
 import { Facebook, Twitter, MessageCircle } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 // Pass data — prices in USD
 const passes = [
@@ -49,12 +50,13 @@ const passes = [
     },
 ];
 
-function PassCard({ pass }: { pass: typeof passes[0] }) {
+function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number | null }) {
     const { addItem } = useCart();
     const { showToast } = useToast();
 
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
     const shareText = `Check out the ${pass.name} for LexTalk World Mumbai 2026!`;
+    const inrPrice = inrRate ? Math.floor(pass.price * inrRate) : null;
 
     const handleAddToCart = () => {
         addItem({
@@ -120,6 +122,14 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
                     <span className="text-3xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
                     <span className="text-white/60 text-sm">.00 USD</span>
                 </div>
+                {inrPrice ? (
+                    <div className="mt-1 flex items-center gap-1.5">
+                        <span className="text-white/80 text-sm font-semibold">≈ ₹{inrPrice.toLocaleString("en-IN")}</span>
+                        <span className="text-white/50 text-xs">INR</span>
+                    </div>
+                ) : (
+                    <div className="mt-1 h-5 w-24 bg-white/10 rounded animate-pulse" />
+                )}
             </div>
 
             {/* Benefits */}
@@ -184,6 +194,15 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
 }
 
 export default function MumbaiAwardeeConfirmationPage() {
+    const [inrRate, setInrRate] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetch("/api/currency/convert")
+            .then(r => r.json())
+            .then(d => setInrRate(d.rate))
+            .catch(() => setInrRate(84));
+    }, []);
+
     return (
         <main className="min-h-screen bg-slate-50">
             <Navbar />
@@ -197,6 +216,11 @@ export default function MumbaiAwardeeConfirmationPage() {
                     <p className="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg">
                         Choose the pass that best suits your needs. All benefits are listed below for easy comparison.
                     </p>
+                    {inrRate && (
+                        <p className="text-slate-400 text-sm mt-3">
+                            🇮🇳 Indian delegates can pay in INR at checkout &nbsp;·&nbsp; Live rate: 1 USD = ₹{inrRate.toFixed(2)}
+                        </p>
+                    )}
                 </div>
             </section>
 
@@ -205,7 +229,7 @@ export default function MumbaiAwardeeConfirmationPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
                         {passes.map((pass) => (
-                            <PassCard key={pass.id} pass={pass} />
+                            <PassCard key={pass.id} pass={pass} inrRate={inrRate} />
                         ))}
                     </div>
                 </div>
