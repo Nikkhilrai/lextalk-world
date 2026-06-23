@@ -37,6 +37,10 @@ export async function POST(request: NextRequest) {
             "standard-pass-dubai-2026": "standard",
             "premium-pass-dubai-2026": "premium",
             "exclusive-pass-dubai-2026": "exclusive",
+            // Mumbai passes
+            "standard-pass-mumbai-2026": "standard",
+            "premium-pass-mumbai-2026": "premium",
+            "exclusive-pass-mumbai-2026": "exclusive",
             // Bangalore passes
             "standard-physical-pass-bangalore-2026": "standard-physical",
             "premium-physical-pass-bangalore-2026": "premium-physical",
@@ -53,10 +57,12 @@ export async function POST(request: NextRequest) {
                 if (!ticketTypeSlug) continue;
 
                 const isBangalore = item.id.includes("bangalore");
+                const isMumbai = item.id.includes("mumbai");
+                const conferenceSlug = isBangalore ? "bangalore-2026" : isMumbai ? "mumbai-2026" : "dubai-2026";
 
                 // Fetch ticket type ID from database
                 const ticketTypeRes = await fetch(
-                    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/get-type?slug=${isBangalore ? "bangalore-2026" : "dubai-2026"}&type=${ticketTypeSlug}`
+                    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/get-type?slug=${conferenceSlug}&type=${ticketTypeSlug}`
                 );
                 if (!ticketTypeRes.ok) {
                     console.error("Failed to fetch ticket type ID");
@@ -79,7 +85,7 @@ export async function POST(request: NextRequest) {
                             buyerDesignation: customerDetails.designation,
                             quantity: item.quantity,
                             totalAmount: item.price * item.quantity,
-                            currency: isBangalore ? "INR" : "USD", // Bangalore orders might be in INR if paid via INR gate, but internally we track USD unless specified
+                            currency: isBangalore ? "INR" : "USD",
                             paymentId: razorpay_payment_id,
                         }),
                     }
@@ -98,6 +104,10 @@ export async function POST(request: NextRequest) {
 
                 // Generate PDF ticket only for non-Bangalore orders
                 if (!isBangalore) {
+                    const conferenceDetails = isMumbai
+                        ? { name: "Mumbai 2026", location: "Mumbai, India", year: 2026 }
+                        : { name: "Dubai 2026", location: "Dubai, UAE", year: 2026 };
+
                     const ticketRes = await fetch(
                         `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/tickets/generate-ticket`,
                         {
@@ -111,11 +121,7 @@ export async function POST(request: NextRequest) {
                                 designation: customerDetails.designation,
                                 passType: item.name,
                                 amount: item.price * item.quantity,
-                                conferenceDetails: {
-                                    name: "Dubai 2026",
-                                    location: "Dubai, UAE",
-                                    year: 2026,
-                                },
+                                conferenceDetails,
                             }),
                         }
                     );
@@ -145,7 +151,7 @@ export async function POST(request: NextRequest) {
                                 currency: isBangalore ? "INR" : "USD",
                                 paymentId: razorpay_payment_id,
                                 orderDate: new Date().toISOString(),
-                                isBangalore: isBangalore,
+                                isBangalore,
                             }),
                         }
                     );
