@@ -30,7 +30,7 @@ const navTabs = [
     { label: "Agenda", href: "/agenda" },
     { label: "Speakers", href: "/dubai-2026/speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
-    { label: "Past Event Images", href: "/bangalore-2026/gallery" },
+    { label: "Past Event Images", href: "https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93" },
     { label: "Sponsorship", href: "/sponsor" },
 ];
 
@@ -337,7 +337,7 @@ export default function DubaiEventPage() {
                                     key={index}
                                     href={tab.href}
                                     className={commonClasses}
-                                    target={tab.href.startsWith("http") ? "_blank" : undefined}
+                                    target={tab.label === "Past Event Images" ? "_blank" : undefined}
                                 >
                                     {tab.label}
                                 </Link>
@@ -734,7 +734,7 @@ export default function DubaiEventPage() {
 
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
-                                {/* Case Docker */}
+                                {/* Case Docer */}
                                 <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
 
@@ -778,25 +778,7 @@ export default function DubaiEventPage() {
                                     </a>
                                 </div>
 
-                                {/* Gorodissky & Partners */}
-                                <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
 
-                                    <a
-                                        href="https://www.gorodissky.com/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="relative h-full w-full p-4 flex items-center justify-center block"
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <img
-                                                src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
-                                                alt="Gorodissky & Partners"
-                                                className="w-full h-full object-contain mix-blend-multiply"
-                                            />
-                                        </div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -853,27 +835,6 @@ export default function DubaiEventPage() {
 
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
-                                {/* BGK Law Associates */}
-                                <div className="group relative w-28 h-20 md:w-52 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(100,116,139,0.1)] border border-slate-100 group-hover:border-slate-200 group-hover:-translate-y-1" />
-
-                                    <a
-                                        href="https://bgklawassociates.co.in/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="relative h-full w-full p-2 flex items-center justify-center block"
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <Image
-                                                src="/dubai-event/sponsors/BGK Law Associates.jpg"
-                                                alt="BGK Law Associates"
-                                                fill
-                                                className="object-contain rounded-xl"
-                                                sizes="(max-width: 768px) 112px, 208px"
-                                            />
-                                        </div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -903,6 +864,29 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
+                    {/* Partner */}
+                    <div className="relative mt-20">
+                        <div className="flex flex-col items-center relative z-10">
+                            <div className="mb-10 flex items-center gap-4">
+                                <div className="h-px w-12 bg-slate-200" />
+                                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400">Partner</p>
+                                <div className="h-px w-12 bg-slate-200" />
+                            </div>
+                            <a
+                                href="https://www.gorodissky.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-white rounded-xl border border-slate-100 shadow-sm px-10 py-5 hover:shadow-md hover:border-slate-200 transition-all duration-300"
+                            >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                                    alt="Gorodissky & Partners"
+                                    className="h-14 w-auto object-contain mix-blend-multiply"
+                                />
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section >
 
