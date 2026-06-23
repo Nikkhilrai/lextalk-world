@@ -3,9 +3,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext";
 import { Facebook, Twitter, MessageCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // Pass data
 const passes = [
@@ -50,20 +50,16 @@ const passes = [
 ];
 
 function PassCard({ pass }: { pass: typeof passes[0] }) {
-    const { addItem } = useCart();
-    const { showToast } = useToast();
+    const { addItem, clearCart } = useCart();
+    const router = useRouter();
 
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
     const shareText = `Check out the ${pass.name} for LexTalk World Dubai 2026!`;
 
-    const handleAddToCart = () => {
-        addItem({
-            id: pass.id,
-            name: pass.name,
-            price: pass.price,
-            image: pass.image,
-        });
-        showToast(`${pass.name} added to cart!`);
+    const handleSelect = () => {
+        clearCart();
+        addItem({ id: pass.id, name: pass.name, price: pass.price, image: pass.image });
+        router.push("/checkout");
     };
 
     // Tier colors
@@ -148,12 +144,12 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
                 {/* Button Section - Pushed to bottom */}
                 <div className="mt-auto">
 
-                    {/* Add to Cart Button */}
+                    {/* Select Pass Button */}
                     <button
-                        onClick={handleAddToCart}
+                        onClick={handleSelect}
                         className={`w-full py-4 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-xl hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg`}
                     >
-                        Add to Cart
+                        Select {pass.name}
                     </button>
 
                     {/* Share Buttons */}

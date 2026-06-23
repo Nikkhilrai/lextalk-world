@@ -44,7 +44,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...prev, { ...newItem, quantity: 1 }];
         });
-        openCart();
     };
 
     const removeItem = (id: string) => {

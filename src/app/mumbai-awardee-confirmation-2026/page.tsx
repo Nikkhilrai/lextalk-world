@@ -3,9 +3,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext";
 import { Check, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const passes = [
     {
@@ -56,13 +56,14 @@ const passes = [
 ];
 
 function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number | null }) {
-    const { addItem } = useCart();
-    const { showToast } = useToast();
+    const { addItem, clearCart } = useCart();
+    const router = useRouter();
     const inrPrice = inrRate ? Math.floor(pass.price * inrRate) : null;
 
-    const handleAddToCart = () => {
+    const handleSelect = () => {
+        clearCart();
         addItem({ id: pass.id, name: pass.name, price: pass.price, image: "" });
-        showToast(`${pass.name} added to cart!`);
+        router.push("/checkout");
     };
 
     return (
@@ -99,7 +100,7 @@ function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number |
 
                 {/* CTA */}
                 <button
-                    onClick={handleAddToCart}
+                    onClick={handleSelect}
                     className={`w-full py-3 ${pass.btnColor} text-white font-semibold rounded-lg transition-colors text-sm`}
                 >
                     Select {pass.name}

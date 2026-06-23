@@ -4,9 +4,7 @@ import "./globals.css";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
-import { CartSidebar } from "@/components/CartSidebar";
 import { ToastProvider } from "@/contexts/ToastContext";
-import { FloatingCartButton } from "@/components/FloatingCartButton";
 import { FloatingActions } from "@/components/FloatingActions";
 import { Toaster } from "react-hot-toast";
 
@@ -119,8 +117,6 @@ export default function RootLayout({
         <ToastProvider>
           <CartProvider>
             {children}
-            <CartSidebar />
-            <FloatingCartButton />
             <FloatingActions />
             <Toaster position="bottom-right" />
           </CartProvider>
