@@ -137,7 +137,7 @@ export default function MumbaiAwardeeConfirmationPage() {
 
     return (
         <main className="min-h-screen bg-slate-50">
-            <Navbar />
+            <Navbar variant="light" />
 
             {/* Hero */}
             <section className="bg-white border-b border-slate-200 pt-32 pb-10 sm:pt-40 sm:pb-12">
