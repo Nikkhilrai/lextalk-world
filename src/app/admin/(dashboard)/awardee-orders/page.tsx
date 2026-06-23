@@ -108,11 +108,14 @@ const PASS_COLORS: Record<string, string> = {
     exclusive: "bg-violet-500/10 text-violet-400 border-violet-500/20",
 };
 
+const AWARDEE_CONFERENCES = ["dubai-2026", "mumbai-2026"];
+
 export default function AwardeeOrdersPage() {
     const [orders, setOrders] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [passFilter, setPassFilter] = useState("all");
+    const [eventFilter, setEventFilter] = useState("all");
     const [selectedOrder, setSelectedOrder] = useState<any | null>(null);
     const [stats, setStats] = useState({ total: 0, paid: 0, revenue: 0 });
 
@@ -121,9 +124,8 @@ export default function AwardeeOrdersPage() {
         try {
             const res = await getTicketOrders();
             if (res.success) {
-                // Filter only Dubai 2026 awardee pass orders
                 const awardeeOrders = res.orders.filter((o: any) =>
-                    o.ticketType?.conference?.slug === "dubai-2026"
+                    AWARDEE_CONFERENCES.includes(o.ticketType?.conference?.slug)
                 );
                 setOrders(awardeeOrders);
                 setStats({
@@ -147,7 +149,8 @@ export default function AwardeeOrdersPage() {
             o.buyerEmail?.toLowerCase().includes(search.toLowerCase()) ||
             parseNotes(o.notes).organization.toLowerCase().includes(search.toLowerCase());
         const matchPass = passFilter === "all" || o.ticketType?.type === passFilter;
-        return matchSearch && matchPass;
+        const matchEvent = eventFilter === "all" || o.ticketType?.conference?.slug === eventFilter;
+        return matchSearch && matchPass && matchEvent;
     });
 
     const handleExportCSV = () => {
@@ -169,7 +172,7 @@ export default function AwardeeOrdersPage() {
         const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = `awardee-orders-dubai-2026-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.download = `awardee-orders-${eventFilter === "all" ? "all-events" : eventFilter}-${new Date().toISOString().slice(0, 10)}.csv`;
         a.click();
         URL.revokeObjectURL(a.href);
     };
@@ -189,7 +192,7 @@ export default function AwardeeOrdersPage() {
             <div className="flex justify-between items-end">
                 <div>
                     <h4 className="text-xl font-bold text-white">Awardee Orders</h4>
-                    <p className="text-sm text-[#878a99]">Dubai 2026 — Pass purchases from the awardee confirmation page</p>
+                    <p className="text-sm text-[#878a99]">Dubai & Mumbai 2026 — Pass purchases from awardee confirmation pages</p>
                 </div>
                 <div className="flex gap-2">
                     <button onClick={fetchData} className="p-2 bg-[#2a304d] text-slate-400 rounded hover:text-white transition-all">
@@ -221,6 +224,11 @@ export default function AwardeeOrdersPage() {
                             className="w-full pl-10 pr-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                         />
                     </div>
+                    <select value={eventFilter} onChange={e => setEventFilter(e.target.value)} className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200">
+                        <option value="all">All Events</option>
+                        <option value="dubai-2026">Dubai 2026</option>
+                        <option value="mumbai-2026">Mumbai 2026</option>
+                    </select>
                     <select value={passFilter} onChange={e => setPassFilter(e.target.value)} className="px-4 py-2.5 bg-[#2a304d]/50 border border-white/10 rounded-lg text-sm text-slate-200">
                         <option value="all">All Passes</option>
                         <option value="standard">Standard</option>

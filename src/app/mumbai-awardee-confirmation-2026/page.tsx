@@ -7,12 +7,12 @@ import { useToast } from "@/contexts/ToastContext";
 import { Facebook, Twitter, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
-// Pass data — prices in INR (1 USD = ₹94.41, rounded down)
+// Pass data — prices in USD
 const passes = [
     {
         id: "standard-pass-mumbai-2026",
         name: "Standard Pass",
-        price: 113000,
+        price: 1200,
         image: "",
         tier: "Standard",
         benefits: [
@@ -27,7 +27,7 @@ const passes = [
     {
         id: "premium-pass-mumbai-2026",
         name: "Premium Pass",
-        price: 141000,
+        price: 1500,
         image: "",
         tier: "Premium",
         benefits: [
@@ -38,7 +38,7 @@ const passes = [
     {
         id: "exclusive-pass-mumbai-2026",
         name: "Exclusive Pass",
-        price: 236000,
+        price: 2500,
         image: "",
         tier: "Exclusive",
         benefits: [
@@ -117,8 +117,8 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
             <div className={`bg-gradient-to-r ${colors.gradient} px-6 py-4`}>
                 <h3 className="text-xl font-serif font-bold text-white">{pass.name}</h3>
                 <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-3xl font-extrabold text-white">₹{pass.price.toLocaleString("en-IN")}</span>
-                    <span className="text-white/60 text-sm">INR</span>
+                    <span className="text-3xl font-extrabold text-white">${pass.price.toLocaleString()}</span>
+                    <span className="text-white/60 text-sm">.00 USD</span>
                 </div>
             </div>
 
