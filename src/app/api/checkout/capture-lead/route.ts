@@ -32,6 +32,19 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        const passNames = cartItems.map((i: any) => i.name).join(", ");
+        const total = cartItems.reduce((s: number, i: any) => s + i.price * i.quantity, 0);
+        const eventLabel = conferenceSlug === "mumbai-2026" ? "Mumbai 2026" : conferenceSlug === "bangalore-2026" ? "Bangalore 2026" : "Dubai 2026";
+
+        prisma.notification.create({
+            data: {
+                type: "TICKET_PURCHASE",
+                message: `Awardee checkout started: ${firstName} ${lastName} (${organization}) — ${passNames} · $${total.toLocaleString()} · ${eventLabel}`,
+                referenceId: lead.id,
+                link: "/admin/checkout-leads",
+            },
+        }).catch(err => console.error("Notification error:", err));
+
         return NextResponse.json({ success: true, leadId: lead.id });
     } catch (error) {
         console.error("Checkout lead capture error:", error);
