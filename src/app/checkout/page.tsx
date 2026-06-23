@@ -73,6 +73,12 @@ export default function CheckoutPage() {
 
     const handleContinueToPayment = () => {
         if (validateForm()) {
+            // Fire-and-forget: capture checkout lead before payment
+            fetch("/api/checkout/capture-lead", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...customerDetails, cartItems: items }),
+            }).catch(() => {});
             setStep(2);
         }
     };

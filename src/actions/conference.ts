@@ -303,3 +303,18 @@ export async function getTicketStats() {
         };
     }
 }
+
+// Get checkout leads (people who filled details but may not have paid)
+export async function getCheckoutLeads(conferenceSlug?: string) {
+    try {
+        const leads = await prisma.checkoutLead.findMany({
+            where: conferenceSlug ? { conferenceSlug } : undefined,
+            orderBy: { createdAt: "desc" },
+        });
+        return { success: true, leads };
+    } catch (error) {
+        console.error("Failed to get checkout leads:", error);
+        return { success: false, leads: [] };
+    }
+}
+

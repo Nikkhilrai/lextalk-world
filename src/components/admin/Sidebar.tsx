@@ -43,6 +43,7 @@ const NAV_GROUPS = [
             { label: "Counsel Exchange", href: "/admin/counsel-exchange-access", icon: Lock },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
             { label: "Awardee Orders", href: "/admin/awardee-orders", icon: Trophy },
+            { label: "Checkout Leads", href: "/admin/checkout-leads", icon: Target },
             { label: "Chat", href: "#", icon: MessageCircle, badge: "New" },
         ]
     },

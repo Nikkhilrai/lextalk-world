@@ -538,6 +538,28 @@ model CounselExchangeRequest {
   @@index([createdAt])
 }
 
+// Checkout Lead — captured when user clicks "Continue to Payment" before completing payment
+model CheckoutLead {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String
+  phone          String
+  organization   String
+  designation    String
+  cartItems      String   @db.Text // JSON array of cart items
+  conferenceSlug String   // e.g. "mumbai-2026", "dubai-2026"
+  status         String   @default("initiated") // initiated, paid, abandoned
+  razorpayOrderId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([conferenceSlug])
+  @@index([createdAt])
+}
+
 // Speaker Application / Interest Form
 model SpeakerApplication {
   id         String   @id @default(cuid())
