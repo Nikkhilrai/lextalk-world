@@ -4,12 +4,23 @@ import { X, Minus, Plus, Trash2, Tag, ShieldCheck, ShoppingCart } from "lucide-r
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function CartSidebar() {
     const { items, isOpen, closeCart, updateQuantity, removeItem, total, itemCount } = useCart();
     const [promoCode, setPromoCode] = useState("");
+    const [inrRate, setInrRate] = useState<number | null>(null);
     const router = useRouter();
+
+    const isMumbaiCart = items.some(i => i.id.includes("mumbai"));
+
+    useEffect(() => {
+        if (!isMumbaiCart) return;
+        fetch("/api/currency/convert")
+            .then(r => r.json())
+            .then(d => setInrRate(d.rate))
+            .catch(() => setInrRate(84));
+    }, [isMumbaiCart]);
 
     const handleCheckout = () => {
         closeCart();
@@ -83,9 +94,22 @@ export function CartSidebar() {
                                             <Trash2 size={14} className="text-slate-400" />
                                         </button>
                                     </div>
-                                    <p className="text-slate-600 font-medium text-sm mt-1">
-                                        ${item.price.toLocaleString()}.00
-                                    </p>
+                                    {isMumbaiCart ? (
+                                        inrRate ? (
+                                            <>
+                                                <p className="text-slate-600 font-medium text-sm mt-1">
+                                                    ₹{Math.floor(item.price * inrRate).toLocaleString("en-IN")}
+                                                </p>
+                                                <p className="text-slate-400 text-xs">${item.price.toLocaleString()} USD</p>
+                                            </>
+                                        ) : (
+                                            <div className="w-20 h-4 bg-slate-200 rounded animate-pulse mt-1" />
+                                        )
+                                    ) : (
+                                        <p className="text-slate-600 font-medium text-sm mt-1">
+                                            ${item.price.toLocaleString()}.00
+                                        </p>
+                                    )}
 
                                     {/* Quantity Controls */}
                                     <div className="flex items-center justify-between mt-2">
@@ -106,9 +130,22 @@ export function CartSidebar() {
                                                 <Plus size={14} className="text-slate-500" />
                                             </button>
                                         </div>
-                                        <p className="text-slate-900 font-bold text-sm">
-                                            ${(item.price * item.quantity).toLocaleString()}.00
-                                        </p>
+                                        {isMumbaiCart ? (
+                                            inrRate ? (
+                                                <div className="text-right">
+                                                    <p className="text-slate-900 font-bold text-sm">
+                                                        ₹{Math.floor(item.price * item.quantity * inrRate).toLocaleString("en-IN")}
+                                                    </p>
+                                                    <p className="text-slate-400 text-xs">${(item.price * item.quantity).toLocaleString()}</p>
+                                                </div>
+                                            ) : (
+                                                <div className="w-20 h-5 bg-slate-200 rounded animate-pulse" />
+                                            )
+                                        ) : (
+                                            <p className="text-slate-900 font-bold text-sm">
+                                                ${(item.price * item.quantity).toLocaleString()}.00
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -137,9 +174,22 @@ export function CartSidebar() {
                                 <p className="font-bold text-slate-900">Estimated total</p>
                                 <p className="text-xs text-slate-500">Taxes and shipping are calculated at checkout.</p>
                             </div>
-                            <p className="text-xl font-bold text-slate-900">
-                                ${total.toLocaleString()}.00
-                            </p>
+                            {isMumbaiCart ? (
+                                inrRate ? (
+                                    <div className="text-right">
+                                        <p className="text-xl font-bold text-slate-900">
+                                            ₹{Math.floor(total * inrRate).toLocaleString("en-IN")}
+                                        </p>
+                                        <p className="text-xs text-slate-400">≈ ${total.toLocaleString()} USD</p>
+                                    </div>
+                                ) : (
+                                    <div className="w-28 h-7 bg-slate-200 rounded animate-pulse" />
+                                )
+                            ) : (
+                                <p className="text-xl font-bold text-slate-900">
+                                    ${total.toLocaleString()}.00
+                                </p>
+                            )}
                         </div>
 
                         {/* Checkout Buttons */}
