@@ -821,24 +821,6 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
-                    {/* Silver Sponsors */}
-                    <div className="relative mt-20">
-                        <div className="flex flex-col items-center relative z-10">
-                            {/* Category Badge */}
-                            <div className="mb-12 transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 border border-slate-300 rounded-full shadow-md">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-900 uppercase tracking-widest whitespace-nowrap">
-                                        Silver Sponsor
-                                    </h3>
-                                </div>
-                            </div>
-
-                            {/* Logos Grid */}
-                            <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Knowledge Partner */}
                     <div className="relative mt-20">
                         <div className="flex flex-col items-center relative z-10">
