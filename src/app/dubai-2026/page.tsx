@@ -839,6 +839,25 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
+                    {/* Knowledge Partner */}
+                    <div className="relative mt-20">
+                        <div className="flex flex-col items-center relative z-10">
+                            <div className="mb-10 flex items-center gap-4 w-full max-w-lg">
+                                <div className="flex-1 h-[1px] bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200" />
+                                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-600 whitespace-nowrap">Knowledge Partner</p>
+                                <div className="flex-1 h-[1px] bg-gradient-to-l from-amber-200 via-amber-400 to-amber-200" />
+                            </div>
+                            <div className="bg-white rounded-xl border border-slate-100 shadow-sm px-10 py-5 hover:shadow-md hover:border-amber-200 transition-all duration-300">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/dubai-event/sponsors/BGK Law Associates.jpg"
+                                    alt="BGK Law Associates"
+                                    className="h-16 w-auto object-contain mix-blend-multiply"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Wellness & Consciousness Partner */}
                     <div className="relative mt-20">
                         <div className="flex flex-col items-center relative z-10">
