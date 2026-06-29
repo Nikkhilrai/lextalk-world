@@ -167,6 +167,14 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         title: "Managing Partner, Gorodissky & Partners",
         image: "/images/counsel-exchange/Sergey Medvedev.jpg",
     },
+    {
+        name: "Shilpa Bhasin Mehra",
+        title: "Head of Legal & Independent Legal Consultant | Accredited Mediator | Author | UAE & AMEA",
+        image: "/dubai-event/dubai-speakers/Shilpa Bhasin Mehra.png",
+        bio: `Having been in the UAE for over 30 years, coming from a legal background, Shilpa has held the position of Head of Legal in global companies, and is now an independent legal consultant, under her management consultancy firm Focal. She has worked as the in-house Legal head with Smit Lamnalco and Svitzer (part of the Maersk Group), doing work with major corporations worldwide. She specializes in corporate legal work, and her expertise is in contracts of all nature. Always working in the interest of her clients, Shilpa is a strong believer in alternate dispute resolution, mainly mediation.
+
+Shilpa had a close to death experience in 2003, her book "All Battles aren't Legal" is based on her life-death experience and recovery. Her second book "Unfiltered and Unapologetic" is about life lessons. Lawyer by profession and author by passion, she is a strong advocate for diversity and inclusion. A recipient of several awards for writing, resilience, legal excellence and real-life inspiration.`,
+    },
 ];
 
 
