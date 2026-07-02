@@ -808,7 +808,7 @@ export default function DubaiEventPage() {
                                     >
                                         <div className="relative w-full h-full">
                                             <Image
-                                                src="/dubai-event/sponsors/AsgandPartnerlogo.jpeg"
+                                                src="/bangalore-2026/Sponsor/asgandpartners.png"
                                                 alt="Asgand & Partner"
                                                 fill
                                                 className="object-contain rounded-xl"
