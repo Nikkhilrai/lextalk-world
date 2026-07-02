@@ -277,52 +277,59 @@ export default function DubaiSpeakersList() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: idx * 0.06 }}
-                            className={`group ${speaker.bio ? "cursor-pointer" : ""}`}
+                            className={`group h-full ${speaker.bio ? "cursor-pointer" : ""}`}
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
-                            <div className="relative flex flex-col items-center text-center">
-                                {/* Rectangular portrait card — matches Bangalore style */}
-                                <div className="relative mb-6 w-full max-w-[280px]">
+                            <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-1.5">
+                                {/* Portrait — fixed 4:5 ratio keeps every card identical */}
+                                <div className="relative mb-7 w-full max-w-[280px]">
                                     {/* Outer thin formal frame */}
-                                    <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
+                                    <div className="absolute -inset-3 border border-slate-200/60 group-hover:border-amber-400/40 transition-colors duration-500 rounded-xl" />
+                                    {/* Corner ticks — subtle atelier detail */}
+                                    <div className="absolute -inset-3 rounded-xl pointer-events-none">
+                                        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-tl-xl transition-colors duration-500" />
+                                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-br-xl transition-colors duration-500" />
+                                    </div>
 
                                     {/* Portrait container */}
-                                    <div className="relative w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
+                                    <div className="relative w-full aspect-[4/5] overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-4 ring-white">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.name}
-                                                width={400}
-                                                height={500}
-                                                className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                                fill
+                                                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
+                                                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                                             />
                                         ) : (
-                                            <div className="w-full aspect-[4/5] flex items-center justify-center bg-slate-100 text-slate-300">
+                                            <div className="absolute inset-0 flex items-center justify-center text-slate-300">
                                                 <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                 </svg>
                                             </div>
                                         )}
-                                        {/* Hover gradient overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        {/* Soft vignette for depth */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+                                        {/* Gold sheen sweep on hover */}
+                                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-amber-100/20 to-transparent skew-x-12 pointer-events-none" />
                                     </div>
 
                                     {/* Bottom amber accent line */}
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-amber-500 rounded-full shadow-sm" />
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 group-hover:w-16 h-[3px] bg-gradient-to-r from-amber-400 to-amber-600 rounded-full shadow-sm transition-all duration-500" />
                                 </div>
 
-                                {/* Text content */}
-                                <div className="pt-2 flex flex-col items-center max-w-[280px]">
-                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
+                                {/* Text content — flex-1 so every card bottom-aligns */}
+                                <div className="pt-1 flex-1 flex flex-col items-center w-full max-w-[280px]">
+                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-900 mb-2 leading-snug group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
                                         {speaker.name}
                                     </h3>
                                     {speaker.title && (
-                                        <p className="text-[12px] md:text-[13px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-widest leading-relaxed">
+                                        <p className="text-[11px] md:text-[12px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-[0.14em] leading-relaxed line-clamp-3">
                                             {speaker.title}
                                         </p>
                                     )}
                                     {speaker.bio && (
-                                        <div className="mt-4 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                                        <div className="mt-auto pt-4 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                                             <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
                                             <div className="w-4 h-px bg-amber-600" />
                                         </div>
