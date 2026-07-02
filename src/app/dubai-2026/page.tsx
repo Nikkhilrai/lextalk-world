@@ -797,26 +797,20 @@ export default function DubaiEventPage() {
                             {/* Logos Grid */}
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Asgand & Partner */}
-                                <div className="group relative w-40 h-28 md:w-80 md:h-52 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(180,83,9,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.1)] group-hover:-translate-y-1" />
-
-                                    <a
-                                        href="https://asgpartners.co.in/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="relative h-full w-full p-0 flex items-center justify-center block"
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <Image
-                                                src="/bangalore-2026/Sponsor/asgandpartners.png"
-                                                alt="Asgand & Partner"
-                                                fill
-                                                className="object-contain rounded-xl"
-                                                sizes="(max-width: 768px) 160px, 320px"
-                                            />
-                                        </div>
-                                    </a>
-                                </div>
+                                <a
+                                    href="https://asgpartners.co.in/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative w-40 h-28 md:w-80 md:h-52 shrink-0 hover:opacity-90 hover:-translate-y-1 transition-all duration-500 block"
+                                >
+                                    <Image
+                                        src="/bangalore-2026/Sponsor/asgandpartners.png"
+                                        alt="Asgand & Partner"
+                                        fill
+                                        className="object-contain mix-blend-multiply"
+                                        sizes="(max-width: 768px) 160px, 320px"
+                                    />
+                                </a>
                             </div>
                         </div>
                     </div>
