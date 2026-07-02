@@ -20,13 +20,6 @@ const boardMembers = [
         linkedin: "#",
     },
     {
-        name: "Monica Romelina Sijabat",
-        role: "Professor",
-        company: "Faculty of Economics & Business, University of Indonesia",
-        image: "/advisory/Monica.avif",
-        linkedin: "#",
-    },
-    {
         name: "Karen Lee",
         role: "Chair",
         company: "Association of Corporate Counsel Australia Legal Technology and Innovation Committee",

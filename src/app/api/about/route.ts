@@ -36,7 +36,6 @@ const defaultContent = {
         { name: "Piyush Gupta", role: "Head Counsel", company: "Etihad Airways", initials: "PG" },
         { name: "Nandini Nair", role: "Global GC", company: "L&T Technology Services", initials: "NN" },
         { name: "Sameet Gambhir", role: "SVP & Global Head – Legal", company: "Uflex", initials: "SG" },
-        { name: "Monica Romelina Sijabat", role: "Founder", company: "MRS Business Professionals", initials: "MS" },
         { name: "Dr. Lalit Bhasin", role: "President", company: "Society of Indian Law Firms", initials: "LB" },
     ]),
     pastSpeakers: JSON.stringify([

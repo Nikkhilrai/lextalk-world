@@ -7,11 +7,6 @@ import { X } from "lucide-react";
 
 const speakers = [
     {
-        name: "Monica Romelina Sijabat",
-        title: "Professor at the Faculty of Economics & Business, University of Indonesia",
-        image: "/dubai-event/dubai-speakers/Monica Romelina Sijabat.jpeg",
-    },
-    {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
         image: "/dubai-event/dubai-speakers/Dr Lalit-Bhasin.jpeg",
