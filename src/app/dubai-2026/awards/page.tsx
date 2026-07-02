@@ -164,7 +164,7 @@ export default function DubaiAwardsPage() {
                             Past Awardees
                         </Link>
                         <Link
-                            href="https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93"
+                            href="https://lextalkworld.in/bangalore-2026/gallery"
                             target="_blank"
                             className="px-6 py-3 border-2 border-amber-500 text-amber-400 font-bold text-sm md:text-base rounded hover:bg-amber-500/10 transition-all duration-300"
                         >

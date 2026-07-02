@@ -30,7 +30,7 @@ const navTabs = [
     { label: "Agenda", href: "/agenda" },
     { label: "Speakers", href: "/dubai-2026/speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
-    { label: "Past Event Images", href: "https://photos.google.com/share/AF1QipN6DTODhQh60CVDxISm-tKGXUrBstjVYZO8ClzQ5I2SmkgfOD56A1AT1g8KynJkVw?key=a3ZzbzZsNmdCUS1JbDFaaUxQMU45V19yWVZ0cF93" },
+    { label: "Past Event Images", href: "https://lextalkworld.in/bangalore-2026/gallery" },
     { label: "Sponsorship", href: "/sponsor" },
 ];
 
