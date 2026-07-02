@@ -697,7 +697,7 @@ export default function DubaiEventPage() {
                             <div className="flex justify-center">
                                 {/* Platinum Sponsor - Slightly larger with amber border */}
                                 <div className="group relative w-44 h-26 md:w-80 md:h-44 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(148,163,184,0.15)] border-2 border-slate-200 group-hover:border-slate-300 group-hover:-translate-y-1" />
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-xl transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(148,163,184,0.15)] group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.amadi.io/"
@@ -736,7 +736,7 @@ export default function DubaiEventPage() {
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Case Docer */}
                                 <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://www.casedocker.com/landing/"
@@ -758,7 +758,7 @@ export default function DubaiEventPage() {
 
                                 {/* Lex Corp */}
                                 <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] border border-cyan-50 group-hover:border-cyan-100 group-hover:-translate-y-1" />
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://home.lexcorp.org.in/"
@@ -798,7 +798,7 @@ export default function DubaiEventPage() {
                             <div className="flex justify-center flex-row flex-wrap gap-4 md:gap-10">
                                 {/* Asgand & Partner */}
                                 <div className="group relative w-40 h-28 md:w-80 md:h-52 shrink-0">
-                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(180,83,9,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.1)] border border-amber-50 group-hover:border-amber-200 group-hover:-translate-y-1" />
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(180,83,9,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.1)] group-hover:-translate-y-1" />
 
                                     <a
                                         href="https://asgpartners.co.in/"
@@ -875,7 +875,7 @@ export default function DubaiEventPage() {
                                 href="https://www.gorodissky.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-white rounded-xl border border-slate-100 shadow-sm px-10 py-5 hover:shadow-md hover:border-slate-200 transition-all duration-300"
+                                className="hover:opacity-90 transition-opacity duration-300"
                             >
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
