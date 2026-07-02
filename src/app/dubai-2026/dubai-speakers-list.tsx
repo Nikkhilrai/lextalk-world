@@ -5,7 +5,12 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
-export const speakers = [
+const speakers = [
+    {
+        name: "Monica Romelina Sijabat",
+        title: "Professor at the Faculty of Economics & Business, University of Indonesia",
+        image: "/dubai-event/dubai-speakers/Monica Romelina Sijabat.jpeg",
+    },
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
@@ -162,56 +167,6 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         title: "Managing Partner, Gorodissky & Partners",
         image: "/images/counsel-exchange/Sergey Medvedev.jpg",
     },
-    {
-        name: "Shilpa Bhasin Mehra",
-        title: "Head of Legal & Independent Legal Consultant | Accredited Mediator | Author | UAE & AMEA",
-        image: "/dubai-event/dubai-speakers/Shilpa Bhasin Mehra.png",
-        bio: `Having been in the UAE for over 30 years, coming from a legal background, Shilpa has held the position of Head of Legal in global companies, and is now an independent legal consultant, under her management consultancy firm Focal. She has worked as the in-house Legal head with Smit Lamnalco and Svitzer (part of the Maersk Group), doing work with major corporations worldwide. She specializes in corporate legal work, and her expertise is in contracts of all nature. Always working in the interest of her clients, Shilpa is a strong believer in alternate dispute resolution, mainly mediation.
-
-Shilpa had a close to death experience in 2003, her book "All Battles aren't Legal" is based on her life-death experience and recovery. Her second book "Unfiltered and Unapologetic" is about life lessons. Lawyer by profession and author by passion, she is a strong advocate for diversity and inclusion. A recipient of several awards for writing, resilience, legal excellence and real-life inspiration.`,
-    },
-    {
-        name: "Hasan Al Kilani",
-        title: "General Counsel | Regulatory & Digital Affairs | Corporate Commercial | Board Governance | MENA & GCC | UNCITRAL | Telecom | Sovereign Finance | Digital Economy Law",
-        image: "/dubai-event/dubai-speakers/Hasan Al Kilani.png",
-        bio: `Over more than three decades, across four jurisdictions and two legal traditions, he has built the legal rules behind some of the most important shifts in how business is done, from the rise of digital trade to the regulation of entirely new technologies. He does not advise on the law from the outside. He writes it. And the work he has authored for the United Arab Emirates is now shaping how the rest of the world will follow.
-
-As Senior Legal Advisor and General Counsel at the UAE Ministry of Economy, he has led the modernisation of the country's commercial laws. In plain terms, he rewrote the rulebook that governs how companies trade, register, and operate in one of the world's fastest-moving economies, and made it a model that other countries now study.
-
-His most significant work is a law he authored in 2023, the Law on Trading by Modern Technological Means. It was one of the first laws anywhere built for an economy of digital platforms and apps rather than traditional commerce, and it placed the UAE ahead of almost every other nation on the legal questions raised by digital trade. He then carried its principles to the United Nations, to the body responsible for international trade law. He presented the UAE's approach in Vienna, and in 2025 the United Arab Emirates and Spain jointly proposed that the United Nations build a new international framework for digital trade based on this work, winning European support along the way. It is rare for one country's law to become the starting point for a global one. His is doing exactly that.
-
-Signature achievements: driving the UAE and Spain proposal at UNCITRAL for a new global Model Law on digital trade; authoring UAE Law No. 14 of 2023, one of the world's first laws built for the digital platform economy; drafting the charter that made the UAE a founding member of the Asian Infrastructure Investment Bank; and, as among the first executives of the UAE's telecommunications regulator, overseeing the country's first telecommunications licence.
-
-At the Ministry of Economy, Mr Al Kilani is custodian of the UAE's economic legislation at national, GCC, and international levels. He has authored and steered landmark laws through drafting, stakeholder engagement, and enactment, including the laws governing commercial transactions, commercial agency, arbitration, cooperatives, and the commercial registry, with UAE legislation increasingly adopted as a reference point across the region.
-
-He transformed the commercial registry from a procedural statute into a consolidated national economic data ecosystem, the National Economic Registry, incorporating e-commerce, digital trade, and data classification with extended protection of proprietary rights. He created a unified GCC digital-trade strategy and regulatory framework, and designed a methodology for assessing the real-world impact of legislation, building public-private task forces and roundtables that turned the introduction of new law into active partnership with the sectors it governed.
-
-As General Counsel at the Abu Dhabi Digital Authority, he built the end-to-end legal and regulatory framework for the Emirate's government-wide digital transformation, spanning digital signature, digital wallet, cloud, blockchain, and digital payment. He developed the legal foundation for UAE Pass and AD Locker, which became the country's sovereign digital identity standard, used by millions every day.
-
-He negotiated the agreements that enabled TAMM, managed centralised technology procurement across government, and designed a central contract-management system governing primary contractors and their subcontractors. The regulatory groundwork he established before 2020 allowed Abu Dhabi's government to continue operating seamlessly through the pandemic, a real-world test of the framework's resilience.
-
-As Legal Advisor to one of the region's most active sovereign development funds, the Abu Dhabi Fund for Development, he advised on sovereign, corporate, investment, and dispute-resolution matters across telecommunications, food security, hospitality, and infrastructure, managing affairs across the UAE, the wider Middle East and Africa, and Europe.
-
-He led the legal architecture for the UAE's accession to the Asian Infrastructure Investment Bank as a founding member, drafting the board charter for Arab nations and navigating the political negotiations that made membership possible. He standardised concessionary loan agreements across borrowing nations, directed an international asset-recovery effort that recovered the large majority of capital exposed to organised fraud, and handled the legal affairs of major clean-energy and infrastructure partnerships including IRENA, Masdar, and Mubadala.
-
-As Of Counsel at the international law firm Simmons & Simmons, he advised clients across government, regulatory, and private sectors, led the UAE legal team through the WTO Second Trade Policy Review, and built an integrated regulatory framework through review of the financial services, competition, and companies laws.
-
-Earlier, he twice helped build a nation's telecommunications law from the ground up. In Jordan he was a principal architect of the country's licensing regime, postal regulatory framework, and dispute-resolution function. In the UAE he joined the new telecommunications regulator as one of its first executives, established its regulatory framework, drafted the GCC CERT Charter, and oversaw the first telecommunications licence in the country's history.
-
-In the same period he set an early national precedent in corporate governance. As a senior legal figure at a listed UAE company, he established one of the first precedents under the country's Corporate Governance Executive Order, helping shape how publicly listed companies in the UAE are governed to this day.
-
-Areas of expertise: national and international law; the authoring of legislation and regulatory frameworks; digital trade and digital-economy regulation; telecommunications and ICT regulation; data protection; intellectual property; sovereign and development finance; cross-border negotiation and treaty law (UNCITRAL, WTO, AIIB, GCC); space activities law; competition and foreign investment law; and corporate governance and the structuring of complex agreements between governments and global institutions.
-
-Mr Al Kilani works across two legal traditions and is professionally fluent in both Arabic and English, including legal translation in both directions. He is a published contributor to the Centre of Islamic and Middle Eastern Law at SOAS, University of London, and a frequent speaker and panellist at legal, regulatory, and business forums. He is bar certified and holds a Bachelor of Laws from the University of Jordan.
-
-What sets him apart is not how much he has done, but the level at which he does it. He builds the rules that markets and nations live by, and he is now helping to write them for the world.`,
-    },
-    {
-        name: "Megha Agarwal",
-        title: "Senior Counsel, Optimizely",
-        image: "/dubai-event/dubai-speakers/Megha Agarwal.png",
-        bio: `Megha Agarwal is an accomplished legal professional with over 18 years of experience in corporate law, specializing in complex commercial transactions, cross-border legal operations & transactions, corporate governance, and compliance. Megha has built legal teams from scratch and scaled them across the APAC, Middle East & Africa regions. She provides strategic legal counsel to senior management, managing legal and regulatory matters, including data protection, cybersecurity regulations, and cross-border transactions.`,
-    },
 ];
 
 
@@ -269,7 +224,7 @@ export default function DubaiSpeakersList() {
                 </motion.div>
 
                 {/* Speakers Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                     {speakers.map((speaker, idx) => (
                         <motion.div
                             key={idx}
@@ -277,59 +232,52 @@ export default function DubaiSpeakersList() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: idx * 0.06 }}
-                            className={`group h-full ${speaker.bio ? "cursor-pointer" : ""}`}
+                            className={`group ${speaker.bio ? "cursor-pointer" : ""}`}
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
-                            <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-1.5">
-                                {/* Portrait — fixed 4:5 ratio keeps every card identical */}
-                                <div className="relative mb-7 w-full max-w-[280px]">
+                            <div className="relative flex flex-col items-center text-center">
+                                {/* Rectangular portrait card — matches Bangalore style */}
+                                <div className="relative mb-6 w-full max-w-[280px]">
                                     {/* Outer thin formal frame */}
-                                    <div className="absolute -inset-3 border border-slate-200/60 group-hover:border-amber-400/40 transition-colors duration-500 rounded-xl" />
-                                    {/* Corner ticks — subtle atelier detail */}
-                                    <div className="absolute -inset-3 rounded-xl pointer-events-none">
-                                        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-tl-xl transition-colors duration-500" />
-                                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-br-xl transition-colors duration-500" />
-                                    </div>
+                                    <div className="absolute -inset-4 border border-slate-200/50 group-hover:border-amber-400/30 transition-all duration-500 rounded-lg" />
 
                                     {/* Portrait container */}
-                                    <div className="relative w-full aspect-[4/5] overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-4 ring-white">
+                                    <div className="relative w-full overflow-hidden bg-white rounded-sm shadow-xl shadow-slate-200/60 group-hover:shadow-2xl group-hover:shadow-amber-100/40 transition-all duration-500 ring-4 ring-white">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.name}
-                                                fill
-                                                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
-                                                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                                                width={400}
+                                                height={500}
+                                                className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-105"
                                             />
                                         ) : (
-                                            <div className="absolute inset-0 flex items-center justify-center text-slate-300">
+                                            <div className="w-full aspect-[4/5] flex items-center justify-center bg-slate-100 text-slate-300">
                                                 <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                 </svg>
                                             </div>
                                         )}
-                                        {/* Soft vignette for depth */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
-                                        {/* Gold sheen sweep on hover */}
-                                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-amber-100/20 to-transparent skew-x-12 pointer-events-none" />
+                                        {/* Hover gradient overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     </div>
 
                                     {/* Bottom amber accent line */}
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 group-hover:w-16 h-[3px] bg-gradient-to-r from-amber-400 to-amber-600 rounded-full shadow-sm transition-all duration-500" />
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-amber-500 rounded-full shadow-sm" />
                                 </div>
 
-                                {/* Text content — flex-1 so every card bottom-aligns */}
-                                <div className="pt-1 flex-1 flex flex-col items-center w-full max-w-[280px]">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-900 mb-2 leading-snug group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
+                                {/* Text content */}
+                                <div className="pt-2 flex flex-col items-center max-w-[280px]">
+                                    <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-900 mb-2 leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
                                         {speaker.name}
                                     </h3>
                                     {speaker.title && (
-                                        <p className="text-[11px] md:text-[12px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-[0.14em] leading-relaxed line-clamp-3">
+                                        <p className="text-[12px] md:text-[13px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-widest leading-relaxed">
                                             {speaker.title}
                                         </p>
                                     )}
                                     {speaker.bio && (
-                                        <div className="mt-auto pt-4 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                                        <div className="mt-4 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                                             <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
                                             <div className="w-4 h-px bg-amber-600" />
                                         </div>
