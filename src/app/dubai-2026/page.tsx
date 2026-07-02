@@ -829,14 +829,12 @@ export default function DubaiEventPage() {
                                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-600 whitespace-nowrap">Knowledge Partner</p>
                                 <div className="flex-1 h-[1px] bg-gradient-to-l from-amber-200 via-amber-400 to-amber-200" />
                             </div>
-                            <div className="bg-white rounded-xl border border-slate-100 shadow-sm px-10 py-5 hover:shadow-md hover:border-amber-200 transition-all duration-300">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/dubai-event/sponsors/BGK Law Associates.jpg"
-                                    alt="BGK Law Associates"
-                                    className="h-16 w-auto object-contain mix-blend-multiply"
-                                />
-                            </div>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/dubai-event/sponsors/BGK Law Associates.jpg"
+                                alt="BGK Law Associates"
+                                className="h-28 w-auto object-contain mix-blend-multiply hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
                     </div>
 
