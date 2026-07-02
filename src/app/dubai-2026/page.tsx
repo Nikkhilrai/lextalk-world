@@ -778,6 +778,27 @@ export default function DubaiEventPage() {
                                     </a>
                                 </div>
 
+                                {/* Gorodissky & Partners */}
+                                <div className="group relative w-28 h-20 md:w-56 md:h-36 shrink-0">
+                                    <div className="absolute inset-0 bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-10px_rgba(6,182,212,0.1)] group-hover:-translate-y-1" />
+
+                                    <a
+                                        href="https://www.gorodissky.com/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="relative h-full w-full p-2 flex items-center justify-center block"
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                                                alt="Gorodissky & Partners"
+                                                fill
+                                                className="object-contain rounded-xl"
+                                                sizes="(max-width: 768px) 112px, 208px"
+                                            />
+                                        </div>
+                                    </a>
+                                </div>
 
                             </div>
                         </div>
@@ -857,29 +878,6 @@ export default function DubaiEventPage() {
                         </div>
                     </div>
 
-                    {/* Partner */}
-                    <div className="relative mt-20">
-                        <div className="flex flex-col items-center relative z-10">
-                            <div className="mb-10 flex items-center gap-4">
-                                <div className="h-px w-12 bg-slate-200" />
-                                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400">Partner</p>
-                                <div className="h-px w-12 bg-slate-200" />
-                            </div>
-                            <a
-                                href="https://www.gorodissky.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:opacity-90 transition-opacity duration-300"
-                            >
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
-                                    alt="Gorodissky & Partners"
-                                    className="h-14 w-auto object-contain mix-blend-multiply"
-                                />
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </section >
 
