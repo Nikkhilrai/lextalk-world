@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { Globe, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
+import { Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Define the Advisor type
 interface Advisor {
@@ -91,7 +91,21 @@ export function DubaiAdvisoryBoard() {
     };
 
     if (isLoading) {
-        return <div className="py-24 text-center">Loading Advisory Board...</div>;
+        return (
+            <section className="py-16 md:py-24 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <div className="flex flex-col items-center gap-4 mb-14">
+                        <div className="h-3 w-40 bg-slate-100 rounded animate-pulse" />
+                        <div className="h-10 w-80 bg-slate-100 rounded animate-pulse" />
+                    </div>
+                    <div className="flex justify-center gap-6">
+                        {[0, 1, 2].map((i) => (
+                            <div key={i} className={`w-56 rounded-2xl bg-slate-100 animate-pulse ${i === 1 ? "h-80" : "h-72 mt-4"}`} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
     }
 
     if (boardMembers.length === 0) {
@@ -111,26 +125,18 @@ export function DubaiAdvisoryBoard() {
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-12 md:mb-16 space-y-4 md:space-y-6">
-                    <div className="flex justify-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full border border-slate-200">
-                            <Globe size={14} className="text-amber-500" />
-                            <span className="text-xs font-bold text-slate-600 uppercase tracking-[0.1em] md:tracking-[0.15em]">
-                                APAC and Middle East
-                            </span>
-                        </div>
-                    </div>
-
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 leading-tight">
-                        Meet The{" "}
-                        <span className="text-amber-500 italic">Advisory Board</span>
+                <div className="text-center mb-12 md:mb-16">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-amber-600 mb-3">
+                        APAC &amp; Middle East
+                    </p>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-slate-900 tracking-tight mb-4">
+                        Meet the <span className="text-amber-600 italic">Advisory Board</span>
                     </h2>
-
-                    <div className="flex justify-center">
-                        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent rounded-full" />
+                    <div className="mx-auto mb-4 flex flex-col items-center gap-[3px]">
+                        <div className="w-16 h-[1px] bg-slate-300" />
+                        <div className="w-10 h-[1px] bg-amber-500/70" />
                     </div>
-
-                    <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
                         Distinguished legal professionals from around the globe, guiding our mission to connect and empower the legal community.
                     </p>
                 </div>
@@ -140,19 +146,29 @@ export function DubaiAdvisoryBoard() {
                     {/* Navigation Arrows */}
                     <button
                         onClick={goToPrev}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all duration-300 text-slate-700 -translate-x-2 md:-translate-x-6"
+                        aria-label="Previous board member"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-slate-100 flex items-center justify-center hover:bg-amber-500 hover:border-amber-500 hover:text-white hover:scale-105 transition-all duration-300 text-slate-700 -translate-x-2 md:-translate-x-6 cursor-pointer"
                     >
                         <ChevronLeft size={20} />
                     </button>
                     <button
                         onClick={goToNext}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all duration-300 text-slate-700 translate-x-2 md:translate-x-6"
+                        aria-label="Next board member"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-slate-100 flex items-center justify-center hover:bg-amber-500 hover:border-amber-500 hover:text-white hover:scale-105 transition-all duration-300 text-slate-700 translate-x-2 md:translate-x-6 cursor-pointer"
                     >
                         <ChevronRight size={20} />
                     </button>
 
+                    {/* Edge fades */}
+                    <div className="absolute left-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-r from-white to-transparent z-30 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-l from-white to-transparent z-30 pointer-events-none" />
+
                     {/* Cards Container */}
-                    <div className="relative h-[420px] sm:h-[480px] md:h-[520px] flex items-center justify-center overflow-hidden">
+                    <div
+                        className="relative h-[420px] sm:h-[480px] md:h-[520px] flex items-center justify-center overflow-hidden"
+                        onMouseEnter={() => setIsAutoPlaying(false)}
+                        onMouseLeave={() => setIsAutoPlaying(true)}
+                    >
                         {boardMembers.map((member, idx) => {
                             const style = getCardStyle(idx);
 
@@ -185,10 +201,13 @@ export function DubaiAdvisoryBoard() {
 
                                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
 
-                                                {style.isCenter && (
+                                                {style.isCenter && member.linkedin && member.linkedin !== "#" && (
                                                     <div className="absolute bottom-2 right-2">
                                                         <a
                                                             href={member.linkedin}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            aria-label={`${member.name} on LinkedIn`}
                                                             className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-amber-500 hover:text-white transition-colors duration-300 text-slate-700"
                                                         >
                                                             <Linkedin size={14} />
