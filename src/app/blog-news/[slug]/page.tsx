@@ -39,6 +39,119 @@ function renderContent(content: string): string {
                 return block;
             })
             .join('\n');
+    } else {
+        // Sanitize malformed HTML from TipTap/Word/PDF paste:
+        // Fix headings that wrap block-level elements (entire body inside <h2>, etc.)
+        html = html.replace(
+            /<(h[1-6])>([\s\S]*?)<\/\1>/gi,
+            (match, tag, inner) => {
+                // If a heading contains <p>, <div>, or <br> tags, it's malformed —
+                // the body was accidentally wrapped in a heading tag
+                if (/<(p|div|br)\b/i.test(inner)) {
+                    return inner;
+                }
+                return match;
+            }
+        );
+
+        // Merge consecutive <p> tags that are fragments of the same paragraph (from PDF line breaks).
+        // A paragraph is considered a fragment if it doesn't end with sentence-ending punctuation
+        // and the next paragraph doesn't start with a capital letter after a period (i.e., it continues).
+        html = html.replace(
+            /(<p>)([\s\S]*?)(<\/p>)/gi,
+            (match, open, inner, close) => {
+                // Strip the inner content, replace <br> with space
+                let cleaned = inner.replace(/<br\s*\/?>/gi, ' ').trim();
+                return `${open}${cleaned}${close}`;
+            }
+        );
+
+        // Now merge consecutive <p> tags that form a single paragraph.
+        // Strategy: collect all <p>...</p> blocks, merge fragments, then rebuild.
+        const pBlocks: string[] = [];
+        const pRegex = /<p>([\s\S]*?)<\/p>/gi;
+        let pMatch;
+        let lastIndex = 0;
+        const nonPParts: { index: number; content: string }[] = [];
+
+        // Extract all p-blocks and non-p content
+        while ((pMatch = pRegex.exec(html)) !== null) {
+            if (pMatch.index > lastIndex) {
+                nonPParts.push({ index: pBlocks.length, content: html.slice(lastIndex, pMatch.index) });
+            }
+            pBlocks.push(pMatch[1].trim());
+            lastIndex = pRegex.lastIndex;
+        }
+        if (lastIndex < html.length) {
+            nonPParts.push({ index: pBlocks.length, content: html.slice(lastIndex) });
+        }
+
+        if (pBlocks.length > 0) {
+            // Merge consecutive fragment paragraphs
+            const merged: string[] = [];
+            let current = '';
+
+            for (let i = 0; i < pBlocks.length; i++) {
+                const block = pBlocks[i];
+
+                // Skip standalone page numbers (e.g., "2", "3", "4", etc.)
+                if (/^\d{1,2}$/.test(block)) continue;
+
+                // Skip empty blocks
+                if (!block || block === '&nbsp;') continue;
+
+                if (!current) {
+                    current = block;
+                } else {
+                    // Check if current block ends a sentence (period, ?, !, or ends with a closing tag after punctuation)
+                    const endsWithPunctuation = /[.!?;:]\s*(<\/[^>]+>\s*)*$/.test(current);
+                    // Check if next block starts a new thought (starts with capital, or starts with a tag followed by capital)
+                    const startsNewParagraph = /^(<[^>]+>\s*)*[A-Z]/.test(block);
+                    // Check for explicit paragraph breaks (double <br>)
+                    const hasBreak = /<br\s*\/?>\s*<br\s*\/?>/i.test(block);
+
+                    if (endsWithPunctuation && startsNewParagraph) {
+                        // End of one paragraph, start of another
+                        merged.push(current);
+                        current = block;
+                    } else if (hasBreak) {
+                        // Explicit break — split into separate paragraphs
+                        merged.push(current);
+                        current = block.replace(/<br\s*\/?>\s*<br\s*\/?>/gi, '').trim();
+                    } else {
+                        // Continue the same paragraph — join with a space
+                        current = current + ' ' + block;
+                    }
+                }
+            }
+            if (current) merged.push(current);
+
+            // Rebuild HTML
+            html = merged.map(p => `<p>${p}</p>`).join('\n');
+
+            // Re-insert non-p content
+            for (const part of nonPParts) {
+                const trimmed = part.content.trim();
+                if (trimmed && !trimmed.match(/^\s*$/)) {
+                    html += trimmed;
+                }
+            }
+        }
+
+        // Split paragraphs at <br><br> boundaries (section breaks from Word/PDF)
+        html = html.replace(
+            /<p>([\s\S]*?)<\/p>/gi,
+            (match, inner) => {
+                if (/<br\s*\/?>\s*<br\s*\/?>/i.test(inner)) {
+                    return inner
+                        .split(/<br\s*\/?>\s*<br\s*\/?>/i)
+                        .filter((s: string) => s.trim())
+                        .map((s: string) => `<p>${s.trim()}</p>`)
+                        .join('\n');
+                }
+                return match;
+            }
+        );
     }
 
     return html
