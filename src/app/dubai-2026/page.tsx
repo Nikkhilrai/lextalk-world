@@ -689,16 +689,16 @@ export default function DubaiEventPage() {
                     <div className="absolute top-14 left-8 w-16 h-16 border-t border-l border-amber-500/15 rounded-tl-3xl hidden lg:block" />
                     <div className="absolute bottom-14 right-8 w-16 h-16 border-b border-r border-amber-500/15 rounded-br-3xl hidden lg:block" />
 
-                    {/* Dubai skyline — faint, anchored at the base */}
-                    <div className="absolute inset-x-0 bottom-0 h-56 md:h-80 opacity-[0.08]">
+                    {/* Dubai skyline — visible silhouette anchored at the base */}
+                    <div className="absolute inset-x-0 bottom-0 h-64 md:h-96">
                         <Image
                             src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1600&auto=format&fit=crop"
                             alt=""
                             fill
                             sizes="100vw"
-                            className="object-cover object-bottom grayscale"
+                            className="object-cover object-bottom grayscale opacity-25"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] via-[#FBFAF7]/40 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] to-transparent h-1/2" />
                     </div>
                 </div>
 
