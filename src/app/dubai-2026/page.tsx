@@ -460,14 +460,14 @@ export default function DubaiEventPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-40px" }}
                                 transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
-                                className="relative w-20 h-20 md:w-24 md:h-24 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-105 transition-all duration-400"
+                                className="relative w-24 h-24 md:w-28 md:h-28 hover:scale-105 transition-transform duration-400"
                             >
                                 <Image
                                     src={item.logo}
                                     alt={item.name}
                                     fill
                                     className="object-contain mix-blend-multiply"
-                                    sizes="96px"
+                                    sizes="112px"
                                 />
                             </motion.div>
                         ))}
