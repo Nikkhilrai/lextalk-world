@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
-const speakers = [
+export const speakers = [
     {
         name: "Monica Romelina Sijabat",
         title: "Professor at the Faculty of Economics & Business, University of Indonesia",
