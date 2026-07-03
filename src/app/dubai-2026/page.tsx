@@ -669,37 +669,25 @@ export default function DubaiEventPage() {
 
 
             {/* ===================== SPEAKERS ===================== */}
-            <section className="relative py-20 md:py-28 bg-[#FBFAF7] border-t border-slate-100 overflow-hidden">
-                {/* Background design elements */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {/* Fine vertical pinstripe — legal stationery motif */}
-                    <div
-                        className="absolute inset-0 opacity-[0.035]"
-                        style={{
-                            backgroundImage: "repeating-linear-gradient(90deg, #1e293b 0px, #1e293b 1px, transparent 1px, transparent 80px)",
-                        }}
+            <section className="relative py-20 md:py-28 overflow-hidden">
+                {/* Dubai background image — full section */}
+                <div className="absolute inset-0">
+                    <Image
+                        src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1920&auto=format&fit=crop"
+                        alt="Dubai skyline"
+                        fill
+                        sizes="100vw"
+                        className="object-cover"
                     />
+                    {/* Dark overlays for legibility */}
+                    <div className="absolute inset-0 bg-[#0a1020]/92" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0a1020] via-[#0a1020]/80 to-[#0a1020]" />
                     {/* Breathing amber glow */}
                     <motion.div
-                        animate={{ opacity: [0.4, 0.75, 0.4], scale: [1, 1.08, 1] }}
+                        animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.08, 1] }}
                         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[320px] bg-amber-100/50 rounded-full blur-[120px]"
+                        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[320px] bg-amber-500/12 rounded-full blur-[130px]"
                     />
-                    {/* Corner flourishes */}
-                    <div className="absolute top-14 left-8 w-16 h-16 border-t border-l border-amber-500/15 rounded-tl-3xl hidden lg:block" />
-                    <div className="absolute bottom-14 right-8 w-16 h-16 border-b border-r border-amber-500/15 rounded-br-3xl hidden lg:block" />
-
-                    {/* Dubai skyline — visible silhouette anchored at the base */}
-                    <div className="absolute inset-x-0 bottom-0 h-64 md:h-96">
-                        <Image
-                            src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1600&auto=format&fit=crop"
-                            alt=""
-                            fill
-                            sizes="100vw"
-                            className="object-cover object-bottom grayscale opacity-25"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] to-transparent h-1/2" />
-                    </div>
                 </div>
 
                 <div className="relative z-10 container mx-auto px-4 max-w-6xl">
@@ -712,8 +700,8 @@ export default function DubaiEventPage() {
                         transition={{ duration: 0.7, ease: "easeOut" }}
                         className="text-center mb-14"
                     >
-                        <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-amber-600 mb-3">Conference Faculty</p>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-slate-900 tracking-tight mb-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-amber-400 mb-3">Conference Faculty</p>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight mb-4">
                             Meet the Speakers
                         </h2>
                         <div className="mx-auto mb-4 flex flex-col items-center gap-[3px]">
@@ -722,17 +710,17 @@ export default function DubaiEventPage() {
                                 whileInView={{ scaleX: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
-                                className="w-16 h-[1px] origin-center bg-slate-300"
+                                className="w-16 h-[1px] origin-center bg-white/25"
                             />
                             <motion.div
                                 initial={{ scaleX: 0 }}
                                 whileInView={{ scaleX: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-                                className="w-10 h-[1px] origin-center bg-amber-500/70"
+                                className="w-10 h-[1px] origin-center bg-amber-500/80"
                             />
                         </div>
-                        <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto">
+                        <p className="text-slate-300 text-sm md:text-base max-w-xl mx-auto">
                             General counsel, managing partners, and industry leaders from across the Middle East and beyond.
                         </p>
                     </motion.div>
@@ -750,7 +738,7 @@ export default function DubaiEventPage() {
                                 <Link href="/dubai-2026/speakers" className="group block text-center">
                                     {/* Portrait */}
                                     <div className="relative mb-5 transition-transform duration-500 ease-out group-hover:-translate-y-1">
-                                        <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg bg-slate-100 shadow-[0_14px_30px_-14px_rgba(15,23,42,0.3)] ring-4 ring-white transition-shadow duration-500 group-hover:shadow-[0_24px_48px_-16px_rgba(180,120,20,0.3)]">
+                                        <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg bg-slate-800 shadow-[0_18px_36px_-14px_rgba(0,0,0,0.5)] ring-1 ring-white/10 transition-shadow duration-500 group-hover:ring-amber-400/40 group-hover:shadow-[0_28px_52px_-16px_rgba(180,120,20,0.4)]">
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.name}
@@ -766,7 +754,7 @@ export default function DubaiEventPage() {
                                     </div>
 
                                     {/* Name & title */}
-                                    <h3 className="font-serif text-base md:text-lg font-bold text-slate-900 leading-snug mb-1.5 group-hover:text-amber-700 transition-colors duration-300">
+                                    <h3 className="font-serif text-base md:text-lg font-bold text-white leading-snug mb-1.5 group-hover:text-amber-400 transition-colors duration-300">
                                         {speaker.name}
                                     </h3>
                                     <p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400 leading-relaxed line-clamp-2 px-1">
@@ -787,16 +775,16 @@ export default function DubaiEventPage() {
                     >
                         <Link
                             href="/dubai-2026/speakers"
-                            className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 border-2 border-slate-900 text-slate-900 font-semibold text-sm rounded-lg hover:bg-slate-900 hover:text-white transition-colors duration-300 w-full sm:w-auto"
+                            className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 border-2 border-white/30 text-white font-semibold text-sm rounded-lg hover:bg-white hover:text-slate-900 transition-colors duration-300 w-full sm:w-auto"
                         >
                             View All 70+ Speakers
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                         </Link>
                         <button
                             onClick={() => setIsSpeakerApplyOpen(true)}
-                            className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-slate-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg transition-colors duration-300 cursor-pointer w-full sm:w-auto"
+                            className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold text-sm rounded-lg transition-colors duration-300 cursor-pointer w-full sm:w-auto"
                         >
-                            <Mic className="w-4 h-4 text-amber-400 group-hover:text-white transition-colors" />
+                            <Mic className="w-4 h-4 text-slate-900" />
                             Apply to Speak
                         </button>
                     </motion.div>
