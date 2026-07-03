@@ -678,16 +678,11 @@ export default function DubaiEventPage() {
                         fill
                         sizes="100vw"
                         className="object-cover"
+                        priority={false}
                     />
-                    {/* Dark overlays for legibility */}
-                    <div className="absolute inset-0 bg-[#0a1020]/92" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0a1020] via-[#0a1020]/80 to-[#0a1020]" />
-                    {/* Breathing amber glow */}
-                    <motion.div
-                        animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.08, 1] }}
-                        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[320px] bg-amber-500/12 rounded-full blur-[130px]"
-                    />
+                    {/* Legibility scrim — image stays visible, edges blend with neighbours */}
+                    <div className="absolute inset-0 bg-[#0a1020]/55" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0a1020]/85 via-[#0a1020]/20 to-[#0a1020]/85" />
                 </div>
 
                 <div className="relative z-10 container mx-auto px-4 max-w-6xl">
