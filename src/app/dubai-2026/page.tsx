@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { EventNavbar } from "@/components/EventNavbar";
+import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
@@ -303,7 +303,7 @@ export default function DubaiEventPage() {
 
     return (
         <main className="min-h-screen bg-white">
-            <EventNavbar />
+            <Navbar />
             <FloatingAgendaButton eventSlug="dubai-2026" />
             <AgendaModal
                 isOpen={isAgendaModalOpen}
