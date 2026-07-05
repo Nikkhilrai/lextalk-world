@@ -15,36 +15,71 @@ export const speakers = [
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
         image: "/dubai-event/dubai-speakers/Dr Lalit-Bhasin.jpeg",
+        bio: `Dr. Lalit Bhasin is a legendary figure in the Indian legal landscape, bringing over 60 years of veteran experience to the field. He is a premier leader in institutional law, corporate legal policy, and international arbitration, widely recognised for his profound contributions to the Rule of Law.
+
+He currently serves as President of the Society of Indian Law Firms (SILF), Chairman of the Chartered Institute of Arbitrators (CIArb) India Branch, and Chairman of the Confederation of Indian Industry (CII) Task Force on Legal Services. He is also an Honorary Life Member of the International Bar Association — the only Indian ever to receive this honour. He is the Immediate Past President of the Bar Association of India, and his 60+ years of legal practice have been formally recognised by his alma mater, Hindu College.
+
+He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goenka University, Gurgaon, and an LL.D. Honoris Causa (2013) from Amity University. His many state and institutional honours include the Lifetime Achievement Award from ASSOCHAM (2023), the Outstanding Arbitration Expert Award from APCAM (2023), the "Glorious 61 Years in the Profession" Award from Legal Era (2023), a Lifetime Achievement Award from the UK India Legal Partnership presented at the House of Lords, London (2022), the National Law Day Award bestowed by the President of India (2007), and a Plaque of Honour bestowed by the Prime Minister of India (2002) for exceptional service to the Rule of Law.`,
     },
     {
         name: "Sameet Gambhir",
-        title: "Sr. Vice President & Global head - Legal, Uflex",
+        title: "Associate Partner, CS & Compliance, KPMG Global Services",
         image: "/dubai-event/dubai-speakers/Sameet Gambhir.avif",
+        bio: `A highly accomplished and forward-thinking Senior Corporate Legal Professional and Fellow Company Secretary (FCS, LLB) with over 30 years of distinguished experience steering corporate governance, regulatory compliance, and legal strategy for top-tier organisations. He currently serves as Associate Partner, CS & Compliance at KPMG Global Services, with a proven track record of safeguarding corporate reputation, mitigating multi-jurisdictional risks, and leading high-performing legal teams. An alumnus of the IIM-Bangalore Leadership Effectiveness Programme, he is recognised nationally and globally as an industry thought leader and champion of robust corporate governance and ESG frameworks.
+
+His expertise spans corporate governance and board management, SEBI listing and insider trading regulations, RBI and FEMA matters, industrial and labour laws, risk management, due diligence, corporate restructuring, high-stakes litigation and investigations, contract management, intellectual property rights, brand protection, and data privacy. He led the legal and compliance team at DCM Shriram Ltd to win "Best Compliance Team of the Year" for two consecutive years (Kamikaze 2019; LegalEra 2020), and has served as former Chair of the Corporate Affairs Committee of PHDCCI, a member of the CII National Committee on Regulatory Affairs, and a member of the Board of Study of GD Goenka Law School.
+
+He has been featured in Forbes India's Top In-house Counsel, Fortune India's Top GC, and The Legal500's GC Powerlist. He was conferred the Global LexFalcon Award (Governance & Compliance) in Dubai by LexTalk World (2022), named Compliance Lawyer of the Year, Finest Legal Counsel, and Distinguished Legal Mind by LegalEra, and recognised as one of the Most Influential Corporate Counsel and Company Secretary by ACoS (2019).`,
     },
     {
         name: "Bhavin Mehta",
-        title: "Vice President and Head of Compliance MEA, Mastercard, UAE",
+        title: "Vice President, Compliance & Enterprise Ethics, Mastercard, UAE",
         image: "/dubai-event/dubai-speakers/Bhavin-Mehta.jpeg",
+        bio: `Vice President, Compliance and Enterprise Ethics & Anti-Corruption Leader at Mastercard in the United Arab Emirates. Bhavin is a seasoned corporate compliance, governance, and risk executive with over 19 years of deep-domain experience spanning the Middle East, Africa, and international markets.
+
+A transformational leader and trusted advisor to senior leadership and the Board, he has a proven track record of managing regional and global teams to design, scale, and seamlessly execute robust compliance programmes, strategies, and frameworks. He brings high adaptability across diverse sectors, including financial services, payments, government contracting, construction, energy, and manufacturing.`,
     },
     {
-        name: "Sanjay Jain",
-        title: "Founder & Promoter | Advocate & business Consultant",
+        name: "Sunjjoy Jaiin",
+        title: "Founder & Managing Partner, Lex Corp",
         image: "/dubai-event/dubai-speakers/Sanjay Jain.avif",
+        bio: `Sunjjoy Jaiin is a seasoned legal strategist and the Founder and Managing Partner of Lex Corp, a premier full-service law firm based in New Delhi. With over 14 years of extensive experience, he specialises in commercial litigation, domestic and international arbitration, insolvency, and corporate advisory. Known for combining rigorous legal excellence with deep commercial awareness, he acts as a trusted advisor delivering practical, solution-oriented counsel aligned with his clients' long-term business objectives.
+
+His core expertise spans dispute resolution (commercial litigation, domestic and international arbitration), corporate and finance (insolvency and bankruptcy before the NCLT/NCLAT, banking and financial disputes, corporate advisory), and specialised law (taxation, intellectual property, and regulatory compliance). He has represented high-profile clients and institutional bodies before the Supreme Court of India, various High Courts, the NCLT and NCLAT, Debt Recovery Tribunals, and commercial and arbitral tribunals.
+
+He serves as Senior Panel Counsel for the State of Uttar Pradesh before the Supreme Court of India, and has been appointed to panels including the Delhi Development Authority, the South Delhi Municipal Corporation, Punjab National Bank, and Kotak Mahindra Bank. His client portfolio spans leading domestic and international corporations, educational institutions, and trusts, including Zee Entertainment Enterprise Ltd, V2 Retail Ltd, Swastik Pipe Ltd, the University of the West of England (UK), and Cordova Publications.
+
+In his words: "Effective legal counsel goes beyond courtroom advocacy — it requires strategic thinking, exceptional integrity, and actionable advice that drives informed decision-making." Under his leadership, Lex Corp bridges the gap between traditional legal values and modern, fast-paced business realities.`,
     },
     {
         name: "Kapil Singhal",
         title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
         image: "/dubai-event/dubai-speakers/Kapil Singhal.jpeg",
+        bio: `A visionary senior executive, serial entrepreneur, and investor with extensive global experience driving business growth across top-tier IT product and services companies. Kapil has a proven track record of spearheading organisational transformations, leading multi-million-dollar global deals, and delivering complex, large-scale enterprise solutions, seamlessly bridging high-level corporate strategy with robust product and service development.
+
+As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
+
+His expertise covers global offering development, business development, transition and transformation, pre-sales and solution architecture, mid-to-large deal closure, and global service delivery, with deep domain knowledge in LegalTech, cloud computing, orchestration and automation, VDI, unified communications, smart city frameworks, and security and surveillance. He is currently architecting customised security and surveillance solutions tailored for the Indian environment in partnership with global Tier-1 component providers within smart city frameworks.`,
     },
     {
         name: "Raghvendra Verma",
-        title: "Chairman and Chapter Head Dubai, ICSI Middle East",
+        title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
         image: "/dubai-event/dubai-speakers/Raghvendra Verma.jpeg",
+        bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
+
+He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
+
+He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
     },
     {
         name: "Aniket Gautam",
-        title: "Founding and Managing Partner at ASG & PARTNERS",
+        title: "Founding Partner, ASG & Partners",
         image: "/dubai-event/dubai-speakers/aniket gautam.jpeg",
+        bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
+
+His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
+
+In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
     },
     {
         name: "Mahmoud Shafik Youssef",
@@ -57,8 +92,13 @@ Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global leg
 
     {
         name: "Chehade Kahi",
-        title: "General Counsel Legal, Emirates Petroleum",
+        title: "General Counsel & Board Secretary, Emirates General Petroleum Corporation (Emarat)",
         image: "/dubai-event/dubai-speakers/Chehade Kahi.jpeg",
+        bio: `An accomplished legal consultant, corporate executive, and advocate with over 20 years of comprehensive experience managing high-stakes legal operations across the GCC, Europe, and the Middle East. He specialises in the oil and gas sector, corporate governance, cross-border commercial transactions, and multi-jurisdictional litigation strategy, with a proven track record of steering complex state-backed joint ventures, safeguarding critical infrastructure projects, and advising boards of directors.
+
+As General Counsel and Board Secretary of Emirates General Petroleum Corporation (Emarat) in Dubai, he serves as chief legal officer and corporate secretary for one of the UAE's primary government-owned petroleum entities. He advises the Board and executive leadership on commercial strategy, regulatory compliance, corporate governance, and joint-venture formations with global oil players; leads the in-house legal department overseeing commercial contract negotiations and major procurement projects such as securing fuelling facilities at Dubai Airport and pipeline networks; and defines the corporation's litigation and dispute-resolution strategies.
+
+He successfully facilitated major public-private partnerships, including the fuel-station naming-rights partnership with Al Maryah Community Bank, and is a regular speaker and panelist at leading international legal forums, including LexTalk World and the ICSI Middle East Conference, on corporate governance, AI in legal leadership, and emerging capital markets. He led the legal function to repeated recognition in The Legal 500 GC Powerlist: Middle East, and is a licensed legal consultant and advocate with multi-jurisdictional expertise across civil and commercial law in Europe and the GCC.`,
     },
     {
         name: "Ahmed Nagy",
@@ -68,8 +108,13 @@ Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global leg
     },
     {
         name: "Vijay Ojha",
-        title: "Group Company Secretary, Sharaf Group",
+        title: "Group Company Secretary & Corporate Legal Leader, Sharaf Group",
         image: "/dubai-event/dubai-speakers/Vijay Ojha.jpeg",
+        bio: `A senior corporate legal and governance professional with over two decades of experience advising boards, promoters, and executive leadership within large, diversified business groups. As Group Company Secretary and Corporate Legal Leader — and a board and governance advisor on ESG, sustainability, risk, compliance, and cross-border structuring — he currently serves with the Sharaf Group in Dubai, specialising in transforming legal and regulatory complexity into clear, decision-oriented guidance that enables growth while protecting long-term enterprise value.
+
+His core expertise spans strategic board governance and board effectiveness, cross-border structuring and M&A across multiple jurisdictions, proactive risk and compliance leadership, and the integration of ESG and sustainability practices within large, complex business groups. A founding member of the ICSI Middle East (DIFC) NPIO in Dubai, he acts as a trusted advisor to boards and senior management, translating complex legal landscapes into execution-ready, commercially pragmatic strategies with deep expertise in regulatory alignment across international markets from a Dubai base.
+
+In his words: "Effective legal leadership is not about saying no — it is about enabling confident, informed decisions while protecting long-term enterprise value."`,
     },
     {
         name: "Georges Abi Saab",
@@ -91,26 +136,49 @@ George's educational background includes a bachelor’s degree in law from the U
         name: "Sergey Konov",
         title: "Regional Compliance & Integrity Officer IMETA, Boehringer Ingelheim",
         image: "/dubai-event/dubai-speakers/Sergey Konov.jpeg",
+        bio: `An accomplished corporate governance and ethics executive with over 20 years of international experience driving organisational trust and integrity. As a Regional Compliance & Integrity Officer based in Dubai, Sergey has a proven track record of transforming compliance from a regulatory check-the-box exercise into a core cultural value, building robust compliance programmes from the ground up, managing complex enterprise risks, and leading cross-functional teams across highly regulated sectors.
+
+His experience spans Russia, Central and Eastern Europe, Turkey, and the Middle East and Africa, with deep sector knowledge in financial services, energy, oil and gas, and healthcare. His expertise covers governance, risk management and compliance (GRC), policies and procedures development from inception to execution, enterprise and third-party risk management, and business ethics and integrity leadership, specialising in cultivating ethical workplace environments where integrity drives strategic decision-making.`,
     },
     {
         name: "Dr. Yasser Aboismail",
-        title: "Director – Head of Legal, Contracts and Compliance, Thales Group",
+        title: "General Counsel, Head of Legal & Compliance & ESG Global Leader",
         image: "/dubai-event/dubai-speakers/Yasser Aboismail.jpeg",
+        bio: `A seasoned executive and trusted legal advisor with an elite track record of driving corporate growth, mitigating enterprise risk, and cultivating high-performance compliance cultures. A General Counsel, Head of Legal & Compliance, and ESG global leader, he is highly adept at steering complex commercial transactions, M&A, joint ventures, and foreign direct investments while ensuring strict regulatory alignment. A powerful negotiator and consensus-builder, he forges strategic alliances with boards, governmental authorities, and public-sector stakeholders to secure long-term organisational success.
+
+He was selected by Legal500 as one of the top 100 most influential General Counsels in the Middle East and named General Counsel of the Year by Legal Era and Law.com. He orchestrates robust frameworks for corporate governance, cross-border M&A, and commercial strategy, and is a subject-matter expert in cross-stakeholder alignment, contract negotiation, and proactive risk mitigation. He has served on multiple boards and committees and is a respected legal-community influencer and acclaimed speaker at major industry conferences.
+
+His core competencies span corporate and commercial law, mergers and acquisitions, global compliance and ESG leadership, antitrust and competition, governmental and public-sector relations, risk mitigation and crisis management, and team leadership and culture engineering.`,
     },
     {
         name: "Julia Kolomenko",
         title: "Regional Head of Legal, EEMEA, SGS",
         image: "/dubai-event/dubai-speakers/Julia Kolomenko.jpeg",
+        bio: `A results-driven global strategy-to-execution and operating-model leader with over 20 years of cross-functional experience bridging business operations, legal, compliance, HR, and cross-regional governance. As Regional Head of Legal, EEMEA, and an enterprise and operations transformation leader on a COO track, Julia is an expert at diagnosing system-level constraints and translating high-level corporate strategy into scalable, automated, and risk-controlled operational realities. In her words: "You cannot manage chaos; you can only manage systems — I build the system."
+
+She designed, scaled, and deployed execution-ready operating models and proprietary digital workflows across 53 countries and 84 legal entities, grounding disparate international operations into cohesive business workflows backed by embedded controls and clear operating rhythms. She architected and scaled an independent billing contractual department from scratch across Russia, the Caspian sub-region, and the Middle East — decoupling the process from business units and finance to eliminate conflicts of interest — and centralised fragmented manual invoicing into a streamlined team with zero headcount increase, accelerating invoice issuance and securing direct cash-flow acceleration through full AR collections ownership.
+
+She was also the end-to-end architect of an in-house, ERP-style HR operations platform for approximately 10,000 employees, leading the full lifecycle from use-case definition to rollout and adoption while introducing strict cost governance and leadership dashboards. Her competencies span strategy execution, operating-model design, enterprise transformation, cross-regional governance, workflow automation, process architecture, cost-to-serve optimisation, revenue assurance, and contract-to-cash governance.`,
     },
     {
         name: "Karishma Sookrajh",
-        title: "Legal Counsel, DHL Middle East, Africa & Turkey",
+        title: "Senior Legal Counsel – Middle East, Africa & Turkey, DHL",
         image: "/dubai-event/dubai-speakers/Karishma Sookrajh.jpeg",
+        bio: `A highly accomplished and strategic corporate counsel with extensive expertise navigating complex legal landscapes across the Middle East, Africa, and Turkey (MEAT). Karishma currently serves as Senior Legal Counsel for DHL, a global leader in logistics, with a proven track record in cross-border transactions, commercial contracts, regulatory compliance, risk mitigation, and corporate governance. She is recognised for delivering commercially viable legal solutions that protect corporate assets while driving business growth in fast-paced, emerging markets.
+
+At DHL, she oversees comprehensive legal operations, corporate governance, and regulatory strategy across the dynamic MEAT region; drafts and negotiates high-value corporate accounts, master service agreements, and complex supply-chain logistics frameworks; and advises on regional joint ventures, compliance structures, sanctions, and regulatory change. Her core competencies span international commercial law, corporate governance and compliance, dispute resolution and litigation, and strategic risk advisory, acting as a trusted business partner to executive leadership.
+
+She is frequently invited to share legal insights at prominent industry gatherings such as the World Lawyers Forum, and is known for multicultural leadership across multi-jurisdictional landscapes, strong commercial acumen, and an exceptional analytical ability to de-escalate high-stakes corporate disputes.`,
     },
     {
         name: "Dr. Ahmed El Shakankiry",
-        title: "Head of Legal and Compliance, Samsung Gulf Electronics",
+        title: "Head of Legal & Compliance – GCC, Samsung Gulf Electronics",
         image: "/dubai-event/dubai-speakers/Dr. Ahmed El Shakankiry.jpeg",
+        bio: `An accomplished in-house legal counsel with over 18 years of international experience in legal consultancy and compliance management across diverse industries in the Middle East. Ahmed's career spans both top-tier law firms and multinational corporate bodies, and he is adept at formulating robust strategic processes and delivering sustainable legal frameworks that protect corporate interests while driving business productivity and profitability.
+
+As Head of Legal and Compliance – GCC at Samsung Gulf Electronics in Dubai, he leads the legal and compliance functions for the GCC region, ensuring operational alignment with regional laws and corporate policies, and serves as a strategic advisor to the executive team, balancing risk management with business profitability. His earlier roles as senior legal counsel and legal consultant across law firms and corporate bodies in the Middle East involved managing comprehensive legal portfolios, drafting complex commercial agreements, and resolving high-stakes corporate disputes.
+
+His core expertise spans strategic legal advice aligned with macro-business objectives, corporate compliance and governance within highly regulated GCC markets, cross-border legal consultancy, risk management and mitigation, and partnering with executive leadership to champion a compliance culture that supports commercial initiatives.`,
     },
     {
         name: "Mehrdad Molaei",
@@ -124,23 +192,41 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
     },
     {
         name: "Beyana Maluegha",
-        title: "Senior Counsel, BOGAC2",
+        title: "Senior Counsel – Energy (OFSE), Commercial Contracts & Subcontracting",
         image: "/dubai-event/dubai-speakers/Beyana Maluegha.jpeg",
+        bio: `A results-driven senior legal counsel with over 10 years of experience driving complex energy and industrial projects across the MENA and Asia-Pacific regions. Beyana specialises in the Oilfield Services and Equipment (OFSE) sector, managing high-stakes commercial contracts, intricate subcontracting structures, and cross-border risk management. She is a pragmatic, solutions-oriented partner to executive leadership, adept at balancing rigorous legal protection with commercial execution to support large-scale international operations.
+
+She has led and secured multi-jurisdictional energy contracts with major national oil companies — including Saudi Aramco and ADNOC — for integrated projects exceeding USD 1.5 billion, and spearheaded the drafting, negotiation, and risk allocation of MSAs, vendor agreements, and complex subcontracting frameworks. Partnering with executive stakeholders, she designed and deployed automated contract-approval workflows using Salesforce, significantly improving governance and operational efficiency.
+
+Her core expertise spans commercial contracts, subcontracting and supply chain, cross-border risk mitigation across MENA and APAC, and cross-functional advisory with supply chain, finance, operations, and senior leadership. Her top skills include commercial contracts and negotiation, risk management and corporate governance, subcontracting and vendor management, the oilfield services and oil and gas sector, and process automation.`,
     },
     {
         name: "Hadi N. El Kadi",
-        title: " Group Chief Legal Officer, Al Habtoor Group",
+        title: "Group Chief Legal Officer & Board Secretary, Al Habtoor Group",
         image: "/dubai-event/dubai-speakers/Hadi N. El Kadi.jpeg",
+        bio: `A distinguished Group Chief Legal Officer and board executive with over 25 years of experience advising chairmen, boards of directors, and C-suite executives across the GCC and MENA regions. Hadi currently leads the legal, governance, and risk strategies for Al Habtoor Group, a premier family-owned conglomerate, with expertise navigating highly diversified sectors including real estate, hospitality, automotive, insurance, education, investment, construction, and financial services. A recognised thought leader, academic, and author, he combines deep legal acumen with strategic business leadership to drive corporate transformation, mitigate enterprise risk, and oversee high-value global transactions.
+
+His core areas of expertise span corporate governance and board advisory — serving as a board member, executive committee member, and board secretary — strategic transactions and M&A, enterprise risk and compliance, dispute resolution and international arbitration, and executive management and negotiation. His recognitions include the Legal 500 GC Powerlist Middle East (2025) and the Middle East Finest General Counsel Award (2024 and 2025).
+
+He is a Senior Lecturer at University Paris II Panthéon-Assas (Dubai campus), founder of the Legal Psychology thought-leadership series, and a regular contributor to the International In-House Counsel Journal, with an upcoming book examining the psychological dynamics of leadership, governance, and organisational behaviour. He is currently a Doctorate in Management candidate at UCAM University, Spain, and holds an MBA, an LLM, and an LLB.`,
     },
     {
         name: "Denis Sergienko",
-        title: "Global Counsel, HP",
+        title: "Global Counsel – Retail & Partner Enablement, HP",
         image: "/dubai-event/dubai-speakers/Denis Sergienko.jpeg",
+        bio: `A highly accomplished and business-focused legal counsel with extensive experience steering sustainable corporate growth across diverse international markets, including the Balkans, Central Asia, and the CIS region. As Global Counsel for Retail & Partner Enablement, Denis is a trusted strategic partner adept at balancing robust risk mitigation with pragmatic, commercially oriented solutions in fast-paced, high-stakes environments, combining deep cross-border legal expertise with a forward-thinking innovation and AI mindset to streamline legal operations and enable commercial success.
+
+His core competencies span international legal counsel across the Balkans, Central Asia, and the CIS regions; retail and partner enablement through structuring, negotiating, and executing commercial agreements, joint ventures, and distribution networks; proactive risk management and compliance tailored to complex, fast-moving markets; strategic business partnership with executive stakeholders; and legal innovation through an AI-driven, tech-forward approach to automating processes and maximising operational efficiency.`,
     },
     {
         name: "Chinar Jethwani",
-        title: "Company Secretary (Global Compliance & Legal Affiars ), Varun Beverages Limited",
+        title: "Company Secretary – Global Compliance & Legal Affairs, Varun Beverages Ltd",
         image: "/dubai-event/dubai-speakers/Chinar Jethwani.jpeg",
+        bio: `Chinar Jethwani is a dual-qualified corporate lawyer and company secretary with over 13 years of cross-border experience managing corporate compliance, secretarial practices, and complex legal affairs across India, Singapore, and the UAE. She currently works at Varun Beverages Ltd as Company Secretary (Global Compliance & Legal Affairs). Throughout her career she has served as a trusted legal manager, company secretary, and compliance officer for multinational entities, navigating highly regulated environments across FMCG, non-banking financial companies, and the chemical and pharmaceutical sectors.
+
+Certified by the Indian Institute of Corporate Affairs (IICA), she has built a robust boardroom legacy over the past decade, serving as a Woman Independent Director on the boards of several India-based enterprises across the textiles, infrastructure, and chemical landscapes. Her strategic insight has also contributed to wider economic platforms, including past service on the Legal Advisory Committee for the Gujarat Chamber of Commerce & Industry.
+
+A dedicated speaker, educator, and creative entrepreneur, Chinar publishes public-interest content under the channel @LegallyYoursDubai, raising awareness of UAE business laws, regulatory compliance, and employee rights. She founded Chinar's Art Valley, an artistic venture designing team-building workshops, youth sessions, and therapeutic art programmes in partnership with NGOs. Today she offers specialised strategic advisory across corporate and business law, international trademark and IP protection, and compliance audits, balancing technical legal consulting with brand and corporate content strategy.`,
     },
     {
         name: "Adeel Mirza",
@@ -151,21 +237,39 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
         name: "Saloni Tuteja",
         title: "Head of Legal & Compliance, Servier Middle East",
         image: "/dubai-event/dubai-speakers/Saloni Tuteja.png",
+        bio: `A results-driven legal and compliance executive with extensive expertise in the healthcare and pharmaceutical sector. Saloni has a proven track record navigating complex regulatory environments, steering corporate advisory, and mitigating organisational risk across the Middle East, and is recognised for exceptional skills in crisis management, cross-border negotiations, and dispute resolution. A dynamic leader and TEDx speaker, she bridges robust legal acumen with impactful public advocacy.
+
+As Head of Legal and Compliance – Middle East at Servier in Dubai, she leads the legal and compliance function for a premier global pharmaceutical company across the region, providing strategic counsel to executive leadership on corporate governance, risk management, and healthcare regulations, and overseeing regional dispute management, commercial negotiations, and crisis-response frameworks. Her core expertise spans healthcare and pharma compliance, corporate advisory and strategy, crisis and dispute management, and strategic negotiation.
+
+She holds a Master of Laws (LL.M.) in Business & Commerce from the University of California, Berkeley, School of Law. As a TEDx speaker and frequent panelist, she is a recognised voice on healthcare compliance, legal ethics, and corporate leadership across the GCC region.`,
     },
     {
         name: "Dr Thouraya Mathlouthi",
-        title: "Group Legal Director, Data Privacy & Protection, E&",
+        title: "Group Legal Director – Data Privacy, Protection & Technology, e&",
         image: "/dubai-event/dubai-speakers/Dr Thouraya Mathlouthi.jpg",
+        bio: `A dual-qualified, award-winning senior legal counsel with over 12 years of in-house experience at the intersection of technology, AI governance, data privacy, and intellectual property. Trilingual in English, French, and Arabic and admitted to the Paris Bar, Dr. Mathlouthi is an expert in steering digital transformation, sovereign cloud programmes, and high-value technology transactions across the GCC, MENA, and Europe, with a proven track record of enabling commercial innovation while building robust compliance frameworks for global telecom and technology conglomerates.
+
+As Group Legal Director – Data Privacy, Protection & Technology at e& (Etisalat Group) in Dubai, she manages the legal strategy for IP, data protection, technology transactions, and AI governance for one of the world's leading telecom and tech conglomerates. She negotiates high-value, complex AI and GenAI platform contracts, structures legal frameworks for emerging technologies including IoT, cloud, and biometrics, leads group-wide data-protection programmes with quarterly strategic reporting to the Audit Committee, and advises government and enterprise clients across the UAE, KSA, Egypt, and Europe. She was part of the team recognised as TMT Team of the Year (IFLR and ALB) for three consecutive years (2023, 2024, 2025).
+
+She holds the AIGP, CIPP/E, and CIPM certifications from the IAPP and is admitted to the Paris Bar Association. A frequent international speaker on AI governance, smart cities, and data privacy regulation, her recent engagements include the Thomson Reuters ALB Middle East In-House Legal Summit (Dubai, 2026) and the Thomson Reuters Synergy Conference (Dubai, 2025).`,
     },
     {
         name: "Anna Kobzar",
         title: "Senior Legal Counsel, Seddiqi Holding LLC",
         image: "/dubai-event/dubai-speakers/Anna Kobzar.jpeg",
+        bio: `A highly qualified and analytically driven corporate lawyer with extensive experience managing legal risks, negotiating high-stakes contracts, and delivering strategic legal counsel within the corporate sector. Anna has a proven ability to thrive under pressure, manage complex legal portfolios, and consistently meet challenging deadlines, bringing a strong academic foundation and robust commercial acumen to international corporate governance.
+
+She currently serves as Senior Legal Counsel at Seddiqi Holding LLC and is a Certified In-House Legal Counsel of the Association of Corporate Counsel (ACC). Her core expertise spans commercial law and governance, high-value contract negotiation and management, legal drafting and review of complex agreements, strategic advisory to executive leadership, and analytical problem-solving that breaks down complex legal issues into concise, risk-mitigated business solutions.`,
     },
     {
         name: "Sergey Medvedev",
-        title: "Managing Partner, Gorodissky & Partners",
+        title: "Partner, Gorodissky & Partners",
         image: "/images/counsel-exchange/Sergey Medvedev.jpg",
+        bio: `A highly accomplished international lawyer and Partner at Gorodissky & Partners with over 12 years of profound legal experience in the intellectual property and technology (IPT) sectors. A dual-qualified expert holding registered status as a Trademark, Design, and Software Attorney, Dr. Medvedev specialises in managing complex contentious and non-contentious IP/IT projects with a focus on Russian and cross-border jurisdictions.
+
+His areas of expertise span asset management of copyrights, computer programs, databases, patents, industrial designs, trademarks, and domain names; data protection and privacy, internet law, e-commerce, and web-content regulation; licensing, outsourcing, franchising, distribution, and corporate IPT transactions; and IPT infringement, dispute resolution, anti-counterfeiting, and anti-piracy. His strategic focus includes IPT advisory and regulatory compliance, due diligence, auditing, and risk assessment, and transactional structuring in the technology, media, and telecommunications (TMT) sector.
+
+He holds a PhD in Law and an LLM in International Law, and is an officially registered Trademark Attorney, Design Attorney, and Software Attorney, leading high-stakes IP and IT matters for diverse industry sectors and bridging the gap between IP law and evolving technology markets.`,
     },
 ];
 
