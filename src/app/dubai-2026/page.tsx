@@ -438,13 +438,13 @@ export default function DubaiEventPage() {
                 </div>
             </section>
 
-            {/* ===================== FEATURED IN ===================== */}
+            {/* ===================== SUPPORTED BY ===================== */}
             <section className="py-12 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
                 <div className="container mx-auto px-4 mb-8 relative z-10">
                     <div className="flex items-center justify-center gap-4">
                         <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-amber-500/50"></div>
                         <p className="text-xs md:text-sm font-bold text-slate-800 tracking-[0.4em] uppercase opacity-90 whitespace-nowrap">
-                            Featured In
+                            Supported By
                         </p>
                         <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-amber-500/50"></div>
                     </div>
