@@ -4,14 +4,13 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
 import { Check, ShieldCheck } from "lucide-react";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const passes = [
     {
         id: "standard-pass-mumbai-2026",
         name: "Standard Pass",
-        price: 1200,
+        price: 1000,
         tier: "Standard",
         accentColor: "border-amber-500",
         badgeColor: "bg-amber-50 text-amber-700 border-amber-200",
@@ -42,7 +41,7 @@ const passes = [
     {
         id: "exclusive-pass-mumbai-2026",
         name: "Exclusive Pass",
-        price: 2500,
+        price: 2000,
         tier: "Exclusive",
         accentColor: "border-slate-800",
         badgeColor: "bg-slate-100 text-slate-700 border-slate-300",
@@ -55,10 +54,9 @@ const passes = [
     },
 ];
 
-function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number | null }) {
+function PassCard({ pass }: { pass: typeof passes[0] }) {
     const { addItem, clearCart } = useCart();
     const router = useRouter();
-    const inrPrice = inrRate ? Math.floor(pass.price * inrRate) : null;
 
     const handleSelect = () => {
         clearCart();
@@ -84,19 +82,12 @@ function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number |
                 <h3 className="text-lg font-bold text-slate-900 mb-3">{pass.name}</h3>
 
                 {/* Price */}
-                {inrPrice ? (
-                    <div className="mb-5">
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-3xl font-extrabold text-slate-900">₹{inrPrice.toLocaleString("en-IN")}</span>
-                        </div>
-                        <p className="text-sm text-slate-400 mt-0.5">≈ ${pass.price.toLocaleString()} USD</p>
+                <div className="mb-5">
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-3xl font-extrabold text-slate-900">${pass.price.toLocaleString()}</span>
+                        <span className="text-sm text-slate-400">USD</span>
                     </div>
-                ) : (
-                    <div className="mb-5">
-                        <div className="h-9 w-40 bg-slate-100 rounded animate-pulse" />
-                        <div className="h-4 w-24 bg-slate-100 rounded animate-pulse mt-1.5" />
-                    </div>
-                )}
+                </div>
 
                 {/* CTA */}
                 <button
@@ -127,15 +118,6 @@ function PassCard({ pass, inrRate }: { pass: typeof passes[0]; inrRate: number |
 }
 
 export default function MumbaiAwardeeConfirmationPage() {
-    const [inrRate, setInrRate] = useState<number | null>(null);
-
-    useEffect(() => {
-        fetch("/api/currency/convert")
-            .then(r => r.json())
-            .then(d => setInrRate(d.rate))
-            .catch(() => setInrRate(84));
-    }, []);
-
     return (
         <main className="min-h-screen bg-slate-50">
             <Navbar variant="light" />
@@ -150,13 +132,8 @@ export default function MumbaiAwardeeConfirmationPage() {
                         Choose Your Awardee Pass
                     </h1>
                     <p className="text-slate-500 text-base max-w-xl mx-auto">
-                        Select the pass that suits you. All prices in INR — pay securely via UPI, cards, or NetBanking at checkout.
+                        Select the pass that suits you. All prices in USD — pay securely by card at checkout.
                     </p>
-                    {inrRate && (
-                        <p className="text-xs text-slate-400 mt-3">
-                            Live rate: 1 USD = ₹{inrRate.toFixed(2)}
-                        </p>
-                    )}
                 </div>
             </section>
 
@@ -165,7 +142,7 @@ export default function MumbaiAwardeeConfirmationPage() {
                 <div className="container mx-auto px-4 max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {passes.map(pass => (
-                            <PassCard key={pass.id} pass={pass} inrRate={inrRate} />
+                            <PassCard key={pass.id} pass={pass} />
                         ))}
                     </div>
 

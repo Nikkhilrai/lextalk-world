@@ -376,14 +376,15 @@ export default function CheckoutPage() {
                                                     </div>
                                                 </button>
 
-                                                {/* Divider */}
+                                                {/* India Payment (INR with UPI) — not offered for Mumbai passes, which are USD only */}
+                                                {!isMumbaiCart && (
+                                                <>
                                                 <div className="flex items-center gap-3">
                                                     <div className="flex-1 h-px bg-slate-200"></div>
                                                     <span className="text-slate-400 text-sm">or</span>
                                                     <div className="flex-1 h-px bg-slate-200"></div>
                                                 </div>
 
-                                                {/* India Payment (INR with UPI) */}
                                                 <button
                                                     onClick={async () => {
                                                         if (!razorpayLoaded || !inrTotal) {
@@ -471,6 +472,8 @@ export default function CheckoutPage() {
                                                         Live rate: 1 USD = ₹{inrRate.toFixed(2)} INR
                                                     </p>
                                                 )}
+                                                </>
+                                                )}
                                             </div>
 
                                             <button
@@ -498,61 +501,30 @@ export default function CheckoutPage() {
                                 <a href={isMumbaiCart ? "/mumbai-awardee-confirmation-2026" : "/dubai-awardee-confirmation-2026"} className="text-sm text-amber-600 hover:underline">Edit Cart</a>
                             </div>
                             <div className="space-y-4 mb-6">
-                                {items.map((item) => {
-                                    const itemInr = inrRate ? Math.floor(item.price * item.quantity * inrRate) : null;
-                                    return (
-                                        <div key={item.id} className="flex justify-between items-start gap-4">
-                                            <div className="flex gap-3">
-                                                <div className="relative w-16 h-16 bg-slate-100 rounded-md overflow-hidden flex-shrink-0">
-                                                    <Image src={item.image || ""} alt={item.name} fill className="object-contain p-1" />
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-semibold text-slate-900 text-sm sm:text-base">{item.name}</h3>
-                                                    <p className="text-slate-500 text-sm">Qty: {item.quantity}</p>
-                                                </div>
+                                {items.map((item) => (
+                                    <div key={item.id} className="flex justify-between items-start gap-4">
+                                        <div className="flex gap-3">
+                                            <div className="relative w-16 h-16 bg-slate-100 rounded-md overflow-hidden flex-shrink-0">
+                                                <Image src={item.image || ""} alt={item.name} fill className="object-contain p-1" />
                                             </div>
-                                            <div className="text-right">
-                                                {isMumbaiCart ? (
-                                                    itemInr ? (
-                                                        <>
-                                                            <p className="font-medium text-slate-900">₹{itemInr.toLocaleString("en-IN")}</p>
-                                                            <p className="text-xs text-slate-400">${(item.price * item.quantity).toLocaleString()}</p>
-                                                        </>
-                                                    ) : (
-                                                        <div className="w-20 h-5 bg-slate-100 rounded animate-pulse" />
-                                                    )
-                                                ) : (
-                                                    <p className="font-medium text-slate-900">${(item.price * item.quantity).toLocaleString()}</p>
-                                                )}
+                                            <div>
+                                                <h3 className="font-semibold text-slate-900 text-sm sm:text-base">{item.name}</h3>
+                                                <p className="text-slate-500 text-sm">Qty: {item.quantity}</p>
                                             </div>
                                         </div>
-                                    );
-                                })}
+                                        <p className="font-medium text-slate-900">${(item.price * item.quantity).toLocaleString()}</p>
+                                    </div>
+                                ))}
                             </div>
 
                             <div className="border-t border-slate-100 pt-4 space-y-2">
                                 <div className="flex justify-between text-slate-600">
                                     <span>Subtotal</span>
-                                    {isMumbaiCart && inrTotal ? (
-                                        <span>₹{inrTotal.toLocaleString("en-IN")}</span>
-                                    ) : (
-                                        <span>${total.toLocaleString()}</span>
-                                    )}
+                                    <span>${total.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between text-slate-900 font-bold text-xl pt-2 border-t border-slate-100">
                                     <span>Total</span>
-                                    {isMumbaiCart ? (
-                                        inrTotal ? (
-                                            <div className="text-right">
-                                                <p>₹{inrTotal.toLocaleString("en-IN")}</p>
-                                                <p className="text-xs text-slate-400 font-normal">≈ ${total.toLocaleString()} USD</p>
-                                            </div>
-                                        ) : (
-                                            <div className="w-28 h-7 bg-slate-100 rounded animate-pulse" />
-                                        )
-                                    ) : (
-                                        <span>${total.toLocaleString()}</span>
-                                    )}
+                                    <span>${total.toLocaleString()}</span>
                                 </div>
                             </div>
 
