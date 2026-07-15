@@ -5,7 +5,6 @@ import { useCart } from "@/contexts/CartContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ShieldCheck, Lock, CreditCard, ChevronRight, ChevronLeft, User, Building2, Phone, Mail } from "lucide-react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 
@@ -503,14 +502,9 @@ export default function CheckoutPage() {
                             <div className="space-y-4 mb-6">
                                 {items.map((item) => (
                                     <div key={item.id} className="flex justify-between items-start gap-4">
-                                        <div className="flex gap-3">
-                                            <div className="relative w-16 h-16 bg-slate-100 rounded-md overflow-hidden flex-shrink-0">
-                                                <Image src={item.image || ""} alt={item.name} fill className="object-contain p-1" />
-                                            </div>
-                                            <div>
-                                                <h3 className="font-semibold text-slate-900 text-sm sm:text-base">{item.name}</h3>
-                                                <p className="text-slate-500 text-sm">Qty: {item.quantity}</p>
-                                            </div>
+                                        <div>
+                                            <h3 className="font-semibold text-slate-900 text-sm sm:text-base">{item.name}</h3>
+                                            <p className="text-slate-500 text-sm">Qty: {item.quantity}</p>
                                         </div>
                                         <p className="font-medium text-slate-900">${(item.price * item.quantity).toLocaleString()}</p>
                                     </div>
