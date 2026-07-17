@@ -413,25 +413,17 @@ export default function DubaiSpeakersList() {
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
                             <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-1.5">
-                                {/* Portrait — square frame matches the source photos so they fill edge-to-edge */}
-                                <div className="relative mb-7 w-full max-w-[280px]">
-                                    {/* Outer thin formal frame */}
-                                    <div className="absolute -inset-3 border border-slate-200/60 group-hover:border-amber-400/40 transition-colors duration-500 rounded-xl" />
-                                    {/* Corner ticks — subtle atelier detail */}
-                                    <div className="absolute -inset-3 rounded-xl pointer-events-none">
-                                        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-tl-xl transition-colors duration-500" />
-                                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-amber-500/0 group-hover:border-amber-500/70 rounded-br-xl transition-colors duration-500" />
-                                    </div>
-
+                                {/* Portrait — square frame, full-bleed crop, no outer gap */}
+                                <div className="relative mb-5 w-full max-w-[280px]">
                                     {/* Portrait container */}
-                                    <div className="relative w-full aspect-square overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-4 ring-white">
+                                    <div className="relative w-full aspect-square overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-1 ring-slate-200 group-hover:ring-2 group-hover:ring-amber-400/60">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.name}
                                                 fill
                                                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
-                                                className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                                                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                                             />
                                         ) : (
                                             <div className="absolute inset-0 flex items-center justify-center text-slate-300">
