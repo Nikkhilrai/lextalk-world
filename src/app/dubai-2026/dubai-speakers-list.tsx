@@ -316,6 +316,20 @@ What sets him apart is not how much he has done, but the level at which he does 
         image: "/dubai-event/dubai-speakers/Megha Agarwal.png",
         bio: `Megha Agarwal is an accomplished legal professional with over 18 years of experience in corporate law, specializing in complex commercial transactions, cross-border legal operations & transactions, corporate governance, and compliance. Megha has built legal teams from scratch and scaled them across the APAC, Middle East & Africa regions. She provides strategic legal counsel to senior management, managing legal and regulatory matters, including data protection, cybersecurity regulations, and cross-border transactions.`,
     },
+    {
+        name: "Ahmed Zaki",
+        title: "Legal Architect | Governance Strategist",
+        image: "/dubai-event/dubai-speakers/Ahmed Zaki.png",
+        bio: `Ahmed Zaki is a distinguished legal executive with more than 32 years of experience spanning judiciary, public prosecution, and executive legal leadership.
+
+A former Judge and Public Prosecutor, he has gone on to serve as General Counsel for leading organizations, advising boards and executive leadership on governance, enterprise risk, complex transactions, strategic disputes, and regulatory transformation across the Middle East.
+
+Known as a Legal Architect and Governance Strategist, Ahmed specializes in designing the legal and governance frameworks that enable organizations to manage complexity, accelerate growth, and build long-term resilience. His expertise spans corporate governance, legal operations, cross-border transactions, enterprise risk management, dispute strategy, regulatory compliance, contract architecture, and digital transformation.
+
+A recognized thought leader, Ahmed regularly speaks on the evolving role of the General Counsel, AI governance, LegalTech, legal operations, and the future of in-house legal leadership. He advocates for a modern legal function that moves beyond risk management to become a strategic partner in innovation, value creation, and sustainable business growth.
+
+Ahmed's contributions to the legal profession have been internationally recognized through multiple General Counsel of the Year awards, reflecting his commitment to excellence, innovation, and leadership in the global legal community.`,
+    },
 ];
 
 
