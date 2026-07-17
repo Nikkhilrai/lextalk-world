@@ -423,7 +423,7 @@ export default function DubaiSpeakersList() {
                                                 alt={speaker.name}
                                                 fill
                                                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
-                                                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                                                className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                                             />
                                         ) : (
                                             <div className="absolute inset-0 flex items-center justify-center text-slate-300">
