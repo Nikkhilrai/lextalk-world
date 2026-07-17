@@ -330,6 +330,12 @@ A recognized thought leader, Ahmed regularly speaks on the evolving role of the 
 
 Ahmed's contributions to the legal profession have been internationally recognized through multiple General Counsel of the Year awards, reflecting his commitment to excellence, innovation, and leadership in the global legal community.`,
     },
+    {
+        name: "Sophie Best",
+        title: "CEO, Knowledge Nexus",
+        image: "/dubai-event/dubai-speakers/Sophie Best.png",
+        bio: `Sophie Best is a legal technology strategist and consultant with over 20 years of experience across the GCC and UK. She works with law firms and in-house legal teams to navigate AI adoption, workflow transformation and operational change, taking a vendor-neutral, people & process first approach that helps teams make better long-term technology decisions.`,
+    },
 ];
 
 
