@@ -336,6 +336,14 @@ Ahmed's contributions to the legal profession have been internationally recogniz
         image: "/dubai-event/dubai-speakers/Sophie Best.png",
         bio: `Sophie Best is a legal technology strategist and consultant with over 20 years of experience across the GCC and UK. She works with law firms and in-house legal teams to navigate AI adoption, workflow transformation and operational change, taking a vendor-neutral, people & process first approach that helps teams make better long-term technology decisions.`,
     },
+    {
+        name: "Imran Nawaz",
+        title: "Group Chief Strategy Officer | Board Member | Strategic Finance & Business Transformation Leader\nMBA | AFA (IFA UK) | MIPA (IPA AUS) | ASA (CPA Australia) | CIPFA Affiliate",
+        image: "/dubai-event/dubai-speakers/Imran Nawaz.png",
+        bio: `Imran Nawaz is a seasoned strategic business leader and Group Chief Strategy Officer with over 17 years of international experience driving corporate strategy, governance, business transformation, and sustainable growth across diversified industries. He advises Boards and executive leadership on cross-border investments, strategic partnerships, mergers and acquisitions, enterprise risk, and value creation.
+
+Recognized for delivering high-impact transformation initiatives and building scalable business ecosystems, Imran has successfully led complex projects across the GCC and international markets. He is a regular speaker at global conferences, sharing insights on corporate governance, strategic leadership, innovation, ESG, and the future of business. His practical, results-driven approach and ability to bridge strategy with execution have established him as a trusted advisor to businesses, investors, and government stakeholders navigating today's rapidly evolving global landscape.`,
+    },
 ];
 
 
