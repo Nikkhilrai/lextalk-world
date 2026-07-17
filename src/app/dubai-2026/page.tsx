@@ -204,6 +204,7 @@ const sponsorTiers = [
             { name: "CaseDocker", src: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
             { name: "LexCorp", src: "/dubai-event/sponsors/Lex_Corp_Logo.avif", href: "https://home.lexcorp.org.in/" },
             { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/Gorodissky_Logo.jpg", href: "https://www.gorodissky.com/" },
+            { name: "DiliTrust", src: "/dubai-event/sponsors/DiliTrust.svg", href: null as string | null },
         ],
     },
     {
