@@ -405,7 +405,7 @@ export default function DubaiSpeakersList() {
                             onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                         >
                             <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-1.5">
-                                {/* Portrait — fixed 4:5 ratio keeps every card identical */}
+                                {/* Portrait — square frame matches the source photos so they fill edge-to-edge */}
                                 <div className="relative mb-7 w-full max-w-[280px]">
                                     {/* Outer thin formal frame */}
                                     <div className="absolute -inset-3 border border-slate-200/60 group-hover:border-amber-400/40 transition-colors duration-500 rounded-xl" />
@@ -416,7 +416,7 @@ export default function DubaiSpeakersList() {
                                     </div>
 
                                     {/* Portrait container */}
-                                    <div className="relative w-full aspect-[4/5] overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-4 ring-white">
+                                    <div className="relative w-full aspect-square overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-4 ring-white">
                                         {speaker.image ? (
                                             <Image
                                                 src={speaker.image}
