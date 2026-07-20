@@ -66,7 +66,7 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
     {
         name: "Sergey Konov",
         title: "Regional Compliance & Integrity Officer IMETA, Boehringer Ingelheim",
-        image: "/dubai-event/dubai-speakers/Sergey Konov.jpeg",
+        image: "/dubai-event/dubai-speakers/Sergey Konov.png",
         bio: `An accomplished corporate governance and ethics executive with over 20 years of international experience driving organisational trust and integrity. As a Regional Compliance & Integrity Officer based in Dubai, Sergey has a proven track record of transforming compliance from a regulatory check-the-box exercise into a core cultural value, building robust compliance programmes from the ground up, managing complex enterprise risks, and leading cross-functional teams across highly regulated sectors.
 
 His experience spans Russia, Central and Eastern Europe, Turkey, and the Middle East and Africa, with deep sector knowledge in financial services, energy, oil and gas, and healthcare. His expertise covers governance, risk management and compliance (GRC), policies and procedures development from inception to execution, enterprise and third-party risk management, and business ethics and integrity leadership, specialising in cultivating ethical workplace environments where integrity drives strategic decision-making.`,
@@ -74,7 +74,7 @@ His experience spans Russia, Central and Eastern Europe, Turkey, and the Middle 
     {
         name: "Sameet Gambhir",
         title: "Associate Partner, CS & Compliance, KPMG Global Services",
-        image: "/dubai-event/dubai-speakers/Sameet Gambhir.avif",
+        image: "/dubai-event/dubai-speakers/Sameet Gambhir.png",
         bio: `A highly accomplished and forward-thinking Senior Corporate Legal Professional and Fellow Company Secretary (FCS, LLB) with over 30 years of distinguished experience steering corporate governance, regulatory compliance, and legal strategy for top-tier organisations. He currently serves as Associate Partner, CS & Compliance at KPMG Global Services, with a proven track record of safeguarding corporate reputation, mitigating multi-jurisdictional risks, and leading high-performing legal teams. An alumnus of the IIM-Bangalore Leadership Effectiveness Programme, he is recognised nationally and globally as an industry thought leader and champion of robust corporate governance and ESG frameworks.
 
 His expertise spans corporate governance and board management, SEBI listing and insider trading regulations, RBI and FEMA matters, industrial and labour laws, risk management, due diligence, corporate restructuring, high-stakes litigation and investigations, contract management, intellectual property rights, brand protection, and data privacy. He led the legal and compliance team at DCM Shriram Ltd to win "Best Compliance Team of the Year" for two consecutive years (Kamikaze 2019; LegalEra 2020), and has served as former Chair of the Corporate Affairs Committee of PHDCCI, a member of the CII National Committee on Regulatory Affairs, and a member of the Board of Study of GD Goenka Law School.
@@ -84,7 +84,7 @@ He has been featured in Forbes India's Top In-house Counsel, Fortune India's Top
     {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
-        image: "/dubai-event/dubai-speakers/Sanjay Jain.avif",
+        image: "/dubai-event/dubai-speakers/Sanjay Jain.png",
         bio: `Sunjjoy Jaiin is a seasoned legal strategist and the Founder and Managing Partner of Lex Corp, a premier full-service law firm based in New Delhi. With over 14 years of extensive experience, he specialises in commercial litigation, domestic and international arbitration, insolvency, and corporate advisory. Known for combining rigorous legal excellence with deep commercial awareness, he acts as a trusted advisor delivering practical, solution-oriented counsel aligned with his clients' long-term business objectives.
 
 His core expertise spans dispute resolution (commercial litigation, domestic and international arbitration), corporate and finance (insolvency and bankruptcy before the NCLT/NCLAT, banking and financial disputes, corporate advisory), and specialised law (taxation, intellectual property, and regulatory compliance). He has represented high-profile clients and institutional bodies before the Supreme Court of India, various High Courts, the NCLT and NCLAT, Debt Recovery Tribunals, and commercial and arbitral tribunals.
@@ -96,7 +96,7 @@ In his words: "Effective legal counsel goes beyond courtroom advocacy — it req
     {
         name: "Kapil Singhal",
         title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
-        image: "/dubai-event/dubai-speakers/Kapil Singhal.jpeg",
+        image: "/dubai-event/dubai-speakers/Kapil Singhal.png",
         bio: `A visionary senior executive, serial entrepreneur, and investor with extensive global experience driving business growth across top-tier IT product and services companies. Kapil has a proven track record of spearheading organisational transformations, leading multi-million-dollar global deals, and delivering complex, large-scale enterprise solutions, seamlessly bridging high-level corporate strategy with robust product and service development.
 
 As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
@@ -106,7 +106,7 @@ His expertise covers global offering development, business development, transiti
     {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners",
-        image: "/dubai-event/dubai-speakers/aniket gautam.jpeg",
+        image: "/dubai-event/dubai-speakers/Aniket Gautam.png",
         bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
 
 His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
@@ -116,7 +116,7 @@ In his words: "Leveraging a nuanced understanding of commercial law to foster st
     {
         name: "Chehade Kahi",
         title: "General Counsel & Board Secretary, Emirates General Petroleum Corporation (Emarat)",
-        image: "/dubai-event/dubai-speakers/Chehade Kahi.jpeg",
+        image: "/dubai-event/dubai-speakers/Chehade Kahi.png",
         bio: `An accomplished legal consultant, corporate executive, and advocate with over 20 years of comprehensive experience managing high-stakes legal operations across the GCC, Europe, and the Middle East. He specialises in the oil and gas sector, corporate governance, cross-border commercial transactions, and multi-jurisdictional litigation strategy, with a proven track record of steering complex state-backed joint ventures, safeguarding critical infrastructure projects, and advising boards of directors.
 
 As General Counsel and Board Secretary of Emirates General Petroleum Corporation (Emarat) in Dubai, he serves as chief legal officer and corporate secretary for one of the UAE's primary government-owned petroleum entities. He advises the Board and executive leadership on commercial strategy, regulatory compliance, corporate governance, and joint-venture formations with global oil players; leads the in-house legal department overseeing commercial contract negotiations and major procurement projects such as securing fuelling facilities at Dubai Airport and pipeline networks; and defines the corporation's litigation and dispute-resolution strategies.
@@ -126,13 +126,13 @@ He successfully facilitated major public-private partnerships, including the fue
     {
         name: "Ahmed Nagy",
         title: "Senior Legal Counsel, Emirates Islamic",
-        image: "/dubai-event/dubai-speakers/Ahmed Nagy.jpeg",
+        image: "/dubai-event/dubai-speakers/Ahmed Nagy.png",
         bio: ` Nagy is highly qualified lawyer, certified in LMAs & certified Quality Management System (QMS) Leader Auditor, accredited by CQI & IRCA with 15+ years extensive of experience in legal profession both in Islamic and Conventional banking, specialized in Banking, Corporate, Commercial & technology laws. He holds a LLB degree in law and has three post-graduate diplomas in IP Rights, Int’l Arbitration, and Economic Courts. Nagy has extensive expertise in providing strategic legal advice, negotiating complex agreements, trademarks & employment matters, and overseeing corporate and company secretary affairs. His solid and diversified knowledge is reflected in his remarkable achievements for being a part of leading ISO 9001:2015 Certifications for legal department in both Islamic and Conventional Banking in the UAE which strengthened his understanding of quality assurance and control, further enhance his ability to straddle digital , strategic & legal roles as an influential change-maker shaping the legal industry future.`
     },
     {
         name: "Vijay Ojha",
         title: "Group Company Secretary & Corporate Legal Leader, Sharaf Group",
-        image: "/dubai-event/dubai-speakers/Vijay Ojha.jpeg",
+        image: "/dubai-event/dubai-speakers/Vijay Ojha.png",
         bio: `A senior corporate legal and governance professional with over two decades of experience advising boards, promoters, and executive leadership within large, diversified business groups. As Group Company Secretary and Corporate Legal Leader — and a board and governance advisor on ESG, sustainability, risk, compliance, and cross-border structuring — he currently serves with the Sharaf Group in Dubai, specialising in transforming legal and regulatory complexity into clear, decision-oriented guidance that enables growth while protecting long-term enterprise value.
 
 His core expertise spans strategic board governance and board effectiveness, cross-border structuring and M&A across multiple jurisdictions, proactive risk and compliance leadership, and the integration of ESG and sustainability practices within large, complex business groups. A founding member of the ICSI Middle East (DIFC) NPIO in Dubai, he acts as a trusted advisor to boards and senior management, translating complex legal landscapes into execution-ready, commercially pragmatic strategies with deep expertise in regulatory alignment across international markets from a Dubai base.
