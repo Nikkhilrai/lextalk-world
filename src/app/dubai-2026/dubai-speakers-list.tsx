@@ -17,6 +17,42 @@ He currently serves as President of the Society of Indian Law Firms (SILF), Chai
 He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goenka University, Gurgaon, and an LL.D. Honoris Causa (2013) from Amity University. His many state and institutional honours include the Lifetime Achievement Award from ASSOCHAM (2023), the Outstanding Arbitration Expert Award from APCAM (2023), the "Glorious 61 Years in the Profession" Award from Legal Era (2023), a Lifetime Achievement Award from the UK India Legal Partnership presented at the House of Lords, London (2022), the National Law Day Award bestowed by the President of India (2007), and a Plaque of Honour bestowed by the Prime Minister of India (2002) for exceptional service to the Rule of Law.`,
     },
     {
+        name: "Hasan Al Kilani",
+        title: "General Counsel | Regulatory & Digital Affairs | Corporate Commercial | Board Governance | MENA & GCC | UNCITRAL | Telecom | Sovereign Finance | Digital Economy Law",
+        image: "/dubai-event/dubai-speakers/Hasan Al Kilani.png",
+        bio: `Over more than three decades, across four jurisdictions and two legal traditions, he has built the legal rules behind some of the most important shifts in how business is done, from the rise of digital trade to the regulation of entirely new technologies. He does not advise on the law from the outside. He writes it. And the work he has authored for the United Arab Emirates is now shaping how the rest of the world will follow.
+
+As Senior Legal Advisor and General Counsel at the UAE Ministry of Economy, he has led the modernisation of the country's commercial laws. In plain terms, he rewrote the rulebook that governs how companies trade, register, and operate in one of the world's fastest-moving economies, and made it a model that other countries now study.
+
+His most significant work is a law he authored in 2023, the Law on Trading by Modern Technological Means. It was one of the first laws anywhere built for an economy of digital platforms and apps rather than traditional commerce, and it placed the UAE ahead of almost every other nation on the legal questions raised by digital trade. He then carried its principles to the United Nations, to the body responsible for international trade law. He presented the UAE's approach in Vienna, and in 2025 the United Arab Emirates and Spain jointly proposed that the United Nations build a new international framework for digital trade based on this work, winning European support along the way. It is rare for one country's law to become the starting point for a global one. His is doing exactly that.
+
+Signature achievements: driving the UAE and Spain proposal at UNCITRAL for a new global Model Law on digital trade; authoring UAE Law No. 14 of 2023, one of the world's first laws built for the digital platform economy; drafting the charter that made the UAE a founding member of the Asian Infrastructure Investment Bank; and, as among the first executives of the UAE's telecommunications regulator, overseeing the country's first telecommunications licence.
+
+At the Ministry of Economy, Mr Al Kilani is custodian of the UAE's economic legislation at national, GCC, and international levels. He has authored and steered landmark laws through drafting, stakeholder engagement, and enactment, including the laws governing commercial transactions, commercial agency, arbitration, cooperatives, and the commercial registry, with UAE legislation increasingly adopted as a reference point across the region.
+
+He transformed the commercial registry from a procedural statute into a consolidated national economic data ecosystem, the National Economic Registry, incorporating e-commerce, digital trade, and data classification with extended protection of proprietary rights. He created a unified GCC digital-trade strategy and regulatory framework, and designed a methodology for assessing the real-world impact of legislation, building public-private task forces and roundtables that turned the introduction of new law into active partnership with the sectors it governed.
+
+As General Counsel at the Abu Dhabi Digital Authority, he built the end-to-end legal and regulatory framework for the Emirate's government-wide digital transformation, spanning digital signature, digital wallet, cloud, blockchain, and digital payment. He developed the legal foundation for UAE Pass and AD Locker, which became the country's sovereign digital identity standard, used by millions every day.
+
+He negotiated the agreements that enabled TAMM, managed centralised technology procurement across government, and designed a central contract-management system governing primary contractors and their subcontractors. The regulatory groundwork he established before 2020 allowed Abu Dhabi's government to continue operating seamlessly through the pandemic, a real-world test of the framework's resilience.
+
+As Legal Advisor to one of the region's most active sovereign development funds, the Abu Dhabi Fund for Development, he advised on sovereign, corporate, investment, and dispute-resolution matters across telecommunications, food security, hospitality, and infrastructure, managing affairs across the UAE, the wider Middle East and Africa, and Europe.
+
+He led the legal architecture for the UAE's accession to the Asian Infrastructure Investment Bank as a founding member, drafting the board charter for Arab nations and navigating the political negotiations that made membership possible. He standardised concessionary loan agreements across borrowing nations, directed an international asset-recovery effort that recovered the large majority of capital exposed to organised fraud, and handled the legal affairs of major clean-energy and infrastructure partnerships including IRENA, Masdar, and Mubadala.
+
+As Of Counsel at the international law firm Simmons & Simmons, he advised clients across government, regulatory, and private sectors, led the UAE legal team through the WTO Second Trade Policy Review, and built an integrated regulatory framework through review of the financial services, competition, and companies laws.
+
+Earlier, he twice helped build a nation's telecommunications law from the ground up. In Jordan he was a principal architect of the country's licensing regime, postal regulatory framework, and dispute-resolution function. In the UAE he joined the new telecommunications regulator as one of its first executives, established its regulatory framework, drafted the GCC CERT Charter, and oversaw the first telecommunications licence in the country's history.
+
+In the same period he set an early national precedent in corporate governance. As a senior legal figure at a listed UAE company, he established one of the first precedents under the country's Corporate Governance Executive Order, helping shape how publicly listed companies in the UAE are governed to this day.
+
+Areas of expertise: national and international law; the authoring of legislation and regulatory frameworks; digital trade and digital-economy regulation; telecommunications and ICT regulation; data protection; intellectual property; sovereign and development finance; cross-border negotiation and treaty law (UNCITRAL, WTO, AIIB, GCC); space activities law; competition and foreign investment law; and corporate governance and the structuring of complex agreements between governments and global institutions.
+
+Mr Al Kilani works across two legal traditions and is professionally fluent in both Arabic and English, including legal translation in both directions. He is a published contributor to the Centre of Islamic and Middle Eastern Law at SOAS, University of London, and a frequent speaker and panellist at legal, regulatory, and business forums. He is bar certified and holds a Bachelor of Laws from the University of Jordan.
+
+What sets him apart is not how much he has done, but the level at which he does it. He builds the rules that markets and nations live by, and he is now helping to write them for the world.`,
+    },
+    {
         name: "Bhavin Mehta",
         title: "Vice President, Compliance & Enterprise Ethics, Mastercard, UAE",
         image: "/dubai-event/dubai-speakers/Bhavin Mehta.png",
@@ -142,7 +178,7 @@ In his words: "Effective legal leadership is not about saying no — it is about
     {
         name: "Georges Abi Saab",
         title: "General Counsel, Ooredoo Group",
-        image: "/dubai-event/dubai-speakers/Georges Abi Saab.jpg",
+        image: "/dubai-event/dubai-speakers/Georges Abi Saab.png",
         bio: `George Abi Saab is the General Counsel at Ooredoo Group since 2020, where he plays a pivotal role in managing and overseeing all legal aspects of the Group. 
 
 One of George's notable achievements was leading Ooredoo’s M&A expansion such leading the acquisition in Iraq, Tunisia and Kuwait as well as obtaining a license in Myanmar as well as leading many corporate finance work such as a USD 1.25 billion sukuk issuance. 
@@ -158,7 +194,7 @@ George's educational background includes a bachelor’s degree in law from the U
     {
         name: "Julia Kolomenko",
         title: "Regional Head of Legal, EEMEA, SGS",
-        image: "/dubai-event/dubai-speakers/Julia Kolomenko.jpeg",
+        image: "/dubai-event/dubai-speakers/Julia Kolomenko.png",
         bio: `A results-driven global strategy-to-execution and operating-model leader with over 20 years of cross-functional experience bridging business operations, legal, compliance, HR, and cross-regional governance. As Regional Head of Legal, EEMEA, and an enterprise and operations transformation leader on a COO track, Julia is an expert at diagnosing system-level constraints and translating high-level corporate strategy into scalable, automated, and risk-controlled operational realities. In her words: "You cannot manage chaos; you can only manage systems — I build the system."
 
 She designed, scaled, and deployed execution-ready operating models and proprietary digital workflows across 53 countries and 84 legal entities, grounding disparate international operations into cohesive business workflows backed by embedded controls and clear operating rhythms. She architected and scaled an independent billing contractual department from scratch across Russia, the Caspian sub-region, and the Middle East — decoupling the process from business units and finance to eliminate conflicts of interest — and centralised fragmented manual invoicing into a streamlined team with zero headcount increase, accelerating invoice issuance and securing direct cash-flow acceleration through full AR collections ownership.
@@ -168,7 +204,7 @@ She was also the end-to-end architect of an in-house, ERP-style HR operations pl
     {
         name: "Karishma Sookrajh",
         title: "Senior Legal Counsel – Middle East, Africa & Turkey, DHL",
-        image: "/dubai-event/dubai-speakers/Karishma Sookrajh.jpeg",
+        image: "/dubai-event/dubai-speakers/Karishma Sookrajh.png",
         bio: `A highly accomplished and strategic corporate counsel with extensive expertise navigating complex legal landscapes across the Middle East, Africa, and Turkey (MEAT). Karishma currently serves as Senior Legal Counsel for DHL, a global leader in logistics, with a proven track record in cross-border transactions, commercial contracts, regulatory compliance, risk mitigation, and corporate governance. She is recognised for delivering commercially viable legal solutions that protect corporate assets while driving business growth in fast-paced, emerging markets.
 
 At DHL, she oversees comprehensive legal operations, corporate governance, and regulatory strategy across the dynamic MEAT region; drafts and negotiates high-value corporate accounts, master service agreements, and complex supply-chain logistics frameworks; and advises on regional joint ventures, compliance structures, sanctions, and regulatory change. Her core competencies span international commercial law, corporate governance and compliance, dispute resolution and litigation, and strategic risk advisory, acting as a trusted business partner to executive leadership.
@@ -188,7 +224,7 @@ His core expertise spans strategic legal advice aligned with macro-business obje
     {
         name: "Beyana Maluegha",
         title: "Senior Counsel – Energy (OFSE), Commercial Contracts & Subcontracting",
-        image: "/dubai-event/dubai-speakers/Beyana Maluegha.jpeg",
+        image: "/dubai-event/dubai-speakers/Beyana Maluegha.png",
         bio: `A results-driven senior legal counsel with over 10 years of experience driving complex energy and industrial projects across the MENA and Asia-Pacific regions. Beyana specialises in the Oilfield Services and Equipment (OFSE) sector, managing high-stakes commercial contracts, intricate subcontracting structures, and cross-border risk management. She is a pragmatic, solutions-oriented partner to executive leadership, adept at balancing rigorous legal protection with commercial execution to support large-scale international operations.
 
 She has led and secured multi-jurisdictional energy contracts with major national oil companies — including Saudi Aramco and ADNOC — for integrated projects exceeding USD 1.5 billion, and spearheaded the drafting, negotiation, and risk allocation of MSAs, vendor agreements, and complex subcontracting frameworks. Partnering with executive stakeholders, she designed and deployed automated contract-approval workflows using Salesforce, significantly improving governance and operational efficiency.
@@ -198,7 +234,7 @@ Her core expertise spans commercial contracts, subcontracting and supply chain, 
     {
         name: "Hadi N. El Kadi",
         title: "Group Chief Legal Officer & Board Secretary, Al Habtoor Group",
-        image: "/dubai-event/dubai-speakers/Hadi N. El Kadi.jpeg",
+        image: "/dubai-event/dubai-speakers/Hadi N. El Kadi.png",
         bio: `A distinguished Group Chief Legal Officer and board executive with over 25 years of experience advising chairmen, boards of directors, and C-suite executives across the GCC and MENA regions. Hadi currently leads the legal, governance, and risk strategies for Al Habtoor Group, a premier family-owned conglomerate, with expertise navigating highly diversified sectors including real estate, hospitality, automotive, insurance, education, investment, construction, and financial services. A recognised thought leader, academic, and author, he combines deep legal acumen with strategic business leadership to drive corporate transformation, mitigate enterprise risk, and oversee high-value global transactions.
 
 His core areas of expertise span corporate governance and board advisory — serving as a board member, executive committee member, and board secretary — strategic transactions and M&A, enterprise risk and compliance, dispute resolution and international arbitration, and executive management and negotiation. His recognitions include the Legal 500 GC Powerlist Middle East (2025) and the Middle East Finest General Counsel Award (2024 and 2025).
@@ -208,7 +244,7 @@ He is a Senior Lecturer at University Paris II Panthéon-Assas (Dubai campus), f
     {
         name: "Denis Sergienko",
         title: "Global Counsel – Retail & Partner Enablement, HP",
-        image: "/dubai-event/dubai-speakers/Denis Sergienko.jpeg",
+        image: "/dubai-event/dubai-speakers/Denis Sergienko.png",
         bio: `A highly accomplished and business-focused legal counsel with extensive experience steering sustainable corporate growth across diverse international markets, including the Balkans, Central Asia, and the CIS region. As Global Counsel for Retail & Partner Enablement, Denis is a trusted strategic partner adept at balancing robust risk mitigation with pragmatic, commercially oriented solutions in fast-paced, high-stakes environments, combining deep cross-border legal expertise with a forward-thinking innovation and AI mindset to streamline legal operations and enable commercial success.
 
 His core competencies span international legal counsel across the Balkans, Central Asia, and the CIS regions; retail and partner enablement through structuring, negotiating, and executing commercial agreements, joint ventures, and distribution networks; proactive risk management and compliance tailored to complex, fast-moving markets; strategic business partnership with executive stakeholders; and legal innovation through an AI-driven, tech-forward approach to automating processes and maximising operational efficiency.`,
@@ -216,7 +252,7 @@ His core competencies span international legal counsel across the Balkans, Centr
     {
         name: "Chinar Jethwani",
         title: "Company Secretary – Global Compliance & Legal Affairs, Varun Beverages Ltd",
-        image: "/dubai-event/dubai-speakers/Chinar Jethwani.jpeg",
+        image: "/dubai-event/dubai-speakers/Chinar Jethwani.png",
         bio: `Chinar Jethwani is a dual-qualified corporate lawyer and company secretary with over 13 years of cross-border experience managing corporate compliance, secretarial practices, and complex legal affairs across India, Singapore, and the UAE. She currently works at Varun Beverages Ltd as Company Secretary (Global Compliance & Legal Affairs). Throughout her career she has served as a trusted legal manager, company secretary, and compliance officer for multinational entities, navigating highly regulated environments across FMCG, non-banking financial companies, and the chemical and pharmaceutical sectors.
 
 Certified by the Indian Institute of Corporate Affairs (IICA), she has built a robust boardroom legacy over the past decade, serving as a Woman Independent Director on the boards of several India-based enterprises across the textiles, infrastructure, and chemical landscapes. Her strategic insight has also contributed to wider economic platforms, including past service on the Legal Advisory Committee for the Gujarat Chamber of Commerce & Industry.
@@ -241,7 +277,7 @@ She holds a Master of Laws (LL.M.) in Business & Commerce from the University of
     {
         name: "Dr Thouraya Mathlouthi",
         title: "Group Legal Director – Data Privacy, Protection & Technology, e&",
-        image: "/dubai-event/dubai-speakers/Dr Thouraya Mathlouthi.jpg",
+        image: "/dubai-event/dubai-speakers/Dr Thouraya Mathlouthi.png",
         bio: `A dual-qualified, award-winning senior legal counsel with over 12 years of in-house experience at the intersection of technology, AI governance, data privacy, and intellectual property. Trilingual in English, French, and Arabic and admitted to the Paris Bar, Dr. Mathlouthi is an expert in steering digital transformation, sovereign cloud programmes, and high-value technology transactions across the GCC, MENA, and Europe, with a proven track record of enabling commercial innovation while building robust compliance frameworks for global telecom and technology conglomerates.
 
 As Group Legal Director – Data Privacy, Protection & Technology at e& (Etisalat Group) in Dubai, she manages the legal strategy for IP, data protection, technology transactions, and AI governance for one of the world's leading telecom and tech conglomerates. She negotiates high-value, complex AI and GenAI platform contracts, structures legal frameworks for emerging technologies including IoT, cloud, and biometrics, leads group-wide data-protection programmes with quarterly strategic reporting to the Audit Committee, and advises government and enterprise clients across the UAE, KSA, Egypt, and Europe. She was part of the team recognised as TMT Team of the Year (IFLR and ALB) for three consecutive years (2023, 2024, 2025).
@@ -251,7 +287,7 @@ She holds the AIGP, CIPP/E, and CIPM certifications from the IAPP and is admitte
     {
         name: "Anna Kobzar",
         title: "Senior Legal Counsel, Seddiqi Holding LLC",
-        image: "/dubai-event/dubai-speakers/Anna Kobzar.jpeg",
+        image: "/dubai-event/dubai-speakers/Anna Kobzar.png",
         bio: `A highly qualified and analytically driven corporate lawyer with extensive experience managing legal risks, negotiating high-stakes contracts, and delivering strategic legal counsel within the corporate sector. Anna has a proven ability to thrive under pressure, manage complex legal portfolios, and consistently meet challenging deadlines, bringing a strong academic foundation and robust commercial acumen to international corporate governance.
 
 She currently serves as Senior Legal Counsel at Seddiqi Holding LLC and is a Certified In-House Legal Counsel of the Association of Corporate Counsel (ACC). Her core expertise spans commercial law and governance, high-value contract negotiation and management, legal drafting and review of complex agreements, strategic advisory to executive leadership, and analytical problem-solving that breaks down complex legal issues into concise, risk-mitigated business solutions.`,
@@ -259,7 +295,7 @@ She currently serves as Senior Legal Counsel at Seddiqi Holding LLC and is a Cer
     {
         name: "Sergey Medvedev",
         title: "Partner, Gorodissky & Partners",
-        image: "/images/counsel-exchange/Sergey Medvedev.jpg",
+        image: "/dubai-event/dubai-speakers/Sergey Medvedev.png",
         bio: `A highly accomplished international lawyer and Partner at Gorodissky & Partners with over 12 years of profound legal experience in the intellectual property and technology (IPT) sectors. A dual-qualified expert holding registered status as a Trademark, Design, and Software Attorney, Dr. Medvedev specialises in managing complex contentious and non-contentious IP/IT projects with a focus on Russian and cross-border jurisdictions.
 
 His areas of expertise span asset management of copyrights, computer programs, databases, patents, industrial designs, trademarks, and domain names; data protection and privacy, internet law, e-commerce, and web-content regulation; licensing, outsourcing, franchising, distribution, and corporate IPT transactions; and IPT infringement, dispute resolution, anti-counterfeiting, and anti-piracy. His strategic focus includes IPT advisory and regulatory compliance, due diligence, auditing, and risk assessment, and transactional structuring in the technology, media, and telecommunications (TMT) sector.
@@ -273,42 +309,6 @@ He holds a PhD in Law and an LLM in International Law, and is an officially regi
         bio: `Having been in the UAE for over 30 years, coming from a legal background, Shilpa has held the position of Head of Legal in global companies, and is now an independent legal consultant, under her management consultancy firm Focal. She has worked as the in-house Legal head with Smit Lamnalco and Svitzer (part of the Maersk Group), doing work with major corporations worldwide. She specializes in corporate legal work, and her expertise is in contracts of all nature. Always working in the interest of her clients, Shilpa is a strong believer in alternate dispute resolution, mainly mediation.
 
 Shilpa had a close to death experience in 2003, her book "All Battles aren't Legal" is based on her life-death experience and recovery. Her second book "Unfiltered and Unapologetic" is about life lessons. Lawyer by profession and author by passion, she is a strong advocate for diversity and inclusion. A recipient of several awards for writing, resilience, legal excellence and real-life inspiration.`,
-    },
-    {
-        name: "Hasan Al Kilani",
-        title: "General Counsel | Regulatory & Digital Affairs | Corporate Commercial | Board Governance | MENA & GCC | UNCITRAL | Telecom | Sovereign Finance | Digital Economy Law",
-        image: "/dubai-event/dubai-speakers/Hasan Al Kilani.png",
-        bio: `Over more than three decades, across four jurisdictions and two legal traditions, he has built the legal rules behind some of the most important shifts in how business is done, from the rise of digital trade to the regulation of entirely new technologies. He does not advise on the law from the outside. He writes it. And the work he has authored for the United Arab Emirates is now shaping how the rest of the world will follow.
-
-As Senior Legal Advisor and General Counsel at the UAE Ministry of Economy, he has led the modernisation of the country's commercial laws. In plain terms, he rewrote the rulebook that governs how companies trade, register, and operate in one of the world's fastest-moving economies, and made it a model that other countries now study.
-
-His most significant work is a law he authored in 2023, the Law on Trading by Modern Technological Means. It was one of the first laws anywhere built for an economy of digital platforms and apps rather than traditional commerce, and it placed the UAE ahead of almost every other nation on the legal questions raised by digital trade. He then carried its principles to the United Nations, to the body responsible for international trade law. He presented the UAE's approach in Vienna, and in 2025 the United Arab Emirates and Spain jointly proposed that the United Nations build a new international framework for digital trade based on this work, winning European support along the way. It is rare for one country's law to become the starting point for a global one. His is doing exactly that.
-
-Signature achievements: driving the UAE and Spain proposal at UNCITRAL for a new global Model Law on digital trade; authoring UAE Law No. 14 of 2023, one of the world's first laws built for the digital platform economy; drafting the charter that made the UAE a founding member of the Asian Infrastructure Investment Bank; and, as among the first executives of the UAE's telecommunications regulator, overseeing the country's first telecommunications licence.
-
-At the Ministry of Economy, Mr Al Kilani is custodian of the UAE's economic legislation at national, GCC, and international levels. He has authored and steered landmark laws through drafting, stakeholder engagement, and enactment, including the laws governing commercial transactions, commercial agency, arbitration, cooperatives, and the commercial registry, with UAE legislation increasingly adopted as a reference point across the region.
-
-He transformed the commercial registry from a procedural statute into a consolidated national economic data ecosystem, the National Economic Registry, incorporating e-commerce, digital trade, and data classification with extended protection of proprietary rights. He created a unified GCC digital-trade strategy and regulatory framework, and designed a methodology for assessing the real-world impact of legislation, building public-private task forces and roundtables that turned the introduction of new law into active partnership with the sectors it governed.
-
-As General Counsel at the Abu Dhabi Digital Authority, he built the end-to-end legal and regulatory framework for the Emirate's government-wide digital transformation, spanning digital signature, digital wallet, cloud, blockchain, and digital payment. He developed the legal foundation for UAE Pass and AD Locker, which became the country's sovereign digital identity standard, used by millions every day.
-
-He negotiated the agreements that enabled TAMM, managed centralised technology procurement across government, and designed a central contract-management system governing primary contractors and their subcontractors. The regulatory groundwork he established before 2020 allowed Abu Dhabi's government to continue operating seamlessly through the pandemic, a real-world test of the framework's resilience.
-
-As Legal Advisor to one of the region's most active sovereign development funds, the Abu Dhabi Fund for Development, he advised on sovereign, corporate, investment, and dispute-resolution matters across telecommunications, food security, hospitality, and infrastructure, managing affairs across the UAE, the wider Middle East and Africa, and Europe.
-
-He led the legal architecture for the UAE's accession to the Asian Infrastructure Investment Bank as a founding member, drafting the board charter for Arab nations and navigating the political negotiations that made membership possible. He standardised concessionary loan agreements across borrowing nations, directed an international asset-recovery effort that recovered the large majority of capital exposed to organised fraud, and handled the legal affairs of major clean-energy and infrastructure partnerships including IRENA, Masdar, and Mubadala.
-
-As Of Counsel at the international law firm Simmons & Simmons, he advised clients across government, regulatory, and private sectors, led the UAE legal team through the WTO Second Trade Policy Review, and built an integrated regulatory framework through review of the financial services, competition, and companies laws.
-
-Earlier, he twice helped build a nation's telecommunications law from the ground up. In Jordan he was a principal architect of the country's licensing regime, postal regulatory framework, and dispute-resolution function. In the UAE he joined the new telecommunications regulator as one of its first executives, established its regulatory framework, drafted the GCC CERT Charter, and oversaw the first telecommunications licence in the country's history.
-
-In the same period he set an early national precedent in corporate governance. As a senior legal figure at a listed UAE company, he established one of the first precedents under the country's Corporate Governance Executive Order, helping shape how publicly listed companies in the UAE are governed to this day.
-
-Areas of expertise: national and international law; the authoring of legislation and regulatory frameworks; digital trade and digital-economy regulation; telecommunications and ICT regulation; data protection; intellectual property; sovereign and development finance; cross-border negotiation and treaty law (UNCITRAL, WTO, AIIB, GCC); space activities law; competition and foreign investment law; and corporate governance and the structuring of complex agreements between governments and global institutions.
-
-Mr Al Kilani works across two legal traditions and is professionally fluent in both Arabic and English, including legal translation in both directions. He is a published contributor to the Centre of Islamic and Middle Eastern Law at SOAS, University of London, and a frequent speaker and panellist at legal, regulatory, and business forums. He is bar certified and holds a Bachelor of Laws from the University of Jordan.
-
-What sets him apart is not how much he has done, but the level at which he does it. He builds the rules that markets and nations live by, and he is now helping to write them for the world.`,
     },
     {
         name: "Megha Agarwal",
