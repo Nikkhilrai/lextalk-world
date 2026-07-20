@@ -9,7 +9,7 @@ export const speakers = [
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
-        image: "/dubai-event/dubai-speakers/Dr Lalit-Bhasin.jpeg",
+        image: "/dubai-event/dubai-speakers/Dr Lalit Bhasin.png",
         bio: `Dr. Lalit Bhasin is a legendary figure in the Indian legal landscape, bringing over 60 years of veteran experience to the field. He is a premier leader in institutional law, corporate legal policy, and international arbitration, widely recognised for his profound contributions to the Rule of Law.
 
 He currently serves as President of the Society of Indian Law Firms (SILF), Chairman of the Chartered Institute of Arbitrators (CIArb) India Branch, and Chairman of the Confederation of Indian Industry (CII) Task Force on Legal Services. He is also an Honorary Life Member of the International Bar Association — the only Indian ever to receive this honour. He is the Immediate Past President of the Bar Association of India, and his 60+ years of legal practice have been formally recognised by his alma mater, Hindu College.
@@ -19,7 +19,7 @@ He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goen
     {
         name: "Bhavin Mehta",
         title: "Vice President, Compliance & Enterprise Ethics, Mastercard, UAE",
-        image: "/dubai-event/dubai-speakers/Bhavin-Mehta.jpeg",
+        image: "/dubai-event/dubai-speakers/Bhavin Mehta.png",
         bio: `Vice President, Compliance and Enterprise Ethics & Anti-Corruption Leader at Mastercard in the United Arab Emirates. Bhavin is a seasoned corporate compliance, governance, and risk executive with over 19 years of deep-domain experience spanning the Middle East, Africa, and international markets.
 
 A transformational leader and trusted advisor to senior leadership and the Board, he has a proven track record of managing regional and global teams to design, scale, and seamlessly execute robust compliance programmes, strategies, and frameworks. He brings high adaptability across diverse sectors, including financial services, payments, government contracting, construction, energy, and manufacturing.`,
@@ -27,7 +27,7 @@ A transformational leader and trusted advisor to senior leadership and the Board
     {
         name: "Raghvendra Verma",
         title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
-        image: "/dubai-event/dubai-speakers/Raghvendra Verma.jpeg",
+        image: "/dubai-event/dubai-speakers/Raghvendra Verma.png",
         bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
 
 He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
@@ -37,7 +37,7 @@ He is a member of the Chartered Institute for Securities & Investment (CISI) and
     {
         name: "Mahmoud Shafik Youssef",
         title: "Group General Counsel - Head of Legal, Foodics",
-        image: "/dubai-event/dubai-speakers/Mahmoud Shafik Youssef.jpeg",
+        image: "/dubai-event/dubai-speakers/Mahmoud Shafik Youssef.png",
         bio: `Mahmoud Shafik Youssef is the Group General Counsel and Company Secretary of Foodics, a leading fintech and SaaS technology company operating across the GCC and emerging markets in Restaurant Management Systems and Technologies. With over 16 years of international legal experience, Mahmoud specializes in technology, AI governance, fintech regulation, cross-border M&A, and capital markets transactions. He has led complex acquisitions, corporate restructurings, and IPO-readiness initiatives across multiple jurisdictions, and is recognized for building scalable legal and compliance frameworks aligned with digital transformation strategies. 
 
 Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global legal and technology summits, where he shares insights on AI governance, data protection, and regulatory innovation. He is passionate about positioning legal functions as strategic enablers of growth in rapidly evolving digital ecosystems.`
@@ -46,7 +46,7 @@ Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global leg
     {
         name: "Dr. Yasser Aboismail",
         title: "General Counsel, Head of Legal & Compliance & ESG Global Leader",
-        image: "/dubai-event/dubai-speakers/Yasser Aboismail.jpeg",
+        image: "/dubai-event/dubai-speakers/Dr Yasser Aboismail.png",
         bio: `A seasoned executive and trusted legal advisor with an elite track record of driving corporate growth, mitigating enterprise risk, and cultivating high-performance compliance cultures. A General Counsel, Head of Legal & Compliance, and ESG global leader, he is highly adept at steering complex commercial transactions, M&A, joint ventures, and foreign direct investments while ensuring strict regulatory alignment. A powerful negotiator and consensus-builder, he forges strategic alliances with boards, governmental authorities, and public-sector stakeholders to secure long-term organisational success.
 
 He was selected by Legal500 as one of the top 100 most influential General Counsels in the Middle East and named General Counsel of the Year by Legal Era and Law.com. He orchestrates robust frameworks for corporate governance, cross-border M&A, and commercial strategy, and is a subject-matter expert in cross-stakeholder alignment, contract negotiation, and proactive risk mitigation. He has served on multiple boards and committees and is a respected legal-community influencer and acclaimed speaker at major industry conferences.
@@ -56,7 +56,7 @@ His core competencies span corporate and commercial law, mergers and acquisition
     {
         name: "Mehrdad Molaei",
         title: "Senior Legal Counsel, SLB",
-        image: "/dubai-event/dubai-speakers/Mehrdad Molaei.jpeg",
+        image: "/dubai-event/dubai-speakers/Mehrdad Molaei.png",
         bio: `Mehrdad Molaei is a senior legal executive with over 20 years of global experience advising multinational organizations on cross-border transactions, corporate governance, and complex risk management.
 
 He has led legal strategy for multi-billion-dollar projects across the Middle East, Europe, and North America, overseeing high-value commercial negotiations, IP-sensitive matters, dispute exposure, and enterprise-wide compliance frameworks.
