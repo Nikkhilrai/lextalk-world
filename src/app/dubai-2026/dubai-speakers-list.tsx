@@ -260,11 +260,6 @@ Certified by the Indian Institute of Corporate Affairs (IICA), she has built a r
 A dedicated speaker, educator, and creative entrepreneur, Chinar publishes public-interest content under the channel @LegallyYoursDubai, raising awareness of UAE business laws, regulatory compliance, and employee rights. She founded Chinar's Art Valley, an artistic venture designing team-building workshops, youth sessions, and therapeutic art programmes in partnership with NGOs. Today she offers specialised strategic advisory across corporate and business law, international trademark and IP protection, and compliance audits, balancing technical legal consulting with brand and corporate content strategy.`,
     },
     {
-        name: "Adeel Mirza",
-        title: "Head of AML & KYC Unit, Al Masraf",
-        image: "/dubai-event/dubai-speakers/Adeel Mirza.png",
-    },
-    {
         name: "Saloni Tuteja",
         title: "Head of Legal & Compliance, Servier Middle East",
         image: "/dubai-event/dubai-speakers/Saloni Tuteja.png",
