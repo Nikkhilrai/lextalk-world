@@ -389,17 +389,17 @@ His expertise spans litigation, arbitration, and strategic contract management, 
         name: "Sujoy Bose",
         title: "Head – Secretarial, Legal & Compliance, Krsnaa Diagnostics Ltd.",
         image: "/dubai-event/dubai-speakers/Sujoy Bose.png",
-        bio: `Sujoy Bose is Head – Secretarial, Legal and Compliance at Krsnaa Diagnostics Limited, where he also serves as Company Secretary and Compliance Officer. He is an Associate Member of the Institute of Company Secretaries of India with more than 11 years of experience in corporate law, commercial law, and compliance.
+        bio: `Sujoy Bose is Head – Secretarial, Legal and Compliance at Krsnaa Diagnostics Limited, appointed as Company Secretary and Compliance Officer in August 2023. He is an Associate Member of the Institute of Company Secretaries of India with over 11 years of experience in corporate law, commercial law, and compliance, and holds a degree from the University of Pune.
 
-He has been recognised as Best In-House Legal Counsel in the Healthcare Industry by the India Business Law Journal.`,
+His prior roles include Company Secretary and Compliance Officer at INDIGO Paints Limited, alongside positions at BMC Legal LLP and Startupwala. He specialises in governance, risk assessment and mitigation, secretarial and legal matters, ESG, and board communication, with particular expertise in IPOs and cross-border M&A. He has been recognised as Best In-House Legal Counsel in the Healthcare Industry by the India Business Law Journal.`,
     },
     {
         name: "Dikina Wedi",
         title: "Group General Counsel & Chief Compliance Officer, Auremin",
         image: "/dubai-event/dubai-speakers/Dikina Wedi.png",
-        bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A dual-qualified international corporate, business, and investment lawyer and admitted Advocate, she brings 19 years of senior in-house legal experience spanning Africa, Europe, and the Middle East.
+        bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A bilingual (French/English), dual-qualified, multi-jurisdictional business lawyer and admitted Advocate, she brings more than 15 years of in-house experience in international corporate, commercial, and business law.
 
-Her practice focuses on cross-border M&A, petroleum and mining regulation, OHADA law, and complex multi-jurisdictional transactions.`,
+She holds an LLB and an LLM in International Business Law, and began her career as an in-house corporate lawyer in Paris, France, developing deep expertise in commercial law within the pharmaceutical industry. She has since led legal support teams on multi-million dollar cross-border African investment and development projects, and remains a driving advocate for Africa-focused investment and top-level legal policy change.`,
     },
 ];
 
