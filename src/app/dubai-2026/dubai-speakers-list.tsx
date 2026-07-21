@@ -108,16 +108,6 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
 His experience spans Russia, Central and Eastern Europe, Turkey, and the Middle East and Africa, with deep sector knowledge in financial services, energy, oil and gas, and healthcare. His expertise covers governance, risk management and compliance (GRC), policies and procedures development from inception to execution, enterprise and third-party risk management, and business ethics and integrity leadership, specialising in cultivating ethical workplace environments where integrity drives strategic decision-making.`,
     },
     {
-        name: "Sameet Gambhir",
-        title: "Associate Partner, CS & Compliance, KPMG Global Services",
-        image: "/dubai-event/dubai-speakers/Sameet Gambhir.png",
-        bio: `A highly accomplished and forward-thinking Senior Corporate Legal Professional and Fellow Company Secretary (FCS, LLB) with over 30 years of distinguished experience steering corporate governance, regulatory compliance, and legal strategy for top-tier organisations. He currently serves as Associate Partner, CS & Compliance at KPMG Global Services, with a proven track record of safeguarding corporate reputation, mitigating multi-jurisdictional risks, and leading high-performing legal teams. An alumnus of the IIM-Bangalore Leadership Effectiveness Programme, he is recognised nationally and globally as an industry thought leader and champion of robust corporate governance and ESG frameworks.
-
-His expertise spans corporate governance and board management, SEBI listing and insider trading regulations, RBI and FEMA matters, industrial and labour laws, risk management, due diligence, corporate restructuring, high-stakes litigation and investigations, contract management, intellectual property rights, brand protection, and data privacy. He led the legal and compliance team at DCM Shriram Ltd to win "Best Compliance Team of the Year" for two consecutive years (Kamikaze 2019; LegalEra 2020), and has served as former Chair of the Corporate Affairs Committee of PHDCCI, a member of the CII National Committee on Regulatory Affairs, and a member of the Board of Study of GD Goenka Law School.
-
-He has been featured in Forbes India's Top In-house Counsel, Fortune India's Top GC, and The Legal500's GC Powerlist. He was conferred the Global LexFalcon Award (Governance & Compliance) in Dubai by LexTalk World (2022), named Compliance Lawyer of the Year, Finest Legal Counsel, and Distinguished Legal Mind by LegalEra, and recognised as one of the Most Influential Corporate Counsel and Company Secretary by ACoS (2019).`,
-    },
-    {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
         image: "/dubai-event/dubai-speakers/Sanjay Jain.png",
@@ -364,6 +354,13 @@ She currently serves as an External Reviewer for the Department of Education and
 He is a frequent contributor on topics including governance, risk and compliance (GRC), supply chain risk, and AI-driven cybersecurity leadership.`,
     },
     {
+        name: "Dikina Wedi",
+        title: "Group General Counsel & Chief Compliance Officer, Auremin",
+        image: "/dubai-event/dubai-speakers/Dikina Wedi.png",
+        bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A bilingual (French/English), dual-qualified, multi-jurisdictional business lawyer and admitted Advocate, she brings more than 15 years of in-house experience in international corporate, commercial, and business law.
+
+She holds an LLB and an LLM in International Business Law, and began her career as an in-house corporate lawyer in Paris, France, developing deep expertise in commercial law within the pharmaceutical industry. She has since led legal support teams on multi-million dollar cross-border African investment and development projects, and remains a driving advocate for Africa-focused investment and top-level legal policy change.`,
+    },    {
         name: "Dr Faris Nasrallah",
         title: "Head of Arbitration & Senior Arbitration Counsel, Crescent Petroleum",
         image: "/dubai-event/dubai-speakers/Dr Faris Nasrallah.png",
@@ -393,14 +390,7 @@ His expertise spans litigation, arbitration, and strategic contract management, 
 
 His prior roles include Company Secretary and Compliance Officer at INDIGO Paints Limited, alongside positions at BMC Legal LLP and Startupwala. He specialises in governance, risk assessment and mitigation, secretarial and legal matters, ESG, and board communication, with particular expertise in IPOs and cross-border M&A. He has been recognised as Best In-House Legal Counsel in the Healthcare Industry by the India Business Law Journal.`,
     },
-    {
-        name: "Dikina Wedi",
-        title: "Group General Counsel & Chief Compliance Officer, Auremin",
-        image: "/dubai-event/dubai-speakers/Dikina Wedi.png",
-        bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A bilingual (French/English), dual-qualified, multi-jurisdictional business lawyer and admitted Advocate, she brings more than 15 years of in-house experience in international corporate, commercial, and business law.
 
-She holds an LLB and an LLM in International Business Law, and began her career as an in-house corporate lawyer in Paris, France, developing deep expertise in commercial law within the pharmaceutical industry. She has since led legal support teams on multi-million dollar cross-border African investment and development projects, and remains a driving advocate for Africa-focused investment and top-level legal policy change.`,
-    },
 ];
 
 
