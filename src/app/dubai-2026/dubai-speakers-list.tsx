@@ -339,6 +339,68 @@ Ahmed's contributions to the legal profession have been internationally recogniz
 
 Recognized for delivering high-impact transformation initiatives and building scalable business ecosystems, Imran has successfully led complex projects across the GCC and international markets. He is a regular speaker at global conferences, sharing insights on corporate governance, strategic leadership, innovation, ESG, and the future of business. His practical, results-driven approach and ability to bridge strategy with execution have established him as a trusted advisor to businesses, investors, and government stakeholders navigating today's rapidly evolving global landscape.`,
     },
+    {
+        name: "Shaharyar Nashat",
+        title: "Executive Director Legal – Assets & Operations, Al Jomaih Energy and Water Co. Ltd. (JENWA)",
+        image: "/dubai-event/dubai-speakers/Shaharyar Nashat.png",
+        bio: `Shaharyar Nashat serves as Executive Director Legal – Assets and Operations at Al Jomaih Energy and Water Co. Ltd. (JENWA), a leading Saudi developer of water and energy infrastructure. He holds a Legal Practice Course (LPC) qualification from the University of Oxford and brings extensive cross-border legal experience spanning commercial litigation, intellectual property, and competition law.
+
+His prior roles include Company Secretary and Head of Legal at The Hub Power Company Limited (HUBCO), Country Counsel and Head of Legal at Citi, and Legal Director positions at Pfizer Pakistan and Pfizer Vietnam. He also serves on the Advisory Board of High Street Resources.`,
+    },
+    {
+        name: "Dr Shamini K Ragavan",
+        title: "External Reviewer, Department of Education and Knowledge (ADEK) | Associate Professor of Law",
+        image: "/dubai-event/dubai-speakers/Dr Shamini K Ragavan.png",
+        bio: `Dr. Shamini K Ragavan is an Associate Professor and legal academic with more than 25 years of international legal and academic experience across five jurisdictions. She began her career as a Barrister in Malaysia specialising in complex commercial litigation before qualifying as a Solicitor in England.
+
+She currently serves as an External Reviewer for the Department of Education and Knowledge (ADEK), Abu Dhabi, and has held academic appointments at institutions including the University of Birmingham (UK and Dubai campuses) and Amity University Dubai.`,
+    },
+    {
+        name: "Clen C Richard",
+        title: "Senior Cybersecurity Manager, MBC Group",
+        image: "/dubai-event/dubai-speakers/Clen C Richard.png",
+        bio: `Clen C Richard is a cybersecurity leader at MBC Group, holding certifications including CISSP, CEH, and ISO 27001 Lead Auditor, alongside recognitions as a Microsoft Cybersecurity Architect Expert and Azure Security Engineer. He is an IDC & CXO Cyber Strategist Award winner, known for building a cybersecurity-aware culture resilient against digital threats.
+
+He is a frequent contributor on topics including governance, risk and compliance (GRC), supply chain risk, and AI-driven cybersecurity leadership.`,
+    },
+    {
+        name: "Dr Faris Nasrallah",
+        title: "Head of Arbitration & Senior Arbitration Counsel, Crescent Petroleum",
+        image: "/dubai-event/dubai-speakers/Dr Faris Nasrallah.png",
+        bio: `Dr. Faris Nasrallah is Head of Arbitration and Senior Arbitration Counsel at Crescent Petroleum, a role he has held since 2021. He is also a Researcher and Visiting Fellow in International Arbitration at the Max Planck Institute and practises independently as Arbitration Counsel.
+
+He holds a PhD, awarded summa cum laude by Martin Luther University Halle-Wittenberg for his thesis "Beyond Theory and Practice in International Arbitration," and is a regular speaker and panellist at international arbitration conferences.`,
+    },
+    {
+        name: "Hamdy Deyab",
+        title: "Head of Legal, Lootah Group of Companies",
+        image: "/dubai-event/dubai-speakers/Hamdy Deyab.png",
+        bio: `Hamdy Deyab serves as Head of Legal at Lootah Group of Companies, one of the UAE's leading multinational conglomerates with operations spanning construction, real estate, industries, and trading.`,
+    },
+    {
+        name: "Abdul Azeem",
+        title: "Head of Legal Department, Rayan Engineering Consulting",
+        image: "/dubai-event/dubai-speakers/Abdul Azeem.png",
+        bio: `Abdul Azeem is Head of the Legal Department at Rayan Engineering Consulting, a Dubai-based architectural and engineering consultancy with branches in Abu Dhabi and Ajman. With over 10 years of legal experience across the UK, UAE, and Pakistan, he advises on corporate, labour, construction, and intellectual property law.
+
+His expertise spans litigation, arbitration, and strategic contract management, having advised leading entities across FinTech, combat sports, construction, and food & beverage sectors on international disputes and regulatory challenges.`,
+    },
+    {
+        name: "Sujoy Bose",
+        title: "Head – Secretarial, Legal & Compliance, Krsnaa Diagnostics Ltd.",
+        image: "/dubai-event/dubai-speakers/Sujoy Bose.png",
+        bio: `Sujoy Bose is Head – Secretarial, Legal and Compliance at Krsnaa Diagnostics Limited, where he also serves as Company Secretary and Compliance Officer. He is an Associate Member of the Institute of Company Secretaries of India with more than 11 years of experience in corporate law, commercial law, and compliance.
+
+He has been recognised as Best In-House Legal Counsel in the Healthcare Industry by the India Business Law Journal.`,
+    },
+    {
+        name: "Dikina Wedi",
+        title: "Group General Counsel & Chief Compliance Officer, Auremin",
+        image: "/dubai-event/dubai-speakers/Dikina Wedi.png",
+        bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A dual-qualified international corporate, business, and investment lawyer and admitted Advocate, she brings 19 years of senior in-house legal experience spanning Africa, Europe, and the Middle East.
+
+Her practice focuses on cross-border M&A, petroleum and mining regulation, OHADA law, and complex multi-jurisdictional transactions.`,
+    },
 ];
 
 
