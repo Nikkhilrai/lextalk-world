@@ -219,6 +219,7 @@ const sponsorTiers = [
         cardClass: "w-52 h-28 md:w-64 md:h-32",
         logos: [
             { name: "BGK Law Associates", src: "/dubai-event/sponsors/BGK Law Associates.jpg", href: null as string | null },
+            { name: "Fairaigle Legal & Consultancy LLP", src: "/dubai-event/sponsors/Fairaigle Legal & Consultancy LLP.jpg", href: null as string | null },
         ],
     },
     {
