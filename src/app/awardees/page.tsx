@@ -26,6 +26,24 @@ interface AwardEvent {
 
 const STATIC_EVENTS: AwardEvent[] = [
     {
+        id: "static-bangalore-2026",
+        name: "Awardees Bangalore, India – 2026",
+        slug: "awardees-bangalore-2026",
+        customHref: "/awardees-bangalore-2026",
+        location: "Bangalore, India",
+        year: 2026,
+        image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=1200&auto=format&fit=crop",
+        description: null,
+        date: "11 June 2026",
+        fullLocation: "Radisson Blu Atria, Bangalore",
+        stats: [
+            { label: "People", value: "300+" },
+            { label: "Speaker", value: "50+" },
+            { label: "Awardee", value: "30+" },
+            { label: "Countries", value: "10+" },
+        ],
+    },
+    {
         id: "static-houston-2026",
         name: "Awardees Houston, USA – 2026",
         slug: "awardees-houston-2026",
