@@ -19,14 +19,6 @@ She also has experience in educational institutional administration, ensuring go
 She is the author of Beads of Life, a forthcoming work centered on the power of the subconscious mind, inner strength, control of emotions and personal transformation. Her writing reflects resilience, purpose, and a deep commitment to inspiring others. With a vision to integrate legal knowledge with human insight, she represents a new generation of professionals driven by both intellect and impact.`,
     },
     {
-        name: "Abdullah Bin Manzur",
-        title: "Barrister, Gray's Inn | Advocate & Founder, Ruskin Global",
-        image: `${IMG}/abdullah-bin-manzur.jpg`,
-        bio: `Abdullah B. Manzur is a Barrister of the Honourable Society of Gray's Inn and an Advocate practising in Dhaka, Bangladesh, with over a decade of experience in dispute resolution and commercial practice. Called to the Bar of England and Wales in 2015, he leads his independent legal practice through his firm, Ruskin Global. His core areas of practice include International Commercial Arbitration, Commercial Litigation, Contractual Disputes, Banking Disputes, Real Estate Law, and complex Construction and EPC Disputes. He advises and represents a diverse portfolio of domestic and international clients and has first-hand experience of successfully representing clients as counsel in international arbitration proceedings conducted under leading institutional rules such as ICC, SIAC, and UNCITRAL.
-
-Mr. Manzur is recognised for his strategic and results-oriented approach to complex disputes, underpinned by a proven track record of successfully representing clients in high-value and multi-million-dollar matters. His experience spans sectors such as infrastructure, energy, contractual disputes, banking, and international trade, and he regularly appears before various courts and tribunals across Bangladesh. In addition to his contentious practice, he maintains an active corporate legal practice, advising various companies, and also acts as counsel in matters involving intellectual property rights, succession, and family disputes. His practice reflects a strong command of both domestic and international legal frameworks, making him a trusted counsel in sophisticated and commercially sensitive legal matters.`,
-    },
-    {
         name: "Apoorva Sane",
         title: "Legal & Privacy Professional | CIPP/E, CIPM",
         image: `${IMG}/apoorva-sane.jpg`,
