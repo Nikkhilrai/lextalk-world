@@ -23,6 +23,7 @@ interface AwardEvent {
     date?: string;
     fullLocation?: string;
     stats?: { label: string; value: string }[];
+    featured?: boolean;
 }
 
 const STATIC_EVENTS: AwardEvent[] = [
@@ -37,6 +38,7 @@ const STATIC_EVENTS: AwardEvent[] = [
         description: null,
         date: "11 June 2026",
         fullLocation: "Radisson Blu Atria, Bangalore",
+        featured: true,
         stats: [
             { label: "People", value: "300+" },
             { label: "Speaker", value: "50+" },
@@ -292,7 +294,11 @@ export default function AwardeesPage() {
             const staticSlugs = new Set(STATIC_EVENTS.map(s => s.slug));
             const filteredDbEvents = dbEvents.filter((e: any) => !staticSlugs.has(e.slug));
 
-            const allEvents = [...filteredDbEvents, ...STATIC_EVENTS].sort((a, b) => b.year - a.year);
+            // Featured (latest) event leads, then newest year first
+            const allEvents = [...filteredDbEvents, ...STATIC_EVENTS].sort((a, b) => {
+                if (a.featured !== b.featured) return a.featured ? -1 : 1;
+                return b.year - a.year;
+            });
             setEvents(allEvents);
             setLoading(false);
         };
@@ -391,7 +397,10 @@ export default function AwardeesPage() {
                                     href={href}
                                     target={isExternal ? "_blank" : undefined}
                                     rel={isExternal ? "noopener noreferrer" : undefined}
-                                    className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-amber-500/5"
+                                    className={`group relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-300 ${event.featured
+                                        ? "border-2 border-amber-400 shadow-[0_12px_40px_-8px_rgba(245,158,11,0.35)] hover:shadow-[0_20px_55px_-8px_rgba(245,158,11,0.5)] hover:-translate-y-1 ring-4 ring-amber-400/15"
+                                        : "border border-slate-200 hover:border-amber-500/30 shadow-sm hover:shadow-2xl hover:shadow-amber-500/5"
+                                        }`}
                                 >
                                     {/* Image Container - Larger Image */}
                                     <div className="relative h-48 w-full overflow-hidden">
@@ -407,6 +416,19 @@ export default function AwardeesPage() {
                                         <div className="absolute top-4 right-4 px-2.5 py-1 bg-amber-500 text-white text-[11px] font-black rounded shadow-lg">
                                             {event.year}
                                         </div>
+
+                                        {/* Latest Event badge */}
+                                        {event.featured && (
+                                            <div className="absolute top-4 left-4 flex items-center gap-1.5 px-2.5 py-1 bg-white/95 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg">
+                                                <span className="relative flex h-1.5 w-1.5">
+                                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
+                                                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                                </span>
+                                                <span className="text-[10px] font-black uppercase tracking-wider text-amber-700">
+                                                    Latest Event
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Content Section - Extremely Tight to maintain card height */}
