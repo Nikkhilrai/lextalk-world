@@ -334,6 +334,9 @@ export default function AwardeesPage() {
                 </div>
             </section>
 
+            {/* Ceremony photo showcase */}
+            <AwardeeCeremonyMarquee variant="light" />
+
             {/* Year Filter */}
             <section className="py-8 border-y border-slate-200 bg-white/50 backdrop-blur-sm sticky top-[72px] z-20">
                 <div className="container mx-auto px-4">
@@ -461,9 +464,6 @@ export default function AwardeesPage() {
                     )}
                 </div>
             </section>
-
-            {/* Ceremony photo showcase */}
-            <AwardeeCeremonyMarquee variant="light" />
 
             <Footer />
         </div>

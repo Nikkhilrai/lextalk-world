@@ -149,6 +149,9 @@ export default function AwardeesBangalore2026Page() {
                 </div>
             </section>
 
+            {/* Ceremony photo showcase */}
+            <AwardeeCeremonyMarquee variant="dark" />
+
             {/* Grid */}
             <section className="py-16 md:py-24 relative">
                 <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#060a14] to-transparent z-10 pointer-events-none" />
@@ -168,9 +171,6 @@ export default function AwardeesBangalore2026Page() {
                     )}
                 </div>
             </section>
-
-            {/* Ceremony photo showcase */}
-            <AwardeeCeremonyMarquee variant="dark" />
 
             {/* Bio Modal */}
             <AnimatePresence>
