@@ -194,7 +194,7 @@ export default function AwardeesBangalore2026Page() {
                                 <X className="w-4 h-4 text-white/60" />
                             </button>
 
-                            <div className="p-6 md:p-8">
+                            <div className="p-6 md:p-8 max-h-[85vh] overflow-y-auto">
                                 <div className="flex items-start gap-5 mb-6">
                                     {selected.image ? (
                                         <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden shrink-0 ring-2 ring-[#cfa45a]/20">
@@ -213,7 +213,13 @@ export default function AwardeesBangalore2026Page() {
 
                                 <div className="w-12 h-px bg-[#cfa45a]/30 mb-5" />
 
-                                <p className="text-white/60 text-sm leading-[1.8] font-light">{selected.bio}</p>
+                                <div className="space-y-4">
+                                    {selected.bio.split("\n\n").map((para, i) => (
+                                        <p key={i} className="text-white/60 text-sm leading-[1.8] font-light">
+                                            {para}
+                                        </p>
+                                    ))}
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>
