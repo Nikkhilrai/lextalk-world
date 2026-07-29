@@ -7,6 +7,7 @@ import { Award, MapPin, Calendar, ChevronRight, Users } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAwardEvents } from "@/actions/awardee";
+import { AwardeeCeremonyMarquee } from "@/components/AwardeeCeremonyMarquee";
 
 interface AwardEvent {
     id: string;
@@ -461,6 +462,8 @@ export default function AwardeesPage() {
                 </div>
             </section>
 
+            {/* Ceremony photo showcase */}
+            <AwardeeCeremonyMarquee variant="light" />
 
             <Footer />
         </div>

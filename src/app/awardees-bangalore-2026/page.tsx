@@ -8,6 +8,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import { awardees, type Awardee } from "./awardees-data";
+import { AwardeeCeremonyMarquee } from "@/components/AwardeeCeremonyMarquee";
 
 function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: number; onSelect: (a: Awardee) => void }) {
     const ref = useRef<HTMLDivElement>(null);
@@ -167,6 +168,9 @@ export default function AwardeesBangalore2026Page() {
                     )}
                 </div>
             </section>
+
+            {/* Ceremony photo showcase */}
+            <AwardeeCeremonyMarquee variant="dark" />
 
             {/* Bio Modal */}
             <AnimatePresence>

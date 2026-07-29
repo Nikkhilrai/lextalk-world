@@ -65,3 +65,6 @@ lextalk-world-*.json
 seed_advisors_prod.js
 seed_real_advisors.js
 test-counts.js
+
+# Raw awardee/event photo originals (uploaded to Cloudinary, not shipped)
+/public/Awardee images/
