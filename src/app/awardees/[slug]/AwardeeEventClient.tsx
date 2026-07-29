@@ -264,7 +264,7 @@ export default function AwardeeEventClient({ event, categories }: { event: DBEve
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25 }}
-                        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+                        className="fixed inset-0 z-[100000] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
                         onClick={() => setSelected(null)}
                     >
                         <motion.div
