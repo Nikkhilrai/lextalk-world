@@ -390,6 +390,20 @@ His expertise spans litigation, arbitration, and strategic contract management, 
 
 His prior roles include Company Secretary and Compliance Officer at INDIGO Paints Limited, alongside positions at BMC Legal LLP and Startupwala. He specialises in governance, risk assessment and mitigation, secretarial and legal matters, ESG, and board communication, with particular expertise in IPOs and cross-border M&A. He has been recognised as Best In-House Legal Counsel in the Healthcare Industry by the India Business Law Journal.`,
     },
+    {
+        name: "Adv. Anindita Pal",
+        title: "Founder & Managing Partner, Fairaigle Legal & Consultancy LLP",
+        image: "/dubai-event/dubai-speakers/Anindita Pal.png",
+        bio: `Adv. Anindita Pal is a seasoned legal professional with over 14 years of experience in litigation, dispute resolution, legal advisory, and strategic consulting. She is the Founder and Managing Partner of Fairaigle Legal & Consultancy LLP, a Hyderabad-based multidisciplinary law firm dedicated to delivering practical, result-oriented legal solutions to individuals, businesses, and institutions across corporate law, family law, litigation, accident claims, business consultancy, and forensic advisory.
+
+She holds an MBA in Entrepreneurship along with a Master's Degree in Forensic Science & Criminology.`,
+    },
+    {
+        name: "Sujneet Kaur Johal",
+        title: "Regional Business Manager & Legal Technology Advisor – MEA",
+        image: "/dubai-event/dubai-speakers/Sujneet Kaur Johal.png",
+        bio: `Sujneet Kaur Johal is a legal technology professional focused on the Middle East and Africa region, working at the intersection of legal operations and enterprise technology adoption. Her work centres on advising corporate legal teams as they digitise governance, contract, and compliance workflows.`,
+    },
 
 ];
 
