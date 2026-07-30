@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
             paymentId,
             orderDate,
             isBangalore = false,
+            isMumbai = false,
         } = body;
+
+        const eventShortLabel = isBangalore ? "Bangalore" : isMumbai ? "Mumbai" : "Dubai";
 
         // Check if Resend is configured
         if (!process.env.RESEND_API_KEY) {
@@ -31,9 +34,17 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const eventName = isBangalore ? "Bangalore 2026 South Asia Edition" : "Dubai 2026 Legal Conference";
-        const eventDate = isBangalore ? "June 11, 2026" : "September 9-10, 2026";
-        const eventVenue = isBangalore ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001" : "Dubai, UAE";
+        const eventName = isBangalore
+            ? "Bangalore 2026 South Asia Edition"
+            : isMumbai
+                ? "Mumbai 2026 Legal Conference"
+                : "Dubai 2026 Legal Conference";
+        const eventDate = isBangalore ? "June 11, 2026" : isMumbai ? "December 10-11, 2026" : "September 9-10, 2026";
+        const eventVenue = isBangalore
+            ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001"
+            : isMumbai
+                ? "Mumbai, India"
+                : "Dubai, UAE";
 
         // Fetch PDF from dynamic download endpoint if available
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
@@ -198,7 +209,7 @@ export async function POST(request: NextRequest) {
         const emailOptions: any = {
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: [buyerEmail],
-            subject: `Payment Confirmation - ${isBangalore ? 'Bangalore' : 'Dubai'} 2026 Conference Pass (#${ticketNumber})`,
+            subject: `Payment Confirmation - ${eventShortLabel} 2026 Conference Pass (#${ticketNumber})`,
             html: htmlEmail,
         };
 
@@ -220,7 +231,7 @@ export async function POST(request: NextRequest) {
             await resend.emails.send({
                 from: "Notifications <noreply@lextalkworld.in>",
                 to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"],
-                subject: `NEW Payment Confirmed: ${buyerName} - ${isBangalore ? 'Bangalore' : 'Dubai'} 2026`,
+                subject: `NEW Payment Confirmed: ${buyerName} - ${eventShortLabel} 2026`,
                 html: `
                     <h2>New Conference Registration Details</h2>
                     <p><strong>Name:</strong> ${buyerName}</p>
@@ -231,7 +242,7 @@ export async function POST(request: NextRequest) {
                     <p><strong>Amount:</strong> ${currencySymbol}${amount?.toLocaleString()} ${currency}</p>
                     <p><strong>Payment ID:</strong> ${paymentId}</p>
                     <p><strong>Order Number:</strong> #${ticketNumber}</p>
-                    <p><strong>Location:</strong> ${isBangalore ? 'Bangalore' : 'Dubai'}</p>
+                    <p><strong>Location:</strong> ${eventShortLabel}</p>
                 `
             });
         } catch (organizerErr) {

@@ -153,6 +153,7 @@ export async function POST(request: NextRequest) {
                                 paymentId: razorpay_payment_id,
                                 orderDate: new Date().toISOString(),
                                 isBangalore,
+                                isMumbai,
                             }),
                         }
                     );
