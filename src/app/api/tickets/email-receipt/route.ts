@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
         const eventVenue = isBangalore
             ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001"
             : isMumbai
-                ? "Mumbai, India"
+                ? "Mumbai, India — venue to be announced"
                 : "Dubai, UAE";
 
         // Fetch PDF from dynamic download endpoint if available
