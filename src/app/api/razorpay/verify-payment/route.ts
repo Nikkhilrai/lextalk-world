@@ -97,7 +97,8 @@ export async function POST(request: NextRequest) {
                 }
 
                 const { order: createdOrder } = await orderRes.json();
-                const ticketNumber = createdOrder.ticketNumber || `BNG-${createdOrder.id}`;
+                const eventPrefix = isBangalore ? "BNG" : isMumbai ? "MUM" : "DXB";
+                const ticketNumber = createdOrder.ticketNumber || `${eventPrefix}-${createdOrder.orderNumber || createdOrder.id}`;
                 ticketNumbers.push(ticketNumber);
 
                 let ticketUrl = null;
