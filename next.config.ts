@@ -5,6 +5,8 @@ const nextConfig: any = {
     return [
       { source: "/blog", destination: "/blog-news", permanent: true },
       { source: "/blog/:slug", destination: "/blog-news/:slug", permanent: true },
+      // Bangalore 2026 concluded on June 11, 2026 — no more passes to sell.
+      { source: "/bangalore-awardee-confirmation-2026", destination: "/awardees-bangalore-2026", permanent: false },
     ];
   },
   images: {
