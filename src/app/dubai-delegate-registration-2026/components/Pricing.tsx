@@ -172,7 +172,11 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
     };
 
     const discountMultiplier = couponApplied ? (1 - couponApplied.discountPct / 100) : 1;
+    const hasEarlyBird = pass.originalPrice > pass.discountedPrice;
     const inrOriginal = pass.inrPrice || Math.round(pass.discountedPrice * 90);
+    // Scale the INR "full price" strike-through by the same ratio as the advertised USD early-bird discount,
+    // so Indian clients see the same saving that international clients see (originalPrice -> discountedPrice).
+    const inrFullPrice = Math.round((inrOriginal * pass.originalPrice) / pass.discountedPrice);
     const inrFinal = Math.round(inrOriginal * discountMultiplier);
     const usdFinal = Math.round(pass.discountedPrice * discountMultiplier * 100) / 100;
 
@@ -605,12 +609,14 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                             className="group relative flex flex-col items-center justify-center p-6 border-2 border-slate-900 text-slate-900 rounded-3xl hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98] disabled:opacity-50"
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 opacity-60">Indian Clients</span>
-                                            {couponApplied && (
-                                                <span className="text-sm line-through opacity-40 leading-none">₹{inrOriginal.toLocaleString("en-IN")}</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-sm line-through opacity-40 leading-none">₹{inrFullPrice.toLocaleString("en-IN")}</span>
                                             )}
                                             <span className="text-2xl font-black">₹{inrFinal.toLocaleString("en-IN")}</span>
-                                            {couponApplied && (
-                                                <span className="text-[9px] mt-0.5 opacity-50">{couponApplied.discountPct}% off applied</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-[9px] mt-0.5 opacity-50">
+                                                    {couponApplied ? `${couponApplied.discountPct}% off applied` : "Early Bird price"}
+                                                </span>
                                             )}
                                             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <ChevronRight size={16} />
@@ -622,12 +628,14 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                             className="group relative flex flex-col items-center justify-center p-6 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-3xl hover:shadow-[0_15px_40px_-10px_rgba(245,158,11,0.5)] transition-all active:scale-[0.98] disabled:opacity-50 shadow-lg"
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 text-slate-900/60">International Clients</span>
-                                            {couponApplied && (
-                                                <span className="text-sm line-through text-slate-900/40 leading-none">${pass.discountedPrice} USD</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-sm line-through text-slate-900/40 leading-none">${pass.originalPrice} USD</span>
                                             )}
                                             <span className="text-2xl font-black">${usdFinal} USD</span>
-                                            {couponApplied && (
-                                                <span className="text-[9px] mt-0.5 text-slate-900/40">{couponApplied.discountPct}% off applied</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-[9px] mt-0.5 text-slate-900/40">
+                                                    {couponApplied ? `${couponApplied.discountPct}% off applied` : "Early Bird price"}
+                                                </span>
                                             )}
                                             <div className="absolute top-2 right-2">
                                                 <Sparkles size={16} fill="currentColor" />
