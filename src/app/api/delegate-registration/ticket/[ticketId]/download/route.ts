@@ -55,7 +55,7 @@ export async function GET(
             ? "June 11, 2026"
             : isMumbai
                 ? "TBA"
-                : "13-14 May, 2026";
+                : "9-10 September, 2026";
         const eventVenue = isBangalore
             ? "Radisson Blu Atria, 1 Palace Road, Bengaluru"
             : isMumbai
