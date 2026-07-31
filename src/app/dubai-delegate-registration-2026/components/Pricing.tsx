@@ -287,8 +287,10 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                         paymentType,
                         customerDetails: formData,
                         conferenceSlug: "dubai-2026",
-                        originalPrice: pass.originalPrice,
-                        discountedPrice: pass.discountedPrice,
+                        // Store prices in the same currency the delegate is actually charged in,
+                        // otherwise INR payments get saved with the USD figures.
+                        originalPrice: paymentType === "india" ? inrOriginal : pass.originalPrice,
+                        discountedPrice: paymentType === "india" ? inrFinal : usdFinal,
                         couponCode: couponApplied?.code || null,
                         couponDiscount: couponApplied?.discountPct || null,
                         registrationId,
