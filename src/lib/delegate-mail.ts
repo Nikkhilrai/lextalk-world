@@ -208,6 +208,14 @@ function dubaiEmailHtml(data: EmailData): string {
                 <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">${fullName}</td>
               </tr>
               <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Date</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">9 &ndash; 10 September 2026</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Venue</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">Crowne Plaza, Dubai, UAE</td>
+              </tr>
+              <tr>
                 <td style="padding:7px 0;color:#64748b;font-size:13px;">Pass Type</td>
                 <td style="padding:7px 0;color:#f59e0b;font-size:13px;font-weight:700;text-align:right;">${passName}</td>
               </tr>
@@ -220,7 +228,7 @@ function dubaiEmailHtml(data: EmailData): string {
         </table>
 
         <p style="margin:0 0 24px;color:#475569;font-size:14px;line-height:1.8;">
-          Your official ticket is attached to this email. Please keep it handy for check-in at the venue.
+          Tap the button below to view and download your official ticket. Please keep a printed or digital copy handy for check-in at the venue.
         </p>
 
         <div style="text-align:center;margin-top:32px;">
