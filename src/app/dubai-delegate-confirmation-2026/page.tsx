@@ -178,7 +178,7 @@ function ConfirmationContent() {
                             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-2">Event Information</h2>
                             <div className="space-y-4">
                                 <DetailItem icon={Calendar} label="Date" value="9-10 September, 2026" />
-                                <DetailItem icon={MapPin} label="Venue" value="To be announced" />
+                                <DetailItem icon={MapPin} label="Venue" value="Crowne Plaza, Dubai, UAE" />
                                 <DetailItem icon={CheckCircle} label="Registration ID" value={registration.ticketNumber} />
                             </div>
                         </div>

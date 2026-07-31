@@ -60,7 +60,7 @@ export async function GET(
             ? "Radisson Blu Atria, 1 Palace Road, Bengaluru"
             : isMumbai
                 ? "TBA, Mumbai"
-                : "TBA, Dubai";
+                : "Crowne Plaza, Dubai, UAE";
 
         // Generate PDF
         const pdfBuffer = await generateTicketPDF({

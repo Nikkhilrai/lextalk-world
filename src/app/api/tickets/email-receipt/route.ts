@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001"
             : isMumbai
                 ? "Mumbai, India — venue to be announced"
-                : "Dubai, UAE";
+                : "Crowne Plaza, Dubai, UAE";
 
         // Fetch PDF from dynamic download endpoint if available
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
