@@ -7,6 +7,7 @@ import { MumbaiFeaturedIn } from "./components/mumbai/MumbaiFeaturedIn";
 import { MumbaiAbout } from "./components/mumbai/MumbaiAbout";
 import { MumbaiWhyMatters } from "./components/mumbai/MumbaiWhyMatters";
 import { MumbaiWhoYouWillMeet } from "./components/mumbai/MumbaiWhoYouWillMeet";
+import { MumbaiSpeakersTeaser } from "./components/mumbai/MumbaiSpeakersTeaser";
 import { MumbaiGlobalLegacy } from "./components/mumbai/MumbaiGlobalLegacy";
 import { MumbaiAdvisoryBoard } from "./components/mumbai/MumbaiAdvisoryBoard";
 import { MumbaiMoreThanAConference } from "./components/mumbai/MumbaiMoreThanAConference";
@@ -53,6 +54,7 @@ export default function Mumbai2026Page() {
                 <MumbaiWhyMatters />
                 <MumbaiConferenceThemes />
                 <MumbaiWhoYouWillMeet />
+                <MumbaiSpeakersTeaser />
                 <MumbaiGlobalLegacy />
                 <MumbaiAdvisoryBoard />
                 <MumbaiMoreThanAConference />
