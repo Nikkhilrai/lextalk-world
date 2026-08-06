@@ -13,6 +13,100 @@ interface Speaker {
 }
 
 export const speakers: Speaker[] = [
+    {
+        name: "Dr. Lalit Bhasin",
+        title: "President\nSociety of Indian Law Firms, India",
+        image: "/dubai-event/dubai-speakers/Dr Lalit Bhasin.png",
+        bio: `Dr. Lalit Bhasin is a legendary figure in the Indian legal landscape, bringing over 60 years of veteran experience to the field. He is a premier leader in institutional law, corporate legal policy, and international arbitration, widely recognised for his profound contributions to the Rule of Law.
+
+He currently serves as President of the Society of Indian Law Firms (SILF), Chairman of the Chartered Institute of Arbitrators (CIArb) India Branch, and Chairman of the Confederation of Indian Industry (CII) Task Force on Legal Services. He is also an Honorary Life Member of the International Bar Association — the only Indian ever to receive this honour. He is the Immediate Past President of the Bar Association of India, and his 60+ years of legal practice have been formally recognised by his alma mater, Hindu College.
+
+He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goenka University, Gurgaon, and an LL.D. Honoris Causa (2013) from Amity University. His many state and institutional honours include the Lifetime Achievement Award from ASSOCHAM (2023), the Outstanding Arbitration Expert Award from APCAM (2023), the "Glorious 61 Years in the Profession" Award from Legal Era (2023), a Lifetime Achievement Award from the UK India Legal Partnership presented at the House of Lords, London (2022), the National Law Day Award bestowed by the President of India (2007), and a Plaque of Honour bestowed by the Prime Minister of India (2002) for exceptional service to the Rule of Law.`,
+    },
+    {
+        name: "Kapil Singhal",
+        title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
+        image: "/dubai-event/dubai-speakers/Kapil Singhal.png",
+        bio: `A visionary senior executive, serial entrepreneur, and investor with extensive global experience driving business growth across top-tier IT product and services companies. Kapil has a proven track record of spearheading organisational transformations, leading multi-million-dollar global deals, and delivering complex, large-scale enterprise solutions, seamlessly bridging high-level corporate strategy with robust product and service development.
+
+As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
+
+His expertise covers global offering development, business development, transition and transformation, pre-sales and solution architecture, mid-to-large deal closure, and global service delivery, with deep domain knowledge in LegalTech, cloud computing, orchestration and automation, VDI, unified communications, smart city frameworks, and security and surveillance. He is currently architecting customised security and surveillance solutions tailored for the Indian environment in partnership with global Tier-1 component providers within smart city frameworks.`,
+    },
+    {
+        name: "Aniket Gautam",
+        title: "Founding Partner, ASG & Partners",
+        image: "/dubai-event/dubai-speakers/Aniket Gautam.png",
+        bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
+
+His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
+
+In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
+    },
+    {
+        name: "Raghvendra Verma",
+        title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
+        image: "/dubai-event/dubai-speakers/Raghvendra Verma.png",
+        bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
+
+He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
+
+He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
+    },
+    {
+        name: "Tanhieya Ghosh",
+        title: "General Counsel – India, South East Asia & Export Markets, Solventum (formerly 3M Healthcare)",
+        image: "/mumbai-2026/mumbai-speakers/Tanhieya Ghosh.png",
+        bio: `Tanhieya Ghosh leads legal affairs for Solventum (formerly 3M Healthcare) across India, Singapore, and Malaysia, bringing nearly 23 years of experience across legal, ethics and compliance, and governance functions in India and Southeast Asia.
+
+She previously served as Director, Legal Compliance & Frontier Markets Plus (India) and Director, Legal & Compliance, Subcontinent (India) at Medtronic. Prior to her roles in the medical device industry, she held the position of Director, Legal, Ethics & Compliance, Region (India) at Otis Worldwide. She is based in Mumbai.`,
+    },
+    {
+        name: "Arun Kasat",
+        title: "Head – Global Corporate & Commercial Compliance (Emerging Markets), Biocon Biologics",
+        image: "/mumbai-2026/mumbai-speakers/Arun Kasat.png",
+        bio: `Arun Kasat is a seasoned Legal, Privacy, Governance & Compliance professional with over 20 years of experience, currently heading Global Corporate and Commercial Compliance for Emerging Markets at Biocon Biologics.
+
+He previously served as Global Generics Business Compliance Lead (India) at Dr. Reddy's Laboratories, and has held positions at Abbott, Siemens, Johnson Insurance, and EY. He holds a B.Com (Hons.) from St. Xavier's College and is a Chartered Accountant with the Institute of Chartered Accountants of India.`,
+    },
+    {
+        name: "Suchana Mukherjee Gupta",
+        title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
+        image: "/mumbai-2026/mumbai-speakers/Suchana Mukherjee Gupta.png",
+        bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
+
+She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
+    },
+    {
+        name: "Nikunj Savalia",
+        title: "Head Legal & Company Secretary, Sanofi CHC India",
+        image: "/mumbai-2026/mumbai-speakers/Nikunj Savalia.png",
+        bio: `Nikunj Savalia is the Company Secretary and Compliance Officer of Sanofi Consumer Healthcare India Limited, and also heads the company's legal function.
+
+He holds an LLB from Gujarat University and is a Fellow Member of the Institute of Company Secretaries of India. Prior to joining Sanofi, he headed corporate legal, ethics, and data privacy at Bayer CropScience Limited.`,
+    },
+    {
+        name: "Anand Narayan",
+        title: "Legal Manager, National Stock Exchange (NSE)",
+        image: "/mumbai-2026/mumbai-speakers/Anand Narayan.png",
+        bio: `Anand Narayan serves as Legal Manager at the National Stock Exchange of India (NSE), contributing to the legal and regulatory functions of one of India's leading stock exchanges.`,
+    },
+    {
+        name: "Yashwardhan Bandi",
+        title: "Unit Manager & Vice President, Legal, IndusInd Bank",
+        image: "/mumbai-2026/mumbai-speakers/Yashwardhan Bandi.png",
+        bio: `Yashwardhan Bandi is a seasoned Banking and Finance lawyer with 16 years of experience across law firms, NBFCs, and Indian and foreign banks, currently serving as Unit Manager and Vice President, Legal at IndusInd Bank.
+
+He previously served as Senior Legal Counsel at HSBC Bank India, where he worked extensively on legal and regulatory matters including sustainable finance and ESG-related frameworks, and has also held roles at Yes Bank Limited, L&T Infrastructure Finance Company Limited, and Link Legal Advocates. He holds an LLM in Banking & Financial Services Law from the University of Melbourne.`,
+    },
+    {
+        name: "Sharifah Thaherah",
+        title: "Chief Regional Counsel (Head of Legal & Regulatory), APAC and India Region, Infobip",
+        image: "/mumbai-2026/mumbai-speakers/Sharifah Thaherah.png",
+        bio: `Sharifah Thaherah leads legal and regulatory affairs for the APAC and India regions at Infobip, supporting the company's global omnichannel communication initiatives.
+
+She began her career as an advocate and solicitor focused on corporate matters and is also a certified company secretary. Prior to Infobip, she served as Director, Legal (APAC) at Ettus Research, a National Instruments company, providing legal oversight within the telecommunications equipment sector.`,
+    },
 ];
 
 const MAROON = "#7A1F3D";
