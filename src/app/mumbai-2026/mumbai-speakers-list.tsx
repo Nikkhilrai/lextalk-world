@@ -150,9 +150,9 @@ export default function MumbaiSpeakersList() {
                     </p>
                 </motion.div>
 
-                {/* Speakers Grid — staggered circular portraits */}
+                {/* Speakers Grid — uniform, evenly-aligned cards */}
                 {speakers.length > 0 ? (
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-16 md:gap-y-20">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-14 md:gap-y-16 items-stretch">
                         {speakers.map((speaker, idx) => (
                             <motion.div
                                 key={idx}
@@ -160,14 +160,14 @@ export default function MumbaiSpeakersList() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: (idx % 4) * 0.08 }}
-                                className={`group h-full ${speaker.bio ? "cursor-pointer" : ""} ${idx % 2 === 1 ? "sm:translate-y-8 lg:translate-y-10" : ""}`}
+                                className={`group h-full ${speaker.bio ? "cursor-pointer" : ""}`}
                                 onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                             >
                                 <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-2">
                                     {/* Portrait — soft rounded square, full photo visible (no corner cropping) */}
-                                    <div className="relative mb-5 w-full max-w-[210px] md:max-w-[230px]">
+                                    <div className="relative mb-5 w-full max-w-[230px] md:max-w-[250px]">
                                         <div
-                                            className="relative w-full aspect-square overflow-hidden rounded-[28px] bg-[#FDF0E4] transition-all duration-500 ring-4 ring-white group-hover:ring-amber-300"
+                                            className="relative w-full aspect-[1/1.05] overflow-hidden rounded-[28px] bg-[#FDF0E4] transition-all duration-500 ring-4 ring-white group-hover:ring-amber-300"
                                             style={{ boxShadow: `0 18px 40px -18px ${MAROON}55` }}
                                         >
                                             {speaker.image ? (
@@ -175,7 +175,7 @@ export default function MumbaiSpeakersList() {
                                                     src={speaker.image}
                                                     alt={speaker.name}
                                                     fill
-                                                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 230px"
+                                                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 250px"
                                                     className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                                                 />
                                             ) : (
@@ -195,13 +195,13 @@ export default function MumbaiSpeakersList() {
                                         </div>
                                     </div>
 
-                                    {/* Text content */}
-                                    <div className="pt-1 flex-1 flex flex-col items-center w-full max-w-[210px]">
-                                        <h3 className="text-base md:text-lg font-black text-[#3A0F1F] mb-1.5 leading-snug group-hover:text-[#7A1F3D] transition-colors duration-300 tracking-tight">
+                                    {/* Text content — fixed min-height so every card lines up regardless of name/title length */}
+                                    <div className="pt-1 flex-1 flex flex-col items-center w-full max-w-[230px]">
+                                        <h3 className="min-h-[2.75rem] md:min-h-[3.25rem] flex items-center text-base md:text-lg font-black text-[#3A0F1F] mb-1.5 leading-snug group-hover:text-[#7A1F3D] transition-colors duration-300 tracking-tight">
                                             {speaker.name}
                                         </h3>
                                         {speaker.title && (
-                                            <p className="text-[10px] md:text-[11px] font-semibold text-[#7A1F3D]/60 group-hover:text-amber-700 transition-colors duration-300 uppercase tracking-[0.12em] leading-relaxed line-clamp-3">
+                                            <p className="min-h-[2.75rem] md:min-h-[3rem] text-[10px] md:text-[11px] font-semibold text-[#7A1F3D]/60 group-hover:text-amber-700 transition-colors duration-300 uppercase tracking-[0.12em] leading-relaxed line-clamp-3">
                                                 {speaker.title}
                                             </p>
                                         )}
