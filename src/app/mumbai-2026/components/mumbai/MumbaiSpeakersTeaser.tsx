@@ -9,7 +9,7 @@ const MAROON_DARK = "#5C1730";
 
 export function MumbaiSpeakersTeaser() {
     return (
-        <section className="relative py-16 md:py-20 overflow-hidden bg-[#FFFCF7]">
+        <section id="speakers" className="relative py-16 md:py-20 overflow-hidden bg-[#FFFCF7] scroll-mt-24">
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-amber-200/20 rounded-full blur-[130px]" />
             </div>
