@@ -164,10 +164,10 @@ export default function MumbaiSpeakersList() {
                                 onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                             >
                                 <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-2">
-                                    {/* Circular Portrait */}
-                                    <div className="relative mb-5 w-full max-w-[190px] md:max-w-[210px]">
+                                    {/* Portrait — soft rounded square, full photo visible (no corner cropping) */}
+                                    <div className="relative mb-5 w-full max-w-[210px] md:max-w-[230px]">
                                         <div
-                                            className="relative w-full aspect-square overflow-hidden rounded-full bg-[#FDF0E4] transition-all duration-500 ring-4 ring-white group-hover:ring-amber-300"
+                                            className="relative w-full aspect-square overflow-hidden rounded-[28px] bg-[#FDF0E4] transition-all duration-500 ring-4 ring-white group-hover:ring-amber-300"
                                             style={{ boxShadow: `0 18px 40px -18px ${MAROON}55` }}
                                         >
                                             {speaker.image ? (
@@ -175,8 +175,8 @@ export default function MumbaiSpeakersList() {
                                                     src={speaker.image}
                                                     alt={speaker.name}
                                                     fill
-                                                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 210px"
-                                                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                                                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 230px"
+                                                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center" style={{ color: `${MAROON}40` }}>
@@ -189,9 +189,9 @@ export default function MumbaiSpeakersList() {
                                             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-12 pointer-events-none" />
                                         </div>
 
-                                        {/* Gold ring accent, offset */}
-                                        <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-amber-500 border-4 border-[#FFFCF7] shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
-                                            <Mic className="w-3.5 h-3.5 text-white" />
+                                        {/* Gold accent badge — top-left, clear of the company logo badges in the photos' bottom-right */}
+                                        <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-amber-500 border-4 border-[#FFFCF7] shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
+                                            <Mic className="w-3 h-3 text-white" />
                                         </div>
                                     </div>
 
@@ -260,12 +260,12 @@ export default function MumbaiSpeakersList() {
                             {/* Modal Content */}
                             <div className="overflow-y-auto p-6 md:p-10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
-                                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-white shrink-0 mx-auto md:mx-0 shadow-lg">
+                                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden ring-4 ring-white shrink-0 mx-auto md:mx-0 shadow-lg">
                                         <Image
                                             src={selectedSpeaker.image}
                                             alt={selectedSpeaker.name}
                                             fill
-                                            className="object-cover object-top"
+                                            className="object-cover object-center"
                                         />
                                     </div>
                                     <div className="flex-1 text-center md:text-left">
