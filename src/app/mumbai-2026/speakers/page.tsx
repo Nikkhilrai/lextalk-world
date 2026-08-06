@@ -9,7 +9,7 @@ import MumbaiSpeakersList from "../mumbai-speakers-list";
 export default function MumbaiSpeakersPage() {
     return (
         <main className="min-h-screen bg-white">
-            <Navbar />
+            <Navbar variant="light" />
 
             <MumbaiSpeakersHero />
 
