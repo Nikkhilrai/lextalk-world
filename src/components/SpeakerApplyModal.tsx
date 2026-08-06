@@ -21,7 +21,6 @@ interface Props {
 }
 
 const CONFERENCES = [
-    "LexTalk World Bangalore 2026",
     "LexTalk World Dubai 2026",
     "LexTalk World Mumbai 2026",
 ];
