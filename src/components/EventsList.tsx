@@ -102,7 +102,7 @@ export function EventsList() {
                 </div>
 
                 {/* Upcoming Event Cards */}
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-4xl mx-auto px-2 sm:px-0">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto px-2 sm:px-0">
                     {upcomingEvents.map((event: any, index) => (
                         <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:border-amber-500/30 hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full">
 
