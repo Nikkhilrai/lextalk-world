@@ -111,7 +111,7 @@ export default function Delhi2027Page() {
                     >
                         <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-full">
                             <Calendar className="w-3.5 h-3.5 text-amber-500/70" />
-                            <span className="text-slate-300 text-xs font-semibold tracking-wide">April / May 2027</span>
+                            <span className="text-slate-300 text-xs font-semibold tracking-wide">May / June 2027</span>
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-full">
                             <MapPin className="w-3.5 h-3.5 text-amber-500/70" />

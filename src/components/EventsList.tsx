@@ -52,7 +52,7 @@ export function EventsList() {
         },
         {
             city: "Delhi",
-            month: "APR/MAY",
+            month: "MAY/JUN",
             days: "TBA",
             year: "2027",
             venue: "India",
