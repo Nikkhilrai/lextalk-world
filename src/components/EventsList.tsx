@@ -49,11 +49,25 @@ export function EventsList() {
                 "100+ Distinguished Legal Honor Global Awardees",
                 "30+ Exhibitors"
             ]
+        },
+        {
+            city: "Delhi",
+            month: "APR/MAY",
+            days: "TBA",
+            year: "2027",
+            venue: "India",
+            image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
+            status: "Coming Soon",
+            region: "South Asia",
+            description: "LexTalk World returns to India's capital in 2027. Full details, dates, and registration will be announced soon.",
+            link: "/delhi-2027",
+            agendaLink: "#",
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "2 Days" }
         }
     ];
 
     return (
-        <section className="py-20 bg-slate-50 overflow-hidden relative">
+        <section id="events" className="py-20 bg-slate-50 overflow-hidden relative scroll-mt-24">
             {/* Animated Background - Global Dots Pattern */}
             <div className="absolute inset-0 opacity-[0.03]"
                 style={{
