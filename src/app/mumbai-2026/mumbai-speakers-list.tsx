@@ -86,12 +86,6 @@ She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel
 He holds an LLB from Gujarat University and is a Fellow Member of the Institute of Company Secretaries of India. Prior to joining Sanofi, he headed corporate legal, ethics, and data privacy at Bayer CropScience Limited.`,
     },
     {
-        name: "Anand Narayan",
-        title: "Legal Manager, National Stock Exchange (NSE)",
-        image: "/mumbai-2026/mumbai-speakers/Anand Narayan.png",
-        bio: `Anand Narayan serves as Legal Manager at the National Stock Exchange of India (NSE), contributing to the legal and regulatory functions of one of India's leading stock exchanges.`,
-    },
-    {
         name: "Yashwardhan Bandi",
         title: "Unit Manager & Vice President, Legal, IndusInd Bank",
         image: "/mumbai-2026/mumbai-speakers/Yashwardhan Bandi.png",
