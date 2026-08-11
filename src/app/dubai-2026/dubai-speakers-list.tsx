@@ -121,13 +121,13 @@ In his words: "Effective legal counsel goes beyond courtroom advocacy — it req
     },
     {
         name: "Kapil Singhal",
-        title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
+        title: "CEO and Founder, Coingeit and CaseDocker | Serial Entrepreneur & Investor",
         image: "/dubai-event/dubai-speakers/Kapil Singhal.png",
-        bio: `A visionary senior executive, serial entrepreneur, and investor with extensive global experience driving business growth across top-tier IT product and services companies. Kapil has a proven track record of spearheading organisational transformations, leading multi-million-dollar global deals, and delivering complex, large-scale enterprise solutions, seamlessly bridging high-level corporate strategy with robust product and service development.
+        bio: `Kapil Singhal is the CEO and Founder of Coingeit, an IT & ITES company pioneering AI-driven solutions for legal, compliance, and contract operations. With a strong vision to modernize and simplify legal workflows, he leads the strategy of CaseDocker, an AI-powered LegalOps WorkDesk widely adopted across industries including BFSI, Manufacturing, IT, Pharma, NBFCs, and FMCG.
 
-As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
+Under his leadership, Coingeit has built a unified legal operations ecosystem that integrates Litigation & Arbitration Management, Contract Lifecycle Management, Compliance Management, Notice Management, Digital eSigning, and domain-specific Legal Playbooks. He also spearheaded the creation of Caseica, an AI-powered legal knowledge and compliance assistant that enhances research, insights, and decision-making for legal teams.
 
-His expertise covers global offering development, business development, transition and transformation, pre-sales and solution architecture, mid-to-large deal closure, and global service delivery, with deep domain knowledge in LegalTech, cloud computing, orchestration and automation, VDI, unified communications, smart city frameworks, and security and surveillance. He is currently architecting customised security and surveillance solutions tailored for the Indian environment in partnership with global Tier-1 component providers within smart city frameworks.`,
+Known for his strategic thinking and product innovation, Kapil brings deep expertise in SaaS product architecture, enterprise legal operations, compliance automation, and AI-driven workflow intelligence. His mission is to empower legal departments with technology that improves data integrity, enhances efficiency, and connects legal operations seamlessly with business functions. He continues to drive Coingeit's growth as a trusted partner in digital legal transformation, helping organizations build smarter, faster, and more resilient legal ecosystems.`,
     },
     {
         name: "Aniket Gautam",
@@ -414,13 +414,13 @@ He previously served as Legal Advisor heading the Legal Operations & Human Resou
     },
     {
         name: "Shuchita Singhal",
-        title: "Chief Operating Officer (COO), CaseDocker",
+        title: "COO, Coingeit & CaseDocker",
         image: "/dubai-event/dubai-speakers/Shuchita Singhal.png",
-        bio: `Shuchita Singhal entered the industry with an engineering background, specialising in Process Engineering & Automation, and has since spent valuable years across Process Automation, Publishing, Content Development, and Data Conversion & Analytics projects. She has led business functions at Altivolus and Manupatra, managing operations, quality, HR, admin, and IT.
+        bio: `Shuchita Singhal is the COO of Coingeit, a fast-growing SaaS company delivering next-generation LegalTech solutions for enterprises and law firms. As a key architect behind Coingeit's operational excellence, she plays a pivotal role in shaping the company's strategic direction, product execution, and customer-first culture.
 
-She established a global practice, products, and delivery organisation for multinational clients with a hybrid team composition, delivering zero-defect products and services to committed global SLAs, while managing delivery and skilled resources across diverse verticals and staying abreast of evolving technology — Social, Mobile, Analytics, Cloud, and IoT.
+Under her leadership, Coingeit has built two pioneering platforms — CaseDocker, an AI-powered LegalOps WorkDesk designed to streamline contract, case, compliance, and notice management; and Caseica, an intelligent legal knowledge and reasoning assistant enabling faster decision-making for legal teams. Her expertise lies in operational strategy, workflow optimization, and scaling technology-enabled businesses with efficiency and precision.
 
-She currently works across her own ventures — Coingeit, CaseDocker, and Caseica — spanning IT, software, publishing, product development, branding, and legal enterprise platforms. CaseDocker and Caseica offer modules for Litigation Management, Contract Lifecycle Management, Compliance Management, Notice Management, Document eSigner, and Playbook, helping corporates and law firms streamline processes while reducing cost, effort, and time.`,
+She is known for her structured approach, strong execution mindset, and deep passion for transforming complex legal processes into simple, intelligent, and automated workflows, and continues to drive Coingeit's mission of empowering legal professionals through smarter, more connected, and AI-driven legal ecosystems.`,
     },
 
 ];
