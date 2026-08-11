@@ -404,6 +404,24 @@ She holds an MBA in Entrepreneurship along with a Master's Degree in Forensic Sc
         image: "/dubai-event/dubai-speakers/Sujneet Kaur Johal.png",
         bio: `Sujneet Kaur Johal is a legal technology professional focused on the Middle East and Africa region, working at the intersection of legal operations and enterprise technology adoption. Her work centres on advising corporate legal teams as they digitise governance, contract, and compliance workflows.`,
     },
+    {
+        name: "Balakrishna Gopalakrishnan",
+        title: "Founder, BGK Law Associates, Advocates and Legal Advisors",
+        image: "/dubai-event/dubai-speakers/Balakrishna Gopalakrishnan.png",
+        bio: `Balakrishna Gopalakrishnan is the Founder of BGK Law Associates, Advocates and Legal Advisors. He is a dynamic and result-oriented legal professional with over four decades of experience across banking, corporate, capital markets, and business laws, cross-border transactions and procedures, human resource issues and employee grievance redressal, litigation, and international arbitration.
+
+He previously served as Legal Advisor heading the Legal Operations & Human Resources Group of Asset Reconstruction Company (India) Ltd. (Arcil), Mumbai, one of India's largest and premier ARCs, and prior to that spent 14 years as President and Head of the Law Department of Axis Bank Ltd.`,
+    },
+    {
+        name: "Shuchita Singhal",
+        title: "Chief Operating Officer (COO), CaseDocker",
+        image: "/dubai-event/dubai-speakers/Shuchita Singhal.png",
+        bio: `Shuchita Singhal entered the industry with an engineering background, specialising in Process Engineering & Automation, and has since spent valuable years across Process Automation, Publishing, Content Development, and Data Conversion & Analytics projects. She has led business functions at Altivolus and Manupatra, managing operations, quality, HR, admin, and IT.
+
+She established a global practice, products, and delivery organisation for multinational clients with a hybrid team composition, delivering zero-defect products and services to committed global SLAs, while managing delivery and skilled resources across diverse verticals and staying abreast of evolving technology — Social, Mobile, Analytics, Cloud, and IoT.
+
+She currently works across her own ventures — Coingeit, CaseDocker, and Caseica — spanning IT, software, publishing, product development, branding, and legal enterprise platforms. CaseDocker and Caseica offer modules for Litigation Management, Contract Lifecycle Management, Compliance Management, Notice Management, Document eSigner, and Playbook, helping corporates and law firms streamline processes while reducing cost, effort, and time.`,
+    },
 
 ];
 
