@@ -69,6 +69,34 @@ const upcomingConferences = [
         link: "/mumbai-2026",
         earlyBird: false,
     },
+    {
+        id: "delhi-2027",
+        name: "LexTalk World APAC",
+        city: "Delhi",
+        country: "India",
+        region: "South Asia",
+        date: "May/June 2027",
+        venue: "New Delhi",
+        duration: "2 Days",
+        image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
+        status: "Coming Soon",
+        featured: false,
+        stats: {
+            "Global Legal Leaders": "TBA",
+            speakers: "TBA",
+            awardees: "TBA",
+            exhibitors: "TBA",
+        },
+        description: "LexTalk World returns to India's capital in 2027. Full details, dates, and registration will be announced soon.",
+        highlights: [
+            "Full Conference Access",
+            "Curated Networking",
+            "Legal Honor Global Awards",
+            "Exhibitor Showcase",
+        ],
+        link: "/delhi-2027",
+        earlyBird: false,
+    },
 ];
 
 export default function ConferencesPage() {
