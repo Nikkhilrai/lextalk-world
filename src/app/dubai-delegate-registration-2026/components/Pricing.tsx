@@ -87,8 +87,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
             "All Corporate Benefits — Everything in the Corporate Delegate Pass",
             "One-to-One Introductions — Curated meetings with senior attendees",
             "Spotlight Interview — Optional media interview feature",
-            "Featured Listing — Highlighted in attendee directory and website",
-            "Post-Event VIP Network — Ongoing connections with key attendees",
+            "Featured Listing — Highlighted on the website",
         ],
     },
     {
