@@ -16,7 +16,7 @@ export const speakers: Speaker[] = [
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
-        image: "/dubai-event/dubai-speakers/Dr Lalit Bhasin.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625110/lextalk/dubai-speakers/dr-lalit-bhasin.jpg",
         bio: `Dr. Lalit Bhasin is a legendary figure in the Indian legal landscape, bringing over 60 years of veteran experience to the field. He is a premier leader in institutional law, corporate legal policy, and international arbitration, widely recognised for his profound contributions to the Rule of Law.
 
 He currently serves as President of the Society of Indian Law Firms (SILF), Chairman of the Chartered Institute of Arbitrators (CIArb) India Branch, and Chairman of the Confederation of Indian Industry (CII) Task Force on Legal Services. He is also an Honorary Life Member of the International Bar Association — the only Indian ever to receive this honour. He is the Immediate Past President of the Bar Association of India, and his 60+ years of legal practice have been formally recognised by his alma mater, Hindu College.
@@ -26,7 +26,7 @@ He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goen
     {
         name: "Kapil Singhal",
         title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
-        image: "/dubai-event/dubai-speakers/Kapil Singhal.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625124/lextalk/dubai-speakers/kapil-singhal.jpg",
         bio: `A visionary senior executive, serial entrepreneur, and investor with extensive global experience driving business growth across top-tier IT product and services companies. Kapil has a proven track record of spearheading organisational transformations, leading multi-million-dollar global deals, and delivering complex, large-scale enterprise solutions, seamlessly bridging high-level corporate strategy with robust product and service development.
 
 As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
@@ -36,7 +36,7 @@ His expertise covers global offering development, business development, transiti
     {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners",
-        image: "/dubai-event/dubai-speakers/Aniket Gautam.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625092/lextalk/dubai-speakers/aniket-gautam.jpg",
         bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
 
 His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
@@ -46,7 +46,7 @@ In his words: "Leveraging a nuanced understanding of commercial law to foster st
     {
         name: "Raghvendra Verma",
         title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
-        image: "/dubai-event/dubai-speakers/Raghvendra Verma.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625131/lextalk/dubai-speakers/raghvendra-verma.jpg",
         bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
 
 He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
@@ -56,7 +56,7 @@ He is a member of the Chartered Institute for Securities & Investment (CISI) and
     {
         name: "Tanhieya Ghosh",
         title: "General Counsel – India, South East Asia & Export Markets, Solventum (formerly 3M Healthcare)",
-        image: "/mumbai-2026/mumbai-speakers/Tanhieya Ghosh.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625153/lextalk/mumbai-speakers/tanhieya-ghosh.jpg",
         bio: `Tanhieya Ghosh leads legal affairs for Solventum (formerly 3M Healthcare) across India, Singapore, and Malaysia, bringing nearly 23 years of experience across legal, ethics and compliance, and governance functions in India and Southeast Asia.
 
 She previously served as Director, Legal Compliance & Frontier Markets Plus (India) and Director, Legal & Compliance, Subcontinent (India) at Medtronic. Prior to her roles in the medical device industry, she held the position of Director, Legal, Ethics & Compliance, Region (India) at Otis Worldwide. She is based in Mumbai.`,
@@ -64,7 +64,7 @@ She previously served as Director, Legal Compliance & Frontier Markets Plus (Ind
     {
         name: "Arun Kasat",
         title: "Head – Global Corporate & Commercial Compliance (Emerging Markets), Biocon Biologics",
-        image: "/mumbai-2026/mumbai-speakers/Arun Kasat.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625148/lextalk/mumbai-speakers/arun-kasat.jpg",
         bio: `Arun Kasat is a seasoned Legal, Privacy, Governance & Compliance professional with over 20 years of experience, currently heading Global Corporate and Commercial Compliance for Emerging Markets at Biocon Biologics.
 
 He previously served as Global Generics Business Compliance Lead (India) at Dr. Reddy's Laboratories, and has held positions at Abbott, Siemens, Johnson Insurance, and EY. He holds a B.Com (Hons.) from St. Xavier's College and is a Chartered Accountant with the Institute of Chartered Accountants of India.`,
@@ -72,7 +72,7 @@ He previously served as Global Generics Business Compliance Lead (India) at Dr. 
     {
         name: "Suchana Mukherjee Gupta",
         title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
-        image: "/mumbai-2026/mumbai-speakers/Suchana Mukherjee Gupta.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625152/lextalk/mumbai-speakers/suchana-mukherjee-gupta.jpg",
         bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
 
 She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
@@ -80,7 +80,7 @@ She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel
     {
         name: "Nikunj Savalia",
         title: "Head Legal & Company Secretary, Sanofi CHC India",
-        image: "/mumbai-2026/mumbai-speakers/Nikunj Savalia.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625149/lextalk/mumbai-speakers/nikunj-savalia.jpg",
         bio: `Nikunj Savalia is the Company Secretary and Compliance Officer of Sanofi Consumer Healthcare India Limited, and also heads the company's legal function.
 
 He holds an LLB from Gujarat University and is a Fellow Member of the Institute of Company Secretaries of India. Prior to joining Sanofi, he headed corporate legal, ethics, and data privacy at Bayer CropScience Limited.`,
@@ -88,7 +88,7 @@ He holds an LLB from Gujarat University and is a Fellow Member of the Institute 
     {
         name: "Yashwardhan Bandi",
         title: "Unit Manager & Vice President, Legal, IndusInd Bank",
-        image: "/mumbai-2026/mumbai-speakers/Yashwardhan Bandi.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625154/lextalk/mumbai-speakers/yashwardhan-bandi.jpg",
         bio: `Yashwardhan Bandi is a seasoned Banking and Finance lawyer with 16 years of experience across law firms, NBFCs, and Indian and foreign banks, currently serving as Unit Manager and Vice President, Legal at IndusInd Bank.
 
 He previously served as Senior Legal Counsel at HSBC Bank India, where he worked extensively on legal and regulatory matters including sustainable finance and ESG-related frameworks, and has also held roles at Yes Bank Limited, L&T Infrastructure Finance Company Limited, and Link Legal Advocates. He holds an LLM in Banking & Financial Services Law from the University of Melbourne.`,
@@ -96,7 +96,7 @@ He previously served as Senior Legal Counsel at HSBC Bank India, where he worked
     {
         name: "Sharifah Thaherah",
         title: "Chief Regional Counsel (Head of Legal & Regulatory), APAC and India Region, Infobip",
-        image: "/mumbai-2026/mumbai-speakers/Sharifah Thaherah.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625150/lextalk/mumbai-speakers/sharifah-thaherah.jpg",
         bio: `Sharifah Thaherah leads legal and regulatory affairs for the APAC and India regions at Infobip, supporting the company's global omnichannel communication initiatives.
 
 She began her career as an advocate and solicitor focused on corporate matters and is also a certified company secretary. Prior to Infobip, she served as Director, Legal (APAC) at Ettus Research, a National Instruments company, providing legal oversight within the telecommunications equipment sector.`,
@@ -104,7 +104,7 @@ She began her career as an advocate and solicitor focused on corporate matters a
     {
         name: "Amit K Vyas",
         title: "Head – Legal & Company Secretary, NOCIL Ltd.",
-        image: "/mumbai-2026/mumbai-speakers/Amit K Vyas.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625146/lextalk/mumbai-speakers/amit-k-vyas.jpg",
         bio: `Amit K Vyas is Head – Legal & Company Secretary at NOCIL Ltd., India's largest rubber chemical manufacturer, where he serves as Chief Legal Advisor to the CEO and Board and as Key Managerial Personnel under the Companies Act. With over two decades of leadership in corporate law, risk management, and ESG governance, he partners with boards and senior leadership to design legal strategies that protect enterprise value while enabling sustainable growth. He believes integrity is the foundation of sustainable governance, and works to transform the legal function into a strategic enabler of performance, compliance, and stakeholder trust.
 
 His career highlights include spearheading enterprise-wide governance, compliance, and ESG frameworks at NOCIL; transforming litigation and compliance management into data-driven, proactive systems; institutionalising BRSR reporting and integrating ESG principles into board oversight; and leading the digitalisation of legal, secretarial, and compliance processes. He has served as trusted counsel to CEOs and Boards across Procter & Gamble, Mahyco-Monsanto, Greaves Cotton, and Larsen & Toubro, balancing risk, reputation, and growth imperatives throughout his career.
