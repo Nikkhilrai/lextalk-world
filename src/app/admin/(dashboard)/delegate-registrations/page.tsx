@@ -222,7 +222,7 @@ export default function DelegateRegistrationsPage() {
     const [syncing, setSyncing] = useState(false);
     const [syncStatus, setSyncStatus] = useState<{ ok: boolean; msg: string } | null>(null);
     const [stats, setStats] = useState({
-        total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0
+        total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0, revenueAED: 0
     });
 
     const fetchData = async () => {
@@ -238,10 +238,11 @@ export default function DelegateRegistrationsPage() {
                     if (reg.paymentType === "free") acc.free++;
                     if (reg.paymentStatus === "success") {
                         if (reg.currency === "INR") acc.revenueINR += reg.discountedPrice;
+                        else if (reg.currency === "AED") acc.revenueAED += reg.discountedPrice;
                         else acc.revenueUSD += reg.discountedPrice;
                     }
                     return acc;
-                }, { total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0 });
+                }, { total: 0, paid: 0, pending: 0, free: 0, revenueINR: 0, revenueUSD: 0, revenueAED: 0 });
                 setStats(s);
             }
         } catch (error) {
@@ -469,11 +470,12 @@ export default function DelegateRegistrationsPage() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 <StatCard title="Total Registrations" value={stats.total.toString()} icon={Ticket} color="primary" percentage="All" trendUp />
                 <StatCard title="Successful Payments" value={stats.paid.toString()} icon={CheckCircle} color="success" percentage={`${((stats.paid / stats.total || 0) * 100).toFixed(0)}%`} trendUp />
                 <StatCard title="Pending / Incomplete" value={stats.pending.toString()} icon={Clock} color="warning" percentage="Awaiting" trendUp={false} />
-                <StatCard title="Total Revenue" value={`$${stats.revenueUSD.toLocaleString()}`} icon={DollarSign} color="info" percentage="Confirmed" trendUp />
+                <StatCard title="Revenue (USD)" value={`$${stats.revenueUSD.toLocaleString()}`} icon={DollarSign} color="info" percentage="Confirmed" trendUp />
+                <StatCard title="Revenue (AED)" value={`AED ${stats.revenueAED.toLocaleString()}`} icon={DollarSign} color="info" percentage="Confirmed" trendUp />
             </div>
 
             {/* Table Card */}

@@ -29,6 +29,7 @@ interface PassType {
     ctaText?: string;
     priceLabel?: string;
     inrPrice?: number;
+    aedPrice?: number;
 }
 
 const INDIVIDUAL_PASSES: PassType[] = [
@@ -44,6 +45,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         ctaText: "Register Now",
         note: "Valid student or faculty ID required for verification.",
         inrPrice: 11600,
+        aedPrice: 475,
         features: [
             "Full 2-Day Conference Access — Attend all sessions, keynotes and panels",
             "Networking Opportunities — Access general networking breaks and events",
@@ -62,6 +64,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         idealFor: "Corporate Counsel, In-House Lawyers, IP Counsel, Compliance & Governance Leaders, Legal Operations professionals.",
         ctaText: "Register Now",
         inrPrice: 18000,
+        aedPrice: 730,
         features: [
             "Everything in Student & Academic Pass",
             "Full 2-Day Access — All conference sessions and keynotes",
@@ -83,6 +86,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         idealFor: "Law Firm Partners, Founders, Managing Partners, Senior Associates, Boutique firm leaders, Independent Practitioners.",
         ctaText: "Register Now",
         inrPrice: 45000,
+        aedPrice: 1835,
         features: [
             "All Corporate Benefits — Everything in the Corporate Delegate Pass",
             "One-to-One Introductions — Curated meetings with senior attendees",
@@ -100,6 +104,7 @@ const INDIVIDUAL_PASSES: PassType[] = [
         idealFor: "Legal Technology Companies, AI Solution Providers, Contract Management Platforms, Consulting & Service Firms, E-Discovery/Forensic Experts, Outsourcing Providers.",
         ctaText: "Register Now",
         inrPrice: 81000,
+        aedPrice: 3300,
         features: [
             "All Law Firm Benefits — Everything in the Law Firm Exclusive Pass",
             "Brand Exposure — Company logo on event materials and website",
@@ -179,6 +184,10 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
     const inrFinal = Math.round(inrOriginal * discountMultiplier);
     const usdFinal = Math.round(pass.discountedPrice * discountMultiplier * 100) / 100;
 
+    const aedOriginal = pass.aedPrice || Math.round(pass.discountedPrice * 3.6725);
+    const aedFullPrice = Math.round((aedOriginal * pass.originalPrice) / pass.discountedPrice);
+    const aedFinal = Math.round(aedOriginal * discountMultiplier);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
         if (error) setError(null);
@@ -243,7 +252,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
         }
     };
 
-    const handleSubmit = async (paymentType: "india" | "international" | "free") => {
+    const handleSubmit = async (paymentType: "india" | "international" | "uae" | "free") => {
 
         setIsProcessing(true);
         setError("");
@@ -276,8 +285,8 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                 }
             } else {
                 // Paid registration
-                const currency = paymentType === "india" ? "INR" : "USD";
-                const amount = paymentType === "india" ? inrFinal : usdFinal;
+                const currency = paymentType === "india" ? "INR" : paymentType === "uae" ? "AED" : "USD";
+                const amount = paymentType === "india" ? inrFinal : paymentType === "uae" ? aedFinal : usdFinal;
 
                 const orderRes = await fetch("/api/delegate-registration/create-order", {
                     method: "POST",
@@ -291,9 +300,9 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                         customerDetails: formData,
                         conferenceSlug: "dubai-2026",
                         // Store prices in the same currency the delegate is actually charged in,
-                        // otherwise INR payments get saved with the USD figures.
-                        originalPrice: paymentType === "india" ? inrOriginal : pass.originalPrice,
-                        discountedPrice: paymentType === "india" ? inrFinal : usdFinal,
+                        // otherwise non-USD payments get saved with the USD figures.
+                        originalPrice: paymentType === "india" ? inrOriginal : paymentType === "uae" ? aedOriginal : pass.originalPrice,
+                        discountedPrice: paymentType === "india" ? inrFinal : paymentType === "uae" ? aedFinal : usdFinal,
                         couponCode: couponApplied?.code || null,
                         couponDiscount: couponApplied?.discountPct || null,
                         registrationId,
@@ -601,7 +610,7 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
 
                                 <div className="space-y-4">
                                     <p className="text-[10px] text-amber-600 font-black uppercase tracking-[0.2em] text-center italic">Choose your preferred currency to pay</p>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <button
                                             onClick={() => handleSubmit("india")}
                                             disabled={isProcessing}
@@ -612,6 +621,25 @@ function RegistrationModal({ isOpen, onClose, pass, category }: RegistrationModa
                                                 <span className="text-sm line-through opacity-40 leading-none">₹{inrFullPrice.toLocaleString("en-IN")}</span>
                                             )}
                                             <span className="text-2xl font-black">₹{inrFinal.toLocaleString("en-IN")}</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-[9px] mt-0.5 opacity-50">
+                                                    {couponApplied ? `${couponApplied.discountPct}% off applied` : "Early Bird price"}
+                                                </span>
+                                            )}
+                                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <ChevronRight size={16} />
+                                            </div>
+                                        </button>
+                                        <button
+                                            onClick={() => handleSubmit("uae")}
+                                            disabled={isProcessing}
+                                            className="group relative flex flex-col items-center justify-center p-6 border-2 border-slate-900 text-slate-900 rounded-3xl hover:bg-slate-900 hover:text-white transition-all active:scale-[0.98] disabled:opacity-50"
+                                        >
+                                            <span className="text-[10px] font-black uppercase tracking-widest mb-1.5 opacity-60">UAE Clients</span>
+                                            {(hasEarlyBird || couponApplied) && (
+                                                <span className="text-sm line-through opacity-40 leading-none">AED {aedFullPrice.toLocaleString("en-AE")}</span>
+                                            )}
+                                            <span className="text-2xl font-black">AED {aedFinal.toLocaleString("en-AE")}</span>
                                             {(hasEarlyBird || couponApplied) && (
                                                 <span className="text-[9px] mt-0.5 opacity-50">
                                                     {couponApplied ? `${couponApplied.discountPct}% off applied` : "Early Bird price"}
