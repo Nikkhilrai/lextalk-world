@@ -644,6 +644,21 @@ export default function SponsorshipPage() {
                                     />
                                 </div>
                             </div>
+                            <a
+                                href="https://melento.ai"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
+                            >
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src="/dubai-event/sponsors/Melento.png"
+                                        alt="Melento - Diamond Sponsor"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </a>
                         </div>
                     </div>
 

@@ -17,6 +17,16 @@ He currently serves as President of the Society of Indian Law Firms (SILF), Chai
 He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goenka University, Gurgaon, and an LL.D. Honoris Causa (2013) from Amity University. His many state and institutional honours include the Lifetime Achievement Award from ASSOCHAM (2023), the Outstanding Arbitration Expert Award from APCAM (2023), the "Glorious 61 Years in the Profession" Award from Legal Era (2023), a Lifetime Achievement Award from the UK India Legal Partnership presented at the House of Lords, London (2022), the National Law Day Award bestowed by the President of India (2007), and a Plaque of Honour bestowed by the Prime Minister of India (2002) for exceptional service to the Rule of Law.`,
     },
     {
+        name: "Krupesh Bhat (KB)",
+        title: "Founder & CEO, Melento.ai",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786629465/lextalk/dubai-speakers/krupesh-bhat-kb.jpg",
+        bio: `I'm a second-time founder passionate about building technology that can transform how the world works.
+
+Today, my focus is on creating next-generation solutions at the intersection of AI, contracts, and banking — reimagining trust, efficiency, and collaboration in the digital era.
+
+At heart, I'm a creator. I'm driven by the belief that technology, when built with purpose, can lead to enduring innovations that make a meaningful difference for humankind.`,
+    },
+    {
         name: "Hasan Al Kilani",
         title: "General Counsel | Regulatory & Digital Affairs | Corporate Commercial | Board Governance | MENA & GCC | UNCITRAL | Telecom | Sovereign Finance | Digital Economy Law",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625121/lextalk/dubai-speakers/hasan-al-kilani.jpg",

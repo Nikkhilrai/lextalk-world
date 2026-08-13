@@ -205,6 +205,7 @@ const sponsorTiers = [
             { name: "LexCorp", src: "/dubai-event/sponsors/Lex_Corp_Logo.avif", href: "https://home.lexcorp.org.in/" },
             { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/Gorodissky_Logo.jpg", href: "https://www.gorodissky.com/" },
             { name: "DiliTrust", src: "/dubai-event/sponsors/DiliTrust.svg", href: null as string | null },
+            { name: "Melento", src: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
         ],
     },
     {
