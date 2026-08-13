@@ -101,6 +101,16 @@ He previously served as Senior Legal Counsel at HSBC Bank India, where he worked
 
 She began her career as an advocate and solicitor focused on corporate matters and is also a certified company secretary. Prior to Infobip, she served as Director, Legal (APAC) at Ettus Research, a National Instruments company, providing legal oversight within the telecommunications equipment sector.`,
     },
+    {
+        name: "Amit K Vyas",
+        title: "Head – Legal & Company Secretary, NOCIL Ltd.",
+        image: "/mumbai-2026/mumbai-speakers/Amit K Vyas.png",
+        bio: `Amit K Vyas is Head – Legal & Company Secretary at NOCIL Ltd., India's largest rubber chemical manufacturer, where he serves as Chief Legal Advisor to the CEO and Board and as Key Managerial Personnel under the Companies Act. With over two decades of leadership in corporate law, risk management, and ESG governance, he partners with boards and senior leadership to design legal strategies that protect enterprise value while enabling sustainable growth. He believes integrity is the foundation of sustainable governance, and works to transform the legal function into a strategic enabler of performance, compliance, and stakeholder trust.
+
+His career highlights include spearheading enterprise-wide governance, compliance, and ESG frameworks at NOCIL; transforming litigation and compliance management into data-driven, proactive systems; institutionalising BRSR reporting and integrating ESG principles into board oversight; and leading the digitalisation of legal, secretarial, and compliance processes. He has served as trusted counsel to CEOs and Boards across Procter & Gamble, Mahyco-Monsanto, Greaves Cotton, and Larsen & Toubro, balancing risk, reputation, and growth imperatives throughout his career.
+
+He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, and holds an LLB and a B.Com from Delhi University. His expertise spans corporate governance and regulatory strategy, legal risk management and compliance leadership, ESG and sustainability integration, litigation, M&A and corporate advisory, and stakeholder engagement and ethical leadership.`,
+    },
 ];
 
 const MAROON = "#7A1F3D";
