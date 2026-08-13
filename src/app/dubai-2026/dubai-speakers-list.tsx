@@ -108,6 +108,14 @@ Mehrdad focuses on aligning legal oversight with business strategy, strengthenin
 His experience spans Russia, Central and Eastern Europe, Turkey, and the Middle East and Africa, with deep sector knowledge in financial services, energy, oil and gas, and healthcare. His expertise covers governance, risk management and compliance (GRC), policies and procedures development from inception to execution, enterprise and third-party risk management, and business ethics and integrity leadership, specialising in cultivating ethical workplace environments where integrity drives strategic decision-making.`,
     },
     {
+        name: "Balakrishna Gopalakrishnan",
+        title: "Founder, BGK Law Associates, Advocates and Legal Advisors",
+        image: "/dubai-event/dubai-speakers/Balakrishna Gopalakrishnan.png",
+        bio: `Balakrishna Gopalakrishnan is the Founder of BGK Law Associates, Advocates and Legal Advisors. He is a dynamic and result-oriented legal professional with over four decades of experience across banking, corporate, capital markets, and business laws, cross-border transactions and procedures, human resource issues and employee grievance redressal, litigation, and international arbitration.
+
+He previously served as Legal Advisor heading the Legal Operations & Human Resources Group of Asset Reconstruction Company (India) Ltd. (Arcil), Mumbai, one of India's largest and premier ARCs, and prior to that spent 14 years as President and Head of the Law Department of Axis Bank Ltd.`,
+    },
+    {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
         image: "/dubai-event/dubai-speakers/Sanjay Jain.png",
@@ -360,7 +368,8 @@ He is a frequent contributor on topics including governance, risk and compliance
         bio: `Dikina Wedi is Group General Counsel & Chief Compliance Officer at Auremin, overseeing the group's legal matters, transaction support, and regulatory compliance across the jurisdictions in which it operates. A bilingual (French/English), dual-qualified, multi-jurisdictional business lawyer and admitted Advocate, she brings more than 15 years of in-house experience in international corporate, commercial, and business law.
 
 She holds an LLB and an LLM in International Business Law, and began her career as an in-house corporate lawyer in Paris, France, developing deep expertise in commercial law within the pharmaceutical industry. She has since led legal support teams on multi-million dollar cross-border African investment and development projects, and remains a driving advocate for Africa-focused investment and top-level legal policy change.`,
-    },    {
+    },
+    {
         name: "Dr Faris Nasrallah",
         title: "Head of Arbitration & Senior Arbitration Counsel, Crescent Petroleum",
         image: "/dubai-event/dubai-speakers/Dr Faris Nasrallah.png",
@@ -403,14 +412,6 @@ She holds an MBA in Entrepreneurship along with a Master's Degree in Forensic Sc
         title: "Regional Business Manager & Legal Technology Advisor – MEA",
         image: "/dubai-event/dubai-speakers/Sujneet Kaur Johal.png",
         bio: `Sujneet Kaur Johal is a legal technology professional focused on the Middle East and Africa region, working at the intersection of legal operations and enterprise technology adoption. Her work centres on advising corporate legal teams as they digitise governance, contract, and compliance workflows.`,
-    },
-    {
-        name: "Balakrishna Gopalakrishnan",
-        title: "Founder, BGK Law Associates, Advocates and Legal Advisors",
-        image: "/dubai-event/dubai-speakers/Balakrishna Gopalakrishnan.png",
-        bio: `Balakrishna Gopalakrishnan is the Founder of BGK Law Associates, Advocates and Legal Advisors. He is a dynamic and result-oriented legal professional with over four decades of experience across banking, corporate, capital markets, and business laws, cross-border transactions and procedures, human resource issues and employee grievance redressal, litigation, and international arbitration.
-
-He previously served as Legal Advisor heading the Legal Operations & Human Resources Group of Asset Reconstruction Company (India) Ltd. (Arcil), Mumbai, one of India's largest and premier ARCs, and prior to that spent 14 years as President and Head of the Law Department of Axis Bank Ltd.`,
     },
     {
         name: "Shuchita Singhal",
