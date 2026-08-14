@@ -63,6 +63,20 @@ export function EventsList() {
             link: "/delhi-2027",
             agendaLink: "#",
             stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "2 Days" }
+        },
+        {
+            city: "Indonesia",
+            month: "MAR",
+            days: "05",
+            year: "2027",
+            venue: "Indonesia",
+            image: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?q=80&w=1200&auto=format&fit=crop",
+            status: "Coming Soon",
+            region: "Southeast Asia",
+            description: "LexTalk World is coming to Indonesia. Full details, venue, and registration will be announced soon.",
+            link: "/indonesia-2027",
+            agendaLink: "#",
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "1 Day" }
         }
     ];
 
@@ -102,7 +116,7 @@ export function EventsList() {
                 </div>
 
                 {/* Upcoming Event Cards */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto px-2 sm:px-0">
+                <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6 max-w-7xl mx-auto px-2 sm:px-0">
                     {upcomingEvents.map((event: any, index) => (
                         <div key={index} className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:border-amber-500/30 hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full">
 

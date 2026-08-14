@@ -97,6 +97,34 @@ const upcomingConferences = [
         link: "/delhi-2027",
         earlyBird: false,
     },
+    {
+        id: "indonesia-2027",
+        name: "LexTalk World Southeast Asia",
+        city: "Indonesia",
+        country: "Indonesia",
+        region: "Southeast Asia",
+        date: "March 5, 2027",
+        venue: "Indonesia",
+        duration: "1 Day",
+        image: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?q=80&w=1200&auto=format&fit=crop",
+        status: "Coming Soon",
+        featured: false,
+        stats: {
+            "Global Legal Leaders": "TBA",
+            speakers: "TBA",
+            awardees: "TBA",
+            exhibitors: "TBA",
+        },
+        description: "LexTalk World is coming to Indonesia. Full details, venue, and registration will be announced soon.",
+        highlights: [
+            "Full Conference Access",
+            "Curated Networking",
+            "Legal Honor Global Awards",
+            "Exhibitor Showcase",
+        ],
+        link: "/indonesia-2027",
+        earlyBird: false,
+    },
 ];
 
 export default function ConferencesPage() {
