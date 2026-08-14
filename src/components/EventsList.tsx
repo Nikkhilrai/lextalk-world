@@ -194,18 +194,18 @@ export function EventsList() {
                                 <div className="mb-4 sm:mb-5">
                                         <p className="text-[10px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Event Scale:</p>
                                     <div className="flex gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-slate-100">
-                                        <div className="flex items-center gap-1.5 sm:gap-2">
-                                            <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
-                                            <div>
-                                                <span className="text-xs font-bold text-slate-900">{event.stats.delegates}</span>
-                                            <span className="text-[8px] sm:text-[9px] text-slate-400 uppercase ml-1 whitespace-nowrap">{event.stats.delegatesLabel || "People"}</span>
+                                        <div className="flex items-start gap-1.5 sm:gap-2 min-w-0">
+                                            <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600 mt-0.5 shrink-0" />
+                                            <div className="min-w-0">
+                                                <span className="block text-xs font-bold text-slate-900">{event.stats.delegates}</span>
+                                                <span className="block text-[8px] sm:text-[9px] text-slate-400 uppercase leading-tight">{event.stats.delegatesLabel || "People"}</span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-1.5 sm:gap-2">
-                                            <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600" />
-                                            <div>
-                                                <span className="text-xs font-bold text-slate-900">{event.stats.duration || "2 Days"}</span>
-                                            <span className="text-[8px] sm:text-[9px] text-slate-400 uppercase ml-1 whitespace-nowrap">{event.stats.type}</span>
+                                        <div className="flex items-start gap-1.5 sm:gap-2 min-w-0">
+                                            <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-600 mt-0.5 shrink-0" />
+                                            <div className="min-w-0">
+                                                <span className="block text-xs font-bold text-slate-900">{event.stats.duration || "2 Days"}</span>
+                                                <span className="block text-[8px] sm:text-[9px] text-slate-400 uppercase leading-tight">{event.stats.type}</span>
                                             </div>
                                         </div>
                                     </div>
