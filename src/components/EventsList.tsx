@@ -122,17 +122,25 @@ export function EventsList() {
 
                             {/* Image Section (Top) - More Compact */}
                             <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden shrink-0">
-                                <Image
-                                    src={event.image}
-                                    alt={event.city}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                {/* Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                                <Link
+                                    href={event.link}
+                                    target={event.status !== "Coming Soon" ? "_blank" : undefined}
+                                    rel={event.status !== "Coming Soon" ? "noopener noreferrer" : undefined}
+                                    aria-label={`${event.city} — ${event.status === "Coming Soon" ? "Notify me" : "View details"}`}
+                                    className="absolute inset-0 z-[1]"
+                                >
+                                    <Image
+                                        src={event.image}
+                                        alt={event.city}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    {/* Gradient Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
 
-                                {/* Shine Effect on Hover */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                    {/* Shine Effect on Hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                </Link>
 
                                 {/* Floating Date Badge - Compact */}
                                 <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 shadow-lg z-10 min-w-[60px] sm:min-w-[70px]">

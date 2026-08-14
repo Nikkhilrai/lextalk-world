@@ -7,9 +7,12 @@ import { motion } from "framer-motion";
 import { Calendar, MapPin, ArrowLeft, Clock } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { RegisterModal } from "@/components/RegisterModal";
+import { Bell } from "lucide-react";
 
 export default function Indonesia2027Page() {
     const [isVisible, setIsVisible] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
@@ -123,12 +126,20 @@ export default function Indonesia2027Page() {
                         </div>
                     </motion.div>
 
-                    {/* CTA back to other events */}
+                    {/* CTA row */}
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.6 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
+                        <button
+                            onClick={() => setIsRegisterOpen(true)}
+                            className="group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                        >
+                            <Bell className="w-4 h-4" />
+                            Notify Me — Register Interest
+                        </button>
                         <Link
                             href="/#events"
                             className="inline-flex items-center gap-2.5 px-8 py-3.5 border border-white/15 text-white/80 font-semibold text-sm rounded-lg hover:bg-white hover:text-slate-900 hover:border-white transition-all duration-300"
@@ -140,6 +151,12 @@ export default function Indonesia2027Page() {
             </section>
 
             <Footer />
+
+            <RegisterModal
+                isOpen={isRegisterOpen}
+                onClose={() => setIsRegisterOpen(false)}
+                defaultConference="Indonesia, March 5 2027"
+            />
         </main>
     );
 }

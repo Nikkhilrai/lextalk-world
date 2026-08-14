@@ -10,11 +10,12 @@ import { PhoneInput } from "@/components/PhoneInput";
 interface RegisterModalProps {
     isOpen: boolean;
     onClose: () => void;
+    defaultConference?: string;
 }
 
 import { createLead } from "@/actions/lead";
 
-export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
+export function RegisterModal({ isOpen, onClose, defaultConference }: RegisterModalProps) {
     const [mounted, setMounted] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState("");
     const [contactNumber, setContactNumber] = useState("");
@@ -343,6 +344,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                                                                     name="conference"
                                                                     value={option}
                                                                     required
+                                                                    defaultChecked={option === defaultConference}
                                                                     className="peer appearance-none w-4 h-4 border border-slate-400 rounded-full checked:border-amber-500 checked:bg-amber-500 transition-all duration-300"
                                                                 />
                                                                 <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100 transition-opacity" />

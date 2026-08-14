@@ -241,17 +241,25 @@ export default function ConferencesPage() {
                                 <div className="grid lg:grid-cols-2">
                                     {/* Image Section */}
                                     <div className="relative h-64 md:h-80 lg:h-full lg:min-h-[450px] overflow-hidden">
-                                        <Image
-                                            src={event.image}
-                                            alt={event.city}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/30 to-transparent lg:bg-gradient-to-t lg:from-slate-900/60 lg:via-transparent lg:to-transparent" />
+                                        <Link
+                                            href={event.link}
+                                            target={event.status === "Open" ? "_blank" : undefined}
+                                            rel={event.status === "Open" ? "noopener noreferrer" : undefined}
+                                            aria-label={`${event.city} — ${event.status === "Open" ? "Visit event website" : "Notify me"}`}
+                                            className="absolute inset-0 z-[1]"
+                                        >
+                                            <Image
+                                                src={event.image}
+                                                alt={event.city}
+                                                fill
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            {/* Gradient Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/30 to-transparent lg:bg-gradient-to-t lg:from-slate-900/60 lg:via-transparent lg:to-transparent" />
+                                        </Link>
 
                                         {/* City Name on Image */}
-                                        <div className="absolute bottom-6 left-6 lg:bottom-8 lg:left-8">
+                                        <div className="absolute bottom-6 left-6 lg:bottom-8 lg:left-8 pointer-events-none">
                                             <div className="flex items-center gap-2 text-amber-400 text-sm font-bold uppercase tracking-wider mb-2">
                                                 <MapPin size={14} />
                                                 {event.region}
