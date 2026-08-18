@@ -30,14 +30,18 @@ export async function GET(request: NextRequest) {
 
         console.log(`DEBUG: Found details for ${registration.firstName} ${registration.lastName}`);
 
-        // Return only necessary fields for the confirmation page
+        // Return only necessary fields for the confirmation/verification pages
         const safeRegistration = {
             id: registration.id,
             firstName: registration.firstName,
             lastName: registration.lastName,
             email: registration.email,
+            phone: registration.phone,
+            organization: registration.organization,
+            designation: registration.designation,
             passType: registration.passType,
             passCategory: registration.passCategory,
+            conferenceSlug: registration.conferenceSlug,
             ticketNumber: registration.ticketNumber,
             ticketId: registration.ticketId,
             paymentStatus: registration.paymentStatus,

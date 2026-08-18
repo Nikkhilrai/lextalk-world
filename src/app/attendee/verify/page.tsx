@@ -12,7 +12,11 @@ import {
     Calendar,
     MapPin,
     ShieldCheck,
-    Loader2
+    Loader2,
+    Briefcase,
+    Building2,
+    Mail,
+    Phone
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -39,6 +43,11 @@ function VerifyContent() {
                     setResult({
                         valid: true,
                         attendee: `${data.registration.firstName} ${data.registration.lastName}`,
+                        designation: data.registration.designation,
+                        organization: data.registration.organization,
+                        email: data.registration.email,
+                        phone: data.registration.phone,
+                        conferenceSlug: data.registration.conferenceSlug,
                         passType: data.registration.passType,
                         ticketNumber: data.registration.ticketNumber,
                         status: data.registration.paymentStatus === 'success' ? 'Verified' : 'Pending'
@@ -86,7 +95,9 @@ function VerifyContent() {
             >
                 <div className="bg-emerald-600 p-8 text-center text-white">
                     <ShieldCheck size={60} className="mx-auto mb-4" />
-                    <h1 className="text-3xl font-serif font-bold">Authentic Ticket</h1>
+                    <h1 className="text-3xl font-serif font-bold">
+                        {result.conferenceSlug === "dubai-2026" ? "Digital Contact Card" : "Authentic Ticket"}
+                    </h1>
                     <p className="opacity-90 font-medium">LexTalk World Dubai 2026</p>
                 </div>
 
@@ -100,6 +111,54 @@ function VerifyContent() {
                             <p className="text-xl font-bold text-slate-900">{result.attendee}</p>
                         </div>
                     </div>
+
+                    {/* Digital Contact Card — Dubai only: lets any attendee scanning this QR get in touch */}
+                    {result.conferenceSlug === "dubai-2026" && (result.designation || result.organization || result.email || result.phone) && (
+                        <div className="space-y-5 pb-6 border-b border-slate-100">
+                            {(result.designation || result.organization) && (
+                                <div className="grid grid-cols-2 gap-6">
+                                    {result.designation && (
+                                        <div className="flex items-start gap-3">
+                                            <Briefcase size={16} className="text-emerald-500 mt-0.5 shrink-0" />
+                                            <div>
+                                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Designation</p>
+                                                <p className="font-semibold text-slate-900 text-sm">{result.designation}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {result.organization && (
+                                        <div className="flex items-start gap-3">
+                                            <Building2 size={16} className="text-emerald-500 mt-0.5 shrink-0" />
+                                            <div>
+                                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Company</p>
+                                                <p className="font-semibold text-slate-900 text-sm">{result.organization}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                {result.email && (
+                                    <a
+                                        href={`mailto:${result.email}`}
+                                        className="flex-1 flex items-center gap-3 px-4 py-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-xl transition-colors group"
+                                    >
+                                        <Mail size={16} className="text-emerald-500 shrink-0" />
+                                        <span className="text-sm font-medium text-slate-700 group-hover:text-emerald-700 truncate">{result.email}</span>
+                                    </a>
+                                )}
+                                {result.phone && (
+                                    <a
+                                        href={`tel:${result.phone}`}
+                                        className="flex-1 flex items-center gap-3 px-4 py-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-xl transition-colors group"
+                                    >
+                                        <Phone size={16} className="text-emerald-500 shrink-0" />
+                                        <span className="text-sm font-medium text-slate-700 group-hover:text-emerald-700">{result.phone}</span>
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
                     <div className="grid grid-cols-2 gap-6 pb-6 border-b border-slate-100">
                         <div>
