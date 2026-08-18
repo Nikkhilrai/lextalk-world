@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { StatCard } from "@/components/admin/StatCard";
 import { getDelegateRegistrations } from "@/actions/delegate-registration";
-import { speakers as dubaiSpeakers } from "@/app/dubai-2026/dubai-speakers-list";
+import { speakers as dubaiSpeakers } from "@/app/dubai-2026/dubai-speakers-data";
+import { slugifySpeakerName } from "@/lib/speaker-slug";
 import {
     Ticket, Mic, Search, Download, User, Building2, Briefcase,
     Mail, Phone, Hash, CreditCard, Loader2, QrCode, X
@@ -18,6 +19,7 @@ export default function DubaiDashboardPage() {
     const [tab, setTab] = useState<Tab>("tickets");
     const [search, setSearch] = useState("");
     const [qrTicket, setQrTicket] = useState<any | null>(null);
+    const [qrSpeaker, setQrSpeaker] = useState<{ name: string; slug: string } | null>(null);
 
     useEffect(() => {
         getDelegateRegistrations().then((res) => {
@@ -221,6 +223,13 @@ export default function DubaiDashboardPage() {
                                 <div className="p-3">
                                     <p className="font-semibold text-[#ced4da] text-sm leading-snug line-clamp-2">{s.name}</p>
                                     <p className="text-[11px] text-[#878a99] mt-1 line-clamp-2">{s.title}</p>
+                                    <button
+                                        onClick={() => setQrSpeaker({ name: s.name, slug: slugifySpeakerName(s.name) })}
+                                        className="mt-2.5 w-full inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#abb9e8] bg-[#2a304d]/50 border border-white/10 hover:bg-[#405189]/30 hover:text-white hover:border-[#405189] transition-colors"
+                                    >
+                                        <QrCode size={13} />
+                                        QR
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -260,6 +269,47 @@ export default function DubaiDashboardPage() {
                             <a
                                 href={`/api/delegate-registration/ticket/${qrTicket.ticketId}/qrcode`}
                                 download={`${qrTicket.ticketNumber || qrTicket.ticketId}-qr.png`}
+                                className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#405189] hover:bg-[#334066] rounded-lg transition-colors"
+                            >
+                                <Download size={14} />
+                                Download PNG
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Speaker QR Code Modal */}
+            {qrSpeaker && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setQrSpeaker(null)} />
+                    <div className="relative z-10 w-full max-w-sm bg-[#1a1d21] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#212946]">
+                            <div>
+                                <h3 className="text-white font-bold text-sm">{qrSpeaker.name}</h3>
+                                <p className="text-slate-400 text-xs mt-0.5">Speaker Profile QR</p>
+                            </div>
+                            <button onClick={() => setQrSpeaker(null)} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                <X size={14} className="text-slate-400" />
+                            </button>
+                        </div>
+                        <div className="p-6 flex flex-col items-center">
+                            <div className="bg-white rounded-xl p-3 shadow-lg">
+                                <Image
+                                    src={`/api/speakers/dubai-2026/${qrSpeaker.slug}/qrcode`}
+                                    alt={`QR code for ${qrSpeaker.name}`}
+                                    width={220}
+                                    height={220}
+                                    unoptimized
+                                    className="block"
+                                />
+                            </div>
+                            <p className="text-[#878a99] text-xs mt-4 text-center leading-relaxed">
+                                Scanning this QR opens {qrSpeaker.name}&apos;s public speaker profile page.
+                            </p>
+                            <a
+                                href={`/api/speakers/dubai-2026/${qrSpeaker.slug}/qrcode`}
+                                download={`${qrSpeaker.slug}-qr.png`}
                                 className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#405189] hover:bg-[#334066] rounded-lg transition-colors"
                             >
                                 <Download size={14} />
