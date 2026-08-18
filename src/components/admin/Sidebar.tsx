@@ -21,6 +21,12 @@ const NAV_GROUPS = [
         ]
     },
     {
+        title: "DUBAI 2026",
+        items: [
+            { label: "Dubai 2026", href: "/admin/dubai-2026", icon: MapIcon },
+        ]
+    },
+    {
         title: "MARKETING",
         items: [
             { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
