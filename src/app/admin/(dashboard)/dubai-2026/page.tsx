@@ -7,7 +7,7 @@ import { getDelegateRegistrations } from "@/actions/delegate-registration";
 import { speakers as dubaiSpeakers } from "@/app/dubai-2026/dubai-speakers-list";
 import {
     Ticket, Mic, Search, Download, User, Building2, Briefcase,
-    Mail, Phone, Hash, CreditCard, Loader2
+    Mail, Phone, Hash, CreditCard, Loader2, QrCode, X
 } from "lucide-react";
 
 type Tab = "tickets" | "speakers";
@@ -17,6 +17,7 @@ export default function DubaiDashboardPage() {
     const [registrations, setRegistrations] = useState<any[]>([]);
     const [tab, setTab] = useState<Tab>("tickets");
     const [search, setSearch] = useState("");
+    const [qrTicket, setQrTicket] = useState<any | null>(null);
 
     useEffect(() => {
         getDelegateRegistrations().then((res) => {
@@ -156,6 +157,7 @@ export default function DubaiDashboardPage() {
                                         <th className="text-left px-4 py-3 font-semibold text-[#878a99] text-xs uppercase tracking-wider">Pass</th>
                                         <th className="text-left px-4 py-3 font-semibold text-[#878a99] text-xs uppercase tracking-wider hidden sm:table-cell">Ticket #</th>
                                         <th className="text-right px-4 py-3 font-semibold text-[#878a99] text-xs uppercase tracking-wider">Amount</th>
+                                        <th className="text-center px-4 py-3 font-semibold text-[#878a99] text-xs uppercase tracking-wider">QR Code</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
@@ -178,6 +180,17 @@ export default function DubaiDashboardPage() {
                                             <td className="px-4 py-3 hidden sm:table-cell text-[#878a99] text-xs font-mono">{r.ticketNumber || "—"}</td>
                                             <td className="px-4 py-3 text-right text-[#ced4da] font-semibold">
                                                 {r.currency} {r.discountedPrice?.toLocaleString()}
+                                            </td>
+                                            <td className="px-4 py-3 text-center">
+                                                <button
+                                                    onClick={() => setQrTicket(r)}
+                                                    disabled={!r.ticketId}
+                                                    title={r.ticketId ? "Generate QR code" : "No ticket ID on this record"}
+                                                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#abb9e8] bg-[#2a304d]/50 border border-white/10 hover:bg-[#405189]/30 hover:text-white hover:border-[#405189] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                                >
+                                                    <QrCode size={13} />
+                                                    QR
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
@@ -213,6 +226,48 @@ export default function DubaiDashboardPage() {
                         ))}
                     </div>
                 )
+            )}
+
+            {/* QR Code Modal */}
+            {qrTicket && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setQrTicket(null)} />
+                    <div className="relative z-10 w-full max-w-sm bg-[#1a1d21] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#212946]">
+                            <div>
+                                <h3 className="text-white font-bold text-sm">{qrTicket.firstName} {qrTicket.lastName}</h3>
+                                <p className="text-slate-400 text-xs mt-0.5 font-mono">{qrTicket.ticketNumber}</p>
+                            </div>
+                            <button onClick={() => setQrTicket(null)} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                <X size={14} className="text-slate-400" />
+                            </button>
+                        </div>
+                        <div className="p-6 flex flex-col items-center">
+                            <div className="bg-white rounded-xl p-3 shadow-lg">
+                                <Image
+                                    src={`/api/delegate-registration/ticket/${qrTicket.ticketId}/qrcode`}
+                                    alt={`QR code for ${qrTicket.firstName} ${qrTicket.lastName}`}
+                                    width={220}
+                                    height={220}
+                                    unoptimized
+                                    className="block"
+                                />
+                            </div>
+                            <p className="text-[#878a99] text-xs mt-4 text-center leading-relaxed">
+                                Same QR code already printed on this attendee&apos;s ticket. Scanning it opens their
+                                digital contact card.
+                            </p>
+                            <a
+                                href={`/api/delegate-registration/ticket/${qrTicket.ticketId}/qrcode`}
+                                download={`${qrTicket.ticketNumber || qrTicket.ticketId}-qr.png`}
+                                className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#405189] hover:bg-[#334066] rounded-lg transition-colors"
+                            >
+                                <Download size={14} />
+                                Download PNG
+                            </a>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
