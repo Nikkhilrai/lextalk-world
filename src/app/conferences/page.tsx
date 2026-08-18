@@ -100,14 +100,14 @@ const upcomingConferences = [
     {
         id: "indonesia-2027",
         name: "LexTalk World Southeast Asia",
-        city: "Indonesia",
+        city: "Jakarta",
         country: "Indonesia",
         region: "Southeast Asia",
         date: "March 5, 2027",
-        venue: "Indonesia",
-        duration: "1 Day",
-        image: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?q=80&w=1200&auto=format&fit=crop",
-        status: "Coming Soon",
+        venue: "Jakarta, Indonesia",
+        duration: "TBA",
+        image: "/indonesia-2027/images/jakarta-day.png",
+        status: "Details Live",
         featured: false,
         stats: {
             "Global Legal Leaders": "TBA",
@@ -115,7 +115,7 @@ const upcomingConferences = [
             awardees: "TBA",
             exhibitors: "TBA",
         },
-        description: "LexTalk World is coming to Indonesia. Full details, venue, and registration will be announced soon.",
+        description: "LexTalk World's first Southeast Asia edition arrives in Jakarta. Explore the conference focus areas and register your interest today.",
         highlights: [
             "Full Conference Access",
             "Curated Networking",
@@ -243,9 +243,9 @@ export default function ConferencesPage() {
                                     <div className="relative h-64 md:h-80 lg:h-full lg:min-h-[450px] overflow-hidden">
                                         <Link
                                             href={event.link}
-                                            target={event.status === "Open" ? "_blank" : undefined}
-                                            rel={event.status === "Open" ? "noopener noreferrer" : undefined}
-                                            aria-label={`${event.city} — ${event.status === "Open" ? "Visit event website" : "Notify me"}`}
+                                            target={event.status !== "Coming Soon" ? "_blank" : undefined}
+                                            rel={event.status !== "Coming Soon" ? "noopener noreferrer" : undefined}
+                                            aria-label={`${event.city} — ${event.status === "Open" ? "Visit event website" : event.status === "Details Live" ? "View conference details" : "Notify me"}`}
                                             className="absolute inset-0 z-[1]"
                                         >
                                             <Image
@@ -282,7 +282,9 @@ export default function ConferencesPage() {
                                             </div>
                                             <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase ${event.status === "Open"
                                                 ? "bg-emerald-100 text-emerald-700"
-                                                : "bg-slate-100 text-slate-500"
+                                                : event.status === "Details Live"
+                                                    ? "bg-amber-100 text-amber-700"
+                                                    : "bg-slate-100 text-slate-500"
                                                 }`}>
                                                 {event.status}
                                             </div>
@@ -342,6 +344,15 @@ export default function ConferencesPage() {
                                                 >
                                                     Visit Event Website
                                                     <ExternalLink size={18} />
+                                                </Link>
+                                            ) : event.status === "Details Live" ? (
+                                                <Link
+                                                    href={event.link}
+                                                    target="_blank"
+                                                    className="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40 hover:-translate-y-0.5"
+                                                >
+                                                    View Conference Details
+                                                    <ArrowRight size={18} />
                                                 </Link>
                                             ) : (
                                                 <button

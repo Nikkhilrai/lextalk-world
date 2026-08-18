@@ -65,18 +65,19 @@ export function EventsList() {
             stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "2 Days" }
         },
         {
-            city: "Indonesia",
+            city: "Jakarta",
             month: "MAR",
             days: "05",
             year: "2027",
             venue: "Indonesia",
-            image: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?q=80&w=1200&auto=format&fit=crop",
-            status: "Coming Soon",
+            image: "/indonesia-2027/images/jakarta-day.png",
+            status: "Details Live",
             region: "Southeast Asia",
-            description: "LexTalk World is coming to Indonesia. Full details, venue, and registration will be announced soon.",
+            description: "LexTalk World's first Southeast Asia edition arrives in Jakarta. Explore the conference focus areas and register your interest today.",
             link: "/indonesia-2027",
             agendaLink: "#",
-            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "1 Day" }
+            agendaReady: false,
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "TBA" }
         }
     ];
 
@@ -153,7 +154,7 @@ export function EventsList() {
 
                                 {/* Status Badge */}
                                 <div className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3">
-                                    <span className={`px-2 sm:px-2.5 py-0.5 sm:py-1 text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-wider rounded-full shadow-lg flex items-center gap-1 sm:gap-1.5 ${event.status === "Coming Soon" ? "bg-slate-500/90 backdrop-blur-sm" : "bg-green-500/90 backdrop-blur-sm"}`}>
+                                    <span className={`px-2 sm:px-2.5 py-0.5 sm:py-1 text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-wider rounded-full shadow-lg flex items-center gap-1 sm:gap-1.5 ${event.status === "Coming Soon" ? "bg-slate-500/90 backdrop-blur-sm" : event.status === "Registrations Open" ? "bg-green-500/90 backdrop-blur-sm" : "bg-amber-500/90 backdrop-blur-sm"}`}>
                                         <span className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-white rounded-full animate-pulse" />
                                         {event.status}
                                     </span>
@@ -243,8 +244,8 @@ export function EventsList() {
                                     ) : (
                                         <button
                                             onClick={() => setSelectedAgendaSlug(event.link.split("/").pop())}
-                                            disabled={event.status === "Coming Soon"}
-                                            className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon"
+                                            disabled={event.status === "Coming Soon" || (event as any).agendaReady === false}
+                                            className={`px-3 sm:px-4 py-2 sm:py-2.5 font-semibold rounded-lg text-xs sm:text-sm border transition-all duration-300 flex items-center justify-center cursor-pointer ${event.status === "Coming Soon" || (event as any).agendaReady === false
                                                 ? "border-slate-100 text-slate-300 cursor-not-allowed hidden sm:flex"
                                                 : "border-slate-200 text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 hidden sm:flex"
                                                 }`}
