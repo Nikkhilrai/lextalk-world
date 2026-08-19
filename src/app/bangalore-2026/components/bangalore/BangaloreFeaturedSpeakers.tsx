@@ -18,18 +18,18 @@ const featured: Speaker[] = [
     {
         name: "Shri. G. Sridhar",
         title: "Secretary to Government, Dept. of Parliamentary Affairs & Legislation, Govt. of Karnataka",
-        image: "/bangalore-2026/speakers-images/shri-g-sridhar.jpeg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125095/lextalk/bangalore-speakers/shri-g-sridhar.jpg",
         badge: "Guest of Honour",
     },
     {
         name: "Dr. Lalit Bhasin",
         title: "President, Society of Indian Law Firms",
-        image: "/bangalore-2026/speakers-images/lalit-bhasin.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125086/lextalk/bangalore-speakers/lalit-bhasin.jpg",
     },
     {
         name: "Amit Anand",
         title: "Director, Legal, Adobe India",
-        image: "/bangalore-2026/speakers-images/Amit-Anand.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125053/lextalk/bangalore-speakers/amit-anand.jpg",
         bio: `Amit Anand is an internationally recognized legal expert with more than 17 years of experience managing diverse teams and cross-border legal matters. As Director, Legal at Adobe, Amit leads the company's legal strategies and ensures compliance with applicable regulations, playing a vital role in its operational success. Previously, he headed the legal function for the Commonwealth Bank of Australia in India, advising on governance and risk management, contract negotiations, and regulatory compliance.
 
 Amit's prior roles at Wells Fargo, NTT DATA, and EY involved managing legal affairs across multiple jurisdictions, including India, the Philippines, China, Poland, Spain, Hungary, Sri Lanka, Mexico, and Argentina. He led and managed international legal teams, resolved cross-border disputes, and developed compliance policies tailored to local and international laws, earning a reputation as a trusted advisor and leader in multinational organizations. A certified Privacy and Corporate Governance Professional, Amit is dedicated to privacy, transparency, and ethical governance.
@@ -39,12 +39,12 @@ Beyond corporate roles, Amit is a prominent industry voice, frequently speaking 
     {
         name: "Deepalakshmi Vadivelan",
         title: "General Counsel & SVP Legal, Global DPO, Quess Corp",
-        image: "/bangalore-2026/speakers-images/Deepalakshmi-Vadivelan.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125062/lextalk/bangalore-speakers/deepalakshmi-vadivelan.jpg",
     },
     {
         name: "Iqbal Tauseef",
         title: "Executive Director – Legal Head India & Global Centre of Excellence",
-        image: "/bangalore-2026/speakers-images/Iqbal-Tauseef.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125067/lextalk/bangalore-speakers/iqbal-tauseef.jpg",
         bio: `Iqbal is a renowned legal professional and celebrated panel speaker, widely recognized across India's legal and corporate circles for his sharp intellect, cross-industry depth, and ability to translate complex legal landscapes into compelling, actionable insight. A sought-after voice at legal forums and industry panels across the country, he has also served as an Industry Expert Faculty at ICSI, leading sessions on Contract Drafting and Negotiation for Leadership and Development programs.
 
 His excellence has earned him back-to-back recognition as one of India's Top In-House Counsels (2021 & 2022) by Forbes India, a place among the Top 50 Legal Professionals in India by Asian Legal Business (India Rising Stars) c/o Thomson Reuters, and the Indian Archivers Award by the Indian Archivists Forum (IAF).
@@ -54,7 +54,7 @@ Over a career spanning 12+ years across IT/ITES, Software, FinTech, Pharmaceutic
     {
         name: "Velmuruga Venkatesh",
         title: "Executive Director – Technology Risk Policy, Wells Fargo",
-        image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125078/lextalk/bangalore-speakers/velmuruga-venkatesh.jpg",
         bio: `A results-driven Governance, Risk and Compliance professional with 29+ years of expertise across Risk Management, Regulatory Compliance, Financial Crimes, IT Risk, Cybersecurity, BCP/DR, Audit, and Data Privacy. Currently serving as Executive Director in GRC at Wells Fargo, he brings deep knowledge of global standards in highly regulated environments.
 
 He holds a Master's in Business Law from NLSIU, an MBA from Symbiosis Institute, and has completed the Senior Management Program at IIM Calcutta. His certifications include CRISC, CDPSE, ISO 27001 Lead Implementer, ISO 31000, and COBIT 5.
@@ -64,13 +64,13 @@ An active industry leader, Velmuruga has served 16+ years on the ISACA Bangalore
     {
         name: "Sivani Peesapati",
         title: "Director, Cyber Security, GE HealthCare",
-        image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125074/lextalk/bangalore-speakers/sivani-peesapati.jpg",
         bio: `A dedicated and experienced Manager in Cybersecurity, committed to safeguarding digital assets and protecting organizations from cyber threats. Skilled in developing and implementing robust security strategies, and compliance initiatives. Adept at leading teams and fostering a culture of cyber resilience. Passionate about staying at the forefront of the ever-evolving cybersecurity landscape to ensure the highest level of protection for businesses and end customers.`,
     },
     {
         name: "Krishna Chellapilla",
         title: "Head – Patents, Prosecution & Copyrights, Tata Consultancy Services",
-        image: "/bangalore-2026/speakers-images/Krishna-Chellapilla.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125071/lextalk/bangalore-speakers/krishna-chellapilla.jpg",
         bio: `Krishna Chellapilla has around 25 years of experience across diverse aspects of Intellectual Property Rights and currently heads the Patents, Prosecution and Copyright activities for TCS. His primary responsibility is to create and protect TCS intellectual property. His specialization includes managing patent prosecution across jurisdictions and handling oral proceedings and examiner interviews at European Patent Office (EPO) and US Patent and Trademark office (USPTO).
 
 Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before that, worked with a US-based law firm as an IP attorney.`,
@@ -78,7 +78,7 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
     {
         name: "Priyesh Sharma",
         title: "Assistant Vice President (Legal), Knowledge Realty Trust",
-        image: "/bangalore-2026/speakers-images/priyesh-sharma.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125091/lextalk/bangalore-speakers/priyesh-sharma.jpg",
         bio: `Priyesh Sharma, Assistant Vice President (Legal) at Knowledge Realty Trust, is a seasoned corporate lawyer with over 15 years of experience in mergers & acquisitions, private equity/venture capital, and real estate transactions. He has been associated with some of India's leading law firms, including JSA, AZB & Partners, and Cyril Amarchand Mangaldas, and has previously headed the M&A practice at ARA Law.
 
 He has advised on several high-value acquisitions and investment transactions in recent years including the largest ever real estate acquisitions and the REITs and has been consistently recognised for his contributions to the field. His accolades include being named a Rising Star- 40 under 40 by Legal Era (2026), Rising Star in M&A and Real Estate (Education Leaders 2025), and recognition as Young Achiever of the Year (Legal Era 2023), among others.`,
@@ -86,12 +86,12 @@ He has advised on several high-value acquisitions and investment transactions in
     {
         name: "Sathish Kolar Ramamoorthy",
         title: "General Counsel VP Legal & CS, Manipal Health Enterprises",
-        image: "/bangalore-2026/speakers-images/Sathish-Kolar-Ramamoorthy.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125072/lextalk/bangalore-speakers/sathish-kolar-ramamoorthy.jpg",
     },
     {
         name: "Debasish Roychowdhury",
         title: "General Counsel & Head Legal, In-solutions Global Ltd.",
-        image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125061/lextalk/bangalore-speakers/debasish-roychowdhury.jpg",
         bio: `Debasish Roychowdhury is a distinguished & Award-winning General Counsel and seasoned expert in Governance, Legal, Risk, and Compliance professional, bringing over 22 years of comprehensive experience across diverse domains including Corporate Governance, Legal Affairs, M&A, Contract Management, Regulatory Compliance, IPOs, Data Privacy, AI Ethics, and more.
 
 His multifaceted qualifications—Company Secretary, LLM, LLB, MBA in Finance, and a Commerce degree—are further bolstered by specialized diplomas and certifications in Cyber Law, IPR, ESG, GDPR, and Artificial Intelligence Governance.
@@ -101,7 +101,7 @@ A recognized thought leader and keynote speaker, Debasish is widely respected fo
     {
         name: "Ankita Choudhary",
         title: "Head of Legal, Nuvama Group",
-        image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125056/lextalk/bangalore-speakers/ankita-choudhary.jpg",
         bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments.
 
 Proven expertise in legal advisory, contract lifecycle management, legal risk mitigation, litigation strategy, and intellectual property protection. Adept at setting up legal frameworks and policies, driving standardization, enabling business growth with pragmatic legal solutions, and managing strategic transactions and special projects.`,

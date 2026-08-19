@@ -17,7 +17,7 @@ Everything here is served from the site root. `public/logo/x.png` → `https://l
 | `logo/` | **LexTalk brand** marks only (`lextalkworld_logo.png`, `favicon.png`). |
 | `logos/` | **Press / "Featured In"** logos (numbered `102.png`–`120.png`). Consumed by `src/components/FeaturedIn.tsx`. Not brand assets — despite the similar name. |
 | `dubai-event/` | Dubai 2026 assets: `sponsors/`, `why-attend/`, `why-attend-slideshow/`, `new-logo/`. |
-| `bangalore-2026/` | Bangalore assets: `Sponsor/`, `speakers-images/`, `awardees/`, `document/`. |
+| `bangalore-2026/` | Bangalore assets: `Sponsor/`, `awardees/`, `document/`. |
 | `mumbai-2026/` | Mumbai assets (`Decision-Makers/`). |
 | `indonesia-2027/` | Jakarta 2027 assets (`images/`). |
 | `agendas/` | Event agenda PDFs. **Served dynamically** — see below. |
@@ -55,8 +55,19 @@ Any file listed there must keep its exact filename, or update the DB rows in the
 `prisma/seed-advisors.ts` must stay in sync too.
 
 ### 3. Cloudinary is the source for most other imagery
-Speakers, blog, awardees, and most sponsor logos are served from Cloudinary
+Blog, awardees, and most sponsor logos are served from Cloudinary
 (`res.cloudinary.com/djagw0s4d/...`), not from this folder.
+
+**All speaker photography now lives on Cloudinary** — do not add speaker images here:
+
+| Event | Cloudinary folder | Count |
+|---|---|---|
+| Dubai 2026 | `lextalk/dubai-speakers` | 44 |
+| Mumbai 2026 | `lextalk/mumbai-speakers` | 7 (+5 reuse Dubai URLs for shared speakers) |
+| Bangalore 2026 | `lextalk/bangalore-speakers` | 45 (39 in use, 6 archived/not in lineup) |
+
+To add a speaker, upload to the relevant folder with a slugified `public_id`
+(`firstname-lastname`) and reference the returned `secure_url`.
 
 ## Verifying you didn't break anything
 

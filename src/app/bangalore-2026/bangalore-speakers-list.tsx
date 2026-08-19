@@ -10,13 +10,13 @@ const speakers: any[] = [
     {
         name: "Shri. G. Sridhar",
         title: "Secretary to Government, Department of Parliamentary Affairs and Legislation, Government of Karnataka",
-        image: "/bangalore-2026/speakers-images/shri-g-sridhar.jpeg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125095/lextalk/bangalore-speakers/shri-g-sridhar.jpg",
         isGuestOfHonor: true,
     },
     {
         name: "THE HON'BLE JUSTICE G. SHYAM PRASAD",
         title: "Former Judge, High Court of Judicature at Hyderabad | Senior Counsel, Supreme Court of India",
-        image: "/bangalore-2026/speakers-images/G-Shyam-Prasad.jpeg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125065/lextalk/bangalore-speakers/g-shyam-prasad.jpg",
         isCentred: true,
         bio: `Justice G Shyam Prasad is a distinguished jurist with over three decades of judicial experience, was elevated as a Judge of the High Court of Judicature at Hyderabad for the States of Telangana and Andhra Pradesh on 20 May 2016.
 
@@ -27,17 +27,17 @@ During a career spanning three decades on the Bench, he adjudicated a broad rang
     {
         name: "Dr. Lalit Bhasin",
         title: "President, Society of Indian Law Firms, India",
-        image: "/bangalore-2026/speakers-images/lalit-bhasin.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125086/lextalk/bangalore-speakers/lalit-bhasin.jpg",
     },
     {
         name: "Aniket Gautam",
         title: "Founding Partner, ASG & Partners Advocates",
-        image: "/bangalore-2026/speakers-images/Aniket-Gautam.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125054/lextalk/bangalore-speakers/aniket-gautam.jpg",
     },
     {
         name: "Velmuruga Venkatesh",
         title: "Executive Director – Technology Risk Policy, Governance Risk Reporting & Regulatory Compliance, Wells Fargo",
-        image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125078/lextalk/bangalore-speakers/velmuruga-venkatesh.jpg",
         bio: `A results-driven Governance, Risk and Compliance professional with 29+ years of expertise across Risk Management, Regulatory Compliance, Financial Crimes, IT Risk, Cybersecurity, BCP/DR, Audit, and Data Privacy. Currently serving as Executive Director in GRC at Wells Fargo, he brings deep knowledge of global standards in highly regulated environments.
 
 He holds a Master's in Business Law from NLSIU, an MBA from Symbiosis Institute, and has completed the Senior Management Program at IIM Calcutta. His certifications include CRISC, CDPSE, ISO 27001 Lead Implementer, ISO 31000, and COBIT 5.
@@ -47,29 +47,29 @@ An active industry leader, Velmuruga has served 16+ years on the ISACA Bangalore
     {
         name: "Kapil Singhal",
         title: "Chief Executive Officer (CEO), Case Docker",
-        image: "/bangalore-2026/speakers-images/Kapil-Singhal.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125069/lextalk/bangalore-speakers/kapil-singhal.jpg",
     },
     {
         name: "Sunjjoy Jaiin",
         title: "Founder & Managing Partner, Lex Corp",
-        image: "/bangalore-2026/speakers-images/Sunjjoy-Jaiin.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125077/lextalk/bangalore-speakers/sunjjoy-jaiin.jpg",
     },
     {
         name: "Jaya Kathju",
         title: "Associate Director – Legal, Eli Lilly",
-        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125068/lextalk/bangalore-speakers/jaya-kathju.jpg",
         bio: `Jaya Kathju is Associate Director – Legal at Eli Lilly, with over a decade of experience in corporate legal functions and litigation. She has previously worked with leading global organizations such as Cognizant and Capgemini: Jaya brings a strong foundation in contracts, complemented by her in-house counsel expertise. She is a graduate of Gujarat National Law University.`
     },
     {
         name: "Priyesh Sharma",
         title: "Assistant Vice President (Legal), Knowledge Realty Trust",
-        image: "/bangalore-2026/speakers-images/priyesh-sharma.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125091/lextalk/bangalore-speakers/priyesh-sharma.jpg",
         bio: `Priyesh Sharma, Assistant Vice President (Legal) at Knowledge Realty Trust, is a seasoned corporate lawyer with over 15 years of experience in mergers & acquisitions, private equity/venture capital, and real estate transactions. He has been associated with some of India’s leading law firms, including JSA, AZB & Partners, and Cyril Amarchand Mangaldas, and has previously headed the M&A practice at ARA Law. He has advised on several high-value acquisitions and investment transactions in recent years including the largest ever real estate acquisitions and the REITs and has been consistently recognised for his contributions to the field. His accolades include being named a Rising Star- 40 under 40 by Legal Era (2026) ,  Rising Star in M&A and Real Estate (Education Leaders 2025), featuring in Enterprise’s Global Leadership List 2025, inclusion in TradeFlock’s Top Real Estate Leadership List 2024, and recognition as Young Achiever of the Year (Legal Era 2023), among others.`
     },
     {
         name: "Debasish Roychowdhury",
         title: "General Counsel and Head Legal, Compliance and Secretarial, In-solutions Global Ltd.",
-        image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125061/lextalk/bangalore-speakers/debasish-roychowdhury.jpg",
         bio: `Debasish Roychowdhury is a distinguished & Award-winning General Counsel and seasoned expert in Governance, Legal, Risk, and Compliance professional, bringing over 22 years of comprehensive experience across diverse domains including Corporate Governance, Legal Affairs, M&A, Contract Management, Regulatory Compliance, IPOs, Data Privacy, AI Ethics, and more.
 
 His multifaceted qualifications—Company Secretary, LLM, LLB, MBA in Finance, and a Commerce degree—are further bolstered by specialized diplomas and certifications in Cyber Law, IPR, ESG, GDPR, and Artificial Intelligence Governance.
@@ -79,13 +79,13 @@ A recognized thought leader and keynote speaker, Debasish is widely respected fo
     {
         name: "Sivani Peesapati",
         title: "Director, Cyber Security, GE HealthCare",
-        image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125074/lextalk/bangalore-speakers/sivani-peesapati.jpg",
         bio: `A dedicated and experienced Manager in Cybersecurity, committed to safeguarding digital assets and protecting organizations from cyber threats. Skilled in developing and implementing robust security strategies, and compliance initiatives . Adept at leading teams and fostering a culture of cyber resilience. Passionate about staying at the forefront of the ever-evolving cybersecurity landscape to ensure the highest level of protection for businesses and end customers.`
     },
     {
         name: "Amit Anand",
         title: "Director, Legal, Adobe India",
-        image: "/bangalore-2026/speakers-images/Amit-Anand.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125053/lextalk/bangalore-speakers/amit-anand.jpg",
         bio: `Amit Anand is an internationally recognized legal expert with more than 17 years of experience managing diverse teams and cross-border legal matters. As Director, Legal at Adobe, Amit leads the company’s legal strategies and ensures compliance with applicable regulations, playing a vital role in its operational success. Previously, he headed the legal function for the Commonwealth Bank of Australia in India, advising on governance and risk management, contract negotiations, and regulatory compliance.
 
 Amit’s prior roles at Wells Fargo, NTT DATA, and EY involved managing legal affairs across multiple jurisdictions, including India, the Philippines, China, Poland, Spain, Hungary, Sri Lanka, Mexico, and Argentina. He led and managed international legal teams, resolved cross-border disputes, and developed compliance policies tailored to local and international laws, earning a reputation as a trusted advisor and leader in multinational organizations. A certified Privacy and Corporate Governance Professional, Amit is dedicated to privacy, transparency, and ethical governance.
@@ -98,34 +98,34 @@ Amit’s influence on policy, commitment to legal scholarship, and advisory work
     {
         name: "Shalini Chawla",
         title: "Patent Specialist - ITC Limited",
-        image: "/bangalore-2026/speakers-images/Shalini-Chawla.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125073/lextalk/bangalore-speakers/shalini-chawla.jpg",
     },
     {
         name: "Bhavesh Saxena",
         title: "Compliance Lead - Asia Pacific & Country Counsel India, Agilent Technologies",
-        image: "/bangalore-2026/speakers-images/Bhavesh-Saxena1.jpg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125059/lextalk/bangalore-speakers/bhavesh-saxena1.jpg",
         bio: `The leadership journey of Bhavesh in the legal domain has been dynamic with significant milestones and impactful decisions. He has transitioned across various sectors, including Service Sector, ITES, Petrochemicals, Crop Science, Automobile, and Life Science over the past 23 years. From being part of 1st E- Governance Government Project of India (MCA21) with TCS, to working with complex greenfield projects at Haldia Petrochemicals and Mitsubishi Chemicals, he later joined Murugappa Group where he worked on mergers and amalgamations and thereafter led the Legal Function of Nissan Motor in India. For last, eight plus years Bhavesh has been with Agilent Technologies- a life science company (a spinoff Hewlett Packard) where he is currently the Compliance Counsel Asia Pacific & Country Legal Counsel - India.`
     },
     {
         name: "Ankita Choudhary",
         title: "Head of Legal, Nuvama Group",
-        image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125056/lextalk/bangalore-speakers/ankita-choudhary.jpg",
         bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments. Proven expertise in legal advisory, contract lifecycle management, legal risk mitigation, litigation strategy, and intellectual property protection. Adept at setting up legal frameworks and policies, driving standardization, enabling business growth with pragmatic legal solutions, and managing strategic transactions and special projects. Recognized for consistent leadership growth, team-building acumen, and collaborative engagement with senior stakeholders and external counsels. Known for being a trusted legal partner across business verticals, aligning legal strategy with organizational goals to support robust and compliant business operations.`
     },
     {
         name: "Hena Datta",
         title: "Head of Legal, Emmvee Group",
-        image: "/bangalore-2026/speakers-images/Hena-Datta.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125066/lextalk/bangalore-speakers/hena-datta.jpg",
     },
     {
         name: "Smitha Chandrashekar",
         title: "Legal Director, Harman International",
-        image: "/bangalore-2026/speakers-images/Smitha-Chandrashekar.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125075/lextalk/bangalore-speakers/smitha-chandrashekar.jpg",
     },
     {
         name: "Prashant Srivastava",
         title: "Attorney Regional Counsel, Head of Contracts & Risk",
-        image: "/bangalore-2026/speakers-images/prashant-srivastava.jpg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125089/lextalk/bangalore-speakers/prashant-srivastava.jpg",
         bio: `A tenured & accomplished, In-house counsel and Contracts Management leader with 15+ years of experience managing high perfmorming legal and contracts functions across multiple Fortune 500 companies. 
 
 Once amongst the pool of youngest GCs/Legal Heads, Prashant is also a qualified Company Secretary.
@@ -135,12 +135,12 @@ Currently, he is designated as the Attorney Regional Counsel & Head of Contracts
     {
         name: "Deepalakshmi Vadivelan",
         title: "General Counsel & SVP Legal, Global DPO, Quess Corp Limited",
-        image: "/bangalore-2026/speakers-images/Deepalakshmi-Vadivelan.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125062/lextalk/bangalore-speakers/deepalakshmi-vadivelan.jpg",
     },
     {
         name: "Krishna Chellapilla",
         title: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",
-        image: "/bangalore-2026/speakers-images/Krishna-Chellapilla.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125071/lextalk/bangalore-speakers/krishna-chellapilla.jpg",
         bio: `Krishna Chellapilla has around 25 years of experience across diverse aspects of Intellectual Property Rights and currently heads the Patents, Prosecution and Copyright activities for TCS. His primary responsibility is to create and protect TCS intellectual property. His specialization includes managing patent prosecution across jurisdictions and handling oral proceedings and examiner interviews at European Patent Office (EPO) and US Patent and Trademark office (USPTO).
 
 Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before that, worked with a US-based law firm as an IP attorney.`
@@ -148,23 +148,23 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
     {
         name: "Iqbal Tauseef",
         title: "Executive Director - Legal Head India and Global Centre of Excellence (Risk and Legal)",
-        image: "/bangalore-2026/speakers-images/Iqbal-Tauseef.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125067/lextalk/bangalore-speakers/iqbal-tauseef.jpg",
         bio: `Iqbal is a renowned legal professional and celebrated panel speaker, widely recognized across India's legal and corporate circles for his sharp intellect, cross-industry depth, and ability to translate complex legal landscapes into compelling, actionable insight. A sought-after voice at legal forums and industry panels across the country, he has also served as an Industry Expert Faculty at ICSI, leading sessions on Contract Drafting and Negotiation for Leadership and Development programs, a role that speaks to both his mastery of the subject and his commitment to elevating the profession. His excellence has earned him back-to-back recognition as one of India's Top In-House Counsels (2021 & 2022) by Forbes India, a place among the Top 50 Legal Professionals in India by Asian Legal Business (India Rising Stars) c/o Thomson Reuters, and the Indian Archivers Award by the Indian Archivists Forum (IAF), with his perspectives further amplified through a featured interview in Lex Witness Magazine. Over a career spanning 12+ years across IT/ITES, Software, FinTech, Pharmaceuticals & Healthcare, Energy, Environmental, and Manufacturing industries, Iqbal has carved a niche in Legal Counsel, Contract Drafting and Negotiation, Contract Lifecycle Management, and Arbitration, earning the trust of C-suite leaders and stakeholders alike through his meticulous attention to detail, commercial awareness, and command over a wide regulatory spectrum including Intellectual Property Rights, GDPR, CGMP, FDA, FIDIC, Incoterms® 2010, and Corporate & International Business law.`
     },
     {
         name: "Anvesha Kumar",
         title: "Director - Legal, JLL",
-        image: "/bangalore-2026/speakers-images/Anvesha-Kumar.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125058/lextalk/bangalore-speakers/anvesha-kumar.jpg",
     },
     {
         name: "Devesh Bhardwaj",
         title: "Head - Legal, VerSe Innovation",
-        image: "/bangalore-2026/speakers-images/Devesh-Bhardwaj.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125063/lextalk/bangalore-speakers/devesh-bhardwaj.jpg",
     },
     {
         name: "Panduranga Acharya",
         title: "General Counsel, Zepto",
-        image: "/bangalore-2026/speakers-images/panduranga-acharya.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125088/lextalk/bangalore-speakers/panduranga-acharya.jpg",
         bio: `Panduranga Acharya is a visionary General Counsel with a proven track record of driving business success through strategic legal counsel. With a deep understanding of diverse customer-facing sectors, he has consistently demonstrated the ability to align legal strategies with evolving business needs, enabling organizations to thrive in competitive landscapes.
 
 Currently serving as the General Counsel of Zepto, India’s pioneering 10-minute delivery quick commerce company, Panduranga has been a cornerstone of the company’s exceptional growth over the last three years. His strategic vision and legal expertise have been instrumental in Zepto’s meteoric rise, with significant contributions to its soaring valuation and rapid market expansion across India. By navigating complex regulatory frameworks and ensuring seamless compliance, Panduranga has positioned Zepto as a leader in the quick commerce industry.`
@@ -172,22 +172,22 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
     {
         name: "Jagannath PV",
         title: "Global Data Privacy Officer, LTIMindtree",
-        image: "/bangalore-2026/speakers-images/jagannath-pv.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125084/lextalk/bangalore-speakers/jagannath-pv.jpg",
     },
     {
         name: "Sushma Shankar",
         title: "Vice President - Legal, Accenture",
-        image: "/bangalore-2026/speakers-images/sushma-shankar.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125097/lextalk/bangalore-speakers/sushma-shankar.jpg",
     },
     {
         name: "Rakesh Kumarswamy Udupi",
         title: "Associate Vice President, Infosys Ltd.",
-        image: "/bangalore-2026/speakers-images/rakesh-udupi.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125093/lextalk/bangalore-speakers/rakesh-udupi.jpg",
     },
     {
         name: "Sivaramakrishnan M.S",
         title: "Advocate and Founder, Law Chamber of Sivaramakishnan M.S. (KPU Chambers)",
-        image: "/bangalore-2026/speakers-images/sivaramakrishnan-m-s.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125096/lextalk/bangalore-speakers/sivaramakrishnan-m-s.jpg",
         bio: `Sivaramakrishnan M.S. is a Practicing Advocate running a boutique commercial litigation and advisory practice in Bangalore. He has over 15 years of experience across commercial courts, arbitration, and corporate advisory, with early practice at the Supreme Court of India.
 
 He holds a Certificate with Honours in AI & Law from Lund University and has been an active voice on the responsible adoption of AI in legal practice by designing practitioner-focused workshops and developing original frameworks on AI reliability in legal contexts. He speaks and writes on what it means to be a human-led, AI-assisted practice in an era of rapid technological change.`
@@ -195,7 +195,7 @@ He holds a Certificate with Honours in AI & Law from Lund University and has bee
     {
         name: "Balaji Mohan",
         title: "Director, Head of Legal | Trianz Digital Consulting Private Limited",
-        image: "/bangalore-2026/speakers-images/balaji-mohan.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125079/lextalk/bangalore-speakers/balaji-mohan.jpg",
         bio: `Balaji Mohan is a senior technology and commercial lawyer with over 22 years of experience advising high-growth technology enterprises on cross-border legal strategy, digital regulation, and complex multi-jurisdictional transactions.
 
 As Director and Head of Legal at Trianz Digital Consulting, Inc. — a US-headquartered technology platforms company operating across the United States, India, and Singapore — Balaji anchors the company's global legal function, with responsibility spanning enterprise contract governance, intellectual property portfolio management, data protection compliance, and pre-litigation risk strategy across jurisdictions.
@@ -207,22 +207,22 @@ Prior to Trianz, Balaji held senior leadership roles at EXLService and served as
     {
         name: "Yawar Usmani",
         title: "Group General Counsel & Company Secretary, MooMark",
-        image: "/bangalore-2026/speakers-images/yawar-usmani.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125099/lextalk/bangalore-speakers/yawar-usmani.jpg",
     },
     {
         name: "Deepti Aggarwal",
         title: "Associate Director, Regulatory Affairs & Drug Development Solutions (RADDS), IQVIA",
-        image: "/bangalore-2026/speakers-images/deepti-aggarwal.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125081/lextalk/bangalore-speakers/deepti-aggarwal.jpg",
     },
     {
         name: "Yogesh Naik",
         title: "Senior Legal Counsel, Volvo Group India",
-        image: "/bangalore-2026/speakers-images/yogesh-naik.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125100/lextalk/bangalore-speakers/yogesh-naik.jpg",
     },
     {
         name: "Antony Alex",
         title: "Founder & CEO, Rainmaker",
-        image: "/bangalore-2026/speakers-images/Antony-Alex.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125057/lextalk/bangalore-speakers/antony-alex.jpg",
         bio: `Antony Alex is the Founder and CEO of Rainmaker and a pioneering entrepreneur in the legal, compliance, and leadership training sectors. A graduate of N.L.S.I.U., Bangalore, Antony is driven by the belief that culture and compliance form the soul of an organization. Under his leadership, Rainmaker transforms regulatory training from a routine "checkbox activity" into an engaging journey, utilizing OTT-style dramatized storytelling to weave ethical practices into the daily fabric of corporate life.
 
 Drawing from his extensive background in establishing corporate grievance mechanisms and anti-corruption protocols, Antony focuses on guiding enterprises through complex regulatory shifts. For his LexTalk World 2026 session, he brings this deep operational expertise to India's Digital Personal Data Protection Act, 2023, providing actionable insights into how companies can successfully transition from high-level privacy policy formulation to practical, everyday execution.
@@ -232,13 +232,13 @@ Prior to founding Rainmaker in 2016, Antony established Kochhar & Co's Mumbai of
     {
         name: "Punya Patra",
         title: "Head Legal Innovation Hub, Novartis",
-        image: "/bangalore-2026/speakers-images/punya-patra.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125092/lextalk/bangalore-speakers/punya-patra.jpg",
         bio: `Punya Chandan Patra is a seasoned legal innovation and transformation leader with over 25+ years of experience driving strategic change across global organizations. Currently serving as Head of the Legal Innovation Hub at Novartis, he leads the design and implementation of next-generation legal service delivery models, with a focus on Responsible AI, digital transformation, and enterprise-wide efficiency. Throughout his career spanning leadership roles at Novartis, PwC, TCS, and CPA Global, Punya has been instrumental in building and scaling global legal operations, establishing high-performing Centers of Excellence, and delivering complex programs across contract lifecycle management, litigation support, regulatory compliance, and data governance. Known for his ability to translate vision into execution, bridge legal expertise with technology, he has spearheaded initiatives in legal tech adoption, eDiscovery, and AI-enabled contract management—helping organizations navigate evolving challenges. Punya has built and led high-performing global teams, delivered large-scale transformation programs, and contributed to shaping the future of legal services. His work consistently focuses on managing risk, strengthening compliance, and enabling resilient legal frameworks in an increasingly data-driven world. A trusted advisor to senior leadership, Punya brings a unique combination of strategic vision, operational excellence, and deep domain expertise—making him a sought-after speaker on the future of legal services, innovation, and risk management.`,
     },
     {
         name: "Nishi Shafton Williams",
         title: "Senior Manager – Service Delivery, ABiz Corporation",
-        image: "/bangalore-2026/speakers-images/nishi-shafton-williams.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125087/lextalk/bangalore-speakers/nishi-shafton-williams.jpg",
         bio: `Nishi Shafton Williams is a contracts and legal operations professional with over 13 years of experience, specialising in contract lifecycle management, CLM implementation, and legal operations transformation. She leads multi-pod delivery teams executing complex contract management, metadata extraction, obligation management, and IP governance programs for global clients across healthcare, technology, and professional services.
 
 Her focus areas include solution design, quality governance, AI-enabled contract operations, executive reporting, and building high-performing offshore delivery teams. Nishi holds a Corporate Membership with WCC and has attained the Contracts & Commercial Management Practitioner Certification from WCC (formerly IACCM).
@@ -248,7 +248,7 @@ A distinguished academic achiever, she ranked 1st in Human Rights, Intellectual 
     {
         name: "Gurupyari Dwivedi",
         title: "Vice President – Service Delivery, ABiz Corporation",
-        image: "/bangalore-2026/speakers-images/gurupyari-dwivedi.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125083/lextalk/bangalore-speakers/gurupyari-dwivedi.jpg",
         bio: `Gurupyari Dwivedi (aka GP) is a seasoned service delivery and legal operations leader with extensive experience in driving contract management excellence, operational efficiency, and client-centric outcomes. As Vice President – Service Delivery at ABiz Corporation, she aligns legal and commercial operations with business strategy to deliver measurable value — recognised for building scalable delivery models, strengthening governance frameworks, and enabling teams to achieve consistent, high-quality results.
 
 GP leads end-to-end service delivery for global contracts management and legal support engagements, overseeing complex client portfolios, driving delivery transformation initiatives, and ensuring alignment between client objectives, operational execution, and risk management. She is known for setting up and mentoring high-performing teams and fostering a culture of accountability, collaboration, and continuous improvement.
@@ -258,13 +258,13 @@ She holds a Master's in English from IGNOU, a Bachelor's in Law from Janhit Coll
     {
         name: "Rovena David",
         title: "General Counsel, StoveKraft Limited",
-        image: "/bangalore-2026/speakers-images/rovena-david.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125094/lextalk/bangalore-speakers/rovena-david.jpg",
         bio: `Rovena David is the General Counsel of Stovekraft Limited, bringing over 17 years of rich experience in corporate legal practice. Over the course of her career, she has held key roles at leading organisations including Titan, Wipro Enterprises, Hindustan Unilever, and Herbalife International, building deep expertise across a wide range of corporate legal functions.`,
     },
     {
         name: "Gaurav Sahay",
         title: "Founder/Partner, Arthashastra Legal",
-        image: "/bangalore-2026/speakers-images/gaurav-sahay.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125082/lextalk/bangalore-speakers/gaurav-sahay.jpg",
     },
 ];
 
