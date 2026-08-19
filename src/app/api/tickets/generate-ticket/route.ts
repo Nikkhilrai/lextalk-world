@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
         // Load logo
         let logoImage;
         try {
-            const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld_logo.png");
+            const logoPath = path.join(process.cwd(), "public", "logo", "lextalkworld-logo.png");
             const logoBytes = await fs.readFile(logoPath);
             logoImage = await pdfDoc.embedPng(logoBytes);
         } catch (err) {
