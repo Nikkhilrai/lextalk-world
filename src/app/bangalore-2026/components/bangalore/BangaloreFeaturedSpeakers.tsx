@@ -18,13 +18,13 @@ const featured: Speaker[] = [
     {
         name: "Shri. G. Sridhar",
         title: "Secretary to Government, Dept. of Parliamentary Affairs & Legislation, Govt. of Karnataka",
-        image: "/bangalore-2026/speakers-images/Shri G. Sridhar.jpeg",
+        image: "/bangalore-2026/speakers-images/shri-g-sridhar.jpeg",
         badge: "Guest of Honour",
     },
     {
         name: "Dr. Lalit Bhasin",
         title: "President, Society of Indian Law Firms",
-        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
+        image: "/bangalore-2026/speakers-images/lalit-bhasin.png",
     },
     {
         name: "Amit Anand",
@@ -78,7 +78,7 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
     {
         name: "Priyesh Sharma",
         title: "Assistant Vice President (Legal), Knowledge Realty Trust",
-        image: "/bangalore-2026/speakers-images/Priyesh Sharma.png",
+        image: "/bangalore-2026/speakers-images/priyesh-sharma.png",
         bio: `Priyesh Sharma, Assistant Vice President (Legal) at Knowledge Realty Trust, is a seasoned corporate lawyer with over 15 years of experience in mergers & acquisitions, private equity/venture capital, and real estate transactions. He has been associated with some of India's leading law firms, including JSA, AZB & Partners, and Cyril Amarchand Mangaldas, and has previously headed the M&A practice at ARA Law.
 
 He has advised on several high-value acquisitions and investment transactions in recent years including the largest ever real estate acquisitions and the REITs and has been consistently recognised for his contributions to the field. His accolades include being named a Rising Star- 40 under 40 by Legal Era (2026), Rising Star in M&A and Real Estate (Education Leaders 2025), and recognition as Young Achiever of the Year (Legal Era 2023), among others.`,

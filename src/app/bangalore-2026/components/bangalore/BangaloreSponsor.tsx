@@ -26,7 +26,7 @@ const tiers = [
         accent: "from-sky-200 via-sky-400 to-sky-200",
         sponsors: [
             { name: "Case Docker", logo: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/", w: 220, h: 110 },
-            { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp", href: "https://home.lexcorp.org.in/", w: 220, h: 110 },
+            { name: "Lex Corp", logo: "/sponsor/sponsor-logos/diamond/lexcorp-logo.webp", href: "https://home.lexcorp.org.in/", w: 220, h: 110 },
         ],
     },
     {
@@ -35,7 +35,7 @@ const tiers = [
         sponsors: [
             { name: "Amadi", logo: "/bangalore-2026/Sponsor/Amadi.jpg", href: null, w: 220, h: 110 },
             { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/", w: 260, h: 130 },
-            { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: "https://www.abizcon.com/", w: 220, h: 110 },
+            { name: "ABiz", logo: "/bangalore-2026/Sponsor/abiz-logo.png", href: "https://www.abizcon.com/", w: 220, h: 110 },
             { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/", w: 220, h: 110 },
         ],
     },
@@ -51,7 +51,7 @@ const tiers = [
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
             { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/", w: 220, h: 110, showName: true },
-            { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null, w: 260, h: 130 },
+            { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawqube-logo.png", href: null, w: 260, h: 130 },
         ],
     },
     {
@@ -73,7 +73,7 @@ const tiers = [
         label: "Venue Partner",
         accent: "from-slate-200 via-slate-300 to-slate-200",
         sponsors: [
-            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null, w: 260, h: 130 },
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial-logo.jpeg", href: null, w: 260, h: 130 },
         ],
     },
 ];

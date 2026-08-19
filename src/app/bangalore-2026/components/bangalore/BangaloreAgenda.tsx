@@ -61,7 +61,7 @@ const agenda: Session[] = [
         title: "Technology in Law",
         duration: "15 min",
         speakers: [
-            { name: "Dr. Lalit Bhasin", designation: "President, Society of Indian Law Firms", image: "/bangalore-2026/speakers-images/lalit bhasin.png" },
+            { name: "Dr. Lalit Bhasin", designation: "President, Society of Indian Law Firms", image: "/bangalore-2026/speakers-images/lalit-bhasin.png" },
         ],
     },
     {
@@ -71,8 +71,8 @@ const agenda: Session[] = [
         duration: "50 min",
         speakers: [
             { name: "Jaya Kathju",          designation: "Associate Director - Legal, Eli Lilly",                                        image: "/bangalore-2026/speakers-images/Jaya-Kathju.png" },
-            { name: "Gaurav Sahay",         designation: "Founder/Partner, Arthashastra Legal",                                       image: "/bangalore-2026/speakers-images/Gaurav Sahay.png" },
-            { name: "Priyesh Sharma",       designation: "Assistant VP Legal, Knowledge Realty Trust",                                   image: "/bangalore-2026/speakers-images/Priyesh Sharma.png" },
+            { name: "Gaurav Sahay",         designation: "Founder/Partner, Arthashastra Legal",                                       image: "/bangalore-2026/speakers-images/gaurav-sahay.png" },
+            { name: "Priyesh Sharma",       designation: "Assistant VP Legal, Knowledge Realty Trust",                                   image: "/bangalore-2026/speakers-images/priyesh-sharma.png" },
             { name: "Hena Datta",           designation: "Head of Legal, Emmvee Group",                                                  image: "/bangalore-2026/speakers-images/Hena-Datta.png" },
             { name: "Smitha Chandrashekar", designation: "Legal Director, Harman International",                                         image: "/bangalore-2026/speakers-images/Smitha-Chandrashekar.png" },
             { name: "Prashant Srivastava",  designation: "Head of Contracts & Attorney Regional Counsel, Hewlett Packard Enterprise",     image: "/bangalore-2026/speakers-images/prashant-srivastava.jpg" },
@@ -94,7 +94,7 @@ const agenda: Session[] = [
             { name: "Antony Alex",           designation: "Founder & CEO, Rainmaker",                                                     image: "/bangalore-2026/speakers-images/Antony-Alex.png" },
             { name: "Debasish Roychowdhury", designation: "General Counsel & Head Legal, In-solutions Global Ltd.",                       image: "/bangalore-2026/speakers-images/Debasish-Roychowdhury.png" },
             { name: "Sivani Peesapati",      designation: "Director, Cyber Security Lab, GE Healthcare",                                  image: "/bangalore-2026/speakers-images/Sivani-Peesapati.png" },
-            { name: "Yogesh Naik",           designation: "Senior Legal Counsel, Volvo Group India",                                      image: "/bangalore-2026/speakers-images/YOGESH NAIK.png" },
+            { name: "Yogesh Naik",           designation: "Senior Legal Counsel, Volvo Group India",                                      image: "/bangalore-2026/speakers-images/yogesh-naik.png" },
         ],
     },
     {
@@ -103,7 +103,7 @@ const agenda: Session[] = [
         title: "Case Study Presentation by ABiz",
         subtitle: "Turning AI into Business Value in Legal Operations and Contract Management",
         duration: "20 min",
-        logo: "/bangalore-2026/Sponsor/ABiz Logo.png",
+        logo: "/bangalore-2026/Sponsor/abiz-logo.png",
     },
     {
         time: "11:55 AM – 12:45 PM",
@@ -112,7 +112,7 @@ const agenda: Session[] = [
         duration: "50 min",
         speakers: [
             { name: "Saurabh Anand",          designation: "Lead Counsel, Akamai Technologies" },
-            { name: "Rovena David",            designation: "General Counsel, StoveKraft Limited",                                         image: "/bangalore-2026/speakers-images/Rovena David.png" },
+            { name: "Rovena David",            designation: "General Counsel, StoveKraft Limited",                                         image: "/bangalore-2026/speakers-images/rovena-david.png" },
             { name: "Deepalakshmi Vadivelan",  designation: "General Counsel & SVP Legal, Global DPO, Quess Corp Limited",                 image: "/bangalore-2026/speakers-images/Deepalakshmi-Vadivelan.png" },
             { name: "Krishna Chellapilla",     designation: "Head - Patents, Prosecution and Copyrights, Tata Consultancy Services",       image: "/bangalore-2026/speakers-images/Krishna-Chellapilla.png" },
             { name: "Iqbal Tauseef",           designation: "Executive Director – Legal Head - India & Global Contracts COE, TTEC",        image: "/bangalore-2026/speakers-images/Iqbal-Tauseef.png" },
@@ -134,7 +134,7 @@ const agenda: Session[] = [
         speakers: [
             { name: "Amit Anand",            designation: "India Head Legal (VP Legal), Adobe",                                            image: "/bangalore-2026/speakers-images/Amit-Anand.png" },
             { name: "Shalini Chawla",        designation: "Patent Specialist, ITC Limited",                                               image: "/bangalore-2026/speakers-images/Shalini-Chawla.png" },
-            { name: "MS Sivaramakrishnan",   designation: "Independent Lawyer/Advocate",                                                  image: "/bangalore-2026/speakers-images/Sivaramakrishnan M.S.png" },
+            { name: "MS Sivaramakrishnan",   designation: "Independent Lawyer/Advocate",                                                  image: "/bangalore-2026/speakers-images/sivaramakrishnan-m-s.png" },
             { name: "Bhavesh Saxena",        designation: "Compliance Lead - Asia Pacific & Country Counsel India, Agilent Technologies",  image: "/bangalore-2026/speakers-images/Bhavesh-Saxena1.jpg" },
             { name: "Ankita Choudhary",      designation: "Head of Legal, Nuvama Group",                                               image: "/bangalore-2026/speakers-images/Ankita-Choudhary.png" },
             { name: "Anvesha Kumar",         designation: "Director - Legal, JLL",                                                        image: "/bangalore-2026/speakers-images/Anvesha-Kumar.png" },
@@ -155,12 +155,12 @@ const agenda: Session[] = [
         title: "Digital Forensics, Data Privacy & Cybersecurity Investigations: Managing Evidence, Risk and Response",
         duration: "55 min",
         speakers: [
-            { name: "Jagannath PV",              designation: "Global Data Privacy Officer, LTIMindtree",                                  image: "/bangalore-2026/speakers-images/Jagannath PV.png" },
-            { name: "Sushma Shankar",            designation: "Vice President - Legal, Accenture",                                        image: "/bangalore-2026/speakers-images/sushma_shankar.png" },
-            { name: "Rakesh Kumarswamy Udupi",   designation: "Associate Vice President, Infosys Ltd.",                                   image: "/bangalore-2026/speakers-images/Rakesh Udupi.png" },
-            { name: "Yawar Usmani",              designation: "Group General Counsel & Company Secretary, MooMark",                       image: "/bangalore-2026/speakers-images/YAWAR USMANI.png" },
+            { name: "Jagannath PV",              designation: "Global Data Privacy Officer, LTIMindtree",                                  image: "/bangalore-2026/speakers-images/jagannath-pv.png" },
+            { name: "Sushma Shankar",            designation: "Vice President - Legal, Accenture",                                        image: "/bangalore-2026/speakers-images/sushma-shankar.png" },
+            { name: "Rakesh Kumarswamy Udupi",   designation: "Associate Vice President, Infosys Ltd.",                                   image: "/bangalore-2026/speakers-images/rakesh-udupi.png" },
+            { name: "Yawar Usmani",              designation: "Group General Counsel & Company Secretary, MooMark",                       image: "/bangalore-2026/speakers-images/yawar-usmani.png" },
             { name: "Hon'ble Justice G. Shyam Prasad", designation: "Former Judge, High Court of Judicature at Hyderabad | Senior Counsel, Supreme Court of India", image: "/bangalore-2026/speakers-images/G-Shyam-Prasad.jpeg" },
-            { name: "Punya Patra",               designation: "Head - Legal Innovation Hub, Novartis Healthcare",                         image: "/bangalore-2026/speakers-images/Punya Patra.png" },
+            { name: "Punya Patra",               designation: "Head - Legal Innovation Hub, Novartis Healthcare",                         image: "/bangalore-2026/speakers-images/punya-patra.png" },
         ],
     },
     {
@@ -170,9 +170,9 @@ const agenda: Session[] = [
         duration: "60 min",
         speakers: [
             { name: "Devesh Bhardwaj",           designation: "Head - Legal, VerSe Innovation",                                           image: "/bangalore-2026/speakers-images/Devesh-Bhardwaj.png" },
-            { name: "Panduranga Acharya",        designation: "General Counsel, Zepto",                                                   image: "/bangalore-2026/speakers-images/Panduranga Acharya.png" },
-            { name: "Balaji Mohan",              designation: "Director, Head of Legal, Trianz Digital Consulting",                       image: "/bangalore-2026/speakers-images/Balaji Mohan.png" },
-            { name: "Deepti Aggarwal",           designation: "Associate Director, Regulatory Affairs & Drug Development Solutions, IQVIA", image: "/bangalore-2026/speakers-images/Deepti Aggarwal.png" },
+            { name: "Panduranga Acharya",        designation: "General Counsel, Zepto",                                                   image: "/bangalore-2026/speakers-images/panduranga-acharya.png" },
+            { name: "Balaji Mohan",              designation: "Director, Head of Legal, Trianz Digital Consulting",                       image: "/bangalore-2026/speakers-images/balaji-mohan.png" },
+            { name: "Deepti Aggarwal",           designation: "Associate Director, Regulatory Affairs & Drug Development Solutions, IQVIA", image: "/bangalore-2026/speakers-images/deepti-aggarwal.png" },
             { name: "Aniket Gautam",             designation: "Founding Partner, ASG & Partners Advocates",                               image: "/bangalore-2026/speakers-images/Aniket-Gautam.png" },
             { name: "Velmuruga Venkatesh",       designation: "Executive Director - Technology Risk Policy Governance, Wells Fargo",       image: "/bangalore-2026/speakers-images/Velmuruga-Venkatesh.png" },
         ],

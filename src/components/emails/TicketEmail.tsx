@@ -48,7 +48,7 @@ export const TicketEmail = ({
                     {/* Header */}
                     <Section style={headerSection}>
                         <Img
-                            src="https://lextalkworld.in/logo/Lextalk-Logo.png"
+                            src="https://lextalkworld.in/logo/lextalkworld-logo.png"
                             width="180"
                             height="50"
                             alt="LexTalk World"

@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     openGraph: {
         title: "LexTalk World Dubai 2026 | Global Legal Conference & Awards | 9th–10th Sep 2026",
         description: "Join 500+ global legal leaders in Dubai on 9th–10th September 2026 at Crowne Plaza. Networking, Legal Honor Global Awards, and Legal Tech Demo.",
-        images: ["/dubai-event/dubai-hero.jpg"],
+        images: ["/og/dubai-2026.jpg"],
     },
     twitter: {
         card: "summary_large_image",
         title: "LexTalk World Dubai 2026 | 9th–10th Sep 2026",
         description: "Join 500+ global legal leaders in Dubai on 9th–10th September 2026.",
-        images: ["/dubai-event/dubai-hero.jpg"],
+        images: ["/og/dubai-2026.jpg"],
     },
 };
 

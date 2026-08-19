@@ -56,7 +56,7 @@ export default function Delhi2027Page() {
                     >
                         <div className="relative w-44 h-10 md:w-56 md:h-14">
                             <Image
-                                src="/logo/lextalkworld_logo.png"
+                                src="/logo/lextalkworld-logo.png"
                                 alt="LexTalk World Logo"
                                 fill
                                 className="object-contain"

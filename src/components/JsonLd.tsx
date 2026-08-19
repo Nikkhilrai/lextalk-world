@@ -58,7 +58,7 @@ export function EventJsonLd() {
             url: 'https://lextalkworld.in/tickets',
             availability: 'https://schema.org/InStock',
         },
-        image: 'https://lextalkworld.in/dubai-event/dubai-hero.jpg',
+        image: 'https://lextalkworld.in/og/dubai-2026.jpg',
     }
 
     return (

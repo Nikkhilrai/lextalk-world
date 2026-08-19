@@ -60,7 +60,7 @@ export function EventNavbar() {
                     <Link href="/" className="relative">
                         <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-12">
                             <Image
-                                src="/logo/lextalkworld_logo.png"
+                                src="/logo/lextalkworld-logo.png"
                                 alt="Lextalk World"
                                 width={200}
                                 height={48}

@@ -56,8 +56,8 @@ export function MumbaiSponsor() {
                             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                                 {[
                                     { name: "Case Docker", src: "/dubai-event/sponsors/CasedockerLogo.avif", url: "https://www.casedocker.com/landing/" },
-                                    { name: "Lex Corp", src: "/dubai-event/sponsors/Lex_Corp_Logo.avif", url: "https://home.lexcorp.org.in/" },
-                                    { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/Gorodissky_Logo.jpg", url: "https://www.gorodissky.com/" }
+                                    { name: "Lex Corp", src: "/dubai-event/sponsors/lex-corp-logo.avif", url: "https://home.lexcorp.org.in/" },
+                                    { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/gorodissky-logo.jpg", url: "https://www.gorodissky.com/" }
                                 ].map((sp, i) => (
                                     <motion.div
                                         key={i}
@@ -101,7 +101,7 @@ export function MumbaiSponsor() {
                                     className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
                                 >
                                     <a href="https://bgklawassociates.co.in/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                        <Image src="/dubai-event/sponsors/BGK Law Associates.jpg" alt="BGK Law Associates" fill className="object-contain mix-blend-multiply" />
+                                        <Image src="/dubai-event/sponsors/bgk-law-associates.jpg" alt="BGK Law Associates" fill className="object-contain mix-blend-multiply" />
                                     </a>
                                 </motion.div>
                             </div>

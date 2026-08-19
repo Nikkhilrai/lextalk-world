@@ -83,7 +83,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                     <Link href="/" className="flex items-center gap-2 group md:-ml-8">
                         <div className="relative w-[140px] h-10 lg:w-[200px] lg:h-14 transition-transform group-hover:scale-105 flex items-center">
                             <Image
-                                src="/logo/lextalkworld_logo.png"
+                                src="/logo/lextalkworld-logo.png"
                                 alt="Lextalk World"
                                 width={240}
                                 height={64}

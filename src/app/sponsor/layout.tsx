@@ -7,13 +7,13 @@ export const metadata: Metadata = {
         title: "Become a Sponsor | LexTalk World",
         description: "Join 500+ legal leaders showcase your expertise and drive real growth. Partner with LexTalk World.",
         url: "https://lextalkworld.in/sponsor",
-        images: ["/logo/lextalkworld_logo.png"],
+        images: ["/logo/lextalkworld-logo.png"],
     },
     twitter: {
         card: "summary_large_image",
         title: "Become a Sponsor | LexTalk World",
         description: "Join 500+ legal leaders showcase your expertise and drive real growth.",
-        images: ["/logo/lextalkworld_logo.png"],
+        images: ["/logo/lextalkworld-logo.png"],
     },
 };
 

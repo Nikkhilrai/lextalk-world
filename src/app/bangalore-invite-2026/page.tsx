@@ -143,7 +143,7 @@ export default function BangaloreInvitePage() {
                                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Venue</p>
                                 <div className="relative h-36 rounded-xl overflow-hidden mb-3">
                                     <Image
-                                        src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg"
+                                        src="/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial-logo.jpeg"
                                         alt="Radisson Blu Atria Bangalore"
                                         fill
                                         className="object-cover"

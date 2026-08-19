@@ -37,25 +37,25 @@ const SPEAKERS = [
         name: "Brian Hinman",
         title: "Chief Intellectual Property Officer",
         company: "Cote Global, Inc.",
-        image: "/images/speakers/Brian Hinman.avif",
+        image: "/images/speakers/brian-hinman.avif",
     },
     {
         name: "Joe Valentine",
         title: "International Trade Compliance Counsel",
         company: "Intel",
-        image: "/images/speakers/Joe Valentine.avif",
+        image: "/images/speakers/joe-valentine.avif",
     },
     {
         name: "Sunil Kumar Parameswaran",
         title: "Head of Legal Tooling – Solutions Enablement",
         company: "Google",
-        image: "/images/speakers/Sunil Kumar Parameswaran.avif",
+        image: "/images/speakers/sunil-kumar-parameswaran.avif",
     },
     {
         name: "Ted Gizewski",
         title: "Head of Legal and Compliance",
         company: "TikTok",
-        image: "/images/speakers/Ted Gizewski.avif",
+        image: "/images/speakers/ted-gizewski.avif",
     },
 ];
 

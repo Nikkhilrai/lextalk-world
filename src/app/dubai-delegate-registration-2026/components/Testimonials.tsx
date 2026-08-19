@@ -21,8 +21,8 @@ const TESTIMONIALS: Testimonial[] = [
         name: "Christopher Bowen",
         designation: "Corporate Counsel",
         company: "Google LLC",
-        image: "/images/testimonials/delegates/Christopher Bowen.avif",
-        logo: "/images/testimonials/logos/Google logo.avif",
+        image: "/images/testimonials/delegates/christopher-bowen.avif",
+        logo: "/images/testimonials/logos/google-logo.avif",
         text: "The LexTalk World sessions at the AMA Center are extremely well-organized. Check-in was simple and quick; the technology worked as promised; and refreshments were widely available.",
     },
     {
@@ -30,7 +30,7 @@ const TESTIMONIALS: Testimonial[] = [
         name: "Jorge Barona",
         designation: "",
         company: "Jorge Barona ILC",
-        image: "/images/testimonials/delegates/Jorge Barona.avif",
+        image: "/images/testimonials/delegates/jorge-barona.avif",
         text: "A truly enriching event. Congratulations to the organizers for a seamless experience. The panels were insightful, thanks to the high profile of the speakers who brought thoughtful perspectives and real-world expertise to the table. It was an honor to contribute to the discussion and connect with such a dynamic group. I look forward to staying engaged and hope to collaborate again in future editions!.",
     },
     {
@@ -38,8 +38,8 @@ const TESTIMONIALS: Testimonial[] = [
         name: "Enrique Eguiarte",
         designation: "Head Legal",
         company: "Ticsa Grupo EPM",
-        image: "/images/testimonials/delegates/Enrique Eguiarte.avif",
-        logo: "/images/testimonials/logos/ticsa_grupo_epm_logo.avif",
+        image: "/images/testimonials/delegates/enrique-eguiarte.avif",
+        logo: "/images/testimonials/logos/ticsa-grupo-epm-logo.avif",
         text: "Wonderful event and such an amazing opportunity to connect with quite professional colleagues.",
     },
     {
@@ -47,8 +47,8 @@ const TESTIMONIALS: Testimonial[] = [
         name: "Alejandro Espejo",
         designation: "Legal Manager Latam",
         company: "Nordex Group",
-        image: "/images/testimonials/delegates/Alejandro Espejo.avif",
-        logo: "/images/testimonials/logos/nordex_logo.avif",
+        image: "/images/testimonials/delegates/alejandro-espejo.avif",
+        logo: "/images/testimonials/logos/nordex-logo.avif",
         text: "Great experience! The networking and technical insights provided a clear path for future innovation in our legal department.",
     },
     {
@@ -57,7 +57,7 @@ const TESTIMONIALS: Testimonial[] = [
         designation: "Founder",
         company: "Serving Immigrants",
         image: "/images/testimonials/delegates/Javier.avif",
-        logo: "/images/testimonials/logos/Serving Immigrants Logo.avif",
+        logo: "/images/testimonials/logos/serving-immigrants-logo.avif",
         text: "Great event! Everything was perfect! The organization, the high-level attendance, and the venue all combined for a world-class experience.",
     },
 ];

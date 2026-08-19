@@ -220,7 +220,7 @@ export default function SponsorshipPage() {
                             <div className="lg:col-span-5 lg:row-span-2 group">
                                 <div className="relative h-full min-h-[400px] lg:min-h-full rounded-3xl overflow-hidden border border-white/10">
                                     <Image
-                                        src="/dubai-event/why-attend/Networking_edited.avif"
+                                        src="/dubai-event/why-attend/networking-edited.avif"
                                         alt="Decision Makers"
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -256,7 +256,7 @@ export default function SponsorshipPage() {
                                 <div className="relative h-full min-h-[200px] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800">
                                     <div className="absolute top-0 right-0 w-1/2 h-full">
                                         <Image
-                                            src="/dubai-event/why-attend/Exhibition & Tech Demo.avif"
+                                            src="/dubai-event/why-attend/exhibition-tech-demo.avif"
                                             alt="Industries"
                                             fill
                                             className="object-cover opacity-50 group-hover:opacity-60 transition-opacity"
@@ -452,7 +452,7 @@ export default function SponsorshipPage() {
                         <div className="group relative">
                             <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
                                 <Image
-                                    src="/sponsor/premium networking.png"
+                                    src="/sponsor/premium-networking.png"
                                     alt="Premium Networking"
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -480,7 +480,7 @@ export default function SponsorshipPage() {
                         <div className="group relative">
                             <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
                                 <Image
-                                    src="/sponsor/product Showcases.png"
+                                    src="/sponsor/product-showcases.png"
                                     alt="Product Showcases"
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -567,7 +567,7 @@ export default function SponsorshipPage() {
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/Platinum Sponsor/Amadi_logo.webp"
+                                        src="/sponsor/sponsor-logos/platinum/amadi-logo.webp"
                                         alt="Amadi - Platinum Sponsor"
                                         fill
                                         className="object-contain"
@@ -597,7 +597,7 @@ export default function SponsorshipPage() {
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/diamond sponsor/CasedockerLogo.webp"
+                                        src="/sponsor/sponsor-logos/diamond/CasedockerLogo.webp"
                                         alt="CaseDocker - Diamond Sponsor"
                                         fill
                                         className="object-contain"
@@ -612,7 +612,7 @@ export default function SponsorshipPage() {
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp"
+                                        src="/sponsor/sponsor-logos/diamond/lexcorp-logo.webp"
                                         alt="LexCorp - Diamond Sponsor"
                                         fill
                                         className="object-contain"
@@ -627,7 +627,7 @@ export default function SponsorshipPage() {
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/dubai-event/sponsors/Gorodissky_Logo.jpg"
+                                        src="/dubai-event/sponsors/gorodissky-logo.jpg"
                                         alt="Gorodissky & Partners - Diamond Sponsor"
                                         fill
                                         className="object-contain"
@@ -682,7 +682,7 @@ export default function SponsorshipPage() {
                             >
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/sponsor/Sponsor logo/gold sponsor/AsgandPartnerlogo.jpeg"
+                                        src="/sponsor/sponsor-logos/gold/AsgandPartnerlogo.jpeg"
                                         alt="Asgand & Partner - Gold Sponsor"
                                         fill
                                         className="object-contain rounded-xl"
@@ -708,7 +708,7 @@ export default function SponsorshipPage() {
                             <div className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.2)] border-2 border-emerald-50 group-hover:border-emerald-200 p-6 flex items-center justify-center hover:-translate-y-2">
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/dubai-event/sponsors/BGK Law Associates.jpg"
+                                        src="/dubai-event/sponsors/bgk-law-associates.jpg"
                                         alt="BGK Law Associates - Knowledge Partner"
                                         fill
                                         className="object-contain"
@@ -718,7 +718,7 @@ export default function SponsorshipPage() {
                             <div className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.2)] border-2 border-emerald-50 group-hover:border-emerald-200 p-6 flex items-center justify-center hover:-translate-y-2">
                                 <div className="relative w-full h-full">
                                     <Image
-                                        src="/dubai-event/sponsors/Fairaigle Legal & Consultancy LLP.jpg"
+                                        src="/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg"
                                         alt="Fairaigle Legal & Consultancy LLP - Knowledge Partner"
                                         fill
                                         className="object-contain"
@@ -741,9 +741,9 @@ export default function SponsorshipPage() {
                         </div>
                         <div className="flex flex-wrap justify-center gap-6 px-4">
                             {[
-                                { name: "Allcanza", logo: "/sponsor/Sponsor logo/Allcanza Logo.avif", url: "https://www.allcanza.com/" },
-                                { name: "Borge", logo: "/sponsor/Sponsor logo/Borge.webp", url: "https://borgesadv.com.br/" },
-                                { name: "Klip", logo: "/sponsor/Sponsor logo/Klip.jpg", url: "https://www.klip.us/" }
+                                { name: "Allcanza", logo: "/sponsor/sponsor-logos/allcanza-logo.avif", url: "https://www.allcanza.com/" },
+                                { name: "Borge", logo: "/sponsor/sponsor-logos/Borge.webp", url: "https://borgesadv.com.br/" },
+                                { name: "Klip", logo: "/sponsor/sponsor-logos/Klip.jpg", url: "https://www.klip.us/" }
                             ].map((sponsor, idx) => (
                                 <a
                                     key={idx}
@@ -790,7 +790,7 @@ export default function SponsorshipPage() {
                                     tierLabel: "Diamond Sponsors",
                                     sponsors: [
                                         { name: "Case Docker", logo: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
-                                        { name: "Lex Corp", logo: "/sponsor/Sponsor logo/diamond sponsor/LexCorp_Logo.webp", href: "https://home.lexcorp.org.in/" },
+                                        { name: "Lex Corp", logo: "/sponsor/sponsor-logos/diamond/lexcorp-logo.webp", href: "https://home.lexcorp.org.in/" },
                                     ]
                                 },
                                 {
@@ -798,7 +798,7 @@ export default function SponsorshipPage() {
                                     sponsors: [
                                         { name: "Amadi", logo: "/bangalore-2026/Sponsor/Amadi.jpg", href: "https://www.amadi.io/" },
                                         { name: "ASG Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/" },
-                                        { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png", href: "https://www.abizcon.com/" },
+                                        { name: "ABiz", logo: "/bangalore-2026/Sponsor/abiz-logo.png", href: "https://www.abizcon.com/" },
                                         { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png", href: "https://rainmaker.co.in/" },
                                     ]
                                 },
@@ -812,7 +812,7 @@ export default function SponsorshipPage() {
                                     tierLabel: "Premium Exhibitors",
                                     sponsors: [
                                         { name: "Litelo", logo: "/bangalore-2026/Sponsor/litelo-logo.png", href: "https://litelo.ai/" },
-                                        { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawQube_logo.png", href: null },
+                                        { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawqube-logo.png", href: null },
                                     ]
                                 },
                                 {
@@ -831,7 +831,7 @@ export default function SponsorshipPage() {
                                 {
                                     tierLabel: "Venue Partner",
                                     sponsors: [
-                                        { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg", href: null },
+                                        { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial-logo.jpeg", href: null },
                                     ]
                                 },
                             ].map((tier, tIdx) => (
@@ -878,23 +878,23 @@ export default function SponsorshipPage() {
                             </div>
                             <div className="flex flex-wrap justify-center gap-6">
                                 {[
-                                    { name: "Uber", logo: "/sponsor/Sponsor logo/Uber.jpg" },
-                                    { name: "White & Case", logo: "/sponsor/Sponsor logo/White and case.jpg" },
-                                    { name: "Contact Force", logo: "/sponsor/Sponsor logo/contact force.jpg" },
-                                    { name: "Stellantis", logo: "/sponsor/Sponsor logo/stellantis.jpg" },
-                                    { name: "Fayet", logo: "/sponsor/Sponsor logo/Fayet.jpg" },
-                                    { name: "Theon", logo: "/sponsor/Sponsor logo/theon.webp" },
-                                    { name: "Winnow", logo: "/sponsor/Sponsor logo/Winnow.jpg" },
-                                    { name: "TRCM", logo: "/sponsor/Sponsor logo/Trcm.jpg" },
-                                    { name: "Consejeras MX", logo: "/sponsor/Sponsor logo/consejeras mx.jpg" },
-                                    { name: "Juarez", logo: "/sponsor/Sponsor logo/juarez.jpg" },
-                                    { name: "Thielmann", logo: "/sponsor/Sponsor logo/thielmann.jpg" },
-                                    { name: "Littler", logo: "/sponsor/Sponsor logo/littler.jpg" },
-                                    { name: "Arrow", logo: "/sponsor/Sponsor logo/arrow.jpg" },
-                                    { name: "Mundial", logo: "/sponsor/Sponsor logo/mundial.jpg" },
-                                    { name: "Legal AI", logo: "/sponsor/Sponsor logo/Legalai.jpg" },
-                                    { name: "GMM", logo: "/sponsor/Sponsor logo/GMM.jpg" },
-                                    { name: "Luxcs", logo: "/sponsor/Sponsor logo/Luxcs.jpg" },
+                                    { name: "Uber", logo: "/sponsor/sponsor-logos/Uber.jpg" },
+                                    { name: "White & Case", logo: "/sponsor/sponsor-logos/white-and-case.jpg" },
+                                    { name: "Contact Force", logo: "/sponsor/sponsor-logos/contact-force.jpg" },
+                                    { name: "Stellantis", logo: "/sponsor/sponsor-logos/stellantis.jpg" },
+                                    { name: "Fayet", logo: "/sponsor/sponsor-logos/Fayet.jpg" },
+                                    { name: "Theon", logo: "/sponsor/sponsor-logos/theon.webp" },
+                                    { name: "Winnow", logo: "/sponsor/sponsor-logos/Winnow.jpg" },
+                                    { name: "TRCM", logo: "/sponsor/sponsor-logos/Trcm.jpg" },
+                                    { name: "Consejeras MX", logo: "/sponsor/sponsor-logos/consejeras-mx.jpg" },
+                                    { name: "Juarez", logo: "/sponsor/sponsor-logos/juarez.jpg" },
+                                    { name: "Thielmann", logo: "/sponsor/sponsor-logos/thielmann.jpg" },
+                                    { name: "Littler", logo: "/sponsor/sponsor-logos/littler.jpg" },
+                                    { name: "Arrow", logo: "/sponsor/sponsor-logos/arrow.jpg" },
+                                    { name: "Mundial", logo: "/sponsor/sponsor-logos/mundial.jpg" },
+                                    { name: "Legal AI", logo: "/sponsor/sponsor-logos/Legalai.jpg" },
+                                    { name: "GMM", logo: "/sponsor/sponsor-logos/GMM.jpg" },
+                                    { name: "Luxcs", logo: "/sponsor/sponsor-logos/Luxcs.jpg" },
                                 ].map((partner, idx) => (
                                     <div
                                         key={idx}

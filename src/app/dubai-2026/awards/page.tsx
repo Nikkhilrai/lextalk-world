@@ -118,7 +118,7 @@ export default function DubaiAwardsPage() {
                     {/* LexTalk World Logo */}
                     <div className={`flex justify-center mb-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <Image
-                            src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                            src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
                             alt="LexTalk World"
                             width={280}
                             height={80}
@@ -293,7 +293,7 @@ export default function DubaiAwardsPage() {
                 <div className="container mx-auto px-4 text-center">
                     <div className="flex justify-center mb-4">
                         <Image
-                            src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                            src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
                             alt="LexTalk World"
                             width={200}
                             height={60}

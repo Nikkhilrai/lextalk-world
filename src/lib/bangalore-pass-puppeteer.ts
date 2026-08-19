@@ -55,7 +55,7 @@ async function buildHtml(data: BangalorePassData): Promise<string> {
     try {
         const fs = await import("fs");
         const path = await import("path");
-        const buf = fs.readFileSync(path.join(process.cwd(), "public/logo/lextalkworld_logo.png"));
+        const buf = fs.readFileSync(path.join(process.cwd(), "public/logo/lextalkworld-logo.png"));
         logoSrc = `data:image/png;base64,${buf.toString("base64")}`;
     } catch { /* fallback to text */ }
 

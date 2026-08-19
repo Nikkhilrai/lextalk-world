@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            reportUrl: "/bangalore-2026/document/Final Legal Reports 2.pdf",
+            reportUrl: "/bangalore-2026/document/final-legal-reports-2.pdf",
             message: "Thank you! Your download will begin shortly.",
         });
 

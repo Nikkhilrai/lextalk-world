@@ -151,7 +151,7 @@ export function NominationForm() {
             {/* Header with Logo */}
             <div className="pt-40 pb-6 text-center">
                 <div className="flex justify-center mb-6">
-                    <Image src="/logo/Lextalk-Logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
+                    <Image src="/logo/lextalkworld-logo.png" alt="LexTalk World" width={200} height={50} className="h-12 w-auto" />
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-800 mb-2">
                     Legal Honor Global <span className="text-amber-600">2026</span> Dubai

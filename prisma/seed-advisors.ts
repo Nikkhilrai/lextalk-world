@@ -5,7 +5,7 @@ const boardMembers = [
         name: "Dr. Lalit Bhasin",
         role: "President",
         company: "Society of Indian Law Firms, India",
-        image: "/advisory/Dr_ Lalit Bhasin.avif",
+        image: "/advisory/Dr_Lalit_Bhasin.avif",
         linkedin: "#",
         order: 1
     },
@@ -13,7 +13,7 @@ const boardMembers = [
         name: "Yasser Aboismail",
         role: "Regional General Counsel",
         company: "Director Legal, Commercial/Contracts and Compliance at Thales",
-        image: "/advisory/Yasser Aboismail.avif",
+        image: "/advisory/Yasser_Aboismail.avif",
         linkedin: "#",
         order: 2
     },
@@ -45,7 +45,7 @@ const boardMembers = [
         name: "Dr. G.V. Rao",
         role: "Senior Advocate, Supreme Court of India",
         company: "Vice-President, Indian Society of International Law",
-        image: "/advisory/Dr_ G_V_ RAO.avif",
+        image: "/advisory/Dr_G_V_RAO.avif",
         linkedin: "#",
         order: 6
     },
@@ -53,7 +53,7 @@ const boardMembers = [
         name: "Piyush Gupta",
         role: "Head Counsel",
         company: "Etihad Airways",
-        image: "/advisory/Piyush Gupta.avif",
+        image: "/advisory/Piyush_Gupta.avif",
         linkedin: "#",
         order: 7
     },
@@ -61,7 +61,7 @@ const boardMembers = [
         name: "Raghvendra Verma",
         role: "Chairman and Chapter Head Dubai",
         company: "ICSI Middle East",
-        image: "/advisory/Raghvendra verma.avif",
+        image: "/advisory/Raghvendra_Verma.avif",
         linkedin: "#",
         order: 8
     },
@@ -69,7 +69,7 @@ const boardMembers = [
         name: "Bhavin Mehta",
         role: "VP - Global Anti-Corruption Compliance",
         company: "Monitoring and Assurance, Mastercard, UAE",
-        image: "/advisory/Bhavin Mehta.avif",
+        image: "/advisory/Bhavin_Mehta.avif",
         linkedin: "#",
         order: 9
     },

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
         description: "The premier global platform for legal professionals in Mumbai.",
         images: [
             {
-                url: "/images/mumbai-hero-og.jpg", // Suggested OG image path
+                url: "/og/mumbai-2026.jpg",
                 width: 1200,
                 height: 630,
                 alt: "LexTalk World Mumbai 2026",

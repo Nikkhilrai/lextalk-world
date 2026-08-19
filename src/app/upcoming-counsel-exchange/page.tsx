@@ -499,12 +499,12 @@ export default function CounselExchangePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {[
-              { name: "Deepalakshmi Vadivelan", role: "General Counsel & SVP Legal", org: "Global DPO, Quess Corp Limited", image: "/images/counsel-exchange/deepalakshmi_vadivelan.png" },
+              { name: "Deepalakshmi Vadivelan", role: "General Counsel & SVP Legal", org: "Global DPO, Quess Corp Limited", image: "/images/counsel-exchange/deepalakshmi-vadivelan.png" },
               { name: "Sergey Medvedev", role: "Managing Partner", org: "Gorodissky & Partners", image: "/images/counsel-exchange/Sergey Medvedev.jpg" },
-              { name: "Saurabh Anand", role: "Lead Counsel", org: "Akamai Technologies", image: "/images/counsel-exchange/saurabh_anand.jpeg" },
-              { name: "Sushma Shankar", role: "Vice President Legal", org: "Accenture", image: "/images/counsel-exchange/sushma_shankar.jpeg" },
-              { name: "Dr. Akshay Kant Chaturvedi", role: "Corporate Head - IPR", org: "Gujarat Fluorochemicals Limited", image: "/images/counsel-exchange/akshay_kant_chaturvedi.jpg" },
-              { name: "Krishna Chellapilla", role: "Head - Patents, Prosecution and Copyrights", org: "Tata Consultancy Services", image: "/images/counsel-exchange/krishna_chellapilla.webp" },
+              { name: "Saurabh Anand", role: "Lead Counsel", org: "Akamai Technologies", image: "/images/counsel-exchange/saurabh-anand.jpeg" },
+              { name: "Sushma Shankar", role: "Vice President Legal", org: "Accenture", image: "/images/counsel-exchange/sushma-shankar.jpeg" },
+              { name: "Dr. Akshay Kant Chaturvedi", role: "Corporate Head - IPR", org: "Gujarat Fluorochemicals Limited", image: "/images/counsel-exchange/akshay-kant-chaturvedi.jpg" },
+              { name: "Krishna Chellapilla", role: "Head - Patents, Prosecution and Copyrights", org: "Tata Consultancy Services", image: "/images/counsel-exchange/krishna-chellapilla.webp" },
             ].map((speaker, i) => (
               <motion.div
                 key={i}

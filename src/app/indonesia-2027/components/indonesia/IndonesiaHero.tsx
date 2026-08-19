@@ -76,7 +76,7 @@ export function IndonesiaHero({ onOpenRegister }: { onOpenRegister?: () => void 
                 <div className={`flex items-center justify-center mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
                     <div className="relative h-10 w-32 md:h-14 md:w-52">
                         <Image
-                            src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                            src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
                             alt="LexTalk World"
                             fill
                             className="object-contain"

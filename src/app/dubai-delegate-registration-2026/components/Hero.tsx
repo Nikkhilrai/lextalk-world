@@ -14,7 +14,7 @@ const COMPANY_LOGOS = [
     { name: "Uber", src: "/images/social-proof/uber.jpg" },
     { name: "Intel", src: "/images/social-proof/intel.jpg" },
     { name: "HSB", src: "/images/social-proof/hsb.jpg" },
-    { name: "White & Case", src: "/images/social-proof/white and case.jpg" },
+    { name: "White & Case", src: "/images/social-proof/white-and-case.jpg" },
     { name: "Ebay", src: "/images/social-proof/ebay.jpg" },
     { name: "Github", src: "/images/social-proof/github.jpg" },
     { name: "Mercedes", src: "/images/social-proof/mercerdez.jpg" },

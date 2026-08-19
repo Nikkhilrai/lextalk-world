@@ -51,7 +51,7 @@ export default function CEONotePage() {
                                     <div className="absolute inset-0 border border-amber-500/10 z-10 pointer-events-none" />
 
                                     <Image
-                                        src="/ceo/Abhishek Gourav.png"
+                                        src="/ceo/abhishek-gourav.png"
                                         alt="Abhishek Gourav"
                                         fill
                                         className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"

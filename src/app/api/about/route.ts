@@ -51,7 +51,7 @@ const defaultContent = {
         { name: "CaseDocker", logo: "/dubai-event/sponsors/CasedockerLogo.avif" },
     ]),
     aboutImages: JSON.stringify([
-        { src: "/about/Networking_edited.avif", alt: "Networking at LexTalk World" },
+        { src: "/about/networking-edited.avif", alt: "Networking at LexTalk World" },
         { src: "/about/5.jpg", alt: "LexTalk World Conference" },
         { src: "/about/Recognitions.avif", alt: "Award Ceremony" },
         { src: "/about/speaker.jpg", alt: "Speaker Session" },

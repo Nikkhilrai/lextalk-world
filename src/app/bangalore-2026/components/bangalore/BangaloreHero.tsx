@@ -55,7 +55,7 @@ export function BangaloreHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?:
                 <div className={`flex items-center justify-center mb-5 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <div className="relative h-10 w-28 md:h-20 md:w-72">
                         <Image
-                            src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                            src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
                             alt="Lextalk World"
                             fill
                             className="object-contain"

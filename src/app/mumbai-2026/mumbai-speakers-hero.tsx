@@ -64,7 +64,7 @@ export default function MumbaiSpeakersHero() {
                 >
                     <div className="relative w-44 h-10 md:w-64 md:h-16">
                         <Image
-                            src="/logo/lextalkworld_logo.png"
+                            src="/logo/lextalkworld-logo.png"
                             alt="LexTalk World Logo"
                             fill
                             className="object-contain"

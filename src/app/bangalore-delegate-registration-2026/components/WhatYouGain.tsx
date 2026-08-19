@@ -85,7 +85,7 @@ export default function WhatYouGainBangalore() {
                 {/* Right Column: Full-Bleed Image */}
                 <div className="relative min-h-[400px] lg:min-h-full">
                     <Image
-                        src="/images/why-attend/agenda highlight.avif"
+                        src="/images/why-attend/agenda-highlight.avif"
                         alt="Senior legal professionals in discussion at LexTalk World Bangalore"
                         fill
                         className="object-cover"

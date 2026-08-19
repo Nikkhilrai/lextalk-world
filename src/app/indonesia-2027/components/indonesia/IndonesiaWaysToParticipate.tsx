@@ -29,7 +29,7 @@ export function IndonesiaWaysToParticipate({
             desc: "Elevate your brand visibility and connect directly with decision-makers through premium exhibition space and digital branding.",
             cta: "View Packages",
             onClick: onOpenSponsorship,
-            image: "/dubai-event/why-attend/Exhibition & Tech Demo.avif",
+            image: "/dubai-event/why-attend/exhibition-tech-demo.avif",
         },
         {
             icon: Users,
@@ -37,7 +37,7 @@ export function IndonesiaWaysToParticipate({
             desc: "Network with peers, learn from experts, and discover the legal tech innovations transforming the industry.",
             cta: "Register Interest",
             onClick: onOpenRegister,
-            image: "/dubai-event/why-attend/Networking_edited.avif",
+            image: "/dubai-event/why-attend/networking-edited.avif",
         },
         {
             icon: Trophy,

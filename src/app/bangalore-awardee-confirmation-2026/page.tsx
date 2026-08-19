@@ -76,7 +76,7 @@ function PassCard({ pass }: { pass: typeof passes[0] }) {
             id: pass.id,
             name: pass.name,
             price: pass.price,
-            image: "/logo/lextalkworld_logo.png",
+            image: "/logo/lextalkworld-logo.png",
         });
         showToast(`${pass.name} added to cart!`);
     };
@@ -238,7 +238,7 @@ export default function BangaloreAwardeeConfirmationPage() {
                                         id: virtualPasses[0].id,
                                         name: virtualPasses[0].name,
                                         price: virtualPasses[0].price,
-                                        image: "/logo/lextalkworld_logo.png",
+                                        image: "/logo/lextalkworld-logo.png",
                                     });
                                     showToast(`${virtualPasses[0].name} added to cart!`);
                                 }}

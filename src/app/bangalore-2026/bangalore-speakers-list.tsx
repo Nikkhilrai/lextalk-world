@@ -10,7 +10,7 @@ const speakers: any[] = [
     {
         name: "Shri. G. Sridhar",
         title: "Secretary to Government, Department of Parliamentary Affairs and Legislation, Government of Karnataka",
-        image: "/bangalore-2026/speakers-images/Shri G. Sridhar.jpeg",
+        image: "/bangalore-2026/speakers-images/shri-g-sridhar.jpeg",
         isGuestOfHonor: true,
     },
     {
@@ -27,7 +27,7 @@ During a career spanning three decades on the Bench, he adjudicated a broad rang
     {
         name: "Dr. Lalit Bhasin",
         title: "President, Society of Indian Law Firms, India",
-        image: "/bangalore-2026/speakers-images/lalit bhasin.png",
+        image: "/bangalore-2026/speakers-images/lalit-bhasin.png",
     },
     {
         name: "Aniket Gautam",
@@ -63,7 +63,7 @@ An active industry leader, Velmuruga has served 16+ years on the ISACA Bangalore
     {
         name: "Priyesh Sharma",
         title: "Assistant Vice President (Legal), Knowledge Realty Trust",
-        image: "/bangalore-2026/speakers-images/Priyesh Sharma.png",
+        image: "/bangalore-2026/speakers-images/priyesh-sharma.png",
         bio: `Priyesh Sharma, Assistant Vice President (Legal) at Knowledge Realty Trust, is a seasoned corporate lawyer with over 15 years of experience in mergers & acquisitions, private equity/venture capital, and real estate transactions. He has been associated with some of India’s leading law firms, including JSA, AZB & Partners, and Cyril Amarchand Mangaldas, and has previously headed the M&A practice at ARA Law. He has advised on several high-value acquisitions and investment transactions in recent years including the largest ever real estate acquisitions and the REITs and has been consistently recognised for his contributions to the field. His accolades include being named a Rising Star- 40 under 40 by Legal Era (2026) ,  Rising Star in M&A and Real Estate (Education Leaders 2025), featuring in Enterprise’s Global Leadership List 2025, inclusion in TradeFlock’s Top Real Estate Leadership List 2024, and recognition as Young Achiever of the Year (Legal Era 2023), among others.`
     },
     {
@@ -164,7 +164,7 @@ Prior to joining TCS in 2011, Krishna headed an India-based law firm and, before
     {
         name: "Panduranga Acharya",
         title: "General Counsel, Zepto",
-        image: "/bangalore-2026/speakers-images/Panduranga Acharya.png",
+        image: "/bangalore-2026/speakers-images/panduranga-acharya.png",
         bio: `Panduranga Acharya is a visionary General Counsel with a proven track record of driving business success through strategic legal counsel. With a deep understanding of diverse customer-facing sectors, he has consistently demonstrated the ability to align legal strategies with evolving business needs, enabling organizations to thrive in competitive landscapes.
 
 Currently serving as the General Counsel of Zepto, India’s pioneering 10-minute delivery quick commerce company, Panduranga has been a cornerstone of the company’s exceptional growth over the last three years. His strategic vision and legal expertise have been instrumental in Zepto’s meteoric rise, with significant contributions to its soaring valuation and rapid market expansion across India. By navigating complex regulatory frameworks and ensuring seamless compliance, Panduranga has positioned Zepto as a leader in the quick commerce industry.`
@@ -172,22 +172,22 @@ Currently serving as the General Counsel of Zepto, India’s pioneering 10-minut
     {
         name: "Jagannath PV",
         title: "Global Data Privacy Officer, LTIMindtree",
-        image: "/bangalore-2026/speakers-images/Jagannath PV.png",
+        image: "/bangalore-2026/speakers-images/jagannath-pv.png",
     },
     {
         name: "Sushma Shankar",
         title: "Vice President - Legal, Accenture",
-        image: "/bangalore-2026/speakers-images/sushma_shankar.png",
+        image: "/bangalore-2026/speakers-images/sushma-shankar.png",
     },
     {
         name: "Rakesh Kumarswamy Udupi",
         title: "Associate Vice President, Infosys Ltd.",
-        image: "/bangalore-2026/speakers-images/Rakesh Udupi.png",
+        image: "/bangalore-2026/speakers-images/rakesh-udupi.png",
     },
     {
         name: "Sivaramakrishnan M.S",
         title: "Advocate and Founder, Law Chamber of Sivaramakishnan M.S. (KPU Chambers)",
-        image: "/bangalore-2026/speakers-images/Sivaramakrishnan M.S.png",
+        image: "/bangalore-2026/speakers-images/sivaramakrishnan-m-s.png",
         bio: `Sivaramakrishnan M.S. is a Practicing Advocate running a boutique commercial litigation and advisory practice in Bangalore. He has over 15 years of experience across commercial courts, arbitration, and corporate advisory, with early practice at the Supreme Court of India.
 
 He holds a Certificate with Honours in AI & Law from Lund University and has been an active voice on the responsible adoption of AI in legal practice by designing practitioner-focused workshops and developing original frameworks on AI reliability in legal contexts. He speaks and writes on what it means to be a human-led, AI-assisted practice in an era of rapid technological change.`
@@ -195,7 +195,7 @@ He holds a Certificate with Honours in AI & Law from Lund University and has bee
     {
         name: "Balaji Mohan",
         title: "Director, Head of Legal | Trianz Digital Consulting Private Limited",
-        image: "/bangalore-2026/speakers-images/Balaji Mohan.png",
+        image: "/bangalore-2026/speakers-images/balaji-mohan.png",
         bio: `Balaji Mohan is a senior technology and commercial lawyer with over 22 years of experience advising high-growth technology enterprises on cross-border legal strategy, digital regulation, and complex multi-jurisdictional transactions.
 
 As Director and Head of Legal at Trianz Digital Consulting, Inc. — a US-headquartered technology platforms company operating across the United States, India, and Singapore — Balaji anchors the company's global legal function, with responsibility spanning enterprise contract governance, intellectual property portfolio management, data protection compliance, and pre-litigation risk strategy across jurisdictions.
@@ -207,17 +207,17 @@ Prior to Trianz, Balaji held senior leadership roles at EXLService and served as
     {
         name: "Yawar Usmani",
         title: "Group General Counsel & Company Secretary, MooMark",
-        image: "/bangalore-2026/speakers-images/YAWAR USMANI.png",
+        image: "/bangalore-2026/speakers-images/yawar-usmani.png",
     },
     {
         name: "Deepti Aggarwal",
         title: "Associate Director, Regulatory Affairs & Drug Development Solutions (RADDS), IQVIA",
-        image: "/bangalore-2026/speakers-images/Deepti Aggarwal.png",
+        image: "/bangalore-2026/speakers-images/deepti-aggarwal.png",
     },
     {
         name: "Yogesh Naik",
         title: "Senior Legal Counsel, Volvo Group India",
-        image: "/bangalore-2026/speakers-images/YOGESH NAIK.png",
+        image: "/bangalore-2026/speakers-images/yogesh-naik.png",
     },
     {
         name: "Antony Alex",
@@ -232,13 +232,13 @@ Prior to founding Rainmaker in 2016, Antony established Kochhar & Co's Mumbai of
     {
         name: "Punya Patra",
         title: "Head Legal Innovation Hub, Novartis",
-        image: "/bangalore-2026/speakers-images/Punya Patra.png",
+        image: "/bangalore-2026/speakers-images/punya-patra.png",
         bio: `Punya Chandan Patra is a seasoned legal innovation and transformation leader with over 25+ years of experience driving strategic change across global organizations. Currently serving as Head of the Legal Innovation Hub at Novartis, he leads the design and implementation of next-generation legal service delivery models, with a focus on Responsible AI, digital transformation, and enterprise-wide efficiency. Throughout his career spanning leadership roles at Novartis, PwC, TCS, and CPA Global, Punya has been instrumental in building and scaling global legal operations, establishing high-performing Centers of Excellence, and delivering complex programs across contract lifecycle management, litigation support, regulatory compliance, and data governance. Known for his ability to translate vision into execution, bridge legal expertise with technology, he has spearheaded initiatives in legal tech adoption, eDiscovery, and AI-enabled contract management—helping organizations navigate evolving challenges. Punya has built and led high-performing global teams, delivered large-scale transformation programs, and contributed to shaping the future of legal services. His work consistently focuses on managing risk, strengthening compliance, and enabling resilient legal frameworks in an increasingly data-driven world. A trusted advisor to senior leadership, Punya brings a unique combination of strategic vision, operational excellence, and deep domain expertise—making him a sought-after speaker on the future of legal services, innovation, and risk management.`,
     },
     {
         name: "Nishi Shafton Williams",
         title: "Senior Manager – Service Delivery, ABiz Corporation",
-        image: "/bangalore-2026/speakers-images/Nishi Shafton Williams.png",
+        image: "/bangalore-2026/speakers-images/nishi-shafton-williams.png",
         bio: `Nishi Shafton Williams is a contracts and legal operations professional with over 13 years of experience, specialising in contract lifecycle management, CLM implementation, and legal operations transformation. She leads multi-pod delivery teams executing complex contract management, metadata extraction, obligation management, and IP governance programs for global clients across healthcare, technology, and professional services.
 
 Her focus areas include solution design, quality governance, AI-enabled contract operations, executive reporting, and building high-performing offshore delivery teams. Nishi holds a Corporate Membership with WCC and has attained the Contracts & Commercial Management Practitioner Certification from WCC (formerly IACCM).
@@ -248,7 +248,7 @@ A distinguished academic achiever, she ranked 1st in Human Rights, Intellectual 
     {
         name: "Gurupyari Dwivedi",
         title: "Vice President – Service Delivery, ABiz Corporation",
-        image: "/bangalore-2026/speakers-images/Gurupyari Dwivedi.png",
+        image: "/bangalore-2026/speakers-images/gurupyari-dwivedi.png",
         bio: `Gurupyari Dwivedi (aka GP) is a seasoned service delivery and legal operations leader with extensive experience in driving contract management excellence, operational efficiency, and client-centric outcomes. As Vice President – Service Delivery at ABiz Corporation, she aligns legal and commercial operations with business strategy to deliver measurable value — recognised for building scalable delivery models, strengthening governance frameworks, and enabling teams to achieve consistent, high-quality results.
 
 GP leads end-to-end service delivery for global contracts management and legal support engagements, overseeing complex client portfolios, driving delivery transformation initiatives, and ensuring alignment between client objectives, operational execution, and risk management. She is known for setting up and mentoring high-performing teams and fostering a culture of accountability, collaboration, and continuous improvement.
@@ -258,13 +258,13 @@ She holds a Master's in English from IGNOU, a Bachelor's in Law from Janhit Coll
     {
         name: "Rovena David",
         title: "General Counsel, StoveKraft Limited",
-        image: "/bangalore-2026/speakers-images/Rovena David.png",
+        image: "/bangalore-2026/speakers-images/rovena-david.png",
         bio: `Rovena David is the General Counsel of Stovekraft Limited, bringing over 17 years of rich experience in corporate legal practice. Over the course of her career, she has held key roles at leading organisations including Titan, Wipro Enterprises, Hindustan Unilever, and Herbalife International, building deep expertise across a wide range of corporate legal functions.`,
     },
     {
         name: "Gaurav Sahay",
         title: "Founder/Partner, Arthashastra Legal",
-        image: "/bangalore-2026/speakers-images/Gaurav Sahay.png",
+        image: "/bangalore-2026/speakers-images/gaurav-sahay.png",
     },
 ];
 

@@ -6,12 +6,12 @@ import Image from "next/image";
 const categories = [
     {
         name: "Venue Partner", size: "lg", items: [
-            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial_logo.jpeg" },
+            { name: "Radisson Blu Atria Bangalore", logo: "/bangalore-2026/Sponsor/radissonbluatriabengaluruofficial-logo.jpeg" },
         ]
     },
     {
         name: "Gold Sponsor", size: "md", items: [
-            { name: "ABiz", logo: "/bangalore-2026/Sponsor/ABiz Logo.png" },
+            { name: "ABiz", logo: "/bangalore-2026/Sponsor/abiz-logo.png" },
             { name: "Rainmaker", logo: "/bangalore-2026/Sponsor/RM-Logo-Blue.png" },
         ]
     },

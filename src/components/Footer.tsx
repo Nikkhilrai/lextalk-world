@@ -19,7 +19,7 @@ export function Footer() {
                     <div className="col-span-2 sm:col-span-2 lg:col-span-1 space-y-4">
                         <div className="bg-white p-2.5 rounded-xl inline-block shadow-lg shadow-slate-900/20">
                             <Image
-                                src="/logo/lextalkworld_logo.png"
+                                src="/logo/lextalkworld-logo.png"
                                 alt="Lextalk World"
                                 width={160}
                                 height={50}
@@ -36,7 +36,7 @@ export function Footer() {
                                 <p className="text-[10px] uppercase tracking-wider text-amber-500/80 font-bold">Organised by</p>
                                 <div className="space-y-1">
                                     <Image
-                                        src="/images/footer/ClickAway Creators LLP_logo.avif"
+                                        src="/images/footer/clickaway-creators-llp-logo.avif"
                                         alt="ClickAway Creators LLP"
                                         width={100}
                                         height={36}

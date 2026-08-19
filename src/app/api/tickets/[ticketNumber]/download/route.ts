@@ -39,7 +39,7 @@ export async function GET(
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://lextalkworld.in";
 
         try {
-            const logoRes = await fetch(`${baseUrl}/logo/lextalkworld_logo.png`);
+            const logoRes = await fetch(`${baseUrl}/logo/lextalkworld-logo.png`);
             if (logoRes.ok) {
                 const logoArrayBuffer = await logoRes.arrayBuffer();
                 logoImage = await pdfDoc.embedPng(logoArrayBuffer);

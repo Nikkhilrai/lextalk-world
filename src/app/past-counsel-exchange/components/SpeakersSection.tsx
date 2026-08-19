@@ -9,28 +9,28 @@ const speakers = [
         name: "Charles N. Bowen",
         designation: "Adjunct Professor",
         organization: "Georgia State University College of Law, USA",
-        image: "/images/e-meet/Speakers/charles N. Bowen.avif",
+        image: "/images/e-meet/Speakers/charles-n-bowen.avif",
         brandColor: "bg-blue-600"
     },
     {
         name: "Catherine Quinlan",
         designation: "Legal M&A Integration Executive",
         organization: "IBM Corporation",
-        image: "/images/e-meet/Speakers/Catherine Quinlan.avif",
+        image: "/images/e-meet/Speakers/catherine-quinlan.avif",
         brandColor: "bg-slate-900"
     },
     {
         name: "Sandeep Sharma",
         designation: "Deputy General Counsel",
         organization: "Calliditas Therapeutics",
-        image: "/images/e-meet/Speakers/Sandeep Sharma.avif",
+        image: "/images/e-meet/Speakers/sandeep-sharma.avif",
         brandColor: "bg-emerald-600"
     },
     {
         name: "Meredith Lobel-Angel",
         designation: "Associate General Counsel",
         organization: "HealthEquity",
-        image: "/images/e-meet/Speakers/Meredith Lobel-Angel.avif",
+        image: "/images/e-meet/Speakers/meredith-lobel-angel.avif",
         brandColor: "bg-amber-600"
     }
 ];

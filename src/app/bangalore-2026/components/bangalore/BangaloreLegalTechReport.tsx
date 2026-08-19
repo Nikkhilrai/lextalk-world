@@ -459,7 +459,7 @@ export function BangaloreLegalTechReport() {
                                             <p className="text-slate-400 text-sm">
                                                 If it doesn't open,{" "}
                                                 <button
-                                                    onClick={() => window.open("/bangalore-2026/document/Final Legal Reports 2.pdf", "_blank")}
+                                                    onClick={() => window.open("/bangalore-2026/document/final-legal-reports-2.pdf", "_blank")}
                                                     className="text-amber-400 underline underline-offset-2"
                                                 >
                                                     click here

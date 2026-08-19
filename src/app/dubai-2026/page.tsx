@@ -126,7 +126,7 @@ const participationPaths = [
         cta: "View Packages",
         actionKey: "sponsor" as "speaker" | "sponsor" | null,
         href: null,
-        image: "/dubai-event/why-attend/Exhibition & Tech Demo.avif",
+        image: "/dubai-event/why-attend/exhibition-tech-demo.avif",
     },
     {
         icon: Users,
@@ -135,7 +135,7 @@ const participationPaths = [
         cta: "Register Now",
         actionKey: null,
         href: "/dubai-delegate-registration-2026",
-        image: "/dubai-event/why-attend/Networking_edited.avif",
+        image: "/dubai-event/why-attend/networking-edited.avif",
     },
     {
         icon: Trophy,
@@ -202,8 +202,8 @@ const sponsorTiers = [
         cardClass: "w-48 h-28 md:w-60 md:h-32",
         logos: [
             { name: "CaseDocker", src: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
-            { name: "LexCorp", src: "/dubai-event/sponsors/Lex_Corp_Logo.avif", href: "https://home.lexcorp.org.in/" },
-            { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/Gorodissky_Logo.jpg", href: "https://www.gorodissky.com/" },
+            { name: "LexCorp", src: "/dubai-event/sponsors/lex-corp-logo.avif", href: "https://home.lexcorp.org.in/" },
+            { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/gorodissky-logo.jpg", href: "https://www.gorodissky.com/" },
             { name: "DiliTrust", src: "/dubai-event/sponsors/DiliTrust.svg", href: null as string | null },
             { name: "Melento", src: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
         ],
@@ -219,8 +219,8 @@ const sponsorTiers = [
         tier: "Knowledge Partner",
         cardClass: "w-52 h-28 md:w-64 md:h-32",
         logos: [
-            { name: "BGK Law Associates", src: "/dubai-event/sponsors/BGK Law Associates.jpg", href: null as string | null },
-            { name: "Fairaigle Legal & Consultancy LLP", src: "/dubai-event/sponsors/Fairaigle Legal & Consultancy LLP.jpg", href: null as string | null },
+            { name: "BGK Law Associates", src: "/dubai-event/sponsors/bgk-law-associates.jpg", href: null as string | null },
+            { name: "Fairaigle Legal & Consultancy LLP", src: "/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg", href: null as string | null },
         ],
     },
     {
@@ -364,7 +364,7 @@ export default function DubaiEventPage() {
                     <div className={`flex items-center justify-center mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
                         <div className="relative h-10 w-32 md:h-14 md:w-52">
                             <Image
-                                src="/dubai-event/new-logo/05_NewLogo_LexTalk_22082023_Outline.avif"
+                                src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
                                 alt="LexTalk World"
                                 fill
                                 className="object-contain"

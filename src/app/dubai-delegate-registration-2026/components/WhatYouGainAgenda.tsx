@@ -82,7 +82,7 @@ export default function WhatYouGainAgenda() {
                 <div className="relative min-h-[400px] lg:min-h-full">
                     {/* Image - Full Bleed, No Border */}
                     <Image
-                        src="/images/why-attend/agenda highlight.avif"
+                        src="/images/why-attend/agenda-highlight.avif"
                         alt="Senior legal professionals in a panel discussion at LexTalk World"
                         fill
                         className="object-cover"

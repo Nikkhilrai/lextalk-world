@@ -3,25 +3,25 @@
 import Image from "next/image";
 
 const partners = [
-    { name: "LawBhoomi", logo: "/media-partners/Law Bhoomi logo.png" },
-    { name: "LawOF", logo: "/media-partners/LawOF Logo.png" },
-    { name: "The Patent", logo: "/media-partners/The Patent Logo.png" },
-    { name: "India Law Journal", logo: "/media-partners/Indian Law Journal Logo.png" },
-    { name: "ICLG", logo: "/media-partners/ICLG Logo.png" },
-    { name: "Icon Outlook", logo: "/media-partners/Icon Outlook logo.png" },
-    { name: "GRC Outlook", logo: "/media-partners/grc outlook logo.png" },
-    { name: "Quatro Hive", logo: "/media-partners/QUATRO HIVE Logo.png" },
-    { name: "Lawyers Gyan", logo: "/media-partners/Lawyers Gyan.png" },
-    { name: "Latest Laws", logo: "/media-partners/Latest Law logo.png" },
-    { name: "LawTeller", logo: "/media-partners/LawTeller Logo.png" },
-    { name: "CIO Tech Outlook", logo: "/media-partners/CIO Tech Outlook Logo.png" },
-    { name: "Live Law", logo: "/media-partners/Live Law Logo.png" },
-    { name: "Advocate Khoj", logo: "/media-partners/Advocate Khoj logo.png" },
-    { name: "Asia Briefing", logo: "/media-partners/Asia Briefing Logo.png" },
-    { name: "Industry Outlook", logo: "/media-partners/Industry Outlook.png" },
-    { name: "Conventus Law", logo: "/media-partners/Conventus Logo.png" },
-    { name: "The Oath", logo: "/media-partners/The Oath.png" },
-    { name: "Jurisprudence", logo: "/media-partners/The Jurisprudence logo.png" },
+    { name: "LawBhoomi", logo: "/media-partners/law-bhoomi-logo.png" },
+    { name: "LawOF", logo: "/media-partners/lawof-logo.png" },
+    { name: "The Patent", logo: "/media-partners/the-patent-logo.png" },
+    { name: "India Law Journal", logo: "/media-partners/indian-law-journal-logo.png" },
+    { name: "ICLG", logo: "/media-partners/iclg-logo.png" },
+    { name: "Icon Outlook", logo: "/media-partners/icon-outlook-logo.png" },
+    { name: "GRC Outlook", logo: "/media-partners/grc-outlook-logo.png" },
+    { name: "Quatro Hive", logo: "/media-partners/quatro-hive-logo.png" },
+    { name: "Lawyers Gyan", logo: "/media-partners/lawyers-gyan.png" },
+    { name: "Latest Laws", logo: "/media-partners/latest-law-logo.png" },
+    { name: "LawTeller", logo: "/media-partners/lawteller-logo.png" },
+    { name: "CIO Tech Outlook", logo: "/media-partners/cio-tech-outlook-logo.png" },
+    { name: "Live Law", logo: "/media-partners/live-law-logo.png" },
+    { name: "Advocate Khoj", logo: "/media-partners/advocate-khoj-logo.png" },
+    { name: "Asia Briefing", logo: "/media-partners/asia-briefing-logo.png" },
+    { name: "Industry Outlook", logo: "/media-partners/industry-outlook.png" },
+    { name: "Conventus Law", logo: "/media-partners/conventus-logo.png" },
+    { name: "The Oath", logo: "/media-partners/the-oath.png" },
+    { name: "Jurisprudence", logo: "/media-partners/the-jurisprudence-logo.png" },
 ];
 
 export function MediaPartners() {
@@ -79,7 +79,7 @@ export function MediaPartners() {
                         >
                             <div className="relative w-full h-full">
                                 <Image
-                                    src="/media-partners/TLR New Logo WB.png"
+                                    src="/media-partners/tlr-new-logo-wb.png"
                                     alt="The Law Reporters"
                                     fill
                                     className="object-contain"
