@@ -1,33 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Users2, Cpu, Handshake, Trophy } from "lucide-react";
+import { Landmark, Scale, Award, Cpu } from "lucide-react";
 
-const deliverables = [
+const pillars = [
     {
-        icon: Sparkles,
-        title: "Insight-Led Sessions",
-        text: "Addressing contemporary legal challenges, regulatory evolution, and business-critical risk across Indonesia and ASEAN.",
+        icon: Landmark,
+        title: "The Commercial Powerhouse of ASEAN",
+        text: "Jakarta serves as the headquarters for Southeast Asia's leading conglomerates, regional financial institutions, state-owned enterprises, and Fortune 500 multinationals — driving major transactions across mineral downstreaming, renewable energy financing, telecommunications, and digital economy platforms.",
     },
     {
-        icon: Users2,
-        title: "Leadership Roundtables",
-        text: "Closed-door conversations curated for senior General Counsels and law firm partners.",
+        icon: Scale,
+        title: "Rapid Legal & Regulatory Modernization",
+        text: "The Personal Data Protection Law, the P2SK Omnibus Financial Law, and the risk-based Online Single Submission system require enterprise legal teams to navigate evolving compliance standards aligned with international benchmarks.",
+    },
+    {
+        icon: Award,
+        title: "A Rapidly Expanding IP Market",
+        text: "With annual intellectual property filings surpassing 330,000 across trademarks, patents, and copyrights, Indonesia is one of the most critical brand protection and IP monetization markets in Asia-Pacific.",
     },
     {
         icon: Cpu,
-        title: "Tech Showcases",
-        text: "Legal Tech, data, AI, and digital solutions shaping the future of law.",
-    },
-    {
-        icon: Handshake,
-        title: "Premium Networking",
-        text: "Meaningful connections beyond traditional conference formats.",
-    },
-    {
-        icon: Trophy,
-        title: "Awards & Recognition",
-        text: "Celebrating excellence, innovation, and leadership within the legal fraternity.",
+        title: "A Hub for Legal Technology & Digital Justice",
+        text: "From the Supreme Court's e-Court systems to regulatory intelligence platforms like Hukumonline and certified digital identity networks like Privy, Jakarta is at the forefront of digital transformation in legal practice.",
     },
 ];
 
@@ -56,32 +51,32 @@ export function IndonesiaWhyMatters() {
                             <span className="text-xs font-semibold text-orange-600 uppercase tracking-[0.3em]">Why Jakarta</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 leading-[1.15] mb-6">
-                            Jakarta is not just a destination —{" "}
-                            <span className="text-orange-600">it is Southeast Asia&apos;s legal gateway.</span>
+                            The Strategic Destination for the{" "}
+                            <span className="text-orange-600">Legal Industry.</span>
                         </h2>
                         <p className="text-slate-500 text-base md:text-lg leading-[1.9] font-light max-w-2xl">
-                            Home to Indonesia&apos;s largest concentration of corporates, multinational headquarters, financial institutions, and top-tier law firms, Jakarta drives legal decisions that resonate across the archipelago and beyond.{" "}
-                            <span className="text-orange-700 font-medium">LexTalk World Jakarta</span> is curated to reflect that influence.
+                            As foreign direct investment accelerates across energy, infrastructure, technology, and finance,{" "}
+                            <span className="text-orange-700 font-medium">Jakarta</span> has established itself as the commercial and regulatory epicentre of Southeast Asia.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Numbered step rail — horizontal scroll on all breakpoints, no card grid */}
                 <div className="flex gap-0 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
-                    {deliverables.map((item, index) => (
+                    {pillars.map((item, index) => (
                         <motion.div
                             key={item.title}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.06 * index }}
-                            className="group relative flex-shrink-0 w-[260px] sm:w-[300px] snap-start pl-6 border-l border-slate-200 hover:border-orange-400 transition-colors duration-400 mr-8"
+                            className="group relative flex-shrink-0 w-[280px] sm:w-[320px] snap-start pl-6 border-l border-slate-200 hover:border-orange-400 transition-colors duration-400 mr-8"
                         >
                             <span className="block font-serif text-4xl font-bold text-slate-100 group-hover:text-orange-200 transition-colors mb-6">
                                 {String(index + 1).padStart(2, "0")}
                             </span>
                             <item.icon className="w-5 h-5 text-orange-600 mb-4" strokeWidth={1.75} />
-                            <h4 className="text-slate-900 font-semibold text-base md:text-lg mb-2">{item.title}</h4>
+                            <h4 className="text-slate-900 font-semibold text-base md:text-lg mb-2 leading-snug">{item.title}</h4>
                             <p className="text-slate-500 text-sm leading-relaxed group-hover:text-slate-600 transition-colors">{item.text}</p>
                         </motion.div>
                     ))}

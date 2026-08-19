@@ -65,10 +65,11 @@ export function IndonesiaAbout() {
                                 className="space-y-5 text-slate-600 text-base leading-[1.8] font-light"
                             >
                                 <p>
-                                    Jakarta anchors ASEAN&apos;s largest economy and its fastest-growing digital market. As the seat of Indonesia&apos;s regulators, its financial institutions, and a rapidly expanding base of multinational operations, the city has become a decisive centre of gravity for legal and compliance leadership across Southeast Asia.
+                                    Indonesia stands as the largest economy in Southeast Asia, with a gross domestic product exceeding{" "}
+                                    <span className="text-orange-600 font-bold">US$1.54 trillion</span>. As foreign direct investment accelerates across energy, infrastructure, technology, and finance, Jakarta has established itself as the commercial and regulatory epicentre of the region. Major structural reforms — including the Omnibus Law on Job Creation and the Personal Data Protection Law — have created a sophisticated corporate landscape that demands high-level legal advisory, cross-border structuring, and regulatory foresight.
                                 </p>
                                 <p>
-                                    <span className="text-orange-600 font-bold">The LexTalk World Conference &amp; Exhibition</span> – Jakarta marks the series&apos; first edition in Indonesia, built as a strategic platform for dialogue that reflects the realities of legal practice across the archipelago while staying firmly connected to global legal and regulatory trends.
+                                    <span className="text-orange-600 font-bold">LexTalk World Indonesia 2027</span> brings together leading General Counsels, managing partners, intellectual property specialists, legal technology pioneers, and regulatory authorities to examine the future of law, compliance, and enterprise governance across the archipelago.
                                 </p>
                             </motion.div>
                         </div>
@@ -90,6 +91,12 @@ export function IndonesiaAbout() {
                                     className="object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
+
+                                {/* Stat badge */}
+                                <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg">
+                                    <p className="text-orange-600 font-serif font-bold text-xl leading-none">US$1.54T+</p>
+                                    <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider mt-1">Indonesia&apos;s GDP</p>
+                                </div>
                             </div>
                             {/* Decorative outline card behind, echoes the dashed "seal" motif used elsewhere */}
                             <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-orange-200 rounded-2xl -z-10" />

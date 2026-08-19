@@ -1,38 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Globe, Gavel, Cpu, Leaf, ShieldCheck } from "lucide-react";
+import { Zap, Landmark, ShieldCheck, Handshake, Award, Cpu } from "lucide-react";
 
 const focusAreas = [
     {
-        icon: Briefcase,
-        title: "General Counsel as Strategic Leader",
-        text: "The evolving role of General Counsel from legal advisor to board-level strategic business leader.",
+        icon: Zap,
+        title: "Energy Transition, Natural Resources & Infrastructure",
+        text: "Structuring production sharing agreements, nickel and bauxite downstreaming facilities, Just Energy Transition Partnership projects, and National Strategic Projects linked to Ibu Kota Nusantara.",
     },
     {
-        icon: Globe,
-        title: "Cross-Border Investment in ASEAN",
-        text: "Navigating foreign investment rules and market-entry risk across Indonesia and the wider ASEAN bloc.",
-    },
-    {
-        icon: Gavel,
-        title: "Dispute Resolution & Arbitration",
-        text: "Enforcement strategies for an increasingly interconnected Southeast Asian market.",
-    },
-    {
-        icon: Cpu,
-        title: "Legal Innovation & AI",
-        text: "Harnessing legal technology and data-driven tools for transformative change in legal practice.",
-    },
-    {
-        icon: Leaf,
-        title: "ESG, Governance & Sustainability",
-        text: "Navigating ESG obligations and sustainable governance across resource-driven economies.",
+        icon: Landmark,
+        title: "Banking, Fintech & Digital Commerce Governance",
+        text: "Addressing Financial Services Authority mandates, open banking standards, cross-border payment integration, and capital market compliance.",
     },
     {
         icon: ShieldCheck,
-        title: "Data Protection & Digital Economy Law",
-        text: "Compliance under Indonesia's Personal Data Protection Law amid rapid digital-economy growth.",
+        title: "Data Privacy, Cybersecurity & Artificial Intelligence",
+        text: "Implementing mandatory Data Protection Impact Assessments, data breach protocols, Data Protection Officer appointments, and digital platform governance.",
+    },
+    {
+        icon: Handshake,
+        title: "Cross-Border Joint Ventures, M&A & Dispute Resolution",
+        text: "Navigating foreign investment frameworks, antitrust compliance under the Business Competition Supervisory Commission, commercial arbitration via BANI, and enforcement of foreign awards.",
+    },
+    {
+        icon: Award,
+        title: "Intellectual Property Strategy & Brand Enforcement",
+        text: "Managing Madrid Protocol trademark portfolios, patent working requirements, digital asset protection, and anti-counterfeiting enforcement through the Commercial Court and customs authorities.",
+    },
+    {
+        icon: Cpu,
+        title: "Legal Department Transformation & Legal Tech Integration",
+        text: "Deploying contract lifecycle management, bilingual legal research automation, enterprise workflow solutions, and certified electronic signature frameworks.",
     },
 ];
 
@@ -60,9 +60,9 @@ export function IndonesiaConferenceThemes() {
                     transition={{ duration: 0.7, ease: "easeOut" }}
                     className="text-center mb-14"
                 >
-                    <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-orange-400 mb-3">Conference Focus</p>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-orange-400 mb-3">Core Conference Pillars</p>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight mb-4">
-                        What We&apos;ll Cover
+                        High-Impact Practice Areas
                     </h2>
                     <div className="mx-auto mb-4 h-[2px] w-16 bg-gradient-to-r from-orange-400 to-orange-600" />
                     <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto">

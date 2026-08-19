@@ -2,50 +2,43 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Scale, ShieldCheck, Cpu, Landmark, Globe } from "lucide-react";
+import { Briefcase, Scale, Award, Cpu, Landmark, Globe } from "lucide-react";
 
 const whoYoullMeet = [
     {
         icon: Briefcase,
-        title: "General Counsel & CLOs",
-        roles: ["In-house legal leaders", "Risk & governance heads"],
+        title: "General Counsels & Legal Directors",
+        roles: ["Chief Legal Officers", "In-house legal leadership"],
         orgLabel: "Typical Organisations",
-        org: "Multinational corporations, conglomerates, financial institutions",
+        org: "Leading domestic and multinational enterprises",
     },
     {
         icon: Scale,
-        title: "Managing Partners & Advocates",
-        roles: ["Law firm leadership", "Litigation & advisory"],
+        title: "Managing & Senior Partners",
+        roles: ["Law firm leadership"],
         orgLabel: "Typical Organisations",
-        org: "Top-tier and boutique law firms across Indonesia and ASEAN",
+        org: "Domestic and international law firms",
     },
     {
-        icon: ShieldCheck,
-        title: "Compliance & Risk Leaders",
-        roles: ["Chief Compliance Officers", "ESG & regulatory affairs"],
+        icon: Award,
+        title: "IP Directors & Attorneys",
+        roles: ["Trademark Attorneys", "Patent Specialists"],
         orgLabel: "Typical Organisations",
-        org: "Banks, fintechs, and regulated enterprises",
+        org: "IP-intensive enterprises and specialist practices",
     },
     {
         icon: Cpu,
-        title: "Legal Tech Founders",
-        roles: ["AI & contract lifecycle", "LegalOps platforms"],
+        title: "Legal Tech & Operations Leaders",
+        roles: ["Founders", "CIOs", "Legal Ops Heads"],
         orgLabel: "Typical Organisations",
-        org: "Legal technology and compliance automation startups",
+        org: "Legal technology platforms and enterprise legal operations",
     },
     {
         icon: Landmark,
-        title: "Policymakers & Regulators",
-        roles: ["Government bodies", "Industry associations"],
+        title: "Regulators & Policy Advisors",
+        roles: ["Senior Regulators", "Arbitrators"],
         orgLabel: "Typical Organisations",
-        org: "Ministries, regulators, and institutional bodies across Indonesia",
-    },
-    {
-        icon: Globe,
-        title: "Corporate Strategy Leaders",
-        roles: ["CXOs", "Cross-border expansion"],
-        orgLabel: "Typical Organisations",
-        org: "Businesses expanding into or within Southeast Asia",
+        org: "Government bodies and regulatory institutions across Indonesia",
     },
 ];
 
@@ -126,14 +119,14 @@ export function IndonesiaWhoYouWillMeet() {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                     {whoYoullMeet.map((group, i) => (
                         <motion.div
                             key={group.title}
                             initial={{ opacity: 0, y: 28 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-40px" }}
-                            transition={{ duration: 0.55, delay: (i % 3) * 0.1, ease: "easeOut" }}
+                            transition={{ duration: 0.55, delay: (i % 5) * 0.08, ease: "easeOut" }}
                             className="group relative bg-white rounded-2xl border border-slate-200 p-6 md:p-7 overflow-hidden shadow-[0_4px_16px_-8px_rgba(15,23,42,0.08)] hover:border-orange-300 hover:shadow-[0_24px_48px_-18px_rgba(194,65,12,0.18)] hover:-translate-y-1.5 transition-all duration-500"
                         >
                             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-400 to-orange-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
