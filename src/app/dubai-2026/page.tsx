@@ -201,11 +201,11 @@ const sponsorTiers = [
         tier: "Diamond Sponsors",
         cardClass: "w-48 h-28 md:w-60 md:h-32",
         logos: [
-            { name: "CaseDocker", src: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
-            { name: "LexCorp", src: "/dubai-event/sponsors/lex-corp-logo.avif", href: "https://home.lexcorp.org.in/" },
-            { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/gorodissky-logo.jpg", href: "https://www.gorodissky.com/" },
-            { name: "DiliTrust", src: "/dubai-event/sponsors/DiliTrust.svg", href: null as string | null },
             { name: "Melento", src: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
+            { name: "DiliTrust", src: "/dubai-event/sponsors/DiliTrust.svg", href: null as string | null },
+            { name: "Gorodissky & Partners", src: "/dubai-event/sponsors/gorodissky-logo.jpg", href: "https://www.gorodissky.com/" },
+            { name: "LexCorp", src: "/dubai-event/sponsors/lex-corp-logo.avif", href: "https://home.lexcorp.org.in/" },
+            { name: "CaseDocker", src: "/dubai-event/sponsors/CasedockerLogo.avif", href: "https://www.casedocker.com/landing/" },
         ],
     },
     {
