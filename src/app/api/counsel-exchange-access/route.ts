@@ -188,21 +188,28 @@ export async function POST(request: NextRequest) {
             }
         }).catch(err => console.error("Notification error:", err));
 
-        // Send confirmation to user (don't await — fire and forget)
-        resend.emails.send({
-            from: "LexTalk World <noreply@lextalkworld.in>",
-            to: email,
-            subject: "Access Confirmation | The Counsel Exchange",
-            html: userConfirmationHtml(name),
-        }).catch(err => console.error("User confirmation email error:", err));
-
-        // Send notification to admin team
-        resend.emails.send({
-            from: "LexTalk World <noreply@lextalkworld.in>",
-            to: ADMIN_EMAILS,
-            subject: `New Counsel Exchange Request — ${name} (${organization})`,
-            html: adminNotificationHtml({ name, email, phone, country, organization, designation, message }),
-        }).catch(err => console.error("Admin notification email error:", err));
+        // These MUST be awaited. On Vercel the serverless function is frozen as
+        // soon as the response returns, which silently discards un-awaited
+        // promises — fire-and-forget meant these emails were never delivered.
+        const [userMail, adminMail] = await Promise.allSettled([
+            resend.emails.send({
+                from: "LexTalk World <noreply@lextalkworld.in>",
+                to: email,
+                subject: "Access Confirmation | The Counsel Exchange",
+                html: userConfirmationHtml(name),
+            }),
+            resend.emails.send({
+                from: "LexTalk World <noreply@lextalkworld.in>",
+                to: ADMIN_EMAILS,
+                subject: `New Counsel Exchange Request — ${name} (${organization})`,
+                html: adminNotificationHtml({ name, email, phone, country, organization, designation, message }),
+            }),
+        ]);
+        // Resend resolves with { error } rather than throwing, so check both.
+        if (userMail.status === "rejected") console.error("[counsel-exchange] user email threw:", userMail.reason);
+        else if (userMail.value?.error) console.error("[counsel-exchange] user email REJECTED:", userMail.value.error);
+        if (adminMail.status === "rejected") console.error("[counsel-exchange] admin email threw:", adminMail.reason);
+        else if (adminMail.value?.error) console.error("[counsel-exchange] admin email REJECTED:", adminMail.value.error);
 
         return NextResponse.json({ success: true });
 

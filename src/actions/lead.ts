@@ -82,28 +82,40 @@ function generateEmailHtml(data: any, includeDashboardLink: boolean) {
 }
 
 async function sendNotificationEmail(data: any) {
-    try {
-        // Send to each recipient with appropriate content
-        for (const email of NOTIFICATION_EMAILS) {
-            const includeDashboardLink = email === ADMIN_EMAIL;
-
-            await resend.emails.send({
+    if (!process.env.RESEND_API_KEY) {
+        console.error("[lead] RESEND_API_KEY is not set — notification email skipped");
+        return;
+    }
+    // Send to each recipient with appropriate content
+    for (const email of NOTIFICATION_EMAILS) {
+        const includeDashboardLink = email === ADMIN_EMAIL;
+        try {
+            // Resend resolves with { data, error } instead of throwing on API
+            // errors, so the error field must be inspected explicitly.
+            const { data: sent, error } = await resend.emails.send({
                 from: "LexTalk World <noreply@lextalkworld.in>",
                 to: email,
                 subject: `🔔 New Lead: ${data.firstName} ${data.lastName} - ${data.conference}`,
                 html: generateEmailHtml(data, includeDashboardLink),
             });
+            if (error) {
+                console.error(`[lead] notification email REJECTED for ${email}:`, error);
+            } else {
+                console.log(`[lead] notification email sent to ${email} (id: ${sent?.id})`);
+            }
+        } catch (error) {
+            console.error(`[lead] notification email threw for ${email}:`, error);
         }
-        console.log("Notification emails sent successfully to all recipients");
-    } catch (error) {
-        console.error("Failed to send notification email:", error);
-        // Don't fail the lead creation if email fails
     }
 }
 
 async function sendConfirmationEmail(data: any) {
+    if (!process.env.RESEND_API_KEY) {
+        console.error("[lead] RESEND_API_KEY is not set — confirmation email skipped");
+        return;
+    }
     try {
-        await resend.emails.send({
+        const { data: sent, error } = await resend.emails.send({
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: data.email,
             subject: `Thank You for Your Interest in LexTalk World Summit! 🌟`,
@@ -166,9 +178,13 @@ async function sendConfirmationEmail(data: any) {
                 </div>
             `,
         });
-        console.log("Confirmation email sent to:", data.email);
+        if (error) {
+            console.error(`[lead] confirmation email REJECTED for ${data.email}:`, error);
+        } else {
+            console.log(`[lead] confirmation email sent to ${data.email} (id: ${sent?.id})`);
+        }
     } catch (error) {
-        console.error("Failed to send confirmation email:", error);
+        console.error(`[lead] confirmation email threw for ${data.email}:`, error);
     }
 }
 
@@ -232,11 +248,20 @@ export async function createLead(data: any) {
         // Sync full "Interest Form (Website)" sheet tab
         triggerLeadsSync();
 
-        // Send email notification (don't await to avoid slowing down the response)
-        sendNotificationEmail(data);
-
-        // Send confirmation email to the lead
-        sendConfirmationEmail(data);
+        // Emails MUST be awaited. On Vercel the serverless function is frozen the
+        // moment the response is returned, which silently kills any un-awaited
+        // promise — that is why these notifications were never arriving.
+        // allSettled so one failing send can't prevent the other.
+        const [notifyResult, confirmResult] = await Promise.allSettled([
+            sendNotificationEmail(data),
+            sendConfirmationEmail(data),
+        ]);
+        if (notifyResult.status === "rejected") {
+            console.error("[lead] notification email threw:", notifyResult.reason);
+        }
+        if (confirmResult.status === "rejected") {
+            console.error("[lead] confirmation email threw:", confirmResult.reason);
+        }
 
         revalidatePath("/admin/leads");
         return { success: true, lead };
