@@ -293,7 +293,7 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
             });
         }
 
-        await resend.emails.send({
+        const { data: sent, error } = await resend.emails.send({
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: data.email,
             subject,
@@ -301,10 +301,17 @@ export async function sendDelegateConfirmationEmail(data: EmailData) {
             ...(attachments.length > 0 ? { attachments } : {}),
         });
 
-        console.log(`Confirmation email sent successfully to ${data.email}`);
+        // Resend resolves with { error } rather than throwing — without this the
+        // caller was told the delegate confirmation succeeded even when it did not.
+        if (error) {
+            console.error(`[delegate-mail] REJECTED for ${data.email}:`, error);
+            return { success: false, error: (error as any)?.message ?? "Email delivery failed" };
+        }
+
+        console.log(`[delegate-mail] confirmation sent to ${data.email} (id: ${sent?.id})`);
         return { success: true };
     } catch (error) {
-        console.error("Failed to send confirmation email:", error);
+        console.error(`[delegate-mail] threw for ${data.email}:`, error);
         return { success: false, error: "Email delivery failed" };
     }
 }

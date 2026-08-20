@@ -225,10 +225,15 @@ export async function POST(request: NextRequest) {
 
         // Send email with Resend
         const { data, error } = await resend.emails.send(emailOptions);
+        if (error) {
+            console.error(`[email-receipt] receipt REJECTED for ${buyerEmail}:`, error);
+        } else {
+            console.log(`[email-receipt] receipt sent to ${buyerEmail} (id: ${data?.id})`);
+        }
 
         // Also send a notification to the organizer
         try {
-            await resend.emails.send({
+            const { error: organizerError } = await resend.emails.send({
                 from: "Notifications <noreply@lextalkworld.in>",
                 to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"],
                 subject: `NEW Payment Confirmed: ${buyerName} - ${eventShortLabel} 2026`,
@@ -245,8 +250,11 @@ export async function POST(request: NextRequest) {
                     <p><strong>Location:</strong> ${eventShortLabel}</p>
                 `
             });
+            if (organizerError) {
+                console.error("[email-receipt] organizer notification REJECTED:", organizerError);
+            }
         } catch (organizerErr) {
-            console.error("Organizer notification error:", organizerErr);
+            console.error("[email-receipt] organizer notification threw:", organizerErr);
         }
 
         if (error) {

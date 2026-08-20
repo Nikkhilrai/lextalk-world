@@ -158,7 +158,7 @@ export async function POST(request: NextRequest) {
         });
 
         // Send dedicated pass email
-        await resend.emails.send({
+        const { data: sentPass, error: passError } = await resend.emails.send({
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: registration.email,
             subject: `Your Entry Pass — LexTalk World Bangalore 2026`,
@@ -174,6 +174,17 @@ export async function POST(request: NextRequest) {
                 contentType: "application/pdf",
             }],
         });
+
+        // Resend resolves with { error } rather than throwing — without this the
+        // route reported success even when the pass was never delivered.
+        if (passError) {
+            console.error(`[send-pass] REJECTED for ${registration.email}:`, passError);
+            return NextResponse.json(
+                { error: "Failed to send pass", details: (passError as any)?.message ?? passError },
+                { status: 502 }
+            );
+        }
+        console.log(`[send-pass] sent to ${registration.email} (id: ${sentPass?.id})`);
 
         return NextResponse.json({ success: true, message: `Pass sent to ${registration.email}` });
     } catch (error: any) {

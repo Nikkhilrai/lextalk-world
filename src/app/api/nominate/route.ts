@@ -54,7 +54,7 @@ export async function POST(req: Request) {
         if (process.env.RESEND_API_KEY) {
             try {
                 // Email to nominator
-                await resend.emails.send({
+                const { error: nominatorError } = await resend.emails.send({
                     from: "LexTalk World <noreply@lextalkworld.in>",
                     to: nominatorEmail,
                     subject: `Nomination Confirmation - ${category} | LexTalk World Dubai 2026`,
@@ -165,8 +165,12 @@ export async function POST(req: Request) {
                     `,
                 });
 
+                if (nominatorError) {
+                    console.error(`[nominate] nominator email REJECTED for ${nominatorEmail}:`, nominatorError);
+                }
+
                 // Also send notification to admin
-                await resend.emails.send({
+                const { error: adminError } = await resend.emails.send({
                     from: "LexTalk World <noreply@lextalkworld.in>",
                     to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"],
                     subject: `🔔 New Nomination: ${nomineeName} - ${category}`,
@@ -213,9 +217,14 @@ export async function POST(req: Request) {
                     `,
                 });
 
-                console.log("Nomination confirmation emails sent");
+                if (adminError) {
+                    console.error("[nominate] admin notification REJECTED:", adminError);
+                }
+                if (!nominatorError && !adminError) {
+                    console.log(`[nominate] confirmation emails sent for ${nomineeName}`);
+                }
             } catch (emailErr) {
-                console.error("Failed to send nomination email:", emailErr);
+                console.error("[nominate] email threw:", emailErr);
                 // Don't fail the nomination if email fails
             }
         }
