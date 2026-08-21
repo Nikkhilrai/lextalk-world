@@ -2,6 +2,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { checkContactSpam, rateLimit } from "@/lib/spam-guard";
 
 export async function createContactMessage(data: {
     name: string;
@@ -10,8 +12,38 @@ export async function createContactMessage(data: {
     company?: string;
     subject: string;
     message: string;
+    /** Hidden honeypot field; real users never populate it. */
+    website?: string;
 }) {
-    console.log("createContactMessage called with:", data);
+    // Bots reached this form ~26 times between Feb and Aug 2026. Filter them
+    // before touching the database so the inbox stays usable. Returns the same
+    // success shape as a real submission so bots get no feedback to adapt to.
+    const verdict = checkContactSpam({
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        subject: data.subject,
+        website: data.website,
+    });
+    if (verdict.spam) {
+        console.warn(`[contact] rejected as spam (${verdict.reason}) from ${data.email}`);
+        return { success: true, id: null };
+    }
+
+    try {
+        const hdrs = await headers();
+        const ip =
+            hdrs.get("x-forwarded-for")?.split(",")[0].trim() ||
+            hdrs.get("x-real-ip") ||
+            "unknown";
+        if (!rateLimit(`contact:${ip}`)) {
+            console.warn(`[contact] rate limited ${ip}`);
+            return { success: true, id: null };
+        }
+    } catch {
+        // headers() unavailable in some contexts — fall through, heuristics still apply
+    }
+
     try {
         const contactMessage = await prisma.contactMessage.create({
             data: {

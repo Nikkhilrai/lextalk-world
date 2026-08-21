@@ -17,6 +17,7 @@ export default function ContactPage() {
         company: "",
         subject: "",
         message: "",
+        website: "", // honeypot — must stay empty
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -33,6 +34,7 @@ export default function ContactPage() {
                 company: formData.company || undefined,
                 subject: formData.subject,
                 message: formData.message,
+                website: formData.website,
             });
 
             if (result.success) {
@@ -47,6 +49,7 @@ export default function ContactPage() {
                         company: "",
                         subject: "",
                         message: "",
+                        website: "",
                     });
                 }, 3000);
             } else {
@@ -199,6 +202,19 @@ export default function ContactPage() {
                                         </div>
                                     ) : (
                                         <form onSubmit={handleSubmit} className="space-y-5">
+                                            {/* Honeypot: hidden from humans, filled by naive bots. */}
+                                            <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+                                                <label htmlFor="website">Website</label>
+                                                <input
+                                                    type="text"
+                                                    id="website"
+                                                    name="website"
+                                                    tabIndex={-1}
+                                                    autoComplete="off"
+                                                    value={formData.website}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
                                             <div className="grid sm:grid-cols-2 gap-5">
                                                 <div>
                                                     <label className="block text-sm font-semibold text-slate-700 mb-2">
