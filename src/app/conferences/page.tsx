@@ -81,12 +81,6 @@ const upcomingConferences = [
         image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
         status: "Coming Soon",
         featured: false,
-        stats: {
-            "Global Legal Leaders": "TBA",
-            speakers: "TBA",
-            awardees: "TBA",
-            exhibitors: "TBA",
-        },
         description: "LexTalk World returns to India's capital in 2027. Full details, dates, and registration will be announced soon.",
         highlights: [
             "Full Conference Access",
@@ -109,12 +103,6 @@ const upcomingConferences = [
         image: "/indonesia-2027/images/jakarta-day.png",
         status: "Details Live",
         featured: false,
-        stats: {
-            "Global Legal Leaders": "TBA",
-            speakers: "TBA",
-            awardees: "TBA",
-            exhibitors: "TBA",
-        },
         description: "LexTalk World's first Southeast Asia edition arrives in Jakarta. Explore the conference focus areas and register your interest today.",
         highlights: [
             "Full Conference Access",
@@ -324,15 +312,17 @@ export default function ConferencesPage() {
                                             </div>
                                         </div>
 
-                                        {/* Stats */}
-                                        <div className="grid grid-cols-4 gap-4 mb-8 p-4 bg-slate-50 rounded-xl">
-                                            {Object.entries(event.stats).map(([key, value], i) => (
-                                                <div key={i} className="text-center">
-                                                    <div className="text-xl md:text-2xl font-bold text-slate-900">{value}</div>
-                                                    <div className="text-[10px] md:text-xs text-slate-500 uppercase tracking-wider">{key}</div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        {/* Stats — only shown once real figures are confirmed */}
+                                        {event.stats && (
+                                            <div className="grid grid-cols-4 gap-4 mb-8 p-4 bg-slate-50 rounded-xl">
+                                                {Object.entries(event.stats).map(([key, value], i) => (
+                                                    <div key={i} className="text-center">
+                                                        <div className="text-xl md:text-2xl font-bold text-slate-900">{value}</div>
+                                                        <div className="text-[10px] md:text-xs text-slate-500 uppercase tracking-wider">{key}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
 
                                         {/* CTA Button */}
                                         <div className="mt-auto">
