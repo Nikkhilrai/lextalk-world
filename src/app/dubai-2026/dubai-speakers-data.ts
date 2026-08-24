@@ -290,13 +290,11 @@ She currently serves as Senior Legal Counsel at Seddiqi Holding LLC and is a Cer
     },
     {
         name: "Sergey Medvedev",
-        title: "Partner, Gorodissky & Partners",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625136/lextalk/dubai-speakers/sergey-medvedev.jpg",
-        bio: `A highly accomplished international lawyer and Partner at Gorodissky & Partners with over 12 years of profound legal experience in the intellectual property and technology (IPT) sectors. A dual-qualified expert holding registered status as a Trademark, Design, and Software Attorney, Dr. Medvedev specialises in managing complex contentious and non-contentious IP/IT projects with a focus on Russian and cross-border jurisdictions.
+        title: "PhD, LLM, Managing Partner, Gorodissky & Partners (Moscow, Russia)",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787571676/lextalk/dubai-speakers/sergey-medvedev.png",
+        bio: `An international lawyer and Managing Partner at Gorodissky & Partners (Moscow, Russia) with about 20 years of profound legal experience in the intellectual property (IP) and information technology (IT) sectors, as well as commercial IP. Sergey works as an IP and IT lawyer holding registered status as a trademark, design and software Attorney. He specializes in managing various contentious and noncontentious IP and IT projects with a focus on cross-border transactional aspects. He mostly deals with trademarks, copyrights, designs and software and advises his clients on licensing, franchising, distribution and corporate IP and IT transactions. His practical focus includes IP and IT commercial advisory and regulatory compliance, due diligence and risk assessment, contractual drafting and transactional management, as well as registration issues.
 
-His areas of expertise span asset management of copyrights, computer programs, databases, patents, industrial designs, trademarks, and domain names; data protection and privacy, internet law, e-commerce, and web-content regulation; licensing, outsourcing, franchising, distribution, and corporate IPT transactions; and IPT infringement, dispute resolution, anti-counterfeiting, and anti-piracy. His strategic focus includes IPT advisory and regulatory compliance, due diligence, auditing, and risk assessment, and transactional structuring in the technology, media, and telecommunications (TMT) sector.
-
-He holds a PhD in Law and an LLM in International Law, and is an officially registered Trademark Attorney, Design Attorney, and Software Attorney, leading high-stakes IP and IT matters for diverse industry sectors and bridging the gap between IP law and evolving technology markets.`,
+Sergey is the author of different IP publications on licensing and franchising. He was many times ranked by prominent international peers, including Legal500, Who's Who Legal, Best Lawyers and IP Stars.`,
     },
     {
         name: "Shilpa Bhasin Mehra",
