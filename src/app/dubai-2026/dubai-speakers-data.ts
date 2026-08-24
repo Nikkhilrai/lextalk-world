@@ -177,22 +177,6 @@ His core expertise spans strategic board governance and board effectiveness, cro
 In his words: "Effective legal leadership is not about saying no — it is about enabling confident, informed decisions while protecting long-term enterprise value."`,
     },
     {
-        name: "Georges Abi Saab",
-        title: "General Counsel, Ooredoo Group",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625117/lextalk/dubai-speakers/georges-abi-saab.jpg",
-        bio: `George Abi Saab is the General Counsel at Ooredoo Group since 2020, where he plays a pivotal role in managing and overseeing all legal aspects of the Group. 
-
-One of George's notable achievements was leading Ooredoo’s M&A expansion such leading the acquisition in Iraq, Tunisia and Kuwait as well as obtaining a license in Myanmar as well as leading many corporate finance work such as a USD 1.25 billion sukuk issuance. 
-
-Currently, George is at the helm of a transformative project involving the sale and leaseback of up to 30,000 towers in Qatar, Kuwait, Algeria, Tunisia, Iraq, and Jordan. This initiative represents a significant step towards establishing a jointly owned independent tower company through a cash and share deal. In addition, Georges is also leading the adjacencies carve out in Data Centre and Fintech.
-
-Prior to his current role, George served as the Senior Director and Head of Corporate Governance at Ooredoo Group. During his tenure, he spearheaded the development of the Corporate Governance policies and procedures framework. This framework was designed to enable the function to effectively meet its objectives and targets, in alignment with overall risk policies, procedures, and the Group's strategic direction.
-
-With extensive experience in the legal and M&A fields, George has held significant positions in the industry, including Senior Associate at Baker & McKenzie in Saudi Arabia and Legal Affairs Manager at M1 Group (the Parent Company of Investcom). His contributions extend to the drafting of policy papers and laws, such as Lebanon's Consumer Protection Law and the Lebanese Trademark Law.
-
-George's educational background includes a bachelor’s degree in law from the University of La Sagesse, Lebanon. Furthermore, his commitment to lifelong learning is evident in his completion of a mini MBA in Telecoms, AI Essential for Business from Harvard Business School Data Privacy & Technology from Harvard Business School, Emotional Intelligence and Maturity from Tomorrow’s Architect, AML and Compliance Regulatory from Qatar Chamber of Commerce and in in Intellectual Property Rights from the World Intellectual Property Organization in Geneva`
-    },
-    {
         name: "Julia Kolomenko",
         title: "Regional Head of Legal, EEMEA, SGS",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625123/lextalk/dubai-speakers/julia-kolomenko.jpg",
@@ -423,6 +407,16 @@ She holds an MBA in Entrepreneurship along with a Master's Degree in Forensic Sc
 Under her leadership, Coingeit has built two pioneering platforms — CaseDocker, an AI-powered LegalOps WorkDesk designed to streamline contract, case, compliance, and notice management; and Caseica, an intelligent legal knowledge and reasoning assistant enabling faster decision-making for legal teams. Her expertise lies in operational strategy, workflow optimization, and scaling technology-enabled businesses with efficiency and precision.
 
 She is known for her structured approach, strong execution mindset, and deep passion for transforming complex legal processes into simple, intelligent, and automated workflows, and continues to drive Coingeit's mission of empowering legal professionals through smarter, more connected, and AI-driven legal ecosystems.`,
+    },
+    {
+        name: "Akef Khoury",
+        title: "Head of Legal, ETG",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787574680/lextalk/dubai-speakers/akef-khoury.png",
+        bio: `Akef Khoury is a strategic leader and Harvard PLD alumnus with over 15 years of experience navigating high-stakes corporate governance, M&A, and regulatory complexity across the GCC, Africa, and global emerging markets.
+
+He currently serves as Head of Legal at ETG, providing strategic counsel to leadership and institutional stakeholders within a multi-billion dollar diversified global conglomerate, with a focus on long-term institutional resilience through robust governance frameworks, risk mitigation, and strategic stakeholder alignment.
+
+His expertise spans governance and oversight — bridging private founder dynamics with institutional-grade standards (PE/DFI requirements); strategic M&A, with a proven track record in multi-billion dollar cross-border transactions, capital raising, and organizational restructuring; geopolitical navigation, managing legal and operational risks across 40+ jurisdictions in complex regulatory environments; and business architecture, trained at Harvard Business School to move beyond functional legal silos into holistic corporate strategy, P&L thinking, and organizational design.`,
     },
 
 ];
