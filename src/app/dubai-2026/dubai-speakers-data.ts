@@ -418,5 +418,30 @@ He currently serves as Head of Legal at ETG, providing strategic counsel to lead
 
 His expertise spans governance and oversight — bridging private founder dynamics with institutional-grade standards (PE/DFI requirements); strategic M&A, with a proven track record in multi-billion dollar cross-border transactions, capital raising, and organizational restructuring; geopolitical navigation, managing legal and operational risks across 40+ jurisdictions in complex regulatory environments; and business architecture, trained at Harvard Business School to move beyond functional legal silos into holistic corporate strategy, P&L thinking, and organizational design.`,
     },
+    {
+        name: "Rita (Al Semaani) Jansen",
+        title: "Consultant, Independent Practitioner",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669421/lextalk/dubai-speakers/rita-al-semaani-jansen.png",
+    },
+    {
+        name: "Sheila Shadmand",
+        title: "Partner-in-Charge, Middle East & Africa Region, Jones Day",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669422/lextalk/dubai-speakers/sheila-shadmand.png",
+    },
+    {
+        name: "Osama El Masry",
+        title: "ME Practice Lead - Data Responsibility & Privacy, Cognizant Technology",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669423/lextalk/dubai-speakers/osama-el-masry.png",
+    },
+    {
+        name: "Anjali Sheoran",
+        title: "Director Legal, Atlan Technologies Private Limited",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669424/lextalk/dubai-speakers/anjali-sheoran.png",
+    },
+    {
+        name: "Shruti Anil Jain",
+        title: "Global Chief Legal Officer - Renewable Energy & Power Transmission, Sterlite Power",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669425/lextalk/dubai-speakers/shruti-anil-jain.png",
+    },
 
 ];
