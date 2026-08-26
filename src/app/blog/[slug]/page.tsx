@@ -287,11 +287,18 @@ export default async function BlogPostPage({
                                 {post.title}
                             </h1>
 
-                            {/* Author */}
+                            {/* Author.
+                                Image resolves from the BlogAuthor record FIRST, exactly as the
+                                AuthorBio card at the foot of the page does. post.authorImage is a
+                                denormalised copy taken when the post was written, so it goes stale
+                                the moment an author updates their photo — which had happened for
+                                84 of 97 posts, showing one picture here and a different one at the
+                                bottom of the same article. BlogAuthor is the source of truth; the
+                                post field is only a fallback for authors with no record. */}
                             <div className="flex items-center justify-center gap-2.5">
-                                {post.authorImage ? (
+                                {(author?.image ?? post.authorImage) ? (
                                     <div className="w-10 h-10 rounded-full overflow-hidden relative border-2 border-white dark:border-slate-600 shadow-sm">
-                                        <Image src={post.authorImage} alt={post.author} fill className="object-cover" />
+                                        <Image src={(author?.image ?? post.authorImage)!} alt={post.author} fill className="object-cover" />
                                     </div>
                                 ) : (
                                     <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center border-2 border-white dark:border-slate-600 shadow-sm">
