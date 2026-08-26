@@ -312,9 +312,9 @@ export default async function BlogPostPage({
                                 bottom of the same article. BlogAuthor is the source of truth; the
                                 post field is only a fallback for authors with no record. */}
                             <div className="flex items-center justify-center gap-2.5">
-                                {(author?.image ?? post.authorImage) ? (
+                                {(author?.image || post.authorImage) ? (
                                     <div className="w-10 h-10 rounded-full overflow-hidden relative border-2 border-white dark:border-slate-600 shadow-sm">
-                                        <Image src={(author?.image ?? post.authorImage)!} alt={post.author} fill className="object-cover" />
+                                        <Image src={(author?.image || post.authorImage)!} alt={post.author} fill className="object-cover" />
                                     </div>
                                 ) : (
                                     <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center border-2 border-white dark:border-slate-600 shadow-sm">
@@ -382,8 +382,8 @@ export default async function BlogPostPage({
                         {/* Author Bio */}
                         <AuthorBio
                             name={post.author}
-                            image={author?.image ?? post.authorImage}
-                            bio={author?.bio ?? undefined}
+                            image={author?.image || post.authorImage}
+                            bio={author?.bio || undefined}
                             linkedin={author?.linkedin ?? undefined}
                             twitter={author?.twitter ?? undefined}
                         />
