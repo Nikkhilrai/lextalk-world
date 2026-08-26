@@ -207,7 +207,30 @@ export async function GET(request: NextRequest) {
             orderBy: { createdAt: "desc" },
         });
 
-        return NextResponse.json(posts);
+        // Resolve each post's author image from the BlogAuthor record, falling back to
+        // the copy stored on the post. `post.authorImage` is denormalised — written once
+        // when the post was created — so it goes stale as soon as an author updates their
+        // photo, and it is simply absent for posts created before an author record
+        // existed. Both showed up on the live listing: stale photos on most cards, and a
+        // grey placeholder icon on posts whose authorImage was never set, even though the
+        // author has a perfectly good photo on file.
+        //
+        // Done here rather than in each consumer because the listing, the featured card
+        // and RelatedPosts all read this endpoint — fixing it once means they can't drift
+        // apart again.
+        const authors = await prisma.blogAuthor.findMany({
+            select: { name: true, image: true },
+        });
+        const authorImages = new Map(
+            authors.filter((a) => a.image).map((a) => [a.name, a.image])
+        );
+
+        const withResolvedAuthors = posts.map((post) => ({
+            ...post,
+            authorImage: authorImages.get(post.author) ?? post.authorImage,
+        }));
+
+        return NextResponse.json(withResolvedAuthors);
     } catch (error) {
         console.error("Error fetching posts:", error);
         return NextResponse.json(

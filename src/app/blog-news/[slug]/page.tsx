@@ -173,11 +173,27 @@ async function getAuthor(name: string) {
 }
 
 async function getRelatedPosts(category: string, currentSlug: string) {
-    return prisma.blogPost.findMany({
+    const posts = await prisma.blogPost.findMany({
         where: { published: true, category, slug: { not: currentSlug } },
         take: 3,
         orderBy: { createdAt: "desc" },
     });
+
+    // Same author-image resolution as the header, the AuthorBio card and /api/blog:
+    // BlogAuthor is the source of truth, post.authorImage is only a fallback. Without
+    // this, a related-post card can show a different photo for the same author than the
+    // article it sits under.
+    const authors = await prisma.blogAuthor.findMany({
+        select: { name: true, image: true },
+    });
+    const authorImages = new Map(
+        authors.filter((a) => a.image).map((a) => [a.name, a.image])
+    );
+
+    return posts.map((p) => ({
+        ...p,
+        authorImage: authorImages.get(p.author) ?? p.authorImage,
+    }));
 }
 
 export async function generateMetadata({
