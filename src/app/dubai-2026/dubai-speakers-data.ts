@@ -81,17 +81,6 @@ He is a member of the Chartered Institute for Securities & Investment (CISI) and
 
 Mahmoud is a Legal 500 GC Powerlist honoree and a frequent speaker at global legal and technology summits, where he shares insights on AI governance, data protection, and regulatory innovation. He is passionate about positioning legal functions as strategic enablers of growth in rapidly evolving digital ecosystems.`
     },
-
-    {
-        name: "Dr. Yasser Aboismail",
-        title: "General Counsel, Head of Legal & Compliance & ESG Global Leader",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625114/lextalk/dubai-speakers/dr-yasser-aboismail.jpg",
-        bio: `A seasoned executive and trusted legal advisor with an elite track record of driving corporate growth, mitigating enterprise risk, and cultivating high-performance compliance cultures. A General Counsel, Head of Legal & Compliance, and ESG global leader, he is highly adept at steering complex commercial transactions, M&A, joint ventures, and foreign direct investments while ensuring strict regulatory alignment. A powerful negotiator and consensus-builder, he forges strategic alliances with boards, governmental authorities, and public-sector stakeholders to secure long-term organisational success.
-
-He was selected by Legal500 as one of the top 100 most influential General Counsels in the Middle East and named General Counsel of the Year by Legal Era and Law.com. He orchestrates robust frameworks for corporate governance, cross-border M&A, and commercial strategy, and is a subject-matter expert in cross-stakeholder alignment, contract negotiation, and proactive risk mitigation. He has served on multiple boards and committees and is a respected legal-community influencer and acclaimed speaker at major industry conferences.
-
-His core competencies span corporate and commercial law, mergers and acquisitions, global compliance and ESG leadership, antitrust and competition, governmental and public-sector relations, risk mitigation and crisis management, and team leadership and culture engineering.`,
-    },
     {
         name: "Mehrdad Molaei",
         title: "Senior Legal Counsel, SLB",
