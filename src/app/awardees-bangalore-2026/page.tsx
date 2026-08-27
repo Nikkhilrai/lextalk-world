@@ -20,8 +20,8 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: n
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: (index % 3) * 0.1, ease: "easeOut" }}
-            className="group cursor-pointer"
-            onClick={() => onSelect(awardee)}
+            className={`group ${awardee.bio ? "cursor-pointer" : ""}`}
+            onClick={() => awardee.bio && onSelect(awardee)}
         >
             <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-950 shadow-lg hover:shadow-[0_20px_60px_-12px_rgba(207,164,90,0.25)] transition-all duration-700 border border-white/[0.06] hover:border-[#cfa45a]/30">
                 {/* Image */}
@@ -61,9 +61,11 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: n
                             <p className="text-[#cfa45a]/90 text-[11px] font-semibold uppercase tracking-[0.12em] leading-relaxed">
                                 {awardee.title}
                             </p>
-                            <p className="text-white/40 text-[10px] mt-2 uppercase tracking-widest font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                Click to read bio &rarr;
-                            </p>
+                            {awardee.bio && (
+                                <p className="text-white/40 text-[10px] mt-2 uppercase tracking-widest font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    Click to read bio &rarr;
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -215,13 +217,15 @@ export default function AwardeesBangalore2026Page() {
 
                                 <div className="w-12 h-px bg-[#cfa45a]/30 mb-5" />
 
-                                <div className="space-y-4">
-                                    {selected.bio.split("\n\n").map((para, i) => (
-                                        <p key={i} className="text-white/60 text-sm leading-[1.8] font-light">
-                                            {para}
-                                        </p>
-                                    ))}
-                                </div>
+                                {selected.bio && (
+                                    <div className="space-y-4">
+                                        {selected.bio.split("\n\n").map((para, i) => (
+                                            <p key={i} className="text-white/60 text-sm leading-[1.8] font-light">
+                                                {para}
+                                            </p>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     </motion.div>

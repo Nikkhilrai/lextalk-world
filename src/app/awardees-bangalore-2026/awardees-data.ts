@@ -4,7 +4,10 @@ export interface Awardee {
     name: string;
     title: string;
     image: string | null;
-    bio: string;
+    // Optional: some awardees (e.g. Saurabh Malhotra here) don't have a bio on file yet.
+    // Absence must never be papered over with invented text — see page.tsx, which only
+    // makes a card clickable / shows "Click to read bio" when bio is actually present.
+    bio?: string;
 }
 
 export const awardees: Awardee[] = [
@@ -75,5 +78,50 @@ His regulatory practice covers the full spectrum of Asia-Pacific and global digi
         bio: `As a Product Counsel, Trisom Sahu serves as a dedicated legal partner to product, engineering, and business teams, providing strategic guidance throughout the entire product lifecycle — from initial conception to global launch and expansion. He specializes in bridging the gap between technical innovation and legal compliance, ensuring that business goals are met through proactive risk mitigation and creative problem-solving.
 
 His expertise is built on a diverse professional foundation, including deep experience in Intellectual Property (IP), complex commercial contracting, Open Source strategy, and Data Privacy. By integrating these disciplines, he helps teams navigate the complexities of modern regulation while protecting core assets and maintaining consumer trust. He is passionate about being a "full-stack" advisor who translates legal requirements into actionable technical guardrails, ultimately helping companies scale faster and more securely.`,
+    },
+    {
+        name: "Srijit Mukherjee",
+        title: "General Counsel, Kocho",
+        image: `${IMG}/srijit-mukherjee.png`,
+        bio: `Srijit Mukherjee is a commercially savvy General Counsel with two decades of experience advising high-growth companies, founders, and boards across the technology, digital infrastructure, and Web3 landscapes.
+
+His work spans leading cross-border M&A, managing complex commercial litigation, and navigating emerging regulations — crypto, data privacy, AI — to enabling scalable contract systems, bringing legal clarity to business complexity.
+
+He has worked closely with founders, product teams, and investors to align legal with strategy, accelerate deals, and unlock enterprise value. His approach blends legal precision with business acumen, grounded in ethical leadership and stakeholder trust.`,
+    },
+    {
+        name: "Saurabh Malhotra",
+        title: "General Counsel, Intertek",
+        image: `${IMG}/saurabh-malhotra.png`,
+    },
+    {
+        name: "Yogesh Naik",
+        title: "Legal Lead, Volvo Group",
+        image: `${IMG}/yogesh-naik.jpeg`,
+        bio: `Yogesh Naik brings extensive legal expertise across industry domains including automotive, construction equipment, heavy manufacturing, textiles and insurance, specializing in navigating complex legal landscapes, managing multifaceted litigation, and driving compliance across industries. His core strengths lie in contracts, litigation, intellectual property and corporate law, complemented by a deep interest in legal tech and strategic risk management.
+
+At Volvo Group, he leads legal initiatives that streamline contracts, enhance compliance, and support business growth. His prior roles at Himatsingka Seide, POSCO Maharashtra Steel — as Team Leader — and Bajaj Allianz Life Insurance reflect a strong track record across legal functions, including setting up the Corporate Legal Cell for POSCO Maharashtra's greenfield steel plant.
+
+Recognized as a Rising Star by Legal 500, he was honoured with the Legal Honor Global Award under the category "Inspiring In-House Lawyer of the Year 2026" at LexTalk World APAC 2026, presented by Shri G. Sridhar, Secretary to the Government of Karnataka.`,
+    },
+    {
+        name: "Yawar Usmani",
+        title: "In-House Lawyer",
+        image: `${IMG}/yawar-usmani.jpeg`,
+        bio: `Yawar Usmani is a seasoned General Counsel with 12+ years of in-house leadership across FMCG, Pharma, Dairy, Technology and FinTech. He currently heads the legal, ethics, compliance, regulatory, IPR, data privacy and ESG functions for Stellapps Technologies Group — India's fastest-growing DairyTech — transforming legal from a cost centre into a strategic growth partner, and is presently helping Stellapps and its subsidiary Moomark scale towards IPO.
+
+He has built and leads a high-impact team of attorneys and compliance professionals spanning corporate governance and board advisory, food safety and sector-specific regulatory compliance, M&A and private equity, commercial contracts and litigation strategy, data protection under the DPDP Act and GDPR, and ESG reporting — while leading PE/VC fundraises exceeding INR 1000+ crore and advising clients including Info Edge (Naukri.com), EROS International and Indian Energy Exchange.
+
+He was featured in The Legal 500 GC Powerlist 2023, and has been a three-time Thomson Reuters ALB Awards finalist for Young Lawyer of the Year (In-House) across 2021, 2022 and 2023, alongside finalist recognitions for In-House Lawyer of the Year, Data Privacy & Protection Lawyer of the Year, and Fintech Lawyer of the Year.`,
+    },
+    {
+        name: "Amit Anand",
+        title: "Director Legal, Adobe",
+        image: `${IMG}/amit-anand.jpeg`,
+        bio: `Amit Anand is a seasoned global lawyer with over 18 years of experience in leading cross-functional teams, managing complex multi-jurisdictional matters, and delivering business-enabling solutions that drive success. His extensive background includes senior legal counsel roles at Wells Fargo, NTT DATA, and EY, where he oversaw legal affairs across diverse jurisdictions such as India, Philippines, China, Poland, Spain, Hungary, Sri Lanka, Mexico, and Argentina.
+
+As of March 2024, Amit leads the India Legal function for the Commonwealth Bank of Australia. His expertise spans providing strategic legal advice on Employment Law, Data Privacy Law, Technology Law, Commercial Contracts, Compliance, and Audit Programs.
+
+Amit holds a unique blend of qualifications, including management and law degrees, as well as certifications as a Corporate Governance Professional from the Indian Institute of Corporate Affairs (IICA) and a DSCI certified Privacy Lead Assessor (DCPLA).`,
     },
 ];
