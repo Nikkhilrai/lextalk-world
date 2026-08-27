@@ -66,6 +66,22 @@ const STATIC_EVENTS: AwardEvent[] = [
         ],
     },
     {
+        // NOTE 2026-08-27: source page (lextalk.world/awardees-new-york-2026) has no
+        // specific date, no venue name, and no People/Speaker/Awardee-style stat block —
+        // its only image is the site's own "San-Fansico" template leftover, mislabeled.
+        // Left date/fullLocation/stats/image unset rather than invented; image falls
+        // back to the shared placeholder (see event.image render below). Fill these in
+        // once the real details/photo are available.
+        id: "static-nyc-2026",
+        name: "Awardees New York City, USA – 2026",
+        slug: "awardees-new-york-2026",
+        customHref: "https://lextalk.world/awardees-new-york-2026/",
+        location: "New York City, USA",
+        year: 2026,
+        image: null,
+        description: null,
+    },
+    {
         id: "static-india-2025",
         name: "Awardees New Delhi, India – 2025",
         slug: "awardees-india-2025",
