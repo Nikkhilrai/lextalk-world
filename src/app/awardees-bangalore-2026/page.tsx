@@ -117,8 +117,6 @@ export default function AwardeesBangalore2026Page() {
                         </div>
 
                         <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.1] mb-6">
-                            <span className="text-white/90">Lex-Falcon</span>
-                            <br />
                             <span className="bg-gradient-to-r from-[#cfa45a] via-[#e8c97a] to-[#cfa45a] bg-clip-text text-transparent">
                                 Awardees Bangalore 2026
                             </span>
