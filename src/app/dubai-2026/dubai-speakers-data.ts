@@ -443,5 +443,10 @@ His expertise spans governance and oversight — bridging private founder dynami
         title: "Global Chief Legal Officer - Renewable Energy & Power Transmission, Sterlite Power",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787669425/lextalk/dubai-speakers/shruti-anil-jain.png",
     },
+    {
+        name: "Saurabh Malhotra",
+        title: "General Counsel, Intertek",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787739230/lextalk/dubai-speakers/saurabh-malhotra.png",
+    },
 
 ];
