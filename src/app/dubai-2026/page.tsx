@@ -7,14 +7,13 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DubaiAdvisoryBoard } from "./DubaiAdvisoryBoard";
-import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
-import { AgendaModal } from "@/components/AgendaModal";
+import { FloatingAgendaLink } from "@/components/FloatingAgendaLink";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
 import { speakers } from "./dubai-speakers-list";
 
 import {
-    Calendar, MapPin, Users, Award, Mic, ArrowRight, Download, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote
+    Calendar, CalendarDays, MapPin, Users, Award, Mic, ArrowRight, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote
 } from "lucide-react";
 
 // Key Highlights Data
@@ -25,32 +24,36 @@ const highlights = [
     { icon: Building, number: "30+", label: "Exhibitors" },
 ];
 
-// Agenda themes & key topics — distilled from the official Dubai 2026 agenda PDF.
-// Full timed programme is gated behind the lead-capture form.
+// Agenda themes & key topics — headline view of the programme.
+// The full timed schedule with speakers is published, ungated, at /dubai-2026/agenda
+// (see agenda/agenda-data.ts, transcribed from the official agenda sheet).
 const agendaTracks = [
     {
         day: "Day 1 · Wednesday, 9 September",
         title: "Architecting Legal Sovereignty",
         subtitle: "in a Disrupted World",
         topics: [
-            "ESG 2.0 — Disclosure, Enforcement & Penalties",
+            "The Global Lawyer's Role in the Era of Sovereign AI",
+            "ESG 2.0 — Sustainability under Scrutiny",
             "LegalOps as a Profit Center",
-            "Cross-Border Risk, IP Wars & Regulatory Volatility",
+            "GC Power Panel — Guardians of Corporate Sovereignty",
             "Digital Assets, Tokenised Trade & Borderless Capital",
-            "Litigation Finance & the New Economics of Disputes",
-            "GC Roundtable — The Velocity Mandate",
+            "Cross-Border Contracts & CLM Across GCC and APAC",
+            "The New Economics of Disputes & Litigation Finance",
+            "Round Table — The Velocity Mandate",
         ],
     },
     {
         day: "Day 2 · Thursday, 10 September",
         title: "Converging Borders",
-        subtitle: "Global Trade, Technology & Digital Law",
+        subtitle: "Navigating the New Frontier of Global Trade and Digital Law",
         topics: [
-            "Re-Engineering Brand Protection for Global Scale",
+            "Intelligent Workflow Automation & Enterprise Legal Tech",
             "Technology Transfer & Data Governance",
-            "Future-Proofing the In-House Team",
+            "GC Power Panel — Future-Proofing the In-House Team",
+            "AI, Fraud & Forensics — Liability in Autonomous Systems",
             "Data Privacy vs IP — The Fragmentation of Digital Law",
-            "Autonomous Contracting & Smart Agreements",
+            "Round Table — Autonomous Contracting & Smart Contracts",
             "Global Legal Honors Awards Function",
         ],
     },
@@ -275,7 +278,6 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
 export default function DubaiEventPage() {
     const [isVisible, setIsVisible] = useState(false);
-    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [showStickyBar, setShowStickyBar] = useState(false);
     const [isSpeakerApplyOpen, setIsSpeakerApplyOpen] = useState(false);
@@ -307,12 +309,7 @@ export default function DubaiEventPage() {
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
-            <FloatingAgendaButton eventSlug="dubai-2026" />
-            <AgendaModal
-                isOpen={isAgendaModalOpen}
-                onClose={() => setIsAgendaModalOpen(false)}
-                eventSlug="dubai-2026"
-            />
+            <FloatingAgendaLink href="/dubai-2026/agenda" />
             <SpeakerApplyModal
                 isOpen={isSpeakerApplyOpen}
                 onClose={() => setIsSpeakerApplyOpen(false)}
@@ -411,13 +408,13 @@ export default function DubaiEventPage() {
                             <span className="text-slate-900 font-bold text-base tracking-wide">Register Now</span>
                             <ArrowRight className="w-5 h-5 text-slate-900 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
-                        <button
-                            onClick={() => setIsAgendaModalOpen(true)}
+                        <Link
+                            href="/dubai-2026/agenda"
                             className="group inline-flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm transition-colors cursor-pointer"
                         >
-                            <Download className="w-4 h-4 text-amber-400" />
-                            <span className="border-b border-white/30 group-hover:border-white/70 pb-0.5 transition-colors">Download Agenda</span>
-                        </button>
+                            <CalendarDays className="w-4 h-4 text-amber-400" />
+                            <span className="border-b border-white/30 group-hover:border-white/70 pb-0.5 transition-colors">View Full Agenda</span>
+                        </Link>
                     </div>
 
                     {/* Stats row */}
@@ -567,14 +564,15 @@ export default function DubaiEventPage() {
                         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                         className="text-center mt-14"
                     >
-                        <button
-                            onClick={() => setIsAgendaModalOpen(true)}
+                        <Link
+                            href="/dubai-2026/agenda"
                             className="inline-flex items-center gap-2.5 px-9 py-4 bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-sm rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                         >
-                            <Download className="w-4 h-4" />
-                            Unlock Full Agenda — Free
-                        </button>
-                        <p className="text-slate-500 text-xs mt-4">Session times, speakers & the complete two-day programme · Instant download</p>
+                            <CalendarDays className="w-4 h-4" />
+                            View the Full Agenda
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                        <p className="text-slate-500 text-xs mt-4">Session times, speakers & the complete two-day programme · No sign-up required</p>
                     </motion.div>
                 </div>
             </section>
