@@ -52,20 +52,6 @@ export function EventsList() {
             ]
         },
         {
-            city: "Delhi",
-            month: "MAY/JUN",
-            days: "TBA",
-            year: "2027",
-            venue: "India",
-            image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
-            status: "Coming Soon",
-            region: "South Asia",
-            description: "LexTalk World returns to India's capital in 2027. Full details, dates, and registration will be announced soon.",
-            link: "/delhi-2027",
-            agendaLink: "#",
-            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "2 Days" }
-        },
-        {
             city: "Jakarta",
             month: "MAR",
             days: "05",
@@ -79,6 +65,20 @@ export function EventsList() {
             agendaLink: "#",
             agendaReady: false,
             stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "TBA" }
+        },
+        {
+            city: "Delhi",
+            month: "JUL",
+            days: "TBA",
+            year: "2027",
+            venue: "India",
+            image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
+            status: "Coming Soon",
+            region: "South Asia",
+            description: "LexTalk World returns to India's capital in 2027. Full details, dates, and registration will be announced soon.",
+            link: "/delhi-2027",
+            agendaLink: "#",
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "2 Days" }
         }
     ];
 
