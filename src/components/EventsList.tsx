@@ -27,7 +27,8 @@ export function EventsList() {
                 "30+ Exhibitors"
             ],
             link: "/dubai-2026",
-            agendaLink: "/agendas/dubai-2026-agenda.pdf",
+            agendaLink: "/dubai-2026/agenda",
+            publishedAgenda: true,
             stats: { delegates: "500+", delegatesLabel: "Global Legal Leaders", type: "Conference", duration: "2 Days" }
         },
         {

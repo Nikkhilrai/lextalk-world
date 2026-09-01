@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Script from "next/script";
 import Hero from "./components/Hero";
 import WhyAttend from "./components/WhyAttend";
@@ -11,24 +10,16 @@ import ReserveYourSeatForm from "./components/ReserveYourSeatForm";
 import WhoShouldAttend from "./components/WhoShouldAttend";
 import Pricing from "./components/Pricing";
 import { Footer } from "@/components/Footer";
-import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
+import { FloatingAgendaLink } from "@/components/FloatingAgendaLink";
 import { FloatingRegisterButton } from "@/components/FloatingRegisterButton";
-import { AgendaModal } from "@/components/AgendaModal";
 
 export default function Page() {
-    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
-
     return (
         <main>
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-            <FloatingAgendaButton eventSlug="dubai-2026" />
+            <FloatingAgendaLink href="/dubai-2026/agenda" />
             <FloatingRegisterButton />
-            <AgendaModal
-                isOpen={isAgendaModalOpen}
-                onClose={() => setIsAgendaModalOpen(false)}
-                eventSlug="dubai-2026"
-            />
-            <Hero onOpenAgenda={() => setIsAgendaModalOpen(true)} />
+            <Hero />
             <WhyAttend />
             <WhatYouGainAgenda />
             <Pricing />

@@ -70,7 +70,7 @@ export default function WhatYouGainAgenda() {
                             <ArrowRight size={16} strokeWidth={2} />
                         </Link>
                         <Link
-                            href="/dubai-2026"
+                            href="/dubai-2026/agenda"
                             className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-600 text-slate-300 text-sm font-semibold rounded-full hover:border-slate-400 hover:text-white transition-colors"
                         >
                             View Full Agenda

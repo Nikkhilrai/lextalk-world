@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles, Download } from "lucide-react";
+import { Users, Mic2, LayoutGrid, Calendar, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import MouseFollowBackground from "./MouseFollowBackground";
 
 const COMPANY_LOGOS = [
@@ -77,7 +77,7 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
     );
 }
 
-export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
+export default function Hero() {
     return (
         <>
             {/* Hero Section */}
@@ -140,14 +140,14 @@ export default function Hero({ onOpenAgenda }: { onOpenAgenda?: () => void }) {
                             <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
 
-                        {/* Download Agenda Button */}
-                        <button
-                            onClick={onOpenAgenda}
+                        {/* View Agenda Button */}
+                        <Link
+                            href="/dubai-2026/agenda"
                             className="group px-8 py-3.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-amber-500/30 transition-all font-semibold text-sm uppercase tracking-wide rounded-full flex items-center gap-3 backdrop-blur-sm shadow-xl shadow-black/20"
                         >
-                            <Download size={18} className="text-amber-500" />
-                            Download Agenda
-                        </button>
+                            <Calendar size={18} className="text-amber-500" />
+                            View Full Agenda
+                        </Link>
                     </div>
 
                     {/* Compact Countdown Section */}
