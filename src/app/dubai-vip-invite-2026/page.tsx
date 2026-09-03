@@ -166,14 +166,6 @@ export default function DubaiVipInvitePage() {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="bg-amber-50/60 border border-amber-100 rounded-2xl p-5">
-                                <p className="text-slate-700 text-xs leading-relaxed">
-                                    This isn't an open registration link — it's a personal invitation.
-                                    Submitting your details doesn't book your seat automatically; our team
-                                    will contact you directly to confirm and arrange your delegate pass.
-                                </p>
-                            </div>
                         </div>
 
                         {/* Right — Form */}
