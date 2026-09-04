@@ -633,9 +633,45 @@ model ChatConversation {
   // FORM_OFFERED...). This is the routing signal the agent's own evals grade on.
   tiersUsed    String[] @default([])
   formOffered  Boolean  @default(false)
+  // Whether the in-chat form was actually submitted — turns the conversation list
+  // into a funnel: offered vs. converted, not just "a chat happened".
+  leadCaptured Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   @@index([createdAt])
   @@index([formOffered])
+}
+
+// Registration-interest leads captured by the Lex chatbot's in-chat form.
+//
+// Its own table, separate from Lead, because these arrive through a different route
+// and the team needs to see at a glance which leads the chatbot produced.
+//
+// This exists because the agent's own lead store is in-memory: a restart or a
+// scale-to-zero event (which Container Apps does automatically when idle) silently
+// discarded every lead the chatbot had captured. The agent still validates the
+// submission against its event catalog — that's what makes the row trustworthy — but
+// the durable copy lives here.
+model ChatbotLead {
+  id           String   @id @default(cuid())
+  fullName     String
+  email        String
+  designation  String
+  mobile       String
+  eventSlug    String
+  passType     String?
+  // The conversation this came out of, so the transcript that produced the lead can
+  // be read alongside it (see ChatConversation.sessionId).
+  sessionId    String?
+  // The id the agent assigned, kept for cross-referencing its own store while it lasts.
+  agentLeadId  String?
+  status       String   @default("New") // New, Contacted, Converted
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@index([sessionId])
 }

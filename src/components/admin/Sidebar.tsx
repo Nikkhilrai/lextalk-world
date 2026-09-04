@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
     LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar,
-    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download, Armchair, Tag, Lock, ScanLine
+    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download, Armchair, Tag, Lock, ScanLine, Bot
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
@@ -51,6 +51,7 @@ const NAV_GROUPS = [
             { label: "Awardee Orders", href: "/admin/awardee-orders", icon: Trophy },
             { label: "Checkout Leads", href: "/admin/checkout-leads", icon: Target },
             { label: "Chat Conversations", href: "/admin/chat-conversations", icon: MessageCircle, badge: "New" },
+            { label: "Chatbot Leads", href: "/admin/chatbot-leads", icon: Bot, badge: "New" },
         ]
     },
     {
@@ -91,6 +92,7 @@ const LEAD_MANAGER_NAV = [
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
             { label: "Chat Conversations", href: "/admin/chat-conversations", icon: MessageCircle },
+            { label: "Chatbot Leads", href: "/admin/chatbot-leads", icon: Bot },
         ]
     }
 ];

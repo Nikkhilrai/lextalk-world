@@ -197,6 +197,50 @@ function pipeAndLog(
     return upstream.pipeThrough(transform);
 }
 
+/**
+ * Persist a lead the chatbot's in-chat form just captured.
+ *
+ * Only called after the agent returns 2xx, because the agent is what validates the
+ * event and pass against the real catalog — storing an unvalidated submission would
+ * put junk in front of the sales team. The tradeoff is that a lead is lost if the
+ * agent errors; that's the right way round, since the agent is also the only thing
+ * that can tell a real submission from a hand-crafted POST to a public endpoint.
+ *
+ * The durable copy lives here rather than in the agent because the agent's own lead
+ * store is in-memory and scale-to-zero wipes it.
+ */
+async function logChatbotLead(requestBody: string, responseBody: string) {
+    try {
+        const sent = JSON.parse(requestBody);
+        const got = JSON.parse(responseBody);
+        if (!sent?.full_name || !sent?.email) return;
+
+        await prisma.chatbotLead.create({
+            data: {
+                fullName: String(sent.full_name).slice(0, 200),
+                email: String(sent.email).slice(0, 200),
+                designation: String(sent.designation ?? "").slice(0, 200),
+                mobile: String(sent.mobile ?? "").slice(0, 40),
+                eventSlug: String(sent.event_slug ?? "").slice(0, 100),
+                passType: sent.pass_type ? String(sent.pass_type).slice(0, 100) : null,
+                sessionId: sent.session_id ? String(sent.session_id) : null,
+                agentLeadId: got?.lead_id ? String(got.lead_id) : null,
+            },
+        });
+
+        // Mark the conversation as converted so the chat list reads as a funnel rather
+        // than a pile of transcripts. Best-effort: the conversation row may not exist
+        // if the form was submitted from a session that predates conversation logging.
+        if (sent.session_id) {
+            await prisma.chatConversation
+                .updateMany({ where: { sessionId: String(sent.session_id) }, data: { leadCaptured: true } })
+                .catch(() => { /* non-critical */ });
+        }
+    } catch (error) {
+        console.error("[support-agent] failed to persist chatbot lead:", error);
+    }
+}
+
 async function forward(request: NextRequest, path: string[], method: "GET" | "POST") {
     const segment = path.join("/");
     if (!ALLOWED_PATHS.has(segment)) {
@@ -269,6 +313,10 @@ async function forward(request: NextRequest, path: string[], method: "GET" | "PO
                 // Malformed JSON on either side shouldn't cost the visitor their reply.
                 console.error("[support-agent] could not parse turn for logging:", error);
             }
+        }
+
+        if (segment === "leads" && upstream.ok && requestBody) {
+            await logChatbotLead(requestBody, body);
         }
 
         return new NextResponse(body, {
