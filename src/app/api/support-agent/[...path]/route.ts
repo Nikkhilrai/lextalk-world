@@ -16,7 +16,7 @@ import { prisma } from "@/lib/prisma";
  * transcripts) and /admin/* to the public internet, defeating the HTTP Basic auth
  * that protects them on the agent itself.
  */
-const ALLOWED_PATHS = new Set(["chat", "events", "leads"]);
+const ALLOWED_PATHS = new Set(["chat", "chat/stream", "events", "leads"]);
 
 /**
  * Measured agent latency is 30–65s per turn (two sequential gpt-5-mini calls with a
@@ -138,6 +138,65 @@ async function logTurn(
     }
 }
 
+/**
+ * Pass an SSE stream straight through to the browser while quietly reading the final
+ * "done" event out of it, so streamed conversations get logged like non-streamed ones.
+ *
+ * A TransformStream rather than buffering-then-forwarding: the visitor's tokens must
+ * not wait on anything we do here. Only the terminal event is parsed — the token events
+ * are already reassembled into `reply` by the agent, so there's no need to stitch them
+ * back together on this side.
+ */
+function pipeAndLog(
+    upstream: ReadableStream<Uint8Array>,
+    requestBody: string | undefined,
+    _ip: string
+): ReadableStream<Uint8Array> {
+    const decoder = new TextDecoder();
+    let tail = "";
+    let doneEvent: Record<string, unknown> | null = null;
+
+    const transform = new TransformStream<Uint8Array, Uint8Array>({
+        transform(chunk, controller) {
+            controller.enqueue(chunk);
+            try {
+                // Keep only the most recent slice: the transcript can be long, and the
+                // event we care about is always the last one.
+                tail = (tail + decoder.decode(chunk, { stream: true })).slice(-20000);
+            } catch {
+                /* observation must never break delivery */
+            }
+        },
+        async flush() {
+            try {
+                for (const line of tail.split("\n")) {
+                    if (!line.startsWith("data: ")) continue;
+                    const parsed = JSON.parse(line.slice(6));
+                    if (parsed?.type === "done") doneEvent = parsed;
+                }
+                if (doneEvent && requestBody) {
+                    const sent = JSON.parse(requestBody);
+                    const d = doneEvent as Record<string, never>;
+                    if (d.session_id) {
+                        await logTurn(
+                            d.session_id as unknown as string,
+                            sent?.message ?? "",
+                            (d.reply as unknown as string) ?? "",
+                            sent?.page_context ?? null,
+                            Array.isArray(d.tiers_used) ? (d.tiers_used as unknown as string[]) : [],
+                            Boolean(d.show_registration_form)
+                        );
+                    }
+                }
+            } catch (error) {
+                console.error("[support-agent] could not log streamed turn:", error);
+            }
+        },
+    });
+
+    return upstream.pipeThrough(transform);
+}
+
 async function forward(request: NextRequest, path: string[], method: "GET" | "POST") {
     const segment = path.join("/");
     if (!ALLOWED_PATHS.has(segment)) {
@@ -174,6 +233,21 @@ async function forward(request: NextRequest, path: string[], method: "GET" | "PO
             // served by a clear error than an indefinite spinner.
             signal: AbortSignal.timeout(150_000),
         });
+
+        // Streamed replies must be piped through untouched. Calling .text() here would
+        // buffer the whole SSE response and hand the visitor everything at once, which
+        // defeats the entire point of the streaming endpoint.
+        if (segment === "chat/stream" && upstream.ok && upstream.body) {
+            return new NextResponse(pipeAndLog(upstream.body, requestBody, ip), {
+                status: upstream.status,
+                headers: {
+                    "Content-Type": "text/event-stream",
+                    "Cache-Control": "no-cache, no-transform",
+                    Connection: "keep-alive",
+                    "X-Accel-Buffering": "no",
+                },
+            });
+        }
 
         const body = await upstream.text();
 

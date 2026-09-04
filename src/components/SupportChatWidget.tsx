@@ -32,6 +32,8 @@ type Role = "user" | "agent" | "system";
 interface Message {
     role: Role;
     text: string;
+    /** Still being streamed — renders a caret and suppresses the typing dots. */
+    streaming?: boolean;
 }
 
 interface PassOption {
@@ -220,6 +222,9 @@ export function SupportChatWidget() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [busy, setBusy] = useState(false);
+    // What the agent is doing before any answer text exists (e.g. "Checking the
+    // details…"). Most of a turn is spent here, so saying so beats an idle spinner.
+    const [statusLine, setStatusLine] = useState<string | null>(null);
     const [sessionId, setSessionId] = useState<string | null>(null);
     const [formState, setFormState] = useState<{ shown: boolean; submitted: boolean; slug: string | null }>({
         shown: false, submitted: false, slug: null,
@@ -257,6 +262,41 @@ export function SupportChatWidget() {
         return () => window.removeEventListener("keydown", onKey);
     }, []);
 
+    /** Non-streaming path, used when the deployed agent has no /chat/stream. */
+    const sendWithoutStreaming = useCallback(async (trimmed: string) => {
+        const res = await fetch(`${API}/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: trimmed,
+                session_id: sessionId,
+                page_context: `${document.title} | ${window.location.pathname}`.slice(0, 200),
+            }),
+        });
+
+        if (!res.ok) {
+            const body = await res.json().catch(() => null);
+            setMessages(m => [...m, {
+                role: "system",
+                text: body?.detail || "Something went wrong reaching support — please try again in a moment.",
+            }]);
+            return;
+        }
+
+        const data = await res.json();
+        if (data.session_id) {
+            setSessionId(data.session_id);
+            try { localStorage.setItem(SESSION_KEY, data.session_id); } catch { /* ignore */ }
+        }
+        setMessages(m => [...m, {
+            role: "agent",
+            text: data.reply || "I wasn't able to put together a reply — could you rephrase that?",
+        }]);
+        if (data.show_registration_form && !formState.shown && !formState.submitted) {
+            setFormState(s => ({ ...s, shown: true, slug: data.registration_event_slug ?? null }));
+        }
+    }, [sessionId, formState.shown, formState.submitted]);
+
     const send = useCallback(async (text: string) => {
         const trimmed = text.trim();
         if (!trimmed || busy) return;
@@ -264,9 +304,10 @@ export function SupportChatWidget() {
         setMessages(m => [...m, { role: "user", text: trimmed }]);
         setInput("");
         setBusy(true);
+        setStatusLine(null);
 
         try {
-            const res = await fetch(`${API}/chat`, {
+            const res = await fetch(`${API}/chat/stream`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -281,7 +322,16 @@ export function SupportChatWidget() {
                 }),
             });
 
-            if (!res.ok) {
+            // An agent build without /chat/stream answers 404. Falling back to the
+            // non-streaming endpoint keeps the widget working regardless of which agent
+            // version happens to be deployed, so the site and the agent can be released
+            // independently instead of having to land in lockstep.
+            if (res.status === 404) {
+                await sendWithoutStreaming(trimmed);
+                return;
+            }
+
+            if (!res.ok || !res.body) {
                 const body = await res.json().catch(() => null);
                 const fallback =
                     res.status === 429
@@ -291,19 +341,89 @@ export function SupportChatWidget() {
                 return;
             }
 
-            const data = await res.json();
-            if (data.session_id) {
-                setSessionId(data.session_id);
-                try { localStorage.setItem(SESSION_KEY, data.session_id); } catch { /* ignore */ }
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = "";
+            let started = false;   // has an agent bubble been opened for this reply
+            let done: Record<string, unknown> | null = null;
+
+            const appendToken = (text: string) => {
+                setMessages(m => {
+                    const next = [...m];
+                    const last = next[next.length - 1];
+                    if (started && last?.role === "agent" && last.streaming) {
+                        next[next.length - 1] = { ...last, text: last.text + text };
+                    } else {
+                        next.push({ role: "agent", text, streaming: true });
+                    }
+                    return next;
+                });
+                started = true;
+            };
+
+            // SSE arrives in arbitrary chunks, so events are split on the blank-line
+            // delimiter rather than assuming one event per read.
+            while (true) {
+                const { value, done: finished } = await reader.read();
+                if (finished) break;
+                buffer += decoder.decode(value, { stream: true });
+                const parts = buffer.split("\n\n");
+                buffer = parts.pop() ?? "";
+
+                for (const part of parts) {
+                    const line = part.split("\n").find(l => l.startsWith("data: "));
+                    if (!line) continue;
+                    let ev: Record<string, unknown>;
+                    try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+
+                    if (ev.type === "status") {
+                        setStatusLine(String(ev.text ?? ""));
+                    } else if (ev.type === "token") {
+                        setStatusLine(null);
+                        appendToken(String(ev.text ?? ""));
+                    } else if (ev.type === "error") {
+                        setMessages(m => [...m, { role: "system", text: String(ev.detail ?? "Something went wrong.") }]);
+                    } else if (ev.type === "done") {
+                        done = ev;
+                    }
+                }
             }
 
-            setMessages(m => [
-                ...m,
-                { role: "agent", text: data.reply || "I wasn't able to put together a reply — could you rephrase that?" },
-            ]);
+            setStatusLine(null);
 
-            if (data.show_registration_form && !formState.shown && !formState.submitted) {
-                setFormState(s => ({ ...s, shown: true, slug: data.registration_event_slug ?? null }));
+            if (done) {
+                if (done.session_id) {
+                    const id = String(done.session_id);
+                    setSessionId(id);
+                    try { localStorage.setItem(SESSION_KEY, id); } catch { /* ignore */ }
+                }
+
+                const full = String(done.reply ?? "");
+                setMessages(m => {
+                    const next = [...m];
+                    const last = next[next.length - 1];
+                    // Settle on the authoritative text: a chunk lost mid-stream would
+                    // otherwise leave a truncated answer sitting on screen looking final.
+                    if (last?.role === "agent" && last.streaming) {
+                        next[next.length - 1] = { role: "agent", text: full || last.text };
+                    } else if (full) {
+                        next.push({ role: "agent", text: full });
+                    } else if (!started) {
+                        next.push({
+                            role: "agent",
+                            text: "I wasn't able to put together a reply — could you rephrase that?",
+                        });
+                    }
+                    return next;
+                });
+
+                if (done.show_registration_form && !formState.shown && !formState.submitted) {
+                    setFormState(s => ({
+                        ...s,
+                        shown: true,
+                        slug: (done!.registration_event_slug as string) ?? null,
+                    }));
+                }
             }
         } catch {
             setMessages(m => [
@@ -312,9 +432,10 @@ export function SupportChatWidget() {
             ]);
         } finally {
             setBusy(false);
+            setStatusLine(null);
             setTimeout(() => inputRef.current?.focus(), 0);
         }
-    }, [busy, sessionId, formState.shown, formState.submitted]);
+    }, [busy, sessionId, formState.shown, formState.submitted, sendWithoutStreaming]);
 
     return (
         <>
@@ -413,13 +534,22 @@ export function SupportChatWidget() {
                                         }`}
                                     >
                                         {m.text}
+                                        {m.streaming && (
+                                            <motion.span
+                                                animate={{ opacity: [1, 0.2, 1] }}
+                                                transition={{ duration: 1, repeat: Infinity }}
+                                                className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-0.5 bg-amber-500"
+                                            />
+                                        )}
                                     </div>
                                 </motion.div>
                             ))}
 
-                            {busy && (
+                            {/* Only while there's nothing to read yet — once tokens start
+                                arriving the answer itself is the progress indicator. */}
+                            {busy && !messages[messages.length - 1]?.streaming && (
                                 <div className="flex justify-start">
-                                    <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md border border-slate-200 bg-white px-4 py-3">
+                                    <div className="flex items-center gap-2 rounded-2xl rounded-bl-md border border-slate-200 bg-white px-4 py-3">
                                         {[0, 1, 2].map(i => (
                                             <motion.span
                                                 key={i}
@@ -428,6 +558,9 @@ export function SupportChatWidget() {
                                                 className="h-1.5 w-1.5 rounded-full bg-slate-400"
                                             />
                                         ))}
+                                        {statusLine && (
+                                            <span className="text-[11px] text-slate-400">{statusLine}</span>
+                                        )}
                                     </div>
                                 </div>
                             )}
