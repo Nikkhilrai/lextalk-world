@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Loader2, Check, ChevronRight } from "lucide-react";
+import { MessageSquare, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
 import { setChatOpen } from "@/lib/chat-widget-state";
 
 /**
@@ -34,6 +35,110 @@ interface Message {
     text: string;
     /** Still being streamed — renders a caret and suppresses the typing dots. */
     streaming?: boolean;
+}
+
+/* ── Turning links in a reply into buttons ─────────────────────────────────── */
+
+/**
+ * Hosts whose links may be promoted to a button.
+ *
+ * lextalkworld.in only — deliberately NOT lextalk.world, which is a different
+ * organisation's site and outside our control. A button is an endorsement: it strips
+ * the URL out of view and invites a tap, so it must only ever point somewhere we own.
+ *
+ * The system prompt tells the agent never to invent a URL, but a prompt is advisory —
+ * if the model ever does hallucinate one, rendering it as a big amber call-to-action
+ * is far worse than leaving it as text the visitor can see and judge. Anything
+ * off-list simply stays in the prose, exactly as written.
+ */
+const TRUSTED_HOSTS = ["lextalkworld.in", "www.lextalkworld.in"];
+
+/** Human labels for the pages the agent actually hands out, longest path first so
+ *  /dubai-2026/agenda wins over /dubai-2026. */
+const LINK_LABELS: [string, string][] = [
+    ["/dubai-delegate-registration-2026", "Register for Dubai 2026"],
+    ["/mumbai-delegate-registration-2026", "Register for Mumbai 2026"],
+    ["/bangalore-delegate-registration-2026", "Register for Bangalore"],
+    ["/dubai-2026/agenda", "View the full agenda"],
+    ["/dubai-2026/speakers", "Meet the speakers"],
+    ["/dubai-vip-invite-2026", "Confirm your interest"],
+    ["/awardees", "See the awardees"],
+    ["/conferences", "All conferences"],
+    ["/sponsor", "Sponsorship options"],
+    ["/contact", "Contact the team"],
+    ["/dubai-2026", "Dubai 2026 event page"],
+    ["/mumbai-2026", "Mumbai 2026 event page"],
+    ["/indonesia-2027", "Jakarta 2027 event page"],
+    ["/delhi-2027", "Delhi 2027 event page"],
+];
+
+interface ReplyLink {
+    href: string;
+    label: string;
+    internal: boolean;
+}
+
+/**
+ * Split an agent reply into prose plus the links worth showing as buttons.
+ *
+ * The URL is removed from the prose rather than left in place: a bare
+ * "https://lextalkworld.in/dubai-delegate-registration-2026" mid-paragraph is noise
+ * once the same destination is a labelled button underneath. Trailing punctuation the
+ * URL was carrying ("…here: <url>.") is tidied so sentences don't end in orphaned
+ * colons or double spaces.
+ */
+export function splitLinks(text: string): { prose: string; links: ReplyLink[] } {
+    const links: ReplyLink[] = [];
+    const seen = new Set<string>();
+
+    // The connector before the URL is consumed along with it. Removing the URL alone
+    // leaves stranded prepositions — "See the agenda at  and the speakers at ." — which
+    // reads worse than the raw link did.
+    let prose = text.replace(
+        /(?:\s*\b(?:at|to|here|via|on|from|visit|see)\b)?\s*[:,]?\s*(https?:\/\/[^\s<>()[\]{}"']+)/gi,
+        (whole, rawUrl: string) => {
+        const raw = rawUrl;
+        // URLs at the end of a sentence usually swallow the full stop.
+        const href = raw.replace(/[.,;:!?]+$/, "");
+        // Anything the URL was carrying that isn't part of it (a closing full stop)
+        // has to survive, or sentences run together.
+        const trailing = raw.slice(href.length);
+        let host: string;
+        let path: string;
+        try {
+            const url = new URL(href);
+            host = url.hostname.toLowerCase();
+            path = url.pathname.replace(/\/$/, "");
+        } catch {
+            return whole; // not parseable — leave the text exactly as it was
+        }
+
+        // Untrusted host: put the sentence back exactly as the agent wrote it.
+        if (!TRUSTED_HOSTS.includes(host)) return whole;
+        if (seen.has(href)) return trailing;
+        seen.add(href);
+
+        const match = LINK_LABELS.find(([p]) => path === p || path.startsWith(p + "/"));
+        const label =
+            match?.[1] ??
+            // Fall back to the last path segment, de-slugified: /past-conferences -> "Past conferences"
+            (path
+                ? path.split("/").filter(Boolean).pop()!.replace(/-/g, " ").replace(/^\w/, c => c.toUpperCase())
+                : "Open page");
+
+        links.push({ href, label, internal: host.endsWith("lextalkworld.in") });
+        return trailing;
+    });
+
+    prose = prose
+        .replace(/[ \t]+([.,;:!?])/g, "$1")   // space left before punctuation
+        .replace(/([:,])\s*(?=[.\n]|$)/g, "") // "Book here:" with nothing after it
+        .replace(/\(\s*\)/g, "")              // emptied parentheses
+        .replace(/[ \t]{2,}/g, " ")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+    return { prose, links };
 }
 
 interface PassOption {
@@ -516,34 +621,76 @@ export function SupportChatWidget() {
                                 </div>
                             )}
 
-                            {messages.map((m, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 8 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.25 }}
-                                    className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                                >
-                                    <div
-                                        className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
-                                            m.role === "user"
-                                                ? "rounded-br-md bg-slate-900 text-white"
-                                                : m.role === "system"
-                                                ? "border border-amber-200 bg-amber-50 text-[12px] text-amber-800"
-                                                : "rounded-bl-md border border-slate-200 bg-white text-slate-700"
-                                        }`}
+                            {messages.map((m, i) => {
+                                // Only settled agent replies get buttons: pulling links out
+                                // of a half-streamed sentence would make them flicker in and
+                                // out as the URL arrives character by character.
+                                const { prose, links } =
+                                    m.role === "agent" && !m.streaming
+                                        ? splitLinks(m.text)
+                                        : { prose: m.text, links: [] as ReplyLink[] };
+
+                                return (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.25 }}
+                                        className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}
                                     >
-                                        {m.text}
-                                        {m.streaming && (
-                                            <motion.span
-                                                animate={{ opacity: [1, 0.2, 1] }}
-                                                transition={{ duration: 1, repeat: Infinity }}
-                                                className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-0.5 bg-amber-500"
-                                            />
+                                        <div
+                                            className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
+                                                m.role === "user"
+                                                    ? "rounded-br-md bg-slate-900 text-white"
+                                                    : m.role === "system"
+                                                    ? "border border-amber-200 bg-amber-50 text-[12px] text-amber-800"
+                                                    : "rounded-bl-md border border-slate-200 bg-white text-slate-700"
+                                            }`}
+                                        >
+                                            {prose}
+                                            {m.streaming && (
+                                                <motion.span
+                                                    animate={{ opacity: [1, 0.2, 1] }}
+                                                    transition={{ duration: 1, repeat: Infinity }}
+                                                    className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-0.5 bg-amber-500"
+                                                />
+                                            )}
+                                        </div>
+
+                                        {links.length > 0 && (
+                                            <div className="mt-2 flex max-w-[85%] flex-col gap-1.5">
+                                                {links.map(link =>
+                                                    link.internal ? (
+                                                        // Client-side navigation, so the widget stays
+                                                        // mounted and the conversation survives the
+                                                        // jump — a full page load would close it.
+                                                        <Link
+                                                            key={link.href}
+                                                            href={new URL(link.href).pathname}
+                                                            onClick={() => setOpen(false)}
+                                                            className="group inline-flex items-center justify-between gap-2 rounded-xl bg-slate-900 px-3.5 py-2.5 text-[12px] font-bold text-white transition hover:bg-amber-500 hover:text-slate-950"
+                                                        >
+                                                            {link.label}
+                                                            <ArrowUpRight size={14} className="shrink-0 transition-transform group-hover:translate-x-0.5" />
+                                                        </Link>
+                                                    ) : (
+                                                        <a
+                                                            key={link.href}
+                                                            href={link.href}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="group inline-flex items-center justify-between gap-2 rounded-xl border border-slate-300 px-3.5 py-2.5 text-[12px] font-bold text-slate-700 transition hover:border-amber-400 hover:bg-amber-50"
+                                                        >
+                                                            {link.label}
+                                                            <ArrowUpRight size={14} className="shrink-0" />
+                                                        </a>
+                                                    )
+                                                )}
+                                            </div>
                                         )}
-                                    </div>
-                                </motion.div>
-                            ))}
+                                    </motion.div>
+                                );
+                            })}
 
                             {/* Only while there's nothing to read yet — once tokens start
                                 arriving the answer itself is the progress indicator. */}
