@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 /**
  * Server-side proxy to the LexTalk support agent (the separate FastAPI service).
@@ -16,6 +17,15 @@ import { NextRequest, NextResponse } from "next/server";
  * that protects them on the agent itself.
  */
 const ALLOWED_PATHS = new Set(["chat", "events", "leads"]);
+
+/**
+ * Measured agent latency is 30–65s per turn (two sequential gpt-5-mini calls with a
+ * large tool payload; see the notes in the agent's model.py). The default function
+ * timeout is far below that, which showed up in production as every chat turn
+ * returning 503 at exactly the old 45s cap. This is a workaround for slow replies,
+ * not a fix for them — the latency itself is the real problem.
+ */
+export const maxDuration = 300;
 
 const AGENT_URL = process.env.SUPPORT_AGENT_URL || "http://localhost:8000";
 
@@ -59,6 +69,75 @@ function clientIp(request: NextRequest): string {
     );
 }
 
+interface LoggedTurn {
+    role: "user" | "agent";
+    text: string;
+    at: string;
+}
+
+/**
+ * Append one turn to the conversation log.
+ *
+ * Deliberately awaited by the caller rather than fire-and-forget: on Vercel the
+ * serverless function is frozen the moment the response is returned, which silently
+ * kills any un-awaited promise — the same trap that stopped lead notification emails
+ * from arriving (see actions/lead.ts). Everything is inside try/catch so a logging
+ * failure can never cost the visitor their reply; a lost analytics row is a far
+ * cheaper failure than a broken chat.
+ */
+async function logTurn(
+    sessionId: string,
+    userText: string,
+    reply: string,
+    pageContext: string | null,
+    tiers: string[],
+    formOffered: boolean
+) {
+    try {
+        const now = new Date().toISOString();
+        const turns: LoggedTurn[] = [
+            { role: "user", text: userText.slice(0, 4000), at: now },
+            { role: "agent", text: (reply || "").slice(0, 8000), at: now },
+        ];
+
+        const existing = await prisma.chatConversation.findUnique({
+            where: { sessionId },
+            select: { messages: true, tiersUsed: true, formOffered: true },
+        });
+
+        if (existing) {
+            const prior = Array.isArray(existing.messages) ? (existing.messages as unknown as LoggedTurn[]) : [];
+            const merged = [...prior, ...turns];
+            await prisma.chatConversation.update({
+                where: { sessionId },
+                data: {
+                    messages: merged as never,
+                    messageCount: merged.length,
+                    lastPage: pageContext,
+                    // Union rather than overwrite: tiers_used is per-turn, but what's
+                    // interesting is everything the conversation as a whole reached for.
+                    tiersUsed: [...new Set([...existing.tiersUsed, ...tiers])],
+                    formOffered: existing.formOffered || formOffered,
+                },
+            });
+        } else {
+            await prisma.chatConversation.create({
+                data: {
+                    sessionId,
+                    messages: turns as never,
+                    messageCount: turns.length,
+                    entryPage: pageContext,
+                    lastPage: pageContext,
+                    tiersUsed: tiers,
+                    formOffered,
+                },
+            });
+        }
+    } catch (error) {
+        console.error("[support-agent] failed to log conversation:", error);
+    }
+}
+
 async function forward(request: NextRequest, path: string[], method: "GET" | "POST") {
     const segment = path.join("/");
     if (!ALLOWED_PATHS.has(segment)) {
@@ -73,6 +152,10 @@ async function forward(request: NextRequest, path: string[], method: "GET" | "PO
         );
     }
 
+    // Read once — the body stream can only be consumed a single time, and both the
+    // upstream call and the conversation log need it.
+    const requestBody = method === "POST" ? await request.text() : undefined;
+
     try {
         const upstream = await fetch(`${AGENT_URL}/${segment}`, {
             method,
@@ -84,14 +167,36 @@ async function forward(request: NextRequest, path: string[], method: "GET" | "PO
                 // that's what the throttle above is covering.)
                 "X-Forwarded-For": ip,
             },
-            body: method === "POST" ? await request.text() : undefined,
-            // The agent calls Azure OpenAI on every /chat turn, which is not fast.
-            // Without a cap a hung upstream would hold the serverless function open
-            // until the platform kills it, with no useful message for the visitor.
-            signal: AbortSignal.timeout(45_000),
+            body: requestBody,
+            // Sized from measured behaviour, not a guess: warm turns run 30–65s, so the
+            // previous 45s cap was cutting off perfectly healthy replies. Still bounded,
+            // because the agent's own model client can hang, and a visitor is better
+            // served by a clear error than an indefinite spinner.
+            signal: AbortSignal.timeout(150_000),
         });
 
         const body = await upstream.text();
+
+        if (segment === "chat" && upstream.ok && requestBody) {
+            try {
+                const sent = JSON.parse(requestBody);
+                const got = JSON.parse(body);
+                if (got?.session_id) {
+                    await logTurn(
+                        got.session_id,
+                        sent?.message ?? "",
+                        got.reply ?? "",
+                        sent?.page_context ?? null,
+                        Array.isArray(got.tiers_used) ? got.tiers_used : [],
+                        Boolean(got.show_registration_form)
+                    );
+                }
+            } catch (error) {
+                // Malformed JSON on either side shouldn't cost the visitor their reply.
+                console.error("[support-agent] could not parse turn for logging:", error);
+            }
+        }
+
         return new NextResponse(body, {
             status: upstream.status,
             headers: { "Content-Type": upstream.headers.get("content-type") || "application/json" },

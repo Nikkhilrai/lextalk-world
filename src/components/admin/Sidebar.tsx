@@ -50,7 +50,7 @@ const NAV_GROUPS = [
             { label: "Awardees", href: "/admin/awardees", icon: Award },
             { label: "Awardee Orders", href: "/admin/awardee-orders", icon: Trophy },
             { label: "Checkout Leads", href: "/admin/checkout-leads", icon: Target },
-            { label: "Chat", href: "#", icon: MessageCircle, badge: "New" },
+            { label: "Chat Conversations", href: "/admin/chat-conversations", icon: MessageCircle, badge: "New" },
         ]
     },
     {
@@ -90,6 +90,7 @@ const LEAD_MANAGER_NAV = [
             { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
             { label: "Contact Messages", href: "/admin/contact-messages", icon: Mail },
             { label: "Sponsorship Inquiries", href: "/admin/sponsorship-inquiries", icon: HeartHandshake },
+            { label: "Chat Conversations", href: "/admin/chat-conversations", icon: MessageCircle },
         ]
     }
 ];

@@ -269,7 +269,16 @@ export function SupportChatWidget() {
             const res = await fetch(`${API}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: trimmed, session_id: sessionId }),
+                body: JSON.stringify({
+                    message: trimmed,
+                    session_id: sessionId,
+                    // Lets the agent resolve "what does it cost" without asking which
+                    // event — someone asking from /dubai-2026 means Dubai. Read fresh on
+                    // every send rather than captured once, so a visitor who navigates
+                    // mid-conversation is judged against the page they're actually on.
+                    // The agent treats this as a disambiguation hint only, never as fact.
+                    page_context: `${document.title} | ${window.location.pathname}`.slice(0, 200),
+                }),
             });
 
             if (!res.ok) {

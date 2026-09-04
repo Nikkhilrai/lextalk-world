@@ -611,3 +611,31 @@ model NewsletterSend {
   @@index([email])
   @@index([status])
 }
+
+// Conversations with "Lex", the AI support agent (a separate FastAPI service — see the
+// lextalk-support-agent repo). Logged here rather than in the agent because the agent's
+// own session store is in-memory and scale-to-zero wipes it, and because this is where
+// the team already looks: the same admin panel as Leads and Contact Messages.
+//
+// Written by the /api/support-agent proxy, which is the one place every chat turn
+// already passes through server-side.
+model ChatConversation {
+  id           String   @id @default(cuid())
+  sessionId    String   @unique
+  // Full transcript: [{ role: "user" | "agent", text, at }]
+  messages     Json
+  messageCount Int      @default(0)
+  // Page the visitor started on, and the one they were on for the most recent turn —
+  // together these show where chats begin and where they end up.
+  entryPage    String?
+  lastPage     String?
+  // Which agent tiers/tools fired across the whole conversation (T1, RAG, LEAD,
+  // FORM_OFFERED...). This is the routing signal the agent's own evals grade on.
+  tiersUsed    String[] @default([])
+  formOffered  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([formOffered])
+}
