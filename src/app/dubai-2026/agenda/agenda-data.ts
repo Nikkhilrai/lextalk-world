@@ -13,10 +13,11 @@
 //
 // Speaker NAMES here use the spelling in dubai-speakers-data.ts so each one
 // resolves to a real headshot; the sheet's own spelling differs for a few
-// (Dekina/Dikina Wedi, Suchita/Shuchita Singhal, Al Kilany/Al Kilani,
-// Ragvendra/Raghvendra Verma, Krupesh Bhatt/Bhat). Where the sheet names
-// "Sanjay Jain, Lex Corp" this is the same person the site lists as
-// Sunjjoy Jaiin, Founder & Managing Partner, Lex Corp.
+// (Dekina/Dikina Wedi, Suchita/Shuchita Singhal, Ragvendra/Raghvendra Verma,
+// Krupesh Bhatt/Bhat). Where the sheet names "Sanjay Jain, Lex Corp" this is
+// the same person the site lists as Sunjjoy Jaiin, Founder & Managing
+// Partner, Lex Corp. Hasan Al Kilani was removed as a speaker — dropped from
+// both the speakers page and this agenda's Day 1 panel he was listed on.
 //
 // Times and session titles are the sheet's own — not normalised, not invented.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -219,10 +220,6 @@ export const AGENDA: AgendaDay[] = [
                 ],
                 hasQA: true,
                 speakers: [
-                    {
-                        name: "Hasan Al Kilani",
-                        role: "General Counsel and Senior Legal Advisor, Ministry of Economy & Tourism, UAE",
-                    },
                     {
                         name: "Dr Faris Nasrallah",
                         role: "Head of Arbitration, Crescent Petroleum",

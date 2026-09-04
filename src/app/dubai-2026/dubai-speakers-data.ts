@@ -20,42 +20,6 @@ Today, my focus is on creating next-generation solutions at the intersection of 
 At heart, I'm a creator. I'm driven by the belief that technology, when built with purpose, can lead to enduring innovations that make a meaningful difference for humankind.`,
     },
     {
-        name: "Hasan Al Kilani",
-        title: "General Counsel | Regulatory & Digital Affairs | Corporate Commercial | Board Governance | MENA & GCC | UNCITRAL | Telecom | Sovereign Finance | Digital Economy Law",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625121/lextalk/dubai-speakers/hasan-al-kilani.jpg",
-        bio: `Over more than three decades, across four jurisdictions and two legal traditions, he has built the legal rules behind some of the most important shifts in how business is done, from the rise of digital trade to the regulation of entirely new technologies. He does not advise on the law from the outside. He writes it. And the work he has authored for the United Arab Emirates is now shaping how the rest of the world will follow.
-
-As Senior Legal Advisor and General Counsel at the UAE Ministry of Economy, he has led the modernisation of the country's commercial laws. In plain terms, he rewrote the rulebook that governs how companies trade, register, and operate in one of the world's fastest-moving economies, and made it a model that other countries now study.
-
-His most significant work is a law he authored in 2023, the Law on Trading by Modern Technological Means. It was one of the first laws anywhere built for an economy of digital platforms and apps rather than traditional commerce, and it placed the UAE ahead of almost every other nation on the legal questions raised by digital trade. He then carried its principles to the United Nations, to the body responsible for international trade law. He presented the UAE's approach in Vienna, and in 2025 the United Arab Emirates and Spain jointly proposed that the United Nations build a new international framework for digital trade based on this work, winning European support along the way. It is rare for one country's law to become the starting point for a global one. His is doing exactly that.
-
-Signature achievements: driving the UAE and Spain proposal at UNCITRAL for a new global Model Law on digital trade; authoring UAE Law No. 14 of 2023, one of the world's first laws built for the digital platform economy; drafting the charter that made the UAE a founding member of the Asian Infrastructure Investment Bank; and, as among the first executives of the UAE's telecommunications regulator, overseeing the country's first telecommunications licence.
-
-At the Ministry of Economy, Mr Al Kilani is custodian of the UAE's economic legislation at national, GCC, and international levels. He has authored and steered landmark laws through drafting, stakeholder engagement, and enactment, including the laws governing commercial transactions, commercial agency, arbitration, cooperatives, and the commercial registry, with UAE legislation increasingly adopted as a reference point across the region.
-
-He transformed the commercial registry from a procedural statute into a consolidated national economic data ecosystem, the National Economic Registry, incorporating e-commerce, digital trade, and data classification with extended protection of proprietary rights. He created a unified GCC digital-trade strategy and regulatory framework, and designed a methodology for assessing the real-world impact of legislation, building public-private task forces and roundtables that turned the introduction of new law into active partnership with the sectors it governed.
-
-As General Counsel at the Abu Dhabi Digital Authority, he built the end-to-end legal and regulatory framework for the Emirate's government-wide digital transformation, spanning digital signature, digital wallet, cloud, blockchain, and digital payment. He developed the legal foundation for UAE Pass and AD Locker, which became the country's sovereign digital identity standard, used by millions every day.
-
-He negotiated the agreements that enabled TAMM, managed centralised technology procurement across government, and designed a central contract-management system governing primary contractors and their subcontractors. The regulatory groundwork he established before 2020 allowed Abu Dhabi's government to continue operating seamlessly through the pandemic, a real-world test of the framework's resilience.
-
-As Legal Advisor to one of the region's most active sovereign development funds, the Abu Dhabi Fund for Development, he advised on sovereign, corporate, investment, and dispute-resolution matters across telecommunications, food security, hospitality, and infrastructure, managing affairs across the UAE, the wider Middle East and Africa, and Europe.
-
-He led the legal architecture for the UAE's accession to the Asian Infrastructure Investment Bank as a founding member, drafting the board charter for Arab nations and navigating the political negotiations that made membership possible. He standardised concessionary loan agreements across borrowing nations, directed an international asset-recovery effort that recovered the large majority of capital exposed to organised fraud, and handled the legal affairs of major clean-energy and infrastructure partnerships including IRENA, Masdar, and Mubadala.
-
-As Of Counsel at the international law firm Simmons & Simmons, he advised clients across government, regulatory, and private sectors, led the UAE legal team through the WTO Second Trade Policy Review, and built an integrated regulatory framework through review of the financial services, competition, and companies laws.
-
-Earlier, he twice helped build a nation's telecommunications law from the ground up. In Jordan he was a principal architect of the country's licensing regime, postal regulatory framework, and dispute-resolution function. In the UAE he joined the new telecommunications regulator as one of its first executives, established its regulatory framework, drafted the GCC CERT Charter, and oversaw the first telecommunications licence in the country's history.
-
-In the same period he set an early national precedent in corporate governance. As a senior legal figure at a listed UAE company, he established one of the first precedents under the country's Corporate Governance Executive Order, helping shape how publicly listed companies in the UAE are governed to this day.
-
-Areas of expertise: national and international law; the authoring of legislation and regulatory frameworks; digital trade and digital-economy regulation; telecommunications and ICT regulation; data protection; intellectual property; sovereign and development finance; cross-border negotiation and treaty law (UNCITRAL, WTO, AIIB, GCC); space activities law; competition and foreign investment law; and corporate governance and the structuring of complex agreements between governments and global institutions.
-
-Mr Al Kilani works across two legal traditions and is professionally fluent in both Arabic and English, including legal translation in both directions. He is a published contributor to the Centre of Islamic and Middle Eastern Law at SOAS, University of London, and a frequent speaker and panellist at legal, regulatory, and business forums. He is bar certified and holds a Bachelor of Laws from the University of Jordan.
-
-What sets him apart is not how much he has done, but the level at which he does it. He builds the rules that markets and nations live by, and he is now helping to write them for the world.`,
-    },
-    {
         name: "Bhavin Mehta",
         title: "Vice President, Compliance & Enterprise Ethics, Mastercard, UAE",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625101/lextalk/dubai-speakers/bhavin-mehta.jpg",
