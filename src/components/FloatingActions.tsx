@@ -14,12 +14,23 @@ import {
     ChevronUp
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { isChatOpen, subscribeChatOpen } from "@/lib/chat-widget-state";
 
 export function FloatingActions({ hideRegister = false }: { hideRegister?: boolean }) {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
+
+    // Never let the auto-open modal land on top of an open chat panel — a visitor
+    // mid-conversation with Lex is already engaged, and covering that with a second
+    // lead form loses both. If the chat opens after the modal is already up, the
+    // modal steps aside (see the subscription below).
+    useEffect(() => {
+        return subscribeChatOpen(open => {
+            if (open) setIsRegisterOpen(false);
+        });
+    }, []);
 
     // Show button only after scrolling down a bit
     useEffect(() => {
@@ -28,7 +39,7 @@ export function FloatingActions({ hideRegister = false }: { hideRegister?: boole
         let timer: NodeJS.Timeout;
         if (!hideRegister && pathname === "/") {
             timer = setTimeout(() => {
-                setIsRegisterOpen(true);
+                if (!isChatOpen()) setIsRegisterOpen(true);
             }, 8000); // Increased to 8s for better UX
         }
 

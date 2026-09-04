@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Loader2, Check, ChevronRight } from "lucide-react";
+import { setChatOpen } from "@/lib/chat-widget-state";
 
 /**
  * Floating chat widget for "Lex", the LexTalk World support agent.
@@ -242,7 +243,13 @@ export function SupportChatWidget() {
 
     useEffect(() => {
         if (open) setTimeout(() => inputRef.current?.focus(), 250);
+        // Publish open state so the homepage's auto-opening "Register Your Interest"
+        // modal doesn't land on top of an active conversation.
+        setChatOpen(open);
     }, [open]);
+
+    // Belt and braces: if this unmounts while open, the flag must not stay stuck on.
+    useEffect(() => () => setChatOpen(false), []);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
