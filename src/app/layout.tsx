@@ -6,6 +6,7 @@ import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { FloatingActions } from "@/components/FloatingActions";
+import { SupportChatWidget } from "@/components/SupportChatWidget";
 import { Toaster } from "react-hot-toast";
 
 // Elegant, high-contrast serif for headings - authoritative and professional
@@ -118,6 +119,10 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <FloatingActions />
+            {/* Off unless explicitly enabled: the support agent is a separate service,
+                and a chat bubble that errors on every message is worse than no bubble.
+                Set NEXT_PUBLIC_SUPPORT_AGENT_ENABLED=true once the agent is deployed. */}
+            {process.env.NEXT_PUBLIC_SUPPORT_AGENT_ENABLED === "true" && <SupportChatWidget />}
             <Toaster position="bottom-right" />
           </CartProvider>
         </ToastProvider>
