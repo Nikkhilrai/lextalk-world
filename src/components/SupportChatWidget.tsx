@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
-import { setChatOpen } from "@/lib/chat-widget-state";
 
 /**
  * Floating chat widget for "Lex", the LexTalk World support agent.
@@ -353,13 +352,7 @@ export function SupportChatWidget() {
 
     useEffect(() => {
         if (open) setTimeout(() => inputRef.current?.focus(), 250);
-        // Publish open state so the homepage's auto-opening "Register Your Interest"
-        // modal doesn't land on top of an active conversation.
-        setChatOpen(open);
     }, [open]);
-
-    // Belt and braces: if this unmounts while open, the flag must not stay stuck on.
-    useEffect(() => () => setChatOpen(false), []);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
@@ -565,14 +558,14 @@ export function SupportChatWidget() {
                 </span>
             </motion.button>
 
-            {/* ── Mobile launcher (bottom-right, above the existing action bubble) ── */}
+            {/* ── Mobile launcher (bottom-right) ── */}
             <motion.button
                 onClick={() => setOpen(v => !v)}
                 aria-label="Chat with Lex, the LexTalk assistant"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 1.2, type: "spring", damping: 18 }}
-                className="fixed bottom-24 right-5 z-[9998] flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] md:hidden"
+                className="fixed bottom-5 right-5 z-[9998] flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] md:hidden"
             >
                 <MessageSquare size={20} className="text-amber-400" />
                 <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-400" />

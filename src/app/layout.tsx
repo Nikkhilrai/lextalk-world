@@ -5,7 +5,6 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
-import { FloatingActions } from "@/components/FloatingActions";
 import { SupportChatWidget } from "@/components/SupportChatWidget";
 import { Toaster } from "react-hot-toast";
 
@@ -118,8 +117,12 @@ export default function RootLayout({
         <ToastProvider>
           <CartProvider>
             {children}
-            <FloatingActions />
-            {/* Off unless explicitly enabled: the support agent is a separate service,
+            {/* Replaces the old FloatingActions cluster (WhatsApp/Call/Instagram/
+                LinkedIn/Register bubbles) sitewide — those links still live in the
+                Footer, but the floating corner is now a single "Ask Lex" launcher,
+                matching the minimal one-button pattern on lextalk.world's own site
+                rather than an expanding menu of options.
+                Off unless explicitly enabled: the support agent is a separate service,
                 and a chat bubble that errors on every message is worse than no bubble.
                 Set NEXT_PUBLIC_SUPPORT_AGENT_ENABLED=true once the agent is deployed. */}
             {process.env.NEXT_PUBLIC_SUPPORT_AGENT_ENABLED === "true" && <SupportChatWidget />}
