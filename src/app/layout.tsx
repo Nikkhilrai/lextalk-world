@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
+import { BackToTopButton } from "@/components/BackToTopButton";
 import { SupportChatWidget } from "@/components/SupportChatWidget";
 import { Toaster } from "react-hot-toast";
 
@@ -117,6 +118,10 @@ export default function RootLayout({
         <ToastProvider>
           <CartProvider>
             {children}
+            {/* Independent of the chat widget's enable flag below — this is a plain
+                page-navigation aid, unrelated to lead capture, and shouldn't vanish
+                again if that flag or the widget itself ever changes. */}
+            <BackToTopButton />
             {/* Replaces the old FloatingActions cluster (WhatsApp/Call/Instagram/
                 LinkedIn/Register bubbles) sitewide — those links still live in the
                 Footer, but the floating corner is now a single "Ask Lex" launcher,

@@ -323,6 +323,7 @@ function RegistrationForm({
 /* ── Widget ────────────────────────────────────────────────────────────────── */
 export function SupportChatWidget() {
     const [open, setOpen] = useState(false);
+    const [showTeaser, setShowTeaser] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [busy, setBusy] = useState(false);
@@ -353,6 +354,29 @@ export function SupportChatWidget() {
     useEffect(() => {
         if (open) setTimeout(() => inputRef.current?.focus(), 250);
     }, [open]);
+
+    // A recurring nudge toward the launcher — the same job Lexi's own teaser bubble
+    // does on lextalk.world. Stops for good the moment there's any real engagement
+    // (opened once, or a message sent), rather than pestering someone who already
+    // knows the widget is there.
+    useEffect(() => {
+        if (open || messages.length > 0) {
+            setShowTeaser(false);
+            return;
+        }
+        let hideTimer: ReturnType<typeof setTimeout>;
+        const pop = () => {
+            setShowTeaser(true);
+            hideTimer = setTimeout(() => setShowTeaser(false), 6000);
+        };
+        const firstShow = setTimeout(pop, 3000);
+        const repeat = setInterval(pop, 45000);
+        return () => {
+            clearTimeout(firstShow);
+            clearInterval(repeat);
+            clearTimeout(hideTimer);
+        };
+    }, [open, messages.length]);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
@@ -537,39 +561,45 @@ export function SupportChatWidget() {
 
     return (
         <>
-            {/* ── Right-edge launcher tab ── */}
-            <motion.button
-                onClick={() => setOpen(v => !v)}
-                aria-label={open ? "Close chat with Lex" : "Chat with Lex, the LexTalk assistant"}
-                initial={{ x: 60, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.2, type: "spring", damping: 20, stiffness: 220 }}
-                className="group fixed right-0 top-1/2 z-[9998] hidden -translate-y-1/2 items-center gap-2 rounded-l-2xl border-y border-l border-amber-400/30 bg-slate-900/95 py-4 pl-3.5 pr-3 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all hover:bg-slate-900 hover:pr-4 md:flex md:flex-col"
-            >
-                <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-inner">
-                    <MessageSquare size={16} className="text-white" />
-                    <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-slate-900 bg-emerald-400" />
-                </span>
-                <span
-                    className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 transition-colors group-hover:text-amber-400"
-                    style={{ writingMode: "vertical-rl" }}
-                >
-                    Ask Lex
-                </span>
-            </motion.button>
+            {/* ── Launcher (same circular button at every breakpoint) ── */}
+            <div className="fixed bottom-5 right-5 z-[9998]">
+                {/* Teaser bubble — reappears periodically until the visitor actually
+                    opens the chat or sends a message, then never again this session. */}
+                <AnimatePresence>
+                    {showTeaser && !open && (
+                        <motion.div
+                            initial={{ opacity: 0, x: 12, scale: 0.9 }}
+                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                            exit={{ opacity: 0, x: 12, scale: 0.9 }}
+                            transition={{ type: "spring", damping: 22, stiffness: 300 }}
+                            className="absolute right-full top-1/2 mr-3.5 -translate-y-1/2 whitespace-nowrap rounded-2xl bg-slate-900 px-4 py-2.5 text-[13px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)]"
+                        >
+                            Ask Lex 👋
+                            <span className="absolute top-1/2 -right-1 h-2.5 w-2.5 -translate-y-1/2 rotate-45 bg-slate-900" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-            {/* ── Mobile launcher (bottom-right) ── */}
-            <motion.button
-                onClick={() => setOpen(v => !v)}
-                aria-label="Chat with Lex, the LexTalk assistant"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.2, type: "spring", damping: 18 }}
-                className="fixed bottom-5 right-5 z-[9998] flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] md:hidden"
-            >
-                <MessageSquare size={20} className="text-amber-400" />
-                <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-400" />
-            </motion.button>
+                <motion.button
+                    onClick={() => setOpen(v => !v)}
+                    aria-label={open ? "Close chat with Lex" : "Chat with Lex, the LexTalk assistant"}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 1, type: "spring", damping: 18 }}
+                    className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#1c2454] to-[#0f1330] shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] ring-[3px] ring-amber-400"
+                >
+                    {/* Breathing glow ring — the "look at me" cue Lexi's own widget
+                        uses, without copying its literal icon artwork. */}
+                    <motion.span
+                        aria-hidden
+                        className="absolute inset-0 rounded-full ring-2 ring-amber-400"
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.7, 0, 0.7] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <MessageSquare size={26} className="relative text-amber-400" strokeWidth={2} />
+                    <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0f1330] bg-emerald-400" />
+                </motion.button>
+            </div>
 
             {/* ── Panel ── */}
             <AnimatePresence>
