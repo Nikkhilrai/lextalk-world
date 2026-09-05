@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Bot, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
 
 /**
  * Floating chat widget for "Lex", the LexTalk World support agent.
@@ -596,7 +596,9 @@ export function SupportChatWidget() {
                         animate={{ scale: [1, 1.3, 1], opacity: [0.7, 0, 0.7] }}
                         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                     />
-                    <MessageSquare size={26} className="relative text-amber-400" strokeWidth={2} />
+                    {/* Bot, not a speech bubble — a bubble reads as "message us on
+                        WhatsApp"; a face reads as "there's an assistant in here". */}
+                    <Bot size={28} className="relative text-amber-400" strokeWidth={2} />
                     <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0f1330] bg-emerald-400" />
                 </motion.button>
             </div>
