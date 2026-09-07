@@ -154,13 +154,24 @@ export default function DubaiSpeakersList() {
                             {/* Modal Content */}
                             <div className="overflow-y-auto p-6 md:p-10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
-                                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0">
-                                        <Image
-                                            src={selectedSpeaker.image}
-                                            alt={selectedSpeaker.name}
-                                            fill
-                                            className="object-cover object-top"
-                                        />
+                                    {/* Guarded like the card above: a speaker can have a bio
+                                        but no photo yet, and next/image throws on an empty src —
+                                        which would crash the modal the moment their card is clicked. */}
+                                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0 bg-slate-100">
+                                        {selectedSpeaker.image ? (
+                                            <Image
+                                                src={selectedSpeaker.image}
+                                                alt={selectedSpeaker.name}
+                                                fill
+                                                className="object-cover object-top"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center text-slate-300">
+                                                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                </svg>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex-1 text-center md:text-left">
                                         <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-2">

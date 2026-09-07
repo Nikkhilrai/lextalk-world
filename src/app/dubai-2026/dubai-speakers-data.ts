@@ -1,4 +1,37 @@
 export const speakers = [
+    // No photos on file for these four yet — the list and modal both fall back to a
+    // silhouette, so they render correctly until images are supplied.
+    {
+        name: "Dr. Ahmad Alozn",
+        title: "Co-Founder, Mediation Hub MENA",
+        image: "",
+        bio: `Dr. Ahmad Alozn is the Co-Founder of Mediation Hub MENA, an authority in dispute prevention, avoidance, alternative dispute resolution (ADR), and construction contracts, with over 18 years of experience advising on infrastructure, transportation, building, and public-private partnership projects. Originally qualified as a civil engineer, he combines technical expertise with advanced qualifications in construction law, dispute resolution, and business administration in finance.
+
+His experience covers the full project lifecycle, from inception and procurement to design, construction, commissioning, and handover. Dr. Alozn advises on contentious and non-contentious matters, combining engineering experience, contractual expertise, procurement knowledge, project governance, and dispute avoidance practice to assist parties navigate technically and commercially complex issues fairly, independently, and efficiently.`,
+    },
+    {
+        name: "Saurabh Bagaria",
+        title: "Advocate, Calcutta High Court",
+        image: "",
+    },
+    {
+        name: "Sari Kanaan",
+        title: "Vice President / General Counsel, RAK Ceramics",
+        image: "",
+        bio: `Awarded Global General Counsel who partners with boards and executive leaders to transform legal functions into engines for commercial growth and risk mitigation.
+
+I align global legal strategy directly with key business objectives: scaling revenue streams, creating new profit pools, and enhancing sales velocity. My expertise is in navigating the complex regulations that enable this growth, including cross-border M&A due diligence, international trade (import/export), and strategic conflict management.
+
+At RAK Ceramics, my mission is to safeguard and drive success through robust legal frameworks, strategic dispute resolution, and resilient business continuity planning. I bring a track record from multinational leadership roles, driving legal solutions that facilitate secure and scalable operations across all jurisdictions.`,
+    },
+    {
+        name: "Gayatri Mohan",
+        title: "Senior Legal Counsel | Assistant General Manager – Legal Services, Medcare Hospitals & Medical Centres",
+        image: "",
+        bio: `Experienced In-House Legal Counsel with a demonstrated history of working in corporate organizations. Skilled in corporate and commercial matters, transactional matters, drafting and negotiating legal agreements, trademark infringement, patent law, licensing, corporate governance, and employment contracts.
+
+Confident and pragmatic approach to problem solving and managing legal risk, with analytical and critical thinking.`,
+    },
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
