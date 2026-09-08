@@ -182,10 +182,6 @@ export const AGENDA: AgendaDay[] = [
                     },
                     { name: "Mehrdad Molaei", role: "Senior Legal Counsel, SLB" },
                     { name: "Vijay Ojha", role: "Group Company Secretary, Sharaf Group" },
-                    {
-                        name: "Hadi N. El Kadi",
-                        role: "Group Chief Legal Officer, Al Habtoor Group",
-                    },
                     { name: "Imran Nawaz", role: "Group Chief Strategy Officer, Heden Group" },
                     {
                         name: "Dikina Wedi",

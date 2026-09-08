@@ -178,16 +178,6 @@ She has led and secured multi-jurisdictional energy contracts with major nationa
 Her core expertise spans commercial contracts, subcontracting and supply chain, cross-border risk mitigation across MENA and APAC, and cross-functional advisory with supply chain, finance, operations, and senior leadership. Her top skills include commercial contracts and negotiation, risk management and corporate governance, subcontracting and vendor management, the oilfield services and oil and gas sector, and process automation.`,
     },
     {
-        name: "Hadi N. El Kadi",
-        title: "Group Chief Legal Officer & Board Secretary, Al Habtoor Group",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625118/lextalk/dubai-speakers/hadi-n-el-kadi.jpg",
-        bio: `A distinguished Group Chief Legal Officer and board executive with over 25 years of experience advising chairmen, boards of directors, and C-suite executives across the GCC and MENA regions. Hadi currently leads the legal, governance, and risk strategies for Al Habtoor Group, a premier family-owned conglomerate, with expertise navigating highly diversified sectors including real estate, hospitality, automotive, insurance, education, investment, construction, and financial services. A recognised thought leader, academic, and author, he combines deep legal acumen with strategic business leadership to drive corporate transformation, mitigate enterprise risk, and oversee high-value global transactions.
-
-His core areas of expertise span corporate governance and board advisory — serving as a board member, executive committee member, and board secretary — strategic transactions and M&A, enterprise risk and compliance, dispute resolution and international arbitration, and executive management and negotiation. His recognitions include the Legal 500 GC Powerlist Middle East (2025) and the Middle East Finest General Counsel Award (2024 and 2025).
-
-He is a Senior Lecturer at University Paris II Panthéon-Assas (Dubai campus), founder of the Legal Psychology thought-leadership series, and a regular contributor to the International In-House Counsel Journal, with an upcoming book examining the psychological dynamics of leadership, governance, and organisational behaviour. He is currently a Doctorate in Management candidate at UCAM University, Spain, and holds an MBA, an LLM, and an LLB.`,
-    },
-    {
         name: "Denis Sergienko",
         title: "Global Counsel – Retail & Partner Enablement, HP",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625107/lextalk/dubai-speakers/denis-sergienko.jpg",
