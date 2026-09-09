@@ -10,7 +10,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
 
 // Email recipients
 const ADMIN_EMAIL = "nikhil@mantranexvista.com"; // Gets full email with dashboard link
-const NOTIFICATION_EMAILS = ["damul@mantranexvista.com", "nikhil@mantranexvista.com"]; // Both get notifications
+const NOTIFICATION_EMAILS = ["nikhil@mantranexvista.com"]; // Gets all notifications
 
 function generateEmailHtml(data: any, includeDashboardLink: boolean) {
     return `
