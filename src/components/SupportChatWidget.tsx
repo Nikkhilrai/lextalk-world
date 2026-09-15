@@ -69,6 +69,7 @@ const LINK_LABELS: [string, string][] = [
     ["/mumbai-2026", "Mumbai 2026 event page"],
     ["/indonesia-2027", "Jakarta 2027 event page"],
     ["/delhi-2027", "Delhi 2027 event page"],
+    ["/riyadh-2027", "Riyadh 2027 event page"],
 ];
 
 interface ReplyLink {

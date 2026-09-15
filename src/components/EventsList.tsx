@@ -52,6 +52,20 @@ export function EventsList() {
             ]
         },
         {
+            city: "Riyadh",
+            month: "JAN",
+            days: "26",
+            year: "2027",
+            venue: "Saudi Arabia",
+            image: "/riyadh-2027/images/riyadh-skyline.png",
+            status: "Coming Soon",
+            region: "Middle East",
+            description: "LexTalk World arrives in Riyadh with a one-day executive summit on AI, cyber resilience and data privacy. Venue and full details to be announced.",
+            link: "/riyadh-2027",
+            agendaLink: "#",
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "1 Day" }
+        },
+        {
             city: "Jakarta",
             month: "MAR",
             days: "05",
@@ -131,12 +145,24 @@ export function EventsList() {
                                     aria-label={`${event.city} — ${event.status === "Coming Soon" ? "Notify me" : "View details"}`}
                                     className="absolute inset-0 z-[1]"
                                 >
-                                    <Image
-                                        src={event.image}
-                                        alt={event.city}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
+                                    {/* A newly announced event often has no photo yet, and
+                                        next/image throws on an empty src — so an image-less
+                                        event degrades to a branded panel instead of crashing
+                                        the whole grid. */}
+                                    {event.image ? (
+                                        <Image
+                                            src={event.image}
+                                            alt={event.city}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-[#050a15] flex items-center justify-center">
+                                            <span className="font-serif font-bold text-3xl uppercase tracking-[0.2em] text-white/15">
+                                                {event.city}
+                                            </span>
+                                        </div>
+                                    )}
                                     {/* Gradient Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
 

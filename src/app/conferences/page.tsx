@@ -70,6 +70,28 @@ const upcomingConferences = [
         earlyBird: false,
     },
     {
+        id: "riyadh-2027",
+        name: "LexTalk World Middle East",
+        city: "Riyadh",
+        country: "Saudi Arabia",
+        region: "Middle East",
+        date: "January 26, 2027",
+        venue: "Riyadh, Saudi Arabia",
+        duration: "1 Day",
+        image: "/riyadh-2027/images/riyadh-skyline.png",
+        status: "Coming Soon",
+        featured: false,
+        description: "A one-day executive summit on operationalizing AI, cyber resilience and data privacy — bringing General Counsel, CISOs and Chief Privacy Officers together in Riyadh. Venue and speakers to be announced.",
+        highlights: [
+            "Executive Summit Format",
+            "GC, CISO & CPO Audience",
+            "Digital Trust & Governance Awards",
+            "Sponsor Case Studies & Demos",
+        ],
+        link: "/riyadh-2027",
+        earlyBird: false,
+    },
+    {
         id: "indonesia-2027",
         name: "LexTalk World Southeast Asia",
         city: "Jakarta",
@@ -236,12 +258,23 @@ export default function ConferencesPage() {
                                             aria-label={`${event.city} — ${event.status === "Open" ? "Visit event website" : event.status === "Details Live" ? "View conference details" : "Notify me"}`}
                                             className="absolute inset-0 z-[1]"
                                         >
-                                            <Image
-                                                src={event.image}
-                                                alt={event.city}
-                                                fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                            />
+                                            {/* Guarded like the homepage grid: a newly announced
+                                                conference may not have a photo yet, and next/image
+                                                throws on an empty src. */}
+                                            {event.image ? (
+                                                <Image
+                                                    src={event.image}
+                                                    alt={event.city}
+                                                    fill
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                />
+                                            ) : (
+                                                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-[#050a15] flex items-center justify-center">
+                                                    <span className="font-serif font-bold text-4xl uppercase tracking-[0.2em] text-white/15">
+                                                        {event.city}
+                                                    </span>
+                                                </div>
+                                            )}
                                             {/* Gradient Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/30 to-transparent lg:bg-gradient-to-t lg:from-slate-900/60 lg:via-transparent lg:to-transparent" />
                                         </Link>
