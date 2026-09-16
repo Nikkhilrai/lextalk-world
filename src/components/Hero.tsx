@@ -55,7 +55,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
 export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-    const [topCard, setTopCard] = useState<"bangalore" | "mumbai" | "dubai">("dubai");
+    const [topCard, setTopCard] = useState<"bangalore" | "mumbai" | "dubai">("mumbai");
 
     return (
         <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-32 md:pt-72 lg:pt-40 pb-2 md:pb-8 overflow-hidden bg-slate-900">
@@ -299,8 +299,8 @@ export function Hero() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                                 {/* Shimmer sweep */}
                                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-amber-500 text-slate-900 text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Registration Open
+                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-slate-600/90 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                    Completed
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
                                     <div className="flex items-center gap-2 mb-2 lg:mb-3">

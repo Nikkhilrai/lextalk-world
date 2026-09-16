@@ -32,6 +32,15 @@ export async function POST(request: NextRequest) {
             couponDiscount,
         } = body;
 
+        // Dubai 2026 concluded on Sep 10, 2026 — registration is closed, block server-side
+        // even if a stale client bypasses the disabled UI.
+        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("dubai")) {
+            return NextResponse.json(
+                { error: "Registration for this event is closed." },
+                { status: 403 }
+            );
+        }
+
         // Server-side coupon validation — if coupon provided, re-validate and recompute amount
         let finalAmount = rawAmount;
         let validatedCouponCode: string | null = couponCode || null;

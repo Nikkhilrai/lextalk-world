@@ -13,7 +13,7 @@ import { SponsorshipModal } from "@/components/SponsorshipModal";
 import { speakers } from "./dubai-speakers-list";
 
 import {
-    Calendar, CalendarDays, MapPin, Users, Award, Mic, ArrowRight, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote
+    Calendar, CalendarDays, MapPin, Users, Award, Mic, ArrowRight, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote, X, CheckCircle2
 } from "lucide-react";
 
 // Key Highlights Data
@@ -135,7 +135,7 @@ const participationPaths = [
         icon: Users,
         title: "Attend as Delegate",
         desc: "Network with peers, learn from experts, and discover the legal tech innovations transforming the industry.",
-        cta: "Register Now",
+        cta: "Event Concluded",
         actionKey: null,
         href: "/dubai-delegate-registration-2026",
         image: "/dubai-event/why-attend/networking-edited.avif",
@@ -283,6 +283,21 @@ export default function DubaiEventPage() {
     const [isSpeakerApplyOpen, setIsSpeakerApplyOpen] = useState(false);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [isSponsorshipOpen, setIsSponsorshipOpen] = useState(false);
+    const [showConcludedModal, setShowConcludedModal] = useState(false);
+
+    // Thank-you popup — announces the concluded event once per browser session
+    useEffect(() => {
+        try {
+            if (sessionStorage.getItem("dubai2026ConcludedSeen")) return;
+        } catch { /* sessionStorage unavailable — show every time */ }
+        const timer = setTimeout(() => setShowConcludedModal(true), 700);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const dismissConcludedModal = () => {
+        setShowConcludedModal(false);
+        try { sessionStorage.setItem("dubai2026ConcludedSeen", "1"); } catch { /* ignore */ }
+    };
 
     // Sticky register bar — appears once the hero is scrolled past
     useEffect(() => {
@@ -319,23 +334,90 @@ export default function DubaiEventPage() {
                 onClose={() => setIsSponsorshipOpen(false)}
             />
 
+            {/* ===================== EVENT CONCLUDED — THANK YOU MODAL ===================== */}
+            {showConcludedModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+                        onClick={dismissConcludedModal}
+                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden text-center"
+                    >
+                        <button
+                            onClick={dismissConcludedModal}
+                            className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors"
+                        >
+                            <X size={16} className="text-slate-600" />
+                        </button>
+
+                        <div className="bg-slate-900 px-8 pt-10 pb-8">
+                            <div className="w-16 h-16 rounded-full bg-amber-500/15 border border-amber-500/30 flex items-center justify-center mx-auto mb-5">
+                                <CheckCircle2 className="w-8 h-8 text-amber-400" />
+                            </div>
+                            <p className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.25em] mb-2">Dubai · September 9–10, 2026</p>
+                            <h2 className="text-white font-serif text-2xl md:text-3xl font-bold leading-tight">
+                                Thank You for Making<br />Dubai 2026 a Success
+                            </h2>
+                        </div>
+
+                        <div className="px-8 py-7">
+                            <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                                LexTalk World Dubai 2026 has concluded. To every delegate, speaker,
+                                sponsor and awardee who joined us at the Crowne Plaza — thank you for
+                                two unforgettable days of insight, networking and recognition.
+                            </p>
+
+                            <div className="grid grid-cols-4 gap-2 mb-7">
+                                {highlights.map((item, i) => (
+                                    <div key={i} className="text-center">
+                                        <p className="text-lg font-black text-slate-900">{item.number}</p>
+                                        <p className="text-[9px] uppercase tracking-wide text-slate-400 font-bold leading-tight mt-0.5">{item.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                <Link
+                                    href="/conferences"
+                                    onClick={dismissConcludedModal}
+                                    className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 bg-slate-900 hover:bg-amber-500 text-white hover:text-slate-950 font-bold text-xs uppercase tracking-widest rounded-xl transition-all"
+                                >
+                                    Explore Upcoming Events
+                                    <ArrowRight size={14} />
+                                </Link>
+                                <Link
+                                    href="/dubai-2026/agenda"
+                                    onClick={dismissConcludedModal}
+                                    className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 border border-slate-200 hover:border-slate-300 text-slate-700 font-bold text-xs uppercase tracking-widest rounded-xl transition-all"
+                                >
+                                    View Agenda
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
+
             {/* ===================== STICKY REGISTER BAR ===================== */}
             <div
                 className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ${showStickyBar ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none'}`}
             >
-                <div className="flex items-center gap-3 sm:gap-5 bg-slate-900/95 backdrop-blur-md text-white pl-5 pr-2 py-2 rounded-full shadow-2xl shadow-slate-900/40 border border-white/10">
+                <div className="flex items-center gap-3 sm:gap-5 bg-slate-900/95 backdrop-blur-md text-white pl-5 pr-5 py-2.5 rounded-full shadow-2xl shadow-slate-900/40 border border-white/10">
                     <div className="flex items-center gap-2 text-xs sm:text-sm font-medium whitespace-nowrap">
                         <Calendar className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span>9–10 Sep</span>
                         <span className="hidden sm:inline text-white/40">·</span>
                         <span className="hidden sm:inline">Crowne Plaza, Dubai</span>
                     </div>
-                    <Link
-                        href="/dubai-delegate-registration-2026"
-                        className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-xs sm:text-sm px-5 py-2 rounded-full transition-colors whitespace-nowrap"
-                    >
-                        Register Now
-                    </Link>
+                    <span className="bg-slate-700/60 text-slate-300 font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full whitespace-nowrap">
+                        Event Concluded
+                    </span>
                 </div>
             </div>
 
@@ -401,13 +483,12 @@ export default function DubaiEventPage() {
 
                     {/* CTAs — one primary action */}
                     <div className={`flex flex-col sm:flex-row items-center justify-center gap-5 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-                        <Link
-                            href="/dubai-delegate-registration-2026"
-                            className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors duration-300 shadow-lg shadow-amber-500/25 w-full sm:w-auto"
+                        <button
+                            onClick={() => setShowConcludedModal(true)}
+                            className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg transition-colors duration-300 w-full sm:w-auto"
                         >
-                            <span className="text-slate-900 font-bold text-base tracking-wide">Register Now</span>
-                            <ArrowRight className="w-5 h-5 text-slate-900 group-hover:translate-x-0.5 transition-transform" />
-                        </Link>
+                            <span className="text-white font-bold text-base tracking-wide">Event Concluded</span>
+                        </button>
                         <Link
                             href="/dubai-2026/agenda"
                             className="group inline-flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm transition-colors cursor-pointer"
@@ -1539,8 +1620,8 @@ export default function DubaiEventPage() {
                             <span className="text-white font-medium text-sm whitespace-nowrap">Crowne Plaza, Dubai, UAE</span>
                         </div>
                         <div className="flex items-center gap-2.5 sm:px-7">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
-                            <span className="text-amber-300 font-medium text-sm whitespace-nowrap">Early Bird pricing live</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                            <span className="text-slate-300 font-medium text-sm whitespace-nowrap">Thank you to everyone who attended</span>
                         </div>
                     </motion.div>
 
@@ -1553,13 +1634,12 @@ export default function DubaiEventPage() {
                         className="flex flex-col items-center gap-6"
                     >
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                            <Link
-                                href="/dubai-delegate-registration-2026"
-                                className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 bg-amber-500 hover:bg-amber-400 rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.03] active:scale-[0.98] w-full sm:w-auto"
+                            <button
+                                onClick={() => setShowConcludedModal(true)}
+                                className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg transition-all duration-300 w-full sm:w-auto"
                             >
-                                <span className="text-slate-900 font-bold text-base tracking-wide">Register Now</span>
-                                <ArrowRight className="w-5 h-5 text-slate-900 group-hover:translate-x-0.5 transition-transform" />
-                            </Link>
+                                <span className="text-white font-bold text-base tracking-wide">Event Concluded</span>
+                            </button>
                             <Link
                                 href="/sponsor"
                                 className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 border-2 border-white/25 hover:border-amber-400/60 hover:bg-white/5 rounded-lg transition-all duration-300 w-full sm:w-auto"

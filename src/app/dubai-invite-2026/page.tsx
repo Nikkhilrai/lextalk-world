@@ -1,65 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle, Loader2, ArrowRight, MapPin, Calendar, Users } from "lucide-react";
+import { MapPin, Calendar, Users, CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CountrySelect } from "@/components/CountrySelect";
-import { PhoneInput } from "@/components/PhoneInput";
-
-interface FormData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    organization: string;
-    designation: string;
-    country: string;
-}
 
 export default function DubaiInvitePage() {
-    const [form, setForm] = useState<FormData>({
-        firstName: "", lastName: "", email: "", phone: "",
-        organization: "", designation: "", country: "",
-    });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [ticket, setTicket] = useState<string | null>(null);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm(p => ({ ...p, [e.target.name]: e.target.value }));
-        setError(null);
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!form.firstName || !form.lastName || !form.email || !form.phone || !form.country) {
-            setError("Please fill in all required fields.");
-            return;
-        }
-        setLoading(true);
-        setError(null);
-        try {
-            const res = await fetch("/api/delegate-registration/register-free", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    customerDetails: form,
-                    passType: "delegate",
-                    passCategory: "individual",
-                    conferenceSlug: "dubai-2026",
-                }),
-            });
-            const data = await res.json();
-            if (!res.ok || !data.success) throw new Error(data.error || "Registration failed");
-            setTicket(data.ticketNumber);
-        } catch (err: any) {
-            setError(err.message || "Something went wrong. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -152,125 +97,17 @@ export default function DubaiInvitePage() {
                             </div>
                         </div>
 
-                        {/* Right — Registration Form */}
+                        {/* Right — Registration Closed */}
                         <div className="lg:col-span-3">
-                            {ticket ? (
-                                <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-10 text-center">
-                                    <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <CheckCircle className="w-10 h-10 text-emerald-600" />
-                                    </div>
-                                    <h2 className="text-2xl font-bold text-slate-900 mb-2">You're Registered!</h2>
-                                    <p className="text-slate-500 mb-8 text-sm leading-relaxed max-w-sm mx-auto">
-                                        A confirmation email has been sent to <strong className="text-slate-700">{form.email}</strong> with your entry details.
-                                    </p>
-                                    <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl px-8 py-6 border border-amber-200 mb-6">
-                                        <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600 mb-2">Confirmation ID</p>
-                                        <p className="text-2xl font-black font-mono text-slate-900 tracking-widest">{ticket}</p>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-3 text-sm text-slate-600">
-                                        <div className="bg-slate-50 rounded-xl p-3 text-left">
-                                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Date</p>
-                                            <p className="font-semibold text-slate-800">9 – 10 September, 2026</p>
-                                        </div>
-                                        <div className="bg-slate-50 rounded-xl p-3 text-left">
-                                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Venue</p>
-                                            <p className="font-semibold text-slate-800">Crowne Plaza, Dubai</p>
-                                        </div>
-                                    </div>
+                            <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-10 text-center">
+                                <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <CheckCircle2 className="w-10 h-10 text-slate-400" />
                                 </div>
-                            ) : (
-                                <div className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
-                                    <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-8 py-6">
-                                        <h3 className="text-white font-bold text-lg">Complete Your Registration</h3>
-                                        <p className="text-slate-400 text-sm mt-1">All fields marked * are required</p>
-                                    </div>
-                                    <div className="h-0.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
-
-                                    <form onSubmit={handleSubmit} className="p-8 space-y-5">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            {[
-                                                { name: "firstName", label: "First Name *", placeholder: "Arjun" },
-                                                { name: "lastName", label: "Last Name *", placeholder: "Mehta" },
-                                            ].map(f => (
-                                                <div key={f.name} className="space-y-1.5">
-                                                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{f.label}</label>
-                                                    <input
-                                                        type="text" name={f.name} required
-                                                        value={form[f.name as keyof FormData]}
-                                                        onChange={handleChange}
-                                                        placeholder={f.placeholder}
-                                                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Email *</label>
-                                            <input
-                                                type="email" name="email" required
-                                                value={form.email} onChange={handleChange}
-                                                placeholder="arjun@example.com"
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Phone *</label>
-                                            <PhoneInput
-                                                value={form.phone}
-                                                onChange={val => setForm(p => ({ ...p, phone: val }))}
-                                                id="invite-phone" variant="pill"
-                                            />
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-4">
-                                            {[
-                                                { name: "organization", label: "Organisation", placeholder: "Law Firm / Company" },
-                                                { name: "designation", label: "Designation", placeholder: "Senior Associate" },
-                                            ].map(f => (
-                                                <div key={f.name} className="space-y-1.5">
-                                                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{f.label}</label>
-                                                    <input
-                                                        type="text" name={f.name}
-                                                        value={form[f.name as keyof FormData]}
-                                                        onChange={handleChange}
-                                                        placeholder={f.placeholder}
-                                                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Country *</label>
-                                            <CountrySelect
-                                                value={form.country}
-                                                onChange={val => setForm(p => ({ ...p, country: val }))}
-                                                id="invite-country" variant="pill"
-                                            />
-                                        </div>
-
-                                        {error && (
-                                            <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
-                                        )}
-
-                                        <button
-                                            type="submit" disabled={loading}
-                                            className="w-full flex items-center justify-center gap-2 py-4 bg-slate-900 hover:bg-amber-500 text-white hover:text-slate-950 font-black text-[11px] uppercase tracking-[0.2em] rounded-2xl transition-all duration-300 disabled:opacity-60 active:scale-[0.98] shadow-lg shadow-slate-900/10"
-                                        >
-                                            {loading
-                                                ? <><Loader2 size={15} className="animate-spin" /> Registering…</>
-                                                : <>Complete Registration <ArrowRight size={14} /></>
-                                            }
-                                        </button>
-
-                                        <p className="text-center text-[11px] text-slate-400 leading-relaxed">
-                                            By registering you agree to our terms. A confirmation email will be sent immediately after submission.
-                                        </p>
-                                    </form>
-                                </div>
-                            )}
+                                <h2 className="text-2xl font-bold text-slate-900 mb-2">Registration Closed</h2>
+                                <p className="text-slate-500 mb-2 text-sm leading-relaxed max-w-sm mx-auto">
+                                    LexTalk World Dubai 2026 has concluded. Thank you to everyone who joined us — free passes are no longer available for this event.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

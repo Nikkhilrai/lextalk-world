@@ -1,79 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle, Loader2, ArrowRight, MapPin, Calendar, Users, Sparkles } from "lucide-react";
+import { MapPin, Calendar, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CountrySelect } from "@/components/CountrySelect";
-import { PhoneInput } from "@/components/PhoneInput";
-import { createLead } from "@/actions/lead";
 
-// This is a personal-invitation lead-capture page: meant to be shared as a
-// private link with specific prospects the team wants to invite as delegates.
-// It does NOT issue a ticket (unlike /dubai-invite-2026, the free-pass flow) —
-// it saves a Lead (same model/admin screen as the sitewide "Register Interest"
-// popup) so the team can personally follow up and confirm the seat themselves.
-// Submissions show up at /admin/leads, tagged "Register as Delegate" /
-// "Dubai UAE, Sep 9-10 2026" with a query note marking them as coming from
-// this invite page, so they're identifiable among other Leads rows.
-
-interface FormData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    organization: string;
-    designation: string;
-    country: string;
-    note: string;
-}
+// This was a personal-invitation lead-capture page for specific prospects the
+// team wanted to invite as Dubai 2026 delegates. Dubai 2026 has concluded, so
+// the form is closed — kept as a static page rather than deleted since the
+// link may still be shared/bookmarked.
 
 export default function DubaiVipInvitePage() {
-    const [form, setForm] = useState<FormData>({
-        firstName: "", lastName: "", email: "", phone: "",
-        organization: "", designation: "", country: "", note: "",
-    });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm(p => ({ ...p, [e.target.name]: e.target.value }));
-        setError(null);
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!form.firstName || !form.lastName || !form.email || !form.phone || !form.country || !form.designation) {
-            setError("Please fill in all required fields.");
-            return;
-        }
-        setLoading(true);
-        setError(null);
-        try {
-            const result = await createLead({
-                firstName: form.firstName,
-                lastName: form.lastName,
-                email: form.email,
-                contact: form.phone,
-                organization: form.organization || undefined,
-                designation: form.designation,
-                country: form.country,
-                joinAs: "Register as Delegate",
-                conference: "Dubai UAE, Sep 9-10 2026",
-                query: form.note
-                    ? `[Personal delegate invitation — Dubai 2026] ${form.note}`
-                    : "[Personal delegate invitation — Dubai 2026] Confirmed interest, no additional note.",
-            });
-            if (!result.success) throw new Error("Something went wrong. Please try again.");
-            setSubmitted(true);
-        } catch (err: any) {
-            setError(err.message || "Something went wrong. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -168,139 +104,17 @@ export default function DubaiVipInvitePage() {
                             </div>
                         </div>
 
-                        {/* Right — Form */}
+                        {/* Right — Registration Closed */}
                         <div className="lg:col-span-3">
-                            {submitted ? (
-                                <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-10 text-center">
-                                    <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <CheckCircle className="w-10 h-10 text-emerald-600" />
-                                    </div>
-                                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Thank You, {form.firstName}!</h2>
-                                    <p className="text-slate-500 mb-2 text-sm leading-relaxed max-w-sm mx-auto">
-                                        We've received your details. A member of our team will personally reach out
-                                        to <strong className="text-slate-700">{form.email}</strong> within 1–2 business days
-                                        to confirm your delegate pass for Dubai 2026.
-                                    </p>
-                                    <div className="grid grid-cols-2 gap-3 text-sm text-slate-600 mt-6">
-                                        <div className="bg-slate-50 rounded-xl p-3 text-left">
-                                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Date</p>
-                                            <p className="font-semibold text-slate-800">9 – 10 September, 2026</p>
-                                        </div>
-                                        <div className="bg-slate-50 rounded-xl p-3 text-left">
-                                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Venue</p>
-                                            <p className="font-semibold text-slate-800">Crowne Plaza, Dubai</p>
-                                        </div>
-                                    </div>
+                            <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-10 text-center">
+                                <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <CheckCircle2 className="w-10 h-10 text-slate-400" />
                                 </div>
-                            ) : (
-                                <div className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
-                                    <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-8 py-6">
-                                        <h3 className="text-white font-bold text-lg">Confirm Your Interest</h3>
-                                        <p className="text-slate-400 text-sm mt-1">All fields marked * are required</p>
-                                    </div>
-                                    <div className="h-0.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
-
-                                    <form onSubmit={handleSubmit} className="p-8 space-y-5">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            {[
-                                                { name: "firstName", label: "First Name *", placeholder: "Arjun" },
-                                                { name: "lastName", label: "Last Name *", placeholder: "Mehta" },
-                                            ].map(f => (
-                                                <div key={f.name} className="space-y-1.5">
-                                                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{f.label}</label>
-                                                    <input
-                                                        type="text" name={f.name} required
-                                                        value={form[f.name as keyof FormData]}
-                                                        onChange={handleChange}
-                                                        placeholder={f.placeholder}
-                                                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Email *</label>
-                                            <input
-                                                type="email" name="email" required
-                                                value={form.email} onChange={handleChange}
-                                                placeholder="arjun@example.com"
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Phone *</label>
-                                            <PhoneInput
-                                                value={form.phone}
-                                                onChange={val => setForm(p => ({ ...p, phone: val }))}
-                                                id="vip-invite-phone" variant="pill"
-                                            />
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-1.5">
-                                                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Organisation</label>
-                                                <input
-                                                    type="text" name="organization"
-                                                    value={form.organization}
-                                                    onChange={handleChange}
-                                                    placeholder="Law Firm / Company"
-                                                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                                />
-                                            </div>
-                                            <div className="space-y-1.5">
-                                                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Designation *</label>
-                                                <input
-                                                    type="text" name="designation" required
-                                                    value={form.designation}
-                                                    onChange={handleChange}
-                                                    placeholder="Senior Associate"
-                                                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Country *</label>
-                                            <CountrySelect
-                                                value={form.country}
-                                                onChange={val => setForm(p => ({ ...p, country: val }))}
-                                                id="vip-invite-country" variant="pill"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Anything we should know?</label>
-                                            <textarea
-                                                name="note" rows={3}
-                                                value={form.note}
-                                                onChange={handleChange}
-                                                placeholder="Optional — dietary needs, travel constraints, questions…"
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 outline-none transition-all placeholder:text-slate-300 resize-none"
-                                            />
-                                        </div>
-
-                                        {error && (
-                                            <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
-                                        )}
-
-                                        <button
-                                            type="submit" disabled={loading}
-                                            className="w-full flex items-center justify-center gap-2 py-4 bg-slate-900 hover:bg-amber-500 text-white hover:text-slate-950 font-black text-[11px] uppercase tracking-[0.2em] rounded-2xl transition-all duration-300 disabled:opacity-60 active:scale-[0.98] shadow-lg shadow-slate-900/10"
-                                        >
-                                            {loading
-                                                ? <><Loader2 size={15} className="animate-spin" /> Submitting…</>
-                                                : <>Confirm My Interest <ArrowRight size={14} /></>
-                                            }
-                                        </button>
-
-                                        <p className="text-center text-[11px] text-slate-400 leading-relaxed">
-                                            Your details go straight to our events team — no payment is taken here.
-                                        </p>
-                                    </form>
-                                </div>
-                            )}
+                                <h2 className="text-2xl font-bold text-slate-900 mb-2">This Invitation Has Closed</h2>
+                                <p className="text-slate-500 mb-2 text-sm leading-relaxed max-w-sm mx-auto">
+                                    LexTalk World Dubai 2026 has concluded. Thank you for your interest — we hope to welcome you at a future LexTalk World event.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

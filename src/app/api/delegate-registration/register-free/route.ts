@@ -23,6 +23,15 @@ export async function POST(request: NextRequest) {
             conferenceSlug,
         } = body;
 
+        // Dubai 2026 concluded on Sep 10, 2026 — registration is closed, block server-side
+        // even if a stale client bypasses the disabled UI.
+        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("dubai")) {
+            return NextResponse.json(
+                { error: "Registration for this event is closed." },
+                { status: 403 }
+            );
+        }
+
         // Check for existing registration (idempotency)
         const existing = await prisma.delegateRegistration.findFirst({
             where: {

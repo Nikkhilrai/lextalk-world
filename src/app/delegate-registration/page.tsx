@@ -84,6 +84,7 @@ const EVENTS = [
         duration: "2 Days",
         delegates: "500+",
         href: "/dubai-delegate-registration-2026",
+        completed: true,
         accent: "sky",
         gradient: "from-sky-500 to-sky-600",
         hoverGradient: "from-sky-400 to-sky-500",

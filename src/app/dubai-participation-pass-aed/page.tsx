@@ -325,7 +325,7 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 }
 
 /* ── Pass Card ── */
-function PassCard({ onRegister }: { onRegister: () => void }) {
+function PassCard() {
     return (
         <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent rounded-[2.5rem] blur-3xl pointer-events-none" />
@@ -338,12 +338,9 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
                         <Sparkles size={14} className="text-amber-400" />
                     </div>
                     <p className="text-slate-400 text-[10px] font-semibold tracking-wide">Special Participation Rate</p>
-                    <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-                        <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                        </span>
-                        <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-wider">Open</span>
+                    <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-slate-500/10 border border-slate-500/20 rounded-full">
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-slate-400" />
+                        <span className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">Closed</span>
                     </div>
                 </div>
 
@@ -392,22 +389,15 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
                         </ul>
                     </div>
 
-                    <button onClick={onRegister}
-                        className="group w-full relative flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[12px] uppercase tracking-widest rounded-2xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 active:scale-[0.98] overflow-hidden"
+                    <button disabled
+                        className="w-full flex items-center justify-center gap-2 py-4 bg-slate-800 text-slate-500 font-black text-[12px] uppercase tracking-widest rounded-2xl cursor-not-allowed select-none border border-slate-700/50"
                     >
-                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                        <Sparkles size={14} />
-                        Secure Your Pass
-                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                        Registration Closed
                     </button>
 
                     <div className="flex items-center justify-center gap-4 mt-4">
                         <div className="flex items-center gap-1.5 text-slate-700 text-[10px]">
-                            <ShieldCheck size={10} className="text-slate-600" /> Razorpay Secured
-                        </div>
-                        <div className="w-px h-3 bg-slate-800" />
-                        <div className="flex items-center gap-1.5 text-slate-700 text-[10px]">
-                            <Zap size={10} className="text-slate-600" /> Instant Confirmation
+                            <ShieldCheck size={10} className="text-slate-600" /> Event Concluded
                         </div>
                     </div>
                 </div>
@@ -419,8 +409,6 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 /* ── Main Page ── */
 export default function DubaiParticipationPassAed() {
     const [loaded, setLoaded] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
-
     useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
 
     return (
@@ -528,7 +516,7 @@ export default function DubaiParticipationPassAed() {
                         {/* ── Right: Pass Card ── */}
                         <div className="lg:sticky lg:top-24">
                             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }} transition={{ duration: 0.7, delay: 0.3 }}>
-                                <PassCard onRegister={() => setModalOpen(true)} />
+                                <PassCard />
                             </motion.div>
                         </div>
 
@@ -537,7 +525,6 @@ export default function DubaiParticipationPassAed() {
             </section>
 
             <Footer />
-            <RegistrationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
         </main>
     );
 }

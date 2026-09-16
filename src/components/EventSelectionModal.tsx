@@ -72,8 +72,8 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                                         <span className="text-[9px] font-black uppercase tracking-[0.3em] text-amber-400 px-2.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
                                             Dubai, UAE
                                         </span>
-                                        <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 px-2.5 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
-                                            Open
+                                        <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 px-2.5 py-1 bg-slate-500/10 rounded-full border border-slate-500/20">
+                                            Concluded
                                         </span>
                                     </div>
 
@@ -93,14 +93,9 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                                         </div>
                                     </div>
 
-                                    <Link
-                                        href="/dubai-delegate-registration-2026"
-                                        onClick={onClose}
-                                        className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-[11px] uppercase tracking-widest rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all active:scale-[0.98]"
-                                    >
-                                        Secure Dubai Pass
-                                        <ArrowRight size={14} />
-                                    </Link>
+                                    <div className="w-full flex items-center justify-center gap-2 py-3 bg-slate-800/60 text-slate-500 font-bold text-[11px] uppercase tracking-widest rounded-xl cursor-not-allowed select-none border border-slate-700/40">
+                                        Event Concluded
+                                    </div>
                                 </div>
                             </div>
 
@@ -152,7 +147,7 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                         {/* Footer */}
                         <div className="px-7 pb-6 text-center">
                             <p className="text-xs text-slate-400">
-                                Both events are part of the LexTalk World Global Legal Roadshow 2026. Bangalore 2026 has concluded.
+                                Part of the LexTalk World Global Legal Roadshow 2026. Bangalore 2026 and Dubai 2026 have concluded.
                             </p>
                         </div>
                     </motion.div>

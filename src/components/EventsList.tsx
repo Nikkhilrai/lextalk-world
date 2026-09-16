@@ -11,27 +11,6 @@ export function EventsList() {
 
     const upcomingEvents = [
         {
-            city: "Dubai",
-            month: "SEP",
-            days: "9-10",
-            year: "2026",
-            venue: "UAE",
-            image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
-            status: "Registrations Open",
-            region: "Middle East",
-            description: "Join 500+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
-            highlights: [
-                "500+ Global Legal Professionals",
-                "70+ Renowned Speakers",
-                "100+ Distinguished Legal Honor Global Awardees",
-                "30+ Exhibitors"
-            ],
-            link: "/dubai-2026",
-            agendaLink: "/dubai-2026/agenda",
-            publishedAgenda: true,
-            stats: { delegates: "500+", delegatesLabel: "Global Legal Leaders", type: "Conference", duration: "2 Days" }
-        },
-        {
             city: "Mumbai",
             month: "DEC",
             days: "10-11",

@@ -13,35 +13,6 @@ import { PastConferencesSection } from "@/components/PastConferencesSection";
 
 const upcomingConferences = [
     {
-        id: "dubai-2026",
-        name: "LexTalk World Middle East",
-        city: "Dubai",
-        country: "UAE",
-        region: "Middle East",
-        date: "September 9-10, 2026",
-        venue: "Dubai",
-        duration: "2 Days",
-        image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
-        status: "Open",
-        featured: true,
-        stats: {
-            "Global Legal Leaders": "500+",
-            speakers: "70+",
-            awardees: "100+",
-            exhibitors: "30+",
-        },
-        description: "Join 500+ legal leaders for two days of insights, networking, and innovation at the heart of the UAE.",
-        highlights: [
-            "500+ Global Legal Professionals",
-            "70+ Renowned Speakers",
-            "100+ Distinguished Legal Honor Global Awardees",
-            "30+ Exhibitors",
-        ],
-        link: "/dubai-2026",
-        earlyBird: true,
-        earlyBirdDiscount: "25%",
-    },
-    {
         id: "mumbai-2026",
         name: "LexTalk World APAC",
         city: "Mumbai",
@@ -68,6 +39,7 @@ const upcomingConferences = [
         ],
         link: "/mumbai-2026",
         earlyBird: false,
+        earlyBirdDiscount: "",
     },
     {
         id: "riyadh-2027",
@@ -90,6 +62,7 @@ const upcomingConferences = [
         ],
         link: "/riyadh-2027",
         earlyBird: false,
+        earlyBirdDiscount: "",
     },
     {
         id: "indonesia-2027",
@@ -112,6 +85,7 @@ const upcomingConferences = [
         ],
         link: "/indonesia-2027",
         earlyBird: false,
+        earlyBirdDiscount: "",
     },
     {
         id: "delhi-2027",
@@ -134,6 +108,7 @@ const upcomingConferences = [
         ],
         link: "/delhi-2027",
         earlyBird: false,
+        earlyBirdDiscount: "",
     },
 ];
 
