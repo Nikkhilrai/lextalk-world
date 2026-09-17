@@ -72,7 +72,7 @@ He previously served as Global Generics Business Compliance Lead (India) at Dr. 
     {
         name: "Suchana Mukherjee Gupta",
         title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625152/lextalk/mumbai-speakers/suchana-mukherjee-gupta.jpg",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650326/lextalk/mumbai-speakers/suchana-mukherjee-gupta.png",
         bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
 
 She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
@@ -110,6 +110,51 @@ She began her career as an advocate and solicitor focused on corporate matters a
 His career highlights include spearheading enterprise-wide governance, compliance, and ESG frameworks at NOCIL; transforming litigation and compliance management into data-driven, proactive systems; institutionalising BRSR reporting and integrating ESG principles into board oversight; and leading the digitalisation of legal, secretarial, and compliance processes. He has served as trusted counsel to CEOs and Boards across Procter & Gamble, Mahyco-Monsanto, Greaves Cotton, and Larsen & Toubro, balancing risk, reputation, and growth imperatives throughout his career.
 
 He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, and holds an LLB and a B.Com from Delhi University. His expertise spans corporate governance and regulatory strategy, legal risk management and compliance leadership, ESG and sustainability integration, litigation, M&A and corporate advisory, and stakeholder engagement and ethical leadership.`,
+    },
+    {
+        name: "Mriganka Shekhar Dutta",
+        title: "Senior Counsel, NTT DATA, Inc.",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650241/lextalk/mumbai-speakers/mriganka-shekhar-dutta.png",
+    },
+    {
+        name: "Sanjukta Venkatesh",
+        title: "Head Legal, Nayara Energy",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650246/lextalk/mumbai-speakers/sanjukta-venkatesh.png",
+    },
+    {
+        name: "Renuka L. Chaudhari",
+        title: "Senior Director, Legal/Commercial Contracts, Automation Anywhere",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650259/lextalk/mumbai-speakers/renuka-l-chaudhari.png",
+    },
+    {
+        name: "Vishal Lohire",
+        title: "Vice President & Head – Legal, Risks & Contracts, Bajel Projects Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650265/lextalk/mumbai-speakers/vishal-lohire.png",
+    },
+    {
+        name: "Abhishek Kumar (Gupta)",
+        title: "Head of Legal & Regulatory (New Energy – Bio Energy Business), Reliance Industries Limited",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650272/lextalk/mumbai-speakers/abhishek-kumar-gupta.png",
+    },
+    {
+        name: "Bireshwar Chatterjee",
+        title: "Chief Compliance Officer, Shriram Life Insurance",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650280/lextalk/mumbai-speakers/bireshwar-chatterjee.png",
+    },
+    {
+        name: "Dr. Richa Pathak",
+        title: "Senior Advisor, Government of India",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650291/lextalk/mumbai-speakers/dr-richa-pathak.png",
+    },
+    {
+        name: "Dishita Sharma",
+        title: "General Counsel, Worley India",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650321/lextalk/mumbai-speakers/dishita-sharma.png",
+    },
+    {
+        name: "Rajiv Mohapatra",
+        title: "Vice President, Global Legal Compliance, Mastercard",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650324/lextalk/mumbai-speakers/rajiv-mohapatra.png",
     },
 ];
 
