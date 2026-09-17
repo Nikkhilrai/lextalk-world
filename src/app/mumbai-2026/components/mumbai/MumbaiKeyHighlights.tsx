@@ -5,8 +5,8 @@ import { Users, Mic, Award, Building } from "lucide-react";
 import { motion } from "framer-motion";
 
 const highlights = [
-    { icon: Users, number: "500+", label: "Legal Professionals" },
-    { icon: Mic, number: "50+", label: "Renowned Speakers" },
+    { icon: Users, number: "400+", label: "Legal Professionals" },
+    { icon: Mic, number: "60+", label: "Renowned Speakers" },
     { icon: Award, number: "50+", label: "Awardees" },
     { icon: Building, number: "25+", label: "Exhibitors" },
 ];

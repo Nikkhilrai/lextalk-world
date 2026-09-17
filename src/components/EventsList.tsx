@@ -22,12 +22,12 @@ export function EventsList() {
             description: "Experience the convergence of law and technology in India's financial capital. Pre-register your interest today.",
             link: "/mumbai-2026",
             agendaLink: "#",
-            stats: { delegates: "500+", delegatesLabel: "Global Legal Professionals", type: "Conference", duration: "2 Days" },
+            stats: { delegates: "400+", delegatesLabel: "Legal Professionals", type: "Conference", duration: "2 Days" },
             highlights: [
-                "500+ Global Legal Professionals",
-                "70+ Renowned Speakers",
-                "100+ Distinguished Legal Honor Global Awardees",
-                "30+ Exhibitors"
+                "400+ Legal Professionals",
+                "60+ Renowned Speakers",
+                "50+ Awardees",
+                "25+ Exhibitors"
             ]
         },
         {
