@@ -6,6 +6,7 @@ import { OrganizationJsonLd } from "@/components/JsonLd";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { BackToTopButton } from "@/components/BackToTopButton";
+import { AutoRegisterPrompt } from "@/components/AutoRegisterPrompt";
 import { SupportChatWidget } from "@/components/SupportChatWidget";
 import { Toaster } from "react-hot-toast";
 
@@ -131,6 +132,10 @@ export default function RootLayout({
                 and a chat bubble that errors on every message is worse than no bubble.
                 Set NEXT_PUBLIC_SUPPORT_AGENT_ENABLED=true once the agent is deployed. */}
             {process.env.NEXT_PUBLIC_SUPPORT_AGENT_ENABLED === "true" && <SupportChatWidget />}
+            {/* The homepage's lead-gen auto-popup — FloatingActions carried this too,
+                and it was lost when that file was deleted above. Restored on its own
+                so it survives independently of whatever the floating launcher is. */}
+            <AutoRegisterPrompt />
             <Toaster position="bottom-right" />
           </CartProvider>
         </ToastProvider>

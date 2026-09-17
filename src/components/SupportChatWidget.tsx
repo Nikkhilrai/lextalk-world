@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
+import { setChatOpen } from "@/lib/chat-widget-state";
 
 /**
  * Floating chat widget for "Lex", the LexTalk World support agent.
@@ -354,7 +355,13 @@ export function SupportChatWidget() {
 
     useEffect(() => {
         if (open) setTimeout(() => inputRef.current?.focus(), 250);
+        // Publish open state so the homepage's auto-opening "Register Your Interest"
+        // modal doesn't land on top of an active conversation.
+        setChatOpen(open);
     }, [open]);
+
+    // Belt and braces: if this unmounts while open, the flag must not stay stuck on.
+    useEffect(() => () => setChatOpen(false), []);
 
     // A recurring nudge toward the launcher — the same job Lexi's own teaser bubble
     // does on lextalk.world. Stops for good the moment there's any real engagement
