@@ -163,7 +163,7 @@ export default function Hero() {
 
                     {/* Meta Stats Row - Tighter */}
                     <div className="flex flex-wrap justify-center gap-4 md:gap-8 pt-10 mt-10 border-t border-white/5">
-                        <MetaItem icon={Users} label="500+ Delegates" />
+                        <MetaItem icon={Users} label="400+ Delegates" />
                         <MetaItem icon={Mic2} label="100+ Speakers" />
                         <MetaItem icon={LayoutGrid} label="20+ Sessions" />
                         <MetaItem icon={Calendar} label="2 Days" />

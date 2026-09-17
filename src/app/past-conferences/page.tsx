@@ -15,7 +15,7 @@ const pastConferences = [
         date: "September 9-10, 2026",
         venue: "Crowne Plaza, Dubai, UAE",
         image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
-        stats: { people: "500+", speakers: "70+", awardees: "100+", countries: "20+" },
+        stats: { people: "400+", speakers: "70+", awardees: "100+", countries: "20+" },
         link: "/dubai-2026",
     },
     {

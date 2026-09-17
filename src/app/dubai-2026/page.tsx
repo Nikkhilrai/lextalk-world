@@ -18,7 +18,7 @@ import {
 
 // Key Highlights Data
 const highlights = [
-    { icon: Users, number: "500+", label: "Global Legal Leaders" },
+    { icon: Users, number: "400+", label: "Global Legal Leaders" },
     { icon: Mic, number: "70+", label: "Renowned Speakers" },
     { icon: Award, number: "100+", label: "Distinguished Legal Honor Global Awardees" },
     { icon: Building, number: "30+", label: "Exhibitors" },
@@ -72,7 +72,7 @@ const featuredLogos = [
 
 // Why Attend — one line per benefit
 const whyAttendFeatures = [
-    { icon: Handshake, title: "Networking", text: "Connect with 500+ legal leaders from across the globe." },
+    { icon: Handshake, title: "Networking", text: "Connect with 400+ legal leaders from across the globe." },
     { icon: GraduationCap, title: "Learning", text: "Keynotes, panels and workshops led by industry experts." },
     { icon: Trophy, title: "Recognition", text: "The Global Legal Honors Awards celebrate excellence in law." },
     { icon: Monitor, title: "Exhibition & Tech Demo", text: "Hands-on demos of the latest legal technology." },
@@ -466,7 +466,7 @@ export default function DubaiEventPage() {
 
                     {/* One-line description */}
                     <p className={`text-slate-300 text-sm md:text-lg font-light max-w-xl mx-auto mb-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-                        Two days of networking, insight, and recognition with 500+ legal leaders from around the world.
+                        Two days of networking, insight, and recognition with 400+ legal leaders from around the world.
                     </p>
 
                     {/* Date & Venue info strip */}
@@ -1101,7 +1101,7 @@ export default function DubaiEventPage() {
                                 <Users className="w-4 h-4 text-amber-400" strokeWidth={1.75} />
                             </span>
                             <span>
-                                <span className="block text-white font-serif font-bold text-lg leading-none">500+</span>
+                                <span className="block text-white font-serif font-bold text-lg leading-none">400+</span>
                                 <span className="block text-slate-400 text-[10px] font-semibold uppercase tracking-[0.15em] mt-1">Delegates</span>
                             </span>
                         </motion.div>
@@ -1275,7 +1275,7 @@ export default function DubaiEventPage() {
                         className="mt-20 rounded-2xl border border-dashed border-amber-300/70 bg-amber-50/40 px-8 py-9 text-center"
                     >
                         <h3 className="text-slate-900 font-serif font-bold text-xl md:text-2xl mb-2">
-                            Put your brand in front of 500+ legal leaders
+                            Put your brand in front of 400+ legal leaders
                         </h3>
                         <p className="text-slate-500 text-sm mb-6 max-w-md mx-auto">
                             Sponsorship, exhibition, and speaking packages for Dubai 2026.

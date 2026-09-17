@@ -96,12 +96,6 @@ export const AGENDA: AgendaDay[] = [
                 type: "keynote",
                 title: "Opening Keynote",
                 description: "Keynote address by the industry leader.",
-                speakers: [
-                    {
-                        name: "Dr. Lalit Bhasin",
-                        role: "President, Society of Indian Law Firms (SILF)",
-                    },
-                ],
             },
             {
                 time: "9:30 AM – 9:45 AM",
