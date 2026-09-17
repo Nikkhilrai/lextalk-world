@@ -44,12 +44,6 @@ His core expertise spans corporate and commercial law, complex corporate restruc
 In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
     },
     {
-        name: "Sanjay Jain",
-        title: "Founder & Managing Partner, Lex Corp",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625133/lextalk/dubai-speakers/sanjay-jain.jpg",
-        bio: `Sanjay Jain is a seasoned legal strategist and the Founder and Managing Partner of Lex Corp, a premier full-service law firm based in New Delhi. With over 14 years of extensive experience, he specialises in commercial litigation, domestic and international arbitration, insolvency, and corporate advisory. Known for combining rigorous legal excellence with deep commercial awareness, he acts as a trusted advisor delivering practical, solution-oriented counsel aligned with his clients' long-term business objectives.`,
-    },
-    {
         name: "Kapil Singhal",
         title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625124/lextalk/dubai-speakers/kapil-singhal.jpg",
