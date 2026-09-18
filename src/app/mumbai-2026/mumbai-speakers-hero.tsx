@@ -155,7 +155,7 @@ export default function MumbaiSpeakersHero() {
                 >
                     <MapPin className="w-3.5 h-3.5 text-amber-600" />
                     <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: `${MAROON_DARK}99` }}>
-                        Mumbai, India · Venue to be announced
+                        Radisson Blu, Mumbai
                     </span>
                 </motion.div>
 

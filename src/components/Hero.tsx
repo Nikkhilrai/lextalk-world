@@ -227,7 +227,7 @@ export function Hero() {
                                     <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
                                     <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
                                         <MapPin className="w-3 h-3" />
-                                        <span>Mumbai, India</span>
+                                        <span>Radisson Blu, Mumbai</span>
                                     </div>
                                 </div>
                             </Link>

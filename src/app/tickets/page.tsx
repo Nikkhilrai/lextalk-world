@@ -28,7 +28,7 @@ const availableEvents = [
         name: "LexTalk World Summit Mumbai 2026",
         shortName: "Mumbai 2026",
         date: "December 7-8, 2026",
-        location: "Mumbai, India",
+        location: "Radisson Blu, Mumbai",
         venue: "Mumbai",
         image: "/dubai-event/event-bg.avif",
         status: "Open",

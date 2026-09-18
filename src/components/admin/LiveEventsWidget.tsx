@@ -89,7 +89,7 @@ const LEGAL_EVENTS: LegalEvent[] = [
     {
         id: "8",
         name: "India Legal Tech Summit",
-        location: "Mumbai, India",
+        location: "Radisson Blu, Mumbai",
         region: "India",
         date: "Sep 2025",
         status: "upcoming",

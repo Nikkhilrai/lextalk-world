@@ -19,7 +19,7 @@ const upcomingConferences = [
         country: "India",
         region: "South Asia",
         date: "December 7-8, 2026",
-        venue: "Mumbai",
+        venue: "Radisson Blu, Mumbai",
         duration: "2 Days",
         image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop",
         status: "Open",

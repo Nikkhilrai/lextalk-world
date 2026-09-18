@@ -116,7 +116,7 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
 
                         <div className="flex items-center gap-2 text-slate-300">
                             <MapPin className="w-4 h-4 text-amber-500" />
-                            <span className="text-sm md:text-base tracking-widest uppercase opacity-80">Mumbai, India</span>
+                            <span className="text-sm md:text-base tracking-widest uppercase opacity-80">Radisson Blu, Mumbai</span>
                         </div>
                     </div>
                 </div>

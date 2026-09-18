@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
                 // Generate PDF ticket only for non-Bangalore orders
                 if (!isBangalore) {
                     const conferenceDetails = isMumbai
-                        ? { name: "Mumbai 2026", location: "Mumbai, India", year: 2026 }
+                        ? { name: "Mumbai 2026", location: "Radisson Blu, Mumbai", year: 2026 }
                         : { name: "Dubai 2026", location: "Dubai, UAE", year: 2026 };
 
                     const ticketRes = await fetch(
