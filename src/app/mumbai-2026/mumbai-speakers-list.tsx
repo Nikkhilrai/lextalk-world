@@ -117,11 +117,6 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650241/lextalk/mumbai-speakers/mriganka-shekhar-dutta.png",
     },
     {
-        name: "Sanjukta Venkatesh",
-        title: "Head Legal, Nayara Energy",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650246/lextalk/mumbai-speakers/sanjukta-venkatesh.png",
-    },
-    {
         name: "Renuka L. Chaudhari",
         title: "Senior Director, Legal/Commercial Contracts, Automation Anywhere",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650259/lextalk/mumbai-speakers/renuka-l-chaudhari.png",
@@ -145,11 +140,6 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         name: "Dr. Richa Pathak",
         title: "Senior Advisor, Government of India",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650291/lextalk/mumbai-speakers/dr-richa-pathak.png",
-    },
-    {
-        name: "Dishita Sharma",
-        title: "General Counsel, Worley India",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650321/lextalk/mumbai-speakers/dishita-sharma.png",
     },
     {
         name: "Rajiv Mohapatra",
