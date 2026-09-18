@@ -6,7 +6,7 @@ import MumbaiDelegatePricing from "./components/Pricing";
 
 export const metadata = {
     title: "Mumbai Delegate Registration 2026 | LexTalk World",
-    description: "Secure your delegate pass for LexTalk World Mumbai 2026 — December 10–11. The premier global platform for legal professionals.",
+    description: "Secure your delegate pass for LexTalk World Mumbai 2026 — December 7–8. The premier global platform for legal professionals.",
 };
 
 export default function MumbaiDelegateRegistration2026() {

@@ -319,7 +319,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, applie
                                                 {[
                                                     { label: "Pass", value: "Corporate Counsel Exclusive" },
                                                     { label: "Event", value: "LexTalk World Mumbai 2026" },
-                                                    { label: "Date", value: "Dec 10–11, Thursday & Friday, 2026" },
+                                                    { label: "Date", value: "Dec 7–8, Monday & Tuesday, 2026" },
                                                     { label: "Attendee", value: `${formData.firstName} ${formData.lastName}` },
                                                 ].map(r => (
                                                     <div key={r.label} className="flex justify-between">
@@ -449,7 +449,7 @@ function PassCard({ couponApplied, discountPct, appliedCode, couponInput, setCou
 
                     <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">Exclusive Pass</h2>
                     <div className="flex gap-3 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> Dec 10–11, 2026</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> Dec 7–8, 2026</span>
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Mumbai, India</span>
                     </div>
 
@@ -656,7 +656,7 @@ export default function MumbaiCorporateCounselPass() {
                                 className="flex flex-wrap gap-4"
                             >
                                 {[
-                                    { icon: Calendar, text: "Dec 10–11, Thursday & Friday, 2026" },
+                                    { icon: Calendar, text: "Dec 7–8, Monday & Tuesday, 2026" },
                                     { icon: MapPin,   text: "Mumbai, India" },
                                     { icon: Users,    text: "300+ Senior Legal Leaders" },
                                 ].map(({ icon: Icon, text }) => (

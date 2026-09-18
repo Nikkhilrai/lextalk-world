@@ -222,7 +222,7 @@ export function Hero() {
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Dec 10-11, 2026</span>
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Dec 7-8, 2026</span>
                                     </div>
                                     <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Mumbai</h3>
                                     <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">

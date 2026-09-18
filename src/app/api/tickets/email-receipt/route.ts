@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
             : isMumbai
                 ? "Mumbai 2026 Legal Conference"
                 : "Dubai 2026 Legal Conference";
-        const eventDate = isBangalore ? "June 11, 2026" : isMumbai ? "December 10-11, 2026" : "September 9-10, 2026";
+        const eventDate = isBangalore ? "June 11, 2026" : isMumbai ? "December 7-8, 2026" : "September 9-10, 2026";
         const eventVenue = isBangalore
             ? "Radisson Blu Atria Bangalore, 1, Palace Rd, Bengaluru, Karnataka 560001"
             : isMumbai

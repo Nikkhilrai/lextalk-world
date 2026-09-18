@@ -108,7 +108,7 @@ const EVENTS = [
         city: "Mumbai",
         country: "India",
         tagline: "India\u2019s Commercial Capital Legal Summit",
-        date: "December 10-11, 2026",
+        date: "December 7-8, 2026",
         day: "2 Days",
         duration: "2 Days",
         delegates: "400+",

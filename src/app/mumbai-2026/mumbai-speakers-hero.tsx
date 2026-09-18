@@ -116,7 +116,7 @@ export default function MumbaiSpeakersHero() {
                     <div className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full border bg-white/70 backdrop-blur-sm" style={{ borderColor: "#D97706" + "40" }}>
                         <Calendar className="w-3.5 h-3.5 text-amber-600" />
                         <span className="text-amber-700 font-serif text-xs md:text-sm font-semibold tracking-[0.2em]">
-                            10th - 11th Dec 2026
+                            7th - 8th Dec 2026
                         </span>
                     </div>
                 </motion.div>

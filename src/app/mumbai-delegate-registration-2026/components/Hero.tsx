@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const TARGET_DATE = new Date("2026-12-10T09:00:00+05:30");
+const TARGET_DATE = new Date("2026-12-07T09:00:00+05:30");
 
 function AmbientParticles() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -119,7 +119,7 @@ export default function MumbaiDelegateHero() {
                 {/* Info pills */}
                 <div className="flex flex-wrap justify-center gap-3 mb-10">
                     {[
-                        "Dec 10–11, 2026 · Thursday & Friday",
+                        "Dec 7–8, 2026 · Monday & Tuesday",
                         "Mumbai, India",
                         "Limited Seats",
                     ].map((info) => (

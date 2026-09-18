@@ -123,7 +123,7 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                                     <div className="space-y-2 mb-6">
                                         <div className="flex items-center gap-2 text-slate-400">
                                             <Calendar size={12} className="text-emerald-400 flex-shrink-0" />
-                                            <span className="text-xs">December 10-11, 2026</span>
+                                            <span className="text-xs">December 7-8, 2026</span>
                                         </div>
                                         <div className="flex items-center gap-2 text-slate-400">
                                             <MapPin size={12} className="text-emerald-400 flex-shrink-0" />

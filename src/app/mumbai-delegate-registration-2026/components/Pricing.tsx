@@ -468,7 +468,7 @@ function RegistrationModal({ isOpen, onClose, pass, currency }: {
                                                 {[
                                                     { label: "Pass", value: pass.name },
                                                     { label: "Event", value: "LexTalk World Mumbai 2026" },
-                                                    { label: "Date", value: "Dec 10–11, Thursday & Friday, 2026" },
+                                                    { label: "Date", value: "Dec 7–8, Monday & Tuesday, 2026" },
                                                     { label: "Attendee", value: `${formData.firstName} ${formData.lastName}` },
                                                 ].map(r => (
                                                     <div key={r.label} className="flex justify-between">
@@ -635,7 +635,7 @@ export default function MumbaiDelegatePricing() {
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100/60 border border-amber-200/60 rounded-full mb-5">
                             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
                             <span className="text-amber-700 text-[10px] font-bold uppercase tracking-[0.2em]">
-                                Mumbai 2026 · Dec 10–11
+                                Mumbai 2026 · Dec 7–8
                             </span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4">

@@ -18,7 +18,7 @@ const upcomingConferences = [
         city: "Mumbai",
         country: "India",
         region: "South Asia",
-        date: "December 10-11, 2026",
+        date: "December 7-8, 2026",
         venue: "Mumbai",
         duration: "2 Days",
         image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop",
