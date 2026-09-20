@@ -31,35 +31,6 @@ export function EventsList() {
             ]
         },
         {
-            city: "Riyadh",
-            month: "JAN",
-            days: "26",
-            year: "2027",
-            venue: "Saudi Arabia",
-            image: "/riyadh-2027/images/riyadh-skyline.png",
-            status: "Coming Soon",
-            region: "Middle East",
-            description: "LexTalk World arrives in Riyadh with a one-day executive summit on AI, cyber resilience and data privacy. Venue and full details to be announced.",
-            link: "/riyadh-2027",
-            agendaLink: "#",
-            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "1 Day" }
-        },
-        {
-            city: "Jakarta",
-            month: "MAR",
-            days: "05",
-            year: "2027",
-            venue: "Indonesia",
-            image: "/indonesia-2027/images/jakarta-day.png",
-            status: "Details Live",
-            region: "Southeast Asia",
-            description: "LexTalk World's first Southeast Asia edition arrives in Jakarta. Explore the conference focus areas and register your interest today.",
-            link: "/indonesia-2027",
-            agendaLink: "#",
-            agendaReady: false,
-            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "TBA" }
-        },
-        {
             city: "Delhi",
             month: "JUL",
             days: "TBA",

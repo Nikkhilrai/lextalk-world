@@ -336,7 +336,7 @@ export function RegisterModal({ isOpen, onClose, defaultConference }: RegisterMo
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-serif text-slate-900 font-bold border-l-4 border-amber-500 pl-3">Conferences</h3>
                                                 <div className="space-y-3 pl-4">
-                                                    {['Mumbai India, Dec 7-8 2026', 'Riyadh KSA, Jan 26 2027', 'Indonesia, March 5 2027', 'Delhi India, July 2027'].map((option) => (
+                                                    {['Mumbai India, Dec 7-8 2026', 'Delhi India, July 2027'].map((option) => (
                                                         <label key={option} className="flex items-center gap-3 cursor-pointer group">
                                                             <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
                                                                 <input

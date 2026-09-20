@@ -68,9 +68,7 @@ const LINK_LABELS: [string, string][] = [
     ["/contact", "Contact the team"],
     ["/dubai-2026", "Dubai 2026 event page"],
     ["/mumbai-2026", "Mumbai 2026 event page"],
-    ["/indonesia-2027", "Jakarta 2027 event page"],
     ["/delhi-2027", "Delhi 2027 event page"],
-    ["/riyadh-2027", "Riyadh 2027 event page"],
 ];
 
 interface ReplyLink {
@@ -649,7 +647,7 @@ export function SupportChatWidget() {
                                     <p className="text-[13px] font-bold text-slate-900">Hi, I&apos;m Lex</p>
                                     <p className="mt-1 text-[12px] leading-relaxed text-slate-500">
                                         Ask me about any LexTalk edition — dates, venues, passes and pricing for
-                                        Dubai, Bangalore, Mumbai, Indonesia or Delhi.
+                                        Dubai, Bangalore, Mumbai or Delhi.
                                     </p>
                                 </div>
                             )}

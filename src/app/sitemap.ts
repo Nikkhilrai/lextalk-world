@@ -23,12 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/riyadh-2027`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.6,
-        },
-        {
             url: `${baseUrl}/awardees`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
