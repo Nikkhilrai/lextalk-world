@@ -16,8 +16,11 @@ export interface Awardee {
     logo?: boolean;
     // Official award category, transcribed from the award-plaque centrepiece PDF
     // (the authoritative source — not inferred from the bio). Drives the
-    // category-sectioned layout in page.tsx.
-    category: string;
+    // tier-sectioned layout in page.tsx. Optional: leave unset rather than guess
+    // when the category hasn't been confirmed yet (e.g. DiliTrust, pending) — an
+    // unset category shows in its own "Pending Category" section instead of a
+    // fabricated tier.
+    category?: string;
 }
 
 // Category display order — first-appearance order in the source PDF, so the
@@ -377,5 +380,12 @@ With a strong understanding of dispute resolution, property-related matters, and
         bio: `Jason Chong Wai Zhe is the Principal of Zhe Chambers and an Advocate & Solicitor of the High Court of Malaya. He specialises in complex construction litigation, domestic and international arbitration, and CIPAA adjudication, representing local and international clients across the engineering, oil and gas, construction, and commercial sectors in high-stakes, multi-million disputes.
 
 Jason has acted and assisted in both domestic and international arbitration proceedings under leading institutional rules, including SIAC, AIAC, HKIAC, AAA, and LCIA. His practice focuses on strategic dispute resolution, navigating technically complex claims and delivering commercially effective representation for clients involved in significant construction and commercial disputes across multiple jurisdictions.`,
+    },
+    {
+        name: "DiliTrust",
+        title: "AI In Corporate Governance Platform",
+        image: "/dubai-event/sponsors/DiliTrust.svg",
+        logo: true,
+        // Category not yet confirmed — see the `category` field comment above.
     },
 ];

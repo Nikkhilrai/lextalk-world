@@ -14,12 +14,14 @@ import { awardees, type Awardee } from "./awardees-data";
 // Year") — grouping by tier gives 4 sections instead of 26 near-empty ones,
 // while the specific award each person actually won still shows on their card.
 const TIER_ORDER = ["Leading", "Inspiring", "Emerging", "Rising"] as const;
+const PENDING_TIER = "Pending Category";
 
-function tierOf(category: string): string {
-    return TIER_ORDER.find((t) => category.startsWith(t)) ?? "Other";
+function tierOf(category: string | undefined): string {
+    if (!category) return PENDING_TIER;
+    return TIER_ORDER.find((t) => category.startsWith(t)) ?? PENDING_TIER;
 }
 
-const groupedAwardees: { tier: string; entries: Awardee[] }[] = TIER_ORDER
+const groupedAwardees: { tier: string; entries: Awardee[] }[] = [...TIER_ORDER, PENDING_TIER]
     .map((tier) => ({ tier, entries: awardees.filter((a) => tierOf(a.category) === tier) }))
     .filter((group) => group.entries.length > 0);
 
@@ -79,9 +81,11 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: n
                     <p className="text-amber-400/80 text-[10.5px] font-semibold uppercase tracking-[0.08em] leading-relaxed line-clamp-3">
                         {awardee.title}
                     </p>
-                    <p className="mt-2 text-white/35 text-[9.5px] uppercase tracking-wider leading-snug line-clamp-2">
-                        {awardee.category}
-                    </p>
+                    {awardee.category && (
+                        <p className="mt-2 text-white/35 text-[9.5px] uppercase tracking-wider leading-snug line-clamp-2">
+                            {awardee.category}
+                        </p>
+                    )}
                     {awardee.bio && (
                         <p className="mt-auto pt-3 text-white/30 text-[10px] uppercase tracking-widest font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             Read bio &rarr;
@@ -259,7 +263,9 @@ export default function AwardeesDubai2026Page() {
                                     <div className="pt-1">
                                         <h3 className="text-xl md:text-2xl font-serif font-bold text-white leading-tight">{selected.name}</h3>
                                         <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider mt-1.5">{selected.title}</p>
-                                        <p className="text-white/40 text-[11px] uppercase tracking-wider mt-1">{selected.category}</p>
+                                        {selected.category && (
+                                            <p className="text-white/40 text-[11px] uppercase tracking-wider mt-1">{selected.category}</p>
+                                        )}
                                     </div>
                                 </div>
 
