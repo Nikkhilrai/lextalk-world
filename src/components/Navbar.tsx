@@ -43,7 +43,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                 { name: "Past Conferences", href: "/past-conferences" },
             ]
         },
-        { name: "Awardees", href: "/awardees" },
+        { name: "Legal Honor", href: "/awardees" },
         { name: "Sponsor", href: "/sponsor" },
         {
             name: "More",
