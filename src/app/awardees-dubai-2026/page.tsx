@@ -190,15 +190,17 @@ export default function AwardeesDubai2026Page() {
                         <div className="space-y-20 md:space-y-28">
                             {groupedAwardees.map((group) => (
                                 <div key={group.tier}>
-                                    <div className="text-center mb-10 md:mb-12">
-                                        <h2 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 bg-clip-text text-transparent">
-                                            {group.tier}
-                                        </h2>
-                                        <p className="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">
-                                            {group.entries.length} Awardee{group.entries.length !== 1 ? "s" : ""}
-                                        </p>
-                                        <div className="mx-auto mt-4 w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
-                                    </div>
+                                    {group.tier !== PENDING_TIER && (
+                                        <div className="text-center mb-10 md:mb-12">
+                                            <h2 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 bg-clip-text text-transparent">
+                                                {group.tier}
+                                            </h2>
+                                            <p className="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">
+                                                {group.entries.length} Awardee{group.entries.length !== 1 ? "s" : ""}
+                                            </p>
+                                            <div className="mx-auto mt-4 w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+                                        </div>
+                                    )}
                                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
                                         {group.entries.map((awardee, idx) => (
                                             <AnimatedCard key={awardee.name} awardee={awardee} index={idx} onSelect={handleSelect} />
