@@ -161,7 +161,7 @@ export default function MumbaiSpeakersIntro() {
                                     <div className="flex items-center gap-2">
                                         <div className="w-5 h-[2px] bg-amber-400" />
                                         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/90 drop-shadow-sm">
-                                            Radisson Blu, Mumbai
+                                            Radisson Blu Mumbai International Airport
                                         </span>
                                     </div>
                                 </div>

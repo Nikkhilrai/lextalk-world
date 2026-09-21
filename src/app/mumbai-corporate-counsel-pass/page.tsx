@@ -450,7 +450,7 @@ function PassCard({ couponApplied, discountPct, appliedCode, couponInput, setCou
                     <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">Exclusive Pass</h2>
                     <div className="flex gap-3 mb-5">
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> Dec 7–8, 2026</span>
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Radisson Blu, Mumbai</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Radisson Blu Mumbai International Airport</span>
                     </div>
 
                     <div className="h-px bg-white/6 mb-5" />
@@ -657,7 +657,7 @@ export default function MumbaiCorporateCounselPass() {
                             >
                                 {[
                                     { icon: Calendar, text: "Dec 7–8, Monday & Tuesday, 2026" },
-                                    { icon: MapPin,   text: "Radisson Blu, Mumbai" },
+                                    { icon: MapPin,   text: "Radisson Blu Mumbai International Airport" },
                                     { icon: Users,    text: "300+ Senior Legal Leaders" },
                                 ].map(({ icon: Icon, text }) => (
                                     <div key={text} className="flex items-center gap-2">

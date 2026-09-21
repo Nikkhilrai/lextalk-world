@@ -130,7 +130,7 @@ export default function UpcomingEventsSection() {
                         city="MUMBAI"
                         title="LexTalk World APAC (South Asia)"
                         date="December 2026 (TBA)"
-                        venue="Radisson Blu, Mumbai"
+                        venue="Radisson Blu Mumbai International Airport"
                         attendance="1000+ Attendees"
                         image="https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop"
                         ctaText="Secure Spot"

@@ -127,7 +127,7 @@ export function EventSelectionModal({ isOpen, onClose }: EventSelectionModalProp
                                         </div>
                                         <div className="flex items-center gap-2 text-slate-400">
                                             <MapPin size={12} className="text-emerald-400 flex-shrink-0" />
-                                            <span className="text-xs">Radisson Blu, Mumbai</span>
+                                            <span className="text-xs">Radisson Blu Mumbai International Airport</span>
                                         </div>
                                     </div>
 

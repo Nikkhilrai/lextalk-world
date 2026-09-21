@@ -15,7 +15,7 @@ export function EventsList() {
             month: "DEC",
             days: "7-8",
             year: "2026",
-            venue: "Radisson Blu, Mumbai",
+            venue: "Radisson Blu Mumbai International Airport",
             image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1200&auto=format&fit=crop",
             status: "Registrations Open",
             region: "South Asia",

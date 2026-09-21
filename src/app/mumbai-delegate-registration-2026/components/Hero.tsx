@@ -120,7 +120,7 @@ export default function MumbaiDelegateHero() {
                 <div className="flex flex-wrap justify-center gap-3 mb-10">
                     {[
                         "Dec 7–8, 2026 · Monday & Tuesday",
-                        "Radisson Blu, Mumbai",
+                        "Radisson Blu Mumbai International Airport",
                         "Limited Seats",
                     ].map((info) => (
                         <div
