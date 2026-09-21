@@ -96,7 +96,7 @@ As Executive Legal Advisor to the President of the Royal Commission for Riyadh C
     {
         name: "Bharath Kumar Daraboina",
         title: "Associate Partner & Advocate, Prism Legal Associates",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973043/lextalk/dubai-awardees-2026/bharath-kumar-daraboina.png`,
         bio: `Bharath Kumar Daraboina is an Associate Partner & Advocate at Prism Legal Associates. He earned his B.Tech in Electronics and Communication Engineering in 2005 and an M.S. in Computer Science in 2008, building a strong foundation in complex technical systems. He later completed his LL.B. in 2023 and was registered with the Bar in 2024.
 
 Combining technical expertise with legal knowledge, he operates at the intersection of technology and legal strategy, with a focus on technology law, intellectual property, emerging digital challenges, and corporate governance. As a registered advocate, he actively contributes to legal discourse and addresses contemporary legal issues arising from technological innovation.`,
@@ -104,7 +104,7 @@ Combining technical expertise with legal knowledge, he operates at the intersect
     {
         name: "Blaine Deolindo",
         title: "Head of Legal — Fintech & Digital Asset Regulation",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973047/lextalk/dubai-awardees-2026/blaine-deolindo.jpg`,
         bio: `Blaine Deolindo is a Head of Legal with over 15 years of experience advising fintech, digital asset, and regulated financial services businesses across the UAE, Saudi Arabia, Europe, and offshore jurisdictions. Based in the UAE, she has led the establishment and regulatory licensing of DFSA-regulated entities in DIFC, ADGM holding structures, and supported licensing strategies under Saudi frameworks, including CMA requirements.
 
 Her expertise spans fintech regulation, blockchain and digital assets, Islamic finance, data protection, and complex cross-border contracts. Blaine is recognised for building legal departments, implementing strong governance and compliance frameworks, and translating evolving regulations into practical business solutions. She also mentors emerging legal talent and contributes to global fintech regulatory best practices.`,
@@ -120,7 +120,7 @@ A University of Pretoria LLB graduate and distinction-holder in European Union L
     {
         name: "Daraboina Subramaniam Yadav",
         title: "Advocate, Supreme Court of India & High Court of Telangana",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973057/lextalk/dubai-awardees-2026/daraboina-subramaniam-yadav.png`,
         bio: `With over 26 years of legal experience, Subramanyam Daraboina is a seasoned Advocate practising before the Supreme Court of India, the High Court of Telangana, and various subordinate courts across Hyderabad and Secunderabad. His extensive legal practice covers constitutional law, corporate law, service and administrative law, insurance, revenue matters, civil disputes, and criminal law.
 
 Over the course of his distinguished career, he has developed broad expertise across diverse areas of law, handling complex legal matters and representing clients before multiple judicial forums. His multifaceted practice reflects a strong understanding of both civil and criminal law, supported by decades of courtroom experience and professional legal practice.`,
@@ -128,7 +128,7 @@ Over the course of his distinguished career, he has developed broad expertise ac
     {
         name: "Fairaigle Legal & Consultancy LLP",
         title: "Legal & Consultancy Firm",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973062/lextalk/dubai-awardees-2026/fairaigle-legal.jpg`,
         bio: `Fairaigle Legal & Consultancy LLP is a professional legal and consultancy firm committed to delivering reliable, practical, and client-focused solutions to individuals, businesses, startups, and corporate organizations. Its experienced legal team provides services across corporate and property law, family law, litigation, contract drafting, dispute resolution, forensic and advisory services, consumer protection, and regulatory compliance.
 
 Fairaigle upholds integrity, professionalism, and excellence while helping clients navigate complex legal challenges with confidence. Combining legal expertise with strategic insight, the firm delivers timely, transparent, and result-oriented solutions tailored to clients' unique needs, positioning Fairaigle as a trusted partner for comprehensive legal and advisory services.`,
@@ -136,7 +136,7 @@ Fairaigle upholds integrity, professionalism, and excellence while helping clien
     {
         name: "Irem Altundag",
         title: "Solicitor, Criminal & Family Law (Australia)",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973065/lextalk/dubai-awardees-2026/irem-altundag.jpg`,
         bio: `Irem Altundag is an Australian solicitor specialising in criminal and family law. She regularly appears before the Local Court and the Federal Circuit and Family Court of Australia, managing a diverse litigation practice that encompasses advocacy, complex legal drafting, and client advisory.
 
 Her professional interests extend to legal research, particularly at the intersection of criminal and family law, where she seeks to contribute to evolving legal practice. Committed to advancing the profession, Irem engages in writing, mentorship, and innovation. Driven by a strong commitment to advocacy and access to justice, she continually develops her expertise while delivering practical, strategic, and client-focused legal solutions.`,
@@ -144,7 +144,7 @@ Her professional interests extend to legal research, particularly at the interse
     {
         name: "José Maria Cabral Sacadura",
         title: "International Business Lawyer",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973096/lextalk/dubai-awardees-2026/jose-maria-cabral-sacadura.jpg`,
         bio: `José Maria Cabral Sacadura is an international business lawyer with two decades of experience across leading US, UK, Benelux, and Iberian law and consulting firms. Throughout his career, he has advised asset managers, financial institutions, multinational corporations, entrepreneurs, and private investors on complex matters including corporate structuring, taxation, governance, and long-term business growth.
 
 His practice combines extensive international experience with technical expertise and a pragmatic, commercially focused approach. He is skilled in navigating sophisticated legal and business challenges across multiple jurisdictions, providing strategic advice tailored to clients' objectives and helping them achieve sustainable growth while effectively managing legal, regulatory, and commercial considerations.`,
@@ -152,7 +152,7 @@ His practice combines extensive international experience with technical expertis
     {
         name: "Jai Lodha",
         title: "Managing Partner, VSL Law Chambers",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973274/lextalk/dubai-awardees-2026/jai-lodha.jpg`,
         bio: `Jai Lodha is Managing Partner of VSL Law Chambers and practises before the Rajasthan High Court, Jaipur Bench. He holds a law degree from Government Law College, Mumbai, an MBL from NLSIU, and certifications in Public International Law from The Hague Academy and Cyber Laws from the Asian School of Cyber Laws.
 
 His practice covers arbitration, taxation, mining, intellectual property, service, insolvency, constitutional, criminal, labour, electricity, education, consumer, and commercial laws. He regularly appears before the Supreme Court, Rajasthan High Court, NCLT, tribunals, and various forums. Currently a Standing Counsel for the Income Tax Department, he has also served the Commercial Taxes Department and represents 15 government organisations and numerous private businesses.`,
@@ -160,7 +160,7 @@ His practice covers arbitration, taxation, mining, intellectual property, servic
     {
         name: "Melento",
         title: "AI-Native Legal-Ops Platform",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973185/lextalk/dubai-awardees-2026/melento.png`,
         bio: `Melento is an AI-native legal-ops platform built around Collaborative Intelligence, combining AI and human judgment to turn contracts into business value. It automates repetitive work and provides legal teams with a connected, governed view across the contract lifecycle, from creation and negotiation to signature, obligations, and renewal.
 
 Unlike traditional CLM with AI added on, Melento embeds intelligence throughout, offering configurable workflows, parallel reviews, obligation tracking, role-based access, native eSign, and invoice-to-contract checks. It helps legal teams recover revenue and identify overpayments. Trusted by 3,000+ enterprises and recognised by Forrester, Melento has helped organisations achieve up to 85% faster turnaround and double-digit revenue recovery.`,
@@ -168,7 +168,7 @@ Unlike traditional CLM with AI added on, Melento embeds intelligence throughout,
     {
         name: "Mashael Alfarsi",
         title: "Senior Executive — Real Estate Dispute Resolution (UAE)",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973181/lextalk/dubai-awardees-2026/mashael-alfarsi.png`,
         bio: `Mashael Alfarsi is a Senior Executive with extensive UAE experience in real estate dispute resolution, litigation support, execution proceedings, debt recovery, contracts, and legal compliance. At Al Hamra Real Estate Development Company LLC and Al Bahri & Al Mazroui Group, she has supported complex matters before courts across Dubai, Ras Al Khaimah, Ajman, and Sharjah.
 
 She prepares legal memoranda, risk assessments, and manages litigation and execution proceedings, while drafting and reviewing over 100 contracts annually. A UAE Federal Advocacy License holder (2026), Mashael holds a Master's in Private Law from Ajman University with a 4.0/4.0 GPA and actively contributes to legal research and conferences.`,
@@ -176,7 +176,7 @@ She prepares legal memoranda, risk assessments, and manages litigation and execu
     {
         name: "Mohamed Abdelgadir",
         title: "Head of Legal",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973191/lextalk/dubai-awardees-2026/mohamed-abdelgadir.png`,
         bio: `Mohamed Abdelgadir is a seasoned legal professional and Head of Legal, whose career has been built through courtroom advocacy, arbitration, high-stakes negotiations, and trusted advisory roles. He has advised Boards, government and semi-government stakeholders, and high-profile individuals across Abu Dhabi, earning trust through consistently delivering results.
 
 His expertise spans M&A, commercial and maritime contracts, cross-border SPV structures across the Cayman Islands, Maldives, and Seychelles, and FIDIC and construction disputes. He has managed litigation, represented companies before the Abu Dhabi International Arbitration Centre, and advised internationally recognised hospitality brands. Fluent in Arabic, English, and Hindi, Mohamed builds trust across cultures and jurisdictions through clear, strategic negotiation.`,
@@ -184,7 +184,7 @@ His expertise spans M&A, commercial and maritime contracts, cross-border SPV str
     {
         name: "Mrs. Prerna Kapoor",
         title: "Manager – Corporate & Government Affairs, JSW MG Motor India",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973194/lextalk/dubai-awardees-2026/prerna-kapoor.jpg`,
         bio: `Mrs. Prerna Kapoor is a corporate and public policy lawyer with over seven years of experience across government, consulting, and corporate sectors. She currently serves as Manager – Corporate and Government Affairs at JSW MG Motor India, leading regulatory strategy, policy advocacy, and stakeholder engagement with central ministries and state governments.
 
 An LL.M. graduate in Commercial and Corporate Law from Queen Mary University of London, she has worked across digital governance, fintech regulation, EV policy, FDI approvals, and sustainability frameworks. Previously, she contributed to key initiatives at the Ministry of Electronics and Information Technology, including IT rule amendments and digital governance projects, bridging law, policy, and industry to advance sustainable, technology-driven growth.`,
@@ -192,7 +192,7 @@ An LL.M. graduate in Commercial and Corporate Law from Queen Mary University of 
     {
         name: "Majed A. Maimani",
         title: "Legal Manager – Core Business, Umm Al-Qura for Development & Construction",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973127/lextalk/dubai-awardees-2026/majed-a-maimani.png`,
         bio: `Majed A. Maimani is a legal leader contributing to Saudi Arabia's transformative development. He serves as Legal Manager – Core Business at Umm Al-Qura for Development & Construction, overseeing the legal infrastructure of the SAR 100 billion MASAR Giga-Project in Makkah, and is Founding Partner of Ibn Adeeb & Maimani Law Firm.
 
 With over nine years of legal experience, he previously provided legal oversight for major global sporting events, including Formula 1, Dakar Rally, Extreme E, Formula E, GT, and WRC, as Legal Manager at Saudi Motorsport Company. Majed holds a First-Class Honours Law degree, is pursuing a Master's in Law, and is an ICCGO, Certified Lawyer, and Saudi Bar Association member.`,
@@ -200,7 +200,7 @@ With over nine years of legal experience, he previously provided legal oversight
     {
         name: "Nevin Jacob Koshy",
         title: "Partner & Head, Patent & Design Department, UTMPS (Dubai)",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973198/lextalk/dubai-awardees-2026/nevin-jacob-koshy.jpg`,
         bio: `Nevin Jacob Koshy is a Partner and Head of the Patent & Design Department at UTMPS's Dubai office, advising clients on patent and design strategy, filing, and prosecution across the MENA region. With 17 years of experience, he is a registered IP attorney in the UK and India and has overseen prosecution of more than 15,000–17,000 IP rights worldwide.
 
 His practice covers contentious and non-contentious IP matters, providing pragmatic, commercially focused solutions. Previously a research scientist and IP consultant, he supported biotechnology innovation in the UK. An active member of leading international IP associations, Nevin has also served in AIPPI UAE leadership and received recognition from IAM and Asia IP.`,
@@ -208,7 +208,7 @@ His practice covers contentious and non-contentious IP matters, providing pragma
     {
         name: "Nizar Ouelhazi",
         title: "Senior Legal & Tax Policy Expert, Qatar General Tax Authority",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973201/lextalk/dubai-awardees-2026/nizar-ouelhazi.jpg`,
         bio: `Nizar Ouelhazi is a Senior Legal and Tax Policy Expert at Qatar's General Tax Authority, focusing on tax policy, legislative reform, international taxation, and modern tax frameworks. Previously, he founded and managed a tax and legal advisory firm in Tunisia and taught international tax law at university level.
 
 His interests include tax certainty, investment competitiveness, dispute prevention, and taxation's role in economic development. A member of LCIA's Young International Arbitration Group, Nizar holds qualifications in Public Law and Business Law and follows emerging tax developments across the GCC. He also supported the U.S. diplomatic mission in Tunisia and taught international tax law at university level.`,
@@ -216,7 +216,7 @@ His interests include tax certainty, investment competitiveness, dispute prevent
     {
         name: "Ranjith Mohan",
         title: "Group Legal Counsel",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973207/lextalk/dubai-awardees-2026/ranjith-mohan.png`,
         bio: `Ranjith Mohan is a Group Legal Counsel with over fourteen years of experience advising multinational organisations on complex legal, commercial, and regulatory matters across energy, logistics, maritime, infrastructure, and banking. His expertise spans corporate governance, cross-border transactions, M&A, commercial contracting, compliance, and strategic risk management.
 
 He advises on significant transactions and business-critical initiatives, helping organisations navigate complex regulatory environments while aligning legal strategy with commercial objectives. His experience includes corporate growth, governance transformation, restructuring, and major projects across multiple jurisdictions. Passionate about the evolving legal profession, Ranjith embraces innovation, continuous learning, and technology to enhance legal service delivery while upholding governance, integrity, and excellence.`,
@@ -224,7 +224,7 @@ He advises on significant transactions and business-critical initiatives, helpin
     {
         name: "Saurabh Malhotra",
         title: "Regional General Counsel – South Asia, Intertek",
-        image: `${SPEAKER_IMG}/v1787739230/lextalk/dubai-speakers/saurabh-malhotra.png`,
+        image: `${SPEAKER_IMG}/v1789973212/lextalk/dubai-awardees-2026/saurabh-malhotra.jpg`,
         bio: `Saurabh Malhotra is a highly accomplished Indian-qualified lawyer and Solicitor of England & Wales (Non-Practice), with extensive APAC and South Asia experience in corporate-commercial law, competition law, compliance, investigations, anti-bribery laws, IPR, risk management, and HR legal matters. Since 2017, he has served as Regional General Counsel – South Asia at Intertek, leading Legal, Risk & Compliance.
 
 Previously, he held legal roles with Syngenta, Intel, Infosys, and Wipro, and practiced with Andersen Legal (DSK Legal) and Singhania & Co. A trusted board advisor and IOD Lifetime Member, Saurabh has received multiple recognitions, including Forbes India Legal Powerlist and BW Legal World Top 100+ General Counsel.`,
@@ -232,7 +232,7 @@ Previously, he held legal roles with Syngenta, Intel, Infosys, and Wipro, and pr
     {
         name: "Shailja Chandra",
         title: "Legal Professional, Britannia Industries Limited",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973221/lextalk/dubai-awardees-2026/shailja-chandra.png`,
         bio: `Shailja Chandra is a legal professional with experience in corporate and commercial law, currently associated with Britannia Industries Limited. She adopts a business-oriented approach to legal advisory, supporting commercial objectives while effectively managing legal and regulatory risks.
 
 Her professional expertise and interests encompass contract management, corporate governance, regulatory compliance, dispute management, and strategic business advisory. Shailja has also pursued executive learning at the Indian School of Business, demonstrating her commitment to continuous professional development. She is recognised for combining sound legal judgment with a practical understanding of business needs and stakeholder priorities, enabling her to provide commercially relevant legal guidance and contribute effectively to organisational objectives.`,
@@ -240,7 +240,7 @@ Her professional expertise and interests encompass contract management, corporat
     {
         name: "Soma Bagaria",
         title: "SKN Legal LLP",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973258/lextalk/dubai-awardees-2026/soma-bagaria.jpg`,
         bio: `Soma Bagaria is associated with SKN Legal LLP, a boutique corporate law firm led by three partners, offering comprehensive legal and advisory services across corporate and commercial law, contracts, startups, joint ventures, investments, intellectual property, real estate, banking and finance, human resources, trusts, and transactional matters.
 
 The firm focuses on understanding each client's business and delivering practical, responsive, and solution-oriented advice. Its diverse clientele includes individuals, entrepreneurs, startups, established businesses, financial institutions, and listed companies. SKN Legal LLP emphasises personalised attention, quality, integrity, and professional service, combining strong legal expertise with business-focused advice and international standards to provide efficient, reliable, and commercially relevant solutions.`,
@@ -248,7 +248,7 @@ The firm focuses on understanding each client's business and delivering practica
     {
         name: "Sujoy Bose",
         title: "Head – Secretarial, Legal & Compliance, Krsnaa Diagnostics Ltd.",
-        image: `${SPEAKER_IMG}/v1786625144/lextalk/dubai-speakers/sujoy-bose.jpg`,
+        image: `${SPEAKER_IMG}/v1789973255/lextalk/dubai-awardees-2026/sujoy-bose.png`,
         bio: `Sujoy Bose is an accomplished corporate legal and governance leader with over a decade of experience in corporate law, securities regulation, M&A, corporate governance, and enterprise compliance. As Head of Legal, Secretarial & Compliance at a publicly listed healthcare company in India, he advises the Board and executive leadership on complex legal, regulatory, and strategic matters.
 
 His experience includes IPO compliance, strategic financing, M&A, cross-border documentation, regulatory investigations, PPP healthcare projects, and enterprise-wide compliance transformation. He has also led digital transformation through technology-enabled governance, contract lifecycle management, and compliance automation. Recognized across national and international legal platforms, Sujoy champions innovation, integrity, and governance excellence.`,
@@ -256,7 +256,7 @@ His experience includes IPO compliance, strategic financing, M&A, cross-border d
     {
         name: "Shilpa Bhasin Mehra",
         title: "Independent Legal Consultant, Focal",
-        image: `${SPEAKER_IMG}/v1786625139/lextalk/dubai-speakers/shilpa-bhasin-mehra.jpg`,
+        image: `${SPEAKER_IMG}/v1789973235/lextalk/dubai-awardees-2026/shilpa-bhasin-mehra.png`,
         bio: `Shilpa Bhasin Mehra, based in the UAE for over 30 years, is a legal professional and independent legal consultant through her management consultancy firm, Focal. She has served as Head of Legal for global companies including Smit Lamnalco and Svitzer, part of the Maersk Group, advising major corporations worldwide.
 
 Specialising in corporate law and contracts, she strongly advocates alternative dispute resolution, particularly mediation. Following a near-death experience in 2003, she authored All Battles Aren't Legal and Unfiltered and Unapologetic, sharing her experiences and life lessons. A lawyer by profession and author by passion, she champions diversity and inclusion and has received several awards for writing, resilience, legal excellence, and inspiration.`,
@@ -272,7 +272,7 @@ Her leadership also addresses land acquisition, environmental clearances, litiga
     {
         name: "Udit Mehta",
         title: "Senior Manager – Legal & Compliance, Equentia Financial Service Pvt. Ltd.",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973267/lextalk/dubai-awardees-2026/udit-mehta.png`,
         bio: `Udit Mehta is an accomplished corporate legal professional with over seven years of experience in corporate litigation, dispute resolution, insolvency law, and high-stakes investment transactions. As Senior Manager – Legal & Compliance at Equentia Financial Service Pvt. Ltd., he plays a key role in capital deployment by structuring, reviewing, and negotiating investment instruments, including share subscription agreements, shareholders' agreements, and term sheets.
 
 His practice bridges courtroom advocacy and commercial strategy, handling significant matters before the Bombay High Court and National Company Law Tribunal (NCLT). Previously, Udit worked with prominent firms Crawford Bayley & Co. and Naik Naik & Company. He is recognised for strategic foresight, drafting excellence, and commercial pragmatism.`,
@@ -280,7 +280,7 @@ His practice bridges courtroom advocacy and commercial strategy, handling signif
     {
         name: "Tuhina Dey",
         title: "Corporate Counsel, Amazon Leo",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973262/lextalk/dubai-awardees-2026/tuhina-dey.png`,
         bio: `Tuhina Dey is a Corporate Counsel at Amazon Leo, specialising in regulatory compliance, with 13 years of legal experience. A qualified LL.B. and Company Secretary, she previously served as Senior Legal Counsel at Concentrix, advising businesses on complex commercial, regulatory, and compliance matters.
 
 Her expertise includes regulatory compliance, commercial contract negotiations, data protection, and strategic legal advisory. She supports international operations, manages complex contractual arrangements, assesses legal and commercial risks, and partners with cross-functional teams to develop practical business solutions. Known for her pragmatic, collaborative approach and strong stakeholder management, Tuhina combines legal expertise, commercial insight, and problem-solving skills while advancing as a global in-house legal leader.`,
@@ -288,7 +288,7 @@ Her expertise includes regulatory compliance, commercial contract negotiations, 
     {
         name: "Vasiliki Kanta",
         title: "Partner, P. Kakkavas–V. Kanta Law Firm",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973271/lextalk/dubai-awardees-2026/vasiliki-kanta.png`,
         bio: `As a Partner at P. Kakkavas–V. Kanta Law Firm, Vasiliki Kanta brings extensive legal expertise across key practice areas, including litigation, real estate, banking, and finance. Her professional experience and sector-specific knowledge enable her to navigate complex legal and commercial matters with a strategic and practical approach.
 
 With a strong understanding of dispute resolution, property-related matters, and financial transactions, she offers valuable insights into the evolving challenges faced by businesses and legal professionals. Her expertise makes her a valuable contributor to discussions among legal leaders on the future of corporate governance, dispute resolution, and cross-border legal frameworks in an increasingly interconnected global business environment.`,
@@ -296,7 +296,7 @@ With a strong understanding of dispute resolution, property-related matters, and
     {
         name: "Jason Chong Wai Zhe",
         title: "Principal, Zhe Chambers · Advocate & Solicitor, High Court of Malaya",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789973079/lextalk/dubai-awardees-2026/jason-chong-wai-zhe.png`,
         bio: `Jason Chong Wai Zhe is the Principal of Zhe Chambers and an Advocate & Solicitor of the High Court of Malaya. He specialises in complex construction litigation, domestic and international arbitration, and CIPAA adjudication, representing local and international clients across the engineering, oil and gas, construction, and commercial sectors in high-stakes, multi-million disputes.
 
 Jason has acted and assisted in both domestic and international arbitration proceedings under leading institutional rules, including SIAC, AIAC, HKIAC, AAA, and LCIA. His practice focuses on strategic dispute resolution, navigating technically complex claims and delivering commercially effective representation for clients involved in significant construction and commercial disputes across multiple jurisdictions.`,
