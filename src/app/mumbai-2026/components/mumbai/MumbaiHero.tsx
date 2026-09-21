@@ -81,11 +81,10 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                     {navTabs.map((tab, index) => {
                         const commonClasses = "px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-xs font-medium";
 
-                        // Agenda PDF is pending an update — hide the trigger entirely rather
-                        // than link to the outdated one. Re-add once onOpenAgenda is wired
-                        // back up in mumbai-2026/page.tsx with the corrected file.
                         if (tab.label === "Agenda") {
-                            return null;
+                            return (
+                                <button key={index} onClick={onOpenAgenda} className={`${commonClasses} cursor-pointer`}>{tab.label}</button>
+                            );
                         }
 
                         return (

@@ -15,18 +15,26 @@ import { MumbaiSponsor } from "./components/mumbai/MumbaiSponsor";
 import { MumbaiConferenceThemes } from "./components/mumbai/MumbaiConferenceThemes";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
+import { AgendaModal } from "@/components/AgendaModal";
 import { RegisterModal } from "@/components/RegisterModal";
 
 export default function Mumbai2026Page() {
+    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
     return (
         <main className="min-h-screen bg-slate-950">
             <Navbar />
 
-            {/* Agenda download intentionally not wired up — the current PDF is outdated.
-                Re-add <FloatingAgendaButton eventSlug="mumbai-2026" />, <AgendaModal ... />
-                and the onOpenAgenda prop below once the corrected file is uploaded. */}
+            {/* Floating Buttons - Hidden on mobile by global component logic */}
+            <FloatingAgendaButton eventSlug="mumbai-2026" />
+
+            <AgendaModal
+                isOpen={isAgendaModalOpen}
+                onClose={() => setIsAgendaModalOpen(false)}
+                eventSlug="mumbai-2026"
+            />
 
             <RegisterModal
                 isOpen={isRegisterModalOpen}
@@ -34,6 +42,7 @@ export default function Mumbai2026Page() {
             />
 
             <MumbaiHero
+                onOpenAgenda={() => setIsAgendaModalOpen(true)}
                 onOpenRegister={() => setIsRegisterModalOpen(true)}
             />
 
