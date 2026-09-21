@@ -44,7 +44,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             ]
         },
         { name: "Legal Honor", href: "/awardees" },
-        { name: "Post Event Reports", href: "/post-event-reports" },
+        { name: "Reports", href: "/post-event-reports" },
         { name: "Sponsor", href: "/sponsor" },
         {
             name: "More",
