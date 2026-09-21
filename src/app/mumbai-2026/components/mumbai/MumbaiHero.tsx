@@ -81,10 +81,11 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                     {navTabs.map((tab, index) => {
                         const commonClasses = "px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-xs font-medium";
 
+                        // Agenda PDF is pending an update — hide the trigger entirely rather
+                        // than link to the outdated one. Re-add once onOpenAgenda is wired
+                        // back up in mumbai-2026/page.tsx with the corrected file.
                         if (tab.label === "Agenda") {
-                            return (
-                                <button key={index} onClick={onOpenAgenda} className={`${commonClasses} cursor-pointer`}>{tab.label}</button>
-                            );
+                            return null;
                         }
 
                         return (
@@ -148,14 +149,16 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                         <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
-                    {/* Download Agenda */}
-                    <button
-                        onClick={onOpenAgenda}
-                        className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto cursor-pointer"
-                    >
-                        <Download className="w-4 h-4 text-amber-400" />
-                        <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase">Download Agenda</span>
-                    </button>
+                    {/* Download Agenda — hidden while the PDF is pending an update, see navTabs above */}
+                    {onOpenAgenda && (
+                        <button
+                            onClick={onOpenAgenda}
+                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto cursor-pointer"
+                        >
+                            <Download className="w-4 h-4 text-amber-400" />
+                            <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase">Download Agenda</span>
+                        </button>
+                    )}
                 </div>
             </div>
         </section>
