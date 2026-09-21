@@ -52,7 +52,6 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             dropdownItems: [
                 { name: "Blog/News", href: "/blog" },
                 { name: "Podcasts", href: "/podcasts" },
-                { name: "Testimonial", href: "/testimonials" },
                 { name: "Magazine", href: "/magazine" },
             ]
         },
