@@ -7,10 +7,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
-import { awardees, CATEGORY_ORDER, type Awardee } from "./awardees-data";
+import { awardees, type Awardee } from "./awardees-data";
 
-const groupedAwardees: { category: string; entries: Awardee[] }[] = CATEGORY_ORDER
-    .map((category) => ({ category, entries: awardees.filter((a) => a.category === category) }))
+// Every category in the source data starts with one of these four tier words
+// (e.g. "Leading General Counsel of the Year", "Rising In-House Counsel of the
+// Year") — grouping by tier gives 4 sections instead of 26 near-empty ones,
+// while the specific award each person actually won still shows on their card.
+const TIER_ORDER = ["Leading", "Inspiring", "Emerging", "Rising"] as const;
+
+function tierOf(category: string): string {
+    return TIER_ORDER.find((t) => category.startsWith(t)) ?? "Other";
+}
+
+const groupedAwardees: { tier: string; entries: Awardee[] }[] = TIER_ORDER
+    .map((tier) => ({ tier, entries: awardees.filter((a) => tierOf(a.category) === tier) }))
     .filter((group) => group.entries.length > 0);
 
 function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: number; onSelect: (a: Awardee) => void }) {
@@ -68,6 +78,9 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: n
                     </h3>
                     <p className="text-amber-400/80 text-[10.5px] font-semibold uppercase tracking-[0.08em] leading-relaxed line-clamp-3">
                         {awardee.title}
+                    </p>
+                    <p className="mt-2 text-white/35 text-[9.5px] uppercase tracking-wider leading-snug line-clamp-2">
+                        {awardee.category}
                     </p>
                     {awardee.bio && (
                         <p className="mt-auto pt-3 text-white/30 text-[10px] uppercase tracking-widest font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -165,19 +178,22 @@ export default function AwardeesDubai2026Page() {
                 </div>
             </section>
 
-            {/* Awardees, sectioned by official award category */}
+            {/* Awardees, sectioned by tier */}
             <section className="py-12 md:py-20 relative">
                 <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#050a15] to-transparent z-10 pointer-events-none" />
                 <div className="container mx-auto px-4">
                     {groupedAwardees.length > 0 ? (
-                        <div className="space-y-16 md:space-y-20">
+                        <div className="space-y-20 md:space-y-28">
                             {groupedAwardees.map((group) => (
-                                <div key={group.category}>
-                                    <div className="flex items-center gap-4 mb-7 md:mb-8">
-                                        <h2 className="text-lg md:text-xl font-serif font-bold text-amber-400 whitespace-nowrap">
-                                            {group.category}
+                                <div key={group.tier}>
+                                    <div className="text-center mb-10 md:mb-12">
+                                        <h2 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 bg-clip-text text-transparent">
+                                            {group.tier}
                                         </h2>
-                                        <div className="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent" />
+                                        <p className="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">
+                                            {group.entries.length} Awardee{group.entries.length !== 1 ? "s" : ""}
+                                        </p>
+                                        <div className="mx-auto mt-4 w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
                                         {group.entries.map((awardee, idx) => (
@@ -243,6 +259,7 @@ export default function AwardeesDubai2026Page() {
                                     <div className="pt-1">
                                         <h3 className="text-xl md:text-2xl font-serif font-bold text-white leading-tight">{selected.name}</h3>
                                         <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider mt-1.5">{selected.title}</p>
+                                        <p className="text-white/40 text-[11px] uppercase tracking-wider mt-1">{selected.category}</p>
                                     </div>
                                 </div>
 
