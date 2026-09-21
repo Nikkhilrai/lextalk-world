@@ -13,7 +13,7 @@ import { SponsorshipModal } from "@/components/SponsorshipModal";
 import { speakers } from "./dubai-speakers-list";
 
 import {
-    Calendar, CalendarDays, MapPin, Users, Award, Mic, ArrowRight, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote, X, CheckCircle2, FileText, Download
+    Calendar, CalendarDays, MapPin, Users, Award, Mic, ArrowRight, Handshake, GraduationCap, Trophy, Monitor, Globe, UserCheck, Scale, Building, Landmark, Shield, Lightbulb, User, Play, Quote, X, CheckCircle2, FileText, Download, Camera
 } from "lucide-react";
 
 // Key Highlights Data
@@ -526,7 +526,7 @@ export default function DubaiEventPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-600 mb-2">Dubai 2026 Recap</p>
                         <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900">Event Resources</h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <a
                             href="/agendas/dubai-2026-legaltech-report.pdf"
                             download
@@ -555,6 +555,19 @@ export default function DubaiEventPage() {
                             </div>
                             <Download className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors shrink-0" />
                         </a>
+                        <Link
+                            href="/dubai-2026/gallery"
+                            className="group flex items-center gap-4 p-5 bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-2xl transition-all duration-300"
+                        >
+                            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
+                                <Camera className="w-5 h-5 text-amber-600" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <h3 className="font-bold text-slate-900 text-sm leading-tight">Event Gallery</h3>
+                                <p className="text-slate-500 text-xs mt-0.5">Browse photos from the conference</p>
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                        </Link>
                     </div>
                 </div>
             </section>
