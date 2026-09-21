@@ -10,6 +10,10 @@ export interface Awardee {
     title: string;
     image: string | null;
     bio?: string;
+    // Company/firm logos (e.g. Melento, Fairaigle) need object-contain on a light
+    // background rather than the object-cover portrait crop used for headshots —
+    // a wide wordmark logo gets cropped to an unreadable sliver under object-cover.
+    logo?: boolean;
 }
 
 export const awardees: Awardee[] = [
@@ -129,6 +133,7 @@ Over the course of his distinguished career, he has developed broad expertise ac
         name: "Fairaigle Legal & Consultancy LLP",
         title: "Legal & Consultancy Firm",
         image: `${SPEAKER_IMG}/v1789973062/lextalk/dubai-awardees-2026/fairaigle-legal.jpg`,
+        logo: true,
         bio: `Fairaigle Legal & Consultancy LLP is a professional legal and consultancy firm committed to delivering reliable, practical, and client-focused solutions to individuals, businesses, startups, and corporate organizations. Its experienced legal team provides services across corporate and property law, family law, litigation, contract drafting, dispute resolution, forensic and advisory services, consumer protection, and regulatory compliance.
 
 Fairaigle upholds integrity, professionalism, and excellence while helping clients navigate complex legal challenges with confidence. Combining legal expertise with strategic insight, the firm delivers timely, transparent, and result-oriented solutions tailored to clients' unique needs, positioning Fairaigle as a trusted partner for comprehensive legal and advisory services.`,
@@ -161,6 +166,7 @@ His practice covers arbitration, taxation, mining, intellectual property, servic
         name: "Melento",
         title: "AI-Native Legal-Ops Platform",
         image: `${SPEAKER_IMG}/v1789973185/lextalk/dubai-awardees-2026/melento.png`,
+        logo: true,
         bio: `Melento is an AI-native legal-ops platform built around Collaborative Intelligence, combining AI and human judgment to turn contracts into business value. It automates repetitive work and provides legal teams with a connected, governed view across the contract lifecycle, from creation and negotiation to signature, obligations, and renewal.
 
 Unlike traditional CLM with AI added on, Melento embeds intelligence throughout, offering configurable workflows, parallel reviews, obligation tracking, role-based access, native eSign, and invoice-to-contract checks. It helps legal teams recover revenue and identify overpayments. Trusted by 3,000+ enterprises and recognised by Forrester, Melento has helped organisations achieve up to 85% faster turnaround and double-digit revenue recovery.`,

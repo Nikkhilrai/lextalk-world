@@ -26,14 +26,27 @@ function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: n
                 {/* Photo */}
                 <div className="aspect-[4/5] relative overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 shrink-0">
                     {awardee.image ? (
-                        <Image
-                            src={awardee.image}
-                            alt={awardee.name}
-                            fill
-                            sizes="(max-width:640px) 50vw,(max-width:1024px) 33vw,25vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                            loading="lazy"
-                        />
+                        awardee.logo ? (
+                            <div className="absolute inset-0 bg-white">
+                                <Image
+                                    src={awardee.image}
+                                    alt={awardee.name}
+                                    fill
+                                    sizes="(max-width:640px) 50vw,(max-width:1024px) 33vw,25vw"
+                                    className="object-contain p-6 transition-transform duration-700 group-hover:scale-105"
+                                    loading="lazy"
+                                />
+                            </div>
+                        ) : (
+                            <Image
+                                src={awardee.image}
+                                alt={awardee.name}
+                                fill
+                                sizes="(max-width:640px) 50vw,(max-width:1024px) 33vw,25vw"
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                loading="lazy"
+                            />
+                        )
                     ) : (
                         <div className="absolute inset-0 flex items-center justify-center">
                             <span className="text-5xl font-serif font-bold text-amber-500/15">{awardee.name.charAt(0)}</span>
@@ -111,7 +124,7 @@ export default function AwardeesDubai2026Page() {
 
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.1] mb-6">
                             <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 bg-clip-text text-transparent">
-                                Our Esteemed Awardees
+                                Legal Honor Global Awards
                             </span>
                         </h1>
 
@@ -197,8 +210,14 @@ export default function AwardeesDubai2026Page() {
                             <div className="p-6 md:p-8 max-h-[85vh] overflow-y-auto">
                                 <div className="flex items-start gap-5 mb-6">
                                     {selected.image ? (
-                                        <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden shrink-0 ring-2 ring-amber-500/20">
-                                            <Image src={selected.image} alt={selected.name} fill className="object-cover" sizes="96px" />
+                                        <div className={`relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden shrink-0 ring-2 ring-amber-500/20 ${selected.logo ? "bg-white" : ""}`}>
+                                            <Image
+                                                src={selected.image}
+                                                alt={selected.name}
+                                                fill
+                                                className={selected.logo ? "object-contain p-2" : "object-cover"}
+                                                sizes="96px"
+                                            />
                                         </div>
                                     ) : (
                                         <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 ring-2 ring-amber-500/20">
