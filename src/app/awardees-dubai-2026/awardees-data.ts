@@ -24,7 +24,7 @@ Anjali believes leadership is about building thoughtful, sustainable businesses 
     {
         name: "Anthi S. Tsigkou",
         title: "International Commercial & Maritime Lawyer",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966121/lextalk/dubai-awardees-2026/anthi-s-tsigkou.png`,
         bio: `I am an international commercial and maritime lawyer focused on creating solutions, influencing decisions, and building lasting value. My expertise spans cross-border transactions, international trade, mediation, corporate governance, and commercial risk management in highly regulated global industries. I approach challenges with a commercial mindset, seeking opportunities where others see obstacles.
 
 Beyond my practice, I am passionate about mentoring the next generation of legal professionals, fostering confidence, strategic thinking, and the courage to challenge conventional approaches. My goal is to leave every business, team, and lawyer stronger than I found them.`,
@@ -32,7 +32,7 @@ Beyond my practice, I am passionate about mentoring the next generation of legal
     {
         name: "Ankit Suri",
         title: "DGM – Legal & Strategy, ITW Universe",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966076/lextalk/dubai-awardees-2026/ankit-suri.jpg`,
         bio: `Ankit Suri, raised in Wellington, Nilgiris, transitioned from engineering to law, discovering a profession that combined his strengths in public speaking and sport. A Bangalore Institute of Legal Studies graduate, he began interning in his first semester and spent nearly five years at Nandan Kamath's office, advising leading sports rights holders on IP, anti-piracy, sponsorship and regulatory matters.
 
 After expanding into technology, media and telecommunications at Indus Law, he joined ITW Universe in 2023. Now DGM – Legal & Strategy, he has shaped engagements exceeding ₹600 crore, combining legal expertise, commercial strategy and people leadership to build scalable, business-enabling legal functions.`,
@@ -40,7 +40,7 @@ After expanding into technology, media and telecommunications at Indus Law, he j
     {
         name: "Anurag Bhargava",
         title: "Product Counsel, CIPP/E-Certified Legal Professional",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966083/lextalk/dubai-awardees-2026/anurag-bhargava.jpg`,
         bio: `Anurag Bhargava is a CIPP/E-certified legal professional working at the intersection of law, technology, AI, and legal operations. As Product Counsel, he focuses on legal technology, AI evaluation, workflow automation, privacy, compliance, and technology-driven legal solutions. He also handles in-house legal matters, including contracts, regulatory compliance, research, and business support.
 
 His experience reflects a commitment to making legal processes structured, efficient, and scalable. Having worked as a delivery rider during law school, Anurag developed a strong interest in employment and labour law, particularly workers' rights and access to legal assistance. He aspires to represent workers facing exploitation and unfair employment practices.`,
@@ -48,7 +48,7 @@ His experience reflects a commitment to making legal processes structured, effic
     {
         name: "Aphune Kuvephulii Kezo",
         title: "Legal Manager, JSW GMR Cricket Private Limited",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966088/lextalk/dubai-awardees-2026/aphune-kuvephulii-kezo.png`,
         bio: `Aphune Kuvephulii Kezo is Legal Manager at JSW GMR Cricket Private Limited, with experience across dispute resolution, corporate and commercial law, and the evolving media and entertainment sector. Her professional journey reflects a distinctive understanding of the intersection between legal practice, commercial strategy, sports, and entertainment.
 
 Working within a dynamic and rapidly transforming industry, Aphune brings a strategic and commercially oriented perspective to the legal challenges businesses face today. Her experience enables her to contribute meaningfully to conversations shaping the future of legal practice and business, while highlighting the increasingly diverse and influential role legal professionals play in navigating complex, fast-changing industries.`,
@@ -56,7 +56,7 @@ Working within a dynamic and rapidly transforming industry, Aphune brings a stra
     {
         name: "Abdullah Bin Manzur",
         title: "Barrister, Gray's Inn · Independent Legal Practice, Ruskin Global",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789965993/lextalk/dubai-awardees-2026/abdullah-bin-manzur.jpg`,
         bio: `Abdullah Bin Manzur is a Barrister of Gray's Inn and Advocate practising in Dhaka, Bangladesh, with over a decade of experience in dispute resolution and commercial practice. Called to the Bar of England and Wales in 2015, he leads Ruskin Global, his independent legal practice.
 
 His expertise includes international commercial arbitration, commercial litigation, contractual, banking, real estate, construction and EPC disputes. He represents domestic and international clients in high-value matters and has acted in ICC, SIAC and UNCITRAL arbitrations. His practice spans infrastructure, energy, corporate law, banking, international trade, intellectual property, succession and family disputes, combining strategic advocacy with strong domestic and international legal expertise.`,
@@ -64,7 +64,7 @@ His expertise includes international commercial arbitration, commercial litigati
     {
         name: "Antonio Ho",
         title: "Legal Counsel, BAT Global Travel Retail",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966079/lextalk/dubai-awardees-2026/antonio-ho.jpg`,
         bio: `Antonio Ho is a senior in-house legal professional with over 15 years of experience advising multinational organizations across more than 70 jurisdictions. He serves as Legal Counsel at BAT Global Travel Retail, supporting complex regulatory, compliance, and commercial matters in highly regulated global markets.
 
 Antonio specializes in transforming legal operations through automation, process redesign, and responsible adoption of emerging technologies, including AI. With experience across legal, compliance, security, business strategy, and corporate affairs, he brings a commercially pragmatic, cross-functional approach to legal leadership. He is committed to continuous professional development and building future-ready legal functions aligned with evolving business and regulatory landscapes.`,
@@ -72,7 +72,7 @@ Antonio specializes in transforming legal operations through automation, process
     {
         name: "Dr. Adarika Ghose",
         title: "Head of Legal Compliance & Regulatory, Acquisory Consulting LLP",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966094/lextalk/dubai-awardees-2026/dr-adarika-ghose.png`,
         bio: `Dr. Adarika Ghose is a distinguished Corporate Compliance Counsel (CS, LLM) with over 15 years of multifaceted experience across India, the UK, and the UAE. As Head of Legal Compliance and Regulatory at Acquisory Consulting LLP, she specializes in M&A, regulatory governance, and corporate restructuring, advising organizations on deal compliance, FEMA, IPOs, and private equity.
 
 Appointed by the Delhi High Court as Co-Chairperson for NCLT meetings, she oversees critical M&A decisions. She also represents FICCI at international roundtables on foreign investment and market expansion. An LLM, ICSI member, and IIM Ahmedabad executive-education alumna, she holds specialized WIPO and cyber law certifications and regularly lectures and contributes to legal journals.`,
@@ -88,7 +88,7 @@ His expertise includes corporate and commercial law, corporate restructuring, co
     {
         name: "Abdullah Dannon",
         title: "Executive Legal Advisor to the President, Royal Commission for Riyadh City",
-        image: null,
+        image: `${SPEAKER_IMG}/v1789966123/lextalk/dubai-awardees-2026/abdullah-dannon.jpg`,
         bio: `Abdullah Dannon is a seasoned legal executive with over two decades of experience in corporate law, Islamic finance, regulatory affairs, infrastructure, port operations, concessions, and high-stakes negotiations. His international career includes DLA Piper and EY, with expertise in cross-border M&A, IPOs, restructuring, complex financing, and multiparty disputes.
 
 As Executive Legal Advisor to the President of the Royal Commission for Riyadh City since 2021, he has led negotiations for the $30 billion Riyadh Metro Project, resolving major disputes and saving billions in delay costs. He also led the legal structuring of Al Qiddiya Foundation and the SAR 52 billion Riyadh Foundation and Al Qiddiya Express PPP. Previously, as General Counsel at Ports Development Company, he helped establish and expand King Abdullah Port.`,
