@@ -28,6 +28,25 @@ interface AwardEvent {
 
 const STATIC_EVENTS: AwardEvent[] = [
     {
+        id: "static-dubai-2026",
+        name: "Awardees Dubai, UAE – 2026",
+        slug: "awardees-dubai-2026",
+        customHref: "/awardees-dubai-2026",
+        location: "Dubai, UAE",
+        year: 2026,
+        image: "https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=1200&auto=format&fit=crop",
+        description: null,
+        date: "9–10 September 2026",
+        fullLocation: "Crowne Plaza, Dubai, UAE",
+        featured: true,
+        stats: [
+            { label: "People", value: "400+" },
+            { label: "Speaker", value: "70+" },
+            { label: "Awardee", value: "36+" },
+            { label: "Countries", value: "20+" },
+        ],
+    },
+    {
         id: "static-bangalore-2026",
         name: "Awardees Bangalore, India – 2026",
         slug: "awardees-bangalore-2026",
