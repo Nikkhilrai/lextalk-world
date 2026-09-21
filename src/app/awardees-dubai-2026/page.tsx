@@ -7,7 +7,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
-import { awardees, type Awardee } from "./awardees-data";
+import { awardees, CATEGORY_ORDER, type Awardee } from "./awardees-data";
+
+const groupedAwardees: { category: string; entries: Awardee[] }[] = CATEGORY_ORDER
+    .map((category) => ({ category, entries: awardees.filter((a) => a.category === category) }))
+    .filter((group) => group.entries.length > 0);
 
 function AnimatedCard({ awardee, index, onSelect }: { awardee: Awardee; index: number; onSelect: (a: Awardee) => void }) {
     const ref = useRef<HTMLDivElement>(null);
@@ -161,14 +165,26 @@ export default function AwardeesDubai2026Page() {
                 </div>
             </section>
 
-            {/* Grid */}
+            {/* Awardees, sectioned by official award category */}
             <section className="py-12 md:py-20 relative">
                 <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#050a15] to-transparent z-10 pointer-events-none" />
                 <div className="container mx-auto px-4">
-                    {awardees.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
-                            {awardees.map((awardee, idx) => (
-                                <AnimatedCard key={idx} awardee={awardee} index={idx} onSelect={handleSelect} />
+                    {groupedAwardees.length > 0 ? (
+                        <div className="space-y-16 md:space-y-20">
+                            {groupedAwardees.map((group) => (
+                                <div key={group.category}>
+                                    <div className="flex items-center gap-4 mb-7 md:mb-8">
+                                        <h2 className="text-lg md:text-xl font-serif font-bold text-amber-400 whitespace-nowrap">
+                                            {group.category}
+                                        </h2>
+                                        <div className="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent" />
+                                    </div>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
+                                        {group.entries.map((awardee, idx) => (
+                                            <AnimatedCard key={awardee.name} awardee={awardee} index={idx} onSelect={handleSelect} />
+                                        ))}
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     ) : (
