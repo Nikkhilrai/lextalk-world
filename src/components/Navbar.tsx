@@ -45,6 +45,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
         },
         { name: "Legal Honor", href: "/awardees" },
         { name: "Reports", href: "/post-event-reports" },
+        { name: "Gallery", href: "/event-gallery" },
         { name: "Sponsor", href: "/sponsor" },
         {
             name: "More",
@@ -53,6 +54,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             dropdownItems: [
                 { name: "Blog/News", href: "/blog" },
                 { name: "Podcasts", href: "/podcasts" },
+                { name: "Show Guide", href: "/show-guides" },
                 { name: "Magazine", href: "/magazine" },
             ]
         },
@@ -95,7 +97,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
 
                     {/* Desktop Navigation - Hidden on Mobile/Tablet and when minimal */}
                     {!minimal && (
-                        <div className="hidden lg:flex items-center gap-6 xl:gap-10">
+                        <div className="hidden lg:flex items-center gap-5 xl:gap-6">
                             {dynamicNavLinks.map((link) => (
                                 <div
                                     key={link.name}
