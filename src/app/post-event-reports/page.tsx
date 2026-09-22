@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { FileText, Download, Calendar, MapPin, Users } from "lucide-react";
+import { FileText, BookOpen, Calendar, MapPin, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import { PdfFlipbook } from "@/components/PdfFlipbook";
 
 interface ReportEntry {
     city: string;
@@ -28,6 +30,8 @@ const reports: ReportEntry[] = [
 ];
 
 export default function PostEventReportsPage() {
+    const [openReport, setOpenReport] = useState<ReportEntry | null>(null);
+
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -64,15 +68,14 @@ export default function PostEventReportsPage() {
                     {reports.length > 0 ? (
                         <div className="space-y-5">
                             {reports.map((report) => (
-                                <motion.a
+                                <motion.button
                                     key={report.city}
-                                    href={report.file}
-                                    download
+                                    onClick={() => setOpenReport(report)}
                                     initial={{ opacity: 0, y: 16 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5 }}
-                                    className="group flex flex-col sm:flex-row sm:items-center gap-5 p-6 bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-2xl transition-all duration-300"
+                                    className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 p-6 bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-2xl transition-all duration-300 text-left"
                                 >
                                     <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
                                         <FileText className="w-6 h-6 text-amber-600" />
@@ -97,10 +100,10 @@ export default function PostEventReportsPage() {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2 px-5 py-3 bg-slate-900 group-hover:bg-amber-500 text-white group-hover:text-slate-950 font-bold text-xs uppercase tracking-widest rounded-xl transition-all duration-300 shrink-0">
-                                        <Download size={14} />
-                                        Download
+                                        <BookOpen size={14} />
+                                        Read Report
                                     </div>
-                                </motion.a>
+                                </motion.button>
                             ))}
                         </div>
                     ) : (
@@ -114,6 +117,14 @@ export default function PostEventReportsPage() {
             </section>
 
             <Footer />
+
+            {openReport && (
+                <PdfFlipbook
+                    fileUrl={openReport.file}
+                    title={openReport.edition}
+                    onClose={() => setOpenReport(null)}
+                />
+            )}
         </main>
     );
 }
