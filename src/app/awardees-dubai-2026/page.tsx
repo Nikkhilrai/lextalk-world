@@ -193,11 +193,8 @@ export default function AwardeesDubai2026Page() {
                                     {group.tier !== PENDING_TIER && (
                                         <div className="text-center mb-10 md:mb-12">
                                             <h2 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 bg-clip-text text-transparent">
-                                                {group.tier}
+                                                {group.tier} Category
                                             </h2>
-                                            <p className="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">
-                                                {group.entries.length} Awardee{group.entries.length !== 1 ? "s" : ""}
-                                            </p>
                                             <div className="mx-auto mt-4 w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
                                         </div>
                                     )}
