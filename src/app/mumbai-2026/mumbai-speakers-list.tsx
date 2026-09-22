@@ -146,6 +146,36 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         title: "Vice President, Global Legal Compliance, Mastercard",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650324/lextalk/mumbai-speakers/rajiv-mohapatra.png",
     },
+    {
+        name: "Karthik Narayanadoss",
+        title: "Head Legal, Montra Electric",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080512/lextalk/mumbai-speakers/karthik-narayanadoss.png",
+    },
+    {
+        name: "Tarang Kulkarni",
+        title: "Director Legal, Target",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080513/lextalk/mumbai-speakers/tarang-kulkarni.png",
+    },
+    {
+        name: "Lakshmi S Nayak",
+        title: "Sr. Director, Head of Legal & Compliance, Yield Engineering Systems",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080515/lextalk/mumbai-speakers/lakshmi-s-nayak.png",
+    },
+    {
+        name: "Sarbasuchi Das",
+        title: "Head of NPA Cell, IDBI Trusteeship Services Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080516/lextalk/mumbai-speakers/sarbasuchi-das.png",
+    },
+    {
+        name: "Rishi Vyas",
+        title: "Vice President & Group Compliance Officer & CS, Welspun Group",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080517/lextalk/mumbai-speakers/rishi-vyas.png",
+    },
+    {
+        name: "Priyam Dhamankar",
+        title: "Regional Ethics & Compliance Leader, Cummins India",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080518/lextalk/mumbai-speakers/priyam-dhamankar.png",
+    },
 ];
 
 const MAROON = "#7A1F3D";
