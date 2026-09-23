@@ -206,14 +206,11 @@ export default function SpeakerInterestFormPage() {
                                         LinkedIn Profile
                                     </label>
                                     <input
-                                        {...register("linkedin", {
-                                            pattern: { value: /^https?:\/\/.+/i, message: "Include http:// or https://" }
-                                        })}
-                                        type="url"
+                                        {...register("linkedin")}
+                                        type="text"
                                         placeholder="https://linkedin.com/in/janesmith"
                                         className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                     />
-                                    {errors.linkedin && <p className="mt-1 text-xs text-red-500">{errors.linkedin.message}</p>}
                                 </div>
 
                                 {/* Conference */}
