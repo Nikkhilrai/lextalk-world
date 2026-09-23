@@ -24,6 +24,7 @@ interface Props {
 const CONFERENCES = [
     "LexTalk World Dubai 2026",
     "LexTalk World Mumbai 2026",
+    "LexTalk World Singapore 2027",
 ];
 
 export function SpeakerApplyModal({ isOpen, onClose }: Props) {
