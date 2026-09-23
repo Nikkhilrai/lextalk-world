@@ -123,7 +123,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             {...register("name", { required: "Required" })}
                                             type="text"
                                             placeholder="Jane Smith"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
                                     </div>
@@ -138,7 +138,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             })}
                                             type="email"
                                             placeholder="jane@company.com"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
                                     </div>
@@ -150,7 +150,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                                             Contact Number <span className="text-red-500">*</span>
                                         </label>
-                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors overflow-hidden">
+                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors">
                                             <Controller
                                                 name="phone"
                                                 control={control}
@@ -176,7 +176,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             {...register("country", { required: "Required" })}
                                             type="text"
                                             placeholder="India"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.country && <p className="mt-1 text-xs text-red-500">{errors.country.message}</p>}
                                     </div>
@@ -192,7 +192,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             {...register("company", { required: "Required" })}
                                             type="text"
                                             placeholder="Acme Corp"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.company && <p className="mt-1 text-xs text-red-500">{errors.company.message}</p>}
                                     </div>
@@ -204,7 +204,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             {...register("designation", { required: "Required" })}
                                             type="text"
                                             placeholder="General Counsel"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.designation && <p className="mt-1 text-xs text-red-500">{errors.designation.message}</p>}
                                     </div>

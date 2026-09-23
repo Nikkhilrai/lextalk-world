@@ -89,8 +89,8 @@ export default function SpeakerInterestFormPage() {
 
             {/* Form */}
             <div className="container mx-auto px-4 py-12 md:py-16">
-                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
-                    <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100">
+                    <div className="h-1 w-full rounded-t-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
 
                     <div className="p-6 md:p-10">
                         {submitted ? (
@@ -115,7 +115,7 @@ export default function SpeakerInterestFormPage() {
                                             {...register("name", { required: "Required" })}
                                             type="text"
                                             placeholder="Jane Smith"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
                                     </div>
@@ -130,7 +130,7 @@ export default function SpeakerInterestFormPage() {
                                             })}
                                             type="email"
                                             placeholder="jane@company.com"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
                                     </div>
@@ -142,7 +142,7 @@ export default function SpeakerInterestFormPage() {
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                                             Contact Number <span className="text-red-500">*</span>
                                         </label>
-                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors overflow-hidden">
+                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors">
                                             <Controller
                                                 name="phone"
                                                 control={control}
@@ -158,7 +158,7 @@ export default function SpeakerInterestFormPage() {
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                                             Country <span className="text-red-500">*</span>
                                         </label>
-                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors overflow-hidden px-1">
+                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors px-1">
                                             <Controller
                                                 name="country"
                                                 control={control}
@@ -182,7 +182,7 @@ export default function SpeakerInterestFormPage() {
                                             {...register("company", { required: "Required" })}
                                             type="text"
                                             placeholder="Acme Corp"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.company && <p className="mt-1 text-xs text-red-500">{errors.company.message}</p>}
                                     </div>
@@ -194,7 +194,7 @@ export default function SpeakerInterestFormPage() {
                                             {...register("designation", { required: "Required" })}
                                             type="text"
                                             placeholder="General Counsel"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                            className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                         />
                                         {errors.designation && <p className="mt-1 text-xs text-red-500">{errors.designation.message}</p>}
                                     </div>
@@ -211,7 +211,7 @@ export default function SpeakerInterestFormPage() {
                                         })}
                                         type="url"
                                         placeholder="https://linkedin.com/in/janesmith"
-                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                        className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                     />
                                     {errors.linkedin && <p className="mt-1 text-xs text-red-500">{errors.linkedin.message}</p>}
                                 </div>
@@ -242,7 +242,7 @@ export default function SpeakerInterestFormPage() {
                                         {...register("topic")}
                                         type="text"
                                         placeholder="e.g. The GC's Role in the Age of Sovereign AI"
-                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                        className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                     />
                                 </div>
 
@@ -255,7 +255,7 @@ export default function SpeakerInterestFormPage() {
                                         {...register("expertise")}
                                         type="text"
                                         placeholder="e.g. Cross-border M&A, Data Privacy, Arbitration"
-                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                        className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                                     />
                                 </div>
 
@@ -268,7 +268,7 @@ export default function SpeakerInterestFormPage() {
                                         {...register("bio")}
                                         rows={4}
                                         placeholder="A short bio we can use in the event show guide and speaker page."
-                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300 resize-none"
+                                        className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300 resize-none"
                                     />
                                 </div>
 
