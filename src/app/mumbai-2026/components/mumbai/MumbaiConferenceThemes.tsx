@@ -112,14 +112,14 @@ export function MumbaiConferenceThemes() {
                         >
                             <div className="border-l-2 border-amber-400 pl-6">
                                 <p className="text-slate-600 text-base md:text-lg leading-relaxed font-light mb-5">
-                                    Inspired by the Dubai conference agenda and adapted for{" "}
+                                    Curated for{" "}
                                     <span className="text-amber-600 font-medium">India and South Asia</span>,
                                     the Mumbai edition focuses on the issues shaping legal leadership today.
                                 </p>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-full text-xs font-medium text-amber-700">
                                         <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                        Adapted for India &amp; South Asia
+                                        Built for India &amp; South Asia
                                     </span>
                                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
                                         <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
