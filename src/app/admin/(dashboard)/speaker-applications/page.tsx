@@ -12,6 +12,11 @@ interface Application {
     company: string;
     designation: string;
     conference: string;
+    linkedin?: string | null;
+    topic?: string | null;
+    expertise?: string | null;
+    bio?: string | null;
+    consent?: boolean;
     status: string;
     createdAt: string;
 }
@@ -233,12 +238,41 @@ export default function SpeakerApplicationsPage() {
                                     { label: "Country", value: viewing.country },
                                     { label: "Conference", value: viewing.conference },
                                     { label: "Applied", value: new Date(viewing.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
+                                    { label: "Consent", value: viewing.consent ? "Given" : "Not recorded" },
                                 ].map(({ label, value }) => (
                                     <div key={label}>
                                         <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">{label}</dt>
                                         <dd className="text-slate-700 font-medium">{value}</dd>
                                     </div>
                                 ))}
+                                {viewing.linkedin && (
+                                    <div className="col-span-2">
+                                        <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">LinkedIn</dt>
+                                        <dd>
+                                            <a href={viewing.linkedin} target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 font-medium break-all">
+                                                {viewing.linkedin}
+                                            </a>
+                                        </dd>
+                                    </div>
+                                )}
+                                {viewing.topic && (
+                                    <div className="col-span-2">
+                                        <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">Proposed Topic</dt>
+                                        <dd className="text-slate-700 font-medium">{viewing.topic}</dd>
+                                    </div>
+                                )}
+                                {viewing.expertise && (
+                                    <div className="col-span-2">
+                                        <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">Areas of Expertise</dt>
+                                        <dd className="text-slate-700 font-medium">{viewing.expertise}</dd>
+                                    </div>
+                                )}
+                                {viewing.bio && (
+                                    <div className="col-span-2">
+                                        <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">Bio</dt>
+                                        <dd className="text-slate-600 leading-relaxed">{viewing.bio}</dd>
+                                    </div>
+                                )}
                             </dl>
 
                             <div>

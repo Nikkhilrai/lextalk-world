@@ -570,6 +570,11 @@ model SpeakerApplication {
   company    String
   designation String
   conference String   // Which conference they're interested in
+  linkedin   String?  // LinkedIn profile URL
+  topic      String?  // Proposed session / talk title
+  expertise  String?  // Areas of expertise
+  bio        String?  @db.Text // Speaker bio
+  consent    Boolean  @default(false) // Consent to data collection & being contacted
   status     String   @default("New") // New, Reviewed, Shortlisted, Rejected
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

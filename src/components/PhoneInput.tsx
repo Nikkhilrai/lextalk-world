@@ -176,7 +176,7 @@ export function PhoneInput({ value, onChange, name, id, required, dropdownDirect
                             htmlFor={id}
                             className={cn(
                                 "absolute left-0 transition-all duration-200 pointer-events-none",
-                                (phoneNumber || document.activeElement === inputRef.current)
+                                (phoneNumber || (typeof document !== "undefined" && document.activeElement === inputRef.current))
                                     ? "-top-4 text-xs text-amber-600 font-semibold"
                                     : "top-2 text-slate-400 text-base"
                             )}

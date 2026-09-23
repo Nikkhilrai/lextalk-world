@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { X, Check, Mic } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
+import { Mic, Check, ArrowRight } from "lucide-react";
 import { PhoneInput } from "@/components/PhoneInput";
+import { CountrySelect } from "@/components/CountrySelect";
+import { Footer } from "@/components/Footer";
 
 interface FormData {
     name: string;
@@ -13,27 +17,29 @@ interface FormData {
     company: string;
     designation: string;
     conference: string;
+    linkedin: string;
+    topic: string;
+    expertise: string;
+    bio: string;
     consent: boolean;
-}
-
-interface Props {
-    isOpen: boolean;
-    onClose: () => void;
 }
 
 const CONFERENCES = [
     "LexTalk World Dubai 2026",
     "LexTalk World Mumbai 2026",
+    "Any Upcoming LexTalk World Event",
 ];
 
-export function SpeakerApplyModal({ isOpen, onClose }: Props) {
+export default function SpeakerInterestFormPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
 
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
+        setSubmitError(null);
         try {
             const res = await fetch("/api/speaker-applications", {
                 method: "POST",
@@ -46,74 +52,60 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
             }
             setSubmitted(true);
             reset();
-            setTimeout(() => {
-                onClose();
-                setSubmitted(false);
-            }, 3500);
         } catch (err: any) {
-            alert(err.message || "Something went wrong. Please try again.");
+            setSubmitError(err.message || "Something went wrong. Please try again.");
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    if (!isOpen) return null;
-
     return (
-        <div className="fixed inset-0 z-[100000] flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <div
-                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-                onClick={onClose}
-            />
-
-            {/* Modal */}
-            <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
-                {/* Amber top bar */}
-                <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 rounded-t-2xl" />
-
-                <div className="p-6 md:p-10">
-                    {/* Close */}
-                    <button
-                        onClick={onClose}
-                        className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-                    >
-                        <X size={20} />
-                    </button>
-
-                    {submitted ? (
-                        <div className="py-16 flex flex-col items-center text-center">
-                            <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
-                                <Check className="w-10 h-10 text-green-600" />
-                            </div>
-                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">Application Received</h3>
-                            <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
-                                Thank you for your interest in speaking at LexTalk World. Our team will review your application and be in touch shortly.
-                            </p>
+        <main className="min-h-screen bg-slate-50">
+            {/* Minimal branded header — intentionally not the full site Navbar */}
+            <header className="bg-[#050a15] border-b border-white/10">
+                <div className="container mx-auto px-4 py-10 md:py-14 text-center">
+                    <Link href="/" className="inline-flex items-center justify-center mb-6">
+                        <div className="relative h-9 w-28 md:h-11 md:w-36">
+                            <Image
+                                src="/dubai-event/new-logo/05-newlogo-lextalk-22082023-outline.avif"
+                                alt="LexTalk World"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
                         </div>
-                    ) : (
-                        <>
-                            {/* Header */}
-                            <div className="mb-8">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-9 h-9 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
-                                        <Mic className="w-4 h-4 text-amber-600" />
-                                    </div>
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-600">
-                                        Speaker Interest Form
-                                    </p>
+                    </Link>
+                    <p className="text-amber-400 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-4">
+                        Speaker Interest Form
+                    </p>
+                    <h1 className="text-3xl md:text-4xl font-serif font-bold text-white leading-tight max-w-2xl mx-auto">
+                        Apply to Speak at a LexTalk World Conference
+                    </h1>
+                    <p className="mt-4 text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+                        Share your details below and our team will be in touch to discuss your participation.
+                    </p>
+                </div>
+            </header>
+
+            {/* Form */}
+            <div className="container mx-auto px-4 py-12 md:py-16">
+                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+                    <div className="h-1 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+
+                    <div className="p-6 md:p-10">
+                        {submitted ? (
+                            <div className="py-16 flex flex-col items-center text-center">
+                                <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                                    <Check className="w-10 h-10 text-green-600" />
                                 </div>
-                                <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 leading-tight">
-                                    Apply to Speak at<br />
-                                    <span className="text-amber-600">LexTalk World</span>
-                                </h2>
-                                <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-                                    Fill in your details and we&apos;ll reach out to discuss your participation.
+                                <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">Application Received</h3>
+                                <p className="text-slate-500 text-sm max-w-sm leading-relaxed">
+                                    Thank you for your interest in speaking at LexTalk World. Our team will review your application and be in touch shortly.
                                 </p>
                             </div>
-
+                        ) : (
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                                {/* Row 1: Name + Email */}
+                                {/* Name + Email */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
@@ -144,7 +136,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                     </div>
                                 </div>
 
-                                {/* Row 2: Phone + Country */}
+                                {/* Phone + Country */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
@@ -156,13 +148,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                                 control={control}
                                                 rules={{ required: "Required" }}
                                                 render={({ field }) => (
-                                                    <PhoneInput
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                        name="phone"
-                                                        id="phone"
-                                                        required
-                                                    />
+                                                    <PhoneInput value={field.value} onChange={field.onChange} name="phone" id="phone" required />
                                                 )}
                                             />
                                         </div>
@@ -172,17 +158,21 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                                             Country <span className="text-red-500">*</span>
                                         </label>
-                                        <input
-                                            {...register("country", { required: "Required" })}
-                                            type="text"
-                                            placeholder="India"
-                                            className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
-                                        />
+                                        <div className="border border-slate-200 rounded-lg focus-within:ring-2 focus-within:ring-amber-400/50 focus-within:border-amber-400 transition-colors overflow-hidden px-1">
+                                            <Controller
+                                                name="country"
+                                                control={control}
+                                                rules={{ required: "Required" }}
+                                                render={({ field }) => (
+                                                    <CountrySelect value={field.value} onChange={field.onChange} id="country" />
+                                                )}
+                                            />
+                                        </div>
                                         {errors.country && <p className="mt-1 text-xs text-red-500">{errors.country.message}</p>}
                                     </div>
                                 </div>
 
-                                {/* Row 3: Company + Designation */}
+                                {/* Company + Designation */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
@@ -210,6 +200,22 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                     </div>
                                 </div>
 
+                                {/* LinkedIn */}
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        LinkedIn Profile
+                                    </label>
+                                    <input
+                                        {...register("linkedin", {
+                                            pattern: { value: /^https?:\/\/.+/i, message: "Include http:// or https://" }
+                                        })}
+                                        type="url"
+                                        placeholder="https://linkedin.com/in/janesmith"
+                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                    />
+                                    {errors.linkedin && <p className="mt-1 text-xs text-red-500">{errors.linkedin.message}</p>}
+                                </div>
+
                                 {/* Conference */}
                                 <div>
                                     <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
@@ -225,6 +231,45 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                         ))}
                                     </select>
                                     {errors.conference && <p className="mt-1 text-xs text-red-500">{errors.conference.message}</p>}
+                                </div>
+
+                                {/* Proposed topic */}
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        Proposed Topic / Session Title
+                                    </label>
+                                    <input
+                                        {...register("topic")}
+                                        type="text"
+                                        placeholder="e.g. The GC's Role in the Age of Sovereign AI"
+                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                    />
+                                </div>
+
+                                {/* Expertise */}
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        Areas of Expertise
+                                    </label>
+                                    <input
+                                        {...register("expertise")}
+                                        type="text"
+                                        placeholder="e.g. Cross-border M&A, Data Privacy, Arbitration"
+                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
+                                    />
+                                </div>
+
+                                {/* Bio */}
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        Speaker Bio
+                                    </label>
+                                    <textarea
+                                        {...register("bio")}
+                                        rows={4}
+                                        placeholder="A short bio we can use in the event show guide and speaker page."
+                                        className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300 resize-none"
+                                    />
                                 </div>
 
                                 {/* Consent */}
@@ -245,12 +290,16 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                     {errors.consent && <p className="mt-1 text-xs text-red-500">{errors.consent.message}</p>}
                                 </div>
 
+                                {submitError && (
+                                    <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-4 py-2.5">{submitError}</p>
+                                )}
+
                                 {/* Submit */}
                                 <div className="pt-2">
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -258,15 +307,18 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                             <>
                                                 <Mic className="w-4 h-4" />
                                                 Submit Application
+                                                <ArrowRight className="w-4 h-4" />
                                             </>
                                         )}
                                     </button>
                                 </div>
                             </form>
-                        </>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <Footer />
+        </main>
     );
 }

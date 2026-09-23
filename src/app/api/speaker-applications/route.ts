@@ -4,14 +4,25 @@ import { prisma } from "@/lib/prisma";
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { name, email, phone, country, company, designation, conference } = body;
+        const { name, email, phone, country, company, designation, conference, linkedin, topic, expertise, bio, consent } = body;
 
         if (!name || !email || !phone || !country || !company || !designation || !conference) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
 
+        if (!consent) {
+            return NextResponse.json({ error: "Consent is required" }, { status: 400 });
+        }
+
         const application = await (prisma as any).speakerApplication.create({
-            data: { name, email, phone, country, company, designation, conference }
+            data: {
+                name, email, phone, country, company, designation, conference,
+                linkedin: linkedin || null,
+                topic: topic || null,
+                expertise: expertise || null,
+                bio: bio || null,
+                consent: true,
+            }
         });
 
         await prisma.notification.create({
