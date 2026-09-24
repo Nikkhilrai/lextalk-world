@@ -115,11 +115,13 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         name: "Mriganka Shekhar Dutta",
         title: "Senior Counsel, NTT DATA, Inc.",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650241/lextalk/mumbai-speakers/mriganka-shekhar-dutta.png",
+        bio: `Technology lawyer and strategic legal leader with over 15 years of experience across TMT, technology consulting, retail, e-commerce and energy. As Senior Counsel at NTT DATA, Inc., he advises senior leadership on technology, complex commercial transactions, M&A, data privacy, IP and regulatory matters. He has built high-performing legal functions that use legal technology and AI to improve efficiency and manage risk.`,
     },
     {
         name: "Renuka L. Chaudhari",
         title: "Senior Director, Legal/Commercial Contracts, Automation Anywhere",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650259/lextalk/mumbai-speakers/renuka-l-chaudhari.png",
+        bio: `Legal professional with 18+ years of experience across industries. Senior Director, Legal & Commercial Contracting (IMEA and APJ) at Automation Anywhere, where she progressed from Director in the same function. Earlier in-house roles include General Manager – Associate Counsel at Cummins India and positions at Zensar Technologies. PG Diploma in Law of International Trade, Holborn College, London.`,
     },
     {
         name: "Vishal Lohire",
@@ -130,26 +132,31 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         name: "Abhishek Kumar (Gupta)",
         title: "Head of Legal & Regulatory (New Energy – Bio Energy Business), Reliance Industries Limited",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650272/lextalk/mumbai-speakers/abhishek-kumar-gupta.png",
+        bio: `Head of Legal & Regulatory for the New Energy – Bio Energy business at Reliance Industries since January 2025, overseeing legal and regulatory work on large-scale energy projects and the growth of bioenergy and sustainable fuels. With nearly two decades in the energy sector, he was previously Head of Legal at Nayara Energy, Deputy General Manager (Legal) at Jio-bp and Manager (Law) at Indian Oil Corporation.`,
     },
     {
         name: "Bireshwar Chatterjee",
         title: "Chief Compliance Officer, Shriram Life Insurance",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650280/lextalk/mumbai-speakers/bireshwar-chatterjee.png",
+        bio: `Chief Compliance Officer and Head of Business Legal at Shriram Life Insurance. He positions legal and compliance as a strategic enabler, bringing legal review into product, partnership and channel planning from the start, and set up the company's Regulatory Intelligence Cell to track IRDAI, PFRDA, RBI and other regulatory developments. Previously worked at LIC and IRDAI. Named among the Dynamic CLOs shaping the legal industry in 2025.`,
     },
     {
         name: "Dr. Richa Pathak",
         title: "Senior Advisor, Government of India",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650291/lextalk/mumbai-speakers/dr-richa-pathak.png",
+        bio: `Legal counsel and Senior Government Advisor specialising in contracts, arbitration, debt restructuring, financing transactions, real estate financing, structuring and policy. LL.M. from the London School of Economics and an Executive Programme from IIM Ahmedabad; recipient of the Chief Justice M.C. Chagla Memorial Trust Gold Medal (2012), University of Mumbai. Earlier roles at Voltas, L&T and Avigna Group. Founder of the Richa Cares Foundation.`,
     },
     {
         name: "Rajiv Mohapatra",
         title: "Vice President, Global Legal Compliance, Mastercard",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650324/lextalk/mumbai-speakers/rajiv-mohapatra.png",
+        bio: `Vice President, Global Legal Compliance at Mastercard, based in Mumbai, and global head of legal compliance for its money-transmission product across 210+ geographies. Previously at Home Credit India, Vodafone and HSBC, and has practised before the High Courts and the Supreme Court of India. Published on banking, finance and payments law. Named among India's Top 100 General Counsel (Business World Legal, 2021).`,
     },
     {
         name: "Karthik Narayanadoss",
         title: "Head Legal, Montra Electric",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080512/lextalk/mumbai-speakers/karthik-narayanadoss.png",
+        bio: `Head of Legal at TI Clean Mobility, the Murugappa Group company behind Montra Electric, overseeing legal affairs and compliance across its subsidiaries and four business divisions. He has 20+ years of in-house experience in manufacturing and technology across commercial contracts, litigation, M&A and regulatory compliance, with earlier roles at Hyundai, Sify Technologies, Tech Mahindra, Pfizer and Ramco Cements. Law degree from Symbiosis Law College, Pune.`,
     },
     {
         name: "Tarang Kulkarni",
@@ -160,11 +167,13 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         name: "Lakshmi S Nayak",
         title: "Sr. Director, Head of Legal & Compliance, Yield Engineering Systems",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080515/lextalk/mumbai-speakers/lakshmi-s-nayak.png",
+        bio: `Director and Head of Legal & Compliance at Yield Engineering Systems, with a background in global legal affairs and business and commerce. Experience spans compliance, risk management, transactional documentation and corporate advisory, with earlier legal roles at Waters Corporation and METRO Cash & Carry India.`,
     },
     {
         name: "Sarbasuchi Das",
         title: "Head of NPA Cell, IDBI Trusteeship Services Ltd",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080516/lextalk/mumbai-speakers/sarbasuchi-das.png",
+        bio: `AVP and Head of NPA Cell at IDBI Trusteeship Services, Mumbai. He began as a practising lawyer before moving into banking and financial services, with earlier roles at SBICAP Trustee Company, Brickwork Ratings, Dhir & Dhir Associates and ING Vysya Bank. Expertise in corporate law, recoveries, conveyancing, employment law and arbitration; Diploma in M&A Laws, Asian School of Cyber Laws.`,
     },
     {
         name: "Rishi Vyas",
