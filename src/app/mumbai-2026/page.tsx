@@ -12,6 +12,7 @@ import { MumbaiWhoYouWillMeet } from "./components/mumbai/MumbaiWhoYouWillMeet";
 import { MumbaiSpeakersTeaser } from "./components/mumbai/MumbaiSpeakersTeaser";
 import { MumbaiWaysToParticipate } from "./components/mumbai/MumbaiWaysToParticipate";
 import { MumbaiGlobalLegacy } from "./components/mumbai/MumbaiGlobalLegacy";
+import { MumbaiTestimonials } from "./components/mumbai/MumbaiTestimonials";
 import { MumbaiAdvisoryBoard } from "./components/mumbai/MumbaiAdvisoryBoard";
 import { MumbaiSponsor } from "./components/mumbai/MumbaiSponsor";
 import { MumbaiFinalCTA } from "./components/mumbai/MumbaiFinalCTA";
@@ -107,6 +108,7 @@ export default function Mumbai2026Page() {
                     onOpenSponsorship={() => setIsSponsorshipOpen(true)}
                 />
                 <MumbaiGlobalLegacy />
+                <MumbaiTestimonials />
                 <MumbaiAdvisoryBoard />
                 <MumbaiSponsor />
                 <MumbaiFinalCTA onOpenRegister={() => setIsRegisterModalOpen(true)} />
