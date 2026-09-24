@@ -112,12 +112,6 @@ His career highlights include spearheading enterprise-wide governance, complianc
 He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, and holds an LLB and a B.Com from Delhi University. His expertise spans corporate governance and regulatory strategy, legal risk management and compliance leadership, ESG and sustainability integration, litigation, M&A and corporate advisory, and stakeholder engagement and ethical leadership.`,
     },
     {
-        name: "Mriganka Shekhar Dutta",
-        title: "Senior Counsel, NTT DATA, Inc.",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650241/lextalk/mumbai-speakers/mriganka-shekhar-dutta.png",
-        bio: `Technology lawyer and strategic legal leader with over 15 years of experience across TMT, technology consulting, retail, e-commerce and energy. As Senior Counsel at NTT DATA, Inc., he advises senior leadership on technology, complex commercial transactions, M&A, data privacy, IP and regulatory matters. He has built high-performing legal functions that use legal technology and AI to improve efficiency and manage risk.`,
-    },
-    {
         name: "Renuka L. Chaudhari",
         title: "Senior Director, Legal/Commercial Contracts, Automation Anywhere",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650259/lextalk/mumbai-speakers/renuka-l-chaudhari.png",
