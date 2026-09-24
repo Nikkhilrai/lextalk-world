@@ -31,6 +31,20 @@ export function EventsList() {
             ]
         },
         {
+            city: "Singapore",
+            month: "FEB",
+            days: "4",
+            year: "2027",
+            venue: "Venue to be announced",
+            image: "https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=1200&auto=format&fit=crop",
+            status: "Coming Soon",
+            region: "Asia Pacific",
+            description: "LexTalk World comes to Singapore on 4 February 2027. Venue, speakers and registration will be announced soon.",
+            link: "/singapore-2027",
+            agendaLink: "#",
+            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "TBA" }
+        },
+        {
             city: "Delhi",
             month: "JUL",
             days: "TBA",

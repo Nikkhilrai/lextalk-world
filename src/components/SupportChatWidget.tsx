@@ -68,6 +68,7 @@ const LINK_LABELS: [string, string][] = [
     ["/contact", "Contact the team"],
     ["/dubai-2026", "Dubai 2026 event page"],
     ["/mumbai-2026", "Mumbai 2026 event page"],
+    ["/singapore-2027", "Singapore 2027 event page"],
     ["/delhi-2027", "Delhi 2027 event page"],
 ];
 
