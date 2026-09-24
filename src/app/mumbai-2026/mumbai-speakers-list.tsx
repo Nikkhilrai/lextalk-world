@@ -153,11 +153,6 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         bio: `Head of Legal at TI Clean Mobility, the Murugappa Group company behind Montra Electric, overseeing legal affairs and compliance across its subsidiaries and four business divisions. He has 20+ years of in-house experience in manufacturing and technology across commercial contracts, litigation, M&A and regulatory compliance, with earlier roles at Hyundai, Sify Technologies, Tech Mahindra, Pfizer and Ramco Cements. Law degree from Symbiosis Law College, Pune.`,
     },
     {
-        name: "Tarang Kulkarni",
-        title: "Director Legal, Target",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080513/lextalk/mumbai-speakers/tarang-kulkarni.png",
-    },
-    {
         name: "Lakshmi S Nayak",
         title: "Sr. Director, Head of Legal & Compliance, Yield Engineering Systems",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080515/lextalk/mumbai-speakers/lakshmi-s-nayak.png",
