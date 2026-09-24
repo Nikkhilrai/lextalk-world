@@ -155,15 +155,6 @@ As Executive Legal Advisor to the President of the Royal Commission for Riyadh C
 Combining technical expertise with legal knowledge, he operates at the intersection of technology and legal strategy, with a focus on technology law, intellectual property, emerging digital challenges, and corporate governance. As a registered advocate, he actively contributes to legal discourse and addresses contemporary legal issues arising from technological innovation.`,
     },
     {
-        name: "Blaine Deolindo",
-        title: "Head of Legal — Fintech & Digital Asset Regulation",
-        category: "Leading General Counsel of the Year",
-        image: `${SPEAKER_IMG}/v1789973047/lextalk/dubai-awardees-2026/blaine-deolindo.jpg`,
-        bio: `Blaine Deolindo is a Head of Legal with over 15 years of experience advising fintech, digital asset, and regulated financial services businesses across the UAE, Saudi Arabia, Europe, and offshore jurisdictions. Based in the UAE, she has led the establishment and regulatory licensing of DFSA-regulated entities in DIFC, ADGM holding structures, and supported licensing strategies under Saudi frameworks, including CMA requirements.
-
-Her expertise spans fintech regulation, blockchain and digital assets, Islamic finance, data protection, and complex cross-border contracts. Blaine is recognised for building legal departments, implementing strong governance and compliance frameworks, and translating evolving regulations into practical business solutions. She also mentors emerging legal talent and contributes to global fintech regulatory best practices.`,
-    },
-    {
         name: "Dikina Wedi",
         title: "Group General Counsel & Chief Compliance Officer, Auremin",
         category: "Inspiring In-House Legal Department of the Year",
