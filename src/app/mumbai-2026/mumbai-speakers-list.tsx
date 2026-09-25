@@ -63,7 +63,7 @@ She previously served as Director, Legal Compliance & Frontier Markets Plus (Ind
     },
     {
         name: "Arun Kasat",
-        title: "Head – Global Corporate & Commercial Compliance (Emerging Markets), Biocon Biologics",
+        title: "Global Head – Ethics, Compliance & Data Privacy, Biocon Biologics",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/f_auto,q_auto,w_800/v1790324454/lextalk/mumbai-speakers/arun-kasat-v2.png",
         bio: `Arun Kasat, Global Head of Ethics, Compliance and Data Privacy at Biocon Biologics, one of the world's leading biopharmaceutical companies. Arun currently leads global initiatives across ethics and compliance, corporate governance, data privacy, sanctions compliance, and regulatory risk management.
 
