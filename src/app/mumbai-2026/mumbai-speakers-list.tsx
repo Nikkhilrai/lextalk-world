@@ -64,10 +64,12 @@ She previously served as Director, Legal Compliance & Frontier Markets Plus (Ind
     {
         name: "Arun Kasat",
         title: "Head – Global Corporate & Commercial Compliance (Emerging Markets), Biocon Biologics",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625148/lextalk/mumbai-speakers/arun-kasat.jpg",
-        bio: `Arun Kasat is a seasoned Legal, Privacy, Governance & Compliance professional with over 20 years of experience, currently heading Global Corporate and Commercial Compliance for Emerging Markets at Biocon Biologics.
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/f_auto,q_auto,w_800/v1790324454/lextalk/mumbai-speakers/arun-kasat-v2.png",
+        bio: `Arun Kasat, Global Head of Ethics, Compliance and Data Privacy at Biocon Biologics, one of the world's leading biopharmaceutical companies. Arun currently leads global initiatives across ethics and compliance, corporate governance, data privacy, sanctions compliance, and regulatory risk management.
 
-He previously served as Global Generics Business Compliance Lead (India) at Dr. Reddy's Laboratories, and has held positions at Abbott, Siemens, Johnson Insurance, and EY. He holds a B.Com (Hons.) from St. Xavier's College and is a Chartered Accountant with the Institute of Chartered Accountants of India.`,
+With more than two decades of international experience, he has advised boards and senior leadership teams on governance, compliance, investigations, data protection, ESG, and enterprise risk management across multiple jurisdictions. Prior to Biocon, Arun held leadership roles with organizations including Dr. Reddy's Laboratories, Abbott, Siemens, Johnson & Johnson, and EY, working across India and the Middle East.
+
+Arun is a qualified lawyer and Chartered Accountant, and is widely recognized for building high-impact compliance and governance programs that enable ethical business growth while navigating complex regulatory environments. His expertise spans compliance strategy, data privacy, corporate governance, investigations, sanctions, and regulatory transformation.`,
     },
     {
         name: "Suchana Mukherjee Gupta",
