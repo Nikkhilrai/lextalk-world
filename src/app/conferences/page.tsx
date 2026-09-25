@@ -48,16 +48,24 @@ const upcomingConferences = [
         country: "Singapore",
         region: "Asia Pacific",
         date: "4 February 2027",
-        venue: "Venue to be announced",
+        venue: "Singapore",
+        tagline: "AI, Law, Risk & Digital Trust Conference & Exhibition 2027",
         duration: "TBA",
         image: "https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=1200&auto=format&fit=crop",
         status: "Coming Soon",
         featured: false,
         description: "LexTalk World comes to Singapore on 4 February 2027. Venue, speakers and registration will be announced soon.",
+        stats: {
+            "Senior Professionals": "150+",
+            speakers: "40+",
+            awardees: "30+",
+            partners: "15+",
+        },
         highlights: [
-            "Full Conference Access",
-            "Curated Networking",
-            "Exhibitor Showcase",
+            "150+ Senior Professionals",
+            "40+ Speakers",
+            "30+ Awardees",
+            "15+ Partners",
         ],
         link: "/singapore-2027",
         earlyBird: false,
@@ -251,6 +259,9 @@ export default function ConferencesPage() {
                                                     {event.name}
                                                 </h3>
                                                 <p className="text-amber-600 font-semibold">{event.venue}</p>
+                                                {(event as any).tagline && (
+                                                    <p className="text-slate-500 text-sm font-medium mt-1">{(event as any).tagline}</p>
+                                                )}
                                             </div>
                                             <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase ${event.status === "Open"
                                                 ? "bg-emerald-100 text-emerald-700"

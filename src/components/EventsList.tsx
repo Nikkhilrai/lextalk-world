@@ -35,14 +35,21 @@ export function EventsList() {
             month: "FEB",
             days: "4",
             year: "2027",
-            venue: "Venue to be announced",
+            venue: "Singapore",
+            tagline: "AI, Law, Risk & Digital Trust Conference & Exhibition 2027",
             image: "https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=1200&auto=format&fit=crop",
             status: "Coming Soon",
             region: "Asia Pacific",
             description: "LexTalk World comes to Singapore on 4 February 2027. Venue, speakers and registration will be announced soon.",
             link: "/singapore-2027",
             agendaLink: "#",
-            stats: { delegates: "TBA", delegatesLabel: "Attendees", type: "Conference", duration: "TBA" }
+            stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "TBA" },
+            highlights: [
+                "150+ Senior Professionals",
+                "40+ Speakers",
+                "30+ Awardees",
+                "15+ Partners"
+            ]
         },
         {
             city: "Delhi",
@@ -170,6 +177,11 @@ export function EventsList() {
                                     <span className="w-3 sm:w-4 h-px bg-amber-400" />
                                     {event.venue}
                                 </p>
+                                {event.tagline && (
+                                    <p className="text-amber-600 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide leading-snug mb-2 sm:mb-3">
+                                        {event.tagline}
+                                    </p>
+                                )}
 
                                 {/* Description or Highlights */}
                                 {event.highlights ? (
