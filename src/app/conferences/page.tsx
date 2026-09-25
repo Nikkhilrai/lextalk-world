@@ -50,7 +50,7 @@ const upcomingConferences = [
         date: "4 February 2027",
         venue: "Singapore",
         tagline: "AI, Law, Risk & Digital Trust Conference & Exhibition 2027",
-        duration: "TBA",
+        duration: "1 Day",
         image: "https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=1200&auto=format&fit=crop",
         status: "Coming Soon",
         featured: false,

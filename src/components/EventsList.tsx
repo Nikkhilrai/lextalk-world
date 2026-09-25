@@ -43,7 +43,7 @@ export function EventsList() {
             description: "LexTalk World comes to Singapore on 4 February 2027. Venue, speakers and registration will be announced soon.",
             link: "/singapore-2027",
             agendaLink: "#",
-            stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "TBA" },
+            stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "1 Day" },
             highlights: [
                 "150+ Senior Professionals",
                 "40+ Speakers",
