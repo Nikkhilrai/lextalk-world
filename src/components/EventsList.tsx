@@ -38,17 +38,17 @@ export function EventsList() {
             venue: "Singapore",
             tagline: "AI, Law, Risk & Digital Trust Conference & Exhibition 2027",
             image: "https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=1200&auto=format&fit=crop",
-            status: "Coming Soon",
+            status: "Details Live",
             region: "Asia Pacific",
-            description: "LexTalk World comes to Singapore on 4 February 2027. Venue, speakers and registration will be announced soon.",
+            description: "A senior executive conference on AI governance, legal exposure, cybersecurity, privacy and digital trust — 4 February 2027, Singapore.",
             link: "/singapore-2027",
             agendaLink: "#",
             stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "1 Day" },
             highlights: [
                 "150+ Senior Professionals",
-                "40+ Speakers",
-                "30+ Awardees",
-                "15+ Partners"
+                "100+ Organisations Represented",
+                "30–35 Senior Speakers",
+                "One-Day Conference & Exhibition"
             ]
         },
         {
