@@ -55,7 +55,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
 export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-    const [topCard, setTopCard] = useState<"bangalore" | "mumbai" | "dubai">("mumbai");
+    const [topCard, setTopCard] = useState<"singapore" | "mumbai" | "dubai">("mumbai");
 
     return (
         <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-32 md:pt-72 lg:pt-40 pb-2 md:pb-8 overflow-hidden bg-slate-900">
@@ -233,47 +233,44 @@ export function Hero() {
                             </Link>
                         </motion.div>
 
-                        {/* Card 2: Bangalore — Completed (side) */}
+                        {/* Card 2: Singapore */}
                         <motion.div
                             className="absolute top-[5%] right-[10%] lg:right-[15%]"
-                            style={{ zIndex: topCard === "bangalore" ? 40 : 20 }}
-                            animate={{ rotate: topCard === "bangalore" ? 0 : 12 }}
+                            style={{ zIndex: topCard === "singapore" ? 40 : 20 }}
+                            animate={{ rotate: topCard === "singapore" ? 0 : 12 }}
                             whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                            onHoverStart={() => setTopCard("bangalore")}
+                            onHoverStart={() => setTopCard("singapore")}
                             onHoverEnd={() => setTopCard("dubai")}
                         >
                             {/* Glow ring */}
                             <motion.div
                                 className="absolute -inset-[3px] rounded-2xl lg:rounded-3xl pointer-events-none"
-                                animate={{ opacity: topCard === "bangalore" ? 1 : 0, scale: topCard === "bangalore" ? 1 : 0.95 }}
+                                animate={{ opacity: topCard === "singapore" ? 1 : 0, scale: topCard === "singapore" ? 1 : 0.95 }}
                                 transition={{ duration: 0.3 }}
                                 style={{ background: "linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b)", padding: 2 }}
                             >
                                 <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-slate-800" />
                             </motion.div>
-                            <Link href="/bangalore-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
-                                style={{ boxShadow: topCard === "bangalore" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
+                            <Link href="/singapore-2027" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
+                                style={{ boxShadow: topCard === "singapore" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
                                 <Image
-                                    src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=800&auto=format&fit=crop"
-                                    alt="Bangalore"
+                                    src="https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=800&auto=format&fit=crop"
+                                    alt="Singapore"
                                     fill
                                     className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
                                 {/* Shimmer sweep */}
                                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
-                                <div className="absolute top-3 right-3 px-2 py-0.5 bg-slate-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Completed
-                                </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">June 11, 2026</span>
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Feb 4, 2027</span>
                                     </div>
-                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Bangalore</h3>
+                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Singapore</h3>
                                     <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
                                         <MapPin className="w-3 h-3" />
-                                        <span>Bangalore, India</span>
+                                        <span>Singapore</span>
                                     </div>
                                 </div>
                             </Link>
