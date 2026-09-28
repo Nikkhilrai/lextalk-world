@@ -22,12 +22,7 @@ export const speakers: Speaker[] = [
         image: "/mumbai-2026/Mumbai_Speakers/RAHUL SHARMA.png",
         badge: "Featured Speaker",
     },
-    {
-        name: "Ankita Choudhary",
-        title: "Head of Legal, Nuvama Group",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125056/lextalk/bangalore-speakers/ankita-choudhary.jpg",
-        bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments. Proven expertise in legal advisory, contract lifecycle management, legal risk mitigation, litigation strategy, and intellectual property protection. Adept at setting up legal frameworks and policies, driving standardization, enabling business growth with pragmatic legal solutions, and managing strategic transactions and special projects. Recognized for consistent leadership growth, team-building acumen, and collaborative engagement with senior stakeholders and external counsels. Known for being a trusted legal partner across business verticals, aligning legal strategy with organizational goals to support robust and compliant business operations.`,
-    },
+
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
@@ -190,6 +185,12 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         name: "Priyam Dhamankar",
         title: "Regional Ethics & Compliance Leader, Cummins India",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080518/lextalk/mumbai-speakers/priyam-dhamankar.png",
+    },
+    {
+        name: "Ankita Choudhary",
+        title: "Head of Legal, Nuvama Group",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1787125056/lextalk/bangalore-speakers/ankita-choudhary.jpg",
+        bio: `Seasoned in-house legal professional with 16 years of diverse experience, currently serving as Associate Director and Head of the Legal Advisory & Contracts Team at Nuvama Wealth Management. Started career with Edelweiss Group in 2010 and transitioned through internal restructuring and strategic investments. Proven expertise in legal advisory, contract lifecycle management, legal risk mitigation, litigation strategy, and intellectual property protection. Adept at setting up legal frameworks and policies, driving standardization, enabling business growth with pragmatic legal solutions, and managing strategic transactions and special projects. Recognized for consistent leadership growth, team-building acumen, and collaborative engagement with senior stakeholders and external counsels. Known for being a trusted legal partner across business verticals, aligning legal strategy with organizational goals to support robust and compliant business operations.`,
     },
 ];
 
