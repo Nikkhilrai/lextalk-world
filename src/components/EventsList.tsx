@@ -42,7 +42,8 @@ export function EventsList() {
             region: "Asia Pacific",
             description: "A senior executive conference on AI governance, legal exposure, cybersecurity, privacy and digital trust — 4 February 2027, Singapore.",
             link: "/singapore-2027",
-            agendaLink: "#",
+            agendaLink: "/singapore-2027#agenda",
+            publishedAgenda: true,
             stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "1 Day" },
             highlights: [
                 "150+ Senior Professionals",
