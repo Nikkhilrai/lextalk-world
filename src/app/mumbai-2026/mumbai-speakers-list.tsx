@@ -5,14 +5,23 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mic } from "lucide-react";
 
-interface Speaker {
+export interface Speaker {
     name: string;
     title: string;
     image: string;
     bio?: string;
+    badge?: string;
+    isGuestOfHonor?: boolean;
+    isCentred?: boolean;
 }
 
 export const speakers: Speaker[] = [
+    {
+        name: "Rahul Sharma",
+        title: "RGC & Head Legal - India & South Asia",
+        image: "/mumbai-2026/Mumbai_Speakers/RAHUL SHARMA.png",
+        badge: "Featured Speaker",
+    },
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
@@ -185,98 +194,104 @@ export default function MumbaiSpeakersList() {
     const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
 
     return (
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-[#FFFCF7]">
-            {/* Warm structured background */}
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-[#FDF9F3]">
+            {/* Subtle structured background — fine linen texture */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-amber-200/20 rounded-full blur-[140px]" />
-                <div className="absolute bottom-0 right-[15%] w-[500px] h-[300px] rounded-full blur-[130px]" style={{ backgroundColor: `${MAROON}0D` }} />
+                <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] rounded-full blur-[140px]"
+                    style={{ backgroundColor: "#FCE7D0", opacity: 0.35 }}
+                />
+                <div
+                    className="absolute inset-0 opacity-[0.035]"
+                    style={{
+                        backgroundImage: `repeating-linear-gradient(90deg, #3A0F1F 0px, #3A0F1F 1px, transparent 1px, transparent 80px)`,
+                    }}
+                />
             </div>
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
-                {/* Section Title — bold, warm */}
+                {/* Section Title */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16 lg:mb-24"
+                    className="text-center mb-16 lg:mb-20"
                 >
-                    <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-amber-600 mb-4">
+                    <p
+                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] mb-4"
+                        style={{ color: MAROON }}
+                    >
                         Mumbai 2026 · Conference Faculty
                     </p>
-                    <h2 className="text-4xl md:text-5xl lg:text-[50px] font-black text-[#3A0F1F] tracking-tight">
+                    <h2 className="text-4xl md:text-5xl lg:text-[50px] font-serif font-bold text-[#3A0F1F] tracking-tight">
                         Our Speakers
                     </h2>
                     <div className="mt-5 flex justify-center items-center gap-0">
                         <div className="flex flex-col items-center gap-[3px]">
-                            <div className="w-16 h-[2px] rounded-full bg-[#7A1F3D]/20" />
-                            <div className="w-10 h-[2px] rounded-full bg-amber-500" />
+                            <div className="w-16 h-[1px] bg-[#D1C2A5]" />
+                            <div className="w-10 h-[1px]" style={{ backgroundColor: MAROON }} />
                         </div>
                     </div>
-                    <p className="mt-5 text-[13px] md:text-sm text-[#7A1F3D]/60 font-normal max-w-lg mx-auto leading-relaxed italic">
-                        Distinguished leaders shaping the future of legal practice across India and South Asia
+                    <p className="mt-5 text-[13px] md:text-sm text-[#7A1F3D]/70 font-normal max-w-lg mx-auto leading-relaxed italic">
+                        Distinguished General Counsel, managing partners, and senior leaders shaping legal practice across South Asia.
                     </p>
                 </motion.div>
 
-                {/* Speakers Grid — uniform, evenly-aligned cards */}
                 {speakers.length > 0 ? (
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-14 md:gap-y-16 items-stretch">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                         {speakers.map((speaker, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
-                                transition={{ duration: 0.5, delay: (idx % 4) * 0.08 }}
-                                className={`group h-full ${speaker.bio ? "cursor-pointer" : ""}`}
+                                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                                className={`group ${(speaker.isGuestOfHonor || speaker.isCentred) ? "sm:col-span-2 lg:col-span-3" : ""} ${speaker.bio ? "cursor-pointer" : ""}`}
                                 onClick={() => speaker.bio && setSelectedSpeaker(speaker)}
                             >
-                                <div className="relative h-full flex flex-col items-center text-center transition-transform duration-500 group-hover:-translate-y-2">
-                                    {/* Portrait — soft rounded square, full photo visible (no corner cropping) */}
-                                    <div className="relative mb-5 w-full max-w-[230px] md:max-w-[250px]">
+                                <div className={`relative flex flex-col items-center text-center ${(speaker.isGuestOfHonor || speaker.isCentred) ? "max-w-xs mx-auto" : ""}`}>
+
+                                    {/* Portrait with structured frame */}
+                                    <div className="relative mb-6 w-full max-w-[280px]">
                                         <div
-                                            className="relative w-full aspect-[1/1.05] overflow-hidden rounded-[28px] bg-[#FDF0E4] transition-all duration-500 ring-4 ring-white group-hover:ring-amber-300"
-                                            style={{ boxShadow: `0 18px 40px -18px ${MAROON}55` }}
-                                        >
-                                            {speaker.image ? (
-                                                <Image
-                                                    src={speaker.image}
-                                                    alt={speaker.name}
-                                                    fill
-                                                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 250px"
-                                                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                                                />
-                                            ) : (
-                                                <div className="absolute inset-0 flex items-center justify-center" style={{ color: `${MAROON}40` }}>
-                                                    <svg className="w-14 h-14" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    </svg>
-                                                </div>
-                                            )}
-                                            {/* Warm sheen sweep on hover */}
-                                            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-12 pointer-events-none" />
+                                            className="absolute -inset-4 border transition-all duration-500 rounded-lg border-[#E5D7C3] group-hover:border-amber-400/50"
+                                        />
+
+                                        <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#F5EDE0] rounded-sm shadow-xl transition-all duration-500 ring-4 ring-white group-hover:shadow-2xl group-hover:shadow-amber-900/15">
+                                            <Image
+                                                src={speaker.image}
+                                                alt={speaker.name}
+                                                fill
+                                                unoptimized
+                                                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                         </div>
 
-                                        {/* Gold accent badge — top-left, clear of the company logo badges in the photos' bottom-right */}
-                                        <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-amber-500 border-4 border-[#FFFCF7] shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
-                                            <Mic className="w-3 h-3 text-white" />
-                                        </div>
+                                        <div
+                                            className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-12 rounded-full shadow-sm"
+                                            style={{ backgroundColor: MAROON }}
+                                        />
                                     </div>
 
-                                    {/* Text content — fixed min-height so every card lines up regardless of name/title length */}
-                                    <div className="pt-1 flex-1 flex flex-col items-center w-full max-w-[230px]">
-                                        <h3 className="min-h-[2.75rem] md:min-h-[3.25rem] flex items-center text-base md:text-lg font-black text-[#3A0F1F] mb-1.5 leading-snug group-hover:text-[#7A1F3D] transition-colors duration-300 tracking-tight">
+                                    {/* Text content */}
+                                    <div className="pt-2 flex flex-col items-center max-w-[320px]">
+                                        <h3 className="font-serif font-bold text-[#3A0F1F] mb-2 text-xl md:text-2xl leading-tight group-hover:text-amber-700 transition-colors duration-300 tracking-tight">
                                             {speaker.name}
                                         </h3>
+
                                         {speaker.title && (
-                                            <p className="min-h-[2.75rem] md:min-h-[3rem] text-[10px] md:text-[11px] font-semibold text-[#7A1F3D]/60 group-hover:text-amber-700 transition-colors duration-300 uppercase tracking-[0.12em] leading-relaxed line-clamp-3">
+                                            <p className="text-[12px] md:text-[13px] font-semibold text-[#7A1F3D]/70 group-hover:text-[#7A1F3D] transition-colors duration-300 uppercase tracking-widest leading-relaxed">
                                                 {speaker.title}
                                             </p>
                                         )}
+
                                         {speaker.bio && (
-                                            <div className="mt-auto pt-3 flex items-center gap-2 text-amber-600 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                                                <span className="text-[9px] font-bold uppercase tracking-widest">View Biography</span>
+                                            <div className="mt-4 flex items-center gap-2 text-amber-700 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                                                <span className="text-[10px] font-bold uppercase tracking-widest">View Biography</span>
+                                                <div className="w-4 h-px bg-amber-700" />
                                             </div>
                                         )}
                                     </div>
@@ -299,7 +314,7 @@ export default function MumbaiSpeakersList() {
 
             </div>
 
-            {/* Biography Modal — warm cream card */}
+            {/* Biography Modal */}
             <AnimatePresence>
                 {selectedSpeaker && (
                     <div className="fixed inset-0 z-[100000] flex items-center justify-center p-4">
@@ -317,7 +332,6 @@ export default function MumbaiSpeakersList() {
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             className="relative w-full max-w-2xl max-h-[90vh] overflow-hidden bg-[#FFFCF7] rounded-2xl shadow-2xl flex flex-col"
                         >
-                            {/* Close button */}
                             <button
                                 onClick={() => setSelectedSpeaker(null)}
                                 className="absolute top-4 right-4 p-2 rounded-full bg-[#FDF0E4] transition-colors z-10 hover:bg-amber-100"
@@ -326,7 +340,6 @@ export default function MumbaiSpeakersList() {
                                 <X className="w-5 h-5" />
                             </button>
 
-                            {/* Modal Content */}
                             <div className="overflow-y-auto p-6 md:p-10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
                                     <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden ring-4 ring-white shrink-0 mx-auto md:mx-0 shadow-lg">
@@ -334,6 +347,7 @@ export default function MumbaiSpeakersList() {
                                             src={selectedSpeaker.image}
                                             alt={selectedSpeaker.name}
                                             fill
+                                            unoptimized
                                             className="object-cover object-center"
                                         />
                                     </div>
@@ -355,7 +369,6 @@ export default function MumbaiSpeakersList() {
                                 </div>
                             </div>
 
-                            {/* Footer / Accent */}
                             <div className="h-1.5 w-full" style={{ background: `linear-gradient(90deg, #FDE68A, ${MAROON}, #FDE68A)` }} />
                         </motion.div>
                     </div>
