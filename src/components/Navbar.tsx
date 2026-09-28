@@ -44,7 +44,6 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             ]
         },
         { name: "Legal Honor", href: "/awardees" },
-        { name: "Reports", href: "/post-event-reports" },
         { name: "Gallery", href: "/event-gallery" },
         { name: "Sponsor", href: "/sponsor" },
         {
@@ -52,6 +51,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             href: "#",
             hasDropdown: true,
             dropdownItems: [
+                { name: "Reports", href: "/post-event-reports" },
                 { name: "Blog/News", href: "/blog" },
                 { name: "Podcasts", href: "/podcasts" },
                 { name: "Show Guide", href: "/show-guides" },
