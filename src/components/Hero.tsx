@@ -197,7 +197,7 @@ export function Hero() {
                             animate={{ rotate: topCard === "mumbai" ? 0 : -8 }}
                             whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                             onHoverStart={() => setTopCard("mumbai")}
-                            onHoverEnd={() => setTopCard("dubai")}
+                            onHoverEnd={() => setTopCard("singapore")}
                         >
                             {/* Glow ring */}
                             <motion.div
@@ -233,81 +233,81 @@ export function Hero() {
                             </Link>
                         </motion.div>
 
-                        {/* Card 2: Singapore */}
+                        {/* Card 2: Dubai — Completed (side) */}
                         <motion.div
                             className="absolute top-[5%] right-[10%] lg:right-[15%]"
-                            style={{ zIndex: topCard === "singapore" ? 40 : 20 }}
-                            animate={{ rotate: topCard === "singapore" ? 0 : 12 }}
+                            style={{ zIndex: topCard === "dubai" ? 40 : 20 }}
+                            animate={{ rotate: topCard === "dubai" ? 0 : 12 }}
                             whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                            onHoverStart={() => setTopCard("singapore")}
-                            onHoverEnd={() => setTopCard("dubai")}
+                            onHoverStart={() => setTopCard("dubai")}
+                            onHoverEnd={() => setTopCard("singapore")}
                         >
                             {/* Glow ring */}
                             <motion.div
                                 className="absolute -inset-[3px] rounded-2xl lg:rounded-3xl pointer-events-none"
-                                animate={{ opacity: topCard === "singapore" ? 1 : 0, scale: topCard === "singapore" ? 1 : 0.95 }}
+                                animate={{ opacity: topCard === "dubai" ? 1 : 0, scale: topCard === "dubai" ? 1 : 0.95 }}
                                 transition={{ duration: 0.3 }}
                                 style={{ background: "linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b)", padding: 2 }}
                             >
                                 <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-slate-800" />
                             </motion.div>
-                            <Link href="/singapore-2027" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
-                                style={{ boxShadow: topCard === "singapore" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
+                            <Link href="/dubai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
+                                style={{ boxShadow: topCard === "dubai" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
                                 <Image
-                                    src="https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=800&auto=format&fit=crop"
-                                    alt="Singapore"
+                                    src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
+                                    alt="Dubai"
                                     fill
                                     className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
                                 {/* Shimmer sweep */}
                                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
+                                <div className="absolute top-3 right-3 px-2 py-0.5 bg-slate-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                    Completed
+                                </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Feb 4, 2027</span>
+                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Sep 9-10, 2026</span>
                                     </div>
-                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Singapore</h3>
+                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Dubai</h3>
                                     <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
                                         <MapPin className="w-3 h-3" />
-                                        <span>Singapore</span>
+                                        <span>Crowne Plaza, Dubai, UAE</span>
                                     </div>
                                 </div>
                             </Link>
                         </motion.div>
 
-                        {/* Card 3: Dubai — Featured (front) */}
+                        {/* Card 3: Singapore — Featured (front) */}
                         <motion.div
                             className="absolute bottom-[5%] left-1/2 -translate-x-1/2"
-                            style={{ zIndex: topCard === "dubai" ? 30 : 20 }}
-                            animate={{ y: topCard === "dubai" ? [0, -12, 0] : 0 }}
-                            transition={{ duration: 3.5, repeat: topCard === "dubai" ? Infinity : 0, ease: "easeInOut" }}
+                            style={{ zIndex: topCard === "singapore" ? 30 : 20 }}
+                            animate={{ y: topCard === "singapore" ? [0, -12, 0] : 0 }}
+                            transition={{ duration: 3.5, repeat: topCard === "singapore" ? Infinity : 0, ease: "easeInOut" }}
                             whileHover={{ y: -20, scale: 1.05, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                            onHoverStart={() => setTopCard("dubai")}
+                            onHoverStart={() => setTopCard("singapore")}
                         >
-                            <Link href="/dubai-2026" className="w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
+                            <Link href="/singapore-2027" className="w-56 lg:w-64 h-72 lg:h-80 bg-slate-900 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
                                 style={{ boxShadow: "0 25px 60px rgba(245,158,11,0.25), 0 10px 40px rgba(0,0,0,0.4)" }}>
                                 <Image
-                                    src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
-                                    alt="Dubai"
+                                    src="https://images.unsplash.com/photo-1774075884764-be7319c06e08?q=80&w=800&auto=format&fit=crop"
+                                    alt="Singapore"
                                     fill
                                     className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                                 {/* Shimmer sweep */}
                                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-                                <div className="absolute top-3 lg:top-4 right-3 lg:right-4 px-2 lg:px-3 py-1 bg-slate-600/90 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Completed
-                                </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
                                     <div className="flex items-center gap-2 mb-2 lg:mb-3">
                                         <Calendar className="w-3 h-3 lg:w-4 lg:h-4 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">Sep 9-10, 2026</span>
+                                        <span className="text-amber-400 font-semibold text-xs lg:text-sm uppercase tracking-widest">Feb 4, 2027</span>
                                     </div>
-                                    <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Dubai</h3>
+                                    <h3 className="text-white font-serif text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">Singapore</h3>
                                     <div className="flex items-center gap-2 text-slate-300 text-xs lg:text-sm mb-3 lg:mb-4">
                                         <MapPin className="w-3 h-3 lg:w-4 lg:h-4" />
-                                        <span>Crowne Plaza, Dubai, UAE</span>
+                                        <span>Singapore</span>
                                     </div>
                                 </div>
                             </Link>
