@@ -85,8 +85,6 @@ const whyAttend = [
     "Participate in the LexTalk World awards and executive networking experience.",
 ];
 
-const sponsorTiers = ["Title", "Diamond", "Platinum", "Gold", "Silver", "Bronze", "Associate Partner", "Exhibitor"];
-
 // ===================== Singapore skyline — custom inline silhouette =====================
 // Flat vector shapes (not a stock asset) combining Marina Bay Sands' three-tower-plus-skypark
 // profile with a small Supertree Grove cluster, so the page reads as Singapore at a glance.
@@ -752,60 +750,6 @@ export default function Singapore2027Page() {
                                 </motion.div>
                             ))}
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ===================== SPONSORSHIP & EXHIBITION ===================== */}
-            <section className="relative py-20 md:py-28 bg-[#0a0f1e] overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
-                <div className="absolute top-0 left-1/3 w-[550px] h-[350px] bg-amber-500/6 rounded-full blur-[130px] pointer-events-none" />
-
-                <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                            <div className="flex items-center gap-3 mb-5">
-                                <div className="w-8 h-px bg-amber-500" />
-                                <span className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">Sponsorship &amp; Exhibition</span>
-                            </div>
-                            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
-                                Put your brand <span className="text-amber-400">in the room</span>
-                            </h2>
-                            <p className="text-white/60 text-base leading-relaxed mb-8">
-                                Organisations can participate through strategic sponsorship, premium speaking
-                                opportunities, case studies, product demonstrations, fireside chats, executive panel
-                                participation, exhibition, curated one-to-one meetings and executive roundtables.
-                            </p>
-                            <button
-                                onClick={() => setIsSponsorshipOpen(true)}
-                                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer"
-                            >
-                                Explore Sponsorship
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                            </button>
-                        </motion.div>
-
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
-                            <p className="text-white/40 text-xs font-bold uppercase tracking-widest mb-4">Sponsorship Categories</p>
-                            <div className="flex flex-wrap gap-2.5 mb-8">
-                                {sponsorTiers.map((tier) => (
-                                    <span key={tier} className="px-4 py-2 rounded-full border border-white/[0.12] hover:border-amber-500/40 hover:bg-amber-500/10 text-white/75 hover:text-white text-xs font-semibold uppercase tracking-wide transition-all duration-300 cursor-default">
-                                        {tier}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div className="group relative rounded-2xl border border-amber-400/25 bg-amber-400/[0.05] hover:bg-amber-400/[0.08] p-6 flex items-center justify-between gap-4 overflow-hidden transition-colors duration-300">
-                                <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-amber-400/15 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="relative z-10">
-                                    <p className="text-white font-bold text-base mb-1">Exhibitor Package</p>
-                                    <p className="text-white/50 text-xs">Standalone exhibition presence</p>
-                                </div>
-                                <div className="relative z-10 text-right shrink-0">
-                                    <p className="text-amber-400 text-xs font-semibold uppercase tracking-wide">Contact for pricing</p>
-                                </div>
-                            </div>
-                        </motion.div>
                     </div>
                 </div>
             </section>
