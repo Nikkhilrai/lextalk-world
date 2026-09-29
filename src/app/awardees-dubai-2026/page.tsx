@@ -13,7 +13,7 @@ import { awardees, type Awardee } from "./awardees-data";
 // (e.g. "Leading General Counsel of the Year", "Rising In-House Counsel of the
 // Year") — grouping by tier gives 4 sections instead of 26 near-empty ones,
 // while the specific award each person actually won still shows on their card.
-const TIER_ORDER = ["Leading", "Inspiring", "Emerging", "Rising"] as const;
+const TIER_ORDER = ["Inspiring", "Leading", "Emerging", "Rising"] as const;
 const PENDING_TIER = "Pending Category";
 
 function tierOf(category: string | undefined): string {
