@@ -584,6 +584,32 @@ model SpeakerApplication {
   @@index([createdAt])
 }
 
+// Private Delegate Registration & Consent Form — used for unlisted,
+// invitation-only registration links (e.g. shared via LinkedIn/email to
+// select profiles) rather than the public paid-pass flow. Two separate
+// consent checkboxes are recorded (data use vs. event photography/media)
+// since they're distinct permissions under the site's Privacy Policy.
+model DelegateConsentRegistration {
+  id           String   @id @default(cuid())
+  name         String
+  designation  String
+  organization String
+  country      String
+  email        String
+  phone        String
+  linkedin     String?  // LinkedIn profile URL
+  conference   String   // e.g. "LexTalk World APAC Singapore 2027"
+  dataConsent  Boolean  @default(false)
+  mediaConsent Boolean  @default(false)
+  status       String   @default("New") // New, Confirmed, Declined
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([conference])
+  @@index([status])
+}
+
 // Newsletter Models
 model Newsletter {
   id             String           @id @default(cuid())

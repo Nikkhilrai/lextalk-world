@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, Users, FileText, Award, Mic, Settings,
     LogOut, Menu, X, Mail, HeartHandshake, BookOpen, Trophy, Ticket, Calendar,
-    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download, Armchair, Tag, Lock, ScanLine, Bot
+    PieChart, Layers, Map as MapIcon, Shield, Target, MessageCircle, Download, Armchair, Tag, Lock, ScanLine, Bot, FileCheck2
 } from "lucide-react";
 import Image from "next/image";
 import { logout } from "@/actions/auth";
@@ -46,6 +46,7 @@ const NAV_GROUPS = [
             { label: "Seat Reservations", href: "/admin/seat-reservations", icon: Armchair },
             { label: "Delegate Coupons", href: "/admin/delegate-coupons", icon: Tag },
             { label: "Speaker Applications", href: "/admin/speaker-applications", icon: Mic },
+            { label: "Delegate Consent", href: "/admin/delegate-consent", icon: FileCheck2 },
             { label: "Counsel Exchange", href: "/admin/counsel-exchange-access", icon: Lock },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
             { label: "Awardee Orders", href: "/admin/awardee-orders", icon: Trophy },
