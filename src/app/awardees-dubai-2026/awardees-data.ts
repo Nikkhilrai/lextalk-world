@@ -83,6 +83,13 @@ Beyond my practice, I am passionate about mentoring the next generation of legal
 After expanding into technology, media and telecommunications at Indus Law, he joined ITW Universe in 2023. Now DGM – Legal & Strategy, he has shaped engagements exceeding ₹600 crore, combining legal expertise, commercial strategy and people leadership to build scalable, business-enabling legal functions.`,
     },
     {
+        name: "CaseDocker",
+        title: "AI-Powered LegalOps WorkDesk",
+        category: "Rising",
+        image: "/dubai-event/sponsors/CasedockerLogo.avif",
+        logo: true,
+    },
+    {
         name: "Anurag Bhargava",
         title: "Product Counsel, CIPP/E-Certified Legal Professional",
         category: "Rising Legal Tech Expert of the Year",
@@ -120,7 +127,7 @@ Antonio specializes in transforming legal operations through automation, process
     },
     {
         name: "Dr. Adarika Ghose",
-        title: "Head of Legal Compliance & Regulatory, Acquisory Consulting LLP",
+        title: "INDEPENDENT COUNSEL & Board Advisor, FORMER HEAD - LEGAL AND COMPLIANCE",
         category: "Inspiring Legal and Compliance Expert of the Year",
         image: `${SPEAKER_IMG}/v1789966094/lextalk/dubai-awardees-2026/dr-adarika-ghose.png`,
         bio: `Dr. Adarika Ghose is a distinguished Corporate Compliance Counsel (CS, LLM) with over 15 years of multifaceted experience across India, the UK, and the UAE. As Head of Legal Compliance and Regulatory at Acquisory Consulting LLP, she specializes in M&A, regulatory governance, and corporate restructuring, advising organizations on deal compliance, FEMA, IPOs, and private equity.
@@ -376,13 +383,6 @@ Jason has acted and assisted in both domestic and international arbitration proc
         name: "DiliTrust",
         title: "AI In Corporate Governance Platform",
         image: "/dubai-event/sponsors/DiliTrust.svg",
-        logo: true,
-        // Category not yet confirmed — see the `category` field comment above.
-    },
-    {
-        name: "CaseDocker",
-        title: "AI-Powered LegalOps WorkDesk",
-        image: "/dubai-event/sponsors/CasedockerLogo.avif",
         logo: true,
         // Category not yet confirmed — see the `category` field comment above.
     },
