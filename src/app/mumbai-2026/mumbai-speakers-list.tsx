@@ -8,7 +8,7 @@ import { X, Mic } from "lucide-react";
 export interface Speaker {
     name: string;
     title: string;
-    image: string;
+    image?: string;
     bio?: string;
     badge?: string;
     isGuestOfHonor?: boolean;
@@ -141,10 +141,23 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
         bio: `Chief Compliance Officer and Head of Business Legal at Shriram Life Insurance. He positions legal and compliance as a strategic enabler, bringing legal review into product, partnership and channel planning from the start, and set up the company's Regulatory Intelligence Cell to track IRDAI, PFRDA, RBI and other regulatory developments. Previously worked at LIC and IRDAI. Named among the Dynamic CLOs shaping the legal industry in 2025.`,
     },
     {
-        name: "Dr. Richa Pathak",
-        title: "Senior Advisor, Government of India",
+        name: "Dr. Richa Pathak Purohit",
+        title: "Legal Strategist & Public Policy Advisor · Founder, Richa Cares Foundation",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650291/lextalk/mumbai-speakers/dr-richa-pathak.png",
-        bio: `Legal counsel and Senior Government Advisor specialising in contracts, arbitration, debt restructuring, financing transactions, real estate financing, structuring and policy. LL.M. from the London School of Economics and an Executive Programme from IIM Ahmedabad; recipient of the Chief Justice M.C. Chagla Memorial Trust Gold Medal (2012), University of Mumbai. Earlier roles at Voltas, L&T and Avigna Group. Founder of the Richa Cares Foundation.`,
+        bio: `Dr. Richa Pathak Purohit is a distinguished lawyer, legal strategist, public policy advisor, philanthropist and thought leader with over 15 years of experience spanning corporate law, governance, regulatory affairs and international advisory. Her professional journey includes working with leading organisations such as Larsen & Toubro (L&T), Tata Group companies and prominent law firms in India and the United Kingdom. Her work reflects a distinctive ability to bridge law, policy, governance and public service.
+
+Dr. Richa has advised and engaged with governments, institutions, think tanks and industry stakeholders on legal and policy frameworks, governance, regulatory matters and emerging areas including technology and AI governance. She has also been invited to speak at leading academic and professional platforms, including IIT Bombay, NALSAR, NLIU, NLSIU, Harvard HPAIR Asia and various national and international legal and business forums, where she addresses themes including ethical leadership, corporate governance, women's empowerment, public policy and the evolving role of law in society.
+
+In her recent professional achievements, Dr. Richa serves as Chairman of the Policy Research and Government Affairs Committee and was selected as an "Ex-Officio Member" of the Governing Council with the Maharashtra Chamber of Commerce, Industry and Agriculture (MACCIA), further strengthening her engagement with industry, legal affairs, governance and policy matters. She is also the Founder of Richa Cares Foundation, through which she works towards education, women's empowerment, community development, legal awareness and inclusive social impact. Her work with communities and institutions reflects her commitment to using law, policy and philanthropy as instruments for meaningful and sustainable change.
+
+Dr. Richa's professional contributions have received recognition across the legal, corporate and social-impact spheres. Her recognitions include the Indian Achievers Award, The Global Choice Award 2022, recognition among the Most Admired Global Indians 2022, Women Icon of the Year 2025, and the LexTalk World 2025 recognition as In-House Lawyer of the Year in Corporate & Commercial. She has also been recognised as a Rising Women Trailblazer of the Year in Corporate & Commercial Law (Corporate Governance) at the BW Legal–Forbes Global Leadership Forum in Dubai. Through her multifaceted work across law, governance, public policy, education and social impact, Dr. Richa continues to contribute to institution-building, ethical leadership and inclusive development, while mentoring the next generation of legal and policy professionals.`,
+    },
+    {
+        name: "Rashmi Sharma",
+        title: "Chief Compliance Officer, Crisil Limited",
+        bio: `Rashmi Sharma is the Chief Compliance Officer at Crisil Limited, responsible for the company's compliance, ethics, privacy, whistleblower and regulatory governance programs. She works closely with senior management and the Board to strengthen governance standards, manage regulatory risk, and promote a culture of integrity.
+
+In her 2 decades plus of extensive experience in financial services, risk management and corporate governance, Rashmi has led initiatives across compliance, investigations, data privacy, AI governance and regulatory engagement. She is committed to strengthening trust, accountability, and responsible business practices in an increasingly complex regulatory environment.`,
     },
     {
         name: "Rajiv Mohapatra",
@@ -273,14 +286,20 @@ export default function MumbaiSpeakersList() {
                                     {/* Portrait — square frame, full-bleed crop, no outer gap */}
                                     <div className="relative mb-5 w-full max-w-[280px]">
                                         <div className="relative w-full aspect-square overflow-hidden bg-slate-100 rounded-lg shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] group-hover:shadow-[0_28px_60px_-20px_rgba(180,120,20,0.35)] transition-shadow duration-500 ring-1 ring-slate-200 group-hover:ring-2 group-hover:ring-amber-400/60">
-                                            <Image
-                                                src={speaker.image}
-                                                alt={speaker.name}
-                                                fill
-                                                unoptimized
-                                                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
-                                                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                                            />
+                                            {speaker.image ? (
+                                                <Image
+                                                    src={speaker.image}
+                                                    alt={speaker.name}
+                                                    fill
+                                                    unoptimized
+                                                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
+                                                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                                                />
+                                            ) : (
+                                                <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
+                                                    <span className="text-4xl font-serif font-bold text-amber-500/20">{speaker.name.charAt(0)}</span>
+                                                </div>
+                                            )}
                                             {/* Soft vignette for depth */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
                                             {/* Gold sheen sweep on hover */}
@@ -355,13 +374,19 @@ export default function MumbaiSpeakersList() {
                             <div className="overflow-y-auto p-6 md:p-10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
                                     <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-slate-50 shrink-0 mx-auto md:mx-0 bg-slate-100">
-                                        <Image
-                                            src={selectedSpeaker.image}
-                                            alt={selectedSpeaker.name}
-                                            fill
-                                            unoptimized
-                                            className="object-cover object-top"
-                                        />
+                                        {selectedSpeaker.image ? (
+                                            <Image
+                                                src={selectedSpeaker.image}
+                                                alt={selectedSpeaker.name}
+                                                fill
+                                                unoptimized
+                                                className="object-cover object-top"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <span className="text-3xl font-serif font-bold text-amber-500/25">{selectedSpeaker.name.charAt(0)}</span>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex-1 text-center md:text-left">
                                         <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-2">
