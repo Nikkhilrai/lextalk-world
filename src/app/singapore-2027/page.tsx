@@ -87,12 +87,6 @@ const whyAttend = [
 
 const sponsorTiers = ["Title", "Diamond", "Platinum", "Gold", "Silver", "Bronze", "Associate Partner", "Exhibitor"];
 
-const registration = [
-    { type: "Corporate / In-House", earlyBird: "S$199", standard: "S$249" },
-    { type: "Law / Professional Services", earlyBird: "S$249", standard: "S$299" },
-    { type: "Technology / Vendor / Consultant", earlyBird: "S$399", standard: "S$499" },
-];
-
 // ===================== Singapore skyline — custom inline silhouette =====================
 // Flat vector shapes (not a stock asset) combining Marina Bay Sands' three-tower-plus-skypark
 // profile with a small Supertree Grove cluster, so the page reads as Singapore at a glance.
@@ -808,8 +802,7 @@ export default function Singapore2027Page() {
                                     <p className="text-white/50 text-xs">Standalone exhibition presence</p>
                                 </div>
                                 <div className="relative z-10 text-right shrink-0">
-                                    <p className="text-white text-xl font-bold">S$3,500</p>
-                                    <p className="text-amber-400 text-xs font-semibold">S$3,150 early bird</p>
+                                    <p className="text-amber-400 text-xs font-semibold uppercase tracking-wide">Contact for pricing</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -829,45 +822,12 @@ export default function Singapore2027Page() {
                             <div className="w-8 h-px bg-amber-500" />
                         </div>
                         <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">Secure your <span className="text-amber-400">seat</span></h2>
+                        <p className="mt-4 text-white/50 text-sm max-w-md mx-auto leading-relaxed">
+                            Delegate pricing will be announced soon. Register your interest to be notified as soon as registration opens.
+                        </p>
                     </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="rounded-2xl border border-white/[0.08] bg-white/[0.02] overflow-hidden"
-                    >
-                        <div className="grid grid-cols-3 bg-white/[0.04] text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/50">
-                            <div className="px-5 md:px-8 py-4">Delegate Type</div>
-                            <div className="px-5 py-4 text-right md:text-left">Early Bird</div>
-                            <div className="px-5 py-4 text-right md:text-left">Standard</div>
-                        </div>
-                        {registration.map((r, i) => {
-                            const earlyNum = parseInt(r.earlyBird.replace(/\D/g, ""), 10);
-                            const stdNum = parseInt(r.standard.replace(/\D/g, ""), 10);
-                            const savePct = Math.round(((stdNum - earlyNum) / stdNum) * 100);
-                            return (
-                                <div
-                                    key={r.type}
-                                    className={`group grid grid-cols-3 items-center hover:bg-amber-500/[0.05] transition-colors duration-300 ${i !== registration.length - 1 ? "border-b border-white/[0.06]" : ""}`}
-                                >
-                                    <div className="px-5 md:px-8 py-5 text-white font-semibold text-sm md:text-base">{r.type}</div>
-                                    <div className="px-5 py-5 text-right md:text-left">
-                                        <span className="text-amber-400 font-bold text-base md:text-lg">{r.earlyBird}</span>
-                                        <span className="hidden sm:inline-block ml-2 px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-semibold align-middle">
-                                            Save {savePct}%
-                                        </span>
-                                    </div>
-                                    <div className="px-5 py-5 text-right md:text-left">
-                                        <span className="text-white/60 font-medium text-sm md:text-base">{r.standard}</span>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </motion.div>
-
-                    <div className="text-center mt-10">
+                    <div className="text-center mt-4">
                         <button
                             onClick={() => setIsRegisterOpen(true)}
                             className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer"
