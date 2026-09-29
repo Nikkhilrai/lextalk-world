@@ -379,4 +379,11 @@ Jason has acted and assisted in both domestic and international arbitration proc
         logo: true,
         // Category not yet confirmed — see the `category` field comment above.
     },
+    {
+        name: "CaseDocker",
+        title: "AI-Powered LegalOps WorkDesk",
+        image: "/dubai-event/sponsors/CasedockerLogo.avif",
+        logo: true,
+        // Category not yet confirmed — see the `category` field comment above.
+    },
 ];
