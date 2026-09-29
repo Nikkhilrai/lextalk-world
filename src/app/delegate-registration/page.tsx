@@ -49,6 +49,7 @@ const EVENTS = [
         id: "bangalore",
         city: "Bangalore",
         country: "India",
+        year: "2026",
         tagline: "India\u2019s Premier Legal Summit",
         date: "June 11, 2026",
         day: "Thursday",
@@ -78,6 +79,7 @@ const EVENTS = [
         id: "dubai",
         city: "Dubai",
         country: "UAE",
+        year: "2026",
         tagline: "Global Legal & Business Summit",
         date: "September 9-10, 2026",
         day: "2 Days",
@@ -107,6 +109,7 @@ const EVENTS = [
         id: "mumbai",
         city: "Mumbai",
         country: "India",
+        year: "2026",
         tagline: "India\u2019s Commercial Capital Legal Summit",
         date: "December 7-8, 2026",
         day: "2 Days",
@@ -129,6 +132,35 @@ const EVENTS = [
             "2-Day Conference Access",
             "400+ Legal Professionals",
             "Structured Networking & Delegate Kit",
+        ],
+    },
+    {
+        id: "singapore",
+        city: "Singapore",
+        country: "Singapore",
+        year: "2027",
+        tagline: "AI, Law, Risk & Digital Trust Conference & Exhibition",
+        date: "February 4, 2027",
+        day: "Thursday",
+        duration: "1 Day",
+        delegates: "150+",
+        href: "/singapore-2027-delegate-passes",
+        accent: "emerald",
+        gradient: "from-emerald-500 to-emerald-600",
+        hoverGradient: "from-emerald-400 to-emerald-500",
+        bgGradient: "from-emerald-950/80 via-slate-900 to-slate-950",
+        radialGlow: "rgba(16,185,129,0.15)",
+        borderHover: "hover:border-emerald-500/40",
+        badgeBg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
+        iconColor: "text-emerald-400",
+        titleAccent: "text-emerald-400",
+        btnClass:
+            "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white",
+        shadowHover: "hover:shadow-emerald-500/20",
+        features: [
+            "1-Day Conference & Exhibition",
+            "150+ Senior Professionals",
+            "Executive Networking & Awards",
         ],
     },
 ];
@@ -208,7 +240,7 @@ function EventCard({
                     <p
                         className={`font-serif text-2xl sm:text-3xl font-bold ${event.titleAccent} leading-tight mb-3`}
                     >
-                        {event.city} 2026
+                        {event.city} {event.year}
                     </p>
                     <p className="text-slate-400 text-sm font-light mb-8 max-w-sm">
                         {event.tagline}
@@ -271,6 +303,8 @@ function EventCard({
                                             ? "bg-amber-500"
                                             : event.accent === "rose"
                                             ? "bg-rose-500"
+                                            : event.accent === "emerald"
+                                            ? "bg-emerald-500"
                                             : "bg-sky-500"
                                     }`}
                                 />
@@ -401,9 +435,9 @@ export default function DelegateRegistrationPage() {
                         </p>
                     </div>
 
-                    {/* Event Cards Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-                        {EVENTS.map((event, i) => (
+                    {/* Event Cards Grid — concluded events are excluded, not just dimmed */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+                        {EVENTS.filter((event) => !event.completed).map((event, i) => (
                             <EventCard
                                 key={event.id}
                                 event={event}
