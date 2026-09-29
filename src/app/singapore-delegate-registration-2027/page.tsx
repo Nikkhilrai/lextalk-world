@@ -1,5 +1,4 @@
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import Image from "next/image";
 import { Calendar, MapPin, ShieldCheck } from "lucide-react";
 import { DelegateConsentForm } from "./DelegateConsentForm";
 
@@ -14,9 +13,7 @@ export const metadata = {
 export default function SingaporeDelegateRegistration2027() {
     return (
         <main className="min-h-screen bg-white">
-            <Navbar variant="light" />
-
-            <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-[#0a0e12]">
+            <section className="relative pt-14 pb-16 md:pt-20 md:pb-20 overflow-hidden bg-[#0a0e12]">
                 <div
                     className="absolute inset-0 opacity-[0.04] pointer-events-none"
                     style={{ backgroundImage: "radial-gradient(circle, #f59e0b 0.5px, transparent 0.5px)", backgroundSize: "26px 26px" }}
@@ -24,6 +21,16 @@ export default function SingaporeDelegateRegistration2027() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/8 rounded-full blur-[130px] pointer-events-none" />
 
                 <div className="container mx-auto px-4 max-w-3xl relative z-10 text-center">
+                    <div className="flex justify-center mb-8">
+                        <Image
+                            src="/logo/lextalkworld-logo.png"
+                            alt="LexTalk World"
+                            width={180}
+                            height={48}
+                            className="h-9 w-auto object-contain"
+                            priority
+                        />
+                    </div>
                     <div className="flex items-center justify-center gap-3 mb-5">
                         <div className="w-8 h-px bg-amber-500" />
                         <span className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">Delegate Registration & Consent</span>
@@ -60,7 +67,14 @@ export default function SingaporeDelegateRegistration2027() {
                 </div>
             </section>
 
-            <Footer />
+            <div className="border-t border-slate-100 py-6">
+                <p className="text-center text-xs text-slate-400">
+                    &copy; {new Date().getFullYear()} LexTalk World. All rights reserved. ·{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">
+                        Privacy Policy
+                    </a>
+                </p>
+            </div>
         </main>
     );
 }
