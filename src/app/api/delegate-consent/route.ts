@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
 
                 const { error: adminError } = await resend.emails.send({
                     from: "LexTalk World <noreply@lextalkworld.in>",
-                    to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"],
+                    to: ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com", "nitesh@mantranexvista.com"],
                     subject: `📝 New Delegate Registration: ${name} - ${conference}`,
                     html: `
                         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
