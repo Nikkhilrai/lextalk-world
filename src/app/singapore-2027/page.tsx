@@ -767,18 +767,18 @@ export default function Singapore2027Page() {
                         </div>
                         <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">Secure your <span className="text-amber-400">seat</span></h2>
                         <p className="mt-4 text-white/50 text-sm max-w-md mx-auto leading-relaxed">
-                            Delegate pricing will be announced soon. Register your interest to be notified as soon as registration opens.
+                            Choose the delegate pass that fits your role and register for LexTalk World APAC Singapore 2027.
                         </p>
                     </motion.div>
 
                     <div className="text-center mt-4">
-                        <button
-                            onClick={() => setIsRegisterOpen(true)}
+                        <Link
+                            href="/singapore-2027-delegate-passes"
                             className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer"
                         >
-                            <Bell className="w-4 h-4" />
-                            Register Your Interest
-                        </button>
+                            View Delegate Passes
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </Link>
                     </div>
                 </div>
             </section>

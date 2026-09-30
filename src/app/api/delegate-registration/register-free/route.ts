@@ -5,7 +5,13 @@ import { triggerDelegateSync } from "@/lib/sheets-sync";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const prefix = conferenceSlug?.includes("bangalore") ? "LTW-BLR26-" : "LTW-DXB26-";
+    const prefix = conferenceSlug?.includes("bangalore")
+        ? "LTW-BLR26-"
+        : conferenceSlug?.includes("mumbai")
+            ? "LTW-BOM26-"
+            : conferenceSlug?.includes("singapore")
+                ? "LTW-SIN27-"
+                : "LTW-DXB26-";
     let result = prefix;
     for (let i = 0; i < 6; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -58,7 +64,7 @@ export async function POST(request: NextRequest) {
                 where: { ticketNumber },
             });
             if (!exists) break;
-            ticketNumber = generateTicketNumber();
+            ticketNumber = generateTicketNumber(conferenceSlug);
             attempts++;
         }
 

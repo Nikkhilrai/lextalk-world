@@ -45,22 +45,29 @@ export async function GET(
 
         const isBangalore = (registration.conferenceSlug || "").includes("bangalore");
         const isMumbai = (registration.conferenceSlug || "").includes("mumbai");
+        const isSingapore = (registration.conferenceSlug || "").includes("singapore");
 
         const eventName = isBangalore
             ? "LexTalk World Bangalore 2026"
             : isMumbai
                 ? "LexTalk World Mumbai 2026"
-                : "LexTalk World Dubai 2026";
+                : isSingapore
+                    ? "LexTalk World APAC Singapore 2027"
+                    : "LexTalk World Dubai 2026";
         const eventDate = isBangalore
             ? "June 11, 2026"
             : isMumbai
                 ? "TBA"
-                : "9-10 September, 2026";
+                : isSingapore
+                    ? "February 4, 2027"
+                    : "9-10 September, 2026";
         const eventVenue = isBangalore
             ? "Radisson Blu Atria, 1 Palace Road, Bengaluru"
             : isMumbai
                 ? "TBA, Mumbai"
-                : "Crowne Plaza, Dubai, UAE";
+                : isSingapore
+                    ? "Singapore · Venue to be announced"
+                    : "Crowne Plaza, Dubai, UAE";
 
         // Generate PDF
         const pdfBuffer = await generateTicketPDF({

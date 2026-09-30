@@ -3,6 +3,16 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { triggerLeadsSync } from "@/lib/sheets-sync";
 
+function conferenceLabel(conferenceSlug: string): string {
+    const map: Record<string, string> = {
+        "dubai-2026": "Dubai 2026 (Delegate)",
+        "bangalore-2026": "Bangalore 2026 (Delegate)",
+        "mumbai-2026": "Mumbai 2026 (Delegate)",
+        "singapore-2027": "Singapore 2027 (Delegate)",
+    };
+    return map[conferenceSlug] || `${conferenceSlug} (Delegate)`;
+}
+
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
@@ -57,7 +67,7 @@ export async function POST(request: NextRequest) {
                         organization: customerDetails.organization || null,
                         designation: customerDetails.designation || null,
                         country: customerDetails.country,
-                        conference: "Dubai 2026 (Delegate)",
+                        conference: conferenceLabel(conferenceSlug),
                         joinAs: "Delegate",
                     }
                 });
@@ -100,7 +110,7 @@ export async function POST(request: NextRequest) {
                             organization: customerDetails.organization || null,
                             designation: customerDetails.designation || null,
                             country: customerDetails.country,
-                            conference: "Dubai 2026 (Delegate)",
+                            conference: conferenceLabel(conferenceSlug),
                             joinAs: "Delegate",
                         }
                     });
@@ -114,7 +124,7 @@ export async function POST(request: NextRequest) {
                             organization: customerDetails.organization || null,
                             designation: customerDetails.designation || null,
                             country: customerDetails.country,
-                            conference: "Dubai 2026 (Delegate)",
+                            conference: conferenceLabel(conferenceSlug),
                             joinAs: "Delegate",
                             status: "New"
                         }

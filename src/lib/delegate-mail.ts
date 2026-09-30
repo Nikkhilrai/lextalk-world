@@ -25,6 +25,8 @@ function passDisplayName(passType: string): string {
         "delegate-vip": "Delegate VIP Pass",
         "vendor-vip": "Vendor Pass",
         "corporate-counsel": "Corporate Counsel Exclusive Pass",
+        "law-firm-partner": "Law Firm Partner Pass",
+        "vendor": "Vendor Pass",
     };
     return map[passType] || passType.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 }
@@ -271,18 +273,118 @@ function dubaiEmailHtml(data: EmailData): string {
 </html>`;
 }
 
+function singaporeEmailHtml(data: EmailData): string {
+    const fullName = `${data.firstName} ${data.lastName}`;
+    const passName = passDisplayName(data.passType);
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:40px 0;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+      <tr><td style="background:#0a0e12;border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;">
+        <p style="margin:0 0 4px;color:#f59e0b;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">LexTalk World APAC · Singapore 2027</p>
+        <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;">Ticket Confirmation</h1>
+      </td></tr>
+
+      <tr><td style="height:3px;background:linear-gradient(90deg,#f59e0b,#fbbf24,#f59e0b);"></td></tr>
+
+      <tr><td style="background:#ffffff;padding:40px;border:1px solid #e2e8f0;border-top:none;">
+        <p style="margin:0 0 8px;color:#0f172a;font-size:17px;font-weight:600;">Dear ${data.firstName},</p>
+        <p style="margin:0 0 24px;color:#475569;font-size:15px;line-height:1.8;">
+          We are thrilled to confirm your registration for <strong>LexTalk World APAC Singapore 2027</strong> — Governing Enterprise AI: From Adoption to Accountability.
+        </p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:28px;">
+          <tr><td style="padding:20px 24px;">
+            <p style="margin:0 0 14px;color:#64748b;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Your Registration Details</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;width:140px;">Attendee</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">${fullName}</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Date</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">4 February 2027</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Venue</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:600;text-align:right;">Singapore · Venue to be announced</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Pass Type</td>
+                <td style="padding:7px 0;color:#f59e0b;font-size:13px;font-weight:700;text-align:right;">${passName}</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 0;color:#64748b;font-size:13px;">Ticket Number</td>
+                <td style="padding:7px 0;color:#0f172a;font-size:13px;font-weight:700;text-align:right;font-family:monospace;">${data.ticketNumber}</td>
+              </tr>
+            </table>
+          </td></tr>
+        </table>
+
+        <p style="margin:0 0 24px;color:#475569;font-size:14px;line-height:1.8;">
+          Tap the button below to view your digital ticket details. The venue is still to be confirmed — we'll email you as soon as it's announced.
+        </p>
+
+        <div style="text-align:center;margin-top:32px;">
+          <a href="https://lextalkworld.in/singapore-delegate-confirmation-2027?regId=${data.ticketId}"
+             style="display:inline-block;background:#0a0e12;color:#ffffff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;">
+            View Digital Ticket →
+          </a>
+        </div>
+
+        <!-- CTA Buttons -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;">
+          <tr>
+            <td style="padding:0 8px 0 0;" width="50%">
+              <a href="https://lextalkworld.in/singapore-2027/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                🌐 View Event Page
+              </a>
+            </td>
+            <td style="padding:0 0 0 8px;" width="50%">
+              <a href="https://www.linkedin.com/company/lextalkworld-apac-me/"
+                 target="_blank"
+                 style="display:block;text-align:center;background:#0077b5;color:#ffffff;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">
+                Follow Us on LinkedIn
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+
+      <tr><td style="background:#0a0e12;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+        <p style="margin:0 0 4px;color:#64748b;font-size:11px;">© 2027 LexTalk World. All rights reserved.</p>
+        <a href="https://lextalkworld.in" style="color:#f59e0b;font-size:12px;text-decoration:none;">lextalkworld.in</a>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>`;
+}
+
 export async function sendDelegateConfirmationEmail(data: EmailData) {
     try {
         const fullName = `${data.firstName} ${data.lastName}`;
         const isBangalore = data.conferenceSlug?.includes("bangalore");
+        const isSingapore = data.conferenceSlug?.includes("singapore");
 
         console.log(`Sending confirmation email to: ${data.email} (${fullName}) — ${data.conferenceSlug}`);
 
         const subject = isBangalore
             ? `Your entry pass is confirmed — LexTalk World Bangalore, June 11 ✓`
-            : `Your LexTalk World Dubai 2026 Ticket Confirmation — ${data.ticketNumber}`;
+            : isSingapore
+                ? `Your LexTalk World APAC Singapore 2027 Ticket Confirmation — ${data.ticketNumber}`
+                : `Your LexTalk World Dubai 2026 Ticket Confirmation — ${data.ticketNumber}`;
 
-        const html = isBangalore ? bangaloreEmailHtml(data) : dubaiEmailHtml(data);
+        const html = isBangalore ? bangaloreEmailHtml(data) : isSingapore ? singaporeEmailHtml(data) : dubaiEmailHtml(data);
 
         const attachments = [];
         if (isBangalore && data.bangalorePassPdf) {
