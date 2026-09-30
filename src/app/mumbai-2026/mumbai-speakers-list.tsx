@@ -142,7 +142,7 @@ He is a Fellow Member (FCS) of the Institute of Company Secretaries of India, an
     },
     {
         name: "Dr. Richa Pathak Purohit",
-        title: "Legal Strategist & Public Policy Advisor · Founder, Richa Cares Foundation",
+        title: "Senior Advisor to Government of Maharashtra",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650291/lextalk/mumbai-speakers/dr-richa-pathak.png",
         bio: `Dr. Richa Pathak Purohit is a distinguished lawyer, legal strategist, public policy advisor, philanthropist and thought leader with over 15 years of experience spanning corporate law, governance, regulatory affairs and international advisory. Her professional journey includes working with leading organisations such as Larsen & Toubro (L&T), Tata Group companies and prominent law firms in India and the United Kingdom. Her work reflects a distinctive ability to bridge law, policy, governance and public service.
 
