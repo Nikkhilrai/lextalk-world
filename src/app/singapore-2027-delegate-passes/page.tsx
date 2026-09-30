@@ -406,41 +406,41 @@ export default function Singapore2027DelegatePasses() {
     const [selectedPass, setSelectedPass] = useState<PassConfig | null>(null);
 
     return (
-        <main className="min-h-screen bg-[#0a0e12]">
+        <main className="min-h-screen bg-white">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-            <Navbar />
+            <Navbar variant="light" />
 
             {/* Hero */}
             <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
                 <div
-                    className="absolute inset-0 opacity-[0.04] pointer-events-none"
-                    style={{ backgroundImage: "radial-gradient(circle, #f59e0b 0.5px, transparent 0.5px)", backgroundSize: "26px 26px" }}
+                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style={{ backgroundImage: "radial-gradient(circle, #1e293b 0.5px, transparent 0.5px)", backgroundSize: "26px 26px" }}
                 />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/8 rounded-full blur-[130px] pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-100/40 rounded-full blur-[130px] pointer-events-none" />
 
                 <div className="container mx-auto px-4 max-w-3xl relative z-10 text-center">
                     <div className="flex items-center justify-center gap-3 mb-5">
                         <div className="w-8 h-px bg-amber-500" />
-                        <span className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">Delegate Passes</span>
+                        <span className="text-amber-600 text-xs font-bold uppercase tracking-[0.3em]">Delegate Passes</span>
                         <div className="w-8 h-px bg-amber-500" />
                     </div>
-                    <h1 className="font-serif text-3xl md:text-5xl font-bold text-white leading-tight mb-5">
-                        LexTalk World APAC <span className="text-amber-400">Singapore 2027</span>
+                    <h1 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-5">
+                        LexTalk World APAC <span className="text-amber-600">Singapore 2027</span>
                     </h1>
-                    <p className="text-white/60 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8">
+                    <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8">
                         Choose the pass that fits your role and secure your seat for a day of executive dialogue on AI governance, law, risk and digital trust.
                     </p>
-                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/50 text-xs font-semibold uppercase tracking-widest">
+                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-slate-500 text-xs font-semibold uppercase tracking-widest">
                         <div className="flex items-center gap-1.5">
-                            <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                            <Calendar className="w-3.5 h-3.5 text-amber-600" />
                             <span>4 February 2027</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                            <MapPin className="w-3.5 h-3.5 text-amber-600" />
                             <span>Singapore · Venue to be announced</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                            <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
                             <span>Secure Razorpay Payment</span>
                         </div>
                     </div>
@@ -460,36 +460,38 @@ export default function Singapore2027DelegatePasses() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-40px" }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    className={`group relative flex flex-col rounded-2xl border bg-white/[0.02] hover:bg-white/[0.03] transition-all duration-300 overflow-hidden ${
-                                        pass.isPopular ? "border-amber-500/40 ring-1 ring-amber-500/20" : "border-white/[0.08] hover:border-amber-500/30"
+                                    className={`group relative flex flex-col rounded-2xl border bg-white transition-all duration-300 overflow-hidden ${
+                                        pass.isPopular
+                                            ? "border-amber-400 ring-2 ring-amber-100 shadow-xl shadow-amber-100/50 hover:shadow-2xl hover:shadow-amber-200/40 hover:-translate-y-1"
+                                            : "border-slate-200 hover:border-amber-300 shadow-sm hover:shadow-xl hover:-translate-y-1"
                                     }`}
                                 >
                                     {pass.isPopular && (
-                                        <div className="absolute top-4 right-4 z-10 px-2.5 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-[9px] font-black uppercase tracking-widest rounded-full">
+                                        <div className="absolute top-4 right-4 z-10 px-2.5 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[9px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-amber-400/30">
                                             Most Popular
                                         </div>
                                     )}
 
-                                    <div className="p-6 pb-5 border-b border-white/[0.06]">
-                                        <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-4 group-hover:bg-amber-500/15 transition-colors duration-300">
-                                            <Icon className="w-5 h-5 text-amber-400" strokeWidth={1.75} />
+                                    <div className="p-6 pb-5 border-b border-slate-100">
+                                        <div className="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors duration-300">
+                                            <Icon className="w-5 h-5 text-amber-600" strokeWidth={1.75} />
                                         </div>
-                                        <h3 className="font-serif text-xl font-bold text-white mb-1.5">{pass.name}</h3>
-                                        <p className="text-white/45 text-xs leading-relaxed mb-4">{pass.subtitle}</p>
+                                        <h3 className="font-serif text-xl font-bold text-slate-900 mb-1.5">{pass.name}</h3>
+                                        <p className="text-slate-500 text-xs leading-relaxed mb-4">{pass.subtitle}</p>
                                         <div className="flex items-baseline gap-1.5">
-                                            <span className="text-3xl font-black text-white">SGD ${pass.sgdPrice}</span>
+                                            <span className="text-3xl font-black text-slate-900">SGD ${pass.sgdPrice}</span>
                                         </div>
-                                        <p className="text-white/35 text-[10px] mt-1 font-medium">per attendee</p>
+                                        <p className="text-slate-400 text-[10px] mt-1 font-medium">per attendee</p>
                                     </div>
 
                                     <div className="px-6 py-5 flex-1">
                                         <ul className="space-y-3">
                                             {pass.features.map((f) => (
                                                 <li key={f} className="flex items-start gap-2.5">
-                                                    <span className="shrink-0 w-4 h-4 rounded-full bg-amber-500/15 flex items-center justify-center mt-0.5">
-                                                        <Check className="w-2.5 h-2.5 text-amber-400" strokeWidth={3} />
+                                                    <span className="shrink-0 w-4 h-4 rounded-full bg-amber-100 flex items-center justify-center mt-0.5">
+                                                        <Check className="w-2.5 h-2.5 text-amber-600" strokeWidth={3} />
                                                     </span>
-                                                    <span className="text-white/65 text-[13px] leading-relaxed">{f}</span>
+                                                    <span className="text-slate-600 text-[13px] leading-relaxed">{f}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -500,8 +502,8 @@ export default function Singapore2027DelegatePasses() {
                                             onClick={() => setSelectedPass(pass)}
                                             className={`w-full flex items-center justify-center gap-2 px-5 py-3.5 font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer ${
                                                 pass.isPopular
-                                                    ? "bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
-                                                    : "bg-white/10 hover:bg-amber-500 hover:text-slate-950 text-white"
+                                                    ? "bg-amber-500 hover:bg-amber-400 text-white shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                                                    : "bg-slate-900 hover:bg-amber-500 text-white"
                                             }`}
                                         >
                                             Register Now
@@ -513,9 +515,9 @@ export default function Singapore2027DelegatePasses() {
                         })}
                     </div>
 
-                    <p className="text-center mt-10 text-white/40 text-xs max-w-lg mx-auto leading-relaxed">
+                    <p className="text-center mt-10 text-slate-400 text-xs max-w-lg mx-auto leading-relaxed">
                         Have questions in the meantime? Reach us at{" "}
-                        <a href="mailto:info@lextalkworld.in" className="text-amber-400 hover:underline">info@lextalkworld.in</a>
+                        <a href="mailto:info@lextalkworld.in" className="text-amber-600 hover:underline">info@lextalkworld.in</a>
                     </p>
                 </div>
             </section>
