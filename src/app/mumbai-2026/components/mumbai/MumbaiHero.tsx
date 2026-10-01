@@ -12,7 +12,7 @@ const navTabs = [
     { label: "Speakers", href: "#speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
     { label: "Past Event Images", href: "/bangalore-2026/gallery" },
-    { label: "Sponsorship", href: "/sponsor" },
+    { label: "Sponsorship", href: "#sponsors" },
 ];
 
 export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: () => void, onOpenRegister?: () => void }) {
