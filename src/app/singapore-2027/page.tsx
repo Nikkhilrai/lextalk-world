@@ -639,6 +639,39 @@ export default function Singapore2027Page() {
                 </div>
             </section>
 
+            {/* ===================== CONFERENCE FACULTY — link out to speakers page ===================== */}
+            <section className="relative py-16 md:py-20 bg-[#0a0f1e] overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-amber-500/6 rounded-full blur-[130px] pointer-events-none" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="container mx-auto px-4 max-w-2xl relative z-10 text-center"
+                >
+                    <div className="flex items-center justify-center gap-3 mb-5">
+                        <div className="w-8 h-px bg-amber-500" />
+                        <span className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">Conference Faculty</span>
+                        <div className="w-8 h-px bg-amber-500" />
+                    </div>
+                    <h2 className="font-serif text-2xl md:text-3xl font-bold text-white leading-tight mb-4">
+                        Meet the <span className="text-amber-400">Speakers</span>
+                    </h2>
+                    <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
+                        Senior leaders governing AI, legal exposure, cybersecurity, privacy and digital trust will be announced as the Singapore 2027 faculty is confirmed.
+                    </p>
+                    <Link
+                        href="/singapore-2027/speakers"
+                        className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer"
+                    >
+                        <Mic className="w-4 h-4" />
+                        View Speaker Page
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                </motion.div>
+            </section>
+
             {/* ===================== AGENDA OVERVIEW — vertical time-rail ===================== */}
             <section id="agenda" className="relative py-20 md:py-28 bg-white overflow-hidden">
                 <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-amber-100/40 rounded-full blur-[120px] translate-x-1/3 pointer-events-none" />
