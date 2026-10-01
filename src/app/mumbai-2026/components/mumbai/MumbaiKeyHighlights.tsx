@@ -8,7 +8,7 @@ const highlights = [
     { icon: Users, number: "400+", label: "Legal Professionals" },
     { icon: Mic, number: "60+", label: "Renowned Speakers" },
     { icon: Award, number: "50+", label: "Awardees" },
-    { icon: Building, number: "25+", label: "Exhibitors" },
+    { icon: Building, number: "20+", label: "Exhibitors" },
 ];
 
 function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; suffix: string; duration?: number }) {

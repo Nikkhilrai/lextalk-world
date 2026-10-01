@@ -27,7 +27,7 @@ export function EventsList() {
                 "400+ Legal Professionals",
                 "60+ Renowned Speakers",
                 "50+ Awardees",
-                "25+ Exhibitors"
+                "20+ Exhibitors"
             ]
         },
         {
