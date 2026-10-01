@@ -372,10 +372,10 @@ With a strong understanding of dispute resolution, property-related matters, and
     },
     {
         name: "Jason Chong Wai Zhe",
-        title: "Principal, Zhe Chambers · Advocate & Solicitor, High Court of Malaya",
+        title: "Principal, Zhe Chambers · Advocate & Solicitor, High Court of Malaysia",
         category: "Rising Law Firm Founder of the Year",
         image: `${SPEAKER_IMG}/v1789973079/lextalk/dubai-awardees-2026/jason-chong-wai-zhe.png`,
-        bio: `Jason Chong Wai Zhe is the Principal of Zhe Chambers and an Advocate & Solicitor of the High Court of Malaya. He specialises in complex construction litigation, domestic and international arbitration, and CIPAA adjudication, representing local and international clients across the engineering, oil and gas, construction, and commercial sectors in high-stakes, multi-million disputes.
+        bio: `Jason Chong Wai Zhe is the Principal of Zhe Chambers and an Advocate & Solicitor of the High Court of Malaysia. He specialises in complex construction litigation, domestic and international arbitration, and CIPAA adjudication, representing local and international clients across the engineering, oil and gas, construction, and commercial sectors in high-stakes, multi-million disputes.
 
 Jason has acted and assisted in both domestic and international arbitration proceedings under leading institutional rules, including SIAC, AIAC, HKIAC, AAA, and LCIA. His practice focuses on strategic dispute resolution, navigating technically complex claims and delivering commercially effective representation for clients involved in significant construction and commercial disputes across multiple jurisdictions.`,
     },
