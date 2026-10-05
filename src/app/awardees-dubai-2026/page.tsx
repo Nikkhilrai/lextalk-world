@@ -111,6 +111,17 @@ export default function AwardeesDubai2026Page() {
             {/* Hero */}
             <section ref={heroRef} className="relative pt-32 pb-16 overflow-hidden">
                 <div className="absolute inset-0">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="absolute inset-0 w-full h-full object-cover opacity-40"
+                    >
+                        <source src="https://res.cloudinary.com/djagw0s4d/video/upload/v1791175439/lextalk/videos/medal-of-excellence-legal-honor-global-award.mp4" type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/80 via-[#050a15]/60 to-[#050a15]" />
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,#1e293b80,transparent)]" />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-500/[0.05] rounded-full blur-[100px]" />
                     <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
