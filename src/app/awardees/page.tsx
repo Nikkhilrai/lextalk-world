@@ -347,27 +347,41 @@ export default function AwardeesPage() {
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] text-slate-900">
-            <Navbar variant="light" />
+            <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden">
+            <section className="relative pt-32 pb-20 overflow-hidden bg-[#050a15]">
+                {/* Background video */}
+                <div className="absolute inset-0">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="absolute inset-0 w-full h-full object-cover opacity-80"
+                    >
+                        <source src="https://res.cloudinary.com/djagw0s4d/video/upload/v1791175439/lextalk/videos/medal-of-excellence-legal-honor-global-award.mp4" type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050a15]/55 via-[#050a15]/35 to-[#050a15]" />
+                </div>
+
                 {/* Background Decor */}
-                <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent" />
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="text-center max-w-3xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-100 rounded-full mb-6">
-                            <Award className="w-4 h-4 text-amber-600" />
-                            <span className="text-amber-700 text-sm font-medium">Celebrating Excellence</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full mb-6">
+                            <Award className="w-4 h-4 text-amber-400" />
+                            <span className="text-amber-300 text-sm font-medium">Celebrating Excellence</span>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-slate-900">
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
                             Our Distinguished{" "}
-                            <span className="text-amber-600">
+                            <span className="text-amber-400">
                                 Awardees
                             </span>
                         </h1>
-                        <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+                        <p className="text-lg text-white/75 max-w-2xl mx-auto font-medium">
                             Recognizing exceptional legal professionals who have demonstrated outstanding
                             achievements and leadership in the global legal community.
                         </p>
