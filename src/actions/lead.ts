@@ -9,8 +9,7 @@ import { triggerLeadsSync } from "@/lib/sheets-sync";
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_dev");
 
 // Email recipients
-const ADMIN_EMAIL = "nikhil@mantranexvista.com"; // Gets full email with dashboard link
-const NOTIFICATION_EMAILS = ["nikhil@mantranexvista.com"]; // Gets all notifications
+const NOTIFICATION_EMAILS = ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com"];
 
 function generateEmailHtml(data: any, includeDashboardLink: boolean) {
     return `
@@ -88,7 +87,6 @@ async function sendNotificationEmail(data: any) {
     }
     // Send to each recipient with appropriate content
     for (const email of NOTIFICATION_EMAILS) {
-        const includeDashboardLink = email === ADMIN_EMAIL;
         try {
             // Resend resolves with { data, error } instead of throwing on API
             // errors, so the error field must be inspected explicitly.
@@ -96,7 +94,7 @@ async function sendNotificationEmail(data: any) {
                 from: "LexTalk World <noreply@lextalkworld.in>",
                 to: email,
                 subject: `🔔 New Lead: ${data.firstName} ${data.lastName} - ${data.conference}`,
-                html: generateEmailHtml(data, includeDashboardLink),
+                html: generateEmailHtml(data, true),
             });
             if (error) {
                 console.error(`[lead] notification email REJECTED for ${email}:`, error);
