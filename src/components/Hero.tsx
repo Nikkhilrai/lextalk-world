@@ -55,7 +55,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: num
 
 export function Hero() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-    const [topCard, setTopCard] = useState<"singapore" | "mumbai" | "dubai">("mumbai");
+    const [topCard, setTopCard] = useState<"singapore" | "mumbai">("mumbai");
 
     return (
         <section className="relative min-h-[75svh] md:min-h-[90svh] lg:min-h-screen flex items-start md:items-center pt-32 md:pt-72 lg:pt-40 pb-2 md:pb-8 overflow-hidden bg-slate-900">
@@ -228,52 +228,6 @@ export function Hero() {
                                     <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
                                         <MapPin className="w-3 h-3" />
                                         <span>Radisson Blu Mumbai International Airport</span>
-                                    </div>
-                                </div>
-                            </Link>
-                        </motion.div>
-
-                        {/* Card 2: Dubai — Completed (side) */}
-                        <motion.div
-                            className="absolute top-[5%] right-[10%] lg:right-[15%]"
-                            style={{ zIndex: topCard === "dubai" ? 40 : 20 }}
-                            animate={{ rotate: topCard === "dubai" ? 0 : 12 }}
-                            whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                            onHoverStart={() => setTopCard("dubai")}
-                            onHoverEnd={() => setTopCard("singapore")}
-                        >
-                            {/* Glow ring */}
-                            <motion.div
-                                className="absolute -inset-[3px] rounded-2xl lg:rounded-3xl pointer-events-none"
-                                animate={{ opacity: topCard === "dubai" ? 1 : 0, scale: topCard === "dubai" ? 1 : 0.95 }}
-                                transition={{ duration: 0.3 }}
-                                style={{ background: "linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b)", padding: 2 }}
-                            >
-                                <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-slate-800" />
-                            </motion.div>
-                            <Link href="/dubai-2026" className="w-48 lg:w-56 h-60 lg:h-72 bg-slate-800 rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer block text-left relative"
-                                style={{ boxShadow: topCard === "dubai" ? "0 30px 70px rgba(245,158,11,0.35), 0 10px 30px rgba(0,0,0,0.4)" : "0 20px 40px rgba(0,0,0,0.3)" }}>
-                                <Image
-                                    src="https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=800&auto=format&fit=crop"
-                                    alt="Dubai"
-                                    fill
-                                    className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                                {/* Shimmer sweep */}
-                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
-                                <div className="absolute top-3 right-3 px-2 py-0.5 bg-slate-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    Completed
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-amber-400" />
-                                        <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">Sep 9-10, 2026</span>
-                                    </div>
-                                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold">Dubai</h3>
-                                    <div className="flex items-center gap-1.5 text-slate-300 text-[10px] lg:text-xs mt-0.5">
-                                        <MapPin className="w-3 h-3" />
-                                        <span>Crowne Plaza, Dubai, UAE</span>
                                     </div>
                                 </div>
                             </Link>
