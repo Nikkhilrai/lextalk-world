@@ -15,8 +15,46 @@ export interface Speaker {
     isCentred?: boolean;
 }
 
-// No speakers confirmed yet — populated once the Singapore 2027 faculty is finalised.
-export const speakers: Speaker[] = [];
+const IMG = "https://res.cloudinary.com/djagw0s4d/image/upload/c_limit,f_auto,q_auto,w_800/lextalk/singapore-speakers";
+
+export const speakers: Speaker[] = [
+    {
+        name: "Jishnu Nair",
+        title: "Counsel, ASEAN Compliance Officer, IBM",
+        image: `${IMG}/jishnu-nair`,
+        bio: `Jishnu Nair is Counsel and ASEAN Market Strategic Advisor at IBM, with experience across regulatory law, compliance, privacy, AI and cybersecurity. He advises on complex legal and regulatory matters across ASEAN and APAC, with a focus on emerging technology, risk and compliance. Jishnu brings a practical perspective on navigating evolving regulations while enabling responsible technology adoption.`,
+    },
+    {
+        name: "Pranav Rai",
+        title: "Legal Counsel, Hitachi Energy",
+        image: `${IMG}/pranav-rai`,
+        bio: `Pranav Rai is Legal Counsel at Hitachi Energy, specialising in technology and commercial contracts, with a focus on AI governance and emerging technology. As an AIGP-certified professional, he brings a practical perspective to the legal, regulatory, and governance challenges associated with AI adoption. His experience sits at the intersection of law, technology, and business, with a particular interest in helping organisations navigate evolving AI requirements while enabling responsible innovation.`,
+    },
+    {
+        name: "Rishi Ganiswaran",
+        title: "Group Data Protection Officer, Frasers Property Group",
+        image: `${IMG}/rishi-ganiswaran`,
+        bio: `Rishi Ganiswaran is a senior legal and privacy leader with around 16 years of experience across energy, infrastructure and technology sectors. He holds degrees in Law and Electrical Engineering, along with a Master's in Digital Economy specialising in data protection, data governance, AI governance, legal tech and fintech. Called to the Singapore Bar and admitted as a solicitor in New South Wales, Australia, Rishi has held senior Head of Legal and Chief Privacy Officer roles, advising multinational organisations across commercial, regulatory, privacy, cybersecurity and technology matters.`,
+    },
+    {
+        name: "Shelly Kohli",
+        title: "Director Legal, APAC, The HEINEKEN Company",
+        image: `${IMG}/shelly-kohli`,
+        bio: `Shelly Kohli is a senior corporate lawyer with over 20 years of experience across private practice and in-house leadership roles with leading global corporations. Dual-qualified in India and New York, she specialises in commercial transactions, litigation, intellectual property, privacy, regulatory compliance and corporate matters. She previously served as Head Legal for Beauty, Personal Care, Home Care and Privacy at Hindustan Unilever. Shelly currently leads the Legal and Compliance function at United Breweries Limited and is part of its Executive Management team, advising the Board and senior leadership on strategic legal, regulatory and compliance matters.`,
+    },
+    {
+        name: "Prem Kumar",
+        title: "Director, Head of Ethics & Compliance, India and South East Asia, Takeda",
+        image: `${IMG}/prem-kumar`,
+        bio: `Prem Kumar is a global Ethics & Compliance leader with extensive experience in governance, risk management and investigations across multiple regions. He has advised Boards and senior leadership on ethical culture, compliance transformation and risk-based decision-making. Prem has led over 100 complex investigations, forensic reviews and risk assessments, with expertise in cross-border investigations, remediation and AI-enabled risk monitoring. His industry experience spans pharmaceuticals, healthcare, financial services, telecom, oil & gas and manufacturing, helping organisations strengthen integrity, reduce compliance risks and build sustainable business environments.`,
+    },
+    {
+        name: "Prerna Gandhi",
+        title: "Associate General Counsel and Director, Amazon Consumer, Singapore",
+        image: `${IMG}/prerna-gandhi`,
+        bio: `Prerna Gandhi is Associate General Counsel and Director at Amazon Consumer, Singapore, where she leads the legal function for the Singapore Consumer business. She advises senior leadership on legal strategy, risk management and regulatory matters across e-commerce operations. Her expertise spans privacy, competition, payments, consumer protection and product safety, with experience engaging regulators and supporting customer-centric business initiatives while ensuring compliance with evolving legal requirements.`,
+    },
+];
 
 export default function SingaporeSpeakersList() {
     const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
