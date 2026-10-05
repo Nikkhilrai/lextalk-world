@@ -193,7 +193,7 @@ export function Hero() {
                         {/* Card 1: Mumbai */}
                         <motion.div
                             className="absolute top-[15%] left-[5%] lg:left-[10%]"
-                            style={{ zIndex: topCard === "mumbai" ? 40 : 10 }}
+                            style={{ zIndex: 40 }}
                             animate={{ rotate: topCard === "mumbai" ? 0 : -8 }}
                             whileHover={{ scale: 1.1, y: -16, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                             onHoverStart={() => setTopCard("mumbai")}
