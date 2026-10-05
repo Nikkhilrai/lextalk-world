@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
+import { sanitizeInterests } from "@/lib/delegate-interests";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder_key");
 
@@ -9,7 +10,7 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const {
             name, designation, organization, country, email, phone,
-            linkedin, conference, dataConsent, mediaConsent,
+            linkedin, conference, dataConsent, mediaConsent, interests: rawInterests, otherInterest,
         } = body;
 
         if (!name || !designation || !organization || !country || !email || !phone || !conference) {
@@ -20,6 +21,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Both consent checkboxes are required" }, { status: 400 });
         }
 
+        const interests = sanitizeInterests(rawInterests, otherInterest);
+        if (interests.length === 0) {
+            return NextResponse.json({ error: "Select at least one area of interest" }, { status: 400 });
+        }
+
         const registration = await (prisma as any).delegateConsentRegistration.create({
             data: {
                 name, designation, organization, country, email, phone,
@@ -27,6 +33,7 @@ export async function POST(request: NextRequest) {
                 conference,
                 dataConsent: true,
                 mediaConsent: true,
+                interests,
             },
         });
 
@@ -132,6 +139,7 @@ export async function POST(request: NextRequest) {
                                     <tr><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #64748b;">Designation</td><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${designation}</td></tr>
                                     <tr><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #64748b;">Conference</td><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #f59e0b; font-weight: 600;">${conference}</td></tr>
                                     ${linkedin ? `<tr><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #64748b;">LinkedIn</td><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${linkedin}</td></tr>` : ""}
+                                    <tr><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #64748b;">Areas of interest</td><td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${interests.join(", ")}</td></tr>
                                     <tr><td style="padding: 10px 0; color: #64748b;">Consent</td><td style="padding: 10px 0; color: #1e293b;">Data use ✓ · Photography/media ✓</td></tr>
                                 </table>
                                 <div style="margin-top: 25px; text-align: center;">

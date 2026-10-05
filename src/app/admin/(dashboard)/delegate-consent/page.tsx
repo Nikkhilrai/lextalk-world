@@ -13,6 +13,7 @@ interface Registration {
     designation: string;
     conference: string;
     linkedin?: string | null;
+    interests?: string[];
     dataConsent: boolean;
     mediaConsent: boolean;
     status: string;
@@ -241,6 +242,12 @@ export default function DelegateConsentPage() {
                                         <dd className="text-slate-700 font-medium">{value}</dd>
                                     </div>
                                 ))}
+                                {viewing.interests && viewing.interests.length > 0 && (
+                                    <div className="col-span-2">
+                                        <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">Areas of Interest</dt>
+                                        <dd className="text-slate-700 font-medium">{viewing.interests.join(", ")}</dd>
+                                    </div>
+                                )}
                                 {viewing.linkedin && (
                                     <div className="col-span-2">
                                         <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">LinkedIn</dt>

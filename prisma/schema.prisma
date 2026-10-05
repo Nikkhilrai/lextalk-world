@@ -453,6 +453,9 @@ model DelegateRegistration {
   checkedInAt       DateTime?         // Set when delegate is scanned at the door
   checkedInBy       String?           // Staff name or device ID that scanned
 
+  // Key areas of interest selected at registration (up to 3)
+  interests         String[]          @default([])
+
   // Timestamps
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
@@ -601,6 +604,7 @@ model DelegateConsentRegistration {
   conference   String   // e.g. "LexTalk World APAC Singapore 2027"
   dataConsent  Boolean  @default(false)
   mediaConsent Boolean  @default(false)
+  interests    String[] @default([]) // Up to 3 selected key areas of interest
   status       String   @default("New") // New, Confirmed, Declined
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

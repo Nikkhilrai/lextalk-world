@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { triggerLeadsSync } from "@/lib/sheets-sync";
+import { sanitizeInterests } from "@/lib/delegate-interests";
 
 function conferenceLabel(conferenceSlug: string): string {
     const map: Record<string, string> = {
@@ -23,7 +24,12 @@ export async function POST(request: NextRequest) {
             conferenceSlug,
             originalPrice,
             discountedPrice,
+            interests: rawInterests,
+            otherInterest,
         } = body;
+
+        const interests = sanitizeInterests(rawInterests, otherInterest);
+        const interestsText = interests.length ? `Areas of interest: ${interests.join(", ")}` : null;
 
         const prismaClient = prisma as any;
 
@@ -53,6 +59,7 @@ export async function POST(request: NextRequest) {
                     passCategory,
                     originalPrice,
                     discountedPrice,
+                    interests,
                 },
             });
 
@@ -69,6 +76,7 @@ export async function POST(request: NextRequest) {
                         country: customerDetails.country,
                         conference: conferenceLabel(conferenceSlug),
                         joinAs: "Delegate",
+                        ...(interestsText ? { query: interestsText } : {}),
                     }
                 });
             } catch (err) {
@@ -90,6 +98,7 @@ export async function POST(request: NextRequest) {
                     conferenceSlug,
                     originalPrice,
                     discountedPrice,
+                    interests,
                     paymentStatus: "pending",
                 },
             });
@@ -112,6 +121,7 @@ export async function POST(request: NextRequest) {
                             country: customerDetails.country,
                             conference: conferenceLabel(conferenceSlug),
                             joinAs: "Delegate",
+                            ...(interestsText ? { query: interestsText } : {}),
                         }
                     });
                 } else {
@@ -126,6 +136,7 @@ export async function POST(request: NextRequest) {
                             country: customerDetails.country,
                             conference: conferenceLabel(conferenceSlug),
                             joinAs: "Delegate",
+                            query: interestsText,
                             status: "New"
                         }
                     });

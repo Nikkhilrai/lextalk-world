@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, ShieldCheck } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/PhoneInput";
+import { InterestPicker } from "@/components/InterestPicker";
 
 interface FormData {
     name: string;
@@ -23,17 +24,29 @@ export function DelegateConsentForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const [interests, setInterests] = useState<string[]>([]);
+    const [otherInterest, setOtherInterest] = useState("");
+    const [interestError, setInterestError] = useState<string | null>(null);
 
     const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
 
     const onSubmit = async (data: FormData) => {
+        if (interests.length === 0) {
+            setInterestError("Please select at least one area of interest.");
+            return;
+        }
+        if (interests.includes("Other") && !otherInterest.trim()) {
+            setInterestError("Please specify your other area of interest.");
+            return;
+        }
+        setInterestError(null);
         setIsSubmitting(true);
         setSubmitError(null);
         try {
             const res = await fetch("/api/delegate-consent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...data, conference: CONFERENCE }),
+                body: JSON.stringify({ ...data, conference: CONFERENCE, interests, otherInterest }),
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -172,6 +185,19 @@ export function DelegateConsentForm() {
                     placeholder="https://www.linkedin.com/in/yourname"
                     className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                 />
+            </div>
+
+            {/* Key areas of interest */}
+            <div className="pt-2 border-t border-slate-100">
+                <div className="pt-4">
+                    <InterestPicker
+                        selected={interests}
+                        onChange={(next) => { setInterests(next); setInterestError(null); }}
+                        otherText={otherInterest}
+                        onOtherTextChange={setOtherInterest}
+                    />
+                </div>
+                {interestError && <p className="mt-2 text-xs text-red-500">{interestError}</p>}
             </div>
 
             {/* Consent */}

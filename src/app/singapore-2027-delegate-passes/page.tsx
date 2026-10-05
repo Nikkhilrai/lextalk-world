@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PhoneInput } from "@/components/PhoneInput";
+import { InterestPicker } from "@/components/InterestPicker";
 import { CountrySelect } from "@/components/CountrySelect";
 import {
     Briefcase, Scale, Cpu, Check, Calendar, MapPin, ArrowRight,
@@ -99,6 +100,8 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
     const [isSaving, setIsSaving] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [interests, setInterests] = useState<string[]>([]);
+    const [otherInterest, setOtherInterest] = useState("");
 
     useEffect(() => {
         if (isOpen) {
@@ -132,6 +135,14 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
             setError("Please fill in all required fields.");
             return;
         }
+        if (interests.length === 0) {
+            setError("Please select at least one area of interest.");
+            return;
+        }
+        if (interests.includes("Other") && !otherInterest.trim()) {
+            setError("Please specify your other area of interest.");
+            return;
+        }
         setIsSaving(true); setError(null);
         try {
             const res = await fetch("/api/delegate-registration/save-lead", {
@@ -144,6 +155,8 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                     conferenceSlug: CONFERENCE_SLUG,
                     originalPrice: pass.sgdPrice,
                     discountedPrice: pass.sgdPrice,
+                    interests,
+                    otherInterest,
                 }),
             });
             const data = await res.json();
@@ -327,6 +340,13 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                                                 id="sg-country" variant="pill"
                                             />
                                         </div>
+
+                                        <InterestPicker
+                                            selected={interests}
+                                            onChange={(next) => { setInterests(next); setError(null); }}
+                                            otherText={otherInterest}
+                                            onOtherTextChange={setOtherInterest}
+                                        />
 
                                         {error && (
                                             <div className="flex items-center gap-2 p-3 bg-red-50 text-red-600 text-xs rounded-xl border border-red-100">
