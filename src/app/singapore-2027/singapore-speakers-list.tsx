@@ -78,6 +78,18 @@ export const speakers: Speaker[] = [
         image: `${IMG}/v1791365739/lextalk/singapore-speakers/lokesh-gangadhar`,
         bio: `Lokesh Gangadhar is a senior legal professional at Dell Technologies, serving as Senior Managing Legal Counsel for APJC. He brings extensive experience in corporate and commercial law, supporting technology businesses across the Asia Pacific and Japan region. His expertise includes legal advisory, commercial transactions, contracts, technology and business operations.`,
     },
+    {
+        name: "Agnipushp Singh",
+        title: "MD & Head of Legal & Compliance, India, Nomura",
+    },
+    {
+        name: "Kumudini Aggarwal",
+        title: "General Counsel & Company Secretary (Head Legal & CS), Lendingkart Finance Ltd",
+    },
+    {
+        name: "Zameer Nathani",
+        title: "Global General Counsel - Group, DNEG",
+    },
 ];
 
 export default function SingaporeSpeakersList() {
