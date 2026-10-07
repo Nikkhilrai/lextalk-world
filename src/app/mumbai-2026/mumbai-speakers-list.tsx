@@ -223,6 +223,21 @@ Attreyi has co-authored successive editions of the top selling book on POSH - Ha
         image: "/mumbai-2026/Mumbai_Speakers/Ramu S..png",
         bio: `Successfully transitioned from Head HR Legal to one of the youngest General Counsels in the industry to Head Legal & Recovery and designated Senior Management Personnel now. Specialising in all legal and recovery aspects of a scheduled commercial bank with an added flair for RBI regulatory compliance, Board Executive level engagement, Leadership Management, NPA Recovery, Industrial Relations, Employee Relations / Engagement, Policy formulation and Execution, Statutory liaisoning etc for the past 16 years. Youngest Senior Management Personnel (SMP) in the Bank.`,
     },
+    {
+        name: "Agnipushp Singh",
+        title: "MD & Head of Legal & Compliance, India, Nomura",
+        image: "/mumbai-2026/Mumbai_Speakers/Agnipushp Singh.png",
+    },
+    {
+        name: "Kumudini Aggarwal",
+        title: "General Counsel & Company Secretary (Head Legal & CS), Lendingkart Finance Ltd",
+        image: "/mumbai-2026/Mumbai_Speakers/Kumudini Aggarwal.png",
+    },
+    {
+        name: "Zameer Nathani",
+        title: "Global General Counsel - Group, DNEG",
+        image: "/mumbai-2026/Mumbai_Speakers/Zameer Nathani.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
