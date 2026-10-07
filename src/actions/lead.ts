@@ -163,8 +163,10 @@ async function sendConfirmationEmail(data: any) {
                         <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 25px 0;" />
                         
                         <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
-                            If you have any questions, feel free to reach out to us at 
+                            If you have any questions, feel free to reach out to us at
                             <a href="mailto:abhishek@clickawaycreators.com" style="color: #f59e0b;">abhishek@clickawaycreators.com</a>
+                            or
+                            <a href="mailto:contact@mantranexvista.com" style="color: #f59e0b;">contact@mantranexvista.com</a>
                         </p>
                     </div>
                     <div style="text-align: center; padding: 20px;">
