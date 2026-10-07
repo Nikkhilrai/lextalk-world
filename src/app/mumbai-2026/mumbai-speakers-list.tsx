@@ -16,7 +16,6 @@ export interface Speaker {
 }
 
 export const speakers: Speaker[] = [
-
     {
         name: "Dr. Lalit Bhasin",
         title: "President\nSociety of Indian Law Firms, India",
@@ -26,6 +25,30 @@ export const speakers: Speaker[] = [
 He currently serves as President of the Society of Indian Law Firms (SILF), Chairman of the Chartered Institute of Arbitrators (CIArb) India Branch, and Chairman of the Confederation of Indian Industry (CII) Task Force on Legal Services. He is also an Honorary Life Member of the International Bar Association — the only Indian ever to receive this honour. He is the Immediate Past President of the Bar Association of India, and his 60+ years of legal practice have been formally recognised by his alma mater, Hindu College.
 
 He holds honorary doctorates including a Ph.D. Honoris Causa (2023) from GD Goenka University, Gurgaon, and an LL.D. Honoris Causa (2013) from Amity University. His many state and institutional honours include the Lifetime Achievement Award from ASSOCHAM (2023), the Outstanding Arbitration Expert Award from APCAM (2023), the "Glorious 61 Years in the Profession" Award from Legal Era (2023), a Lifetime Achievement Award from the UK India Legal Partnership presented at the House of Lords, London (2022), the National Law Day Award bestowed by the President of India (2007), and a Plaque of Honour bestowed by the Prime Minister of India (2002) for exceptional service to the Rule of Law.`,
+    },
+    {
+        name: "Tanhieya Ghosh",
+        title: "General Counsel – India, South East Asia & Export Markets, Solventum (formerly 3M Healthcare)",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625153/lextalk/mumbai-speakers/tanhieya-ghosh.jpg",
+        bio: `Tanhieya Ghosh leads legal affairs for Solventum (formerly 3M Healthcare) across India, Singapore, and Malaysia, bringing nearly 23 years of experience across legal, ethics and compliance, and governance functions in India and Southeast Asia.
+
+She previously served as Director, Legal Compliance & Frontier Markets Plus (India) and Director, Legal & Compliance, Subcontinent (India) at Medtronic. Prior to her roles in the medical device industry, she held the position of Director, Legal, Ethics & Compliance, Region (India) at Otis Worldwide. She is based in Mumbai.`,
+    },
+    {
+        name: "Suchana Mukherjee Gupta",
+        title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650326/lextalk/mumbai-speakers/suchana-mukherjee-gupta.png",
+        bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
+
+She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
+    },
+    {
+        name: "Sharifah Thaherah",
+        title: "Chief Regional Counsel (Head of Legal & Regulatory), APAC and India Region, Infobip",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625150/lextalk/mumbai-speakers/sharifah-thaherah.jpg",
+        bio: `Sharifah Thaherah leads legal and regulatory affairs for the APAC and India regions at Infobip, supporting the company's global omnichannel communication initiatives.
+
+She began her career as an advocate and solicitor focused on corporate matters and is also a certified company secretary. Prior to Infobip, she served as Director, Legal (APAC) at Ettus Research, a National Instruments company, providing legal oversight within the telecommunications equipment sector.`,
     },
     {
         name: "Raghvendra Verma",
@@ -38,16 +61,6 @@ He currently serves as Partner at AMADI, a leading legal and corporate advisory 
 He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
     },
     {
-        name: "Aniket Gautam",
-        title: "Founding Partner, ASG & Partners",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625092/lextalk/dubai-speakers/aniket-gautam.jpg",
-        bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
-
-His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
-
-In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
-    },
-    {
         name: "Kapil Singhal",
         title: "Founder & CEO, Coingeit (CaseDocker) | Serial Entrepreneur & Investor",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625124/lextalk/dubai-speakers/kapil-singhal.jpg",
@@ -56,14 +69,6 @@ In his words: "Leveraging a nuanced understanding of commercial law to foster st
 As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the LegalTech and digital solutions ecosystem. His earlier executive leadership roles spanned Director of Global Offering Development, Global Service Executive, Solution Director, and Enterprise Architect at global technology giants including Computer Sciences Corporation (now DXC Technology), Hewlett Packard, and Compaq.
 
 His expertise covers global offering development, business development, transition and transformation, pre-sales and solution architecture, mid-to-large deal closure, and global service delivery, with deep domain knowledge in LegalTech, cloud computing, orchestration and automation, VDI, unified communications, smart city frameworks, and security and surveillance. He is currently architecting customised security and surveillance solutions tailored for the Indian environment in partnership with global Tier-1 component providers within smart city frameworks.`,
-    },
-    {
-        name: "Tanhieya Ghosh",
-        title: "General Counsel – India, South East Asia & Export Markets, Solventum (formerly 3M Healthcare)",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625153/lextalk/mumbai-speakers/tanhieya-ghosh.jpg",
-        bio: `Tanhieya Ghosh leads legal affairs for Solventum (formerly 3M Healthcare) across India, Singapore, and Malaysia, bringing nearly 23 years of experience across legal, ethics and compliance, and governance functions in India and Southeast Asia.
-
-She previously served as Director, Legal Compliance & Frontier Markets Plus (India) and Director, Legal & Compliance, Subcontinent (India) at Medtronic. Prior to her roles in the medical device industry, she held the position of Director, Legal, Ethics & Compliance, Region (India) at Otis Worldwide. She is based in Mumbai.`,
     },
     {
         name: "Arun Kasat",
@@ -76,12 +81,14 @@ With more than two decades of international experience, he has advised boards an
 Arun is a qualified lawyer and Chartered Accountant, and is widely recognized for building high-impact compliance and governance programs that enable ethical business growth while navigating complex regulatory environments. His expertise spans compliance strategy, data privacy, corporate governance, investigations, sanctions, and regulatory transformation.`,
     },
     {
-        name: "Suchana Mukherjee Gupta",
-        title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650326/lextalk/mumbai-speakers/suchana-mukherjee-gupta.png",
-        bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
+        name: "Aniket Gautam",
+        title: "Founding Partner, ASG & Partners",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625092/lextalk/dubai-speakers/aniket-gautam.jpg",
+        bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
 
-She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
+His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
+
+In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
     },
     {
         name: "Nikunj Savalia",
@@ -98,14 +105,6 @@ He holds an LLB from Gujarat University and is a Fellow Member of the Institute 
         bio: `Yashwardhan Bandi is a seasoned Banking and Finance lawyer with 16 years of experience across law firms, NBFCs, and Indian and foreign banks, currently serving as Unit Manager and Vice President, Legal at IndusInd Bank.
 
 He previously served as Senior Legal Counsel at HSBC Bank India, where he worked extensively on legal and regulatory matters including sustainable finance and ESG-related frameworks, and has also held roles at Yes Bank Limited, L&T Infrastructure Finance Company Limited, and Link Legal Advocates. He holds an LLM in Banking & Financial Services Law from the University of Melbourne.`,
-    },
-    {
-        name: "Sharifah Thaherah",
-        title: "Chief Regional Counsel (Head of Legal & Regulatory), APAC and India Region, Infobip",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625150/lextalk/mumbai-speakers/sharifah-thaherah.jpg",
-        bio: `Sharifah Thaherah leads legal and regulatory affairs for the APAC and India regions at Infobip, supporting the company's global omnichannel communication initiatives.
-
-She began her career as an advocate and solicitor focused on corporate matters and is also a certified company secretary. Prior to Infobip, she served as Director, Legal (APAC) at Ettus Research, a National Instruments company, providing legal oversight within the telecommunications equipment sector.`,
     },
     {
         name: "Amit K Vyas",
