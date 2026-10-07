@@ -54,6 +54,30 @@ export const speakers: Speaker[] = [
         image: `${IMG}/prerna-gandhi`,
         bio: `Prerna Gandhi is Associate General Counsel and Director at Amazon Consumer, Singapore, where she leads the legal function for the Singapore Consumer business. She advises senior leadership on legal strategy, risk management and regulatory matters across e-commerce operations. Her expertise spans privacy, competition, payments, consumer protection and product safety, with experience engaging regulators and supporting customer-centric business initiatives while ensuring compliance with evolving legal requirements.`,
     },
+    {
+        name: "Zhanna Krekoten",
+        title: "Region Head APAC SpeakUp Office, Novartis",
+        image: `${IMG}/zhanna-krekoten`,
+        bio: `Zhanna Krekoten is Region Head, APAC SpeakUp Office at Novartis, with expertise in compliance, governance, investigations, risk management and business ethics. She works across APAC to strengthen ethical culture, accountability and effective SpeakUp programs.`,
+    },
+    {
+        name: "Animesh Ballabh",
+        title: "Senior Compliance Director - Asia Pacific, ADM (Archer Daniels Midland Company)",
+        image: `${IMG}/animesh-ballabh`,
+        bio: `A compliance and ethics specialist and corporate lawyer with extensive experience across Asia Pacific, the Indian Subcontinent and the Middle East. A CFE and CCEP-I professional, with expertise in compliance, anti-corruption, fraud, internal investigations, legal advisory and third-party risk. Currently heading the Compliance function for Asia Pacific and Indian Subcontinent at ADM.`,
+    },
+    {
+        name: "Lyn Lee",
+        title: "Head of Group Legal, OCBC Bank",
+        image: `${IMG}/lyn-lee`,
+        bio: `Lyn Lee is Head of Group Legal at OCBC Bank, overseeing legal advisory and support across its businesses, as well as the bank's Data Privacy Office. She has extensive experience in treasury and investment banking law and has worked in Singapore's banking industry since 2006. Lyn is an IBF Fellow, former Co-Chair of the ISDA Legal and Regulatory Committee, and a P.R.I.M.E. Finance Expert. She also serves as an independent non-executive director of DTCC Singapore.`,
+    },
+    {
+        name: "Lokesh Gangadhar",
+        title: "Senior Manager Legal Counsel, Dell Technologies",
+        image: `${IMG}/lokesh-gangadhar`,
+        bio: `Lokesh Gangadhar is a senior legal professional at Dell Technologies, serving as Senior Managing Legal Counsel for APJC. He brings extensive experience in corporate and commercial law, supporting technology businesses across the Asia Pacific and Japan region. His expertise includes legal advisory, commercial transactions, contracts, technology and business operations.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
