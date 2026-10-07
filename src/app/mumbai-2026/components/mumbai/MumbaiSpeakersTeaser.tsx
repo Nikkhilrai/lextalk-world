@@ -56,13 +56,19 @@ export function MumbaiSpeakersTeaser({ onOpenSpeakerApply }: { onOpenSpeakerAppl
                             <Link href="/mumbai-2026/speakers" className="group block text-center">
                                 <div className="relative mb-5 transition-transform duration-500 ease-out group-hover:-translate-y-1">
                                     <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg bg-slate-800 shadow-[0_18px_36px_-14px_rgba(0,0,0,0.5)] ring-1 ring-white/10 transition-shadow duration-500 group-hover:ring-amber-400/40 group-hover:shadow-[0_28px_52px_-16px_rgba(180,120,20,0.4)]">
-                                        <Image
-                                            src={speaker.image}
-                                            alt={speaker.name}
-                                            fill
-                                            sizes="(max-width: 768px) 45vw, 260px"
-                                            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                                        />
+                                        {speaker.image ? (
+                                            <Image
+                                                src={speaker.image}
+                                                alt={speaker.name}
+                                                fill
+                                                sizes="(max-width: 768px) 45vw, 260px"
+                                                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
+                                                <span className="text-4xl font-serif font-bold text-amber-400/20">{speaker.name.charAt(0)}</span>
+                                            </div>
+                                        )}
                                         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none" />
                                     </div>
                                     <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-9 group-hover:w-14 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full transition-all duration-500" />
@@ -91,7 +97,7 @@ export function MumbaiSpeakersTeaser({ onOpenSpeakerApply }: { onOpenSpeakerAppl
                         href="/mumbai-2026/speakers"
                         className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 border-2 border-white/30 text-white font-semibold text-sm rounded-lg hover:bg-white hover:text-slate-900 transition-colors duration-300 w-full sm:w-auto"
                     >
-                        View All {speakers.length}+ Speakers
+                        View All Speakers
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     {onOpenSpeakerApply && (
