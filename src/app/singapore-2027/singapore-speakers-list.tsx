@@ -15,67 +15,67 @@ export interface Speaker {
     isCentred?: boolean;
 }
 
-const IMG = "https://res.cloudinary.com/djagw0s4d/image/upload/c_limit,f_auto,q_auto,w_800/lextalk/singapore-speakers";
+const IMG = "https://res.cloudinary.com/djagw0s4d/image/upload/c_limit,f_auto,q_auto,w_800";
 
 export const speakers: Speaker[] = [
     {
         name: "Jishnu Nair",
         title: "Counsel, ASEAN Compliance Officer, IBM",
-        image: `${IMG}/jishnu-nair`,
+        image: `${IMG}/v1791365134/lextalk/singapore-speakers/jishnu-nair`,
         bio: `Jishnu Nair is Counsel and ASEAN Market Strategic Advisor at IBM, with experience across regulatory law, compliance, privacy, AI and cybersecurity. He advises on complex legal and regulatory matters across ASEAN and APAC, with a focus on emerging technology, risk and compliance. Jishnu brings a practical perspective on navigating evolving regulations while enabling responsible technology adoption.`,
     },
     {
         name: "Pranav Rai",
         title: "Legal Counsel, Hitachi Energy",
-        image: `${IMG}/pranav-rai`,
+        image: `${IMG}/v1791365136/lextalk/singapore-speakers/pranav-rai`,
         bio: `Pranav Rai is Legal Counsel at Hitachi Energy, specialising in technology and commercial contracts, with a focus on AI governance and emerging technology. As an AIGP-certified professional, he brings a practical perspective to the legal, regulatory, and governance challenges associated with AI adoption. His experience sits at the intersection of law, technology, and business, with a particular interest in helping organisations navigate evolving AI requirements while enabling responsible innovation.`,
     },
     {
         name: "Rishi Ganiswaran",
         title: "Group Data Protection Officer, Frasers Property Group",
-        image: `${IMG}/rishi-ganiswaran`,
+        image: `${IMG}/v1791365138/lextalk/singapore-speakers/rishi-ganiswaran`,
         bio: `Rishi Ganiswaran is a senior legal and privacy leader with around 16 years of experience across energy, infrastructure and technology sectors. He holds degrees in Law and Electrical Engineering, along with a Master's in Digital Economy specialising in data protection, data governance, AI governance, legal tech and fintech. Called to the Singapore Bar and admitted as a solicitor in New South Wales, Australia, Rishi has held senior Head of Legal and Chief Privacy Officer roles, advising multinational organisations across commercial, regulatory, privacy, cybersecurity and technology matters.`,
     },
     {
         name: "Shelly Kohli",
         title: "Director Legal, APAC, The HEINEKEN Company",
-        image: `${IMG}/shelly-kohli`,
+        image: `${IMG}/v1791365140/lextalk/singapore-speakers/shelly-kohli`,
         bio: `Shelly Kohli is a senior corporate lawyer with over 20 years of experience across private practice and in-house leadership roles with leading global corporations. Dual-qualified in India and New York, she specialises in commercial transactions, litigation, intellectual property, privacy, regulatory compliance and corporate matters. She previously served as Head Legal for Beauty, Personal Care, Home Care and Privacy at Hindustan Unilever. Shelly currently leads the Legal and Compliance function at United Breweries Limited and is part of its Executive Management team, advising the Board and senior leadership on strategic legal, regulatory and compliance matters.`,
     },
     {
         name: "Prem Kumar",
         title: "Director, Head of Ethics & Compliance, India and South East Asia, Takeda",
-        image: `${IMG}/prem-kumar`,
+        image: `${IMG}/v1791365142/lextalk/singapore-speakers/prem-kumar`,
         bio: `Prem Kumar is a global Ethics & Compliance leader with extensive experience in governance, risk management and investigations across multiple regions. He has advised Boards and senior leadership on ethical culture, compliance transformation and risk-based decision-making. Prem has led over 100 complex investigations, forensic reviews and risk assessments, with expertise in cross-border investigations, remediation and AI-enabled risk monitoring. His industry experience spans pharmaceuticals, healthcare, financial services, telecom, oil & gas and manufacturing, helping organisations strengthen integrity, reduce compliance risks and build sustainable business environments.`,
     },
     {
         name: "Prerna Gandhi",
         title: "Associate General Counsel and Director, Amazon Consumer, Singapore",
-        image: `${IMG}/prerna-gandhi`,
+        image: `${IMG}/v1791365144/lextalk/singapore-speakers/prerna-gandhi`,
         bio: `Prerna Gandhi is Associate General Counsel and Director at Amazon Consumer, Singapore, where she leads the legal function for the Singapore Consumer business. She advises senior leadership on legal strategy, risk management and regulatory matters across e-commerce operations. Her expertise spans privacy, competition, payments, consumer protection and product safety, with experience engaging regulators and supporting customer-centric business initiatives while ensuring compliance with evolving legal requirements.`,
     },
     {
         name: "Zhanna Krekoten",
         title: "Region Head APAC SpeakUp Office, Novartis",
-        image: `${IMG}/zhanna-krekoten`,
+        image: `${IMG}/v1791365734/lextalk/singapore-speakers/zhanna-krekoten`,
         bio: `Zhanna Krekoten is Region Head, APAC SpeakUp Office at Novartis, with expertise in compliance, governance, investigations, risk management and business ethics. She works across APAC to strengthen ethical culture, accountability and effective SpeakUp programs.`,
     },
     {
         name: "Animesh Ballabh",
         title: "Senior Compliance Director - Asia Pacific, ADM (Archer Daniels Midland Company)",
-        image: `${IMG}/animesh-ballabh`,
+        image: `${IMG}/v1791365736/lextalk/singapore-speakers/animesh-ballabh`,
         bio: `A compliance and ethics specialist and corporate lawyer with extensive experience across Asia Pacific, the Indian Subcontinent and the Middle East. A CFE and CCEP-I professional, with expertise in compliance, anti-corruption, fraud, internal investigations, legal advisory and third-party risk. Currently heading the Compliance function for Asia Pacific and Indian Subcontinent at ADM.`,
     },
     {
         name: "Lyn Lee",
         title: "Head of Group Legal, OCBC Bank",
-        image: `${IMG}/lyn-lee`,
+        image: `${IMG}/v1791365738/lextalk/singapore-speakers/lyn-lee`,
         bio: `Lyn Lee is Head of Group Legal at OCBC Bank, overseeing legal advisory and support across its businesses, as well as the bank's Data Privacy Office. She has extensive experience in treasury and investment banking law and has worked in Singapore's banking industry since 2006. Lyn is an IBF Fellow, former Co-Chair of the ISDA Legal and Regulatory Committee, and a P.R.I.M.E. Finance Expert. She also serves as an independent non-executive director of DTCC Singapore.`,
     },
     {
         name: "Lokesh Gangadhar",
         title: "Senior Manager Legal Counsel, Dell Technologies",
-        image: `${IMG}/lokesh-gangadhar`,
+        image: `${IMG}/v1791365739/lextalk/singapore-speakers/lokesh-gangadhar`,
         bio: `Lokesh Gangadhar is a senior legal professional at Dell Technologies, serving as Senior Managing Legal Counsel for APJC. He brings extensive experience in corporate and commercial law, supporting technology businesses across the Asia Pacific and Japan region. His expertise includes legal advisory, commercial transactions, contracts, technology and business operations.`,
     },
 ];
