@@ -134,7 +134,7 @@ export async function POST(req: Request) {
 
                             <p style="margin: 0 0 10px; font-size: 14px; color: #4B5563; line-height: 22px;">
                                 Our team will review the nomination and get back to you with the results. If you have any questions, please contact us at 
-                                <a href="mailto:info@lextalkworld.in" style="color: #3B82F6; text-decoration: none; font-weight: 500;">info@lextalkworld.in</a>
+                                <a href="mailto:abhishek@clickawaycreators.com" style="color: #3B82F6; text-decoration: none; font-weight: 500;">abhishek@clickawaycreators.com</a> or <a href="mailto:contact@mantranexvista.com" style="color: #3B82F6; text-decoration: none; font-weight: 500;">contact@mantranexvista.com</a>
                             </p>
 
                             <p style="margin: 30px 0 0; font-size: 14px; color: #4B5563;">
