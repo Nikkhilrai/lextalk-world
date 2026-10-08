@@ -205,11 +205,11 @@ async function sendConfirmationEmail(data: any) {
                         </p>
                         ` : ""}
 
-                        <div style="margin-top: 25px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                            <a href="${eventUrl}" style="display: inline-block; background: ${isDelegate ? "#1e293b" : "#f59e0b"}; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                        <div style="margin-top: 25px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+                            <a href="${eventUrl}" style="display: inline-block; background: ${isDelegate ? "#1e293b" : "#f59e0b"}; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 0 12px 12px 0;">
                                 ${isDelegate ? "View Event Details" : "Learn More About The Event"} →
                             </a>
-                            <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                            <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 0 0 12px 12px;">
                                 Follow Us on LinkedIn
                             </a>
                         </div>
