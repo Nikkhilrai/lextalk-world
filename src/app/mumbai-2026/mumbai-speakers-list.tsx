@@ -237,6 +237,18 @@ Attreyi has co-authored successive editions of the top selling book on POSH - Ha
         title: "Global General Counsel - Group, DNEG",
         image: "/mumbai-2026/Mumbai_Speakers/Zameer Nathani.png",
     },
+    {
+        name: "Sanjay Jain",
+        title: "Founder & Managing Partner, Lex Corp",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625133/lextalk/dubai-speakers/sanjay-jain.jpg",
+        bio: `Sanjay Jain is a seasoned legal strategist and the Founder and Managing Partner of Lex Corp, a premier full-service law firm based in New Delhi. With over 14 years of extensive experience, he specialises in commercial litigation, domestic and international arbitration, insolvency, and corporate advisory. Known for combining rigorous legal excellence with deep commercial awareness, he acts as a trusted advisor delivering practical, solution-oriented counsel aligned with his clients' long-term business objectives.
+
+His core expertise spans dispute resolution (commercial litigation, domestic and international arbitration), corporate and finance (insolvency and bankruptcy before the NCLT/NCLAT, banking and financial disputes, corporate advisory), and specialised law (taxation, intellectual property, and regulatory compliance). He has represented high-profile clients and institutional bodies before the Supreme Court of India, various High Courts, the NCLT and NCLAT, Debt Recovery Tribunals, and commercial and arbitral tribunals.
+
+He serves as Senior Panel Counsel for the State of Uttar Pradesh before the Supreme Court of India, and has been appointed to panels including the Delhi Development Authority, the South Delhi Municipal Corporation, Punjab National Bank, and Kotak Mahindra Bank. His client portfolio spans leading domestic and international corporations, educational institutions, and trusts, including Zee Entertainment Enterprise Ltd, V2 Retail Ltd, Swastik Pipe Ltd, the University of the West of England (UK), and Cordova Publications.
+
+In his words: "Effective legal counsel goes beyond courtroom advocacy — it requires strategic thinking, exceptional integrity, and actionable advice that drives informed decision-making." Under his leadership, Lex Corp bridges the gap between traditional legal values and modern, fast-paced business realities.`,
+    },
 ];
 
 export default function MumbaiSpeakersList() {
