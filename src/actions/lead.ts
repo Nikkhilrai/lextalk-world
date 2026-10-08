@@ -107,31 +107,81 @@ async function sendNotificationEmail(data: any) {
     }
 }
 
+// Live delegate payment/registration pages, keyed by the exact conference
+// value from RegisterModal. Only list a conference here once its real pass
+// pricing is live — Delhi has no page yet, so it's deliberately absent
+// rather than pointing at a broken or fabricated link.
+const DELEGATE_PAYMENT_PAGES: Record<string, string> = {
+    "Mumbai India, Dec 7-8 2026": "https://lextalkworld.in/mumbai-delegate-registration-2026",
+    "Singapore, Feb 4 2027": "https://lextalkworld.in/singapore-2027-delegate-passes",
+};
+
+function eventPageFor(conference: string | undefined): string {
+    if (conference === "Mumbai India, Dec 7-8 2026") return "https://lextalkworld.in/mumbai-2026";
+    if (conference === "Singapore, Feb 4 2027") return "https://lextalkworld.in/singapore-2027";
+    if (conference === "Delhi India, July 2027") return "https://lextalkworld.in/delhi-2027";
+    return "https://lextalkworld.in/conferences";
+}
+
 async function sendConfirmationEmail(data: any) {
     if (!process.env.RESEND_API_KEY) {
         console.error("[lead] RESEND_API_KEY is not set — confirmation email skipped");
         return;
     }
+
+    const isDelegate = data.joinAs === "Register as Delegate";
+    const paymentUrl = isDelegate ? DELEGATE_PAYMENT_PAGES[data.conference as string] : undefined;
+    const eventUrl = eventPageFor(data.conference);
+
+    const heading = isDelegate ? "You're Almost In! 🎟️" : "Thank You! 🎉";
+    const subheading = isDelegate
+        ? "One step left — complete your delegate registration"
+        : "Your registration of interest has been received";
+    const subject = isDelegate
+        ? `Complete Your Delegate Registration — LexTalk World`
+        : `Thank You for Your Interest in LexTalk World Summit! 🌟`;
+
+    const introParagraph = isDelegate
+        ? `Thank you for registering your interest as a delegate for <strong>${data.conference || "LexTalk World"}</strong>. To secure your seat, please complete your registration and payment using the button below.`
+        : `Thank you for expressing your interest in attending the <strong>LexTalk World Summit</strong>! We're excited to have you join our global community of legal professionals.`;
+
+    const delegateCta = isDelegate
+        ? (paymentUrl
+            ? `
+                <div style="margin: 25px 0; text-align: center;">
+                    <a href="${paymentUrl}" style="display: inline-block; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px;">
+                        Complete Registration &amp; Pay →
+                    </a>
+                </div>
+            `
+            : `
+                <div style="margin: 20px 0; padding: 16px 20px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;">
+                    <p style="color: #92400e; font-size: 14px; line-height: 1.6; margin: 0;">
+                        Delegate registration for <strong>${data.conference || "this event"}</strong> is not yet open. We'll email you the registration and payment link as soon as it is.
+                    </p>
+                </div>
+            `)
+        : "";
+
     try {
         const { data: sent, error } = await resend.emails.send({
             from: "LexTalk World <noreply@lextalkworld.in>",
             to: data.email,
-            subject: `Thank You for Your Interest in LexTalk World Summit! 🌟`,
+            subject,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                     <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
-                        <h1 style="color: white; margin: 0; font-size: 28px;">Thank You! 🎉</h1>
-                        <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your registration of interest has been received</p>
+                        <h1 style="color: white; margin: 0; font-size: 28px;">${heading}</h1>
+                        <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">${subheading}</p>
                     </div>
                     <div style="background: #f8fafc; padding: 30px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 10px 10px;">
                         <p style="color: #1e293b; font-size: 16px; line-height: 1.6; margin-top: 0;">
                             Dear <strong>${data.firstName}</strong>,
                         </p>
                         <p style="color: #475569; font-size: 15px; line-height: 1.8;">
-                            Thank you for expressing your interest in attending the <strong>LexTalk World Summit</strong>! 
-                            We're excited to have you join our global community of legal professionals.
+                            ${introParagraph}
                         </p>
-                        
+
                         <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 20px 0;">
                             <h3 style="color: #1e293b; margin: 0 0 15px 0; font-size: 16px;">Your Registration Details:</h3>
                             <table style="width: 100%; border-collapse: collapse;">
@@ -145,23 +195,27 @@ async function sendConfirmationEmail(data: any) {
                                 </tr>
                             </table>
                         </div>
-                        
+
+                        ${delegateCta}
+
+                        ${!isDelegate ? `
                         <p style="color: #475569; font-size: 15px; line-height: 1.8;">
-                            Our team will review your information and get back to you shortly with more details about 
+                            Our team will review your information and get back to you shortly with more details about
                             the event, registration process, and exclusive early bird offers.
                         </p>
-                        
+                        ` : ""}
+
                         <div style="margin-top: 25px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                            <a href="https://lextalkworld.in/dubai-2026" style="display: inline-block; background: #f59e0b; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
-                                Learn More About The Event →
+                            <a href="${eventUrl}" style="display: inline-block; background: ${isDelegate ? "#1e293b" : "#f59e0b"}; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                                ${isDelegate ? "View Event Details" : "Learn More About The Event"} →
                             </a>
                             <a href="https://www.linkedin.com/company/lextalkworld-apac-me/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
                                 Follow Us on LinkedIn
                             </a>
                         </div>
-                        
+
                         <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 25px 0;" />
-                        
+
                         <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
                             If you have any questions, feel free to reach out to us at
                             <a href="mailto:abhishek@clickawaycreators.com" style="color: #f59e0b;">abhishek@clickawaycreators.com</a>
