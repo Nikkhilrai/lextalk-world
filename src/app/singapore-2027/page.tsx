@@ -15,6 +15,7 @@ import { Footer } from "@/components/Footer";
 import { RegisterModal } from "@/components/RegisterModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
+import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 
 const CONFERENCE = "Singapore, Feb 4 2027";
 
@@ -178,6 +179,8 @@ export default function Singapore2027Page() {
     return (
         <main className="min-h-screen bg-[#0a0e12]">
             <Navbar />
+
+            <FloatingAgendaButton eventSlug="singapore-2027" />
 
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} defaultConference={CONFERENCE} />
             <SponsorshipModal isOpen={isSponsorshipOpen} onClose={() => setIsSponsorshipOpen(false)} />
