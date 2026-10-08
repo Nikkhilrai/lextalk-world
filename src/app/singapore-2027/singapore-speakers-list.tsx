@@ -37,6 +37,12 @@ export const speakers: Speaker[] = [
         bio: `Rishi Ganiswaran is a senior legal and privacy leader with around 16 years of experience across energy, infrastructure and technology sectors. He holds degrees in Law and Electrical Engineering, along with a Master's in Digital Economy specialising in data protection, data governance, AI governance, legal tech and fintech. Called to the Singapore Bar and admitted as a solicitor in New South Wales, Australia, Rishi has held senior Head of Legal and Chief Privacy Officer roles, advising multinational organisations across commercial, regulatory, privacy, cybersecurity and technology matters.`,
     },
     {
+        name: "Lyn Lee",
+        title: "Head of Group Legal, OCBC Bank",
+        image: `${IMG}/v1791365738/lextalk/singapore-speakers/lyn-lee`,
+        bio: `Lyn Lee is Head of Group Legal at OCBC Bank, overseeing legal advisory and support across its businesses, as well as the bank's Data Privacy Office. She has extensive experience in treasury and investment banking law and has worked in Singapore's banking industry since 2006. Lyn is an IBF Fellow, former Co-Chair of the ISDA Legal and Regulatory Committee, and a P.R.I.M.E. Finance Expert. She also serves as an independent non-executive director of DTCC Singapore.`,
+    },
+    {
         name: "Shelly Kohli",
         title: "Director Legal, APAC, The HEINEKEN Company",
         image: `${IMG}/v1791365140/lextalk/singapore-speakers/shelly-kohli`,
@@ -67,16 +73,22 @@ export const speakers: Speaker[] = [
         bio: `A compliance and ethics specialist and corporate lawyer with extensive experience across Asia Pacific, the Indian Subcontinent and the Middle East. A CFE and CCEP-I professional, with expertise in compliance, anti-corruption, fraud, internal investigations, legal advisory and third-party risk. Currently heading the Compliance function for Asia Pacific and Indian Subcontinent at ADM.`,
     },
     {
-        name: "Lyn Lee",
-        title: "Head of Group Legal, OCBC Bank",
-        image: `${IMG}/v1791365738/lextalk/singapore-speakers/lyn-lee`,
-        bio: `Lyn Lee is Head of Group Legal at OCBC Bank, overseeing legal advisory and support across its businesses, as well as the bank's Data Privacy Office. She has extensive experience in treasury and investment banking law and has worked in Singapore's banking industry since 2006. Lyn is an IBF Fellow, former Co-Chair of the ISDA Legal and Regulatory Committee, and a P.R.I.M.E. Finance Expert. She also serves as an independent non-executive director of DTCC Singapore.`,
-    },
-    {
         name: "Lokesh Gangadhar",
         title: "Senior Manager Legal Counsel, Dell Technologies",
         image: `${IMG}/v1791365739/lextalk/singapore-speakers/lokesh-gangadhar`,
         bio: `Lokesh Gangadhar is a senior legal professional at Dell Technologies, serving as Senior Managing Legal Counsel for APJC. He brings extensive experience in corporate and commercial law, supporting technology businesses across the Asia Pacific and Japan region. His expertise includes legal advisory, commercial transactions, contracts, technology and business operations.`,
+    },
+    {
+        name: "Soumava Chatterjee",
+        title: "Director & Assistant General Counsel, Bank of America",
+        image: `${IMG}/v1791462456/lextalk/singapore-speakers/soumava-chatterjee`,
+        bio: `Soumava Chatterjee leads legal strategy for Bank of America's APAC infrastructure credit platform, advising on complex cross-border financings supporting energy transition and digital infrastructure across Southeast Asia. Dual-qualified in India and Australia, he specialises in renewables, digital and core infrastructure financings. He works closely with senior leadership and deal teams to manage legal and regulatory risk, structure transactions and support growth across emerging markets. Soumava is also recognised as an APAC thought leader on energy transition and infrastructure credit.`,
+    },
+    {
+        name: "Mekhla Basu",
+        title: "Regional Compliance Officer, ByteDance",
+        image: `${IMG}/v1791462457/lextalk/singapore-speakers/mekhla-basu`,
+        bio: `Mekhla Basu is a senior legal and compliance executive with over 20 years of experience across APAC, EMEA and emerging markets. She has led global legal strategies, compliance programmes and complex cross-border M&A across technology, digital media, healthcare and industrial sectors. Her experience includes leadership roles at ByteDance, Intel, IBM and GE Healthcare. She advises C-suite leaders and boards on corporate governance, regulatory risk, business strategy and legal operations.`,
     },
 ];
 
