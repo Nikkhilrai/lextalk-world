@@ -615,6 +615,33 @@ model DelegateConsentRegistration {
   @@index([status])
 }
 
+// Awards Eligibility Request — "Request an eligibility review" form on an
+// awards programme page (e.g. Singapore 2027's Medal of Excellence). No
+// pricing or commercial terms are collected here; eligible nominees are
+// contacted and moved into the private nomination/confirmation process
+// (handled via Zoho) by the team after review.
+model AwardsEligibilityRequest {
+  id           String   @id @default(cuid())
+  name         String
+  role         String?  // Job title
+  organization String?
+  email        String
+  country      String?
+  linkedin     String?  // LinkedIn profile or website URL
+  category     String?  // Preferred award category
+  summary      String?  @db.Text // Achievement summary
+  source       String?  // How they heard about the awards
+  program      String   // e.g. "LexTalk World Singapore 2027 — The Medal of Excellence"
+  consent      Boolean  @default(false)
+  status       String   @default("New") // New, Reviewing, Eligible, Not Eligible
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([program])
+  @@index([status])
+}
+
 // Newsletter Models
 model Newsletter {
   id             String           @id @default(cuid())

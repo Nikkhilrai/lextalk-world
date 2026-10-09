@@ -47,6 +47,7 @@ const NAV_GROUPS = [
             { label: "Delegate Coupons", href: "/admin/delegate-coupons", icon: Tag },
             { label: "Speaker Applications", href: "/admin/speaker-applications", icon: Mic },
             { label: "Delegate Consent", href: "/admin/delegate-consent", icon: FileCheck2 },
+            { label: "Awards Eligibility", href: "/admin/awards-eligibility", icon: Trophy },
             { label: "Counsel Exchange", href: "/admin/counsel-exchange-access", icon: Lock },
             { label: "Awardees", href: "/admin/awardees", icon: Award },
             { label: "Awardee Orders", href: "/admin/awardee-orders", icon: Trophy },
