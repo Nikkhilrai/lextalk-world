@@ -248,6 +248,14 @@ In his words: "Effective legal counsel goes beyond courtroom advocacy — it req
         title: "Global General Counsel - Group, DNEG",
         image: "/mumbai-2026/Mumbai_Speakers/Zameer Nathani.png",
     },
+    {
+        name: "Sachin Mishra",
+        title: "General Counsel & Company Secretary, Compliance Officer, Tata Consulting Engineers",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1791542199/lextalk/mumbai-speakers/sachin-mishra.png",
+        bio: `As General Counsel and Company Secretary at Tata Consulting Engineers, Sachin Mishra leads the organisation's Legal, Contract, Secretarial, Mergers & Acquisitions, IPR, Corporate Governance, and Compliance functions.
+
+With over 18 years of experience in legal, secretarial and governance roles, he focuses on driving strategic solutions that enable the company's business growth while ensuring full compliance with statutory and ethical standards.`,
+    },
 
 ];
 
