@@ -90,6 +90,12 @@ export const speakers: Speaker[] = [
         image: `${IMG}/v1791462457/lextalk/singapore-speakers/mekhla-basu`,
         bio: `Mekhla Basu is a senior legal and compliance executive with over 20 years of experience across APAC, EMEA and emerging markets. She has led global legal strategies, compliance programmes and complex cross-border M&A across technology, digital media, healthcare and industrial sectors. Her experience includes leadership roles at ByteDance, Intel, IBM and GE Healthcare. She advises C-suite leaders and boards on corporate governance, regulatory risk, business strategy and legal operations.`,
     },
+    {
+        name: "Faizan Gul",
+        title: "Director & Head of Risk Compliance & ESG, Telenor",
+        image: `${IMG}/v1791541511/lextalk/singapore-speakers/faizan-gul`,
+        bio: `A seasoned Risk, Compliance and ESG leader with 16 years of telecom experience and 14 years in governance, risk and control. He leads third-party and supply chain risk, ESG, information security, compliance and business continuity for a global Nordic telecom group. His expertise spans enterprise risk management, supply chain resilience, risk intelligence, sustainability, and Board-level reporting. He focuses on strengthening organisational resilience, integrating risk disciplines, improving supplier oversight, and translating complex operational and regulatory challenges into actionable business strategies.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
