@@ -276,6 +276,107 @@ export default function SingaporeAwardsPage() {
                 </div>
             </section>
 
+            {/* ===================== APPLY / ELIGIBILITY REVIEW FORM ===================== */}
+            <section id="apply" className="py-20 md:py-28 bg-[#0a0e12] relative overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/8 rounded-full blur-[140px] pointer-events-none" />
+                <div className="container mx-auto px-4 max-w-2xl relative z-10">
+                    <div className="text-center mb-10">
+                        <SectionEyebrow dark>Call to Action</SectionEyebrow>
+                        <h2 className="font-serif text-2xl md:text-4xl font-bold text-white leading-tight mb-5">
+                            Request an <span className="text-amber-400">Eligibility Review</span>
+                        </h2>
+                        <p className="text-white/60 leading-relaxed max-w-xl mx-auto">
+                            If your work has advanced responsible AI, trusted digital transformation or resilient governance, tell us why it should be considered. Our team will review category fit and share the next steps with eligible candidates.
+                        </p>
+                    </div>
+
+                    <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-6 md:p-8">
+                        {submitted ? (
+                            <div className="py-10 flex flex-col items-center text-center">
+                                <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/25 flex items-center justify-center mb-6">
+                                    <Check className="w-8 h-8 text-amber-400" />
+                                </div>
+                                <h3 className="font-serif text-xl font-bold text-white mb-3">Request Received</h3>
+                                <p className="text-white/60 text-sm max-w-sm leading-relaxed">
+                                    Thank you for your interest in the Medal of Excellence. Our team will review your submission and respond within three business days.
+                                </p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Full Name <span className="text-amber-400">*</span></label>
+                                        <input required value={form.name} onChange={update("name")} type="text" placeholder="Your name" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Job Title</label>
+                                        <input value={form.role} onChange={update("role")} type="text" placeholder="e.g. Chief Risk Officer" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Organisation</label>
+                                        <input value={form.organization} onChange={update("organization")} type="text" placeholder="Organisation" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Work Email <span className="text-amber-400">*</span></label>
+                                        <input required value={form.email} onChange={update("email")} type="email" placeholder="name@company.com" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Country / Market</label>
+                                        <input value={form.country} onChange={update("country")} type="text" placeholder="e.g. Singapore" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">LinkedIn or Website</label>
+                                        <input value={form.linkedin} onChange={update("linkedin")} type="url" placeholder="https://" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Preferred Category</label>
+                                    <select value={form.category} onChange={update("category")} className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors [&>option]:text-slate-900">
+                                        <option value="">Select a category</option>
+                                        {categoryOptions.map((c) => <option key={c} value={c}>{c}</option>)}
+                                        <option value="Not sure yet">Not sure yet — please advise</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Achievement Summary (75 words)</label>
+                                    <textarea value={form.summary} onChange={update("summary")} rows={4} placeholder="What was achieved, how it was implemented, and what changed as a result." className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30 resize-none" />
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">How Did You Hear About the Awards?</label>
+                                    <input value={form.source} onChange={update("source")} type="text" placeholder="Referral, LinkedIn, association, event, other" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
+                                </div>
+
+                                <label className="flex items-start gap-3 cursor-pointer pt-2">
+                                    <input checked={consent} onChange={(e) => setConsent(e.target.checked)} type="checkbox" className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/30 bg-white/5 text-amber-500 focus:ring-amber-400/50 cursor-pointer" />
+                                    <span className="text-xs text-white/55 leading-relaxed">
+                                        I confirm the information provided is accurate, that I am authorised to submit it, and that I consent to LexTalk World contacting me about this recognition process. <span className="text-amber-400">*</span>
+                                    </span>
+                                </label>
+
+                                {submitError && <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2.5">{submitError}</p>}
+
+                                <button type="submit" disabled={isSubmitting} className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 disabled:opacity-60 disabled:cursor-not-allowed">
+                                    {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Submit Eligibility Request <ArrowRight className="w-4 h-4" /></>}
+                                </button>
+                            </form>
+                        )}
+                    </div>
+
+                    <p className="mt-6 text-xs text-white/40 leading-relaxed text-center max-w-xl mx-auto">
+                        Submission is an expression of interest only. It does not constitute recognition, and all recognition remains subject to eligibility and independent assessment. Participation arrangements for recognised awardees are shared privately after assessment.
+                    </p>
+                </div>
+            </section>
+
             {/* ===================== INTRO ===================== */}
             <section className="py-20 md:py-24 bg-white">
                 <div className="container mx-auto px-4 max-w-3xl">
@@ -575,107 +676,6 @@ export default function SingaporeAwardsPage() {
                             </Accordion>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* ===================== APPLY / ELIGIBILITY REVIEW FORM ===================== */}
-            <section id="apply" className="py-20 md:py-28 bg-[#0a0e12] relative overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/8 rounded-full blur-[140px] pointer-events-none" />
-                <div className="container mx-auto px-4 max-w-2xl relative z-10">
-                    <div className="text-center mb-10">
-                        <SectionEyebrow dark>Call to Action</SectionEyebrow>
-                        <h2 className="font-serif text-2xl md:text-4xl font-bold text-white leading-tight mb-5">
-                            Request an <span className="text-amber-400">Eligibility Review</span>
-                        </h2>
-                        <p className="text-white/60 leading-relaxed max-w-xl mx-auto">
-                            If your work has advanced responsible AI, trusted digital transformation or resilient governance, tell us why it should be considered. Our team will review category fit and share the next steps with eligible candidates.
-                        </p>
-                    </div>
-
-                    <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-6 md:p-8">
-                        {submitted ? (
-                            <div className="py-10 flex flex-col items-center text-center">
-                                <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/25 flex items-center justify-center mb-6">
-                                    <Check className="w-8 h-8 text-amber-400" />
-                                </div>
-                                <h3 className="font-serif text-xl font-bold text-white mb-3">Request Received</h3>
-                                <p className="text-white/60 text-sm max-w-sm leading-relaxed">
-                                    Thank you for your interest in the Medal of Excellence. Our team will review your submission and respond within three business days.
-                                </p>
-                            </div>
-                        ) : (
-                            <form onSubmit={handleSubmit} className="space-y-5">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Full Name <span className="text-amber-400">*</span></label>
-                                        <input required value={form.name} onChange={update("name")} type="text" placeholder="Your name" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Job Title</label>
-                                        <input value={form.role} onChange={update("role")} type="text" placeholder="e.g. Chief Risk Officer" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Organisation</label>
-                                        <input value={form.organization} onChange={update("organization")} type="text" placeholder="Organisation" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Work Email <span className="text-amber-400">*</span></label>
-                                        <input required value={form.email} onChange={update("email")} type="email" placeholder="name@company.com" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Country / Market</label>
-                                        <input value={form.country} onChange={update("country")} type="text" placeholder="e.g. Singapore" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">LinkedIn or Website</label>
-                                        <input value={form.linkedin} onChange={update("linkedin")} type="url" placeholder="https://" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Preferred Category</label>
-                                    <select value={form.category} onChange={update("category")} className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors [&>option]:text-slate-900">
-                                        <option value="">Select a category</option>
-                                        {categoryOptions.map((c) => <option key={c} value={c}>{c}</option>)}
-                                        <option value="Not sure yet">Not sure yet — please advise</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">Achievement Summary (75 words)</label>
-                                    <textarea value={form.summary} onChange={update("summary")} rows={4} placeholder="What was achieved, how it was implemented, and what changed as a result." className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30 resize-none" />
-                                </div>
-
-                                <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-white/50 mb-1.5">How Did You Hear About the Awards?</label>
-                                    <input value={form.source} onChange={update("source")} type="text" placeholder="Referral, LinkedIn, association, event, other" className="w-full px-4 py-2.5 text-sm text-white bg-white/5 border border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/40 focus:border-amber-400/60 transition-colors placeholder:text-white/30" />
-                                </div>
-
-                                <label className="flex items-start gap-3 cursor-pointer pt-2">
-                                    <input checked={consent} onChange={(e) => setConsent(e.target.checked)} type="checkbox" className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/30 bg-white/5 text-amber-500 focus:ring-amber-400/50 cursor-pointer" />
-                                    <span className="text-xs text-white/55 leading-relaxed">
-                                        I confirm the information provided is accurate, that I am authorised to submit it, and that I consent to LexTalk World contacting me about this recognition process. <span className="text-amber-400">*</span>
-                                    </span>
-                                </label>
-
-                                {submitError && <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2.5">{submitError}</p>}
-
-                                <button type="submit" disabled={isSubmitting} className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 disabled:opacity-60 disabled:cursor-not-allowed">
-                                    {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Submit Eligibility Request <ArrowRight className="w-4 h-4" /></>}
-                                </button>
-                            </form>
-                        )}
-                    </div>
-
-                    <p className="mt-6 text-xs text-white/40 leading-relaxed text-center max-w-xl mx-auto">
-                        Submission is an expression of interest only. It does not constitute recognition, and all recognition remains subject to eligibility and independent assessment. Participation arrangements for recognised awardees are shared privately after assessment.
-                    </p>
                 </div>
             </section>
 
