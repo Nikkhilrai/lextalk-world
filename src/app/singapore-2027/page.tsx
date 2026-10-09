@@ -839,11 +839,18 @@ export default function Singapore2027Page() {
                     <div className="w-14 h-14 rounded-full border border-amber-500/25 bg-amber-500/10 flex items-center justify-center mx-auto mb-7">
                         <Trophy className="w-6 h-6 text-amber-400" strokeWidth={1.75} />
                     </div>
-                    <p className="font-serif text-xl md:text-2xl text-white/85 leading-relaxed">
+                    <p className="font-serif text-xl md:text-2xl text-white/85 leading-relaxed mb-9">
                         The event will conclude with the LexTalk World <span className="text-amber-400">awards ceremony</span>, recognising
                         exceptional contributions to legal excellence, AI governance, innovation, cybersecurity, privacy, risk,
                         compliance and the future of law.
                     </p>
+                    <Link
+                        href="/singapore-2027/awards"
+                        className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                    >
+                        Check Your Eligibility
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </motion.div>
             </section>
 
