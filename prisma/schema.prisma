@@ -601,10 +601,11 @@ model DelegateConsentRegistration {
   email        String
   phone        String
   linkedin     String?  // LinkedIn profile URL
+  recognitionInterest Boolean? // Interested in being considered for Recognition? Yes/No
   conference   String   // e.g. "LexTalk World APAC Singapore 2027"
   dataConsent  Boolean  @default(false)
   mediaConsent Boolean  @default(false)
-  interests    String[] @default([]) // Up to 3 selected key areas of interest
+  interests    String[] @default([]) // Minimum 3 selected key areas of interest
   status       String   @default("New") // New, Confirmed, Declined
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

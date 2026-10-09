@@ -5,6 +5,7 @@ import { Check, ShieldCheck } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/PhoneInput";
 import { InterestPicker } from "@/components/InterestPicker";
+import { MIN_INTERESTS } from "@/lib/delegate-interests";
 
 interface FormData {
     name: string;
@@ -27,26 +28,33 @@ export function DelegateConsentForm() {
     const [interests, setInterests] = useState<string[]>([]);
     const [otherInterest, setOtherInterest] = useState("");
     const [interestError, setInterestError] = useState<string | null>(null);
+    const [recognitionInterest, setRecognitionInterest] = useState<boolean | null>(null);
+    const [recognitionError, setRecognitionError] = useState<string | null>(null);
 
     const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
 
     const onSubmit = async (data: FormData) => {
-        if (interests.length === 0) {
-            setInterestError("Please select at least one area of interest.");
+        if (interests.length < MIN_INTERESTS) {
+            setInterestError(`Please select at least ${MIN_INTERESTS} areas of interest.`);
             return;
         }
         if (interests.includes("Other") && !otherInterest.trim()) {
             setInterestError("Please specify your other area of interest.");
             return;
         }
+        if (recognitionInterest === null) {
+            setRecognitionError("Please let us know if you'd like to be considered for recognition.");
+            return;
+        }
         setInterestError(null);
+        setRecognitionError(null);
         setIsSubmitting(true);
         setSubmitError(null);
         try {
             const res = await fetch("/api/delegate-consent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...data, conference: CONFERENCE, interests, otherInterest }),
+                body: JSON.stringify({ ...data, conference: CONFERENCE, interests, otherInterest, recognitionInterest }),
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -54,6 +62,9 @@ export function DelegateConsentForm() {
             }
             setSubmitted(true);
             reset();
+            setInterests([]);
+            setOtherInterest("");
+            setRecognitionInterest(null);
         } catch (err: any) {
             setSubmitError(err.message || "Something went wrong. Please try again.");
         } finally {
@@ -185,6 +196,38 @@ export function DelegateConsentForm() {
                     placeholder="https://www.linkedin.com/in/yourname"
                     className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300"
                 />
+            </div>
+
+            {/* Recognition interest */}
+            <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                    Would you like to be considered for Recognition? <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-3">
+                    <button
+                        type="button"
+                        onClick={() => { setRecognitionInterest(true); setRecognitionError(null); }}
+                        className={`px-5 py-2 text-sm font-semibold rounded-lg border transition-colors cursor-pointer ${
+                            recognitionInterest === true
+                                ? "border-amber-400 bg-amber-50 text-slate-900"
+                                : "border-slate-200 text-slate-700 hover:border-amber-300"
+                        }`}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => { setRecognitionInterest(false); setRecognitionError(null); }}
+                        className={`px-5 py-2 text-sm font-semibold rounded-lg border transition-colors cursor-pointer ${
+                            recognitionInterest === false
+                                ? "border-amber-400 bg-amber-50 text-slate-900"
+                                : "border-slate-200 text-slate-700 hover:border-amber-300"
+                        }`}
+                    >
+                        No
+                    </button>
+                </div>
+                {recognitionError && <p className="mt-1 text-xs text-red-500">{recognitionError}</p>}
             </div>
 
             {/* Key areas of interest */}

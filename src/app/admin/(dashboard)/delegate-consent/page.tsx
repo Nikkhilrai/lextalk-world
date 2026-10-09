@@ -13,6 +13,7 @@ interface Registration {
     designation: string;
     conference: string;
     linkedin?: string | null;
+    recognitionInterest?: boolean | null;
     interests?: string[];
     dataConsent: boolean;
     mediaConsent: boolean;
@@ -66,10 +67,11 @@ export default function DelegateConsentPage() {
     };
 
     const exportCSV = () => {
-        const headers = ["Name", "Email", "Phone", "Country", "Organisation", "Designation", "Conference", "Status", "Date"];
+        const headers = ["Name", "Email", "Phone", "Country", "Organisation", "Designation", "Conference", "Recognition Interest", "Status", "Date"];
         const rows = filtered.map(r => [
-            r.name, r.email, r.phone, r.country, r.organization, r.designation, r.conference, r.status,
-            new Date(r.createdAt).toLocaleDateString()
+            r.name, r.email, r.phone, r.country, r.organization, r.designation, r.conference,
+            r.recognitionInterest == null ? "" : r.recognitionInterest ? "Yes" : "No",
+            r.status, new Date(r.createdAt).toLocaleDateString()
         ]);
         const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(",")).join("\n");
         const blob = new Blob([csv], { type: "text/csv" });
@@ -236,6 +238,7 @@ export default function DelegateConsentPage() {
                                     { label: "Conference", value: viewing.conference },
                                     { label: "Registered", value: new Date(viewing.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
                                     { label: "Consent", value: viewing.dataConsent && viewing.mediaConsent ? "Data + Media given" : "Incomplete" },
+                                    { label: "Recognition Interest", value: viewing.recognitionInterest == null ? "—" : viewing.recognitionInterest ? "Yes" : "No" },
                                 ].map(({ label, value }) => (
                                     <div key={label}>
                                         <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">{label}</dt>

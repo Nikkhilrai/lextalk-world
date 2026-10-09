@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { PhoneInput } from "@/components/PhoneInput";
 import { InterestPicker } from "@/components/InterestPicker";
 import { CountrySelect } from "@/components/CountrySelect";
+import { MIN_INTERESTS } from "@/lib/delegate-interests";
 import {
     Briefcase, Scale, Cpu, Check, Calendar, MapPin, ArrowRight,
     X, Loader2, AlertCircle, Sparkles, ShieldCheck,
@@ -135,8 +136,8 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
             setError("Please fill in all required fields.");
             return;
         }
-        if (interests.length === 0) {
-            setError("Please select at least one area of interest.");
+        if (interests.length < MIN_INTERESTS) {
+            setError(`Please select at least ${MIN_INTERESTS} areas of interest.`);
             return;
         }
         if (interests.includes("Other") && !otherInterest.trim()) {

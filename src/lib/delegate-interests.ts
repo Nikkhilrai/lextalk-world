@@ -26,13 +26,11 @@ export const INTEREST_OPTIONS = [
     "Other",
 ] as const;
 
-export const MAX_INTERESTS = 3;
+export const MIN_INTERESTS = 3;
 
 export function sanitizeInterests(selected: unknown, otherText?: unknown): string[] {
     if (!Array.isArray(selected)) return [];
     const picked = selected.filter((s): s is string => typeof s === "string" && (INTEREST_OPTIONS as readonly string[]).includes(s));
     const other = typeof otherText === "string" ? otherText.trim() : "";
-    return picked
-        .map((s) => (s === "Other" && other ? `Other: ${other}` : s))
-        .slice(0, MAX_INTERESTS);
+    return picked.map((s) => (s === "Other" && other ? `Other: ${other}` : s));
 }

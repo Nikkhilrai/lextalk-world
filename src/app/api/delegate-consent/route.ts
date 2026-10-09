@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
-import { sanitizeInterests } from "@/lib/delegate-interests";
+import { sanitizeInterests, MIN_INTERESTS } from "@/lib/delegate-interests";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder_key");
 
@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
         const {
             name, designation, organization, country, email, phone,
             linkedin, conference, dataConsent, mediaConsent, interests: rawInterests, otherInterest,
+            recognitionInterest,
         } = body;
 
         if (!name || !designation || !organization || !country || !email || !phone || !conference) {
@@ -21,15 +22,20 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Both consent checkboxes are required" }, { status: 400 });
         }
 
+        if (typeof recognitionInterest !== "boolean") {
+            return NextResponse.json({ error: "Please let us know if you'd like to be considered for recognition" }, { status: 400 });
+        }
+
         const interests = sanitizeInterests(rawInterests, otherInterest);
-        if (interests.length === 0) {
-            return NextResponse.json({ error: "Select at least one area of interest" }, { status: 400 });
+        if (interests.length < MIN_INTERESTS) {
+            return NextResponse.json({ error: `Select at least ${MIN_INTERESTS} areas of interest` }, { status: 400 });
         }
 
         const registration = await (prisma as any).delegateConsentRegistration.create({
             data: {
                 name, designation, organization, country, email, phone,
                 linkedin: linkedin || null,
+                recognitionInterest,
                 conference,
                 dataConsent: true,
                 mediaConsent: true,
