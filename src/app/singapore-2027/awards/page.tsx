@@ -276,6 +276,36 @@ export default function SingaporeAwardsPage() {
                 </div>
             </section>
 
+            {/* ===================== QUICK LINKS / TABS ===================== */}
+            <section className="bg-[#050a15] py-6 border-t border-white/5">
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-wrap items-center justify-center gap-2.5">
+                        {[
+                            { label: "Why It Matters", href: "#why" },
+                            { label: "Categories", href: "#categories" },
+                            { label: "Eligibility", href: "#eligibility" },
+                            { label: "Evaluation", href: "#methodology" },
+                            { label: "Key Dates", href: "#dates" },
+                            { label: "FAQ", href: "#faq" },
+                        ].map((tab) => (
+                            <a
+                                key={tab.href}
+                                href={tab.href}
+                                className="px-4 py-2 rounded-full border border-white/15 text-white/70 text-xs font-semibold uppercase tracking-wide hover:border-amber-400/50 hover:text-amber-400 hover:bg-white/5 transition-all duration-300"
+                            >
+                                {tab.label}
+                            </a>
+                        ))}
+                        <a
+                            href="#apply"
+                            className="px-5 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold uppercase tracking-wide transition-all duration-300 shadow-md shadow-amber-500/20"
+                        >
+                            Request Eligibility Review
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             {/* ===================== APPLY / ELIGIBILITY REVIEW FORM ===================== */}
             <section id="apply" className="py-20 md:py-28 bg-[#0a0e12] relative overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/8 rounded-full blur-[140px] pointer-events-none" />
@@ -391,7 +421,7 @@ export default function SingaporeAwardsPage() {
             </section>
 
             {/* ===================== WHY THESE AWARDS MATTER ===================== */}
-            <section className="py-20 md:py-28 bg-[#0a0f1e] relative overflow-hidden">
+            <section id="why" className="py-20 md:py-28 bg-[#0a0f1e] relative overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-2xl mb-14">
