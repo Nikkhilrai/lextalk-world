@@ -96,6 +96,18 @@ export const speakers: Speaker[] = [
         image: `${IMG}/v1791541511/lextalk/singapore-speakers/faizan-gul`,
         bio: `A seasoned Risk, Compliance and ESG leader with 16 years of telecom experience and 14 years in governance, risk and control. He leads third-party and supply chain risk, ESG, information security, compliance and business continuity for a global Nordic telecom group. His expertise spans enterprise risk management, supply chain resilience, risk intelligence, sustainability, and Board-level reporting. He focuses on strengthening organisational resilience, integrating risk disciplines, improving supplier oversight, and translating complex operational and regulatory challenges into actionable business strategies.`,
     },
+    {
+        name: "Ravi Chincholkar",
+        title: "Regional Lead for Capital Markets Regulatory Change and Oversight, Northern Trust",
+        image: `${IMG}/v1791807112/lextalk/singapore-speakers/ravi-chincholkar`,
+        bio: `Ravi Chincholkar is a regulatory change, risk and oversight professional with 26 years of banking experience, including 18 years focused on regulatory change, risk and controls. He specialises in regulatory horizon scanning, impact assessments, regulatory reporting, remediation and compliance assurance across APAC. Ravi works closely with Legal, Compliance and business teams on regulatory interpretation and governance. He holds PMP, Scrum Master, Compliance and AI Governance certifications, with a techno-functional background from IIT Bombay, and regularly speaks on emerging regulatory themes and AI governance.`,
+    },
+    {
+        name: "Matteo Spadacini",
+        title: "Group Head of Risk Management & Compliance, bolttech",
+        image: `${IMG}/v1791807113/lextalk/singapore-speakers/matteo-spadacini`,
+        bio: `Matteo Spadacini is Group Head of Risk & Compliance at bolttech, bringing extensive experience in risk management, regulatory compliance, and financial services. Previously, he served as Regional Head of Compliance at Generali Asia and held a financial services consulting role at PwC. His expertise spans corporate governance, compliance strategy, and risk oversight across international markets. Matteo holds a Master of Science in Finance from Bocconi University and has completed a leadership development programme at IMD Business School.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
