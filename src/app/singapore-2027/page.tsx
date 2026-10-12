@@ -281,6 +281,13 @@ export default function Singapore2027Page() {
                             >
                                 Check Your Eligibility
                             </Link>
+                            <Link
+                                href="/singapore-2027/awards"
+                                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-amber-400/40 text-amber-400 font-semibold text-sm rounded-lg hover:bg-amber-400/10 hover:border-amber-400/60 transition-all duration-300"
+                            >
+                                <Trophy className="w-4 h-4" />
+                                Legal Honor
+                            </Link>
                         </motion.div>
                     </div>
                 </div>
@@ -846,7 +853,7 @@ export default function Singapore2027Page() {
                         <Trophy className="w-6 h-6 text-amber-400" strokeWidth={1.75} />
                     </div>
                     <p className="font-serif text-xl md:text-2xl text-white/85 leading-relaxed mb-9">
-                        The event will conclude with the LexTalk World <span className="text-amber-400">awards ceremony</span>, recognising
+                        The event will conclude with the <span className="text-amber-400">Legal Honor Global Awards Ceremony</span>, recognising
                         exceptional contributions to legal excellence, AI governance, innovation, cybersecurity, privacy, risk,
                         compliance and the future of law.
                     </p>
