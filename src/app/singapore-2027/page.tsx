@@ -275,6 +275,12 @@ export default function Singapore2027Page() {
                             >
                                 Become a Speaker
                             </button>
+                            <Link
+                                href="/singapore-2027/awards"
+                                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/20 text-white/85 font-semibold text-sm rounded-lg hover:bg-white/5 hover:border-white/40 transition-all duration-300"
+                            >
+                                Check Your Eligibility
+                            </Link>
                         </motion.div>
                     </div>
                 </div>
