@@ -108,6 +108,18 @@ export const speakers: Speaker[] = [
         image: `${IMG}/v1791867203/lextalk/singapore-speakers/matteo-spadacini`,
         bio: `Matteo Spadacini is Group Head of Risk & Compliance at bolttech, bringing extensive experience in risk management, regulatory compliance, and financial services. Previously, he served as Regional Head of Compliance at Generali Asia and held a financial services consulting role at PwC. His expertise spans corporate governance, compliance strategy, and risk oversight across international markets. Matteo holds a Master of Science in Finance from Bocconi University and has completed a leadership development programme at IMD Business School.`,
     },
+    {
+        name: "Kalindee Mehta",
+        title: "Senior Vice President & Regional General Counsel - Asia Pacific and China, SAP",
+        image: `${IMG}/v1791895308/lextalk/singapore-speakers/kalindee-mehta`,
+        bio: `Kalindee Mehta is the Regional General Counsel and Corporate Secretary for SAP Asia Pacific and Japan, bringing around 20 years of legal and business experience across the technology, manufacturing, FMCG and investment banking sectors. She has held roles at leading organisations, including SAP, GE, Pernod Ricard, Credit Suisse and Lehman Brothers. Her expertise spans commercial transactions, corporate governance, competition law, employment law, privacy, data protection, cybersecurity and intellectual property. She also engages with regulators and contributes to public policy discussions on emerging technologies, digital transformation and responsible business practices.`,
+    },
+    {
+        name: "Carolina Sacerdote",
+        title: "Head of Compliance, Legal & Data Protection, Zenyum",
+        image: `${IMG}/v1791895310/lextalk/singapore-speakers/carolina-sacerdote`,
+        bio: `Carolina Sacerdote leads legal and compliance initiatives across the Asia-Pacific region at Zenyum, supporting the company's mission to transform the dental industry through technology. She brings strong expertise in corporate, commercial, consumer and technology law, with experience navigating complex regulatory environments and advising on legal risks associated with innovative products. Previously, she worked at Amazon, where she advised on commercial transactions for EU Digital's Devices, Alexa and Books businesses. Her experience combines legal strategy, regulatory compliance and cross-functional collaboration to support responsible innovation and business growth.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
