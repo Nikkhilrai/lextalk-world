@@ -252,9 +252,25 @@ In his words: "Effective legal counsel goes beyond courtroom advocacy — it req
         name: "Sachin Mishra",
         title: "General Counsel & Company Secretary, Compliance Officer, Tata Consulting Engineers",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1791542199/lextalk/mumbai-speakers/sachin-mishra.png",
-        bio: `As General Counsel and Company Secretary at Tata Consulting Engineers, Sachin Mishra leads the organisation's Legal, Contract, Secretarial, Mergers & Acquisitions, IPR, Corporate Governance, and Compliance functions.
+        bio: `With over 18 years of distinguished experience, Mr. Mishra is a seasoned legal and governance professional known for his strategic acumen, deep domain expertise, and leadership in Corporate Governance, Board Advisory, Legal Strategy, and Regulatory Compliance.
 
-With over 18 years of experience in legal, secretarial and governance roles, he focuses on driving strategic solutions that enable the company's business growth while ensuring full compliance with statutory and ethical standards.`,
+His diverse experience spans Contract and Litigation Management (Domestic and International), Mergers and Acquisitions, Company Secretarial Functions, Intellectual Property Rights, Arbitration and Mediation, as well as Policy Advocacy.
+
+As General Counsel and Company Secretary at Tata Consulting Engineers, Mr. Mishra plays a pivotal role in strengthening the organization's legal and governance framework, driving compliance excellence, and enabling strategic business growth. He has led several high impact initiatives, including cross border acquisitions, complex litigations and arbitrations, and the implementation of robust compliance systems.
+
+He has also overseen the drafting, review, and negotiation of an extensive portfolio of contracts across sectors such as infrastructure, power, energy, metals, and chemicals, both in India and internationally. Additionally, he has been instrumental in developing and implementing critical organizational policies, including Anti-Bribery and Anti-Corruption, Data Privacy, and POSH frameworks, ensuring adherence to evolving regulatory standards.
+
+Prior to joining Tata Consulting Engineers in 2014, Mr. Mishra was associated with Tata Petrodyne Limited, where he managed global oil and gas contracts, mergers and acquisitions, and complex commercial arrangements across multiple geographies.
+
+Mr. Mishra currently serves as a Board Member of Ecofirst Services Limited, a Tata Enterprise. His thought leadership is widely recognized through his contributions to the ESG & Sustainability Board of ICSI, the National Legal Committee at CII, and as Chairman of the CII Legal Reform Sub-Committee (IT/ITES). He is also a member of the Corporate Governance Expert Group for the ICSI National Awards under the Ministry of Corporate Affairs.
+
+Committed to continuous learning and excellence, Mr. Mishra holds certifications from prestigious institutions such as the Indian School of Business (ISB), Indian Institute of Management Ahmedabad (IIMA), CASS Business School, and FIDIC, and is a certified TBEM Assessor with the Tata Business Excellence Group.
+
+A recognized thought leader, Mr. Mishra has been the recipient of numerous prestigious accolades viz. Services Export Promotion Council (supported by Ministry of Commerce and Industry) In-House Legal Counsel Award (2026), SILF General Counsel of the Year Award (2026), Fortune India Legal Excellence Top General Counsel Award (2025), BW Legal World Top 100 General Counsel Award (2025), MCA - ICSI Governance Professional of the Year Awards (2023 & 2021), Forbes India Legal Powerlist (2023, 2022 & 2021), Legal Era General Counsel / IP Counsel of the Year Awards (2026, 2025 & 2023), India Legal Achievers Awards (2026 & 2023) and India Legal Awards (2025, 2022 & 2021).
+
+Mr. Mishra brings to the stage a unique blend of legal expertise, strategic insight, and governance leadership, offering valuable perspectives on navigating regulatory complexity, strengthening corporate governance, and driving sustainable business practices.
+
+Outside of his professional commitments, Mr. Mishra is an avid reader, a music enthusiast, and a passionate cricket lover.`,
     },
     {
         name: "Vipul Dhingra",
