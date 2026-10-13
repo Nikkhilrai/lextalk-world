@@ -256,7 +256,18 @@ In his words: "Effective legal counsel goes beyond courtroom advocacy — it req
 
 With over 18 years of experience in legal, secretarial and governance roles, he focuses on driving strategic solutions that enable the company's business growth while ensuring full compliance with statutory and ethical standards.`,
     },
+    {
+        name: "Vipul Dhingra",
+        title: "Lead Counsel - India, Greater Thailand and Australia, Weatherford",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1791875591/lextalk/mumbai-speakers/vipul-dhingra.png",
+        bio: `Vipul Dhingra leads the legal function for India and several markets across Asia and Australia at Weatherford, a leading global energy services and technology company.
 
+An India-qualified legal professional with around 20 years of experience, Vipul brings a diverse professional background spanning private legal practice, legal process outsourcing, the services sector and the energy industry, including oilfield services, technology and manufacturing.
+
+His expertise encompasses complex commercial transactions, international arbitration, employment law, workplace investigations, corporate governance and cross-border regulatory compliance. He also plays an active role in enterprise-level policy development, including compliance frameworks and responsible AI governance initiatives.
+
+Working closely with regional and global business leadership, Vipul focuses on translating complex legal and regulatory challenges into practical, commercially sound solutions. He has a particular interest in the evolving role of in-house legal teams as strategic business partners, legal technology adoption and building agile, accountable and business-aligned legal functions.`,
+    },
 ];
 
 export default function MumbaiSpeakersList() {
