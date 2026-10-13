@@ -99,13 +99,13 @@ export const speakers: Speaker[] = [
     {
         name: "Ravi Chincholkar",
         title: "Regional Lead for Capital Markets Regulatory Change and Oversight, Northern Trust",
-        image: `${IMG}/v1791807112/lextalk/singapore-speakers/ravi-chincholkar`,
+        image: `${IMG}/v1791867201/lextalk/singapore-speakers/ravi-chincholkar`,
         bio: `Ravi Chincholkar is a regulatory change, risk and oversight professional with 26 years of banking experience, including 18 years focused on regulatory change, risk and controls. He specialises in regulatory horizon scanning, impact assessments, regulatory reporting, remediation and compliance assurance across APAC. Ravi works closely with Legal, Compliance and business teams on regulatory interpretation and governance. He holds PMP, Scrum Master, Compliance and AI Governance certifications, with a techno-functional background from IIT Bombay, and regularly speaks on emerging regulatory themes and AI governance.`,
     },
     {
         name: "Matteo Spadacini",
         title: "Group Head of Risk Management & Compliance, bolttech",
-        image: `${IMG}/v1791807113/lextalk/singapore-speakers/matteo-spadacini`,
+        image: `${IMG}/v1791867203/lextalk/singapore-speakers/matteo-spadacini`,
         bio: `Matteo Spadacini is Group Head of Risk & Compliance at bolttech, bringing extensive experience in risk management, regulatory compliance, and financial services. Previously, he served as Regional Head of Compliance at Generali Asia and held a financial services consulting role at PwC. His expertise spans corporate governance, compliance strategy, and risk oversight across international markets. Matteo holds a Master of Science in Finance from Bocconi University and has completed a leadership development programme at IMD Business School.`,
     },
 ];
