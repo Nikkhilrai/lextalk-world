@@ -94,7 +94,9 @@ export const speakers: Speaker[] = [
         name: "Faizan Gul",
         title: "Director & Head of Risk Compliance & ESG, Telenor",
         image: `${IMG}/v1791541511/lextalk/singapore-speakers/faizan-gul`,
-        bio: `A seasoned Risk, Compliance and ESG leader with 16 years of telecom experience and 14 years in governance, risk and control. He leads third-party and supply chain risk, ESG, information security, compliance and business continuity for a global Nordic telecom group. His expertise spans enterprise risk management, supply chain resilience, risk intelligence, sustainability, and Board-level reporting. He focuses on strengthening organisational resilience, integrating risk disciplines, improving supplier oversight, and translating complex operational and regulatory challenges into actionable business strategies.`,
+        bio: `A seasoned Risk, Compliance and ESG leader with 16 years of telecom experience and 14 years in governance, risk and control. He leads third-party and supply chain risk, ESG, information security, compliance and business continuity for a global Nordic telecom group. His expertise spans enterprise risk management, supply chain resilience, risk intelligence, sustainability, and Board-level reporting. He focuses on strengthening organisational resilience, integrating risk disciplines, improving supplier oversight, and translating complex operational and regulatory challenges into actionable business strategies.
+
+Faizan brings extensive GRC experience from roles within and outside Telenor. In Telenor Procurement, he has led the development of the third-party and supply-chain risk capability, introducing risk-based supplier due diligence, stronger supply-chain risk management and AI-enabled monitoring. He has also led responses to geopolitical disruption, semiconductor shortages, tariffs and trade restrictions.`,
     },
     {
         name: "Ravi Chincholkar",
