@@ -122,6 +122,18 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1791895310/lextalk/singapore-speakers/carolina-sacerdote`,
         bio: `Carolina Sacerdote leads legal and compliance initiatives across the Asia-Pacific region at Zenyum, supporting the company's mission to transform the dental industry through technology. She brings strong expertise in corporate, commercial, consumer and technology law, with experience navigating complex regulatory environments and advising on legal risks associated with innovative products. Previously, she worked at Amazon, where she advised on commercial transactions for EU Digital's Devices, Alexa and Books businesses. Her experience combines legal strategy, regulatory compliance and cross-functional collaboration to support responsible innovation and business growth.`,
     },
+    {
+        name: "Jennifer Ong",
+        title: "Fractional General Counsel, Penanshin Shipping Group",
+        image: `${IMG}/v1792065325/lextalk/singapore-speakers/jennifer-ong`,
+        bio: `Jennifer Ong is a Fractional General Counsel with extensive experience in corporate governance, legal and regulatory compliance, and cross-border commercial transactions. She has held senior legal leadership roles at FLS Group, Legend Group, and Food Empire Holdings, advising businesses on complex legal and operational matters across multiple jurisdictions. Her expertise includes board advisory, enterprise risk management, dispute resolution, and international supply chains. Jennifer brings a practical, business-oriented perspective to legal oversight, accountability, and governance, helping organisations navigate regulatory complexity and manage risk effectively.`,
+    },
+    {
+        name: "Jayaprakash Thiyagarajan",
+        title: "Chief Legal and Government Relations Officer, Prudential Singapore",
+        image: `${IMG}/v1792065329/lextalk/singapore-speakers/jayaprakash-thiyagarajan`,
+        bio: `Jayaprakash Thiyagarajan is the Chief Legal and Government Relations Officer at Prudential Assurance Company Singapore. He brings senior leadership experience in legal affairs, corporate governance, regulatory engagement, and government relations within the financial services sector. His role involves navigating complex regulatory environments, supporting business strategy, and engaging with stakeholders on legal and policy matters. Jayaprakash’s professional perspective spans legal oversight, risk management, and regulatory compliance, making him a valuable contributor to discussions on governance, accountability, and responsible enterprise decision-making.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
