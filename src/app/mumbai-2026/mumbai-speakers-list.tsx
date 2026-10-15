@@ -81,16 +81,6 @@ With more than two decades of international experience, he has advised boards an
 Arun is a qualified lawyer and Chartered Accountant, and is widely recognized for building high-impact compliance and governance programs that enable ethical business growth while navigating complex regulatory environments. His expertise spans compliance strategy, data privacy, corporate governance, investigations, sanctions, and regulatory transformation.`,
     },
     {
-        name: "Aniket Gautam",
-        title: "Founding Partner, ASG & Partners",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625092/lextalk/dubai-speakers/aniket-gautam.jpg",
-        bio: `A strategic and results-driven legal expert with over 16 years of distinguished experience in corporate law, mergers and acquisitions, and private equity. As the Founding Partner of ASG & Partners, Aniket delivers tailored legal solutions and navigates complex regulatory landscapes to align business objectives with legal compliance. He is trusted by clients to structure high-value transactions, negotiate critical agreements, and drive corporate restructuring across diverse industry sectors.
-
-His core expertise spans corporate and commercial law, complex corporate restructuring, and high-stakes commercial contracts, with a proven track record advising on cross-border and domestic M&A, joint ventures, and strategic investments, and specialised counsel for the banking and finance, media, and intellectual property sectors. His top skills include commercial contracts, intellectual property law, commercial litigation, and white-collar criminal defence.
-
-In his words: "Leveraging a nuanced understanding of commercial law to foster strong strategic partnerships, mitigate risks, and deliver client-centric solutions that drive operational success."`,
-    },
-    {
         name: "Nikunj Savalia",
         title: "Head Legal & Company Secretary, Sanofi CHC India",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625149/lextalk/mumbai-speakers/nikunj-savalia.jpg",
