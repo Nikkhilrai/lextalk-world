@@ -51,6 +51,7 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
             href: "#",
             hasDropdown: true,
             dropdownItems: [
+                { name: "Press Release", href: "/press-release" },
                 { name: "Reports", href: "/post-event-reports" },
                 { name: "Blog/News", href: "/blog" },
                 { name: "Podcasts", href: "/podcasts" },
