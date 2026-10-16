@@ -135,7 +135,6 @@ export const CLOSING =
     "The event reinforced Dubai as an essential international hub for strategic legal collaboration.";
 
 export const MEDIA_CONTACT = {
-    email: "info@lextalkworld.in",
     phone: "+91 981 188 5302",
     phoneHref: "tel:+919811885302",
     site: "lextalkworld.in",

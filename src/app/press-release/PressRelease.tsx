@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Phone, Globe, Images, CalendarDays } from "lucide-react";
+import { ArrowRight, Phone, Globe, Images, CalendarDays } from "lucide-react";
+import MediaEnquiryForm from "./MediaEnquiryForm";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { awardees } from "../awardees-dubai-2026/awardees-data";
@@ -295,21 +296,23 @@ export default function PressRelease() {
                 </motion.p>
                 <p aria-hidden="true" className="mt-8 text-center text-sm font-bold tracking-[0.5em] text-amber-600">###</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
-                    <motion.div {...reveal} className="rounded-2xl bg-white border border-slate-200/80 p-7 flex flex-col gap-3">
+                <motion.div {...reveal} className="mt-16 rounded-2xl bg-white border border-slate-200/80 p-7 md:p-10 grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-12">
+                    <div className="flex flex-col gap-3">
                         <h2 className="font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-amber-600">Media enquiries</h2>
-                        <a href={`mailto:${MEDIA_CONTACT.email}`} className="flex items-center gap-2.5 font-serif text-lg font-semibold text-slate-900 hover:text-amber-700 break-all">
-                            <Mail className="w-4 h-4 text-amber-600 shrink-0" />{MEDIA_CONTACT.email}
-                        </a>
-                        <a href={MEDIA_CONTACT.phoneHref} className="flex items-center gap-2.5 font-serif text-lg font-semibold text-slate-900 hover:text-amber-700">
+                        <p className="font-serif text-2xl md:text-3xl font-semibold text-slate-900 leading-snug [text-wrap:balance]">Write to our press team</p>
+                        <p className="text-sm text-slate-500 leading-relaxed">Send us your enquiry and we will respond shortly.</p>
+                        <a href={MEDIA_CONTACT.phoneHref} className="mt-3 flex items-center gap-2.5 font-serif text-lg font-semibold text-slate-900 hover:text-amber-700">
                             <Phone className="w-4 h-4 text-amber-600 shrink-0" />{MEDIA_CONTACT.phone}
                         </a>
                         <a href={`https://${MEDIA_CONTACT.site}`} className="flex items-center gap-2.5 text-sm text-slate-500 hover:text-amber-700">
                             <Globe className="w-4 h-4 text-amber-600 shrink-0" />{MEDIA_CONTACT.site}
                         </a>
-                        <p className="mt-auto pt-2 text-xs text-slate-400 leading-relaxed">Issued by MantraNex Vista Pvt Ltd, organiser of LexTalk World.</p>
-                    </motion.div>
+                        <p className="mt-auto pt-4 text-xs text-slate-400 leading-relaxed">Issued by MantraNex Vista Pvt Ltd, organiser of LexTalk World.</p>
+                    </div>
+                    <MediaEnquiryForm />
+                </motion.div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.08 }}>
                         <Link href="/dubai-2026/gallery" className="group h-full rounded-2xl bg-white border border-slate-200/80 p-7 flex flex-col gap-3 hover:border-amber-300 hover:-translate-y-1 hover:shadow-xl transition-all duration-500">
                             <h2 className="font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-amber-600">Event gallery</h2>
