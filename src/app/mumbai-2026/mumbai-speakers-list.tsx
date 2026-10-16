@@ -237,7 +237,7 @@ Attreyi has co-authored successive editions of the top selling book on POSH - Ha
     {
         name: "Zameer Nathani",
         title: "Global General Counsel - Group, DNEG",
-        image: "/mumbai-2026/Mumbai_Speakers/Zameer Nathani.png",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1792127803/lextalk/mumbai-speakers/zameer-nathani.png",
     },
     {
         name: "Sachin Mishra",
