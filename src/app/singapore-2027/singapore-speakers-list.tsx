@@ -125,7 +125,7 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
     {
         name: "Jennifer Ong",
         title: "Fractional General Counsel, Penanshin Shipping Group",
-        image: `${IMG}/v1792065325/lextalk/singapore-speakers/jennifer-ong`,
+        image: `${IMG}/v1792133003/lextalk/singapore-speakers/jennifer-ong`,
         bio: `Jennifer Ong is a Fractional General Counsel with extensive experience in corporate governance, legal and regulatory compliance, and cross-border commercial transactions. She has held senior legal leadership roles at FLS Group, Legend Group, and Food Empire Holdings, advising businesses on complex legal and operational matters across multiple jurisdictions. Her expertise includes board advisory, enterprise risk management, dispute resolution, and international supply chains. Jennifer brings a practical, business-oriented perspective to legal oversight, accountability, and governance, helping organisations navigate regulatory complexity and manage risk effectively.`,
     },
     {
