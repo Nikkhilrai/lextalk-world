@@ -37,13 +37,12 @@ export default function SpeakerInterestFormPage() {
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
-    const { register, handleSubmit, watch, formState: { errors }, control, reset } = useForm<FormData>();
-    const isSingapore = (watch("conference") || "").includes("Singapore");
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
     const [legalHonors, setLegalHonors] = useState<boolean | null>(null);
     const [legalHonorsError, setLegalHonorsError] = useState<string | null>(null);
 
     const onSubmit = async (data: FormData) => {
-        if (isSingapore && legalHonors === null) {
+        if (legalHonors === null) {
             setLegalHonorsError("Please let us know if you'd like to be considered for Legal Honors.");
             return;
         }
@@ -54,7 +53,7 @@ export default function SpeakerInterestFormPage() {
             const res = await fetch("/api/speaker-applications", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...data, legalHonorsInterest: isSingapore ? legalHonors : null }),
+                body: JSON.stringify({ ...data, legalHonorsInterest: legalHonors }),
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -280,9 +279,7 @@ export default function SpeakerInterestFormPage() {
                                     />
                                 </div>
 
-                                {isSingapore && (
-                                    <LegalHonorsYesNo value={legalHonors} onChange={(v) => { setLegalHonors(v); setLegalHonorsError(null); }} error={legalHonorsError} />
-                                )}
+                                <LegalHonorsYesNo value={legalHonors} onChange={(v) => { setLegalHonors(v); setLegalHonorsError(null); }} error={legalHonorsError} />
 
                                 {/* Consent */}
                                 <div>
