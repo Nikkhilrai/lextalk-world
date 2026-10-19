@@ -16,6 +16,7 @@ interface Application {
     topic?: string | null;
     expertise?: string | null;
     bio?: string | null;
+    legalHonorsInterest?: boolean | null;
     consent?: boolean;
     status: string;
     createdAt: string;
@@ -237,6 +238,7 @@ export default function SpeakerApplicationsPage() {
                                     { label: "Phone", value: viewing.phone },
                                     { label: "Country", value: viewing.country },
                                     { label: "Conference", value: viewing.conference },
+                                    { label: "Legal Honors Interest", value: viewing.legalHonorsInterest == null ? "—" : viewing.legalHonorsInterest ? "Yes" : "No" },
                                     { label: "Applied", value: new Date(viewing.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
                                     { label: "Consent", value: viewing.consent ? "Given" : "Not recorded" },
                                 ].map(({ label, value }) => (

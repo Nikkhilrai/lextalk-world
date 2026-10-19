@@ -4,6 +4,7 @@ import { useState } from "react";
 import { X, Check, Mic } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/PhoneInput";
+import { LegalHonorsYesNo } from "@/components/LegalHonorsYesNo";
 
 interface FormData {
     name: string;
@@ -31,15 +32,23 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
+    const { register, handleSubmit, watch, formState: { errors }, control, reset } = useForm<FormData>();
+    const isSingapore = (watch("conference") || "").includes("Singapore");
+    const [legalHonors, setLegalHonors] = useState<boolean | null>(null);
+    const [legalHonorsError, setLegalHonorsError] = useState<string | null>(null);
 
     const onSubmit = async (data: FormData) => {
+        if (isSingapore && legalHonors === null) {
+            setLegalHonorsError("Please let us know if you'd like to be considered for Legal Honors.");
+            return;
+        }
+        setLegalHonorsError(null);
         setIsSubmitting(true);
         try {
             const res = await fetch("/api/speaker-applications", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ ...data, legalHonorsInterest: isSingapore ? legalHonors : null }),
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -47,6 +56,7 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
             }
             setSubmitted(true);
             reset();
+            setLegalHonors(null);
             setTimeout(() => {
                 onClose();
                 setSubmitted(false);
@@ -227,6 +237,10 @@ export function SpeakerApplyModal({ isOpen, onClose }: Props) {
                                     </select>
                                     {errors.conference && <p className="mt-1 text-xs text-red-500">{errors.conference.message}</p>}
                                 </div>
+
+                                {isSingapore && (
+                                    <LegalHonorsYesNo value={legalHonors} onChange={(v) => { setLegalHonors(v); setLegalHonorsError(null); }} error={legalHonorsError} />
+                                )}
 
                                 {/* Consent */}
                                 <div>

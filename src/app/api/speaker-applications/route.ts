@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder_key");
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { name, email, phone, country, company, designation, conference, linkedin, topic, expertise, bio, consent } = body;
+        const { name, email, phone, country, company, designation, conference, linkedin, topic, expertise, bio, consent, legalHonorsInterest } = body;
 
         if (!name || !email || !phone || !country || !company || !designation || !conference) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
                 topic: topic || null,
                 expertise: expertise || null,
                 bio: bio || null,
+                legalHonorsInterest: typeof legalHonorsInterest === "boolean" ? legalHonorsInterest : null,
                 consent: true,
             }
         });

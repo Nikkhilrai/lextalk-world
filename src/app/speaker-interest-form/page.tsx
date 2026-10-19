@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { Mic, Check, ArrowRight } from "lucide-react";
 import { PhoneInput } from "@/components/PhoneInput";
+import { LegalHonorsYesNo } from "@/components/LegalHonorsYesNo";
 import { CountrySelect } from "@/components/CountrySelect";
 import { Footer } from "@/components/Footer";
 
@@ -36,16 +37,24 @@ export default function SpeakerInterestFormPage() {
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
-    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
+    const { register, handleSubmit, watch, formState: { errors }, control, reset } = useForm<FormData>();
+    const isSingapore = (watch("conference") || "").includes("Singapore");
+    const [legalHonors, setLegalHonors] = useState<boolean | null>(null);
+    const [legalHonorsError, setLegalHonorsError] = useState<string | null>(null);
 
     const onSubmit = async (data: FormData) => {
+        if (isSingapore && legalHonors === null) {
+            setLegalHonorsError("Please let us know if you'd like to be considered for Legal Honors.");
+            return;
+        }
+        setLegalHonorsError(null);
         setIsSubmitting(true);
         setSubmitError(null);
         try {
             const res = await fetch("/api/speaker-applications", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ ...data, legalHonorsInterest: isSingapore ? legalHonors : null }),
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -53,6 +62,7 @@ export default function SpeakerInterestFormPage() {
             }
             setSubmitted(true);
             reset();
+            setLegalHonors(null);
         } catch (err: any) {
             setSubmitError(err.message || "Something went wrong. Please try again.");
         } finally {
@@ -269,6 +279,10 @@ export default function SpeakerInterestFormPage() {
                                         className="w-full px-4 py-2.5 text-sm text-slate-900 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-colors placeholder:text-slate-300 resize-none"
                                     />
                                 </div>
+
+                                {isSingapore && (
+                                    <LegalHonorsYesNo value={legalHonors} onChange={(v) => { setLegalHonors(v); setLegalHonorsError(null); }} error={legalHonorsError} />
+                                )}
 
                                 {/* Consent */}
                                 <div>

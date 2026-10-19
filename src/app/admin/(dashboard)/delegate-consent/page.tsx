@@ -67,7 +67,7 @@ export default function DelegateConsentPage() {
     };
 
     const exportCSV = () => {
-        const headers = ["Name", "Email", "Phone", "Country", "Organisation", "Designation", "Conference", "Recognition Interest", "Status", "Date"];
+        const headers = ["Name", "Email", "Phone", "Country", "Organisation", "Designation", "Conference", "Legal Honors Interest", "Status", "Date"];
         const rows = filtered.map(r => [
             r.name, r.email, r.phone, r.country, r.organization, r.designation, r.conference,
             r.recognitionInterest == null ? "" : r.recognitionInterest ? "Yes" : "No",
@@ -238,7 +238,7 @@ export default function DelegateConsentPage() {
                                     { label: "Conference", value: viewing.conference },
                                     { label: "Registered", value: new Date(viewing.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
                                     { label: "Consent", value: viewing.dataConsent && viewing.mediaConsent ? "Data + Media given" : "Incomplete" },
-                                    { label: "Recognition Interest", value: viewing.recognitionInterest == null ? "—" : viewing.recognitionInterest ? "Yes" : "No" },
+                                    { label: "Legal Honors Interest", value: viewing.recognitionInterest == null ? "—" : viewing.recognitionInterest ? "Yes" : "No" },
                                 ].map(({ label, value }) => (
                                     <div key={label}>
                                         <dt className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-0.5">{label}</dt>
