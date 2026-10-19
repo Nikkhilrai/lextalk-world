@@ -43,7 +43,7 @@ export function DelegateConsentForm() {
             return;
         }
         if (recognitionInterest === null) {
-            setRecognitionError("Please let us know if you'd like to be considered for recognition.");
+            setRecognitionError("Please let us know if you'd like to be considered for Legal Honors.");
             return;
         }
         setInterestError(null);
@@ -201,7 +201,7 @@ export function DelegateConsentForm() {
             {/* Recognition interest */}
             <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
-                    Would you like to be considered for Recognition? <span className="text-red-500">*</span>
+                    Would you like to be considered for Legal Honors? <span className="text-red-500">*</span>
                 </label>
                 <div className="flex gap-3">
                     <button
