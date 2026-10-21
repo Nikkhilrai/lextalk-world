@@ -134,6 +134,24 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1792065329/lextalk/singapore-speakers/jayaprakash-thiyagarajan`,
         bio: `Jayaprakash Thiyagarajan is the Chief Legal and Government Relations Officer at Prudential Assurance Company Singapore. He brings senior leadership experience in legal affairs, corporate governance, regulatory engagement, and government relations within the financial services sector. His role involves navigating complex regulatory environments, supporting business strategy, and engaging with stakeholders on legal and policy matters. Jayaprakash’s professional perspective spans legal oversight, risk management, and regulatory compliance, making him a valuable contributor to discussions on governance, accountability, and responsible enterprise decision-making.`,
     },
+    {
+        name: "Daniel Lim",
+        title: "Head of Compliance, Lorum Technologies",
+        image: `${IMG}/v1792582219/lextalk/singapore-speakers/daniel-lim`,
+        bio: `Daniel Lim has nearly 25 years of experience in legal and compliance, including close to three years as Head of Legal and Compliance at HL Bank Singapore, where he oversees the bank\u2019s legal and compliance matters, ensuring regulatory adherence and operational integrity. His expertise spans corporate law, company secretarial matters, and contract negotiation. Previously, at Maybank and Daiwa Securities, he supported regulatory compliance across securities and financial services and contributed to developing robust compliance frameworks. As a Certified Anti-Money Laundering Specialist (CAMS), he brings specialised knowledge of anti-money laundering and financial crime prevention. His professional focus is on helping organisations achieve their strategic objectives while upholding strong legal, regulatory, and ethical standards in banking and financial services.`,
+    },
+    {
+        name: "Dr. Martin Leo",
+        title: "Chief Risk Officer, National University of Singapore (NUS)",
+        image: `${IMG}/v1792582221/lextalk/singapore-speakers/martin-leo`,
+        bio: `Dr Martin Leo is the Chief Risk Officer at the National University of Singapore (NUS), where he oversees Enterprise Risk Management and Compliance. He has close to three decades of leadership experience spanning financial services and higher education, with expertise in enterprise risk, operational resilience, governance, compliance, and strategic risk. Prior to joining NUS, Dr Martin held regional risk leadership roles at leading global financial institutions including Citibank, ING, Morgan Stanley, and State Street Bank. Throughout his career, he has led large-scale risk transformation initiatives, strengthened governance frameworks, and enhanced organisational resilience across diverse business environments. Dr Martin also serves as an Adjunct Professor in the Department of Finance at SP Jain School of Global Management. A frequent speaker and published author, he shares insights on enterprise risk, emerging technologies, AI governance, operational resilience, and the future of risk management. He holds the Financial Risk Manager (FRM), Certified Information Systems Security Professional (CISSP), and Certified ESG Analyst (CESGA) professional certifications.`,
+    },
+    {
+        name: "Prasanna Subramanian",
+        title: "Principal AI Transformation Lead, Mercedes-Benz Singapore",
+        image: `${IMG}/v1792582222/lextalk/singapore-speakers/prasanna-subramanian`,
+        bio: `Prasanna Subramanian is a Principal AI Transformation Lead at Mercedes-Benz Asia Pacific, with over 18 years of experience in technology, innovation, and digital transformation. His expertise spans Enterprise AI Transformation, Agentic AI, AI Governance, and AI Security, with a focus on building responsible, scalable, and business-driven AI solutions. He is also an active contributor to OWASP initiatives on Agentic AI security and governance. Prasanna is passionate about combining human potential with AI intelligence to drive meaningful enterprise transformation.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
