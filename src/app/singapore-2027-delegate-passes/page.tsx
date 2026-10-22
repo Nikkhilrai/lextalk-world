@@ -248,7 +248,7 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                     <motion.div
                         initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}
                         transition={{ type: "spring", damping: 28, stiffness: 350 }}
-                        className="relative z-10 w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[90dvh] flex flex-col bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden"
+                        className="relative z-10 w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[90dvh] flex flex-col bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-clip"
                     >
                         <div className="relative shrink-0 flex items-center justify-between px-6 sm:px-8 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
                             <div>

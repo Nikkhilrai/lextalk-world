@@ -40,7 +40,7 @@ export function InterestPicker({ selected, onChange, otherText, onOtherTextChang
                     return (
                         <label
                             key={option}
-                            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg border text-sm transition-colors ${
+                            className={`relative flex items-center gap-2.5 px-3 py-2 rounded-lg border text-sm transition-colors ${
                                 checked
                                     ? "border-amber-400 bg-amber-50 text-slate-900"
                                     : "border-slate-200 text-slate-700 hover:border-amber-300 cursor-pointer"
