@@ -275,6 +275,21 @@ His expertise encompasses complex commercial transactions, international arbitra
 
 Working closely with regional and global business leadership, Vipul focuses on translating complex legal and regulatory challenges into practical, commercially sound solutions. He has a particular interest in the evolving role of in-house legal teams as strategic business partners, legal technology adoption and building agile, accountable and business-aligned legal functions.`,
     },
+    {
+        name: "Dr. Priti Dahotre",
+        title: "Head Legal - (SSS Vertical), Writer Business Services Pvt Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1792664140/lextalk/mumbai-speakers/priti-dahotre.png",
+    },
+    {
+        name: "Florra K Das",
+        title: "Head of Legal - APAC Counsel & Compliance Officer | Regulatory Affairs, Carestream Dental",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1792664141/lextalk/mumbai-speakers/florra-k-das.png",
+    },
+    {
+        name: "Anubhav Kapoor",
+        title: "General Counsel & Senior Vice President (COSA), Samvardhana Motherson Group",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1792664142/lextalk/mumbai-speakers/anubhav-kapoor.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
@@ -369,7 +384,7 @@ export default function MumbaiSpeakersList() {
                                         </h3>
 
                                         {speaker.title && (
-                                            <p className="text-[11px] md:text-[12px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-[0.14em] leading-relaxed line-clamp-3">
+                                            <p className="text-[11px] md:text-[12px] font-semibold text-slate-500 group-hover:text-slate-600 transition-colors duration-300 uppercase tracking-[0.14em] leading-relaxed line-clamp-4">
                                                 {speaker.title}
                                             </p>
                                         )}
