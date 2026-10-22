@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
+import { singaporePassPrice, SINGAPORE_CURRENCY } from "@/lib/singapore-pass-prices";
 
 export async function POST(request: NextRequest) {
     try {
@@ -25,8 +26,8 @@ export async function POST(request: NextRequest) {
             paymentType,
             customerDetails,
             conferenceSlug,
-            originalPrice,
-            discountedPrice,
+            originalPrice: bodyOriginalPrice,
+            discountedPrice: bodyDiscountedPrice,
             registrationId,
             couponCode,
             couponDiscount,
@@ -41,8 +42,23 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Singapore passes: the price comes from the server table, never from the browser.
+        let serverPrice: number | null = null;
+        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("singapore")) {
+            serverPrice = singaporePassPrice(passType);
+            if (serverPrice === null) {
+                return NextResponse.json({ error: "Unknown pass type" }, { status: 400 });
+            }
+            if (currency !== SINGAPORE_CURRENCY) {
+                return NextResponse.json({ error: "Invalid currency" }, { status: 400 });
+            }
+        }
+
+        const originalPrice = serverPrice ?? bodyOriginalPrice;
+        const discountedPrice = serverPrice ?? bodyDiscountedPrice;
+
         // Server-side coupon validation — if coupon provided, re-validate and recompute amount
-        let finalAmount = rawAmount;
+        let finalAmount = serverPrice ?? rawAmount;
         let validatedCouponCode: string | null = couponCode || null;
         let validatedCouponDiscount: number | null = couponDiscount || null;
 

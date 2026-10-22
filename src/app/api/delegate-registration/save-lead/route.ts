@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { triggerLeadsSync } from "@/lib/sheets-sync";
 import { sanitizeInterests } from "@/lib/delegate-interests";
+import { singaporePassPrice } from "@/lib/singapore-pass-prices";
 
 function conferenceLabel(conferenceSlug: string): string {
     const map: Record<string, string> = {
@@ -22,11 +23,15 @@ export async function POST(request: NextRequest) {
             passType,
             passCategory,
             conferenceSlug,
-            originalPrice,
-            discountedPrice,
+            originalPrice: bodyOriginalPrice,
+            discountedPrice: bodyDiscountedPrice,
             interests: rawInterests,
             otherInterest,
         } = body;
+
+        const serverPrice = typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("singapore") ? singaporePassPrice(passType) : null;
+        const originalPrice = serverPrice ?? bodyOriginalPrice;
+        const discountedPrice = serverPrice ?? bodyDiscountedPrice;
 
         const interests = sanitizeInterests(rawInterests, otherInterest);
         const interestsText = interests.length ? `Areas of interest: ${interests.join(", ")}` : null;

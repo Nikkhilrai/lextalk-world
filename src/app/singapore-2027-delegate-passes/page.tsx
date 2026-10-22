@@ -10,6 +10,7 @@ import { PhoneInput } from "@/components/PhoneInput";
 import { InterestPicker } from "@/components/InterestPicker";
 import { CountrySelect } from "@/components/CountrySelect";
 import { MIN_INTERESTS } from "@/lib/delegate-interests";
+import { SINGAPORE_PASS_PRICES } from "@/lib/singapore-pass-prices";
 import {
     Briefcase, Scale, Cpu, Check, Calendar, MapPin, ArrowRight,
     X, Loader2, AlertCircle, Sparkles, ShieldCheck,
@@ -36,7 +37,7 @@ const PASSES: PassConfig[] = [
         id: "corporate-counsel",
         name: "Corporate Counsel",
         subtitle: "General Counsel, CPOs, CISOs and in-house legal, privacy, risk and AI leaders",
-        sgdPrice: 249,
+        sgdPrice: SINGAPORE_PASS_PRICES["corporate-counsel"],
         icon: Briefcase,
         features: [
             "Full Day Conference Access",
@@ -51,7 +52,7 @@ const PASSES: PassConfig[] = [
         id: "law-firm-partner",
         name: "Law Firm Partner",
         subtitle: "Law firm partners, independent lawyers and professional services advisors",
-        sgdPrice: 349,
+        sgdPrice: SINGAPORE_PASS_PRICES["law-firm-partner"],
         icon: Scale,
         isPopular: true,
         features: [
@@ -67,7 +68,7 @@ const PASSES: PassConfig[] = [
         id: "vendor",
         name: "Vendor",
         subtitle: "LegalTech, PrivacyTech, cybersecurity, GRC and advisory organisations",
-        sgdPrice: 599,
+        sgdPrice: SINGAPORE_PASS_PRICES["vendor"],
         icon: Cpu,
         features: [
             "Full Conference Access",

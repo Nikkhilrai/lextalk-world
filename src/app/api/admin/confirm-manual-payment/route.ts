@@ -7,7 +7,7 @@ import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 // Marks pending registration as success, assigns ticket number, sends confirmation email
 
 function generateTicketNumber(conferenceSlug: string): string {
-    const prefix = conferenceSlug?.includes("bangalore") ? "LTW-BLR26-" : conferenceSlug?.includes("mumbai") ? "LTW-MUM26-" : "LTW-DXB26-";
+    const prefix = conferenceSlug?.includes("bangalore") ? "LTW-BLR26-" : conferenceSlug?.includes("mumbai") ? "LTW-MUM26-" : conferenceSlug?.includes("singapore") ? "LTW-SIN27-" : "LTW-DXB26-";
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let suffix = "";
     for (let i = 0; i < 6; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
