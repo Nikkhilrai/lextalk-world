@@ -239,7 +239,7 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100000] flex items-end sm:items-start justify-center p-0 sm:p-4 sm:pt-24 overflow-y-auto">
+                <div className="fixed inset-0 z-[100000] flex items-end sm:items-center justify-center p-0 sm:p-6">
                     <motion.div
                         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                         className="absolute inset-0 bg-black/70 backdrop-blur-md"
@@ -248,9 +248,9 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                     <motion.div
                         initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}
                         transition={{ type: "spring", damping: 28, stiffness: 350 }}
-                        className="relative z-10 w-full sm:max-w-md bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden sm:mb-8"
+                        className="relative z-10 w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[90dvh] flex flex-col bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden"
                     >
-                        <div className="relative flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
+                        <div className="relative shrink-0 flex items-center justify-between px-6 sm:px-8 pt-5 pb-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-amber-50/30">
                             <div>
                                 <p className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-600 mb-0.5">
                                     {pass.name} Pass · Singapore 2027
@@ -264,7 +264,7 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                             </button>
                         </div>
 
-                        <div className="h-0.5 w-full bg-slate-100">
+                        <div className="h-0.5 w-full shrink-0 bg-slate-100">
                             <motion.div
                                 animate={{ width: step === 1 ? "50%" : "100%" }}
                                 className="h-full bg-gradient-to-r from-amber-400 to-amber-600"
@@ -272,7 +272,7 @@ function RegistrationModal({ isOpen, onClose, pass }: { isOpen: boolean; onClose
                             />
                         </div>
 
-                        <div className="p-6 overflow-y-auto">
+                        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 sm:p-8">
                             <AnimatePresence mode="wait">
                                 {step === 1 ? (
                                     <motion.form
