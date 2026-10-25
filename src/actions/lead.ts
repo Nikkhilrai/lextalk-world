@@ -265,7 +265,11 @@ async function syncToGoogleSheet(data: any) {
     }
 }
 
-export async function createLead(data: any) {
+// confirmVisitor: false skips the "your registration of interest has been received"
+// email, for leads where the visitor never asked to register (e.g. the chat's
+// start-of-conversation details form). The team is still notified either way.
+export async function createLead(data: any, options: { confirmVisitor?: boolean } = {}) {
+    const confirmVisitor = options.confirmVisitor ?? true;
     try {
         const lead = await prisma.lead.create({
             data: {
@@ -308,7 +312,7 @@ export async function createLead(data: any) {
         // allSettled so one failing send can't prevent the other.
         const [notifyResult, confirmResult] = await Promise.allSettled([
             sendNotificationEmail(data),
-            sendConfirmationEmail(data),
+            confirmVisitor ? sendConfirmationEmail(data) : Promise.resolve(),
         ]);
         if (notifyResult.status === "rejected") {
             console.error("[lead] notification email threw:", notifyResult.reason);

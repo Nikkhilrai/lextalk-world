@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createLead } from "@/actions/lead";
+
+// Agent event slugs → the conference labels actions/lead.ts uses to pick the event
+// page and payment link in the visitor's confirmation email.
+const CONFERENCE_LABELS: Record<string, string> = {
+    "mumbai-2026": "Mumbai India, Dec 7-8 2026",
+    "singapore-2027": "Singapore, Feb 4 2027",
+    "delhi-2027": "Delhi India, July 2027",
+};
 
 /**
  * Server-side proxy to the LexTalk support agent (the separate FastAPI service).
@@ -186,6 +195,7 @@ function pipeAndLog(
                             Array.isArray(d.tiers_used) ? (d.tiers_used as unknown as string[]) : [],
                             Boolean(d.show_registration_form)
                         );
+                        await saveCapturedLeads(d.captured_leads, d.session_id as unknown as string);
                     }
                 }
             } catch (error) {
@@ -195,6 +205,61 @@ function pipeAndLog(
     });
 
     return upstream.pipeThrough(transform);
+}
+
+// Agent lead intents → the site's own "Join as" options, so a chat handoff sorts with
+// the leads from the website's forms. Anything else (a discount or group-rate question,
+// a one-off request) is labelled as a chat handoff, with the specifics in the query.
+const HANDOFF_JOIN_AS: Record<string, string> = {
+    sponsor: "Become a Sponsor",
+    speaker: "Apply as Speaker",
+    awards: "Apply for Legal Honor Global Awards",
+};
+
+interface CapturedLead {
+    full_name: string;
+    email: string;
+    intent: string;
+    reason: string | null;
+    event_slug: string | null;
+}
+
+/**
+ * Put leads the agent captured this turn (a visitor saying yes to "want me to pass this
+ * to the team?") onto the Leads page.
+ *
+ * The agent only reports a lead once its own code has checked the visitor agreed in
+ * their latest message and the contact is one they typed — so this trusts the list as
+ * given. The agent's own copy is in-memory; this is the durable one. No confirmation
+ * email to the visitor: Lex has already told them the team will be in touch.
+ */
+async function saveCapturedLeads(leads: unknown, sessionId: string | undefined) {
+    if (!Array.isArray(leads) || leads.length === 0) return;
+    try {
+        for (const lead of leads as CapturedLead[]) {
+            const [firstName, ...rest] = String(lead.full_name ?? "").trim().split(/\s+/);
+            const slug = String(lead.event_slug ?? "");
+            await createLead(
+                {
+                    firstName,
+                    lastName: rest.join(" "),
+                    email: String(lead.email ?? "").slice(0, 200),
+                    country: "Not provided",
+                    joinAs: HANDOFF_JOIN_AS[lead.intent] ?? "Chat handoff",
+                    conference: slug ? (CONFERENCE_LABELS[slug] ?? slug) : undefined,
+                    query: `Via Lex chat: ${String(lead.reason ?? "asked to be contacted").slice(0, 1000)}`,
+                },
+                { confirmVisitor: false }
+            );
+        }
+        if (sessionId) {
+            await prisma.chatConversation
+                .updateMany({ where: { sessionId }, data: { leadCaptured: true } })
+                .catch(() => { /* non-critical */ });
+        }
+    } catch (error) {
+        console.error("[support-agent] failed to save captured lead:", error);
+    }
 }
 
 /**
@@ -226,6 +291,23 @@ async function logChatbotLead(requestBody: string, responseBody: string) {
                 sessionId: sent.session_id ? String(sent.session_id) : null,
                 agentLeadId: got?.lead_id ? String(got.lead_id) : null,
             },
+        });
+
+        // Also onto the main Leads page with the website's own forms, so the team works
+        // one list. "Register as Delegate" gets the visitor the event's payment link
+        // (or a "not open yet" note) in their confirmation email.
+        const [firstName, ...rest] = String(sent.full_name).trim().split(/\s+/);
+        const slug = String(sent.event_slug ?? "");
+        await createLead({
+            firstName,
+            lastName: rest.join(" "),
+            email: String(sent.email).slice(0, 200),
+            contact: String(sent.mobile ?? "").slice(0, 40),
+            designation: String(sent.designation ?? "").slice(0, 200),
+            country: "Not provided",
+            joinAs: "Register as Delegate",
+            conference: CONFERENCE_LABELS[slug] ?? slug,
+            query: `Registration interest via Lex chat${sent.pass_type ? ` (pass: ${sent.pass_type})` : ""}`,
         });
 
         // Mark the conversation as converted so the chat list reads as a funnel rather
@@ -308,6 +390,7 @@ async function forward(request: NextRequest, path: string[], method: "GET" | "PO
                         Array.isArray(got.tiers_used) ? got.tiers_used : [],
                         Boolean(got.show_registration_form)
                     );
+                    await saveCapturedLeads(got.captured_leads, got.session_id);
                 }
             } catch (error) {
                 // Malformed JSON on either side shouldn't cost the visitor their reply.
