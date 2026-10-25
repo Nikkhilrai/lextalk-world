@@ -496,6 +496,7 @@ export function SupportChatWidget() {
                 message: trimmed,
                 session_id: sessionId,
                 page_context: `${document.title} | ${window.location.pathname}`.slice(0, 200),
+                visitor,
             }),
         });
 
@@ -520,7 +521,7 @@ export function SupportChatWidget() {
         if (data.show_registration_form && !formState.shown && !formState.submitted) {
             setFormState(s => ({ ...s, shown: true, slug: data.registration_event_slug ?? null }));
         }
-    }, [sessionId, formState.shown, formState.submitted]);
+    }, [sessionId, formState.shown, formState.submitted, visitor]);
 
     const send = useCallback(async (text: string) => {
         const trimmed = text.trim();
@@ -544,6 +545,10 @@ export function SupportChatWidget() {
                     // mid-conversation is judged against the page they're actually on.
                     // The agent treats this as a disambiguation hint only, never as fact.
                     page_context: `${document.title} | ${window.location.pathname}`.slice(0, 200),
+                    // The details from the start-of-chat form. The agent uses these as
+                    // the contact for any handoff the visitor agrees to, so the model
+                    // never has to ask for (or make up) a name and email.
+                    visitor,
                 }),
             });
 
