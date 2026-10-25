@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createLead } from "@/actions/lead";
+
+// Agent event slugs → the conference labels actions/lead.ts uses to pick the event
+// page and payment link in the visitor's confirmation email.
+const CONFERENCE_LABELS: Record<string, string> = {
+    "mumbai-2026": "Mumbai India, Dec 7-8 2026",
+    "singapore-2027": "Singapore, Feb 4 2027",
+    "delhi-2027": "Delhi India, July 2027",
+};
 
 /**
  * Server-side proxy to the LexTalk support agent (the separate FastAPI service).
@@ -226,6 +235,23 @@ async function logChatbotLead(requestBody: string, responseBody: string) {
                 sessionId: sent.session_id ? String(sent.session_id) : null,
                 agentLeadId: got?.lead_id ? String(got.lead_id) : null,
             },
+        });
+
+        // Also onto the main Leads page with the website's own forms, so the team works
+        // one list. "Register as Delegate" gets the visitor the event's payment link
+        // (or a "not open yet" note) in their confirmation email.
+        const [firstName, ...rest] = String(sent.full_name).trim().split(/\s+/);
+        const slug = String(sent.event_slug ?? "");
+        await createLead({
+            firstName,
+            lastName: rest.join(" "),
+            email: String(sent.email).slice(0, 200),
+            contact: String(sent.mobile ?? "").slice(0, 40),
+            designation: String(sent.designation ?? "").slice(0, 200),
+            country: "Not provided",
+            joinAs: "Register as Delegate",
+            conference: CONFERENCE_LABELS[slug] ?? slug,
+            query: `Registration interest via Lex chat${sent.pass_type ? ` (pass: ${sent.pass_type})` : ""}`,
         });
 
         // Mark the conversation as converted so the chat list reads as a funnel rather

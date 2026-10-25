@@ -21,13 +21,20 @@ import { setChatOpen } from "@/lib/chat-widget-state";
  */
 
 const SESSION_KEY = "lextalk_support_session_id";
+// Set once a visitor has given their details, so they aren't asked again on return.
+const VISITOR_KEY = "lextalk_chat_visitor";
 const API = "/api/support-agent";
 
 const SUGGESTIONS = [
-    "When is the Dubai conference?",
-    "What does the Delegate Pass cost?",
-    "Who's speaking in Dubai?",
+    "When is the Mumbai conference?",
+    "What does a Singapore pass cost?",
+    "Who's speaking in Mumbai?",
 ];
+
+interface Visitor {
+    name: string;
+    email: string;
+}
 
 type Role = "user" | "agent" | "system";
 interface Message {
@@ -157,18 +164,20 @@ interface EventOption {
 function RegistrationForm({
     preferredSlug,
     sessionId,
+    visitor,
     onSubmitted,
     onUnavailable,
 }: {
     preferredSlug: string | null;
     sessionId: string | null;
+    visitor: Visitor | null;
     onSubmitted: () => void;
     onUnavailable: () => void;
 }) {
     const [events, setEvents] = useState<EventOption[]>([]);
     const [form, setForm] = useState({
-        full_name: "",
-        email: "",
+        full_name: visitor?.name ?? "",
+        email: visitor?.email ?? "",
         designation: "",
         mobile: "",
         event_slug: "",
@@ -321,6 +330,77 @@ function RegistrationForm({
     );
 }
 
+/* ── Start-of-chat details form ────────────────────────────────────────────── */
+function VisitorForm({ onSaved }: { onSaved: (visitor: Visitor) => void }) {
+    const [form, setForm] = useState({ name: "", email: "", phone: "" });
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setSending(true);
+        setError(null);
+        const visitor = { name: form.name.trim(), email: form.email.trim() };
+        try {
+            const res = await fetch("/api/chat-visitor", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...form, page: window.location.pathname }),
+            });
+            if (res.status === 400 || res.status === 429) {
+                const body = await res.json().catch(() => null);
+                setError(body?.detail || "Please check your details.");
+                return;
+            }
+            // Any other failure is ours, not the visitor's: let them chat rather than
+            // locking them out of support because the lead couldn't be saved.
+            if (!res.ok) console.error("[chat] visitor details not saved:", res.status);
+        } catch (err) {
+            console.error("[chat] visitor details not saved:", err);
+        } finally {
+            setSending(false);
+        }
+        onSaved(visitor);
+    };
+
+    const field =
+        "w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[13px] text-slate-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/20 placeholder:text-slate-300";
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-2.5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div>
+                <p className="text-[13px] font-bold text-slate-900">Hi, I&apos;m Lex</p>
+                <p className="mt-0.5 text-[12px] leading-relaxed text-slate-500">
+                    Before we start, tell me who I&apos;m talking to so our team can follow up if you need them.
+                </p>
+            </div>
+            <input
+                required type="text" placeholder="Full name" autoComplete="name" maxLength={200}
+                value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                className={field}
+            />
+            <input
+                required type="email" placeholder="Email" autoComplete="email" maxLength={200}
+                value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                className={field}
+            />
+            <input
+                type="tel" placeholder="Phone (optional)" autoComplete="tel" maxLength={20}
+                value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                className={field}
+            />
+            {error && <p className="text-[11px] font-medium text-red-500">{error}</p>}
+            <button
+                type="submit"
+                disabled={sending}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 py-2.5 text-[11px] font-black uppercase tracking-widest text-white transition hover:bg-amber-500 hover:text-slate-950 disabled:opacity-60"
+            >
+                {sending ? <><Loader2 size={13} className="animate-spin" /> Starting…</> : "Start chatting"}
+            </button>
+        </form>
+    );
+}
+
 /* ── Widget ────────────────────────────────────────────────────────────────── */
 export function SupportChatWidget() {
     const [open, setOpen] = useState(false);
@@ -335,6 +415,10 @@ export function SupportChatWidget() {
     const [formState, setFormState] = useState<{ shown: boolean; submitted: boolean; slug: string | null }>({
         shown: false, submitted: false, slug: null,
     });
+    // null until the visitor gives their details; visitorChecked stops the details form
+    // flashing up for a returning visitor before localStorage has been read.
+    const [visitor, setVisitor] = useState<Visitor | null>(null);
+    const [visitorChecked, setVisitorChecked] = useState(false);
 
     const threadRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -345,8 +429,20 @@ export function SupportChatWidget() {
         try {
             const saved = localStorage.getItem(SESSION_KEY);
             if (saved) setSessionId(saved);
+            const savedVisitor = localStorage.getItem(VISITOR_KEY);
+            if (savedVisitor) {
+                const parsed = JSON.parse(savedVisitor);
+                if (parsed?.name && parsed?.email) setVisitor(parsed);
+            }
         } catch { /* ignore */ }
+        setVisitorChecked(true);
     }, []);
+
+    const handleVisitorSaved = (v: Visitor) => {
+        setVisitor(v);
+        try { localStorage.setItem(VISITOR_KEY, JSON.stringify(v)); } catch { /* ignore */ }
+        setTimeout(() => inputRef.current?.focus(), 50);
+    };
 
     useEffect(() => {
         threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
@@ -428,7 +524,7 @@ export function SupportChatWidget() {
 
     const send = useCallback(async (text: string) => {
         const trimmed = text.trim();
-        if (!trimmed || busy) return;
+        if (!trimmed || busy || !visitor) return;
 
         setMessages(m => [...m, { role: "user", text: trimmed }]);
         setInput("");
@@ -564,7 +660,7 @@ export function SupportChatWidget() {
             setStatusLine(null);
             setTimeout(() => inputRef.current?.focus(), 0);
         }
-    }, [busy, sessionId, formState.shown, formState.submitted, sendWithoutStreaming]);
+    }, [busy, sessionId, formState.shown, formState.submitted, sendWithoutStreaming, visitor]);
 
     return (
         <>
@@ -643,12 +739,16 @@ export function SupportChatWidget() {
 
                         {/* Thread */}
                         <div ref={threadRef} className="flex-1 space-y-3 overflow-y-auto bg-slate-50 px-4 py-4">
-                            {messages.length === 0 && (
+                            {visitorChecked && !visitor && <VisitorForm onSaved={handleVisitorSaved} />}
+
+                            {visitor && messages.length === 0 && (
                                 <div className="rounded-2xl border border-slate-200 bg-white p-4">
-                                    <p className="text-[13px] font-bold text-slate-900">Hi, I&apos;m Lex</p>
+                                    <p className="text-[13px] font-bold text-slate-900">
+                                        Hi {visitor.name.split(/\s+/)[0]}, I&apos;m Lex
+                                    </p>
                                     <p className="mt-1 text-[12px] leading-relaxed text-slate-500">
-                                        Ask me about any LexTalk edition — dates, venues, passes and pricing for
-                                        Dubai, Bangalore, Mumbai or Delhi.
+                                        Ask me about any LexTalk edition — dates, venues, speakers, passes and
+                                        pricing for Mumbai, Singapore, Jakarta or Delhi.
                                     </p>
                                 </div>
                             )}
@@ -748,6 +848,7 @@ export function SupportChatWidget() {
                                 <RegistrationForm
                                     preferredSlug={formState.slug}
                                     sessionId={sessionId}
+                                    visitor={visitor}
                                     onSubmitted={() => setFormState(s => ({ ...s, submitted: true }))}
                                     onUnavailable={() => {
                                         // Let a later turn retry rather than dead-ending the visitor.
@@ -760,7 +861,7 @@ export function SupportChatWidget() {
                                 />
                             )}
 
-                            {messages.length === 0 && (
+                            {visitor && messages.length === 0 && (
                                 <div className="space-y-1.5 pt-1">
                                     {SUGGESTIONS.map(s => (
                                         <button
@@ -785,6 +886,7 @@ export function SupportChatWidget() {
                                 ref={inputRef}
                                 rows={1}
                                 value={input}
+                                disabled={!visitor}
                                 maxLength={4000}
                                 onChange={e => setInput(e.target.value)}
                                 onKeyDown={e => {
@@ -793,12 +895,12 @@ export function SupportChatWidget() {
                                         send(input);
                                     }
                                 }}
-                                placeholder="Type your question…"
+                                placeholder={visitor ? "Type your question…" : "Share your details above to start"}
                                 className="max-h-28 flex-1 resize-none rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-[13px] text-slate-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/20 placeholder:text-slate-300"
                             />
                             <button
                                 type="submit"
-                                disabled={busy || !input.trim()}
+                                disabled={busy || !input.trim() || !visitor}
                                 aria-label="Send message"
                                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white transition hover:bg-amber-500 hover:text-slate-950 disabled:opacity-40"
                             >
