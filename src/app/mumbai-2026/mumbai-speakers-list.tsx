@@ -290,6 +290,11 @@ Working closely with regional and global business leadership, Vipul focuses on t
         title: "General Counsel & Senior Vice President (COSA), Samvardhana Motherson Group",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1792664142/lextalk/mumbai-speakers/anubhav-kapoor.png",
     },
+    {
+        name: "Debasish Roychowdhury",
+        title: "General Counsel and Governance, Legal and Compliance leader",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793095663/lextalk/mumbai-speakers/debasish-roychowdhury.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
