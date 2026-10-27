@@ -54,12 +54,84 @@ const whoShouldAttend = [
     { icon: Building2, text: "LegalTech, PrivacyTech, Cybersecurity, GRC, cloud, data and advisory organisations" },
 ];
 
-const agenda = [
-    { time: "08:00", end: "09:00", icon: Coffee, title: "Registration, Welcome Coffee & Executive Networking" },
-    { time: "09:00", end: "13:00", icon: Sparkles, title: "Enterprise AI, scale, risk ownership, AI regulation, AI security and trustworthy AI implementation" },
-    { time: "13:00", end: "14:00", icon: Utensils, title: "Networking Lunch & Exhibition" },
-    { time: "14:00", end: "17:00", icon: ShieldCheck, title: "Governance to action, privacy, data, digital trust, operational AI governance, agentic AI and third-party risk" },
-    { time: "17:00", end: "18:00", icon: Trophy, title: "Awards Ceremony & Closing Networking" },
+type AgendaKind = "Registration" | "Keynote" | "Panel" | "Debate Panel" | "Case Study" | "Break" | "Lunch" | "Awards";
+
+interface AgendaItem {
+    start: string;
+    end: string;
+    kind: AgendaKind;
+    icon: React.ElementType;
+    title: string;
+    points?: string[];
+}
+
+// From the official Singapore 2027 agenda PDF (public/agendas/singapore-2027-agenda.pdf).
+const AGENDA_THEME = "AI, Law & Enterprise Governance: Scaling AI Responsibly and Turning Governance into Enterprise Value";
+
+const agenda: AgendaItem[] = [
+    { start: "8:00 AM", end: "9:00 AM", kind: "Registration", icon: Coffee, title: "Registration & Breakfast: Welcome Coffee & Executive Networking" },
+    {
+        start: "9:00 AM", end: "9:20 AM", kind: "Keynote", icon: Mic,
+        title: "The Enterprise AI Reality in 2027: From Experimentation to Accountability",
+        points: ["From AI Experimentation to Enterprise-Wide Adoption", "Legal, Regulatory & Ethical Impact of Embedded AI", "What Boards & General Counsel Must Know", "Accountability & Measurable Outcomes"],
+    },
+    {
+        start: "9:20 AM", end: "10:00 AM", kind: "Panel", icon: Users,
+        title: "From AI Pilots to Enterprise Scale: Building a Responsible Operating Model",
+        points: ["Scaling Pilots into Secure, Sustainable Systems", "Aligning Legal, Technology, Risk & Business Teams", "Procurement, Change Management & Performance Monitoring", "Building Regulatory Readiness"],
+    },
+    {
+        start: "10:00 AM", end: "10:40 AM", kind: "Debate Panel", icon: Scale,
+        title: "Who Owns AI Risk? Board Accountability, Management Responsibility & Legal Oversight",
+        points: ["Legal, Operational, Financial & Reputational AI Risk", "Roles of Boards, GCs, Compliance & Risk Committees", "Accountability When Third Parties Build or Run AI", "Clear Lines of Ownership & Escalation"],
+    },
+    { start: "10:40 AM", end: "11:00 AM", kind: "Break", icon: Coffee, title: "Networking Break: Coffee & Business Conversations" },
+    {
+        start: "11:00 AM", end: "11:20 AM", kind: "Case Study", icon: ClipboardCheck,
+        title: "From AI Adoption to Measurable Business Value",
+        points: ["From Proof of Concept to Real Business Impact", "Choosing the Right KPIs for AI Investment", "What Works & What Fails in Implementation", "Improving Adoption Outcomes"],
+    },
+    {
+        start: "11:20 AM", end: "12:00 PM", kind: "Panel", icon: Users,
+        title: "AI Regulation in Practice: Translating Emerging Rules into Business Action",
+        points: ["Turning Evolving AI Laws into Enterprise Controls", "Managing Regulatory Uncertainty Across Jurisdictions", "Cross-Border Operations & Sector Expectations", "Documentation, Impact Assessments & Oversight"],
+    },
+    {
+        start: "12:00 PM", end: "12:40 PM", kind: "Panel", icon: ShieldAlert,
+        title: "AI Security: The New Enterprise Attack Surface",
+        points: ["Vulnerabilities in Models, Data Pipelines & APIs", "Protecting Confidential & Privileged Information", "Prompt Injection, Data Leakage & Adversarial Attacks", "Access Control & Incident Response"],
+    },
+    {
+        start: "12:40 PM", end: "1:00 PM", kind: "Case Study", icon: ClipboardCheck,
+        title: "Building Trustworthy AI: A Real-World Implementation Story",
+        points: ["Governance, Security & Human Oversight in Practice", "Balancing Performance with Explainability", "Transparency & Accountability in a Live Environment", "Lessons for Responsible Scale"],
+    },
+    { start: "1:00 PM", end: "2:00 PM", kind: "Lunch", icon: Utensils, title: "Power Lunch: Networking Lunch & Exhibition" },
+    {
+        start: "2:00 PM", end: "2:20 PM", kind: "Keynote", icon: Mic,
+        title: "From Governance to Action: Making Enterprise AI Work Responsibly",
+        points: ["From Principles to Practical Governance Mechanisms", "Responsible AI in Procurement & Product Development", "Deployment, Monitoring & Business Decision-Making", "Where Innovation & Accountability Advance Together"],
+    },
+    // The agenda PDF repeats the "AI Regulation in Practice" bullets under this session; they
+    // look like a copy-paste slip, so the bullets are left out here until confirmed.
+    { start: "2:20 PM", end: "3:00 PM", kind: "Panel", icon: Fingerprint, title: "Privacy, Data & Digital Trust: Protecting Value in an AI-Driven Economy" },
+    {
+        start: "3:00 PM", end: "3:20 PM", kind: "Case Study", icon: ClipboardCheck,
+        title: "AI Governance in Action: From Policy to Practice",
+        points: ["Governance Frameworks in Real Organisations", "Turning Principles into Controls, Workflows & Approvals", "Documentation, Monitoring & Escalation", "Measuring Adherence Across Employees & Vendors"],
+    },
+    {
+        start: "3:20 PM", end: "4:00 PM", kind: "Panel", icon: ShieldCheck,
+        title: "Beyond Policy: Making AI Governance Operational",
+        points: ["Practical, Proportionate & Auditable Governance", "Integrating with Legal, Compliance & InfoSec Frameworks", "Model Inventory & Risk Classification", "Human Oversight, Vendor Management & Remediation"],
+    },
+    { start: "4:00 PM", end: "4:20 PM", kind: "Break", icon: Coffee, title: "Networking Break: Tea & Refreshments" },
+    {
+        start: "4:20 PM", end: "5:00 PM", kind: "Panel", icon: Bot,
+        title: "Agentic AI, Third-Party Risk & Enterprise Control",
+        points: ["Legal Implications of AI Agents That Act & Transact", "Managing Third-Party Models, Vendors & Platforms", "Autonomy Limits, Human Approval & Auditability", "Liability & Incident Response"],
+    },
+    { start: "5:00 PM", end: "6:00 PM", kind: "Awards", icon: Trophy, title: "Awards Ceremony: LexTalk World – Legal Honor Global Awards & Closing Networking" },
 ];
 
 const featuredSessions = [
@@ -694,6 +766,9 @@ export default function Singapore2027Page() {
                     <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-14">
                         One day, <span className="text-amber-600">fully programmed</span>
                     </motion.h2>
+                    <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="-mt-9 mb-14 max-w-2xl text-slate-500 leading-relaxed">
+                        <span className="font-semibold text-slate-700">4 February 2027 · Theme:</span> {AGENDA_THEME}
+                    </motion.p>
 
                     <div className="relative pl-16 md:pl-24">
                         <motion.div
@@ -705,20 +780,31 @@ export default function Singapore2027Page() {
                         />
                         {agenda.map((a, i) => (
                             <motion.div
-                                key={a.time}
+                                key={a.start}
                                 initial={{ opacity: 0, y: 16 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-40px" }}
-                                transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                                className="group relative mb-10 last:mb-0 rounded-xl -ml-4 pl-4 pr-2 py-1 hover:bg-amber-50/60 transition-colors duration-300"
+                                transition={{ duration: 0.5, delay: Math.min(i, 3) * 0.08 }}
+                                className="group relative mb-8 last:mb-0 rounded-xl -ml-4 pl-4 pr-2 py-1 hover:bg-amber-50/60 transition-colors duration-300"
                             >
                                 <span className="absolute -left-12 md:-left-20 top-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border-2 border-amber-400 group-hover:border-amber-500 group-hover:scale-110 flex items-center justify-center shadow-sm transition-all duration-300">
                                     <a.icon className="w-5 h-5 text-amber-600" strokeWidth={1.75} />
                                 </span>
-                                <p className="text-amber-600 text-xs font-bold uppercase tracking-widest mb-1.5">
-                                    {a.time} – {a.end}
+                                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
+                                    <span className="text-amber-600 text-xs font-bold uppercase tracking-widest">{a.start} – {a.end}</span>
+                                    <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">{a.kind}</span>
                                 </p>
-                                <p className="text-slate-800 text-base md:text-lg leading-snug font-medium group-hover:text-slate-900 transition-colors">{a.title}</p>
+                                <p className="text-slate-800 text-base md:text-lg leading-snug font-semibold group-hover:text-slate-900 transition-colors">{a.title}</p>
+                                {a.points && (
+                                    <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                                        {a.points.map((pt) => (
+                                            <li key={pt} className="flex items-start gap-2 text-sm text-slate-500 leading-snug">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                                                {pt}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </motion.div>
                         ))}
                     </div>
