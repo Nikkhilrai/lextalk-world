@@ -10,7 +10,6 @@ import { AdvisoryBoard } from "@/components/AdvisoryBoard";
 import { WhoShouldJoin } from "@/components/WhoShouldJoin";
 import { FAQ } from "@/components/FAQ";
 import { StayUpdated } from "@/components/StayUpdated";
-import { ShowGuideBanner } from "@/components/ShowGuideBanner";
 import { Footer } from "@/components/Footer";
 
 
@@ -26,7 +25,6 @@ export default function Home() {
       <Hero />
       <FeaturedIn />
       <EventsList />
-      <ShowGuideBanner />
       <AdvisoryBoard />
       <WhoShouldJoin />
       <SupportingAssociations />
