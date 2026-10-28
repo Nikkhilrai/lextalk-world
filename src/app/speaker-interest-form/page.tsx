@@ -26,10 +26,10 @@ interface FormData {
 }
 
 const CONFERENCES = [
-    "LexTalk World Mumbai 2026",
-    "LexTalk World Delhi 2027",
-    "LexTalk World Singapore 2027",
-    "Any Upcoming LexTalk World Event",
+    { value: "LexTalk World Mumbai 2026", label: "LexTalk World Mumbai 2026 — 7–8 December 2026" },
+    { value: "LexTalk World Delhi 2027", label: "LexTalk World Delhi 2027 — July 2027 (dates TBA)" },
+    { value: "LexTalk World Singapore 2027", label: "LexTalk World Singapore 2027 — 4 February 2027" },
+    { value: "Any Upcoming LexTalk World Event", label: "Any Upcoming LexTalk World Event" },
 ];
 
 export default function SpeakerInterestFormPage() {
@@ -245,7 +245,7 @@ export default function SpeakerInterestFormPage() {
                                     >
                                         <option value="">Select a conference</option>
                                         {CONFERENCES.map(c => (
-                                            <option key={c} value={c}>{c}</option>
+                                            <option key={c.value} value={c.value}>{c.label}</option>
                                         ))}
                                     </select>
                                     {errors.conference && <p className="mt-1 text-xs text-red-500">{errors.conference.message}</p>}
