@@ -152,6 +152,24 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1792582222/lextalk/singapore-speakers/prasanna-subramanian`,
         bio: `Prasanna Subramanian is a Principal AI Transformation Lead at Mercedes-Benz Asia Pacific, with over 18 years of experience in technology, innovation, and digital transformation. His expertise spans Enterprise AI Transformation, Agentic AI, AI Governance, and AI Security, with a focus on building responsible, scalable, and business-driven AI solutions. He is also an active contributor to OWASP initiatives on Agentic AI security and governance. Prasanna is passionate about combining human potential with AI intelligence to drive meaningful enterprise transformation.`,
     },
+    {
+        name: "Ajay Kumar",
+        title: "Regional Strategic Advisor & vCISO, Asia Pacific, Google",
+        image: `${IMG}/v1793192645/lextalk/singapore-speakers/ajay-kumar`,
+        bio: `With over 26 years of corporate experience, he serves as a Regional Strategic Advisor and vCISO for Google Cloud in Asia Pacific, advising C-suite executives and Boards on cybersecurity, AI governance, cyber risk, and digital transformation. He previously held senior leadership and General Management roles with P&L responsibility. As a Board Member and Chair of specialized groups at ISACA Singapore Chapter, he contributes to industry thought leadership across cybersecurity, AI, quantum technologies, and operational technology security.`,
+    },
+    {
+        name: "Justus Chua",
+        title: "Head of Legal & Compliance, ASEAN, Korea, Australia & New Zealand, Boehringer Ingelheim Singapore Pte Ltd",
+        image: `${IMG}/v1793192649/lextalk/singapore-speakers/justus-chua`,
+        bio: `Justus Chua is an experienced Head of Legal & Compliance in Asia, with a strong background in the chemicals and pharmaceuticals industries. His expertise includes legal compliance, arbitration, corporate law, intellectual property, and employment law. He focuses on aligning legal and compliance functions with business objectives through effective business partnering, risk management, and regulatory oversight, supporting organizations in navigating complex legal environments and achieving sustainable business outcomes across the region.`,
+    },
+    {
+        name: "Jatin Badiani",
+        title: "Director, Head of Regulatory Change & Governance Asia, Treasury & Trade Solutions, Citibank",
+        image: `${IMG}/v1793192653/lextalk/singapore-speakers/jatin-badiani`,
+        bio: `Jatin Badiani is a senior banking professional with over 25 years of industry experience. He serves as Head of Regulatory Change and Governance for Treasury and Trade Solutions Asia at Citibank Singapore, overseeing regional governance and collaborating with senior stakeholders across Asia. Previously, he held key roles at Deutsche Bank, Standard Chartered Bank, and JPMorgan. His expertise spans regulatory strategy, technology, payments, compliance, cloud adoption, tokenization, and artificial intelligence. He also contributes to industry thought leadership through co-authored white papers and publications.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
