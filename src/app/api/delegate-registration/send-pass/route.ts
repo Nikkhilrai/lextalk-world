@@ -17,6 +17,7 @@ function passTypeName(pt: string) {
         "student": "Student Pass",
         "vendor-vip": "Vendor Pass",
         "corporate-counsel": "Corporate Counsel Pass",
+        "law-firm-lawyer": "Law Firm & Independent Lawyer Pass",
         "standard-physical": "Standard Pass",
         "premium-physical": "Premium Pass",
         "exclusive-physical": "Exclusive Pass",

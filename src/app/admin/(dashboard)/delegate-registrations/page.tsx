@@ -505,6 +505,7 @@ export default function DelegateRegistrationsPage() {
                         <option value="vendor-vip">Vendor Pass</option>
                         <option value="student">Student</option>
                         <option value="corporate-counsel">Corporate Counsel</option>
+                        <option value="law-firm-lawyer">Law Firm & Independent Lawyer</option>
                         <option value="visitor">Visitor</option>
                         <option value="full-access">Full Access</option>
                         <option value="full-access-vip">Full Access VIP</option>

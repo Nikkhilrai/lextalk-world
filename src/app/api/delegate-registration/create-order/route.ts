@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
 import { singaporePassPrice, SINGAPORE_CURRENCY } from "@/lib/singapore-pass-prices";
+import { mumbaiFixedPrice } from "@/lib/mumbai-pass-prices";
 
 export async function POST(request: NextRequest) {
     try {
@@ -54,15 +55,21 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        const originalPrice = serverPrice ?? bodyOriginalPrice;
-        const discountedPrice = serverPrice ?? bodyDiscountedPrice;
+        // Mumbai fixed-price passes (law firms / independent lawyers): total comes from the server.
+        const mumbaiFixed = mumbaiFixedPrice(conferenceSlug, passType);
+        if (mumbaiFixed && currency !== "INR") {
+            return NextResponse.json({ error: "Invalid currency" }, { status: 400 });
+        }
+
+        const originalPrice = mumbaiFixed?.originalPrice ?? serverPrice ?? bodyOriginalPrice;
+        const discountedPrice = mumbaiFixed?.discountedPrice ?? serverPrice ?? bodyDiscountedPrice;
 
         // Server-side coupon validation — if coupon provided, re-validate and recompute amount
-        let finalAmount = serverPrice ?? rawAmount;
-        let validatedCouponCode: string | null = couponCode || null;
-        let validatedCouponDiscount: number | null = couponDiscount || null;
+        let finalAmount = mumbaiFixed?.total ?? serverPrice ?? rawAmount;
+        let validatedCouponCode: string | null = mumbaiFixed ? null : couponCode || null;
+        let validatedCouponDiscount: number | null = mumbaiFixed ? null : couponDiscount || null;
 
-        if (couponCode) {
+        if (couponCode && !mumbaiFixed) {
             const prismaClient2 = prisma as any;
             const coupon = await prismaClient2.delegateCoupon.findUnique({
                 where: { code: couponCode.trim().toUpperCase() },

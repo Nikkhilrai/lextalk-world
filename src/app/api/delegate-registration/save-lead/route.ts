@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { triggerLeadsSync } from "@/lib/sheets-sync";
 import { sanitizeInterests } from "@/lib/delegate-interests";
 import { singaporePassPrice } from "@/lib/singapore-pass-prices";
+import { mumbaiFixedPrice } from "@/lib/mumbai-pass-prices";
 
 function conferenceLabel(conferenceSlug: string): string {
     const map: Record<string, string> = {
@@ -30,8 +31,9 @@ export async function POST(request: NextRequest) {
         } = body;
 
         const serverPrice = typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("singapore") ? singaporePassPrice(passType) : null;
-        const originalPrice = serverPrice ?? bodyOriginalPrice;
-        const discountedPrice = serverPrice ?? bodyDiscountedPrice;
+        const mumbaiFixed = mumbaiFixedPrice(conferenceSlug, passType);
+        const originalPrice = mumbaiFixed?.originalPrice ?? serverPrice ?? bodyOriginalPrice;
+        const discountedPrice = mumbaiFixed?.discountedPrice ?? serverPrice ?? bodyDiscountedPrice;
 
         const interests = sanitizeInterests(rawInterests, otherInterest);
         const interestsText = interests.length ? `Areas of interest: ${interests.join(", ")}` : null;
