@@ -167,6 +167,8 @@ export function Footer() {
                             <p className="text-xs text-slate-500 mb-1">Kishan Chhetry, Customer Success</p>
                             <a href="tel:+919311899545" className="text-xs text-slate-400 hover:text-amber-500 block">+91 931 189 9545</a>
                             <a href="mailto:kishan@lextalkworld.in" className="text-xs text-slate-400 hover:text-amber-500 block">kishan@lextalkworld.in</a>
+                            <p className="text-xs text-slate-500 mt-3 mb-1">Kriti Agarwal, Senior Manager – Sales &amp; Operations</p>
+                            <a href="tel:+919999497543" className="text-xs text-slate-400 hover:text-amber-500 block">+91 999 949 7543</a>
                         </div>
                     </div>
                 </div>
