@@ -94,17 +94,6 @@ export default function SpeakerInterestFormPage() {
                     <p className="mt-4 text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
                         Share your details below and our team will be in touch to discuss your participation.
                     </p>
-                    <div className="mt-8 max-w-xl mx-auto rounded-xl border border-amber-400/30 bg-white/5 px-5 py-4 text-left">
-                        <p className="text-amber-400 text-[10px] font-bold tracking-[0.25em] uppercase mb-1.5">
-                            LexTalk World Mumbai 2026
-                        </p>
-                        <p className="text-white text-sm font-semibold">
-                            7–8 December 2026 · Radisson Blu Mumbai International Airport
-                        </p>
-                        <p className="mt-2 text-slate-400 text-xs md:text-sm leading-relaxed">
-                            Experience the convergence of law and technology in India&apos;s financial capital — a two-day conference bringing together legal professionals, speakers and awardees.
-                        </p>
-                    </div>
                 </div>
             </header>
 
