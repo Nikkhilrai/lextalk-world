@@ -164,12 +164,6 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1793192649/lextalk/singapore-speakers/justus-chua`,
         bio: `Justus Chua is an experienced Head of Legal & Compliance in Asia, with a strong background in the chemicals and pharmaceuticals industries. His expertise includes legal compliance, arbitration, corporate law, intellectual property, and employment law. He focuses on aligning legal and compliance functions with business objectives through effective business partnering, risk management, and regulatory oversight, supporting organizations in navigating complex legal environments and achieving sustainable business outcomes across the region.`,
     },
-    {
-        name: "Jatin Badiani",
-        title: "Director, Head of Regulatory Change & Governance Asia, Treasury & Trade Solutions, Citibank",
-        image: `${IMG}/v1793192653/lextalk/singapore-speakers/jatin-badiani`,
-        bio: `Jatin Badiani is a senior banking professional with over 25 years of industry experience. He serves as Head of Regulatory Change and Governance for Treasury and Trade Solutions Asia at Citibank Singapore, overseeing regional governance and collaborating with senior stakeholders across Asia. Previously, he held key roles at Deutsche Bank, Standard Chartered Bank, and JPMorgan. His expertise spans regulatory strategy, technology, payments, compliance, cloud adoption, tokenization, and artificial intelligence. He also contributes to industry thought leadership through co-authored white papers and publications.`,
-    },
 ];
 
 export default function SingaporeSpeakersList() {
