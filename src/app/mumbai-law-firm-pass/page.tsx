@@ -27,10 +27,7 @@ const BENEFITS = [
     { title: "Tech Expo Access", text: "Explore legal tech and service partner exhibits" },
     { title: "Networking Lunches", text: "Guided group lunches to meet peers" },
     { title: "Post-Event Content", text: "Access session recordings and slides" },
-    { title: "One-to-One Introductions", text: "Curated meetings with senior attendees" },
     { title: "Spotlight Interview", text: "Optional media interview feature" },
-    { title: "Featured Listing", text: "Highlighted in attendee directory and website" },
-    { title: "Post-Event VIP Network", text: "Ongoing connections with key attendees" },
 ];
 
 const STATS = [
@@ -590,7 +587,7 @@ export default function MumbaiLawFirmPass() {
 
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
                                 className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                Two days of sessions, curated networking and introductions with senior attendees at LexTalk World Mumbai. Available to law firms and independent lawyers only.
+                                Two days of sessions, keynotes and curated networking at LexTalk World Mumbai. Available to law firms and independent lawyers only.
                             </motion.p>
 
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.4 }}
