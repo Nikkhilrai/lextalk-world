@@ -11,7 +11,7 @@ import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle, ShieldCheck, X,
     Calendar, MapPin, Zap, Scale, Flame,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { MUMBAI_LAW_FIRM_PASS_TYPE, MUMBAI_LAW_FIRM_PRICE } from "@/lib/mumbai-pass-prices";
 
 declare global { interface Window { Razorpay: any; } }
@@ -349,80 +349,194 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
     );
 }
 
+/* ── Diwali decorations ── */
+// Fixed positions so server and client render the same markup.
+const SPARKS = [
+    { left: "6%", top: "18%", size: 6, delay: 0 },
+    { left: "14%", top: "62%", size: 4, delay: 1.2 },
+    { left: "22%", top: "34%", size: 5, delay: 2.4 },
+    { left: "34%", top: "78%", size: 4, delay: 0.6 },
+    { left: "46%", top: "12%", size: 6, delay: 1.8 },
+    { left: "55%", top: "54%", size: 4, delay: 3 },
+    { left: "64%", top: "26%", size: 5, delay: 0.9 },
+    { left: "73%", top: "70%", size: 6, delay: 2.1 },
+    { left: "82%", top: "40%", size: 4, delay: 1.5 },
+    { left: "91%", top: "16%", size: 5, delay: 2.7 },
+    { left: "95%", top: "84%", size: 4, delay: 0.3 },
+];
+
+const LIGHT_COLORS = ["#f59e0b", "#ef4444", "#f97316", "#eab308", "#ec4899"];
+
+function StringLights() {
+    const reduce = useReducedMotion();
+    return (
+        <div className="absolute top-0 inset-x-0 h-10 pointer-events-none" aria-hidden>
+            <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 10">
+                <path d="M0 1 Q 12.5 8 25 1 T 50 1 T 75 1 T 100 1" fill="none" stroke="#d6a65a" strokeWidth="0.15" />
+            </svg>
+            <div className="absolute inset-0 flex justify-between px-[2%]">
+                {Array.from({ length: 24 }).map((_, i) => {
+                    const phase = (i % 6) / 6;
+                    const y = 4 + Math.sin(phase * Math.PI) * 20;
+                    const color = LIGHT_COLORS[i % LIGHT_COLORS.length];
+                    return (
+                        <motion.span
+                            key={i}
+                            className="block w-2 h-2.5 rounded-full"
+                            style={{ marginTop: `${y}px`, backgroundColor: color, boxShadow: `0 0 10px 2px ${color}88` }}
+                            animate={reduce ? undefined : { opacity: [1, 0.35, 1] }}
+                            transition={{ duration: 1.8, repeat: Infinity, delay: (i % 4) * 0.45, ease: "easeInOut" }}
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
+function FloatingSparks() {
+    const reduce = useReducedMotion();
+    if (reduce) return null;
+    return (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+            {SPARKS.map((s, i) => (
+                <motion.span
+                    key={i}
+                    className="absolute rounded-full bg-amber-400"
+                    style={{ left: s.left, top: s.top, width: s.size, height: s.size, boxShadow: "0 0 12px 3px rgba(251,191,36,0.55)" }}
+                    animate={{ y: [0, -40, 0], opacity: [0, 1, 0], scale: [0.6, 1.2, 0.6] }}
+                    transition={{ duration: 4.5, repeat: Infinity, delay: s.delay, ease: "easeInOut" }}
+                />
+            ))}
+        </div>
+    );
+}
+
+function Diya({ className = "" }: { className?: string }) {
+    const reduce = useReducedMotion();
+    return (
+        <div className={`relative ${className}`} aria-hidden>
+            <motion.div
+                className="absolute left-1/2 -translate-x-1/2 -top-1 w-10 h-10 rounded-full bg-amber-300/50 blur-xl"
+                animate={reduce ? undefined : { scale: [1, 1.35, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <svg viewBox="0 0 64 64" className="relative w-full h-full">
+                <motion.path
+                    d="M32 6 C 38 16 40 22 32 30 C 24 22 26 16 32 6 Z"
+                    fill="url(#flame)"
+                    style={{ transformOrigin: "32px 30px" }}
+                    animate={reduce ? undefined : { scaleY: [1, 1.15, 0.92, 1], scaleX: [1, 0.92, 1.05, 1] }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <path d="M6 34 C 10 52 54 52 58 34 Z" fill="#c2410c" />
+                <path d="M6 34 C 18 40 46 40 58 34" fill="none" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" />
+                <circle cx="20" cy="43" r="2" fill="#fbbf24" />
+                <circle cx="32" cy="45" r="2" fill="#fbbf24" />
+                <circle cx="44" cy="43" r="2" fill="#fbbf24" />
+                <defs>
+                    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#fde68a" />
+                        <stop offset="60%" stopColor="#f59e0b" />
+                        <stop offset="100%" stopColor="#ea580c" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    );
+}
+
 /* ── Pass Card ── */
 function PassCard({ onRegister }: { onRegister: () => void }) {
+    const reduce = useReducedMotion();
     return (
         <div className="relative">
-            <div className="absolute -inset-3 bg-gradient-to-br from-amber-400/15 via-amber-500/8 to-transparent rounded-[2rem] blur-2xl pointer-events-none" />
-            <div className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                <div className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500" />
+            <motion.div
+                className="absolute -inset-1 rounded-[1.4rem] bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 opacity-70 blur-md pointer-events-none"
+                animate={reduce ? undefined : { opacity: [0.45, 0.85, 0.45] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="relative bg-white rounded-2xl overflow-hidden border border-amber-100 shadow-xl shadow-amber-900/10">
+                <div className="h-1.5 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500" />
                 <div className="p-6">
                     <div className="flex items-center justify-between mb-5 gap-2">
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/25 rounded-full">
-                            <Flame size={10} className="text-amber-400" />
-                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">Diwali Exclusive Offer</span>
+                        <div className="relative overflow-hidden flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-orange-500 to-rose-500 rounded-full">
+                            <Flame size={10} className="text-white" />
+                            <span className="text-white text-[9px] font-black uppercase tracking-[0.2em]">Diwali Exclusive Offer</span>
+                            {!reduce && (
+                                <motion.span
+                                    className="absolute inset-y-0 w-8 bg-gradient-to-r from-transparent via-white/60 to-transparent -skew-x-12"
+                                    animate={{ x: ["-3rem", "12rem"] }}
+                                    transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 1.2, ease: "easeInOut" }}
+                                />
+                            )}
                         </div>
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-full">
                             <span className="relative flex h-1.5 w-1.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                             </span>
-                            <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-wider">Open</span>
+                            <span className="text-emerald-700 text-[9px] font-bold uppercase tracking-wider">Open</span>
                         </div>
                     </div>
 
-                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">Law Firm & Independent Lawyer Pass</h2>
+                    <h2 className="font-serif text-2xl font-bold text-slate-900 leading-tight mb-3">Law Firm & Independent Lawyer Pass</h2>
                     <div className="flex flex-wrap gap-x-3 gap-y-1 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> Dec 7–8, 2026</span>
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Radisson Blu Mumbai International Airport</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-600" /> Dec 7–8, 2026</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-600" /> Radisson Blu Mumbai International Airport</span>
                     </div>
 
-                    <div className="h-px bg-white/6 mb-5" />
-
-                    <div className="mb-5">
+                    <div className="relative mb-5 p-4 rounded-xl bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 border border-amber-200/70 overflow-hidden">
+                        <div className="absolute right-3 top-3 w-12 h-12"><Diya className="w-full h-full" /></div>
                         <p className="text-slate-500 text-xs mb-1">
-                            Actual price <span className="line-through">{inr(LIST_PRICE)} + taxes</span>
+                            Actual price <span className="line-through decoration-rose-500/70">{inr(LIST_PRICE)} + taxes</span>
                         </p>
-                        <div className="flex items-baseline gap-2 mb-1">
-                            <span className="text-4xl font-black text-white leading-none">{inr(TOTAL)}</span>
-                            <span className="text-slate-400 text-xs">inclusive of taxes</span>
+                        <div className="flex items-baseline gap-2 mb-1 flex-wrap">
+                            <motion.span
+                                className="text-4xl font-black leading-none bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 bg-clip-text text-transparent bg-[length:200%_auto]"
+                                animate={reduce ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                            >
+                                {inr(TOTAL)}
+                            </motion.span>
+                            <span className="text-slate-500 text-xs">inclusive of taxes</span>
                         </div>
-                        <p className="text-amber-400/80 text-[11px] font-semibold">Hurry up — offer valid up to Diwali only.</p>
+                        <p className="text-orange-700 text-[11px] font-bold">Hurry up — offer valid up to Diwali only.</p>
                     </div>
 
                     <div className="mb-5">
-                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">Benefits</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Benefits</p>
                         <ul className="space-y-2.5">
                             {BENEFITS.map(({ title, text }) => (
                                 <li key={title} className="flex items-start gap-2.5">
-                                    <div className="w-4 h-4 mt-0.5 rounded-md bg-amber-500/12 flex items-center justify-center flex-shrink-0">
-                                        <Check size={9} strokeWidth={3} className="text-amber-400" />
+                                    <div className="w-4 h-4 mt-0.5 rounded-md bg-amber-100 flex items-center justify-center flex-shrink-0">
+                                        <Check size={9} strokeWidth={3} className="text-amber-700" />
                                     </div>
-                                    <span className="text-slate-400 text-xs leading-snug">
-                                        <span className="text-slate-200 font-semibold">{title}</span> — {text}
+                                    <span className="text-slate-500 text-xs leading-snug">
+                                        <span className="text-slate-900 font-semibold">{title}</span> — {text}
                                     </span>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    <p className="text-[11px] text-slate-500 mb-4 flex items-start gap-1.5">
-                        <Scale size={11} className="text-amber-500/60 mt-0.5 shrink-0" />
+                    <p className="text-[11px] text-slate-600 font-medium mb-4 flex items-start gap-1.5">
+                        <Scale size={11} className="text-amber-600 mt-0.5 shrink-0" />
                         For law firms and independent lawyers only.
                     </p>
 
                     <button onClick={onRegister}
-                        className="group w-full flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/15 hover:shadow-xl hover:shadow-amber-500/25 active:scale-[0.98] relative overflow-hidden">
-                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                        className="group w-full flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-[length:200%_auto] hover:bg-right text-white font-black text-[11px] uppercase tracking-widest rounded-xl transition-all duration-500 shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 active:scale-[0.98] relative overflow-hidden">
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                         <Sparkles size={13} />
                         Secure Your Pass
                         <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
                     <div className="flex items-center justify-center gap-3 mt-4">
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
-                        <div className="w-px h-3 bg-slate-800" />
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
+                        <div className="flex items-center gap-1 text-slate-400 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
+                        <div className="w-px h-3 bg-slate-200" />
+                        <div className="flex items-center gap-1 text-slate-400 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
                     </div>
                 </div>
             </div>
@@ -438,45 +552,53 @@ export default function MumbaiLawFirmPass() {
     useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
 
     return (
-        <main className="bg-[#050a15] min-h-screen">
+        <main className="bg-[#fffaf2] min-h-screen">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-            <Navbar />
+            <Navbar variant="light" />
 
             <section className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-amber-500/6 rounded-full blur-[180px]" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-400/4 rounded-full blur-[140px]" />
+                    <div className="absolute -top-32 right-0 w-[600px] h-[600px] bg-amber-200/40 rounded-full blur-[140px]" />
+                    <div className="absolute bottom-0 -left-20 w-[500px] h-[400px] bg-rose-200/30 rounded-full blur-[130px]" />
+                    <div className="absolute inset-0 opacity-[0.35]"
+                        style={{ backgroundImage: "radial-gradient(rgba(217,119,6,0.18) 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
                 </div>
+                <div className="absolute top-20 md:top-24 inset-x-0">
+                    <StringLights />
+                </div>
+                <FloatingSparks />
 
-                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+                <div className="container mx-auto px-4 max-w-6xl relative z-10 pt-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                         <div className="lg:pt-8">
-                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }} transition={{ duration: 0.6, delay: 0.1 }}>
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/25 rounded-full mb-6">
-                                    <ShieldCheck size={12} className="text-amber-400" />
-                                    <span className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.25em]">LexTalk World · Mumbai 2026</span>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }} transition={{ duration: 0.6, delay: 0.1 }}
+                                className="flex flex-wrap items-center gap-3 mb-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-amber-200 rounded-full shadow-sm">
+                                    <ShieldCheck size={12} className="text-amber-600" />
+                                    <span className="text-amber-700 text-[10px] font-bold uppercase tracking-[0.25em]">LexTalk World · Mumbai 2026</span>
                                 </div>
+                                <Diya className="w-10 h-10" />
                             </motion.div>
 
                             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 24 }} transition={{ duration: 0.7, delay: 0.2 }}
-                                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5">
+                                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-5">
                                 Law Firm &amp; Independent Lawyer
-                                <span className="block bg-gradient-to-r from-amber-300 via-amber-500 to-amber-400 bg-clip-text text-transparent">
+                                <span className="block bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
                                     Diwali Offer
                                 </span>
                             </motion.h1>
 
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
-                                className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg font-light">
+                                className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
                                 Two days of sessions, curated networking and introductions with senior attendees at LexTalk World Mumbai. Available to law firms and independent lawyers only.
                             </motion.p>
 
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.4 }}
                                 className="grid grid-cols-3 gap-3 max-w-md mb-8">
                                 {STATS.map(s => (
-                                    <div key={s.label} className="px-3 py-4 bg-white/5 border border-white/10 rounded-xl text-center">
-                                        <p className="text-2xl md:text-3xl font-black text-amber-400 leading-none mb-1.5">{s.value}</p>
-                                        <p className="text-[10px] text-slate-400 font-medium leading-tight">{s.label}</p>
+                                    <div key={s.label} className="px-3 py-4 bg-white border border-amber-100 rounded-xl text-center shadow-sm">
+                                        <p className="text-2xl md:text-3xl font-black text-orange-600 leading-none mb-1.5">{s.value}</p>
+                                        <p className="text-[10px] text-slate-500 font-medium leading-tight">{s.label}</p>
                                     </div>
                                 ))}
                             </motion.div>
@@ -488,8 +610,8 @@ export default function MumbaiLawFirmPass() {
                                     { icon: MapPin, text: "Radisson Blu Mumbai International Airport" },
                                 ].map(({ icon: Icon, text }) => (
                                     <div key={text} className="flex items-center gap-2">
-                                        <Icon size={13} className="text-amber-500/60" />
-                                        <span className="text-slate-500 text-xs">{text}</span>
+                                        <Icon size={13} className="text-amber-600" />
+                                        <span className="text-slate-600 text-xs">{text}</span>
                                     </div>
                                 ))}
                             </motion.div>
