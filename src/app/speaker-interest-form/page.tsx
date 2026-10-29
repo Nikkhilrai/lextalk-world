@@ -37,7 +37,9 @@ export default function SpeakerInterestFormPage() {
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
-    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>({
+        defaultValues: { conference: "LexTalk World Singapore 2027" },
+    });
     const [legalHonors, setLegalHonors] = useState<boolean | null>(null);
     const [legalHonorsError, setLegalHonorsError] = useState<string | null>(null);
 
