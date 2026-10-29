@@ -295,6 +295,26 @@ Working closely with regional and global business leadership, Vipul focuses on t
         title: "General Counsel and Governance, Legal and Compliance leader",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793095663/lextalk/mumbai-speakers/debasish-roychowdhury.png",
     },
+    {
+        name: "Neha Shah",
+        title: "Senior Group Legal Counsel, Ericsson India Pvt Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793267106/lextalk/mumbai-speakers/neha-shah.png",
+    },
+    {
+        name: "Ketan Mehta",
+        title: "Chief Compliance Officer, Gallagher",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793267111/lextalk/mumbai-speakers/ketan-mehta.png",
+    },
+    {
+        name: "Vijayalakshmy Malkani",
+        title: "AVP - Head Trademarks India business Emerging Markets & Japan, Sun Pharmaceuticals",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793267116/lextalk/mumbai-speakers/vijayalakshmy-malkani.png",
+    },
+    {
+        name: "Shwetha Bidhuri",
+        title: "Director & Head (South Asia), Singapore International Arbitration Centre (SIAC)",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793267122/lextalk/mumbai-speakers/shwetha-bidhuri.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
