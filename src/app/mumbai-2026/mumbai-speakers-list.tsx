@@ -315,6 +315,22 @@ Working closely with regional and global business leadership, Vipul focuses on t
         title: "Director & Head (South Asia), Singapore International Arbitration Centre (SIAC)",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793267122/lextalk/mumbai-speakers/shwetha-bidhuri.png",
     },
+    {
+        name: "Dr. Swapnil Sharad Chatur",
+        title: "Head of Employment Legal, Ethics, Compliance & Investigations",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793272290/lextalk/mumbai-speakers/swapnil-chatur.png",
+        bio: `Dr. Swapnil Sharad Chatur is a distinguished legal and compliance professional with over 19 years of experience advising global organizations on complex legal, regulatory, governance, and ethical matters. He has built a reputation as a trusted strategic advisor and thought leader with expertise spanning Employment Law, Corporate Compliance, Anti-Bribery & Anti-Corruption (FCPA & UK Bribery Act), Corporate Ethics, Intellectual Property Rights (IPR), Commercial Contracts, Cross-border Transactions, Strategic Mergers & Acquisitions, Internal Investigations, Corporate Governance, and Regulatory Risk Management.
+
+Throughout his career, Dr. Chatur has held senior legal leadership positions with leading multinational organizations, including Fiserv (Company Secretary & Manager – Legal), Barclays (Legal Counsel), The Bank of New York Mellon (Vice President – Employment Legal, Investigations & Compliance), and Capgemini (Head – Employment Law, Ethics & Compliance, India & Middle East). He currently serves as VP - Senior Legal Counsel, advising business leadership on strategic legal, corporate investigation, compliance, employment, and governance matters across complex business environments.
+
+Dr. Chatur possesses a strong academic foundation, holding a Bachelor of Arts in English Literature, Bachelor of Laws (LL.B.), Master of Laws (LL.M.) in Business Laws, MBA in Human Resource Management, and a Ph.D. in Corporate Governance. He has further strengthened his professional credentials through specialized diplomas in Cyber Laws & Cyber Crime Investigation, Intellectual Property Rights, and FinTech Laws.
+
+Beyond his corporate responsibilities, Dr. Chatur is an accomplished thought leader, educator, and public speaker. He is a frequent speaker at MIT Law School and has actively participated in and delivered thought leadership sessions at forums organized by the Association of Corporate Counsel. He has also served as a panel speaker at leading legal forums, including the International Employment Lawyers (IEL) Forum, ETLegalWorld, and LegaVent, sharing insights on employment law, corporate governance, ethics, compliance, investigations, and emerging legal trends.
+
+He has conducted lectures, workshops, and executive training programmes at prestigious academic institutions, including National Law University Mumbai, Symbiosis Law School, Bharati Vidyapeeth New Law College, MIT Law School and several other universities and professional institutions, contributing to legal education and the development of future legal professionals.
+
+A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur has mentored more than 5,000 law students and young professionals, guiding them on legal compliance, corporate governance, career development, interview preparation, and professional excellence. His contributions to the legal profession have been acknowledged through numerous prestigious recognitions, including the Employment Legal Counsel Award (2022), Best Legal Counsel Award (2021), and multiple organizational and industry awards for excellence in legal leadership, ethics, compliance, and corporate governance.`,
+    },
 ];
 
 export default function MumbaiSpeakersList() {
