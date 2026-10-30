@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { Navbar } from "@/components/Navbar";
@@ -365,7 +365,6 @@ const SPARKS = [
 const LIGHT_COLORS = ["#f59e0b", "#ef4444", "#f97316", "#eab308", "#ec4899"];
 
 function StringLights() {
-    const reduce = useReducedMotion();
     return (
         <div className="absolute top-0 inset-x-0 h-10 pointer-events-none" aria-hidden>
             <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 10">
@@ -381,8 +380,11 @@ function StringLights() {
                             key={i}
                             className="block w-2 h-2.5 rounded-full"
                             style={{ marginTop: `${y}px`, backgroundColor: color, boxShadow: `0 0 10px 2px ${color}88` }}
-                            animate={reduce ? undefined : { opacity: [1, 0.35, 1] }}
-                            transition={{ duration: 1.8, repeat: Infinity, delay: (i % 4) * 0.45, ease: "easeInOut" }}
+                            animate={{
+                                opacity: [1, 1, 0.15, 0.15, 1],
+                                boxShadow: [`0 0 12px 3px ${color}aa`, `0 0 12px 3px ${color}aa`, `0 0 0px 0px ${color}00`, `0 0 0px 0px ${color}00`, `0 0 12px 3px ${color}aa`],
+                            }}
+                            transition={{ duration: 1.2, times: [0, 0.4, 0.5, 0.9, 1], repeat: Infinity, delay: (i % 2) * 0.6, ease: "linear" }}
                         />
                     );
                 })}
@@ -441,6 +443,109 @@ function Diya({ className = "" }: { className?: string }) {
             </svg>
         </div>
     );
+}
+
+// One-off fireworks burst when the page opens; skipped for reduced-motion users.
+const FIREWORK_COLORS = ["#f59e0b", "#ef4444", "#f97316", "#eab308", "#ec4899", "#22c55e", "#3b82f6"];
+
+function Fireworks() {
+    const reduce = useReducedMotion();
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [done, setDone] = useState(false);
+
+    useEffect(() => {
+        if (reduce) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext("2d");
+        if (!canvas || !ctx) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const resize = () => {
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        resize();
+        window.addEventListener("resize", resize);
+
+        type Rocket = { x: number; y: number; vy: number; targetY: number; color: string; launchAt: number; exploded: boolean };
+        type Particle = { x: number; y: number; vx: number; vy: number; life: number; color: string };
+
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const rockets: Rocket[] = Array.from({ length: 10 }, (_, i) => ({
+            x: w * (0.12 + 0.76 * ((i * 0.37) % 1)),
+            y: h,
+            vy: -(h / 55),
+            targetY: h * (0.15 + 0.25 * ((i * 0.53) % 1)),
+            color: FIREWORK_COLORS[i % FIREWORK_COLORS.length],
+            launchAt: i * 260,
+            exploded: false,
+        }));
+        const particles: Particle[] = [];
+        const start = performance.now();
+        let frame = 0;
+
+        const explode = (r: Rocket) => {
+            const count = 90;
+            for (let i = 0; i < count; i++) {
+                const angle = (Math.PI * 2 * i) / count;
+                const speed = 2.5 + Math.random() * 4;
+                particles.push({
+                    x: r.x, y: r.y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 1,
+                    color: Math.random() < 0.3 ? "#fde68a" : r.color,
+                });
+            }
+        };
+
+        const tick = (now: number) => {
+            const t = now - start;
+            ctx.clearRect(0, 0, w, h);
+
+            for (const r of rockets) {
+                if (r.exploded || t < r.launchAt) continue;
+                r.y += r.vy;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = "#fbbf24";
+                ctx.shadowColor = "#f59e0b";
+                ctx.shadowBlur = 12;
+                ctx.fill();
+                if (r.y <= r.targetY) { r.exploded = true; explode(r); }
+            }
+
+            for (const p of particles) {
+                if (p.life <= 0) continue;
+                p.x += p.vx; p.y += p.vy;
+                p.vx *= 0.98; p.vy = p.vy * 0.98 + 0.06;
+                p.life -= 0.01;
+                ctx.globalAlpha = Math.max(p.life, 0);
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 10;
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+
+            const busy = rockets.some(r => !r.exploded) || particles.some(p => p.life > 0);
+            if (busy && t < 7000) frame = requestAnimationFrame(tick);
+            else setDone(true);
+        };
+        frame = requestAnimationFrame(tick);
+
+        return () => {
+            cancelAnimationFrame(frame);
+            window.removeEventListener("resize", resize);
+        };
+    }, [reduce]);
+
+    if (reduce || done) return null;
+    return <canvas ref={canvasRef} className="fixed inset-0 w-screen h-screen pointer-events-none z-[90]" aria-hidden />;
 }
 
 /* ── Pass Card ── */
@@ -552,6 +657,7 @@ export default function MumbaiLawFirmPass() {
         <main className="bg-[#fffaf2] min-h-screen">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
             <Navbar variant="light" />
+            <Fireworks />
 
             <section className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
