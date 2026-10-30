@@ -77,6 +77,23 @@ export function MumbaiSponsor() {
                         </div>
                     </div>
 
+                    {/* Exhibitors */}
+                    <div className="md:col-span-2 lg:col-span-3">
+                        <div className="flex flex-col items-center">
+                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Exhibitors</h4>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            >
+                                <a href="https://melento.ai" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
+                                    <Image src="/dubai-event/sponsors/Melento.png" alt="Melento" fill className="object-contain mix-blend-multiply" />
+                                </a>
+                            </motion.div>
+                        </div>
+                    </div>
+
                     {/* Wellness & Consciousness Partner */}
                     <div className="md:col-span-2 lg:col-span-3 flex flex-col items-center mt-4">
                         <div className="flex items-center gap-4 w-full max-w-lg mb-8">
