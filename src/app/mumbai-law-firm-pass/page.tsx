@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Script from "next/script";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -717,6 +718,23 @@ export default function MumbaiLawFirmPass() {
                                         <span className="text-slate-600 text-xs">{text}</span>
                                     </div>
                                 ))}
+                            </motion.div>
+
+                            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.6 }}
+                                className="mt-10 max-w-lg p-6 bg-white border border-amber-100 rounded-2xl shadow-sm">
+                                <h2 className="font-serif text-xl md:text-2xl font-bold text-slate-900 mb-4">
+                                    Why attend the LexTalk World APAC, Mumbai
+                                </h2>
+                                <div className="space-y-4 text-slate-600 text-sm leading-relaxed">
+                                    <p>
+                                        Navigating the future of legal practice requires direct engagement with top legal minds and prominent corporate thought leaders (for example{" "}
+                                        <Link href="/mumbai-2026/speakers" className="text-orange-600 font-semibold underline underline-offset-2 hover:text-orange-700">our speakers</Link>
+                                        ) all under one roof. This conference offers law firm professionals and independent practitioners an unmatched environment to forge powerful business connectivity and cultivate strategic alliances for future growth. Attendees will also gain exclusive access to visionary legal technology brand owners to stay ahead of industry advancements.
+                                    </p>
+                                    <p className="text-slate-900 font-medium">
+                                        Secure your presence at this premier gathering to elevate your practice and expand your professional ecosystem.
+                                    </p>
+                                </div>
                             </motion.div>
                         </div>
 
