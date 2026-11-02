@@ -331,6 +331,31 @@ He has conducted lectures, workshops, and executive training programmes at prest
 
 A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur has mentored more than 5,000 law students and young professionals, guiding them on legal compliance, corporate governance, career development, interview preparation, and professional excellence. His contributions to the legal profession have been acknowledged through numerous prestigious recognitions, including the Employment Legal Counsel Award (2022), Best Legal Counsel Award (2021), and multiple organizational and industry awards for excellence in legal leadership, ethics, compliance, and corporate governance.`,
     },
+    {
+        name: "Pathik Arora",
+        title: "General Counsel",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610213/lextalk/mumbai-speakers/pathik-arora.png",
+    },
+    {
+        name: "Aditya Goenka",
+        title: "President - Chief Legal & Compliance Officer, YES Securities (India) Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610218/lextalk/mumbai-speakers/aditya-goenka.png",
+    },
+    {
+        name: "Rabindra Purohit",
+        title: "Vice President Legal, Compliance and Company Secretary, Blue Dart",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610224/lextalk/mumbai-speakers/rabindra-purohit.png",
+    },
+    {
+        name: "Suresh Kumar Bhutani",
+        title: "Group General Counsel, Company Secretary & Compliance Officer, Ixigo",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610229/lextalk/mumbai-speakers/suresh-kumar-bhutani.png",
+    },
+    {
+        name: "Pradyumna Vengurlekar",
+        title: "Global General Counsel, Knack RCM",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610235/lextalk/mumbai-speakers/pradyumna-vengurlekar.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
