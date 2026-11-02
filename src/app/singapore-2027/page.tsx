@@ -5,10 +5,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-    Calendar, MapPin, Clock, ArrowRight, ArrowLeft, Bell, Mic,
-    ShieldCheck, Scale, ShieldAlert, Fingerprint, ClipboardCheck, Bot,
-    Briefcase, Lock, Cpu, Users, ListChecks, Package, Building2,
-    Coffee, Utensils, Trophy, Sparkles, Check,
+    Calendar,
+    MapPin,
+    Clock,
+    ArrowRight,
+    ArrowLeft,
+    Bell,
+    Mic,
+    ShieldCheck,
+    Scale,
+    ShieldAlert,
+    Fingerprint,
+    ClipboardCheck,
+    Bot,
+    Briefcase,
+    Lock,
+    Cpu,
+    Users,
+    ListChecks,
+    Package,
+    Building2,
+    Trophy,
+    Check,
+    Download,
+    FileText,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -16,6 +36,7 @@ import { RegisterModal } from "@/components/RegisterModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
+import { AgendaModal } from "@/components/AgendaModal";
 
 const CONFERENCE = "Singapore, Feb 4 2027";
 
@@ -54,99 +75,17 @@ const whoShouldAttend = [
     { icon: Building2, text: "LegalTech, PrivacyTech, Cybersecurity, GRC, cloud, data and advisory organisations" },
 ];
 
-type AgendaKind = "Registration" | "Keynote" | "Panel" | "Debate Panel" | "Case Study" | "Break" | "Lunch" | "Awards";
-
-interface AgendaItem {
-    start: string;
-    end: string;
-    kind: AgendaKind;
-    icon: React.ElementType;
-    title: string;
-    points?: string[];
-}
-
 // From the official Singapore 2027 agenda PDF (public/agendas/singapore-2027-agenda.pdf).
 const AGENDA_THEME = "AI, Law & Enterprise Governance: Scaling AI Responsibly and Turning Governance into Enterprise Value";
 
-const agenda: AgendaItem[] = [
-    { start: "8:00 AM", end: "9:00 AM", kind: "Registration", icon: Coffee, title: "Registration & Breakfast: Welcome Coffee & Executive Networking" },
-    {
-        start: "9:00 AM", end: "9:20 AM", kind: "Keynote", icon: Mic,
-        title: "The Enterprise AI Reality in 2027: From Experimentation to Accountability",
-        points: ["From AI Experimentation to Enterprise-Wide Adoption", "Legal, Regulatory & Ethical Impact of Embedded AI", "What Boards & General Counsel Must Know", "Accountability & Measurable Outcomes"],
-    },
-    {
-        start: "9:20 AM", end: "10:00 AM", kind: "Panel", icon: Users,
-        title: "From AI Pilots to Enterprise Scale: Building a Responsible Operating Model",
-        points: ["Scaling Pilots into Secure, Sustainable Systems", "Aligning Legal, Technology, Risk & Business Teams", "Procurement, Change Management & Performance Monitoring", "Building Regulatory Readiness"],
-    },
-    {
-        start: "10:00 AM", end: "10:40 AM", kind: "Debate Panel", icon: Scale,
-        title: "Who Owns AI Risk? Board Accountability, Management Responsibility & Legal Oversight",
-        points: ["Legal, Operational, Financial & Reputational AI Risk", "Roles of Boards, GCs, Compliance & Risk Committees", "Accountability When Third Parties Build or Run AI", "Clear Lines of Ownership & Escalation"],
-    },
-    { start: "10:40 AM", end: "11:00 AM", kind: "Break", icon: Coffee, title: "Networking Break: Coffee & Business Conversations" },
-    {
-        start: "11:00 AM", end: "11:20 AM", kind: "Case Study", icon: ClipboardCheck,
-        title: "From AI Adoption to Measurable Business Value",
-        points: ["From Proof of Concept to Real Business Impact", "Choosing the Right KPIs for AI Investment", "What Works & What Fails in Implementation", "Improving Adoption Outcomes"],
-    },
-    {
-        start: "11:20 AM", end: "12:00 PM", kind: "Panel", icon: Users,
-        title: "AI Regulation in Practice: Translating Emerging Rules into Business Action",
-        points: ["Turning Evolving AI Laws into Enterprise Controls", "Managing Regulatory Uncertainty Across Jurisdictions", "Cross-Border Operations & Sector Expectations", "Documentation, Impact Assessments & Oversight"],
-    },
-    {
-        start: "12:00 PM", end: "12:40 PM", kind: "Panel", icon: ShieldAlert,
-        title: "AI Security: The New Enterprise Attack Surface",
-        points: ["Vulnerabilities in Models, Data Pipelines & APIs", "Protecting Confidential & Privileged Information", "Prompt Injection, Data Leakage & Adversarial Attacks", "Access Control & Incident Response"],
-    },
-    {
-        start: "12:40 PM", end: "1:00 PM", kind: "Case Study", icon: ClipboardCheck,
-        title: "Building Trustworthy AI: A Real-World Implementation Story",
-        points: ["Governance, Security & Human Oversight in Practice", "Balancing Performance with Explainability", "Transparency & Accountability in a Live Environment", "Lessons for Responsible Scale"],
-    },
-    { start: "1:00 PM", end: "2:00 PM", kind: "Lunch", icon: Utensils, title: "Power Lunch: Networking Lunch & Exhibition" },
-    {
-        start: "2:00 PM", end: "2:20 PM", kind: "Keynote", icon: Mic,
-        title: "From Governance to Action: Making Enterprise AI Work Responsibly",
-        points: ["From Principles to Practical Governance Mechanisms", "Responsible AI in Procurement & Product Development", "Deployment, Monitoring & Business Decision-Making", "Where Innovation & Accountability Advance Together"],
-    },
-    // The agenda PDF repeats the "AI Regulation in Practice" bullets under this session; they
-    // look like a copy-paste slip, so the bullets are left out here until confirmed.
-    { start: "2:20 PM", end: "3:00 PM", kind: "Panel", icon: Fingerprint, title: "Privacy, Data & Digital Trust: Protecting Value in an AI-Driven Economy" },
-    {
-        start: "3:00 PM", end: "3:20 PM", kind: "Case Study", icon: ClipboardCheck,
-        title: "AI Governance in Action: From Policy to Practice",
-        points: ["Governance Frameworks in Real Organisations", "Turning Principles into Controls, Workflows & Approvals", "Documentation, Monitoring & Escalation", "Measuring Adherence Across Employees & Vendors"],
-    },
-    {
-        start: "3:20 PM", end: "4:00 PM", kind: "Panel", icon: ShieldCheck,
-        title: "Beyond Policy: Making AI Governance Operational",
-        points: ["Practical, Proportionate & Auditable Governance", "Integrating with Legal, Compliance & InfoSec Frameworks", "Model Inventory & Risk Classification", "Human Oversight, Vendor Management & Remediation"],
-    },
-    { start: "4:00 PM", end: "4:20 PM", kind: "Break", icon: Coffee, title: "Networking Break: Tea & Refreshments" },
-    {
-        start: "4:20 PM", end: "5:00 PM", kind: "Panel", icon: Bot,
-        title: "Agentic AI, Third-Party Risk & Enterprise Control",
-        points: ["Legal Implications of AI Agents That Act & Transact", "Managing Third-Party Models, Vendors & Platforms", "Autonomy Limits, Human Approval & Auditability", "Liability & Incident Response"],
-    },
-    { start: "5:00 PM", end: "6:00 PM", kind: "Awards", icon: Trophy, title: "Awards Ceremony: LexTalk World – Legal Honor Global Awards & Closing Networking" },
-];
-
-const featuredSessions = [
-    "The Enterprise AI Reality in 2027",
-    "From AI Pilots to Enterprise Scale",
-    "Who Owns AI Risk?",
-    "From AI Adoption to Measurable Business Value",
-    "AI Regulation in Practice",
-    "AI Security: The New Enterprise Attack Surface",
-    "Building Trustworthy AI: A Real-World Implementation Story",
-    "From Governance to Action: Making Enterprise AI Work Responsibly",
-    "Privacy, Data & Digital Trust",
-    "AI Governance in Action: From Policy to Practice",
-    "Beyond Policy: Making AI Governance Operational",
-    "Agentic AI, Third-Party Risk & Enterprise Control",
+// Public page shows only the six themes; the full programme is behind the agenda-download form (lead capture).
+const agendaThemes = [
+    { icon: Scale, title: "AI Governance & Regulation", text: "Policy, governance models, regulatory readiness, accountability and controls." },
+    { icon: FileText, title: "Law, Contracts & Liability", text: "AI contracts, IP, liability, procurement, vendor terms and legal exposure." },
+    { icon: ShieldAlert, title: "Cybersecurity & AI Security", text: "Attack surfaces, model security, prompt and tool manipulation, identity and access." },
+    { icon: Fingerprint, title: "Privacy, Data & Digital Trust", text: "Data use, privacy-by-design, data governance, transparency and trust." },
+    { icon: ClipboardCheck, title: "Risk, Compliance & GRC", text: "AI risk management, control testing, third-party risk, auditability and compliance." },
+    { icon: Bot, title: "Enterprise & Agentic AI", text: "Moving from pilots to production, AI agents, automation, human oversight and business value." },
 ];
 
 const whyAttend = [
@@ -247,12 +186,14 @@ export default function Singapore2027Page() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isSponsorshipOpen, setIsSponsorshipOpen] = useState(false);
     const [isSpeakerApplyOpen, setIsSpeakerApplyOpen] = useState(false);
+    const [isAgendaOpen, setIsAgendaOpen] = useState(false);
 
     return (
         <main className="min-h-screen bg-[#0a0e12]">
             <Navbar />
 
             <FloatingAgendaButton eventSlug="singapore-2027" />
+            <AgendaModal isOpen={isAgendaOpen} onClose={() => setIsAgendaOpen(false)} eventSlug="singapore-2027" />
 
             <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} defaultConference={CONFERENCE} />
             <SponsorshipModal isOpen={isSponsorshipOpen} onClose={() => setIsSponsorshipOpen(false)} />
@@ -754,91 +695,51 @@ export default function Singapore2027Page() {
                 </motion.div>
             </section>
 
-            {/* ===================== AGENDA OVERVIEW — vertical time-rail ===================== */}
+            {/* ===================== AGENDA OVERVIEW — themes + download (lead capture) ===================== */}
             <section id="agenda" className="relative py-20 md:py-28 bg-white overflow-hidden">
                 <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-amber-100/40 rounded-full blur-[120px] translate-x-1/3 pointer-events-none" />
 
-                <div className="container mx-auto px-4 max-w-4xl relative z-10">
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
                     <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex items-center gap-3 mb-5">
                         <div className="w-8 h-px bg-amber-500" />
                         <span className="text-amber-600 text-xs font-bold uppercase tracking-[0.3em]">Agenda Overview</span>
                     </motion.div>
-                    <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-14">
-                        One day, <span className="text-amber-600">fully programmed</span>
+                    <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-5">
+                        Six themes, <span className="text-amber-600">one day</span>
                     </motion.h2>
-                    <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="-mt-9 mb-14 max-w-2xl text-slate-500 leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="mb-12 max-w-2xl text-slate-500 leading-relaxed">
                         <span className="font-semibold text-slate-700">4 February 2027 · Theme:</span> {AGENDA_THEME}
                     </motion.p>
 
-                    <div className="relative pl-16 md:pl-24">
-                        <motion.div
-                            initial={{ scaleY: 0 }}
-                            whileInView={{ scaleY: 1 }}
-                            viewport={{ once: true, margin: "-60px" }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            className="absolute left-6 md:left-9 top-2 bottom-2 w-px bg-gradient-to-b from-amber-500 via-amber-300 to-transparent origin-top"
-                        />
-                        {agenda.map((a, i) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {agendaThemes.map((t, i) => (
                             <motion.div
-                                key={a.start}
-                                initial={{ opacity: 0, y: 16 }}
+                                key={t.title}
+                                initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-40px" }}
-                                transition={{ duration: 0.5, delay: Math.min(i, 3) * 0.08 }}
-                                className="group relative mb-8 last:mb-0 rounded-xl -ml-4 pl-4 pr-2 py-1 hover:bg-amber-50/60 transition-colors duration-300"
+                                transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+                                className="group rounded-2xl border border-slate-200 bg-white p-6 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300"
                             >
-                                <span className="absolute -left-12 md:-left-20 top-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border-2 border-amber-400 group-hover:border-amber-500 group-hover:scale-110 flex items-center justify-center shadow-sm transition-all duration-300">
-                                    <a.icon className="w-5 h-5 text-amber-600" strokeWidth={1.75} />
+                                <span className="w-11 h-11 rounded-xl bg-amber-50 group-hover:bg-amber-100 flex items-center justify-center mb-4 transition-colors duration-300">
+                                    <t.icon className="w-5 h-5 text-amber-600" strokeWidth={1.75} />
                                 </span>
-                                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
-                                    <span className="text-amber-600 text-xs font-bold uppercase tracking-widest">{a.start} – {a.end}</span>
-                                    <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">{a.kind}</span>
-                                </p>
-                                <p className="text-slate-800 text-base md:text-lg leading-snug font-semibold group-hover:text-slate-900 transition-colors">{a.title}</p>
-                                {a.points && (
-                                    <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
-                                        {a.points.map((pt) => (
-                                            <li key={pt} className="flex items-start gap-2 text-sm text-slate-500 leading-snug">
-                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
-                                                {pt}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                                <h3 className="font-serif text-lg font-bold text-slate-900 mb-2 leading-snug">{t.title}</h3>
+                                <p className="text-sm text-slate-500 leading-relaxed">{t.text}</p>
                             </motion.div>
                         ))}
                     </div>
-                </div>
-            </section>
 
-            {/* ===================== FEATURED SESSION TITLES ===================== */}
-            <section className="relative py-20 md:py-28 bg-[#0a0f1e] overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
-                <div className="absolute bottom-0 left-1/4 w-[600px] h-[350px] bg-amber-500/6 rounded-full blur-[130px] pointer-events-none" />
-
-                <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex items-center gap-3 mb-5">
-                        <Mic className="w-4 h-4 text-amber-400" strokeWidth={1.75} />
-                        <span className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">Featured Session Titles</span>
+                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-12 flex flex-col items-center text-center">
+                        <p className="text-slate-500 text-sm mb-4">Want the session-by-session programme and timings?</p>
+                        <button
+                            onClick={() => setIsAgendaOpen(true)}
+                            className="group inline-flex items-center gap-2.5 px-8 py-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm uppercase tracking-wider rounded-full shadow-lg shadow-amber-500/25 transition-all duration-300 hover:scale-[1.03]"
+                        >
+                            <Download className="w-4 h-4" />
+                            Download Full Agenda
+                        </button>
                     </motion.div>
-                    <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className="font-serif text-3xl md:text-4xl font-bold text-white mb-12 max-w-xl">
-                        The <span className="text-amber-400">conversations</span> on stage
-                    </motion.h2>
-
-                    <div className="flex flex-wrap gap-3">
-                        {featuredSessions.map((s, i) => (
-                            <motion.span
-                                key={s}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: "-20px" }}
-                                transition={{ duration: 0.4, delay: i * 0.03 }}
-                                className="px-5 py-3 rounded-full border border-white/[0.1] bg-white/[0.03] hover:border-amber-500/40 hover:bg-amber-500/10 transition-all duration-300 text-white/85 hover:text-white text-sm font-medium cursor-default"
-                            >
-                                {s}
-                            </motion.span>
-                        ))}
-                    </div>
                 </div>
             </section>
 
