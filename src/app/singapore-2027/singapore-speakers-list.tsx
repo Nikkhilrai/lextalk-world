@@ -164,6 +164,12 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1793192649/lextalk/singapore-speakers/justus-chua`,
         bio: `Justus Chua is an experienced Head of Legal & Compliance in Asia, with a strong background in the chemicals and pharmaceuticals industries. His expertise includes legal compliance, arbitration, corporate law, intellectual property, and employment law. He focuses on aligning legal and compliance functions with business objectives through effective business partnering, risk management, and regulatory oversight, supporting organizations in navigating complex legal environments and achieving sustainable business outcomes across the region.`,
     },
+    {
+        name: "Ayushi Kapoor",
+        title: "Regulatory Counsel, Google",
+        image: `${IMG}/v1793614052/lextalk/singapore-speakers/ayushi-kapoor`,
+        bio: `Ayushi Kapoor is a seasoned legal professional with extensive experience in navigating the intersection of law, technology, and corporate governance. Currently serving as Regulatory Counsel at Google, she specializes in managing complex regulatory landscapes and cross-border legal challenges within the fast-evolving technology sector. Her expertise spans technology law, AI governance, enforcement risks, and compliance. She holds an AIGP certification from IAPP and has significant experience in regulatory strategy, stakeholder management, and designing and implementing compliance frameworks.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
