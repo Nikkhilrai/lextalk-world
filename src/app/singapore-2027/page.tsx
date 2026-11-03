@@ -38,6 +38,7 @@ import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 import { AgendaModal } from "@/components/AgendaModal";
 import { SingaporeFeaturedSpeakers } from "./singapore-featured-speakers";
+import { speakers as allSpeakers } from "./singapore-speakers-list";
 
 const CONFERENCE = "Singapore, Feb 4 2027";
 
@@ -183,6 +184,22 @@ function AnimatedCounter({ target, suffix = "", duration = 1800 }: { target: num
 
 // ===================== Page =====================
 
+// The company is the last part of the title; a trailing ", Singapore" is a location, not the company.
+function heroOrg(title: string) {
+    const t = title.replace(/,\s*Singapore$/i, "");
+    return t.includes(",") ? t.slice(t.lastIndexOf(",") + 1).trim() : t;
+}
+
+// Hero speaker strip: the first speakers on the list (the order the team set), as small face crops.
+const heroSpeakers = allSpeakers
+    .filter((sp) => sp.image)
+    .slice(0, 8)
+    .map((sp) => ({
+        name: sp.name,
+        org: heroOrg(sp.title),
+        image: (sp.image as string).replace("c_limit,f_auto,q_auto,w_800", "c_fill,g_face,f_auto,q_auto,w_200,h_200"),
+    }));
+
 export default function Singapore2027Page() {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isSponsorshipOpen, setIsSponsorshipOpen] = useState(false);
@@ -296,6 +313,45 @@ export default function Singapore2027Page() {
                                 <Trophy className="w-4 h-4" />
                                 Legal Honor - Law, AI &amp; Digital Trust Awards
                             </Link>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.45 }}
+                            className="mt-14 pt-8 border-t border-white/10"
+                        >
+                            <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                                <p className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-[0.3em]">
+                                    <Mic className="w-3.5 h-3.5" />
+                                    Featured Speakers
+                                </p>
+                                <Link
+                                    href="/singapore-2027/speakers"
+                                    className="group inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 hover:text-amber-400 transition-colors"
+                                >
+                                    View all {allSpeakers.length} speakers
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
+                            </div>
+                            <div className="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-x-3 gap-y-6">
+                                {heroSpeakers.map((sp, i) => (
+                                    <motion.a
+                                        key={sp.name}
+                                        href="#speakers"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.45, delay: 0.5 + i * 0.06 }}
+                                        className="group flex flex-col items-center text-center"
+                                    >
+                                        <span className="relative block w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-white/15 group-hover:ring-amber-400 transition-all duration-300 group-hover:scale-105 bg-slate-800">
+                                            <Image src={sp.image} alt={sp.name} fill unoptimized sizes="80px" className="object-cover" />
+                                        </span>
+                                        <span className="mt-2.5 text-white text-[11px] sm:text-xs font-semibold leading-tight group-hover:text-amber-300 transition-colors">{sp.name}</span>
+                                        <span className="mt-0.5 text-white/50 text-[10px] leading-tight line-clamp-2">{sp.org}</span>
+                                    </motion.a>
+                                ))}
+                            </div>
                         </motion.div>
                     </div>
                 </div>
