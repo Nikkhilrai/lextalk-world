@@ -37,14 +37,6 @@ He currently serves as Partner at AMADI, a leading legal and corporate advisory 
 He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
     },
     {
-        name: "Suchana Mukherjee Gupta",
-        title: "General Counsel India & Director – GS (CS, Regulatory, Public Affairs & Corporate Communications), Danone India",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1789650326/lextalk/mumbai-speakers/suchana-mukherjee-gupta.png",
-        bio: `Suchana Mukherjee Gupta is General Counsel India and Director – GS for CS, Regulatory, Public Affairs and Corporate Communications at Danone, bringing over 15 years of diverse experience across the FMCG and automotive sectors.
-
-She joined Danone from Hindustan Unilever Limited (HUL), where as Senior Counsel she was instrumental in developing legal strategy for the Foods business and steering regulatory compliance across the portfolio. Prior to HUL, she served as Regional Legal Head for Tata Motors' Western India operations, overseeing both commercial and passenger vehicle businesses. She holds an LL.M. from the National Law School of India University.`,
-    },
-    {
         name: "Tanhieya Ghosh",
         title: "General Counsel – India, South East Asia & Export Markets, Solventum (formerly 3M Healthcare)",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625153/lextalk/mumbai-speakers/tanhieya-ghosh.jpg",
@@ -335,11 +327,6 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         name: "Pathik Arora",
         title: "General Counsel",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610213/lextalk/mumbai-speakers/pathik-arora.png",
-    },
-    {
-        name: "Aditya Goenka",
-        title: "President - Chief Legal & Compliance Officer, YES Securities (India) Ltd",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610218/lextalk/mumbai-speakers/aditya-goenka.png",
     },
     {
         name: "Rabindra Purohit",
