@@ -148,6 +148,7 @@ Dr. Richa's professional contributions have received recognition across the lega
     {
         name: "Rashmi Sharma",
         title: "Chief Compliance Officer, Crisil Limited",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793780067/lextalk/mumbai-speakers/rashmi-sharma.png",
         bio: `Rashmi Sharma is the Chief Compliance Officer at Crisil Limited, responsible for the company's compliance, ethics, privacy, whistleblower and regulatory governance programs. She works closely with senior management and the Board to strengthen governance standards, manage regulatory risk, and promote a culture of integrity.
 
 In her 2 decades plus of extensive experience in financial services, risk management and corporate governance, Rashmi has led initiatives across compliance, investigations, data privacy, AI governance and regulatory engagement. She is committed to strengthening trust, accountability, and responsible business practices in an increasingly complex regulatory environment.`,
