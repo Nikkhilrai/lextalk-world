@@ -891,10 +891,13 @@ export default function Singapore2027Page() {
                         </div>
                         <div className="flex justify-center">
                             <div className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300">
-                                <div className="relative w-full aspect-[2/1] flex items-center justify-center">
-                                    <span className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-                                        Rainmaker
-                                    </span>
+                                <div className="relative w-full aspect-[2/1]">
+                                    <Image
+                                        src="/dubai-event/sponsors/rainmaker.png"
+                                        alt="Rainmaker - Gold Sponsor"
+                                        fill
+                                        className="object-contain"
+                                    />
                                 </div>
                             </div>
                         </div>
