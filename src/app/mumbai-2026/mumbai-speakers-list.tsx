@@ -344,6 +344,11 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         title: "Global General Counsel, Knack RCM",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610235/lextalk/mumbai-speakers/pradyumna-vengurlekar.png",
     },
+    {
+        name: "Saikat Sarkar",
+        title: "Group Chief Legal Officer and General Counsel, TAFE - Tractors & Farm Equipment Ltd",
+        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793946899/lextalk/mumbai-speakers/saikat-sarkar.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
