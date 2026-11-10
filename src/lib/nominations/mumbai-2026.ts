@@ -121,7 +121,6 @@ export const PRACTICE_AREAS = [
     "Family", "Health", "Immigration", "Personal Injury", "Infrastructure",
     "Real Estate", "Media and Entertainment", "Sports", "Other",
 ];
-export const MAX_PRACTICE_AREAS = 3;
 
 /** Supporting documents (photo, CV, achievements, case studies). 10 MB each is Cloudinary's free-plan limit. */
 export const MAX_FILES = 10;
@@ -198,7 +197,7 @@ export const FIELD_LABELS: Record<FieldKey, string> = {
     addressState: "State/Region/Province",
     addressPostal: "Postal / Zip Code",
     addressCountry: "Country",
-    practiceAreas: "Top 3 Key Practice Areas",
+    practiceAreas: "Key Practice Areas",
     essayReach: "Tell us about your Overall Reach as a Legal Professional:",
     essayAchievements: "Tell us about your Achievements and the Impact you made on the Industry.",
     essayInnovation: "How Innovative is your approach?",
@@ -309,7 +308,6 @@ export function validateNomination(a: NominationAnswers, step?: 1 | 2 | 3 | 4 | 
         if (key === "practiceAreas") {
             const list = Array.isArray(a.practiceAreas) ? a.practiceAreas : [];
             if (list.length < 1) errors[key] = "Select at least 1 practice area.";
-            else if (list.length > MAX_PRACTICE_AREAS) errors[key] = `Select at most ${MAX_PRACTICE_AREAS}.`;
             else if (list.some(p => !PRACTICE_AREAS.includes(p))) errors[key] = "Invalid practice area.";
             continue;
         }

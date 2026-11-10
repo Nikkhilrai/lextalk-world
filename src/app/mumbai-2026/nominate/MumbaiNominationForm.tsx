@@ -13,7 +13,7 @@ import { PhoneInput } from "@/components/PhoneInput";
 import { COUNTRIES_DATA } from "@/lib/countries";
 import {
     CATEGORY_GROUPS, DUAL_QUALIFIED, FIELD_LABELS, FILE_EXTENSIONS, FIRM_TYPES, FieldKey, INDIVIDUAL_ROLES,
-    MAX_FILE_BYTES, MAX_FILES, MAX_PRACTICE_AREAS, MUMBAI_2026_NOMINATION as EVENT, NOMINATE_AS, NominationAnswers,
+    MAX_FILE_BYTES, MAX_FILES, MUMBAI_2026_NOMINATION as EVENT, NOMINATE_AS, NominationAnswers,
     PRACTICE_AREAS, YEAR_RANGES, validateNomination, visibleFields,
 } from "@/lib/nominations/mumbai-2026";
 
@@ -25,7 +25,7 @@ const STEPS: { title: string; hint: string }[] = [
     { title: "Terms & Conditions", hint: "Read and accept" },
     { title: "Personal Information", hint: "Your contact details" },
     { title: "Nomination", hint: "Profile and award category" },
-    { title: "Key Practice Areas", hint: `Choose up to ${MAX_PRACTICE_AREAS}` },
+    { title: "Key Practice Areas", hint: "Choose all that apply" },
     { title: "Your Story", hint: "Achievements and documents" },
     { title: "Payment", hint: `USD ${EVENT.feeUsd} nomination fee` },
 ];
@@ -544,13 +544,13 @@ export function MumbaiNominationForm() {
                                     {step === 4 && (
                                         <div>
                                             <div className="flex items-center justify-between gap-4 mb-4">
-                                                <p className="text-sm text-slate-600">Now select your top {MAX_PRACTICE_AREAS} key practice areas.<span className="text-amber-600 ml-0.5">*</span></p>
-                                                <span className="shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900 text-amber-400 text-xs font-bold tabular-nums">{practice.length} / {MAX_PRACTICE_AREAS}</span>
+                                                <p className="text-sm text-slate-600">Select all the key practice areas that apply to you.<span className="text-amber-600 ml-0.5">*</span></p>
+                                                <span className="shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900 text-amber-400 text-xs font-bold tabular-nums">{practice.length} selected</span>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
                                                 {PRACTICE_AREAS.map(p => {
                                                     const on = practice.includes(p);
-                                                    const disabled = !on && practice.length >= MAX_PRACTICE_AREAS;
+                                                    const disabled = false;
                                                     return (
                                                         <label key={p} className={`relative inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-all select-none ${on
                                                             ? "bg-amber-500 border-amber-500 text-white font-semibold shadow-md shadow-amber-500/25"
