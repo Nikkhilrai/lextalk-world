@@ -61,6 +61,9 @@ export const CATEGORY_GROUPS: { group: string; options: string[] }[] = [
             "Legal Tech Expert",
             "Government Official/Representative",
             "Legal Business Consultant",
+            "White Collar Crime",
+            "Cybersecurity",
+            "Investigation",
             "None of the above",
         ],
     },
@@ -119,6 +122,11 @@ export const PRACTICE_AREAS = [
     "Real Estate", "Media and Entertainment", "Sports", "Other",
 ];
 export const MAX_PRACTICE_AREAS = 3;
+
+/** Supporting documents (photo, CV, achievements, case studies). 10 MB each is Cloudinary's free-plan limit. */
+export const MAX_FILES = 10;
+export const MAX_FILE_BYTES = 10 * 1024 * 1024;
+export const FILE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".pdf", ".doc", ".docx", ".ppt", ".pptx"];
 
 /* ------------------------------------------------------------------ */
 /* Fields                                                              */

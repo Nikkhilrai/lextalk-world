@@ -15,7 +15,7 @@ export interface NominationRow {
     createdAt: string;
     event: string;
     answers: Record<string, unknown>;
-    file: { url: string; name: string; bytes: number | null } | null;
+    files: { url: string; name: string; bytes: number | null }[];
     payment: { paymentId: string; amount: number; currency: string; paidAt: string } | null;
 }
 
@@ -54,10 +54,10 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
     });
 
     const exportCSV = () => {
-        const head = ["Submitted", "Event", "Status", "Paid", "Payment ID", "Nominate As", "Category", ...ORDER.map(k => FIELD_LABELS[k]), "File"];
+        const head = ["Submitted", "Event", "Status", "Paid", "Payment ID", "Nominate As", "Category", ...ORDER.map(k => FIELD_LABELS[k]), "Files"];
         const lines = filtered.map(r => [
             new Date(r.createdAt).toLocaleString("en-IN"), r.event, STATUS_LABEL[r.status] ?? r.status, paidText(r.payment),
-            r.payment?.paymentId ?? "", r.type, r.category, ...ORDER.map(k => show(r.answers[k])), r.file?.url ?? "",
+            r.payment?.paymentId ?? "", r.type, r.category, ...ORDER.map(k => show(r.answers[k])), r.files.map(f => f.url).join(" "),
         ]);
         const csv = [head, ...lines].map(l => l.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
         const url = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }));
@@ -125,6 +125,7 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                                 <td className="px-4 py-3">
                                     <p className="font-semibold text-slate-900">{r.name}</p>
                                     <p className="text-xs text-slate-500">{r.email}{r.phone ? ` · ${r.phone}` : ""}</p>
+                                    {r.files.length > 0 && <p className="text-xs text-amber-700 mt-0.5 flex items-center gap-1"><FileText className="w-3 h-3" /> {r.files.length} file{r.files.length > 1 ? "s" : ""}</p>}
                                 </td>
                                 <td className="px-4 py-3 text-slate-700 max-w-xs"><span className="text-xs text-slate-400">{r.type}</span><br />{r.category}</td>
                                 <td className="px-4 py-3 text-slate-600 text-xs">{r.event}</td>
@@ -162,10 +163,16 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                                 {viewing.payment && <span className="px-2 py-0.5 rounded-full border border-slate-200 text-slate-600">{paidText(viewing.payment)} · {viewing.payment.paymentId}</span>}
                                 <span className="px-2 py-0.5 rounded-full border border-slate-200 text-slate-500">Ref {viewing.id}</span>
                             </div>
-                            {viewing.file && (
-                                <a href={viewing.file.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-3 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-800 hover:bg-amber-100">
-                                    <FileText className="w-4 h-4" /> {viewing.file.name}
-                                </a>
+                            {viewing.files.length > 0 && (
+                                <div className="space-y-2">
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Uploaded files ({viewing.files.length})</p>
+                                    {viewing.files.map(f => (
+                                        <a key={f.url} href={f.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-3 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-800 hover:bg-amber-100">
+                                            <FileText className="w-4 h-4 shrink-0" /> <span className="truncate">{f.name}</span>
+                                            {f.bytes ? <span className="ml-auto text-xs text-amber-600/70 shrink-0">{(f.bytes / 1024 / 1024).toFixed(1)} MB</span> : null}
+                                        </a>
+                                    ))}
+                                </div>
                             )}
                             <dl className="divide-y divide-slate-100">
                                 {(ORDER.some(k => k in viewing.answers) ? ORDER.map(k => [FIELD_LABELS[k], viewing.answers[k]] as const) : Object.entries(viewing.answers))

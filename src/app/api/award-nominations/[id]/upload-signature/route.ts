@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { MAX_FILES } from "@/lib/nominations/mumbai-2026";
 import { checkNominationToken } from "@/lib/nominations/server";
 
 /**
@@ -22,8 +23,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
         const nomination = await prisma.nomination.findUnique({ where: { id }, select: { formResponse: true } });
         if (!nomination) return NextResponse.json({ error: "Nomination not found" }, { status: 404 });
-        if ((nomination.formResponse as Record<string, unknown> | null)?.file) {
-            return NextResponse.json({ error: "A file is already attached" }, { status: 409 });
+        const files = (nomination.formResponse as Record<string, unknown> | null)?.files;
+        if (Array.isArray(files) && files.length >= MAX_FILES) {
+            return NextResponse.json({ error: `Up to ${MAX_FILES} files can be attached` }, { status: 409 });
         }
 
         const folder = `lextalk/nominations/${id}`;

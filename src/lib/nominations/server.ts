@@ -62,13 +62,13 @@ export async function nominationFee(currency: "USD" | "INR"): Promise<{ amount: 
 /* ------------------------------------------------------------------ */
 
 const FROM = "LexTalk World <noreply@lextalkworld.in>";
-export const NOMINATION_TEAM = ["nikhil@mantranexvista.com", "abhishek@mantranexvista.com", "nitesh@mantranexvista.com"];
+export const NOMINATION_TEAM = ["nikhil@mantranexvista.com", "abhishek.gourav@mantranexvista.com", "nitesh@mantranexvista.com"];
 
 function esc(s: string): string {
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function answersTable(a: NominationAnswers, fileUrl?: string): string {
+function answersTable(a: NominationAnswers): string {
     const order = Object.values(STEP_FIELDS).flat() as FieldKey[];
     const rows = order
         .filter(k => k !== "acceptedTerms" && a[k] !== undefined && a[k] !== "")
@@ -77,7 +77,6 @@ function answersTable(a: NominationAnswers, fileUrl?: string): string {
             const text = Array.isArray(v) ? v.join(", ") : String(v);
             return `<tr><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;color:#64748b;vertical-align:top;width:38%;font-size:13px">${esc(FIELD_LABELS[k])}</td><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;color:#0f172a;font-size:13px;white-space:pre-wrap">${esc(text)}</td></tr>`;
         });
-    if (fileUrl) rows.push(`<tr><td style="padding:8px 10px;color:#64748b;font-size:13px">File Upload</td><td style="padding:8px 10px;font-size:13px"><a href="${esc(fileUrl)}">${esc(fileUrl)}</a></td></tr>`);
     return `<table style="width:100%;border-collapse:collapse">${rows.join("")}</table>`;
 }
 
@@ -118,6 +117,7 @@ export async function sendNominationReceivedEmails(n: { id: string; name: string
             html: shell("New nomination — awaiting payment", `
 <p><strong>${esc(ev.eventName)}</strong></p>
 ${answersTable(n.answers)}
+<p style="margin-top:16px;color:#64748b;font-size:13px">Any uploaded files (photo, CV, achievements, case studies) are on the dashboard.</p>
 <p style="margin-top:20px"><a href="https://lextalkworld.in/admin/nominations" style="background:#f59e0b;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600">View in Dashboard →</a></p>`),
         });
         if (e2) console.error("[award-nominations] team email rejected:", e2);

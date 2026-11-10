@@ -22,7 +22,8 @@ export default async function AdminNominationsPage() {
             event: typeof fr.eventName === "string" ? fr.eventName : "Legal Honor Global 2026 (Dubai form)",
             // New (Mumbai) nominations keep answers under `answers`; older ones stored the raw form.
             answers: (fr.answers ?? fr) as Record<string, unknown>,
-            file: fr.file ?? null,
+            // Older test records used a single `file`; current ones keep a `files` list.
+            files: Array.isArray(fr.files) ? fr.files : fr.file ? [fr.file] : [],
             payment: fr.payment ?? null,
         };
     });
