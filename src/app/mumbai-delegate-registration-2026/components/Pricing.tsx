@@ -10,6 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { CountrySelect } from "@/components/CountrySelect";
 import { PhoneInput } from "@/components/PhoneInput";
+import { MUMBAI_DELEGATE_PASSES } from "@/lib/mumbai-delegate-passes";
 
 declare global {
     interface Window { Razorpay: any; }
@@ -35,12 +36,8 @@ interface PassConfig {
 const PASSES: PassConfig[] = [
     {
         id: "student",
-        name: "Student & Academic Pass",
+        ...MUMBAI_DELEGATE_PASSES["student"],
         tagline: "Accelerate your legal education.",
-        usdPrice: 129,
-        inrPrice: 12000,
-        usdOriginalPrice: 129,
-        inrOriginalPrice: 12000,
         icon: GraduationCap,
         badge: "Student",
         color: "slate",
@@ -56,12 +53,8 @@ const PASSES: PassConfig[] = [
     },
     {
         id: "delegate",
-        name: "Corporate Delegate Pass",
+        ...MUMBAI_DELEGATE_PASSES["delegate"],
         tagline: "Expand your corporate legal network.",
-        usdPrice: 199,
-        inrPrice: 18000,
-        usdOriginalPrice: 399,
-        inrOriginalPrice: 36000,
         icon: Users,
         color: "slate",
         idealFor: "Corporate Counsel, In-House Lawyers, IP Counsel, Compliance & Governance Leaders, Legal Operations professionals.",
@@ -77,12 +70,8 @@ const PASSES: PassConfig[] = [
     },
     {
         id: "delegate-vip",
-        name: "Law Firm Exclusive Pass",
+        ...MUMBAI_DELEGATE_PASSES["delegate-vip"],
         tagline: "Amplify your law firm's influence.",
-        usdPrice: 499,
-        inrPrice: 47000,
-        usdOriginalPrice: 799,
-        inrOriginalPrice: 72000,
         icon: Building2,
         isPopular: true,
         badge: "Most Popular",
@@ -98,12 +87,8 @@ const PASSES: PassConfig[] = [
     },
     {
         id: "vendor-vip",
-        name: "Vendor & Business VIP Pass",
+        ...MUMBAI_DELEGATE_PASSES["vendor-vip"],
         tagline: "Showcase your solutions to industry leaders.",
-        usdPrice: 899,
-        inrPrice: 84000,
-        usdOriginalPrice: 1999,
-        inrOriginalPrice: 160000,
         icon: Globe,
         badge: "Business",
         color: "slate",

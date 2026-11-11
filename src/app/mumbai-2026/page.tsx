@@ -23,6 +23,12 @@ import { AgendaModal } from "@/components/AgendaModal";
 import { RegisterModal } from "@/components/RegisterModal";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
+import { speakers as mumbaiSpeakers } from "./mumbai-speakers-list";
+import { mumbaiEventJsonLd } from "./seo";
+
+// Structured data so search engines can show the conference as an event
+// (dates, venue, organiser, pass prices and speakers).
+const eventJsonLd = mumbaiEventJsonLd(mumbaiSpeakers);
 
 export default function Mumbai2026Page() {
     const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
@@ -40,6 +46,7 @@ export default function Mumbai2026Page() {
 
     return (
         <main className="min-h-screen bg-slate-950">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
             <Navbar />
 
             {/* Floating Buttons - Hidden on mobile by global component logic */}
