@@ -170,6 +170,12 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: `${IMG}/v1793614052/lextalk/singapore-speakers/ayushi-kapoor`,
         bio: `Ayushi Kapoor is a seasoned legal professional with extensive experience in navigating the intersection of law, technology, and corporate governance. Currently serving as Regulatory Counsel at Google, she specializes in managing complex regulatory landscapes and cross-border legal challenges within the fast-evolving technology sector. Her expertise spans technology law, AI governance, enforcement risks, and compliance. She holds an AIGP certification from IAPP and has significant experience in regulatory strategy, stakeholder management, and designing and implementing compliance frameworks.`,
     },
+    {
+        name: "Rishiraj Singh",
+        title: "Executive Director, Head of AI & Data Risk Governance, United Overseas Bank Limited",
+        image: "/Singapore-2027/Speaker-images/Rishiraj%20Singh.png",
+        bio: `Rishiraj Singh leads UOB\u2019s Enterprise AI & Data Risk Governance function within Group Risk Management, driving the strategy and implementation of governance frameworks for responsible AI and data adoption. He oversees AI risk assessments, Responsible AI, data governance, data quality, AI inventory and BCBS 239 initiatives. He advises senior management and executive committees on AI and data risk, regulatory compliance and risk appetite, while strengthening accountability, control effectiveness and enterprise-wide risk transparency to enable sustainable innovation.`,
+    },
 ];
 
 export default function SingaporeSpeakersList() {
