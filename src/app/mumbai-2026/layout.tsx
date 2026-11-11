@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "LexTalk World — Mumbai 2026",
-    description: "Connect With Senior Legal Decision-Makers Shaping the Future of Law in India's commercial capital.",
+    title: { absolute: "LexTalk World Mumbai 2026 | Legal Conference & Legal Honor Global Awards | 7–8 Dec 2026" },
+    description: "Connect With Senior Legal Decision-Makers Shaping the Future of Law in India's commercial capital. LexTalk World Mumbai, 7–8 December 2026.",
+    alternates: { canonical: "/mumbai-2026" },
     openGraph: {
-        title: "LexTalk World — Mumbai 2026",
+        type: "website",
+        url: "https://lextalkworld.in/mumbai-2026",
+        title: "LexTalk World Mumbai 2026 | 7–8 December 2026",
         description: "The premier global platform for legal professionals in Mumbai.",
         images: [
             {

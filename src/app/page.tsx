@@ -13,9 +13,22 @@ import { StayUpdated } from "@/components/StayUpdated";
 import { Footer } from "@/components/Footer";
 
 
+const HOME_TITLE = "LexTalk World | Legal Tech & AI Law Conferences and Legal Honor Global Awards";
+const HOME_DESCRIPTION =
+  "LexTalk World is the global platform for legal, AI governance, risk and compliance leaders. Join LexTalk World Mumbai (7–8 December 2026) and APAC Singapore (4 February 2027) — conferences, exhibitions and the Legal Honor Global Awards.";
+
 export const metadata: Metadata = {
-  title: "LexTalk World | Legal Tech Conference & Legal Honor Global | Dubai 9th - 10th Sep 2026",
-  description: "LexTalk World is the Global Authority on Legal Tech. Join our flagship conference in Dubai 9th - 10th Sep 2026. Networking, Awards, and Innovation for legal professionals worldwide.",
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://lextalkworld.in",
+    siteName: "LexTalk World",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [{ url: "/og/default.jpg", width: 1200, height: 630, alt: "LexTalk World" }],
+  },
 };
 
 export default function Home() {

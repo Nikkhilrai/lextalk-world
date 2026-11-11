@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     default: "LexTalk World | Global Legal Conference & Tech Platform | Middle East & Asia",
     template: "%s | LexTalk World",
   },
-  description: "LexTalk World is the Global Authority on Legal Tech. Organizing premier legal conferences in Dubai, Mumbai, and globally. Join 500+ legal professionals for award-winning networking and innovation.",
+  description: "LexTalk World is the Global Authority on Legal Tech. Organizing premier legal conferences in Mumbai, Singapore, Dubai and globally. Join 500+ legal professionals for award-winning networking and innovation.",
   keywords: [
     "LexTalk World",
     "Lextalk",
     "Global Legal Conference",
-    "Legal Tech Dubai",
-    "Legal Tech 2026",
-    "Dubai Legal Conference 2026",
+    "Legal Tech Conference",
+    "AI Law Conference",
+    "Legal Honor Global Awards",
     "Legal Awards Global",
     "Legal Technology Summit",
     "Law Firm Excellence Awards",
@@ -52,21 +52,20 @@ export const metadata: Metadata = {
   creator: "LexTalk World",
   publisher: "LexTalk World",
   metadataBase: new URL("https://lextalkworld.in"),
-  alternates: {
-    canonical: "/",
-  },
+  // No site-wide canonical here: a canonical set in the root layout is inherited by
+  // every page, which told search engines each page was a copy of the homepage.
+  // Pages set their own canonical (alternates.canonical) instead.
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://lextalkworld.in",
     siteName: "LexTalk World",
     title: "LexTalk World | Global Legal Conference Platform",
     description: "The Global Authority on Legal Tech. Join 500+ legal professionals from 30+ countries. Connect, Lead, and Innovate.",
     images: [
       {
-        url: "/logo/favicon.png",
-        width: 512,
-        height: 512,
+        url: "/og/default.jpg",
+        width: 1200,
+        height: 630,
         alt: "LexTalk World",
       },
     ],
@@ -75,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LexTalk World | Global Legal Conference Platform",
     description: "The Global Authority on Legal Tech. Connect, Lead, and Innovate with legal professionals worldwide.",
-    images: ["/logo/favicon.png"],
+    images: ["/og/default.jpg"],
   },
   robots: {
     index: true,
