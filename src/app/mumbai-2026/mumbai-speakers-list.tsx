@@ -349,6 +349,16 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         title: "Group Chief Legal Officer and General Counsel, TAFE - Tractors & Farm Equipment Ltd",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793946899/lextalk/mumbai-speakers/saikat-sarkar.png",
     },
+    {
+        name: "Subramanyam Yadav Daraboina",
+        title: "Spl. Public Prosecutor-ED, Ministry of Finance, GOI, Prism Legal Associates",
+        image: "/mumbai-2026/Mumbai_Speakers/Subramanyam Yadav Daraboina.png",
+    },
+    {
+        name: "Rajeev Kumar",
+        title: "Executive Vice President Legal, Kotak Mahindra Bank",
+        image: "/mumbai-2026/Mumbai_Speakers/Rajeev Kumar.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
