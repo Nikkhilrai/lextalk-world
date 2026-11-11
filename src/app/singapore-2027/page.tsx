@@ -39,6 +39,7 @@ import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
 import { AgendaModal } from "@/components/AgendaModal";
 import { SingaporeFeaturedSpeakers } from "./singapore-featured-speakers";
 import { speakers as allSpeakers } from "./singapore-speakers-list";
+import { singaporeEventJsonLd } from "./seo";
 
 const CONFERENCE = "Singapore, Feb 4 2027";
 
@@ -190,6 +191,10 @@ function heroOrg(title: string) {
     return t.includes(",") ? t.slice(t.lastIndexOf(",") + 1).trim() : t;
 }
 
+// Structured data so search engines can show the conference as an event
+// (date, place, organiser, pass prices and speakers).
+const eventJsonLd = singaporeEventJsonLd(allSpeakers);
+
 // Hero speaker strip: the first speakers on the list (the order the team set), as small face crops.
 const heroSpeakers = allSpeakers
     .filter((sp) => sp.image)
@@ -208,6 +213,7 @@ export default function Singapore2027Page() {
 
     return (
         <main className="min-h-screen bg-[#0a0e12]">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
             <Navbar />
 
             <FloatingAgendaButton eventSlug="singapore-2027" />
