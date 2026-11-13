@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
+import { X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
 import { setChatOpen } from "@/lib/chat-widget-state";
+import { LexFace, type LexMood } from "@/components/LexFace";
 
 /**
  * Floating chat widget for "Lex", the LexTalk World support agent.
@@ -423,6 +424,26 @@ export function SupportChatWidget() {
     const threadRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
+    // Lex's face follows the conversation: thinking while the agent works, talking
+    // while the reply streams in, and a short smile once an answer has landed.
+    const [justAnswered, setJustAnswered] = useState(false);
+    const wasBusy = useRef(false);
+    useEffect(() => {
+        const answered = wasBusy.current && !busy && messages[messages.length - 1]?.role === "agent";
+        wasBusy.current = busy;
+        if (!answered) return;
+        setJustAnswered(true);
+        const timer = setTimeout(() => setJustAnswered(false), 1800);
+        return () => clearTimeout(timer);
+    }, [busy, messages]);
+    const mood: LexMood = messages[messages.length - 1]?.streaming
+        ? "talking"
+        : busy
+            ? "thinking"
+            : justAnswered
+                ? "happy"
+                : "idle";
+
     // Restore the session id so a visitor who navigates between pages keeps the
     // same conversation. Wrapped because private-mode browsers throw on access.
     useEffect(() => {
@@ -704,9 +725,10 @@ export function SupportChatWidget() {
                         animate={{ scale: [1, 1.3, 1], opacity: [0.7, 0, 0.7] }}
                         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                     />
-                    {/* Bot, not a speech bubble — a bubble reads as "message us on
-                        WhatsApp"; a face reads as "there's an assistant in here". */}
-                    <Bot size={28} className="relative text-amber-400" strokeWidth={2} />
+                    {/* A face, not a speech bubble — a bubble reads as "message us on
+                        WhatsApp"; a face reads as "there's an assistant in here". It
+                        smiles while the teaser invites the visitor in. */}
+                    <LexFace mood={showTeaser ? "happy" : mood} className="relative h-11 w-11" />
                     <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0f1330] bg-emerald-400" />
                 </motion.button>
             </div>
@@ -723,8 +745,8 @@ export function SupportChatWidget() {
                     >
                         {/* Header */}
                         <div className="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-slate-900 to-slate-800 px-5 py-4">
-                            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 font-serif text-base font-bold text-white">
-                                L
+                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1c2454] to-[#0f1330] ring-2 ring-amber-400">
+                                <LexFace mood={mood} className="h-9 w-9" />
                             </div>
                             <div className="min-w-0 flex-1">
                                 <p className="font-serif text-sm font-bold text-white">Lex</p>
