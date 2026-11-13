@@ -52,13 +52,15 @@ export default function SponsorshipPage() {
                         >
                             Become a Sponsor
                         </button>
-                        <button
-                            onClick={() => setIsModalOpen(true)}
+                        <a
+                            href="https://calendly.com/abhishek-gourav-mantranexvista/30min"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="px-8 py-3 rounded-full bg-white text-slate-900 hover:bg-slate-100 transition-all font-bold flex items-center gap-2 cursor-pointer"
                         >
                             <Phone size={18} />
                             Book a Sponsorship Call
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -528,13 +530,15 @@ export default function SponsorshipPage() {
                             <ArrowRight className="w-5 h-5" />
                         </button>
 
-                        <button
-                            onClick={() => setIsModalOpen(true)}
+                        <a
+                            href="https://calendly.com/abhishek-gourav-mantranexvista/30min"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-7 py-2.5 bg-transparent border-2 border-white/30 hover:border-white text-white text-sm md:text-base font-semibold rounded-full transition-all duration-300 hover:bg-white/5 cursor-pointer"
                         >
                             <Phone className="w-4 h-4" />
                             Schedule a Call
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>
