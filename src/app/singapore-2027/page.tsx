@@ -251,7 +251,7 @@ export default function Singapore2027Page() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.05 }}
-                            className="text-amber-400 text-xs font-bold uppercase tracking-[0.3em] mb-5"
+                            className="text-amber-400 text-sm md:text-lg lg:text-xl font-bold uppercase tracking-[0.2em] leading-snug mb-5"
                         >
                             AI, Law, Risk &amp; Digital Trust Conference &amp; Exhibition 2027
                         </motion.p>
@@ -260,7 +260,7 @@ export default function Singapore2027Page() {
                             initial={{ opacity: 0, y: 14 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="font-serif text-4xl md:text-6xl lg:text-[64px] font-bold text-white leading-[1.1] tracking-tight mb-7"
+                            className="font-serif text-3xl md:text-4xl lg:text-[44px] font-bold text-white leading-[1.15] tracking-tight mb-7"
                         >
                             Governing Enterprise AI:
                             <br />
