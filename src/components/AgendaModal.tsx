@@ -20,9 +20,12 @@ interface AgendaModalProps {
     title?: string;
     subtitle?: string;
     downloadLabel?: string;
+    /** Override the endpoint / saved filename (used by the show-guides page) */
+    apiUrl?: string;
+    fileName?: string;
 }
 
-export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda", subtitle = "Unlock the full schedule & speaker lineup", downloadLabel = "Download Agenda" }: AgendaModalProps) {
+export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda", subtitle = "Unlock the full schedule & speaker lineup", downloadLabel = "Download Agenda", apiUrl = "/api/agenda/download", fileName }: AgendaModalProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -31,7 +34,7 @@ export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda"
     const onSubmit = async (data: AgendaFormData) => {
         setIsSubmitting(true);
         try {
-            const response = await fetch("/api/agenda/download", {
+            const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...data, eventSlug })
@@ -50,7 +53,7 @@ export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda"
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement("a");
                 link.href = url;
-                link.download = `${eventSlug}-agenda.pdf`;
+                link.download = fileName || `${eventSlug}-agenda.pdf`;
                 link.style.display = "none";
                 document.body.appendChild(link);
                 link.click();
@@ -61,7 +64,7 @@ export function AgendaModal({ isOpen, onClose, eventSlug, title = "Event Agenda"
                 const result = await response.json();
                 const link = document.createElement("a");
                 link.href = result.agendaUrl;
-                link.download = `${eventSlug}-agenda.pdf`;
+                link.download = fileName || `${eventSlug}-agenda.pdf`;
                 link.target = "_blank";
                 link.style.display = "none";
                 document.body.appendChild(link);

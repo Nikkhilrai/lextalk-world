@@ -4,12 +4,15 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BookOpen, Download, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { AgendaModal } from "@/components/AgendaModal";
 
 interface ShowGuideEntry {
     city: string;
     edition: string;
     date: string;
     venue: string;
+    slug: string; // key accepted by /api/show-guide/download
     file: string;
 }
 
@@ -21,6 +24,7 @@ const showGuides: ShowGuideEntry[] = [
         edition: "LexTalk World Bangalore 2026",
         date: "June 11, 2026",
         venue: "Radisson Blu Atria, Bangalore, India",
+        slug: "bangalore-2026",
         file: "/agendas/bangalore-2026-showguide-agenda.pdf",
     },
     {
@@ -28,11 +32,14 @@ const showGuides: ShowGuideEntry[] = [
         edition: "LexTalk World Dubai 2026",
         date: "September 9–10, 2026",
         venue: "Crowne Plaza, Dubai, UAE",
+        slug: "dubai-2026",
         file: "/agendas/dubai-2026-showguide.pdf",
     },
 ];
 
 export default function ShowGuidesPage() {
+    const [selected, setSelected] = useState<ShowGuideEntry | null>(null);
+
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -69,15 +76,15 @@ export default function ShowGuidesPage() {
                     {showGuides.length > 0 ? (
                         <div className="space-y-5">
                             {showGuides.map((guide) => (
-                                <motion.a
+                                <motion.button
+                                    type="button"
                                     key={guide.city}
-                                    href={guide.file}
-                                    download
+                                    onClick={() => setSelected(guide)}
                                     initial={{ opacity: 0, y: 16 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5 }}
-                                    className="group flex flex-col sm:flex-row sm:items-center gap-5 p-6 bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-2xl transition-all duration-300"
+                                    className="group flex flex-col sm:flex-row sm:items-center gap-5 p-6 bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-2xl transition-all duration-300 text-left w-full"
                                 >
                                     <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
                                         <BookOpen className="w-6 h-6 text-amber-600" />
@@ -101,7 +108,7 @@ export default function ShowGuidesPage() {
                                         <Download size={14} />
                                         Download
                                     </div>
-                                </motion.a>
+                                </motion.button>
                             ))}
                         </div>
                     ) : (
@@ -113,6 +120,17 @@ export default function ShowGuidesPage() {
                     )}
                 </div>
             </section>
+
+            <AgendaModal
+                isOpen={!!selected}
+                onClose={() => setSelected(null)}
+                eventSlug={selected?.slug ?? ""}
+                apiUrl="/api/show-guide/download"
+                fileName={selected ? `${selected.slug}-showguide.pdf` : undefined}
+                title="Show Guide"
+                subtitle={selected ? `${selected.edition} — enter your details to download` : ""}
+                downloadLabel="Download Show Guide"
+            />
 
             <Footer />
         </main>

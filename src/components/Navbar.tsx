@@ -56,7 +56,6 @@ export function Navbar({ variant = "default", minimal = false }: NavbarProps) {
                 { name: "Blog/News", href: "/blog" },
                 { name: "Podcasts", href: "/podcasts" },
                 { name: "Show Guide", href: "/show-guides" },
-                { name: "Magazine", href: "/magazine" },
             ]
         },
     ]);

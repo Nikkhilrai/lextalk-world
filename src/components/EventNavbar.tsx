@@ -26,7 +26,6 @@ const navItems: NavLink[] = [
         dropdownItems: [
             { name: "Podcasts", href: "/podcasts" },
             { name: "Testimonial", href: "/testimonials" },
-            { name: "Magazine", href: "/magazine" },
         ]
     },
 ];
