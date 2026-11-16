@@ -109,7 +109,7 @@ export const MUMBAI_EVENT = build({
 
 /* ------------------------------------------------------------------ */
 /* Singapore 2027 — The Medal of Excellence                            */
-/* Categories from /singapore-2027/awards; questions as on the Mumbai form *
+/* Categories from /singapore-2027/awards; questions as on Mumbai     */
 /* ------------------------------------------------------------------ */
 
 const SG_CATEGORY_GROUPS: CategoryGroup[] = [
