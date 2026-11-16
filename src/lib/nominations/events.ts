@@ -57,6 +57,14 @@ function build(e: Omit<NominationEvent, "rules">): NominationEvent {
     return { ...e, rules: { categoryValues: categoryValuesOf(e.categoryGroups), individualRoles: e.individualRoles, firmTypes: e.firmTypes } };
 }
 
+// Essay questions and hints are the same on every form (from the Mumbai Zoho form).
+const MUMBAI_ESSAY_HINTS = {
+    essayReach: "Include details about your education, experience, key practice areas and examples of important cases or disputes.",
+    essayAchievements: "Include details and examples of your achievements and their impact.",
+    essayInnovation: "Share examples of your innovative approach that benefited your clients or company.",
+    essayFuture: "Describe your continuous professional development and how you adapt to new technologies.",
+};
+
 /* ------------------------------------------------------------------ */
 /* Mumbai 2026 — unchanged from the original form                      */
 /* ------------------------------------------------------------------ */
@@ -76,12 +84,7 @@ export const MUMBAI_EVENT = build({
         venueChip: "Radisson Blu, Mumbai International Airport",
         defaultCountry: "India",
         juryNote: "Every nomination is screened by the Legal Honor Global Awards Jury Panel. Qualifying score: 80/100.",
-        essayHints: {
-            essayReach: "Include details about your education, experience, key practice areas and examples of important cases or disputes.",
-            essayAchievements: "Include details and examples of your achievements and their impact.",
-            essayInnovation: "Share examples of your innovative approach that benefited your clients or company.",
-            essayFuture: "Describe your continuous professional development and how you adapt to new technologies.",
-        },
+        essayHints: MUMBAI_ESSAY_HINTS,
         paidMessage: "Thank you. We've received your nomination fee and emailed you a confirmation. The Awards Committee will send you a detailed scorecard once the evaluation is complete.",
         exploreHref: "/mumbai-2026",
         exploreLabel: "Explore LexTalk World Mumbai",
@@ -106,7 +109,7 @@ export const MUMBAI_EVENT = build({
 
 /* ------------------------------------------------------------------ */
 /* Singapore 2027 — The Medal of Excellence                            */
-/* Categories, essays and evaluation wording from /singapore-2027/awards */
+/* Categories from /singapore-2027/awards; questions as on the Mumbai form *
 /* ------------------------------------------------------------------ */
 
 const SG_CATEGORY_GROUPS: CategoryGroup[] = [
@@ -174,13 +177,7 @@ export const SINGAPORE_EVENT = build({
         "Public-Sector Body",
         "Cross-Functional Team",
     ]),
-    labels: {
-        ...FIELD_LABELS,
-        essayReach: "Summary of the nomination (about 150 words)",
-        essayAchievements: "The challenge or opportunity, and the nominee's specific role",
-        essayInnovation: "Proof of impact",
-        essayFuture: "Governance evidence",
-    },
+    labels: FIELD_LABELS,
     ui: {
         badge: "The Medal of Excellence",
         heroHighlight: "Singapore 2027",
@@ -189,12 +186,7 @@ export const SINGAPORE_EVENT = build({
         venueChip: "Singapore",
         defaultCountry: "Singapore",
         juryNote: "Every nomination is screened by the Legal Honor Global Awards Jury Panel. Qualifying score: 80/100.",
-        essayHints: {
-            essayReach: "A short summary of the achievement — what was done, for whom, and why it matters. Activity between 1 January 2025 and 31 December 2026.",
-            essayAchievements: "Describe the challenge or opportunity and exactly what the nominee did. Entries cannot rely on future intent or unimplemented ideas.",
-            essayInnovation: "Two or three specific measures (baseline to current where possible), with client or stakeholder validation where available.",
-            essayFuture: "Relevant policy, control, privacy, security or risk-management practice behind the work. Redact anything confidential.",
-        },
+        essayHints: MUMBAI_ESSAY_HINTS,
         paidMessage: "Thank you. We've received your nomination fee and emailed you a confirmation. The Awards Committee will send you a detailed scorecard once the evaluation is complete.",
         exploreHref: "/singapore-2027",
         exploreLabel: "Explore LexTalk World Singapore",

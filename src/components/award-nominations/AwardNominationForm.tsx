@@ -69,6 +69,13 @@ function ErrorText({ children }: { children?: string }) {
     return children ? <p className="mt-1.5 text-[13px] text-red-600">{children}</p> : null;
 }
 
+/**
+ * Field wrapper: label, box and error share rows with the field beside it
+ * (CSS subgrid), so boxes in a two-column row line up even when one label
+ * wraps onto two lines.
+ */
+const FIELD = "grid grid-rows-subgrid row-span-3 gap-0 content-start";
+
 function fileSize(bytes: number) {
     return bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
 }
@@ -280,7 +287,7 @@ export function AwardNominationForm({ eventKey, terms }: { eventKey: string; ter
 
     const text = (k: FieldKey, opts: { label?: string; type?: string; placeholder?: string } = {}) =>
         shown.has(k) && (
-            <div>
+            <div className={FIELD}>
                 <FieldLabel htmlFor={k} required={!OPTIONAL_FIELDS.includes(k)}>{opts.label ?? FIELD_LABELS[k]}</FieldLabel>
                 <input id={k} type={opts.type ?? "text"} maxLength={255} placeholder={opts.placeholder}
                     value={(a[k] as string) ?? ""} onChange={e => set(k, e.target.value as never)} className={inputCls(k)} />
@@ -290,7 +297,7 @@ export function AwardNominationForm({ eventKey, terms }: { eventKey: string; ter
 
     const select = (k: FieldKey, options: string[], label?: string) =>
         shown.has(k) && (
-            <div>
+            <div className={FIELD}>
                 <FieldLabel htmlFor={k} required>{label ?? FIELD_LABELS[k]}</FieldLabel>
                 <select id={k} value={(a[k] as string) ?? ""} onChange={e => set(k, e.target.value as never)}
                     className={`${inputCls(k)} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-no-repeat bg-[right_0.9rem_center] pr-10 ${a[k] ? "" : "text-slate-400"}`}>
@@ -539,13 +546,14 @@ export function AwardNominationForm({ eventKey, terms }: { eventKey: string; ter
                                                 <Section icon={MapPin} title="Address">
                                                     {text("addressStreet")}
                                                     {text("addressLine2")}
-                                                    <div className="grid sm:grid-cols-2 gap-5">
+                                                    {/* No State field for Singapore — City then takes the full row */}
+                                                    <div className={shown.has("addressState") ? "grid sm:grid-cols-2 gap-5" : "grid gap-5"}>
                                                         {text("addressCity")}
                                                         {india ? select("addressState", INDIAN_STATES) : text("addressState")}
                                                     </div>
                                                     <div className="grid sm:grid-cols-2 gap-5">
                                                         {text("addressPostal")}
-                                                        <div>
+                                                        <div className={FIELD}>
                                                             <FieldLabel htmlFor="addressCountry" required>{FIELD_LABELS.addressCountry}</FieldLabel>
                                                             <select id="addressCountry" value={a.addressCountry ?? ""}
                                                                 className={`${inputCls("addressCountry")} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-no-repeat bg-[right_0.9rem_center] pr-10`}
