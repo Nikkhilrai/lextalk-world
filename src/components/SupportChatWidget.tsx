@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Loader2, Check, ChevronRight, ArrowUpRight } from "lucide-react";
 import { setChatOpen } from "@/lib/chat-widget-state";
@@ -403,7 +404,17 @@ function VisitorForm({ onSaved }: { onSaved: (visitor: Visitor) => void }) {
 }
 
 /* ── Widget ────────────────────────────────────────────────────────────────── */
+// Pages where Lex stays hidden: the standalone award nomination forms, where it
+// covers fields and pulls people away mid-form (help is the email on the form).
+const HIDDEN_ON = /^\/[^/]+\/nominate\/?$/;
+
 export function SupportChatWidget() {
+    const pathname = usePathname();
+    if (pathname && HIDDEN_ON.test(pathname)) return null;
+    return <SupportChatWidgetInner />;
+}
+
+function SupportChatWidgetInner() {
     const [open, setOpen] = useState(false);
     const [showTeaser, setShowTeaser] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);

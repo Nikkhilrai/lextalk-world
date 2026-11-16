@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/Footer";
+import { NominationFooter } from "@/components/award-nominations/NominationFooter";
 import { AwardNominationForm } from "@/components/award-nominations/AwardNominationForm";
 import { LegalHonorTerms } from "@/components/award-nominations/LegalHonorTerms";
 
@@ -26,7 +26,7 @@ export default function SingaporeNominatePage() {
     return (
         <main className="min-h-screen">
             <AwardNominationForm eventKey="singapore-2027" terms={<LegalHonorTerms conference="Singapore Conference" passUsd={1200} />} />
-            <Footer />
+            <NominationFooter />
         </main>
     );
 }

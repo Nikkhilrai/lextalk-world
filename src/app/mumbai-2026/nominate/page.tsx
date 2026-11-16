@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/Footer";
+import { NominationFooter } from "@/components/award-nominations/NominationFooter";
 import { AwardNominationForm } from "@/components/award-nominations/AwardNominationForm";
 import { LegalHonorTerms } from "@/components/award-nominations/LegalHonorTerms";
 
@@ -21,7 +21,7 @@ export default function MumbaiNominatePage() {
     return (
         <main className="min-h-screen">
             <AwardNominationForm eventKey="mumbai-2026" terms={<LegalHonorTerms conference="India Conference" passUsd={1000} />} />
-            <Footer />
+            <NominationFooter />
         </main>
     );
 }
