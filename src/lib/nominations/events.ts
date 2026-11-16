@@ -38,6 +38,19 @@ export type NominationEvent = {
         exploreHref: string;
         exploreLabel: string;
     };
+    /** Wording for the nominee's confirmation emails. */
+    email: {
+        /** e.g. "The Medal of Excellence" — used in subject lines and headings. */
+        award: string;
+        /** "What happens next" after submitting (numbered list). */
+        nextSteps: string[];
+        /** "What happens next" once the fee is paid. */
+        afterPayment: string[];
+        /** Address nominees' replies go to. */
+        replyTo: string;
+        /** Public page the email links to for programme details. */
+        detailsHref: string;
+    };
 };
 
 function build(e: Omit<NominationEvent, "rules">): NominationEvent {
@@ -72,6 +85,22 @@ export const MUMBAI_EVENT = build({
         paidMessage: "Thank you. We've received your nomination fee and emailed you a confirmation. The Awards Committee will send you a detailed scorecard once the evaluation is complete.",
         exploreHref: "/mumbai-2026",
         exploreLabel: "Explore LexTalk World Mumbai",
+    },
+    email: {
+        award: "Legal Honor Global Awards 2026",
+        nextSteps: [
+            "Complete the USD 50 nomination fee, if you haven't already — your nomination is considered once it is paid.",
+            "The Legal Honor Global Awards Jury Panel independently screens and evaluates every nomination.",
+            "The Awards Committee emails you a detailed scorecard. The qualifying score is 80 out of 100.",
+            "If you make the cut, we confirm you as a winner at LexTalk World Mumbai (7–8 December 2026). If not, the nomination fee is refunded in full.",
+        ],
+        afterPayment: [
+            "The Legal Honor Global Awards Jury Panel will evaluate your nomination.",
+            "Once the evaluation is complete, the Awards Committee will email you a detailed scorecard.",
+            "Winners are confirmed for the ceremony at LexTalk World Mumbai on 7–8 December 2026. If you do not make the cut, the fee is refunded in full.",
+        ],
+        replyTo: "info@lextalkworld.in",
+        detailsHref: "/mumbai-2026",
     },
 });
 
@@ -169,6 +198,22 @@ export const SINGAPORE_EVENT = build({
         paidMessage: "Thank you. We've received your nomination fee and emailed you a confirmation. Every eligible nomination is independently reviewed; you'll hear the result once review and moderation are complete.",
         exploreHref: "/singapore-2027",
         exploreLabel: "Explore LexTalk World Singapore",
+    },
+    email: {
+        award: "The Medal of Excellence 2027",
+        nextSteps: [
+            "Complete the USD 50 nomination fee, if you haven't already — your nomination is reviewed once it is paid.",
+            "Our team checks eligibility and category fit, and may contact you to verify the facts stated in your nomination.",
+            "Subject-matter experts independently score your nomination against the published criteria: impact and outcomes, innovation and implementation, leadership and governance, and relevance to Singapore and APAC.",
+            "You'll receive the result by email. Recognised awardees are announced at LexTalk World Singapore on 4 February 2027; if you are not recognised, the nomination fee is refunded in full.",
+        ],
+        afterPayment: [
+            "Our team checks eligibility and category fit, and may contact you to verify the facts stated in your nomination.",
+            "Subject-matter experts independently score your nomination, moderated by an awards chair. All material is treated as confidential.",
+            "You'll receive the result by email once review and moderation are complete. Recognised awardees are announced at the ceremony on 4 February 2027 in Singapore; if you are not recognised, the fee is refunded in full.",
+        ],
+        replyTo: "info@lextalkworld.in",
+        detailsHref: "/singapore-2027/awards",
     },
 });
 

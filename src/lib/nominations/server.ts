@@ -79,10 +79,99 @@ function answersTable(a: NominationAnswers, labels: Record<FieldKey, string>): s
     return `<table style="width:100%;border-collapse:collapse">${rows.join("")}</table>`;
 }
 
+const SITE = "https://lextalkworld.in";
+
 function shell(title: string, body: string): string {
     return `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:20px">
 <div style="background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);padding:20px;border-radius:10px 10px 0 0"><h1 style="color:#fff;margin:0;font-size:20px">${title}</h1></div>
 <div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 10px 10px;color:#334155;font-size:14px;line-height:1.6">${body}</div></div>`;
+}
+
+/** "Group - Award" → "Award" with the group underneath, for display. */
+function categoryHtml(category: string): string {
+    const i = category.indexOf(" - ");
+    if (i < 0) return `<strong>${esc(category)}</strong>`;
+    return `<strong>${esc(category.slice(i + 3))}</strong><br/><span style="color:#94a3b8;font-size:12px">${esc(category.slice(0, i))}</span>`;
+}
+
+/** Branded layout for emails the nominee receives. */
+function nomineeShell(ev: NominationEvent, kicker: string, title: string, body: string): string {
+    return `<!doctype html><html><body style="margin:0;padding:0;background:#f4f1ea">
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px 16px">
+<div style="background:#0b1120;border-radius:14px 14px 0 0;padding:26px 28px 22px;text-align:center">
+<img src="${SITE}/logo/lextalkworld-logo.png" alt="LexTalk World" width="150" style="display:inline-block;width:150px;height:auto;border:0" />
+<p style="margin:18px 0 0;color:#fbbf24;font-size:11px;font-weight:bold;letter-spacing:3px;text-transform:uppercase">${esc(kicker)}</p>
+<h1 style="margin:8px 0 0;color:#ffffff;font-family:Georgia,'Times New Roman',serif;font-size:26px;line-height:1.25;font-weight:normal">${esc(title)}</h1>
+<p style="margin:10px 0 0;color:#94a3b8;font-size:13px">${esc(ev.conferenceName)} · ${esc(ev.details)}</p>
+</div>
+<div style="height:3px;background:linear-gradient(90deg,#fbbf24,#f59e0b,#f97316)"></div>
+<div style="background:#ffffff;border:1px solid #e7e2d6;border-top:none;border-radius:0 0 14px 14px;padding:28px;color:#334155;font-size:15px;line-height:1.65">${body}</div>
+<p style="text-align:center;color:#94a3b8;font-size:12px;line-height:1.6;margin:18px 0 0">Questions? Just reply to this email or write to <a href="mailto:${ev.email.replyTo}" style="color:#b45309">${ev.email.replyTo}</a>.<br/>LexTalk World · <a href="${SITE}${ev.email.detailsHref}" style="color:#94a3b8">${SITE.replace("https://", "")}${ev.email.detailsHref}</a></p>
+</div></body></html>`;
+}
+
+function summaryCard(rows: [string, string][]): string {
+    return `<table role="presentation" style="width:100%;border-collapse:collapse;background:#faf8f4;border:1px solid #eee7d8;border-radius:10px;margin:20px 0">${rows
+        .map(([k, v], i) => `<tr><td style="padding:12px 16px;${i ? "border-top:1px solid #eee7d8;" : ""}color:#64748b;font-size:13px;width:38%;vertical-align:top">${esc(k)}</td><td style="padding:12px 16px;${i ? "border-top:1px solid #eee7d8;" : ""}color:#0f172a;font-size:14px">${v}</td></tr>`)
+        .join("")}</table>`;
+}
+
+function stepsList(title: string, steps: string[]): string {
+    return `<p style="margin:26px 0 10px;color:#0f172a;font-weight:bold;font-size:15px">${esc(title)}</p>
+<table role="presentation" style="width:100%;border-collapse:collapse">${steps
+        .map((t, i) => `<tr><td style="width:34px;vertical-align:top;padding:6px 0"><span style="display:inline-block;width:24px;height:24px;line-height:24px;border-radius:12px;background:#0b1120;color:#fbbf24;font-size:12px;font-weight:bold;text-align:center">${i + 1}</span></td><td style="padding:6px 0;color:#475569;font-size:14px;line-height:1.6">${esc(t)}</td></tr>`)
+        .join("")}</table>`;
+}
+
+function button(href: string, label: string): string {
+    return `<p style="margin:22px 0 4px"><a href="${href}" style="display:inline-block;background:#f59e0b;color:#0b1120;padding:13px 24px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:15px">${esc(label)}</a></p>`;
+}
+
+/** Link that reopens the form on the payment step for this nomination. */
+export function paymentLink(ev: NominationEvent, id: string): string {
+    return `${SITE}/${ev.event}/nominate?pay=${encodeURIComponent(id)}&t=${nominationToken(id)}`;
+}
+
+/** Email to the nominee right after the form is submitted. Exported so it can be previewed. */
+export function nominationReceivedEmail(ev: NominationEvent, n: { id: string; name: string; category: string }) {
+    const first = n.name.split(" ")[0] || n.name;
+    return {
+        subject: `Nomination received — ${ev.email.award}`,
+        html: nomineeShell(ev, ev.email.award, "Thank you for your nomination", `
+<p style="margin:0 0 14px">Dear ${esc(first)},</p>
+<p style="margin:0 0 14px">Thank you for submitting a nomination for <strong>${esc(ev.email.award)}</strong> at ${esc(ev.conferenceName)}. We have received it, and this email confirms your details.</p>
+${summaryCard([
+    ["Reference", `<span style="font-family:monospace">${esc(n.id)}</span>`],
+    ["Nominee", esc(n.name)],
+    ["Category", categoryHtml(n.category)],
+    ["Nomination fee", `USD ${ev.feeUsd} <span style="color:#94a3b8;font-size:12px">· fully refundable if not recognised</span>`],
+])}
+<p style="margin:0">Your nomination is ${ev.event === "mumbai-2026" ? "considered" : "reviewed"} once the nomination fee is paid. If you didn't complete the payment, you can do it here:</p>
+${button(paymentLink(ev, n.id), `Complete payment — USD ${ev.feeUsd}`)}
+<p style="margin:6px 0 0;color:#94a3b8;font-size:12px">Already paid? You'll get a separate payment confirmation — no need to do anything else.</p>
+${stepsList("What happens next", ev.email.nextSteps)}
+<p style="margin:24px 0 0">Warm regards,<br/><strong>The LexTalk World Awards Team</strong></p>`),
+    };
+}
+
+/** Email to the nominee once the fee is paid. Exported so it can be previewed. */
+export function nominationPaidEmail(ev: NominationEvent, n: { id: string; name: string; category: string; paid: string; paymentId: string }) {
+    const first = n.name.split(" ")[0] || n.name;
+    return {
+        subject: `Nomination confirmed — ${ev.email.award}`,
+        html: nomineeShell(ev, ev.email.award, "Your nomination is confirmed", `
+<p style="margin:0 0 14px">Dear ${esc(first)},</p>
+<p style="margin:0 0 14px">We have received your nomination fee. Your nomination for <strong>${esc(ev.email.award)}</strong> is complete and is now with the awards panel.</p>
+${summaryCard([
+    ["Reference", `<span style="font-family:monospace">${esc(n.id)}</span>`],
+    ["Nominee", esc(n.name)],
+    ["Category", categoryHtml(n.category)],
+    ["Amount paid", `<strong>${esc(n.paid)}</strong>`],
+    ["Payment ID", `<span style="font-family:monospace">${esc(n.paymentId)}</span>`],
+])}
+${stepsList("What happens next", ev.email.afterPayment)}
+<p style="margin:24px 0 0">Warm regards,<br/><strong>The LexTalk World Awards Team</strong></p>`),
+    };
 }
 
 function resend(): Resend | null {
@@ -93,18 +182,8 @@ export async function sendNominationReceivedEmails(ev: NominationEvent, n: { id:
     const r = resend();
     if (!r) return;
     try {
-        const { error: e1 } = await r.emails.send({
-            from: FROM,
-            to: [n.email],
-            subject: `Nomination received — ${ev.eventName}`,
-            html: shell("Thank you for your nomination", `
-<p>Dear ${esc(n.name)},</p>
-<p>We have received your nomination for the <strong>${esc(ev.eventName)}</strong> (${esc(ev.details)}).</p>
-<p><strong>Category:</strong> ${esc(n.category)}</p>
-<p>Your nomination is considered once the nomination fee of <strong>USD ${ev.feeUsd}</strong> is paid. If you haven't completed the payment yet, simply reply to this email and our team will help you.</p>
-<p>All nominations undergo an independent screening and evaluation process by the ${esc(ev.jury)}. The fee is fully refundable if you do not make the cut.</p>
-<p style="color:#94a3b8;font-size:12px;margin-top:24px">Reference: ${esc(n.id)}</p>`),
-        });
+        const mail = nominationReceivedEmail(ev, n);
+        const { error: e1 } = await r.emails.send({ from: FROM, to: [n.email], replyTo: ev.email.replyTo, subject: mail.subject, html: mail.html });
         if (e1) console.error("[award-nominations] nominee email rejected:", e1);
 
         const { error: e2 } = await r.emails.send({
@@ -128,16 +207,9 @@ export async function sendNominationPaidEmails(ev: NominationEvent, n: { id: str
     const r = resend();
     if (!r) return;
     try {
-        await r.emails.send({
-            from: FROM,
-            to: [n.email],
-            subject: `Payment received — ${ev.eventName}`,
-            html: shell("Your nomination is complete", `
-<p>Dear ${esc(n.name)},</p>
-<p>We have received your nomination fee of <strong>${esc(n.paid)}</strong>. Your nomination for <strong>${esc(n.category)}</strong> is now with the Awards Committee.</p>
-<p>${ev.event === "mumbai-2026" ? "Once the evaluation is complete, the committee will email you a detailed scorecard." : "Every eligible nomination is independently reviewed; we will email you the result once review and moderation are complete."}</p>
-<p style="color:#94a3b8;font-size:12px;margin-top:24px">Payment ID: ${esc(n.paymentId)} · Reference: ${esc(n.id)}</p>`),
-        });
+        const mail = nominationPaidEmail(ev, n);
+        const { error } = await r.emails.send({ from: FROM, to: [n.email], replyTo: ev.email.replyTo, subject: mail.subject, html: mail.html });
+        if (error) console.error("[award-nominations] paid email rejected:", error);
         await r.emails.send({
             from: FROM,
             to: NOMINATION_TEAM,

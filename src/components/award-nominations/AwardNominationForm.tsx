@@ -111,6 +111,18 @@ export function AwardNominationForm({ eventKey, terms }: { eventKey: string; ter
     }, []);
     const onPhone = useCallback((v: string) => set("phone", v), [set]);
 
+    // Arriving from the "Complete payment" link in the confirmation email
+    // (?pay=<id>&t=<token>): open the payment step for that nomination. The
+    // server checks the token and refuses nominations that are already paid.
+    useEffect(() => {
+        const q = new URLSearchParams(window.location.search);
+        const id = q.get("pay"), token = q.get("t");
+        if (id && token && /^[a-z0-9]{10,40}$/i.test(id) && /^[a-f0-9]{64}$/.test(token)) {
+            setSaved({ id, token });
+            setStep(6);
+        }
+    }, []);
+
     useEffect(() => {
         if (firstRender.current) { firstRender.current = false; return; }
         topRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
