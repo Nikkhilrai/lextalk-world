@@ -1,7 +1,10 @@
 import { Check, ShieldCheck, Star, Trophy } from "lucide-react";
 
-/* Terms text from the Zoho "Legal Honor Global Awards - 2026 Mumbai" form. */
-export function MumbaiTerms() {
+/*
+ * Legal Honor Global Awards terms, from the Zoho nomination forms. Shared by
+ * Mumbai and Singapore; only the awardee pass line differs.
+ */
+export function LegalHonorTerms({ conference, passUsd }: { conference: string; passUsd: number }) {
     const Item = ({ n, title, children }: { n: number; title: string; children: React.ReactNode }) => (
         <div className="relative pl-12">
             <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-900 text-amber-400 text-sm font-bold flex items-center justify-center">{n}</span>
@@ -39,7 +42,7 @@ export function MumbaiTerms() {
                         <div className="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200">
                             <p className="font-semibold text-emerald-800 flex items-center gap-1.5 mb-1"><Trophy className="w-4 h-4" /> Winner</p>
                             <p className="text-sm">We will confirm you as a winner at the LexTalk World conference and sign you up for the Awardee pass.</p>
-                            <p className="text-sm mt-2 text-slate-800">India Conference — Standard In-Person Awardee Pass: <strong>USD 1000</strong> (inclusive of taxes)</p>
+                            <p className="text-sm mt-2 text-slate-800">{conference} — Standard In-Person Awardee Pass: <strong>USD {passUsd}</strong> (inclusive of taxes)</p>
                         </div>
                         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                             <p className="font-semibold text-slate-800 mb-1">Fail to make the cut</p>

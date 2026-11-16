@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { AwardNominationForm } from "@/components/award-nominations/AwardNominationForm";
-import { SingaporeTerms } from "./SingaporeTerms";
+import { LegalHonorTerms } from "@/components/award-nominations/LegalHonorTerms";
 
 const TITLE = "Nominate — The Medal of Excellence 2027 | LexTalk World Singapore";
 const DESCRIPTION = "Submit a nomination for The Medal of Excellence at LexTalk World Singapore, 4 February 2027 — recognising responsible AI, legal innovation, governance, cybersecurity and digital trust across Singapore and APAC.";
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function SingaporeNominatePage() {
     return (
         <main className="min-h-screen">
-            <AwardNominationForm eventKey="singapore-2027" terms={<SingaporeTerms />} />
+            <AwardNominationForm eventKey="singapore-2027" terms={<LegalHonorTerms conference="Singapore Conference" passUsd={1200} />} />
             <Footer />
         </main>
     );

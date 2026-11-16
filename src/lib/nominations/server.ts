@@ -146,7 +146,7 @@ ${summaryCard([
     ["Category", categoryHtml(n.category)],
     ["Nomination fee", `USD ${ev.feeUsd} <span style="color:#94a3b8;font-size:12px">· fully refundable if not recognised</span>`],
 ])}
-<p style="margin:0">Your nomination is ${ev.event === "mumbai-2026" ? "considered" : "reviewed"} once the nomination fee is paid. If you didn't complete the payment, you can do it here:</p>
+<p style="margin:0">Your nomination is considered once the nomination fee is paid. If you didn't complete the payment, you can do it here:</p>
 ${button(paymentLink(ev, n.id), `Complete payment — USD ${ev.feeUsd}`)}
 <p style="margin:6px 0 0;color:#94a3b8;font-size:12px">Already paid? You'll get a separate payment confirmation — no need to do anything else.</p>
 ${stepsList("What happens next", ev.email.nextSteps)}

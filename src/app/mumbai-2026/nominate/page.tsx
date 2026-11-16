@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { AwardNominationForm } from "@/components/award-nominations/AwardNominationForm";
-import { MumbaiTerms } from "./MumbaiTerms";
+import { LegalHonorTerms } from "@/components/award-nominations/LegalHonorTerms";
 
 export const metadata: Metadata = {
     title: { absolute: "Nominate — Legal Honor Global Awards 2026 Mumbai | LexTalk World" },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function MumbaiNominatePage() {
     return (
         <main className="min-h-screen">
-            <AwardNominationForm eventKey="mumbai-2026" terms={<MumbaiTerms />} />
+            <AwardNominationForm eventKey="mumbai-2026" terms={<LegalHonorTerms conference="India Conference" passUsd={1000} />} />
             <Footer />
         </main>
     );
