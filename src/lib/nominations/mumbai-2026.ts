@@ -109,7 +109,16 @@ export const CATEGORY_GROUPS: { group: string; options: string[] }[] = [
 ];
 
 /** Category values are stored as "Group - Option", like Zoho's export ("Independent Lawyer/Advocate - General"). */
-export const CATEGORY_VALUES = CATEGORY_GROUPS.flatMap(g => g.options.map(o => `${g.group} - ${o}`));
+export const categoryValuesOf = (groups: { group: string; options: string[] }[]) =>
+    groups.flatMap(g => g.options.map(o => `${g.group} - ${o}`));
+export const CATEGORY_VALUES = categoryValuesOf(CATEGORY_GROUPS);
+
+/**
+ * The parts of the rules that differ between events (Singapore has its own
+ * categories and a few extra roles). Defaults to Mumbai's.
+ */
+export type NominationRules = { categoryValues: string[]; individualRoles: string[]; firmTypes: string[] };
+export const MUMBAI_RULES: NominationRules = { categoryValues: CATEGORY_VALUES, individualRoles: INDIVIDUAL_ROLES, firmTypes: FIRM_TYPES };
 
 export const PRACTICE_AREAS = [
     "Administrative", "Capital Markets", "Banking & Finance", "M&A", "Construction",
@@ -263,6 +272,9 @@ export function visibleFields(a: NominationAnswers): Set<FieldKey> {
         "addressStreet", "addressLine2", "addressCity", "addressState", "addressPostal", "addressCountry"] as FieldKey[])
         .forEach(f => v.add(f));
 
+    // Singapore has no states/regions, so don't ask for one.
+    if (a.addressCountry === "Singapore") v.delete("addressState");
+
     if (noneOfAbove) v.add("roleOther");
     else v.add("category");
 
@@ -292,7 +304,7 @@ function str(x: unknown): string {
  * currently visible are checked, so a hidden question can never block anyone.
  * Returns { field: message } — empty when valid.
  */
-export function validateNomination(a: NominationAnswers, step?: 1 | 2 | 3 | 4 | 5): Partial<Record<FieldKey, string>> {
+export function validateNomination(a: NominationAnswers, step?: 1 | 2 | 3 | 4 | 5, rules: NominationRules = MUMBAI_RULES): Partial<Record<FieldKey, string>> {
     const errors: Partial<Record<FieldKey, string>> = {};
     const shown = visibleFields(a);
     const keys = step ? STEP_FIELDS[step] : (Object.values(STEP_FIELDS).flat() as FieldKey[]);
@@ -335,10 +347,10 @@ export function validateNomination(a: NominationAnswers, step?: 1 | 2 | 3 | 4 | 
                 if (!(NOMINATE_AS as readonly string[]).includes(value)) errors[key] = "Choose an option.";
                 break;
             case "individualRole":
-                if (!INDIVIDUAL_ROLES.includes(value)) errors[key] = "Choose an option.";
+                if (!rules.individualRoles.includes(value)) errors[key] = "Choose an option.";
                 break;
             case "firmType":
-                if (!FIRM_TYPES.includes(value)) errors[key] = "Choose an option.";
+                if (!rules.firmTypes.includes(value)) errors[key] = "Choose an option.";
                 break;
             case "dualQualified":
                 if (!DUAL_QUALIFIED.includes(value)) errors[key] = "Choose Yes or No.";
@@ -348,7 +360,7 @@ export function validateNomination(a: NominationAnswers, step?: 1 | 2 | 3 | 4 | 
                 if (!YEAR_RANGES.includes(value)) errors[key] = "Choose an option.";
                 break;
             case "category":
-                if (!CATEGORY_VALUES.includes(value)) errors[key] = "Choose a category.";
+                if (!rules.categoryValues.includes(value)) errors[key] = "Choose a category.";
                 break;
         }
     }

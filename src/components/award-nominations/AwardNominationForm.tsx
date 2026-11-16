@@ -12,22 +12,22 @@ import {
 import { PhoneInput } from "@/components/PhoneInput";
 import { COUNTRIES_DATA } from "@/lib/countries";
 import {
-    CATEGORY_GROUPS, DUAL_QUALIFIED, FIELD_LABELS, FILE_EXTENSIONS, FIRM_TYPES, FieldKey, INDIVIDUAL_ROLES,
-    MAX_FILE_BYTES, MAX_FILES, MUMBAI_2026_NOMINATION as EVENT, NOMINATE_AS, NominationAnswers,
-    PRACTICE_AREAS, YEAR_RANGES, validateNomination, visibleFields,
+    DUAL_QUALIFIED, FILE_EXTENSIONS, FieldKey, MAX_FILE_BYTES, MAX_FILES, NOMINATE_AS, NominationAnswers,
+    PRACTICE_AREAS, YEAR_RANGES, validateNomination as validateWith, visibleFields,
 } from "@/lib/nominations/mumbai-2026";
+import { nominationEvent } from "@/lib/nominations/events";
 
 declare global { interface Window { Razorpay: any } }
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
-const STEPS: { title: string; hint: string }[] = [
+const stepsFor = (feeUsd: number): { title: string; hint: string }[] => [
     { title: "Terms & Conditions", hint: "Read and accept" },
     { title: "Personal Information", hint: "Your contact details" },
     { title: "Nomination", hint: "Profile and award category" },
     { title: "Key Practice Areas", hint: "Choose all that apply" },
     { title: "Your Story", hint: "Achievements and documents" },
-    { title: "Payment", hint: `USD ${EVENT.feeUsd} nomination fee` },
+    { title: "Payment", hint: `USD ${feeUsd} nomination fee` },
 ];
 
 const INDIAN_STATES = [
@@ -73,10 +73,18 @@ function fileSize(bytes: number) {
     return bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
 }
 
-export function MumbaiNominationForm() {
+/**
+ * The multi-step award nomination form, shared by every event in
+ * lib/nominations/events.ts. `terms` is the event's own Terms & Conditions.
+ */
+export function AwardNominationForm({ eventKey, terms }: { eventKey: string; terms: React.ReactNode }) {
+    const EVENT = nominationEvent(eventKey)!;
+    const FIELD_LABELS = EVENT.labels;
+    const STEPS = stepsFor(EVENT.feeUsd);
+    const validateNomination = (x: NominationAnswers, s?: 1 | 2 | 3 | 4 | 5) => validateWith(x, s, EVENT.rules);
     const reduceMotion = useReducedMotion();
     const [step, setStep] = useState<Step>(1);
-    const [a, setA] = useState<NominationAnswers>({ practiceAreas: [], addressCountry: "India" });
+    const [a, setA] = useState<NominationAnswers>({ practiceAreas: [], addressCountry: EVENT.ui.defaultCountry });
     const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
     const [hp, setHp] = useState("");
     const [files, setFiles] = useState<File[]>([]);
@@ -110,7 +118,7 @@ export function MumbaiNominationForm() {
 
     useEffect(() => {
         if (step === 6 && !fee) {
-            fetch("/api/award-nominations/fee").then(r => r.json()).then(setFee).catch(() => setFee({ usd: `USD ${EVENT.feeUsd}`, inr: null }));
+            fetch(`/api/award-nominations/fee?event=${EVENT.event}`).then(r => r.json()).then(setFee).catch(() => setFee({ usd: `USD ${EVENT.feeUsd}`, inr: null }));
         }
     }, [step, fee]);
 
@@ -350,17 +358,17 @@ export function MumbaiNominationForm() {
             {/* Hero */}
             <div ref={topRef} className="relative z-10 max-w-3xl mx-auto px-4 pt-10 md:pt-14 pb-10 text-center scroll-mt-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-amber-200 text-amber-700 text-xs font-bold uppercase tracking-[0.2em] shadow-sm">
-                    <Trophy className="w-3.5 h-3.5" /> Legal Honor Global Awards
+                    <Trophy className="w-3.5 h-3.5" /> {EVENT.ui.badge}
                 </div>
                 <h1 className="mt-5 font-serif text-[2.1rem] leading-tight md:text-5xl font-bold text-slate-900">
-                    Nominate for <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">Mumbai 2026</span>
+                    Nominate for <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">{EVENT.ui.heroHighlight}</span>
                 </h1>
                 <p className="mt-4 text-slate-600 md:text-lg max-w-xl mx-auto">
-                    Recognising excellence across law firms, in-house teams and independent practice at LexTalk World Mumbai.
+                    {EVENT.ui.heroBlurb}
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-2 text-[13px] text-slate-700">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"><CalendarDays className="w-3.5 h-3.5 text-amber-600" /> 7–8 December 2026</span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"><MapPin className="w-3.5 h-3.5 text-amber-600" /> Radisson Blu, Mumbai International Airport</span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"><CalendarDays className="w-3.5 h-3.5 text-amber-600" /> {EVENT.ui.dateChip}</span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"><MapPin className="w-3.5 h-3.5 text-amber-600" /> {EVENT.ui.venueChip}</span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"><ShieldCheck className="w-3.5 h-3.5 text-amber-600" /> USD {EVENT.feeUsd} fee · refundable</span>
                 </div>
             </div>
@@ -393,7 +401,7 @@ export function MumbaiNominationForm() {
                     </ol>
                     <div className="mt-8 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs text-slate-600 leading-relaxed">
                         <p className="font-semibold text-slate-800 flex items-center gap-1.5 mb-1"><Award className="w-3.5 h-3.5 text-amber-600" /> Independent jury</p>
-                        Every nomination is screened by the Legal Honor Global Awards Jury Panel. Qualifying score: 80/100.
+                        {EVENT.ui.juryNote}
                     </div>
                 </aside>
 
@@ -430,7 +438,7 @@ export function MumbaiNominationForm() {
                                 <motion.div key={paid ? "paid" : step} {...motionProps} className="space-y-8">
                                     {step === 1 && (
                                         <>
-                                            <Terms />
+                                            {terms}
                                             <label className={`relative flex items-start gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${a.acceptedTerms
                                                 ? "border-amber-500 bg-amber-50/70 ring-4 ring-amber-500/10"
                                                 : errors.acceptedTerms ? "border-red-300" : "border-slate-200 hover:border-amber-300"}`}>
@@ -463,8 +471,8 @@ export function MumbaiNominationForm() {
                                         <>
                                             <Section icon={UserRound} title="Nomination type">
                                                 {choices("nominateAs", NOMINATE_AS, "sm:grid-cols-2")}
-                                                {select("individualRole", INDIVIDUAL_ROLES)}
-                                                {select("firmType", FIRM_TYPES)}
+                                                {select("individualRole", EVENT.individualRoles)}
+                                                {select("firmType", EVENT.firmTypes)}
                                                 {text("roleOther")}
                                             </Section>
 
@@ -504,7 +512,7 @@ export function MumbaiNominationForm() {
                                                         <select id="category" value={a.category ?? ""} onChange={e => set("category", e.target.value)}
                                                             className={`${inputCls("category")} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-no-repeat bg-[right_0.9rem_center] pr-10 ${a.category ? "" : "text-slate-400"}`}>
                                                             <option value="">Select the award category</option>
-                                                            {CATEGORY_GROUPS.map(g => (
+                                                            {EVENT.categoryGroups.map(g => (
                                                                 <optgroup key={g.group} label={g.group}>
                                                                     {g.options.map(o => <option key={o} value={`${g.group} - ${o}`} className="text-slate-900">{o}</option>)}
                                                                 </optgroup>
@@ -570,10 +578,10 @@ export function MumbaiNominationForm() {
                                     {step === 5 && (
                                         <>
                                             <div className="space-y-7">
-                                                {essay("essayReach", "Include details about your education, experience, key practice areas and examples of important cases or disputes.")}
-                                                {essay("essayAchievements", "Include details and examples of your achievements and their impact.")}
-                                                {essay("essayInnovation", "Share examples of your innovative approach that benefited your clients or company.")}
-                                                {essay("essayFuture", "Describe your continuous professional development and how you adapt to new technologies.")}
+                                                {essay("essayReach", EVENT.ui.essayHints.essayReach)}
+                                                {essay("essayAchievements", EVENT.ui.essayHints.essayAchievements)}
+                                                {essay("essayInnovation", EVENT.ui.essayHints.essayInnovation)}
+                                                {essay("essayFuture", EVENT.ui.essayHints.essayFuture)}
                                             </div>
 
                                             <Section icon={UploadCloud} title="Supporting documents">
@@ -668,9 +676,9 @@ export function MumbaiNominationForm() {
                                                 </span>
                                             </div>
                                             <h2 className="font-serif text-3xl font-bold text-slate-900">Your nomination is complete</h2>
-                                            <p className="text-slate-600 max-w-md mx-auto">Thank you. We&apos;ve received your nomination fee and emailed you a confirmation. The Awards Committee will send you a detailed scorecard once the evaluation is complete.</p>
-                                            <Link href="/mumbai-2026" className="inline-flex items-center gap-2 mt-2 px-6 h-12 rounded-2xl bg-slate-900 text-white font-semibold hover:bg-slate-800">
-                                                Explore LexTalk World Mumbai <ArrowRight className="w-4 h-4 text-amber-400" />
+                                            <p className="text-slate-600 max-w-md mx-auto">{EVENT.ui.paidMessage}</p>
+                                            <Link href={EVENT.ui.exploreHref} className="inline-flex items-center gap-2 mt-2 px-6 h-12 rounded-2xl bg-slate-900 text-white font-semibold hover:bg-slate-800">
+                                                {EVENT.ui.exploreLabel} <ArrowRight className="w-4 h-4 text-amber-400" />
                                             </Link>
                                         </div>
                                     )}
@@ -705,81 +713,6 @@ export function MumbaiNominationForm() {
                     <p className="mt-6 text-center text-xs text-slate-500">
                         Questions? Write to <a href="mailto:info@lextalkworld.in" className="text-amber-700 hover:underline">info@lextalkworld.in</a>
                     </p>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-/* Terms text from the Zoho "Legal Honor Global Awards - 2026 Mumbai" form. */
-function Terms() {
-    const Item = ({ n, title, children }: { n: number; title: string; children: React.ReactNode }) => (
-        <div className="relative pl-12">
-            <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-900 text-amber-400 text-sm font-bold flex items-center justify-center">{n}</span>
-            <h3 className="font-semibold text-slate-900 pt-1">{title}</h3>
-            <div className="mt-2 text-[14.5px] text-slate-600 leading-relaxed">{children}</div>
-        </div>
-    );
-    return (
-        <div className="space-y-6">
-            <div className="flex gap-3 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/70">
-                <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-700">All nominations undergo an independent screening and evaluation process by the <strong>Legal Honor Global Awards Jury Panel</strong>. All fields marked with <span className="text-amber-600 font-bold">*</span> are required.</p>
-            </div>
-
-            <div className="max-h-[480px] overflow-y-auto pr-2 -mr-2 space-y-7 [scrollbar-width:thin]">
-                <Item n={1} title="Terms and conditions">
-                    <ul className="space-y-2 list-disc pl-4 marker:text-amber-500">
-                        <li>All awardees are required to be physically or virtually present at the event to receive the Award. In case the Awardee is not able to attend, they can send a person on their behalf.</li>
-                        <li>Filling in the nomination form only does not ensure that you will be selected for the Award.</li>
-                        <li>The Awardees will be selected on the basis of parameters set by our Awards Committee and will be intimated accordingly.</li>
-                        <li>In case you do not win the award nomination, the nomination fee <strong className="text-slate-900">USD 50</strong> is completely refundable.</li>
-                        <li>All Awardees will need to book the Awardee pass to attend the conference and receive their award.</li>
-                        <li>The decision of the Awards Committee will be final and binding.</li>
-                        <li>LexTalk World and Legal Honor are brought to you by Canada-based firm ClickAway Creators (a division of CAC Media &amp; Events) and managed by MantranexVista, which reserves the right to make any changes to the event, as it deems necessary.</li>
-                    </ul>
-                </Item>
-                <Item n={2} title="Evaluation">
-                    Based on your answers and our own research, our Awards Committee rates you on different parameters such as the overall reach, impact on the legal industry, knowledge and market demand, innovative ideas and suggestions, futuristic spirit and approach, etc.
-                </Item>
-                <Item n={3} title="Scorecard">
-                    Once the Awards Committee completes the evaluation, they will share a detailed scorecard with each nominee via email. They give you a score out of 100 in each of your answers; the cut-off to qualify is <strong className="text-slate-900">80 points out of 100</strong>.
-                </Item>
-                <Item n={4} title="Outcome">
-                    <div className="grid sm:grid-cols-2 gap-3 mt-1">
-                        <div className="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200">
-                            <p className="font-semibold text-emerald-800 flex items-center gap-1.5 mb-1"><Trophy className="w-4 h-4" /> Winner</p>
-                            <p className="text-sm">We will confirm you as a winner at the LexTalk World conference and sign you up for the Awardee pass.</p>
-                            <p className="text-sm mt-2 text-slate-800">India Conference — Standard In-Person Awardee Pass: <strong>USD 1000</strong> (inclusive of taxes)</p>
-                        </div>
-                        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                            <p className="font-semibold text-slate-800 mb-1">Fail to make the cut</p>
-                            <p className="text-sm">We will issue a full refund of the nomination fee (USD 50).</p>
-                        </div>
-                    </div>
-                </Item>
-                <Item n={5} title="The event">
-                    You attend the event, accept the award, and are part of great sessions while networking with your peers. As an awardee you are entitled to all of the benefits below in the Standard Awardee Pass.
-                </Item>
-
-                <div className="rounded-2xl border border-slate-200 p-5">
-                    <p className="font-semibold text-slate-900 flex items-center gap-2 mb-4"><Star className="w-4 h-4 text-amber-500" /> Standard Awardee Pass benefits</p>
-                    <div className="grid md:grid-cols-3 gap-5 text-[13px] text-slate-600">
-                        {[
-                            ["Pre-Conference", ["Opportunity to write an article, promoted on social media and website", "Article in the upcoming editions of the Jurisprudence e-Magazine published by Global Lawyers Association"]],
-                            ["During Conference", ["Announcement of Awardees for each category", "Full event participation with networking opportunities", "Awardees listing in the event show guide", "Mic time on the stage", "Award plaque from the Guest of Honor"]],
-                            ["Post-Conference", ["Social media announcement for Awardees", "Dedicated section in the Awardees List on our website", "E-certificate and e-badge of Honor", "PR announcements in 200+ international digital publications and news sites"]],
-                        ].map(([title, items]) => (
-                            <div key={title as string}>
-                                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-700 mb-2">{title as string}</p>
-                                <ul className="space-y-1.5">
-                                    {(items as string[]).map(i => (
-                                        <li key={i} className="flex gap-2"><Check className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" strokeWidth={3} />{i}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
         </div>

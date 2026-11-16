@@ -3,6 +3,7 @@ import crypto from "crypto";
 import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
 import { checkNominationToken, sendNominationPaidEmails } from "@/lib/nominations/server";
+import { MUMBAI_EVENT, nominationEvent } from "@/lib/nominations/events";
 
 /**
  * Confirms a Razorpay payment for a nomination: checks the signature, then asks
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             },
         });
 
-        await sendNominationPaidEmails({
+        await sendNominationPaidEmails(nominationEvent(formResponse.event) ?? MUMBAI_EVENT, {
             id,
             name: nomination.nomineeName,
             email: nomination.nomineeEmail,

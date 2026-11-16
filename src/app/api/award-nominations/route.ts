@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import {
-    MUMBAI_2026_NOMINATION, NominationAnswers, cleanAnswers, nominationCategory, validateNomination,
-} from "@/lib/nominations/mumbai-2026";
+import { NominationAnswers, cleanAnswers, nominationCategory, validateNomination } from "@/lib/nominations/mumbai-2026";
+import { nominationEvent } from "@/lib/nominations/events";
 import { nominationToken, sendNominationReceivedEmails } from "@/lib/nominations/server";
 
 /**
- * Saves a Mumbai 2026 award nomination (status PENDING_PAYMENT) and emails the
+ * Saves an award nomination (Mumbai 2026, Singapore 2027 — see lib/nominations/events) (status PENDING_PAYMENT) and emails the
  * nominee and the team. Payment happens afterwards via ./[id]/order + ./[id]/verify.
  */
 export async function POST(req: NextRequest) {
@@ -21,12 +20,13 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Invalid request" }, { status: 400 });
         }
 
-        if (body.event !== MUMBAI_2026_NOMINATION.event) {
+        const ev = nominationEvent(body.event);
+        if (!ev) {
             return NextResponse.json({ error: "Unknown event" }, { status: 400 });
         }
 
         const raw = (body.answers ?? {}) as NominationAnswers;
-        const errors = validateNomination(raw);
+        const errors = validateNomination(raw, undefined, ev.rules);
         if (Object.keys(errors).length > 0) {
             return NextResponse.json({ error: "Please complete the required fields.", errors }, { status: 400 });
         }
@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
                 nomineeEmail: answers.email!,
                 status: "PENDING_PAYMENT",
                 formResponse: {
-                    event: MUMBAI_2026_NOMINATION.event,
-                    eventName: MUMBAI_2026_NOMINATION.eventName,
+                    event: ev.event,
+                    eventName: ev.eventName,
                     answers,
                     submittedAt: new Date().toISOString(),
                 },
@@ -56,13 +56,13 @@ export async function POST(req: NextRequest) {
         await prisma.notification.create({
             data: {
                 type: "AWARD_NOMINATION",
-                message: `New Mumbai 2026 nomination: ${name} — ${category}`,
+                message: `New ${ev.conferenceName} nomination: ${name} — ${category}`,
                 referenceId: nomination.id,
                 link: "/admin/nominations",
             },
         }).catch(err => console.error("[award-nominations] notification error:", err));
 
-        await sendNominationReceivedEmails({ id: nomination.id, name, email: answers.email!, category, answers });
+        await sendNominationReceivedEmails(ev, { id: nomination.id, name, email: answers.email!, category, answers });
 
         return NextResponse.json({ id: nomination.id, token: nominationToken(nomination.id) });
     } catch (error) {

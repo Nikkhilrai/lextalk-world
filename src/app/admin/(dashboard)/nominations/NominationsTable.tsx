@@ -3,6 +3,10 @@
 import { useMemo, useState } from "react";
 import { Download, Eye, FileText, Search, Trophy, X } from "lucide-react";
 import { FIELD_LABELS, STEP_FIELDS, type FieldKey } from "@/lib/nominations/mumbai-2026";
+import { nominationEvent } from "@/lib/nominations/events";
+
+// Each event words some questions differently (Singapore's essays), so label by the row's event.
+const labelsFor = (eventKey: string | null) => nominationEvent(eventKey)?.labels ?? FIELD_LABELS;
 
 export interface NominationRow {
     id: string;
@@ -14,6 +18,7 @@ export interface NominationRow {
     status: string;
     createdAt: string;
     event: string;
+    eventKey: string | null;
     answers: Record<string, unknown>;
     files: { url: string; name: string; bytes: number | null }[];
     payment: { paymentId: string; amount: number; currency: string; paidAt: string } | null;
@@ -54,7 +59,9 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
     });
 
     const exportCSV = () => {
-        const head = ["Submitted", "Event", "Status", "Paid", "Payment ID", "Nominate As", "Category", ...ORDER.map(k => FIELD_LABELS[k]), "Files"];
+        const keys = new Set(filtered.map(r => r.eventKey));
+        const labels = keys.size === 1 ? labelsFor(filtered[0].eventKey) : FIELD_LABELS;
+        const head = ["Submitted", "Event", "Status", "Paid", "Payment ID", "Nominate As", "Category", ...ORDER.map(k => labels[k]), "Files"];
         const lines = filtered.map(r => [
             new Date(r.createdAt).toLocaleString("en-IN"), r.event, STATUS_LABEL[r.status] ?? r.status, paidText(r.payment),
             r.payment?.paymentId ?? "", r.type, r.category, ...ORDER.map(k => show(r.answers[k])), r.files.map(f => f.url).join(" "),
@@ -175,7 +182,7 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                                 </div>
                             )}
                             <dl className="divide-y divide-slate-100">
-                                {(ORDER.some(k => k in viewing.answers) ? ORDER.map(k => [FIELD_LABELS[k], viewing.answers[k]] as const) : Object.entries(viewing.answers))
+                                {(ORDER.some(k => k in viewing.answers) ? ORDER.map(k => [labelsFor(viewing.eventKey)[k], viewing.answers[k]] as const) : Object.entries(viewing.answers))
                                     .filter(([, v]) => show(v) !== "")
                                     .map(([label, v]) => (
                                         <div key={label} className="py-3 grid sm:grid-cols-3 gap-1 sm:gap-4">

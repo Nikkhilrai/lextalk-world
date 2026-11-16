@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
-import { MUMBAI_2026_NOMINATION } from "@/lib/nominations/mumbai-2026";
+import { MUMBAI_EVENT, nominationEvent } from "@/lib/nominations/events";
 import { checkNominationToken, nominationFee } from "@/lib/nominations/server";
 
 /** Creates the Razorpay order for a nomination. The amount is set here, never by the browser. */
@@ -22,8 +22,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             return NextResponse.json({ error: "This nomination is already paid." }, { status: 409 });
         }
 
+        // Older nominations have no event stored — they were all Mumbai.
+        const ev = nominationEvent((nomination.formResponse as Record<string, unknown> | null)?.event) ?? MUMBAI_EVENT;
         const currency = body.currency === "INR" ? "INR" : "USD";
-        const fee = await nominationFee(currency);
+        const fee = await nominationFee(currency, ev);
         if (!fee) {
             return NextResponse.json({ error: "INR payment is unavailable right now. Please pay in USD." }, { status: 503 });
         }
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             amount: fee.amount,
             currency: fee.currency,
             receipt: `nom_${id}`.slice(0, 40),
-            notes: { nominationId: id, event: MUMBAI_2026_NOMINATION.event, nominee: nomination.nomineeName },
+            notes: { nominationId: id, event: ev.event, nominee: nomination.nomineeName },
         });
 
         return NextResponse.json({

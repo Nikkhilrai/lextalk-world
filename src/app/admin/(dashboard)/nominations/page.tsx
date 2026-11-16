@@ -19,6 +19,7 @@ export default async function AdminNominationsPage() {
             phone: n.nominatorPhone ?? "",
             status: n.status,
             createdAt: n.createdAt.toISOString(),
+            eventKey: typeof fr.event === "string" ? fr.event : null,
             event: typeof fr.eventName === "string" ? fr.eventName : "Legal Honor Global 2026 (Dubai form)",
             // New (Mumbai) nominations keep answers under `answers`; older ones stored the raw form.
             answers: (fr.answers ?? fr) as Record<string, unknown>,
