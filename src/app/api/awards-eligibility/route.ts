@@ -161,15 +161,3 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Failed to submit request" }, { status: 500 });
     }
 }
-
-export async function GET() {
-    try {
-        const requests = await (prisma as any).awardsEligibilityRequest.findMany({
-            orderBy: { createdAt: "desc" },
-        });
-        return NextResponse.json(requests);
-    } catch (error) {
-        console.error("Fetch awards eligibility requests error:", error);
-        return NextResponse.json({ error: "Failed to fetch requests" }, { status: 500 });
-    }
-}

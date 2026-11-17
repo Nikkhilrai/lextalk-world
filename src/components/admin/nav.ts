@@ -3,8 +3,8 @@
  * read from the same list, so a tab only needs adding here.
  */
 import {
-    LayoutDashboard, CalendarDays, Users, ScanLine, Download, FileCheck2, Tag, Mic, Award, Trophy,
-    BadgeCheck, MessageCircle, HeartHandshake, Lock, Bot, MessagesSquare, Ticket, Layers, ShoppingCart,
+    LayoutDashboard, CalendarDays, Users, ScanLine, Download, FileCheck2, Tag, Mic, Award,
+    MessageCircle, HeartHandshake, Lock, Bot, MessagesSquare, Ticket, Layers, ShoppingCart,
     Receipt, BookOpen, MessageSquareText, UsersRound, Mail, Map as MapIcon, Armchair, Settings, Target,
     type LucideIcon,
 } from "lucide-react";
@@ -36,8 +36,6 @@ export const NAV_GROUPS: NavGroup[] = [
         items: [
             { label: "Speaker Applications", href: "/admin/speaker-applications", icon: Mic },
             { label: "Award Nominations", href: "/admin/nominations", icon: Award },
-            { label: "Awards Eligibility", href: "/admin/awards-eligibility", icon: BadgeCheck },
-            { label: "Awardees", href: "/admin/awardees", icon: Trophy, hint: "Public awardee profiles" },
         ],
     },
     {

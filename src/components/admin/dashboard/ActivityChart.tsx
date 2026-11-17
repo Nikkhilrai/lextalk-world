@@ -8,7 +8,7 @@ type Point = { day: string; leads: number; delegates: number; agendas: number };
 const SERIES = [
     { key: "leads", label: "Leads", color: "#6ea1ff" },
     { key: "agendas", label: "Agenda downloads", color: "#2dd4b4" },
-    { key: "delegates", label: "Paid delegates", color: "#f7c46c" },
+    { key: "delegates", label: "Confirmed delegates", color: "#f7c46c" },
 ] as const;
 
 const short = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
@@ -44,7 +44,7 @@ export function ActivityChart({ data }: { data: Point[] }) {
                             ))}
                         </defs>
                         <CartesianGrid stroke="rgba(255,255,255,0.05)" vertical={false} />
-                        <XAxis dataKey="day" tickFormatter={short} tick={{ fill: "#5d6b8f", fontSize: 11 }} axisLine={false} tickLine={false} interval={4} />
+                        <XAxis dataKey="day" tickFormatter={short} tick={{ fill: "#5d6b8f", fontSize: 11 }} axisLine={false} tickLine={false} interval="preserveStartEnd" minTickGap={28} />
                         <YAxis allowDecimals={false} tick={{ fill: "#5d6b8f", fontSize: 11 }} axisLine={false} tickLine={false} />
                         <Tooltip
                             labelFormatter={l => new Date(`${l}T12:00:00`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" })}

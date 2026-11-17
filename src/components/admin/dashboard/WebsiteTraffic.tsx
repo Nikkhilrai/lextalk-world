@@ -1,5 +1,6 @@
 import { Globe2, MonitorSmartphone, MousePointerClick, Radio } from "lucide-react";
 import { getAnalyticsData, getRealTimeUsers } from "@/actions/analytics";
+import { BarList } from "@/components/admin/dashboard/BarList";
 
 const fmt = (n: number) => n.toLocaleString("en-IN");
 const duration = (s: number) => `${Math.floor(s / 60)}m ${Math.round(s % 60)}s`;
@@ -66,30 +67,6 @@ function Heading({ live }: { live: number | null }) {
                     </span>
                     {live} on the site now
                 </span>
-            )}
-        </div>
-    );
-}
-
-function BarList({ icon: Icon, title, unit, rows, mono }: { icon: typeof Globe2; title: string; unit: string; rows: { label: string; n: number }[]; mono?: boolean }) {
-    const max = Math.max(1, ...rows.map(r => r.n));
-    return (
-        <div>
-            <div className="flex items-center gap-2 mb-3">
-                <Icon size={15} className="text-[#7c8db5]" />
-                <h3 className="text-[13px] font-semibold text-[#c9d2ea]">{title}</h3>
-                <span className="ml-auto text-[11px] text-[#5d6b8f]">{unit}</span>
-            </div>
-            {rows.length === 0 ? <p className="text-[12px] text-[#5d6b8f]">No data yet.</p> : (
-                <ul className="space-y-1.5">
-                    {rows.map(r => (
-                        <li key={r.label} className="relative flex items-center justify-between gap-3 px-2.5 py-1.5 rounded-md overflow-hidden">
-                            <span className="absolute inset-y-0 left-0 bg-[#405189]/25 rounded-md" style={{ width: `${(r.n / max) * 100}%` }} />
-                            <span className={`relative truncate text-[12.5px] text-[#c9d2ea] ${mono ? "font-mono text-[11.5px]" : ""}`} title={r.label}>{r.label}</span>
-                            <span className="relative text-[12px] tabular-nums text-white/90">{fmt(r.n)}</span>
-                        </li>
-                    ))}
-                </ul>
             )}
         </div>
     );
