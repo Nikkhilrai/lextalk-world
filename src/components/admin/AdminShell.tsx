@@ -7,6 +7,7 @@ import { ExternalLink, Menu, Search, CornerDownLeft } from "lucide-react";
 import { Sidebar } from "@/components/admin/Sidebar";
 import { NotificationBell } from "@/components/admin/NotificationBell";
 import { activeItem, navForRole, roleLabel, type NavItem } from "@/components/admin/nav";
+import { badgeText, useNavCounts } from "@/components/admin/useNavCounts";
 
 type Props = { name: string; role: string | null; children: React.ReactNode };
 
@@ -14,15 +15,18 @@ export function AdminShell({ name, role, children }: Props) {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const current = activeItem(pathname);
+    const counts = useNavCounts(current?.item.href ?? null);
+    const anyNew = Object.entries(counts).some(([href, n]) => n > 0 && href !== current?.item.href);
 
     return (
         <div className="min-h-screen admin-bg text-slate-200 font-sans selection:bg-[#405189]/40">
-            <Sidebar role={role} open={menuOpen} onClose={() => setMenuOpen(false)} />
+            <Sidebar role={role} open={menuOpen} onClose={() => setMenuOpen(false)} counts={counts} />
 
             <main className="lg:ml-[260px] min-h-screen flex flex-col">
                 <header className="sticky top-0 z-30 h-16 bg-[#0b1020]/80 backdrop-blur-xl border-b border-white/[0.06] px-4 sm:px-6 lg:px-8 flex items-center gap-4">
-                    <button onClick={() => setMenuOpen(true)} className="lg:hidden p-2 -ml-2 rounded-lg text-[#a3b0cf] hover:text-white hover:bg-white/5" aria-label="Open menu">
+                    <button onClick={() => setMenuOpen(true)} className="relative lg:hidden p-2 -ml-2 rounded-lg text-[#a3b0cf] hover:text-white hover:bg-white/5" aria-label={anyNew ? "Open menu (new entries)" : "Open menu"}>
                         <Menu size={20} />
+                        {anyNew && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#f06548] ring-2 ring-[#0b1020]" />}
                     </button>
 
                     <div className="min-w-0 flex-1">
@@ -37,7 +41,7 @@ export function AdminShell({ name, role, children }: Props) {
                         )}
                     </div>
 
-                    <QuickJump role={role} />
+                    <QuickJump role={role} counts={counts} />
 
                     <a href="/" target="_blank" rel="noopener noreferrer" title="Open the website"
                         className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[12.5px] text-[#a3b0cf] hover:text-white hover:bg-white/5 transition-colors">
@@ -64,7 +68,7 @@ export function AdminShell({ name, role, children }: Props) {
 }
 
 /** Jump to any tab by name: click the box or press ⌘K / Ctrl+K. */
-function QuickJump({ role }: { role: string | null }) {
+function QuickJump({ role, counts }: { role: string | null; counts: Record<string, number> }) {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [q, setQ] = useState("");
@@ -134,6 +138,7 @@ function QuickJump({ role }: { role: string | null }) {
                                                 <span className="block text-[13.5px] font-medium truncate">{item.label}</span>
                                                 {item.hint && <span className="block text-[11.5px] text-[#7c8db5] truncate">{item.hint}</span>}
                                             </span>
+                                            {!!counts[item.href] && <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-[#f06548] text-white text-[10.5px] font-semibold flex items-center justify-center tabular-nums">{badgeText(counts[item.href])}</span>}
                                             <span className="text-[11px] text-[#5d6b8f]">{item.group}</span>
                                             {i === sel && <CornerDownLeft size={14} className="text-[#7c8db5]" />}
                                         </Link>

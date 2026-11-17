@@ -6,10 +6,11 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, LogOut, X } from "lucide-react";
 import { logout } from "@/actions/auth";
 import { activeItem, homeForRole, navForRole, roleLabel } from "@/components/admin/nav";
+import { badgeText } from "@/components/admin/useNavCounts";
 
 const COLLAPSE_KEY = "admin-nav-collapsed";
 
-export function Sidebar({ role, open, onClose }: { role: string | null; open: boolean; onClose: () => void }) {
+export function Sidebar({ role, open, onClose, counts = {} }: { role: string | null; open: boolean; onClose: () => void; counts?: Record<string, number> }) {
     const pathname = usePathname();
     const groups = navForRole(role);
     const current = activeItem(pathname);
@@ -56,13 +57,17 @@ export function Sidebar({ role, open, onClose }: { role: string | null; open: bo
                     {groups.map(group => {
                         const hasActive = group.items.some(i => i.href === current?.item.href);
                         const isFolded = folded[group.title] && !hasActive;
+                        const groupNew = group.items.reduce((n, i) => n + (counts[i.href] ?? 0), 0);
                         return (
                             <div key={group.title}>
                                 <button
                                     onClick={() => toggle(group.title)}
                                     className="w-full flex items-center justify-between px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5d6b8f] hover:text-[#9aa8c9] transition-colors"
                                 >
-                                    <span>{group.title}</span>
+                                    <span className="flex items-center gap-2">
+                                        {group.title}
+                                        {isFolded && groupNew > 0 && <span className="w-1.5 h-1.5 rounded-full bg-[#f06548]" title={`${groupNew} new`} />}
+                                    </span>
                                     <ChevronDown size={13} className={`transition-transform ${isFolded ? "-rotate-90" : ""}`} />
                                 </button>
                                 {!isFolded && (
@@ -81,7 +86,15 @@ export function Sidebar({ role, open, onClose }: { role: string | null; open: bo
                                                             : "text-[#a3b0cf] hover:text-white hover:bg-white/[0.04]"}`}
                                                     >
                                                         <Icon size={17} className={active ? "text-[#8da2ea]" : "text-[#5d6b8f] group-hover:text-[#a3b0cf]"} />
-                                                        <span className="truncate">{item.label}</span>
+                                                        <span className="flex-1 truncate">{item.label}</span>
+                                                        {!!counts[item.href] && (
+                                                            <span
+                                                                title={`${counts[item.href]} new since you last opened this tab`}
+                                                                className="shrink-0 min-w-[22px] h-5 px-1.5 rounded-full bg-[#f06548] text-white text-[10.5px] font-semibold flex items-center justify-center tabular-nums shadow-sm shadow-[#f06548]/40"
+                                                            >
+                                                                {badgeText(counts[item.href])}
+                                                            </span>
+                                                        )}
                                                     </Link>
                                                 </li>
                                             );
