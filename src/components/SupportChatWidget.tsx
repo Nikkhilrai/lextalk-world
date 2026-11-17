@@ -405,8 +405,9 @@ function VisitorForm({ onSaved }: { onSaved: (visitor: Visitor) => void }) {
 
 /* ── Widget ────────────────────────────────────────────────────────────────── */
 // Pages where Lex stays hidden: the standalone award nomination forms, where it
-// covers fields and pulls people away mid-form (help is the email on the form).
-const HIDDEN_ON = /^\/[^/]+\/nominate\/?$/;
+// covers fields and pulls people away mid-form (help is the email on the form),
+// and the admin panel, which is for the team, not visitors.
+const HIDDEN_ON = /^\/[^/]+\/nominate\/?$|^\/admin(\/|$)/;
 
 export function SupportChatWidget() {
     const pathname = usePathname();

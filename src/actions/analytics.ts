@@ -19,6 +19,10 @@ export interface AnalyticsData {
     pageViews: number;
     sessions: number;
     newUsers: number;
+    /** Seconds, straight from GA4. */
+    avgSessionDuration: number;
+    /** 0–1, straight from GA4. */
+    bounceRate: number;
     topPages: { page: string; views: number }[];
     topCountries: { country: string; users: number }[];
     deviceCategories: { device: string; users: number }[];
@@ -36,6 +40,8 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
                 { name: "screenPageViews" },
                 { name: "sessions" },
                 { name: "newUsers" },
+                { name: "averageSessionDuration" },
+                { name: "bounceRate" },
             ],
         });
 
@@ -107,6 +113,8 @@ export async function getAnalyticsData(): Promise<{ success: boolean; data: Anal
                 pageViews: parseInt(metrics[1]?.value || "0"),
                 sessions: parseInt(metrics[2]?.value || "0"),
                 newUsers: parseInt(metrics[3]?.value || "0"),
+                avgSessionDuration: parseFloat(metrics[4]?.value || "0"),
+                bounceRate: parseFloat(metrics[5]?.value || "0"),
                 topPages,
                 topCountries,
                 deviceCategories,
