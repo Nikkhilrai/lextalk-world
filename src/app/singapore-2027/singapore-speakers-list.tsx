@@ -19,6 +19,16 @@ const IMG = "https://res.cloudinary.com/djagw0s4d/image/upload/c_limit,f_auto,q_
 
 export const speakers: Speaker[] = [
     {
+        name: "Raghvendra Verma",
+        title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
+        image: "/Singapore-2027/Speaker-images/raghvendra-verma.jpg",
+        bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
+
+He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
+
+He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
+    },
+    {
         name: "Jishnu Nair",
         title: "Counsel, ASEAN Compliance Officer, IBM",
         image: `${IMG}/v1791365134/lextalk/singapore-speakers/jishnu-nair`,
@@ -175,16 +185,6 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         title: "Executive Director, Head of AI & Data Risk Governance, United Overseas Bank Limited",
         image: "/Singapore-2027/Speaker-images/Rishiraj%20Singh.png",
         bio: `Rishiraj Singh leads UOB\u2019s Enterprise AI & Data Risk Governance function within Group Risk Management, driving the strategy and implementation of governance frameworks for responsible AI and data adoption. He oversees AI risk assessments, Responsible AI, data governance, data quality, AI inventory and BCBS 239 initiatives. He advises senior management and executive committees on AI and data risk, regulatory compliance and risk appetite, while strengthening accountability, control effectiveness and enterprise-wide risk transparency to enable sustainable innovation.`,
-    },
-    {
-        name: "Raghvendra Verma",
-        title: "Partner, AMADI | Chairman, ICSI Middle East DIFC NPIO Dubai",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625131/lextalk/dubai-speakers/raghvendra-verma.jpg",
-        bio: `A distinguished legal executive and corporate strategist with over 25 years of unparalleled expertise across the Middle East, Africa, and Asia-Pacific. Based in Dubai, he serves as a Board Member and Chairman of the ICSI Middle East DIFC NPIO Dubai, and is a GRC, M&A, and privacy expert and author. He has a proven track record steering global legal operations, executing complex cross-border M&A, and establishing robust corporate governance frameworks, working closely with corporate boards and promoters to drive compliant, high-stakes global expansion.
-
-He currently serves as Partner at AMADI, a leading legal and corporate advisory firm in the UAE and Africa. His achievements include directing seamless acquisitions across jurisdictions including Egypt, South Africa, Dubai, Cyprus, Mauritius, Kenya, Nigeria, Tanzania, and Mozambique, and delivering legal and strategic oversight across the IT/ITES, BPO, healthcare, telecommunications infrastructure, mining, and customer services sectors. His competencies span board and shareholder relations, corporate restructuring, cross-border acquisitions, licensing, joint ventures, due diligence, corporate governance, risk management, cybersecurity, privacy and data protection, commercial contracting, litigation, and employment law.
-
-He is a member of the Chartered Institute for Securities & Investment (CISI) and a Certified CIPP/E of the IAPP, a law graduate and distinguished member of the ICSI, and Editor of Corporate Governance Magazine. His accolades include the Champion of Governance Award (Kenya), recognition among the 50 Best Legal Falcons, Best In-House Legal Team (Middle East), and the 50 Best Corporate Governance Professional and Global Achiever Awards. He is also a mental well-being advocate, organising stress-elimination courses under the Art of Living initiative across India, the UAE, and Africa, and leads community service and food distribution initiatives for underprivileged communities in Kenya and Nigeria.`,
     },
 ];
 

@@ -186,8 +186,9 @@ function AnimatedCounter({ target, suffix = "", duration = 1800 }: { target: num
 // ===================== Page =====================
 
 // The company is the last part of the title; a trailing ", Singapore" is a location, not the company.
+// With several roles ("Partner, AMADI | Chairman, …") the first role is the main one.
 function heroOrg(title: string) {
-    const t = title.replace(/,\s*Singapore$/i, "");
+    const t = title.split("|")[0].trim().replace(/,\s*Singapore$/i, "");
     return t.includes(",") ? t.slice(t.lastIndexOf(",") + 1).trim() : t;
 }
 
