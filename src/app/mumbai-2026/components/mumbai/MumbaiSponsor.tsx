@@ -34,6 +34,23 @@ export function MumbaiSponsor() {
 
                 {/* Grid for other tiers */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                    {/* Supported By */}
+                    <div className="md:col-span-2 lg:col-span-3">
+                        <div className="flex flex-col items-center">
+                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Supported By</h4>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="w-full max-w-2xl bg-slate-50/50 rounded-2xl p-6 md:p-8 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            >
+                                <div className="relative w-full aspect-[1280/290]">
+                                    <Image src="/mumbai-2026/sponsor/inalp-indian-national-association-of-legal-professionals.png" alt="Indian National Association of Legal Professionals - Supported By" fill className="object-contain mix-blend-multiply" />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
                     {/* Diamond Sponsors */}
                     <div className="lg:col-span-3">
                         <div className="flex flex-col items-center">
