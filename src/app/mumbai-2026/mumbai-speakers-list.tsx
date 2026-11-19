@@ -349,6 +349,26 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         title: "Executive Vice President Legal, Kotak Mahindra Bank",
         image: "/mumbai-2026/Mumbai_Speakers/Rajeev Kumar.png",
     },
+    {
+        name: "Anindita Pal",
+        title: "Founder & Managing Partner, Fairaigle Legal & Consultancy LLP",
+        image: "/mumbai-2026/Mumbai_Speakers/Advocate Anindita Pal.png",
+    },
+    {
+        name: "Sneha Bhawnani",
+        title: "Senior Legal Counsel, Hinduja Group Ltd",
+        image: "/mumbai-2026/Mumbai_Speakers/Sneha Bhawnani.png",
+    },
+    {
+        name: "Suvajit Chakraborty",
+        title: "Associate General Counsel & Regional Director - Legal & Compliance, Revvity",
+        image: "/mumbai-2026/Mumbai_Speakers/Suvajit Chakraborty.png",
+    },
+    {
+        name: "Sandesh Laxman Jadhav",
+        title: "Global Data Privacy Officer, Wipro",
+        image: "/mumbai-2026/Mumbai_Speakers/Sandesh Jadhav.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
