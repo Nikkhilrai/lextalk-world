@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 const navTabs = [
-    { label: "Agenda", href: "#agenda" },
+    { label: "Agenda", href: "/mumbai-2026/agenda" },
     { label: "Speakers", href: "#speakers" },
     { label: "Awards & Recognition", href: "/awardees" },
     { label: "Past Event Images", href: "/bangalore-2026/gallery" },
@@ -80,12 +80,6 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                 <div className={`flex flex-wrap justify-center gap-2 mb-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {navTabs.map((tab, index) => {
                         const commonClasses = "px-3 py-1.5 md:px-4 md:py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white/80 rounded-full hover:bg-amber-500/20 hover:border-amber-500/50 hover:text-amber-400 transition-all duration-300 text-[10px] md:text-xs font-medium";
-
-                        if (tab.label === "Agenda") {
-                            return (
-                                <button key={index} onClick={onOpenAgenda} className={`${commonClasses} cursor-pointer`}>{tab.label}</button>
-                            );
-                        }
 
                         return (
                             <Link

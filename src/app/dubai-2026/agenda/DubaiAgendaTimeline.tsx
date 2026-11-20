@@ -11,6 +11,37 @@ export type ResolvedSpeaker = AgendaSpeaker & { image?: string };
 export type ResolvedSession = Omit<AgendaSession, "speakers"> & { speakers?: ResolvedSpeaker[] };
 export type ResolvedDay = Omit<AgendaDay, "sessions"> & { sessions: ResolvedSession[] };
 
+/** Event-specific copy around the timeline. Defaults are Dubai 2026's. */
+export interface AgendaEventInfo {
+    dates: string;
+    venue: string;
+    /** Hero speaker figure; defaults to the number of speakers named in the agenda. */
+    speakersLabel?: string;
+    intro: string;
+    footnote: React.ReactNode;
+    ctaTitle: string;
+    ctaText: string;
+    registerHref: string;
+    speakersHref: string;
+}
+
+const DUBAI_EVENT: AgendaEventInfo = {
+    dates: "9 – 10 September 2026",
+    venue: "Crowne Plaza, Dubai, UAE",
+    intro: "Two days of keynotes, GC power panels, round tables and case studies — closing with the Global Legal Honors Awards.",
+    footnote: (
+        <>
+            Programme subject to minor adjustments. All times are Gulf Standard Time (GST).
+            <br className="hidden sm:block" />
+            Some sessions are still being confirmed and additional speakers will be announced.
+        </>
+    ),
+    ctaTitle: "Secure your seat in Dubai",
+    ctaText: "Join 500+ General Counsel, law firm partners and legal technology leaders across two days at the Crowne Plaza.",
+    registerHref: "/dubai-delegate-registration-2026",
+    speakersHref: "/dubai-2026/speakers",
+};
+
 /* ── Speaker chip ───────────────────────────────────────────────────────── */
 function SpeakerChip({ sp, index }: { sp: ResolvedSpeaker; index: number }) {
     return (
@@ -198,8 +229,12 @@ function DayPanel({ day }: { day: ResolvedDay }) {
                 </p>
                 <div className="flex items-center justify-center gap-6 mt-6 text-[11px] text-slate-500 font-medium uppercase tracking-widest">
                     <span>{sessionCount} Sessions</span>
-                    <span className="w-1 h-1 rounded-full bg-slate-700" />
-                    <span>{speakerCount} Speakers</span>
+                    {speakerCount > 0 && (
+                        <>
+                            <span className="w-1 h-1 rounded-full bg-slate-700" />
+                            <span>{speakerCount} Speakers</span>
+                        </>
+                    )}
                 </div>
             </div>
 
@@ -222,7 +257,16 @@ function DayPanel({ day }: { day: ResolvedDay }) {
 }
 
 /* ── Page shell ─────────────────────────────────────────────────────────── */
-export function DubaiAgendaTimeline({ days }: { days: ResolvedDay[] }) {
+export function DubaiAgendaTimeline({
+    days,
+    event = DUBAI_EVENT,
+    heroActions,
+}: {
+    days: ResolvedDay[];
+    event?: AgendaEventInfo;
+    /** Extra buttons under the hero facts, e.g. a PDF download. */
+    heroActions?: React.ReactNode;
+}) {
     const [active, setActive] = useState(0);
     const day = days[active];
 
@@ -267,30 +311,33 @@ export function DubaiAgendaTimeline({ days }: { days: ResolvedDay[] }) {
                         </h1>
 
                         <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-light leading-relaxed mb-8">
-                            Two days of keynotes, GC power panels, round tables and case studies —
-                            closing with the Global Legal Honors Awards.
+                            {event.intro}
                         </p>
 
                         <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-0 sm:divide-x divide-white/15 border-y border-white/15 py-4 px-2 sm:px-0">
                             <div className="flex items-center gap-2.5 sm:px-7">
                                 <Calendar className="w-4 h-4 text-amber-500 shrink-0" />
                                 <span className="text-white font-medium text-sm whitespace-nowrap">
-                                    9 – 10 September 2026
+                                    {event.dates}
                                 </span>
                             </div>
                             <div className="flex items-center gap-2.5 sm:px-7">
                                 <MapPin className="w-4 h-4 text-amber-500 shrink-0" />
                                 <span className="text-white font-medium text-sm whitespace-nowrap">
-                                    Crowne Plaza, Dubai, UAE
+                                    {event.venue}
                                 </span>
                             </div>
                             <div className="flex items-center gap-2.5 sm:px-7">
                                 <Mic2 className="w-4 h-4 text-amber-500 shrink-0" />
                                 <span className="text-white font-medium text-sm whitespace-nowrap">
-                                    {totalSpeakers}+ Speakers
+                                    {event.speakersLabel ?? `${totalSpeakers}+ Speakers`}
                                 </span>
                             </div>
                         </div>
+
+                        {heroActions && (
+                            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">{heroActions}</div>
+                        )}
                     </motion.div>
                 </div>
             </section>
@@ -347,9 +394,7 @@ export function DubaiAgendaTimeline({ days }: { days: ResolvedDay[] }) {
                     </AnimatePresence>
 
                     <p className="text-center text-slate-600 text-[11px] mt-14 leading-relaxed">
-                        Programme subject to minor adjustments. All times are Gulf Standard Time (GST).
-                        <br className="hidden sm:block" />
-                        Some sessions are still being confirmed and additional speakers will be announced.
+                        {event.footnote}
                     </p>
                 </div>
             </section>
@@ -359,22 +404,21 @@ export function DubaiAgendaTimeline({ days }: { days: ResolvedDay[] }) {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[240px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
                 <div className="container mx-auto px-4 relative z-10 max-w-3xl text-center">
                     <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight mb-4">
-                        Secure your seat in Dubai
+                        {event.ctaTitle}
                     </h2>
                     <p className="text-slate-400 text-sm md:text-base mb-8 max-w-lg mx-auto font-light">
-                        Join 500+ General Counsel, law firm partners and legal technology leaders
-                        across two days at the Crowne Plaza.
+                        {event.ctaText}
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
-                            href="/dubai-delegate-registration-2026"
+                            href={event.registerHref}
                             className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors duration-300 shadow-lg shadow-amber-500/25 w-full sm:w-auto"
                         >
                             <span className="text-slate-900 font-bold text-sm tracking-wide">Register Now</span>
                             <ArrowRight className="w-4 h-4 text-slate-900 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
                         <Link
-                            href="/dubai-2026/speakers"
+                            href={event.speakersHref}
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/15 hover:border-white/30 text-white/80 hover:text-white rounded-lg text-sm font-medium transition-colors duration-300 w-full sm:w-auto"
                         >
                             Meet the Speakers

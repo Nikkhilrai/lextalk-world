@@ -32,7 +32,10 @@ export type SessionType =
     | "casestudy"
     | "roundtable"
     | "break"
-    | "awards";
+    | "awards"
+    | "spotlight"
+    | "workshop"
+    | "breakfast";
 
 export interface AgendaSpeaker {
     /** Must match a `name` in dubai-speakers-data.ts for the headshot to resolve. */
@@ -514,4 +517,7 @@ export const SESSION_META: Record<
     roundtable:   { label: "Round Table",        dot: "bg-indigo-400",  badge: "bg-indigo-500/15 text-indigo-300 border-indigo-500/25",  border: "border-indigo-500/20" },
     break:        { label: "Networking",         dot: "bg-slate-600",   badge: "bg-slate-700/25 text-slate-500 border-slate-600/20",     border: "border-slate-700/20" },
     awards:       { label: "Awards Ceremony",    dot: "bg-amber-400",   badge: "bg-amber-500/15 text-amber-300 border-amber-500/25",     border: "border-amber-500/20" },
+    spotlight:    { label: "LexTalk Spotlight",  dot: "bg-cyan-400",    badge: "bg-cyan-500/15 text-cyan-300 border-cyan-500/25",        border: "border-cyan-500/20" },
+    workshop:     { label: "Interactive Workshop", dot: "bg-teal-400",  badge: "bg-teal-500/15 text-teal-300 border-teal-500/25",        border: "border-teal-500/20" },
+    breakfast:    { label: "Power Breakfast",    dot: "bg-orange-400",  badge: "bg-orange-500/15 text-orange-300 border-orange-500/25",  border: "border-orange-500/20" },
 };

@@ -69,6 +69,7 @@ const LINK_LABELS: [string, string][] = [
     ["/mumbai-delegate-registration-2026", "Register for Mumbai 2026"],
     ["/bangalore-delegate-registration-2026", "Register for Bangalore"],
     ["/dubai-2026/agenda", "View the full agenda"],
+    ["/mumbai-2026/agenda", "View the Mumbai agenda"],
     ["/dubai-2026/speakers", "Meet the speakers"],
     ["/dubai-vip-invite-2026", "Confirm your interest"],
     ["/awardees", "See the awardees"],
