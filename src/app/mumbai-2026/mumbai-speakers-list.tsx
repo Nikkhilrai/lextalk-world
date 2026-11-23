@@ -352,6 +352,16 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         title: "Global Data Privacy Officer, Wipro",
         image: "/mumbai-2026/Mumbai_Speakers/Sandesh Jadhav.png",
     },
+    {
+        name: "Srividhya Sridhar",
+        title: "Group General Counsel, Vivriti NEXT",
+        image: "/mumbai-2026/Mumbai_Speakers/Srividhya Sridhar.png",
+    },
+    {
+        name: "Adv. Aditya Goenka",
+        title: "President - Chief Legal & Compliance Officer",
+        image: "/mumbai-2026/Mumbai_Speakers/Adv. Aditya Goenka.png",
+    },
 ];
 
 export default function MumbaiSpeakersList() {
