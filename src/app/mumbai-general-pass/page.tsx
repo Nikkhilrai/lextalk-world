@@ -10,7 +10,7 @@ import { PhoneInput } from "@/components/PhoneInput";
 import { CountrySelect } from "@/components/CountrySelect";
 import {
     Check, ArrowRight, Loader2, Sparkles, AlertCircle, ShieldCheck, X,
-    Calendar, MapPin, Zap,
+    MapPin, Zap,
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { MUMBAI_GENERAL_PASS_TYPE, MUMBAI_GENERAL_PRICE } from "@/lib/mumbai-pass-prices";
@@ -261,7 +261,6 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                                                 {[
                                                     { label: "Pass", value: "General Pass (all-inclusive)" },
                                                     { label: "Event", value: "LexTalk World Mumbai 2026" },
-                                                    { label: "Date", value: "Dec 7–8, Monday & Tuesday, 2026" },
                                                     { label: "Attendee", value: `${formData.firstName} ${formData.lastName}` },
                                                 ].map(r => (
                                                     <div key={r.label} className="flex justify-between gap-3">
@@ -361,7 +360,6 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 
                     <h2 className="font-serif text-2xl font-bold text-slate-900 leading-tight mb-3">General Pass</h2>
                     <div className="flex flex-wrap gap-x-3 gap-y-1 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-600" /> Dec 7–8, 2026</span>
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-600" /> Radisson Blu Mumbai International Airport</span>
                     </div>
 
@@ -467,7 +465,6 @@ export default function MumbaiGeneralPass() {
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.5 }}
                                 className="flex flex-wrap gap-4">
                                 {[
-                                    { icon: Calendar, text: "Dec 7–8, Monday & Tuesday, 2026" },
                                     { icon: MapPin, text: "Radisson Blu Mumbai International Airport" },
                                 ].map(({ icon: Icon, text }) => (
                                     <div key={text} className="flex items-center gap-2">
