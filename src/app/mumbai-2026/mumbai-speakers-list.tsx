@@ -162,12 +162,6 @@ In her 2 decades plus of extensive experience in financial services, risk manage
         bio: `Director and Head of Legal & Compliance at Yield Engineering Systems, with a background in global legal affairs and business and commerce. Experience spans compliance, risk management, transactional documentation and corporate advisory, with earlier legal roles at Waters Corporation and METRO Cash & Carry India.`,
     },
     {
-        name: "Sarbasuchi Das",
-        title: "Head of NPA Cell, IDBI Trusteeship Services Ltd",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080516/lextalk/mumbai-speakers/sarbasuchi-das.png",
-        bio: `AVP and Head of NPA Cell at IDBI Trusteeship Services, Mumbai. He began as a practising lawyer before moving into banking and financial services, with earlier roles at SBICAP Trustee Company, Brickwork Ratings, Dhir & Dhir Associates and ING Vysya Bank. Expertise in corporate law, recoveries, conveyancing, employment law and arbitration; Diploma in M&A Laws, Asian School of Cyber Laws.`,
-    },
-    {
         name: "Rishi Vyas",
         title: "Vice President & Group Compliance Officer & CS, Welspun Group",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1790080517/lextalk/mumbai-speakers/rishi-vyas.png",
@@ -200,12 +194,6 @@ With a focus on time-bound and successful outcomes, has advised businesses in di
 Attreyi is the Chairperson of the Legal Affairs and IPR Committee of the Bombay Chamber of Commerce and Industry and is involved in designing and speaking at seminars on diverse topics. She also speaks at various forums including domestic and international seminars and chambers of commerce, on topical issues like Tech Laws, Data Privacy, Corporate Governance, AI, Ethics, ABAC and DEI.
 
 Attreyi has co-authored successive editions of the top selling book on POSH - Handbook on the Law on Sexual Harassment at Workplace - published by Thomson Reuters (2015 and 2019).`,
-    },
-    {
-        name: "Ramu S",
-        title: "Group Head - Legal & Recoveries, Karur Vysya Bank Ltd",
-        image: "/mumbai-2026/Mumbai_Speakers/Ramu S..png",
-        bio: `Successfully transitioned from Head HR Legal to one of the youngest General Counsels in the industry to Head Legal & Recovery and designated Senior Management Personnel now. Specialising in all legal and recovery aspects of a scheduled commercial bank with an added flair for RBI regulatory compliance, Board Executive level engagement, Leadership Management, NPA Recovery, Industrial Relations, Employee Relations / Engagement, Policy formulation and Execution, Statutory liaisoning etc for the past 16 years. Youngest Senior Management Personnel (SMP) in the Bank.`,
     },
     {
         name: "Agnipushp Singh",
@@ -323,11 +311,6 @@ A recognized member of the Ethical Alliance and Compliance Community, Dr. Chatur
         name: "Rabindra Purohit",
         title: "Vice President Legal, Compliance and Company Secretary, Blue Dart",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610224/lextalk/mumbai-speakers/rabindra-purohit.png",
-    },
-    {
-        name: "Suresh Kumar Bhutani",
-        title: "Group General Counsel, Company Secretary & Compliance Officer, Ixigo",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1793610229/lextalk/mumbai-speakers/suresh-kumar-bhutani.png",
     },
     {
         name: "Pradyumna Vengurlekar",
