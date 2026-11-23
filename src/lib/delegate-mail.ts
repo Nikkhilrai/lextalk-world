@@ -27,6 +27,7 @@ function passDisplayName(passType: string): string {
         "corporate-counsel": "Corporate Counsel Exclusive Pass",
         "law-firm-partner": "Law Firm Partner Pass",
         "law-firm-lawyer": "Law Firm & Independent Lawyer Pass",
+        "general": "General Pass",
         "vendor": "Vendor Pass",
     };
     return map[passType] || passType.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
