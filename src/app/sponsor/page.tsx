@@ -551,184 +551,139 @@ export default function SponsorshipPage() {
                         <div className="w-20 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full" />
                     </div>
 
-                    {/* Platinum Sponsor tier */}
-                    <div className="mb-24">
-                        <div className="flex flex-col items-center mb-12">
-                            <div className="transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-3 bg-gradient-to-r from-slate-100 via-white to-slate-200 border-2 border-slate-300 rounded-full shadow-[0_10px_25px_-5px_rgba(148,163,184,0.15)]">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
-                                        Platinum Sponsors
-                                    </h3>
+                    {/* Current events: Mumbai 2026 and Singapore 2027 */}
+                    {[
+                        {
+                            event: "Mumbai 2026",
+                            subtitle: "LexTalk World Mumbai, December 2026",
+                            href: "/mumbai-2026",
+                            tiers: [
+                                { label: "Supported By", wide: true, sponsors: [
+                                    { name: "Indian National Association of Legal Professionals", logo: "/mumbai-2026/sponsor/inalp-indian-national-association-of-legal-professionals.png", href: null },
+                                ] },
+                                { label: "Diamond Sponsors", sponsors: [
+                                    { name: "CaseDocker", logo: "/sponsor/sponsor-logos/diamond/CasedockerLogo.webp", href: "https://www.casedocker.com/landing/" },
+                                    { name: "LexCorp", logo: "/sponsor/sponsor-logos/diamond/lexcorp-logo.webp", href: "https://home.lexcorp.org.in/" },
+                                ] },
+                                { label: "Knowledge Partners", sponsors: [
+                                    { name: "Fairaigle Legal & Consultancy LLP", logo: "/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg", href: null },
+                                    { name: "Prism Legal Associates", logo: "/mumbai-2026/sponsor/prism-legal-associates.jpg", href: null },
+                                ] },
+                                { label: "Exhibitor", sponsors: [
+                                    { name: "Melento", logo: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
+                                ] },
+                                { label: "Wellness & Consciousness Partner", sponsors: [
+                                    { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/" },
+                                ] },
+                            ],
+                        },
+                        {
+                            event: "Singapore 2027",
+                            subtitle: "LexTalk World Singapore, 2027",
+                            href: "/singapore-2027",
+                            tiers: [
+                                { label: "Platinum Sponsor", sponsors: [
+                                    { name: "Amadi", logo: "/sponsor/sponsor-logos/platinum/amadi-logo.webp", href: "https://www.amadi.io/" },
+                                ] },
+                                { label: "Gold Sponsor", sponsors: [
+                                    { name: "Rainmaker", logo: "/dubai-event/sponsors/rainmaker.png", href: "https://rainmaker.co.in/" },
+                                ] },
+                                { label: "Ecosystem Partner", sponsors: [
+                                    { name: "Fairaigle Legal & Consultancy LLP", logo: "/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg", href: null },
+                                ] },
+                                { label: "Knowledge Partner", sponsors: [
+                                    { name: "Prism Legal Associates", logo: "/mumbai-2026/sponsor/prism-legal-associates.jpg", href: null },
+                                ] },
+                            ],
+                        },
+                    ].map((ev) => (
+                        <div key={ev.event} className="mb-24">
+                            <div className="flex flex-col items-center mb-12">
+                                <div className="transform hover:scale-105 transition-transform duration-500">
+                                    <div className="relative px-8 py-3 bg-gradient-to-r from-amber-100 via-white to-amber-100 border-2 border-amber-300 rounded-full shadow-[0_10px_25px_-5px_rgba(245,158,11,0.15)]">
+                                        <h3 className="text-lg md:text-xl font-serif font-bold text-amber-900 uppercase tracking-widest whitespace-nowrap">
+                                            {ev.event}
+                                        </h3>
+                                    </div>
                                 </div>
+                                <Link href={ev.href} className="text-sm text-slate-500 hover:text-amber-700 mt-3 font-medium transition-colors">{ev.subtitle}</Link>
+                            </div>
+                            <div className="space-y-12 px-4">
+                                {ev.tiers.map((tier) => (
+                                    <div key={tier.label}>
+                                        <p className="text-center text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">{tier.label}</p>
+                                        <div className="flex flex-wrap justify-center gap-8">
+                                            {tier.sponsors.map((sponsor) => {
+                                                const cardClasses = `group relative w-full ${"wide" in tier && tier.wide ? "sm:w-[560px]" : "sm:w-[320px]"} h-40 bg-white rounded-2xl shadow-lg border-2 border-slate-100 hover:border-amber-200 p-6 flex items-center justify-center hover:-translate-y-2 transition-all duration-500`;
+                                                const inner = (
+                                                    <div className="relative w-full h-full">
+                                                        <Image src={sponsor.logo} alt={`${sponsor.name} - ${tier.label}`} fill className="object-contain mix-blend-multiply brightness-[1.04]" />
+                                                    </div>
+                                                );
+                                                return sponsor.href ? (
+                                                    <a key={sponsor.name} href={sponsor.href} target="_blank" rel="noopener noreferrer" className={cardClasses}>{inner}</a>
+                                                ) : (
+                                                    <div key={sponsor.name} className={cardClasses}>{inner}</div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="flex flex-wrap justify-center gap-8 md:gap-12 px-4">
-                            <a
-                                href="https://www.amadi.io/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(148,163,184,0.2)] border-2 border-slate-100 group-hover:border-slate-300 p-6 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/sponsor-logos/platinum/amadi-logo.webp"
-                                        alt="Amadi - Platinum Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    ))}
 
-                    {/* Diamond Sponsor tier */}
+                    {/* Dubai 2026 — Past Sponsors */}
                     <div className="mb-24">
-                        <div className="flex flex-col items-center mb-12">
+                        <div className="flex flex-col items-center mb-10">
                             <div className="transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-3 bg-gradient-to-r from-cyan-100 via-white to-cyan-100 border-2 border-cyan-200 rounded-full shadow-[0_10px_25px_-5px_rgba(6,182,212,0.15)]">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
-                                        Diamond Sponsors
+                                <div className="relative px-8 py-2.5 bg-gradient-to-r from-cyan-100 via-white to-cyan-100 border-2 border-cyan-200 rounded-full shadow-[0_10px_25px_-5px_rgba(6,182,212,0.12)]">
+                                    <h3 className="text-base md:text-lg font-serif font-bold text-slate-800 uppercase tracking-widest whitespace-nowrap">
+                                        Dubai 2026 — Past Sponsors
                                     </h3>
                                 </div>
                             </div>
+                            <p className="text-sm text-slate-500 mt-3 font-medium">LexTalk World Dubai 2026</p>
                         </div>
-                        <div className="flex flex-wrap justify-center gap-8 md:gap-12 px-4">
-                            <a
-                                href="https://www.casedocker.com/landing/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/sponsor-logos/diamond/CasedockerLogo.webp"
-                                        alt="CaseDocker - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
+                        <div className="space-y-10 px-4">
+                            {[
+                                { tierLabel: "Platinum Sponsor", sponsors: [
+                                    { name: "Amadi", logo: "/sponsor/sponsor-logos/platinum/amadi-logo.webp", href: "https://www.amadi.io/" },
+                                ] },
+                                { tierLabel: "Diamond Sponsors", sponsors: [
+                                    { name: "CaseDocker", logo: "/sponsor/sponsor-logos/diamond/CasedockerLogo.webp", href: "https://www.casedocker.com/landing/" },
+                                    { name: "LexCorp", logo: "/sponsor/sponsor-logos/diamond/lexcorp-logo.webp", href: "https://home.lexcorp.org.in/" },
+                                    { name: "Gorodissky & Partners", logo: "/dubai-event/sponsors/gorodissky-logo.jpg", href: "https://www.gorodissky.com/" },
+                                    { name: "DiliTrust", logo: "/dubai-event/sponsors/DiliTrust.svg", href: null },
+                                    { name: "Melento", logo: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
+                                ] },
+                                { tierLabel: "Gold Sponsor", sponsors: [
+                                    { name: "ASG & Partners", logo: "/bangalore-2026/Sponsor/asgandpartners.png", href: "https://asgpartners.co.in/" },
+                                ] },
+                                { tierLabel: "Knowledge Partners", sponsors: [
+                                    { name: "BGK Law Associates", logo: "/dubai-event/sponsors/bgk-law-associates.jpg", href: null },
+                                    { name: "Fairaigle Legal & Consultancy LLP", logo: "/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg", href: null },
+                                ] },
+                            ].map((tier) => (
+                                <div key={tier.tierLabel}>
+                                    <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">{tier.tierLabel}</p>
+                                    <div className="flex flex-wrap justify-center gap-5">
+                                        {tier.sponsors.map((sponsor) => {
+                                            const cardClasses = "group relative w-[180px] h-[110px] bg-white rounded-xl shadow-md border border-slate-200/50 p-3 flex items-center justify-center hover:shadow-lg hover:border-cyan-300/60 hover:-translate-y-1 transition-all duration-300";
+                                            const inner = (
+                                                <div className="relative w-full h-full">
+                                                    <Image src={sponsor.logo} alt={sponsor.name} fill className="object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+                                                </div>
+                                            );
+                                            return sponsor.href ? (
+                                                <a key={sponsor.name} href={sponsor.href} target="_blank" rel="noopener noreferrer" className={cardClasses}>{inner}</a>
+                                            ) : (
+                                                <div key={sponsor.name} className={cardClasses}>{inner}</div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </a>
-                            <a
-                                href="https://home.lexcorp.org.in/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/sponsor-logos/diamond/lexcorp-logo.webp"
-                                        alt="LexCorp - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </a>
-                            <a
-                                href="https://www.gorodissky.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/gorodissky-logo.jpg"
-                                        alt="Gorodissky & Partners - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </a>
-                            <div className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2">
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/DiliTrust.svg"
-                                        alt="DiliTrust - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                            <a
-                                href="https://melento.ai"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(6,182,212,0.2)] border-2 border-cyan-50 group-hover:border-cyan-200 p-6 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/Melento.png"
-                                        alt="Melento - Diamond Sponsor"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Gold Sponsor tier */}
-                    <div className="mb-24">
-                        <div className="flex flex-col items-center mb-12">
-                            <div className="transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-3 bg-gradient-to-r from-amber-400 via-amber-100 to-amber-500 border-2 border-amber-300 rounded-full shadow-[0_10px_25px_-5px_rgba(245,158,11,0.15)]">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-amber-900 uppercase tracking-widest whitespace-nowrap">
-                                        Gold Sponsor
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex justify-center px-4">
-                            <a
-                                href="https://asgpartners.co.in/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative w-full sm:w-[380px] h-48 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.2)] border-2 border-amber-50 group-hover:border-amber-200 p-0 flex items-center justify-center hover:-translate-y-2"
-                            >
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/sponsor/sponsor-logos/gold/AsgandPartnerlogo.jpeg"
-                                        alt="Asgand & Partner - Gold Sponsor"
-                                        fill
-                                        className="object-contain rounded-xl"
-                                        sizes="(max-width: 768px) 300px, 380px"
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Knowledge Partner tier */}
-                    <div className="mb-24">
-                        <div className="flex flex-col items-center mb-12">
-                            <div className="transform hover:scale-105 transition-transform duration-500">
-                                <div className="relative px-8 py-3 bg-gradient-to-r from-emerald-100 via-white to-emerald-100 border-2 border-emerald-200 rounded-full shadow-[0_10px_25px_-5px_rgba(16,185,129,0.15)]">
-                                    <h3 className="text-lg md:text-xl font-serif font-bold text-emerald-900 uppercase tracking-widest whitespace-nowrap">
-                                        Knowledge Partner
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap justify-center gap-8 md:gap-12 px-4">
-                            <div className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.2)] border-2 border-emerald-50 group-hover:border-emerald-200 p-6 flex items-center justify-center hover:-translate-y-2">
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/bgk-law-associates.jpg"
-                                        alt="BGK Law Associates - Knowledge Partner"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                            <div className="group relative w-full sm:w-[360px] h-44 bg-white rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.2)] border-2 border-emerald-50 group-hover:border-emerald-200 p-6 flex items-center justify-center hover:-translate-y-2">
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src="/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg"
-                                        alt="Fairaigle Legal & Consultancy LLP - Knowledge Partner"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
 

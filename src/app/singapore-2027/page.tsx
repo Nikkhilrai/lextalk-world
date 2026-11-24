@@ -943,7 +943,7 @@ export default function Singapore2027Page() {
             </section>
 
             {/* ===================== ECOSYSTEM PARTNER ===================== */}
-            <section className="relative py-20 md:py-24 bg-white overflow-hidden">
+            <section className="relative pt-12 md:pt-14 pb-4 bg-white overflow-hidden">
                 <div className="container mx-auto px-4 max-w-3xl text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -964,6 +964,36 @@ export default function Singapore2027Page() {
                                         alt="Fairaigle Legal & Consultancy LLP - Ecosystem Partner"
                                         fill
                                         className="object-contain mix-blend-multiply"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* ===================== KNOWLEDGE PARTNER ===================== */}
+            <section className="relative pt-12 md:pt-14 pb-20 md:pb-24 bg-white overflow-hidden">
+                <div className="container mx-auto px-4 max-w-3xl text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <div className="flex items-center justify-center gap-3 mb-10">
+                            <div className="w-8 h-px bg-amber-500" />
+                            <span className="text-amber-600 text-xs font-bold uppercase tracking-[0.3em]">Knowledge Partner</span>
+                            <div className="w-8 h-px bg-amber-500" />
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300">
+                                <div className="relative w-full aspect-[2/1]">
+                                    <Image
+                                        src="/mumbai-2026/sponsor/prism-legal-associates.jpg"
+                                        alt="Prism Legal Associates - Knowledge Partner"
+                                        fill
+                                        className="object-contain mix-blend-multiply brightness-[1.05]"
                                     />
                                 </div>
                             </div>
