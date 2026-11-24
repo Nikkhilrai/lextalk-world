@@ -114,6 +114,10 @@ export const MUMBAI_EVENT = build({
 
 const SG_CATEGORY_GROUPS: CategoryGroup[] = [
     {
+        group: "Individual Categories",
+        options: ["Lawyer in a Law Firm"],
+    },
+    {
         group: "AI & Responsible Innovation",
         options: [
             "AI Leadership Award", "Enterprise AI Transformation Award", "Applied AI Innovation Award",
