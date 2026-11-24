@@ -45,6 +45,10 @@ function paidText(p: NominationRow["payment"]) {
     return p.currency === "INR" ? `₹${p.amount.toLocaleString("en-IN")}` : `${p.currency} ${p.amount}`;
 }
 
+// jsPDF's built-in fonts can't draw ₹ or curly quotes; swap them for safe equivalents.
+const pdfText = (v: unknown) => String(v ?? "").replace(/₹/g, "INR ").replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').replace(/[\u2013\u2014]/g, "-").replace(/[^\x09\x0A\x0D\x20-\x7E\u00A0-\u00FF]/g, "");
+const fileSlug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export function NominationsTable({ rows }: { rows: NominationRow[] }) {
     const [search, setSearch] = useState("");
     const [event, setEvent] = useState("all");
@@ -75,6 +79,52 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
         URL.revokeObjectURL(url);
     };
 
+    const exportListPDF = async () => {
+        const [{ jsPDF }, { default: autoTable }] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
+        const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+        doc.setFontSize(16);
+        doc.text("Award Nominations", 40, 40);
+        doc.setFontSize(9);
+        doc.setTextColor(110);
+        doc.text(pdfText(`${filtered.length} nomination${filtered.length === 1 ? "" : "s"} · generated ${new Date().toLocaleString("en-IN")}`), 40, 56);
+        autoTable(doc, {
+            startY: 70,
+            head: [["#", "Nominee", "Email / Phone", "Category", "Event", "Status", "Submitted"]],
+            body: filtered.map((r, i) => [
+                i + 1, r.name, `${r.email}${r.phone ? `\n${r.phone}` : ""}`, `${r.type}: ${r.category}`, r.event,
+                `${STATUS_LABEL[r.status] ?? r.status}${r.payment ? `\n${paidText(r.payment)}` : ""}`,
+                new Date(r.createdAt).toLocaleDateString("en-IN", { dateStyle: "medium" }),
+            ].map(pdfText)),
+            styles: { fontSize: 8, cellPadding: 4, overflow: "linebreak" },
+            headStyles: { fillColor: [15, 23, 42] },
+            alternateRowStyles: { fillColor: [248, 250, 252] },
+        });
+        doc.save(`award-nominations-${new Date().toISOString().slice(0, 10)}.pdf`);
+    };
+
+    const downloadPDF = async (r: NominationRow) => {
+        const [{ jsPDF }, { default: autoTable }] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
+        const doc = new jsPDF({ unit: "pt", format: "a4" });
+        doc.setFontSize(18);
+        doc.text(pdfText(r.name), 40, 48, { maxWidth: 515 });
+        doc.setFontSize(10);
+        doc.setTextColor(110);
+        doc.text(pdfText(`${r.event} - ${r.category}`), 40, 68, { maxWidth: 515 });
+        doc.text(pdfText(`${STATUS_LABEL[r.status] ?? r.status}${r.payment ? ` - ${paidText(r.payment)} - ${r.payment.paymentId}` : ""}  |  Ref ${r.id}`), 40, 84, { maxWidth: 515 });
+        const labels = labelsFor(r.eventKey);
+        const entries = ORDER.some(k => k in r.answers) ? ORDER.map(k => [labels[k], r.answers[k]] as const) : Object.entries(r.answers);
+        const body = entries.filter(([, v]) => show(v) !== "").map(([l, v]) => [pdfText(l), pdfText(show(v))]);
+        if (r.files.length) body.push(["Uploaded files", pdfText(r.files.map(f => `${f.name}\n${f.url}`).join("\n"))]);
+        autoTable(doc, {
+            startY: 100,
+            body,
+            theme: "grid",
+            styles: { fontSize: 9, cellPadding: 6, overflow: "linebreak", valign: "top" },
+            columnStyles: { 0: { cellWidth: 150, fontStyle: "bold", fillColor: [248, 250, 252], textColor: [71, 85, 105] }, 1: { cellWidth: "auto" } },
+        });
+        doc.save(`nomination-${fileSlug(r.name) || r.id}.pdf`);
+    };
+
     return (
         <div className="p-6 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -89,9 +139,14 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                         {rows.length} total · {rows.filter(r => r.status === "PAID").length} paid · {rows.filter(r => r.status === "PENDING_PAYMENT").length} awaiting payment
                     </p>
                 </div>
-                <button onClick={exportCSV} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50">
-                    <Download className="w-4 h-4" /> Export CSV
-                </button>
+                <div className="flex gap-2">
+                    <button onClick={exportListPDF} disabled={filtered.length === 0} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-50">
+                        <FileText className="w-4 h-4" /> Download PDF
+                    </button>
+                    <button onClick={exportCSV} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50">
+                        <Download className="w-4 h-4" /> Export CSV
+                    </button>
+                </div>
             </div>
 
             <div className="flex flex-col md:flex-row gap-3 mb-6">
@@ -162,7 +217,12 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                                 <h2 className="text-lg font-bold text-slate-900">{viewing.name}</h2>
                                 <p className="text-sm text-slate-500">{viewing.event} · {viewing.category}</p>
                             </div>
-                            <button onClick={() => setViewing(null)} className="p-1.5 rounded-lg hover:bg-slate-100" aria-label="Close"><X className="w-5 h-5 text-slate-500" /></button>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => downloadPDF(viewing)} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50">
+                                    <Download className="w-3.5 h-3.5" /> Download PDF
+                                </button>
+                                <button onClick={() => setViewing(null)} className="p-1.5 rounded-lg hover:bg-slate-100" aria-label="Close"><X className="w-5 h-5 text-slate-500" /></button>
+                            </div>
                         </div>
                         <div className="px-6 py-5 space-y-5">
                             <div className="flex flex-wrap gap-2 text-xs">
