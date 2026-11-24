@@ -124,16 +124,30 @@ export function MumbaiSponsor() {
                     <div className="md:col-span-2 lg:col-span-3">
                         <div className="flex flex-col items-center">
                             <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Exhibitors</h4>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
-                            >
-                                <a href="https://melento.ai" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[2/1]">
-                                    <Image src="/dubai-event/sponsors/Melento.png" alt="Melento" fill className="object-contain mix-blend-multiply" />
-                                </a>
-                            </motion.div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+                                {[
+                                    { name: "Melento", src: "/dubai-event/sponsors/Melento.png", url: "https://melento.ai" },
+                                    { name: "LawQube", src: "/bangalore-2026/Sponsor/lawqube-logo.png", url: null },
+                                ].map((ex, i) => {
+                                    const img = (
+                                        <div className="relative w-full aspect-[2/1]">
+                                            <Image src={ex.src} alt={`${ex.name} - Exhibitor`} fill className={`object-contain mix-blend-multiply ${ex.name === "LawQube" ? "p-4" : ""}`} />
+                                        </div>
+                                    );
+                                    return (
+                                        <motion.div
+                                            key={ex.name}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.1 }}
+                                            className="w-full bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                                        >
+                                            {ex.url ? <a href={ex.url} target="_blank" rel="noopener noreferrer" className="w-full">{img}</a> : img}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
 

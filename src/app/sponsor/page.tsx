@@ -572,8 +572,9 @@ export default function SponsorshipPage() {
                                 { label: "Official Media Sponsor", sponsors: [
                                     { name: "The Patent Invention Magazine", logo: "/mumbai-2026/sponsor/the-patent-invention-magazine.png", href: null },
                                 ] },
-                                { label: "Exhibitor", sponsors: [
+                                { label: "Exhibitors", sponsors: [
                                     { name: "Melento", logo: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
+                                    { name: "LawQube", logo: "/bangalore-2026/Sponsor/lawqube-logo.png", href: null },
                                 ] },
                                 { label: "Wellness & Consciousness Partner", sponsors: [
                                     { name: "MysticVerse Global", logo: "/images/footer/mysticverseglobal.png", href: "https://mysticverseglobal.com/" },
