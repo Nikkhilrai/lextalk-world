@@ -199,9 +199,14 @@ export function NominationsTable({ rows }: { rows: NominationRow[] }) {
                                 </td>
                                 <td className="px-4 py-3 text-slate-500 text-xs whitespace-nowrap">{new Date(r.createdAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</td>
                                 <td className="px-4 py-3 text-right">
-                                    <button onClick={() => setViewing(r)} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg hover:bg-amber-100">
-                                        <Eye className="w-3.5 h-3.5" /> View
-                                    </button>
+                                    <div className="inline-flex items-center gap-2">
+                                        <button onClick={() => setViewing(r)} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg hover:bg-amber-100">
+                                            <Eye className="w-3.5 h-3.5" /> View
+                                        </button>
+                                        <button onClick={() => downloadPDF(r)} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50">
+                                            <Download className="w-3.5 h-3.5" /> PDF
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
