@@ -569,6 +569,9 @@ export default function SponsorshipPage() {
                                     { name: "Fairaigle Legal & Consultancy LLP", logo: "/dubai-event/sponsors/fairaigle-legal-consultancy-llp.jpg", href: null },
                                     { name: "Prism Legal Associates", logo: "/mumbai-2026/sponsor/prism-legal-associates.jpg", href: null },
                                 ] },
+                                { label: "Official Media Sponsor", sponsors: [
+                                    { name: "The Patent Invention Magazine", logo: "/mumbai-2026/sponsor/the-patent-invention-magazine.png", href: null },
+                                ] },
                                 { label: "Exhibitor", sponsors: [
                                     { name: "Melento", logo: "/dubai-event/sponsors/Melento.png", href: "https://melento.ai" },
                                 ] },
@@ -593,6 +596,9 @@ export default function SponsorshipPage() {
                                 ] },
                                 { label: "Knowledge Partner", sponsors: [
                                     { name: "Prism Legal Associates", logo: "/mumbai-2026/sponsor/prism-legal-associates.jpg", href: null },
+                                ] },
+                                { label: "Official Media Sponsor", sponsors: [
+                                    { name: "The Patent Invention Magazine", logo: "/mumbai-2026/sponsor/the-patent-invention-magazine.png", href: null },
                                 ] },
                             ],
                         },

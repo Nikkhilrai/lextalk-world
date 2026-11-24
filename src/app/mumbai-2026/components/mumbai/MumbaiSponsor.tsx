@@ -103,6 +103,23 @@ export function MumbaiSponsor() {
                         </div>
                     </div>
 
+                    {/* Official Media Sponsor */}
+                    <div className="md:col-span-2 lg:col-span-3">
+                        <div className="flex flex-col items-center">
+                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Official Media Sponsor</h4>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="w-full max-w-sm bg-slate-50/50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                            >
+                                <div className="relative w-full aspect-[10/3]">
+                                    <Image src="/mumbai-2026/sponsor/the-patent-invention-magazine.png" alt="The Patent Invention Magazine - Official Media Sponsor" fill className="object-contain mix-blend-multiply" />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
                     {/* Exhibitors */}
                     <div className="md:col-span-2 lg:col-span-3">
                         <div className="flex flex-col items-center">
