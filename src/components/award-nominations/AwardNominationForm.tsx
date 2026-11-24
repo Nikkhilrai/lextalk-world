@@ -453,7 +453,7 @@ export function AwardNominationForm({ eventKey, terms }: { eventKey: string; ter
                                 </div>
                             )}
 
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" initial={false}>
                                 <motion.div key={paid ? "paid" : step} {...motionProps} className="space-y-8">
                                     {step === 1 && (
                                         <>
