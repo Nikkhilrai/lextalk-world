@@ -1,10 +1,130 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Calendar, MapPin, Mic2, ArrowRight, Coffee, UtensilsCrossed, Trophy, Clock } from "lucide-react";
-import type { AgendaDay, AgendaSession, SessionType } from "@/app/dubai-2026/agenda/agenda-data";
+import { Calendar, MapPin, Mic2, ArrowRight, Coffee, UtensilsCrossed, Trophy, Clock, X, ChevronRight } from "lucide-react";
+import type { AgendaDay, AgendaSession, AgendaSpeaker, SessionType } from "@/app/dubai-2026/agenda/agenda-data";
+import { speakers as mumbaiSpeakers } from "../mumbai-speakers-list";
+
+export type ResolvedSpeaker = AgendaSpeaker & { image?: string; bio?: string };
+export type ResolvedSession = Omit<AgendaSession, "speakers"> & { speakers?: ResolvedSpeaker[] };
+export type ResolvedDay = Omit<AgendaDay, "sessions"> & { sessions: ResolvedSession[] };
+
+// Headshots and bios come from the Mumbai speakers list (a client module, so it
+// is resolved here rather than in the server page).
+const PROFILES = new Map(mumbaiSpeakers.map(s => [s.name.trim().toLowerCase(), s] as const));
+const resolveDays = (days: AgendaDay[]): ResolvedDay[] =>
+    days.map(day => ({
+        ...day,
+        sessions: day.sessions.map(session => ({
+            ...session,
+            speakers: session.speakers?.map(sp => {
+                const p = PROFILES.get(sp.name.trim().toLowerCase());
+                return { ...sp, image: p?.image, bio: p?.bio };
+            }),
+        })),
+    }));
+
+const initials = (name: string) =>
+    name.replace(/^(Dr\.|Adv\.)\s+/i, "").split(/\s+/).filter(w => /^[A-Za-z]/.test(w)).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+
+function Avatar({ sp, size }: { sp: ResolvedSpeaker; size: number }) {
+    return (
+        <span className="relative block rounded-full overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 ring-2 ring-white shadow-sm shrink-0" style={{ width: size, height: size }}>
+            {sp.image ? (
+                <Image src={sp.image} alt={sp.name} fill sizes={`${size * 2}px`} className="object-cover object-top" />
+            ) : (
+                <span className="absolute inset-0 flex items-center justify-center font-serif font-bold text-amber-800" style={{ fontSize: size * 0.36 }}>
+                    {initials(sp.name)}
+                </span>
+            )}
+        </span>
+    );
+}
+
+/* ── Speaker chip ───────────────────────────────────────────────────────── */
+function SpeakerChip({ sp, index, onOpen }: { sp: ResolvedSpeaker; index: number; onOpen: (sp: ResolvedSpeaker) => void }) {
+    const clickable = !!sp.bio;
+    const Tag = clickable ? "button" : "div";
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: "easeOut" }}
+        >
+            <Tag
+                {...(clickable ? { type: "button" as const, onClick: () => onOpen(sp) } : {})}
+                className={`w-full flex items-center gap-3 p-2 -m-2 rounded-xl text-left transition-colors ${clickable ? "group/sp hover:bg-amber-50/70 cursor-pointer" : ""}`}
+            >
+                <Avatar sp={sp} size={48} />
+                <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <span className="text-slate-900 text-[13.5px] font-semibold leading-tight group-hover/sp:text-amber-700 transition-colors">{sp.name}</span>
+                        {sp.isModerator && (
+                            <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 ring-1 ring-amber-200">
+                                Moderator
+                            </span>
+                        )}
+                    </span>
+                    {sp.role && <span className="block text-slate-500 text-[11.5px] leading-snug mt-1 line-clamp-2">{sp.role}</span>}
+                </span>
+                {clickable && <ChevronRight className="w-4 h-4 text-slate-300 group-hover/sp:text-amber-600 shrink-0 transition-colors" />}
+            </Tag>
+        </motion.div>
+    );
+}
+
+/* ── Speaker profile modal ──────────────────────────────────────────────── */
+function ProfileModal({ sp, onClose }: { sp: ResolvedSpeaker | null; onClose: () => void }) {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    useEffect(() => {
+        if (!sp) return;
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+        document.addEventListener("keydown", onKey);
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+    }, [sp, onClose]);
+    if (!mounted) return null;
+    return createPortal(
+        <AnimatePresence>
+            {sp && (
+                <motion.div
+                    key="profile"
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-slate-900/50 backdrop-blur-sm p-0 sm:p-6"
+                    onClick={onClose}
+                >
+                    <motion.div
+                        initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 320, damping: 30 }}
+                        onClick={e => e.stopPropagation()}
+                        role="dialog" aria-modal="true" aria-label={sp.name}
+                        className="relative w-full sm:max-w-xl max-h-[88vh] overflow-y-auto bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl"
+                    >
+                        <div className="h-24 bg-gradient-to-br from-[#0b1224] via-[#1a2540] to-[#3a2a10]" />
+                        <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors">
+                            <X className="w-4 h-4" />
+                        </button>
+                        <div className="px-6 sm:px-8 pb-8 -mt-12">
+                            <Avatar sp={sp} size={96} />
+                            <h3 className="mt-4 font-serif text-2xl font-bold text-slate-900 leading-tight">{sp.name}</h3>
+                            {sp.role && <p className="mt-1.5 text-amber-700 text-sm font-medium leading-snug">{sp.role}</p>}
+                            <div className="mt-5 h-px bg-gradient-to-r from-amber-300/70 via-slate-200 to-transparent" />
+                            <div className="mt-5 space-y-3 text-slate-600 text-[14px] leading-relaxed whitespace-pre-line">{sp.bio}</div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        document.body,
+    );
+}
 
 /* Light-theme colours per session type (the Dubai page's palette is built for a dark background). */
 const META: Record<SessionType, { label: string; dot: string; badge: string; bar: string }> = {
@@ -24,7 +144,7 @@ const META: Record<SessionType, { label: string; dot: string; badge: string; bar
 };
 
 /* ── Break / lunch strip ────────────────────────────────────────────────── */
-function BreakRow({ session }: { session: AgendaSession }) {
+function BreakRow({ session }: { session: ResolvedSession }) {
     const Icon = /lunch/i.test(session.title) ? UtensilsCrossed : Coffee;
     return (
         <motion.div
@@ -52,7 +172,7 @@ function BreakRow({ session }: { session: AgendaSession }) {
 }
 
 /* ── One session ────────────────────────────────────────────────────────── */
-function SessionRow({ session, index }: { session: AgendaSession; index: number }) {
+function SessionRow({ session, index, onOpen }: { session: ResolvedSession; index: number; onOpen: (sp: ResolvedSpeaker) => void }) {
     if (session.type === "break") return <BreakRow session={session} />;
     const meta = META[session.type];
     const isAwards = session.type === "awards";
@@ -128,6 +248,20 @@ function SessionRow({ session, index }: { session: AgendaSession; index: number 
                             ))}
                         </ul>
                     )}
+
+                    {session.speakers && session.speakers.length > 0 && (
+                        <div className="mt-6 pt-5 border-t border-dashed border-slate-200">
+                            <p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                                <Mic2 className="w-3 h-3 text-amber-600" />
+                                {session.speakers.length === 1 ? "Speaker" : `Speakers · ${session.speakers.length}`}
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                                {session.speakers.map((sp, i) => (
+                                    <SpeakerChip key={sp.name + i} sp={sp} index={i} onOpen={onOpen} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </motion.div>
@@ -135,20 +269,21 @@ function SessionRow({ session, index }: { session: AgendaSession; index: number 
 }
 
 /* ── Day ────────────────────────────────────────────────────────────────── */
-function DayPanel({ day, number }: { day: AgendaDay; number: number }) {
+function DayPanel({ day, number, single, onOpen }: { day: ResolvedDay; number: number; single: boolean; onOpen: (sp: ResolvedSpeaker) => void }) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.15"] });
     const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
     const sessionCount = day.sessions.filter(s => s.type !== "break").length;
+    const speakerCount = new Set(day.sessions.flatMap(s => s.speakers?.map(sp => sp.name) ?? [])).size;
 
     return (
         <div>
             <div className="relative text-center mb-12 md:mb-16">
                 <span aria-hidden className="absolute left-1/2 -translate-x-1/2 -top-10 md:-top-14 font-serif font-bold text-[120px] md:text-[180px] leading-none text-amber-500/[0.07] select-none pointer-events-none">
-                    0{number}
+                    {single ? "08" : `0${number}`}
                 </span>
                 <p className="relative text-amber-600 text-[11px] font-bold uppercase tracking-[0.3em] mb-3">
-                    {day.label} · {day.date}
+                    {single ? day.date : `${day.label} · ${day.date}`}
                 </p>
                 <h2 className="relative text-3xl md:text-5xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
                     {day.theme}
@@ -158,7 +293,7 @@ function DayPanel({ day, number }: { day: AgendaDay; number: number }) {
                 </p>
                 <div className="relative flex items-center justify-center gap-3 mt-6">
                     <span className="h-px w-10 bg-gradient-to-r from-transparent to-amber-400" />
-                    <span className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest">{sessionCount} Sessions</span>
+                    <span className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest">{sessionCount} Sessions · {speakerCount} Speakers</span>
                     <span className="h-px w-10 bg-gradient-to-l from-transparent to-amber-400" />
                 </div>
             </div>
@@ -171,7 +306,7 @@ function DayPanel({ day, number }: { day: AgendaDay; number: number }) {
                 </div>
 
                 {day.sessions.map((s, i) => (
-                    <SessionRow key={`${day.id}-${i}`} session={s} index={i} />
+                    <SessionRow key={`${day.id}-${i}`} session={s} index={i} onOpen={onOpen} />
                 ))}
             </div>
         </div>
@@ -179,9 +314,13 @@ function DayPanel({ day, number }: { day: AgendaDay; number: number }) {
 }
 
 /* ── Page ───────────────────────────────────────────────────────────────── */
-export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
+export function MumbaiAgendaTimeline({ days: rawDays }: { days: AgendaDay[] }) {
+    const [days] = useState(() => resolveDays(rawDays));
     const [active, setActive] = useState(0);
+    const [profile, setProfile] = useState<ResolvedSpeaker | null>(null);
     const day = days[active];
+    const single = days.length === 1;
+    const totalSpeakers = new Set(days.flatMap(d => d.sessions.flatMap(s => s.speakers?.map(sp => sp.name) ?? []))).size;
 
     return (
         <>
@@ -223,9 +362,9 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
 
                         <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-3 rounded-2xl bg-white ring-1 ring-slate-200/80 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] divide-y sm:divide-y-0 sm:divide-x divide-slate-100 text-left">
                             {[
-                                { Icon: Calendar, k: "Dates", v: "7 – 8 December 2026" },
+                                { Icon: Calendar, k: "Date", v: "Tuesday, 8 December 2026" },
                                 { Icon: MapPin, k: "Venue", v: "Radisson Blu Mumbai International Airport" },
-                                { Icon: Mic2, k: "Speakers", v: "50+ legal leaders" },
+                                { Icon: Mic2, k: "Speakers", v: `${totalSpeakers}+ legal leaders` },
                             ].map(({ Icon, k, v }) => (
                                 <div key={k} className="flex items-start gap-3 px-5 py-4">
                                     <span className="w-9 h-9 rounded-xl bg-amber-50 ring-1 ring-amber-200 flex items-center justify-center shrink-0">
@@ -253,7 +392,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
             </section>
 
             {/* Day switcher — top-[72px] clears the scrolled navbar */}
-            <div className="sticky top-[72px] md:top-[88px] z-40 bg-[#faf8f3]/85 backdrop-blur-xl border-y border-slate-200/70">
+            {!single && <div className="sticky top-[72px] md:top-[88px] z-40 bg-[#faf8f3]/85 backdrop-blur-xl border-y border-slate-200/70">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="flex items-center justify-center gap-2 py-3">
                         {days.map((d, i) => (
@@ -282,7 +421,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div>}
 
             {/* Timeline */}
             <section id="programme" className="relative scroll-mt-24 bg-[#faf8f3] pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
@@ -298,7 +437,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                             exit={{ opacity: 0, y: -8 }}
                             transition={{ duration: 0.35, ease: "easeOut" }}
                         >
-                            <DayPanel day={day} number={active + 1} />
+                            <DayPanel day={day} number={active + 1} single={single} onOpen={setProfile} />
                         </motion.div>
                     </AnimatePresence>
 
@@ -316,10 +455,12 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
 
                     <p className="text-center text-slate-400 text-[11.5px] mt-12 leading-relaxed">
                         Programme subject to minor adjustments. All times are India Standard Time (IST).
-                        <br className="hidden sm:block" /> Speakers for each session will be announced soon.
+                        <br className="hidden sm:block" /> Tap a speaker to read their profile.
                     </p>
                 </div>
             </section>
+
+            <ProfileModal sp={profile} onClose={() => setProfile(null)} />
 
             {/* CTA */}
             <section className="bg-[#faf8f3] pb-20 md:pb-28 px-4">
@@ -327,7 +468,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                     <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[620px] h-[260px] bg-amber-500/20 rounded-full blur-[110px] pointer-events-none" />
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/70 to-transparent" />
                     <div className="relative">
-                        <p className="text-amber-400 text-[11px] font-bold uppercase tracking-[0.3em] mb-4">7 – 8 December 2026 · Mumbai</p>
+                        <p className="text-amber-400 text-[11px] font-bold uppercase tracking-[0.3em] mb-4">8 December 2026 · Mumbai</p>
                         <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight mb-4">
                             Secure your seat in Mumbai
                         </h2>
