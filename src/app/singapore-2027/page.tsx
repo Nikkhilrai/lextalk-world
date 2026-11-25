@@ -46,8 +46,8 @@ const CONFERENCE = "Singapore, Feb 4 2027";
 // ===================== Content — verbatim from the supplied brief =====================
 
 const keyStats = [
-    { value: "150", suffix: "+", label: "Senior Professionals" },
-    { value: "100", suffix: "+", label: "Organisations Represented" },
+    { value: "200", suffix: "+", label: "Senior Professionals" },
+    { value: "150", suffix: "+", label: "Organisations Represented" },
     { value: "30–35", suffix: "", label: "Senior Speakers" },
 ];
 

@@ -45,10 +45,10 @@ export function EventsList() {
             link: "/singapore-2027",
             agendaLink: "/singapore-2027#agenda",
             publishedAgenda: true,
-            stats: { delegates: "150+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "1 Day" },
+            stats: { delegates: "200+", delegatesLabel: "Senior Professionals", type: "Conference", duration: "1 Day" },
             highlights: [
-                "150+ Senior Professionals",
-                "100+ Organisations Represented",
+                "200+ Senior Professionals",
+                "150+ Organisations Represented",
                 "30–35 Senior Speakers",
                 "One-Day Conference & Exhibition"
             ]

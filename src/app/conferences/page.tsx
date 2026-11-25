@@ -56,14 +56,14 @@ const upcomingConferences = [
         featured: false,
         description: "A senior executive conference on AI governance, legal exposure, cybersecurity, privacy and digital trust — 4 February 2027, Singapore.",
         stats: {
-            "Senior Professionals": "150+",
-            organisations: "100+",
+            "Senior Professionals": "200+",
+            organisations: "150+",
             speakers: "30–35",
             duration: "1 Day",
         },
         highlights: [
-            "150+ Senior Professionals",
-            "100+ Organisations Represented",
+            "200+ Senior Professionals",
+            "150+ Organisations Represented",
             "30–35 Senior Speakers",
             "One-Day Conference & Exhibition",
         ],

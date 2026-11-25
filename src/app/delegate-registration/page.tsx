@@ -143,7 +143,7 @@ const EVENTS = [
         date: "February 4, 2027",
         day: "Thursday",
         duration: "1 Day",
-        delegates: "150+",
+        delegates: "200+",
         href: "/singapore-2027-delegate-passes",
         accent: "emerald",
         gradient: "from-emerald-500 to-emerald-600",
@@ -159,7 +159,7 @@ const EVENTS = [
         shadowHover: "hover:shadow-emerald-500/20",
         features: [
             "1-Day Conference & Exhibition",
-            "150+ Senior Professionals",
+            "200+ Senior Professionals",
             "Executive Networking & Awards",
         ],
     },
