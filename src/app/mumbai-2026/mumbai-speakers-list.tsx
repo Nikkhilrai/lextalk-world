@@ -65,16 +65,6 @@ As Founder and CEO of Coingeit and CaseDocker, he is driving innovation in the L
 His expertise covers global offering development, business development, transition and transformation, pre-sales and solution architecture, mid-to-large deal closure, and global service delivery, with deep domain knowledge in LegalTech, cloud computing, orchestration and automation, VDI, unified communications, smart city frameworks, and security and surveillance. He is currently architecting customised security and surveillance solutions tailored for the Indian environment in partnership with global Tier-1 component providers within smart city frameworks.`,
     },
     {
-        name: "Arun Kasat",
-        title: "Global Head – Ethics, Compliance & Data Privacy, Biocon Biologics",
-        image: "https://res.cloudinary.com/djagw0s4d/image/upload/f_auto,q_auto,w_800/v1790324454/lextalk/mumbai-speakers/arun-kasat-v2.png",
-        bio: `Arun Kasat, Global Head of Ethics, Compliance and Data Privacy at Biocon Biologics, one of the world's leading biopharmaceutical companies. Arun currently leads global initiatives across ethics and compliance, corporate governance, data privacy, sanctions compliance, and regulatory risk management.
-
-With more than two decades of international experience, he has advised boards and senior leadership teams on governance, compliance, investigations, data protection, ESG, and enterprise risk management across multiple jurisdictions. Prior to Biocon, Arun held leadership roles with organizations including Dr. Reddy's Laboratories, Abbott, Siemens, Johnson & Johnson, and EY, working across India and the Middle East.
-
-Arun is a qualified lawyer and Chartered Accountant, and is widely recognized for building high-impact compliance and governance programs that enable ethical business growth while navigating complex regulatory environments. His expertise spans compliance strategy, data privacy, corporate governance, investigations, sanctions, and regulatory transformation.`,
-    },
-    {
         name: "Nikunj Savalia",
         title: "Head Legal & Company Secretary, Sanofi CHC India",
         image: "https://res.cloudinary.com/djagw0s4d/image/upload/v1786625149/lextalk/mumbai-speakers/nikunj-savalia.jpg",

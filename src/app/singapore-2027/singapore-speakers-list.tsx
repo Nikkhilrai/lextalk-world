@@ -186,18 +186,6 @@ Faizan brings extensive GRC experience from roles within and outside Telenor. In
         image: "/Singapore-2027/Speaker-images/Rishiraj%20Singh.png",
         bio: `Rishiraj Singh leads UOB\u2019s Enterprise AI & Data Risk Governance function within Group Risk Management, driving the strategy and implementation of governance frameworks for responsible AI and data adoption. He oversees AI risk assessments, Responsible AI, data governance, data quality, AI inventory and BCBS 239 initiatives. He advises senior management and executive committees on AI and data risk, regulatory compliance and risk appetite, while strengthening accountability, control effectiveness and enterprise-wide risk transparency to enable sustainable innovation.`,
     },
-    {
-        name: "Angela Xu",
-        title: "Senior Counsel, Regulatory Affairs - Privacy Advisory (Head of APAC), Google",
-        image: "/Singapore-2027/Speaker-images/angela-xu.jpg",
-        bio: `Angela Xu is a privacy and data protection specialist at Google, based in Singapore, with significant experience in public policy, privacy governance and data protection implementation. She brings valuable perspectives on navigating evolving regulatory frameworks, strengthening organisational privacy practices and addressing complex data protection challenges in the digital economy. A Certified Information Privacy Manager (CIPM), Angela combines policy understanding with practical implementation insights, contributing to discussions on privacy, data governance and digital trust.`,
-    },
-    {
-        name: "Edna Essien",
-        title: "Director, Data Protection Office, APAC, LATAM & MEA, PayPal",
-        image: "/Singapore-2027/Speaker-images/edna-essien.jpg",
-        bio: `Edna is a qualified Solicitor of England and Wales with over 20 years of experience in global data privacy, data protection and technology compliance. She currently serves as Director and Data Protection Officer for APAC, LATAM and MEA at PayPal in Singapore. Previously, she held senior privacy and legal roles at Scotiabank, Standard Chartered Bank and Accenture. A former President of AsiaDPO, Edna brings extensive expertise in GDPR, international privacy regulations, data governance and technology compliance.`,
-    },
 ];
 
 export default function SingaporeSpeakersList() {
