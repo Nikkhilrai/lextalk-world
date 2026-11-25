@@ -15,7 +15,7 @@ import { Footer } from "@/components/Footer";
 
 const HOME_TITLE = "LexTalk World | Legal Tech & AI Law Conferences and Legal Honor Global Awards";
 const HOME_DESCRIPTION =
-  "LexTalk World is the global platform for legal, AI governance, risk and compliance leaders. Join LexTalk World Mumbai (7–8 December 2026) and APAC Singapore (4 February 2027) — conferences, exhibitions and the Legal Honor Global Awards.";
+  "LexTalk World is the global platform for legal, AI governance, risk and compliance leaders. Join LexTalk World Mumbai (8 December 2026) and APAC Singapore (4 February 2027) — conferences, exhibitions and the Legal Honor Global Awards.";
 
 export const metadata: Metadata = {
   title: { absolute: HOME_TITLE },
