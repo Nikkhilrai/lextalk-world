@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Calendar, MapPin, Mic2, ArrowRight, Coffee, UtensilsCrossed, Trophy, Clock } from "lucide-react";
 import type { AgendaDay, AgendaSession, SessionType } from "@/app/dubai-2026/agenda/agenda-data";
-import { DownloadAgendaButton } from "./DownloadAgendaButton";
 
 /* Light-theme colours per session type (the Dubai page's palette is built for a dark background). */
 const META: Record<SessionType, { label: string; dot: string; badge: string; bar: string }> = {
@@ -218,7 +217,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                         </h1>
 
                         <p className="text-slate-500 text-[15px] md:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-10">
-                            Two days of keynotes, GC power panels, roundtables and case studies in India&apos;s
+                            A full day of keynotes, GC power panels, roundtables and case studies in India&apos;s
                             commercial capital — closing with the India Legal Honors.
                         </p>
 
@@ -248,7 +247,6 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                                 Register Now
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                             </Link>
-                            <DownloadAgendaButton />
                         </div>
                     </motion.div>
                 </div>
@@ -334,7 +332,7 @@ export function MumbaiAgendaTimeline({ days }: { days: AgendaDay[] }) {
                             Secure your seat in Mumbai
                         </h2>
                         <p className="text-slate-400 text-sm md:text-base mb-9 max-w-xl mx-auto font-light">
-                            Join General Counsel, law firm partners and legal technology leaders across two days at
+                            Join General Counsel, law firm partners and legal technology leaders for a full day at
                             Radisson Blu Mumbai International Airport.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

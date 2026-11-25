@@ -25,7 +25,7 @@ export function MumbaiFinalCTA({ onOpenRegister }: { onOpenRegister?: () => void
                     <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-0 sm:divide-x divide-white/15 border-y border-white/15 py-4 px-2 sm:px-0 mb-10">
                         <div className="flex items-center gap-2.5 sm:px-8">
                             <Calendar className="w-4 h-4 text-amber-500 shrink-0" />
-                            <span className="text-white font-medium text-sm md:text-base whitespace-nowrap">December 7–8, 2026</span>
+                            <span className="text-white font-medium text-sm md:text-base whitespace-nowrap">December 8, 2026</span>
                         </div>
                         <div className="flex items-center gap-2.5 sm:px-8">
                             <MapPin className="w-4 h-4 text-amber-500 shrink-0" />

@@ -22,7 +22,7 @@ const GST_AMOUNT = TOTAL - PRICE;
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 const BENEFITS = [
-    { title: "Full 2-Day Access", text: "All conference sessions and keynotes" },
+    { title: "Full-Day Access", text: "All conference sessions and keynotes" },
     { title: "Curated Networking", text: "Facilitated introductions and networking access" },
     { title: "Conference Kit", text: "Branded delegate kit and event materials" },
     { title: "Tech Expo Access", text: "Explore legal tech and service partner exhibits" },
@@ -273,7 +273,7 @@ function RegistrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                                                 {[
                                                     { label: "Pass", value: "Law Firm & Independent Lawyer" },
                                                     { label: "Event", value: "LexTalk World Mumbai 2026" },
-                                                    { label: "Date", value: "Dec 7–8, Monday & Tuesday, 2026" },
+                                                    { label: "Date", value: "Dec 8, Tuesday, 2026" },
                                                     { label: "Attendee", value: `${formData.firstName} ${formData.lastName}` },
                                                 ].map(r => (
                                                     <div key={r.label} className="flex justify-between gap-3">
@@ -585,7 +585,7 @@ function PassCard({ onRegister }: { onRegister: () => void }) {
 
                     <h2 className="font-serif text-2xl font-bold text-slate-900 leading-tight mb-3">Law Firm & Independent Lawyer Pass</h2>
                     <div className="flex flex-wrap gap-x-3 gap-y-1 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-600" /> Dec 7–8, 2026</span>
+                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-600" /> Dec 8, 2026</span>
                         <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-600" /> Radisson Blu Mumbai International Airport</span>
                     </div>
 
@@ -694,7 +694,7 @@ export default function MumbaiLawFirmPass() {
 
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
                                 className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                Two days of sessions, keynotes and curated networking at LexTalk World Mumbai. Available to law firms and independent lawyers only.
+                                A full day of sessions, keynotes and curated networking at LexTalk World Mumbai. Available to law firms and independent lawyers only.
                             </motion.p>
 
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.4 }}
@@ -710,7 +710,7 @@ export default function MumbaiLawFirmPass() {
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.5 }}
                                 className="flex flex-wrap gap-4">
                                 {[
-                                    { icon: Calendar, text: "Dec 7–8, Monday & Tuesday, 2026" },
+                                    { icon: Calendar, text: "Dec 8, Tuesday, 2026" },
                                     { icon: MapPin, text: "Radisson Blu Mumbai International Airport" },
                                 ].map(({ icon: Icon, text }) => (
                                     <div key={text} className="flex items-center gap-2">

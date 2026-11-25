@@ -13,7 +13,7 @@ export const MUMBAI_2026_NOMINATION = {
     event: "mumbai-2026",
     eventName: "Legal Honor Global Awards - 2026 Mumbai",
     conferenceName: "LexTalk World Mumbai 2026",
-    details: "7–8 December 2026 · Radisson Blu Mumbai International Airport",
+    details: "8 December 2026 · Radisson Blu Mumbai International Airport",
     /** Nomination fee, charged server-side. Refundable if the nominee doesn't make the cut. */
     feeUsd: 50,
 } as const;

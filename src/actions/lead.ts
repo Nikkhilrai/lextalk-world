@@ -112,12 +112,12 @@ async function sendNotificationEmail(data: any) {
 // pricing is live — Delhi has no page yet, so it's deliberately absent
 // rather than pointing at a broken or fabricated link.
 const DELEGATE_PAYMENT_PAGES: Record<string, string> = {
-    "Mumbai India, Dec 7-8 2026": "https://lextalkworld.in/mumbai-delegate-registration-2026",
+    "Mumbai India, Dec 8 2026": "https://lextalkworld.in/mumbai-delegate-registration-2026",
     "Singapore, Feb 4 2027": "https://lextalkworld.in/singapore-2027-delegate-passes",
 };
 
 function eventPageFor(conference: string | undefined): string {
-    if (conference === "Mumbai India, Dec 7-8 2026") return "https://lextalkworld.in/mumbai-2026";
+    if (conference === "Mumbai India, Dec 8 2026") return "https://lextalkworld.in/mumbai-2026";
     if (conference === "Singapore, Feb 4 2027") return "https://lextalkworld.in/singapore-2027";
     if (conference === "Delhi India, July 2027") return "https://lextalkworld.in/delhi-2027";
     return "https://lextalkworld.in/conferences";

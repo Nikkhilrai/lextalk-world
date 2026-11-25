@@ -25,7 +25,7 @@ const paths = [
     {
         icon: Users,
         title: "Attend as Delegate",
-        desc: "Register for two days of strategy, networking, and recognition at India's commercial capital.",
+        desc: "Register for a full day of strategy, networking, and recognition at India's commercial capital.",
         cta: "Secure Your Pass",
         image: "/mumbai-2026/Decision-Makers/premium-networking.jpg",
         actionKey: null,

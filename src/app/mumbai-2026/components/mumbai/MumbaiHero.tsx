@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-    Calendar, MapPin, ArrowRight, Download
+    Calendar, MapPin, ArrowRight
 } from "lucide-react";
 
 const navTabs = [
@@ -15,7 +15,7 @@ const navTabs = [
     { label: "Sponsorship", href: "#sponsors" },
 ];
 
-export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: () => void, onOpenRegister?: () => void }) {
+export function MumbaiHero({ onOpenRegister }: { onOpenRegister?: () => void }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -100,7 +100,7 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                         <div className="flex items-center gap-3 mb-3 px-6 py-2 bg-black/30 backdrop-blur-sm rounded-full border border-amber-500/30">
                             <Calendar className="w-5 h-5 text-amber-500" />
                             <span className="text-amber-400 font-serif text-lg md:text-xl tracking-wide">
-                                December 7th–8th, 2026
+                                December 8th, 2026
                             </span>
                         </div>
 
@@ -142,16 +142,13 @@ export function MumbaiHero({ onOpenAgenda, onOpenRegister }: { onOpenAgenda?: ()
                         <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
-                    {/* Download Agenda — hidden while the PDF is pending an update, see navTabs above */}
-                    {onOpenAgenda && (
-                        <button
-                            onClick={onOpenAgenda}
-                            className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto cursor-pointer"
-                        >
-                            <Download className="w-4 h-4 text-amber-400" />
-                            <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase">Download Agenda</span>
-                        </button>
-                    )}
+                    <Link
+                        href="/mumbai-2026/agenda"
+                        className="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 md:px-7 md:py-3 bg-white/5 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 w-full sm:w-auto"
+                    >
+                        <Calendar className="w-4 h-4 text-amber-400" />
+                        <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase">View Agenda</span>
+                    </Link>
                 </div>
             </div>
         </section>

@@ -40,7 +40,7 @@ export type DashEvent = {
 const KNOWN_EVENTS: DashEvent[] = [
     { slug: "bangalore-2026", name: "LexTalk World Bangalore 2026", short: "Bangalore 2026", city: "Bangalore", year: "2026", start: "2026-06-11", end: "2026-06-11", dateLabel: "11 June 2026", venue: "Radisson Blu Atria, Bangalore", href: "/bangalore-2026" },
     { slug: "dubai-2026", name: "LexTalk World Dubai 2026", short: "Dubai 2026", city: "Dubai", year: "2026", start: "2026-09-10", end: "2026-09-10", dateLabel: "10 September 2026", venue: "Dubai, UAE", href: "/dubai-2026" },
-    { slug: "mumbai-2026", name: "LexTalk World Mumbai 2026", short: "Mumbai 2026", city: "Mumbai", year: "2026", start: "2026-12-07", end: "2026-12-08", dateLabel: "7–8 December 2026", venue: "Radisson Blu, Mumbai International Airport", href: "/mumbai-2026" },
+    { slug: "mumbai-2026", name: "LexTalk World Mumbai 2026", short: "Mumbai 2026", city: "Mumbai", year: "2026", start: "2026-12-08", end: "2026-12-08", dateLabel: "8 December 2026", venue: "Radisson Blu, Mumbai International Airport", href: "/mumbai-2026" },
     { slug: "singapore-2027", name: "LexTalk World Singapore 2027", short: "Singapore 2027", city: "Singapore", year: "2027", start: "2027-02-04", end: "2027-02-04", dateLabel: "4 February 2027", venue: "Singapore", href: "/singapore-2027" },
 ];
 

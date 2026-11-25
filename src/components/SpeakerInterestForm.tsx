@@ -26,7 +26,7 @@ interface FormData {
 }
 
 const CONFERENCES = [
-    { value: "LexTalk World Mumbai 2026", label: "LexTalk World Mumbai 2026 — 7–8 December 2026" },
+    { value: "LexTalk World Mumbai 2026", label: "LexTalk World Mumbai 2026 — 8 December 2026" },
     { value: "LexTalk World Delhi 2027", label: "LexTalk World Delhi 2027 — July 2027 (dates TBA)" },
     { value: "LexTalk World Singapore 2027", label: "LexTalk World Singapore 2027 — 4 February 2027" },
     { value: "Any Upcoming LexTalk World Event", label: "Any Upcoming LexTalk World Event" },

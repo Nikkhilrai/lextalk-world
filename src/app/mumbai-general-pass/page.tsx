@@ -21,7 +21,7 @@ const { price: PRICE, gst: GST_AMOUNT, total: TOTAL } = MUMBAI_GENERAL_PRICE;
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 const BENEFITS = [
-    { title: "Full 2-Day Access", text: "All conference sessions and keynotes" },
+    { title: "Full-Day Access", text: "All conference sessions and keynotes" },
     { title: "Curated Networking", text: "Facilitated introductions and networking access" },
     { title: "Conference Kit", text: "Branded delegate kit and event materials" },
     { title: "Tech Expo Access", text: "Explore legal tech and service partner exhibits" },
@@ -449,7 +449,7 @@ export default function MumbaiGeneralPass() {
 
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
                                 className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                One simple price for two days of sessions, keynotes and curated networking at LexTalk World Mumbai. Open to all legal professionals.
+                                One simple price for a full day of sessions, keynotes and curated networking at LexTalk World Mumbai. Open to all legal professionals.
                             </motion.p>
 
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.4 }}
@@ -479,7 +479,7 @@ export default function MumbaiGeneralPass() {
                                 <h2 className="font-serif text-xl md:text-2xl font-bold text-slate-900 mb-3">See what&apos;s on</h2>
                                 <p className="text-slate-600 text-sm leading-relaxed">
                                     Browse the{" "}
-                                    <Link href="/mumbai-2026/agenda" className="text-amber-700 font-semibold underline underline-offset-2 hover:text-amber-800">full two-day agenda</Link>
+                                    <Link href="/mumbai-2026/agenda" className="text-amber-700 font-semibold underline underline-offset-2 hover:text-amber-800">full agenda</Link>
                                     {" "}and meet{" "}
                                     <Link href="/mumbai-2026/speakers" className="text-amber-700 font-semibold underline underline-offset-2 hover:text-amber-800">our speakers</Link>.
                                 </p>

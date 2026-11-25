@@ -15,7 +15,7 @@ export type NominationEvent = {
     event: string;
     eventName: string;
     conferenceName: string;
-    /** One line for emails, e.g. "7–8 December 2026 · Radisson Blu …" */
+    /** One line for emails, e.g. "8 December 2026 · Radisson Blu …" */
     details: string;
     feeUsd: number;
     /** Name of the reviewing panel, used in emails. */
@@ -80,7 +80,7 @@ export const MUMBAI_EVENT = build({
         badge: "Legal Honor Global Awards",
         heroHighlight: "Mumbai 2026",
         heroBlurb: "Recognising excellence across law firms, in-house teams and independent practice at LexTalk World Mumbai.",
-        dateChip: "7–8 December 2026",
+        dateChip: "8 December 2026",
         venueChip: "Radisson Blu, Mumbai International Airport",
         defaultCountry: "India",
         juryNote: "Every nomination is screened by the Legal Honor Global Awards Jury Panel. Qualifying score: 80/100.",
@@ -95,12 +95,12 @@ export const MUMBAI_EVENT = build({
             "Complete the USD 50 nomination fee, if you haven't already — your nomination is considered once it is paid.",
             "The Legal Honor Global Awards Jury Panel independently screens and evaluates every nomination.",
             "The Awards Committee emails you a detailed scorecard. The qualifying score is 80 out of 100.",
-            "If you make the cut, we confirm you as a winner at LexTalk World Mumbai (7–8 December 2026). If not, the nomination fee is refunded in full.",
+            "If you make the cut, we confirm you as a winner at LexTalk World Mumbai (8 December 2026). If not, the nomination fee is refunded in full.",
         ],
         afterPayment: [
             "The Legal Honor Global Awards Jury Panel will evaluate your nomination.",
             "Once the evaluation is complete, the Awards Committee will email you a detailed scorecard.",
-            "Winners are confirmed for the ceremony at LexTalk World Mumbai on 7–8 December 2026. If you do not make the cut, the fee is refunded in full.",
+            "Winners are confirmed for the ceremony at LexTalk World Mumbai on 8 December 2026. If you do not make the cut, the fee is refunded in full.",
         ],
         replyTo: "info@lextalkworld.in",
         detailsHref: "/mumbai-2026",

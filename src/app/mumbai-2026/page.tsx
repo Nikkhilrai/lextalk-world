@@ -18,8 +18,7 @@ import { MumbaiSponsor } from "./components/mumbai/MumbaiSponsor";
 import { MumbaiFinalCTA } from "./components/mumbai/MumbaiFinalCTA";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { FloatingAgendaButton } from "@/components/FloatingAgendaButton";
-import { AgendaModal } from "@/components/AgendaModal";
+import { FloatingAgendaLink } from "@/components/FloatingAgendaLink";
 import { RegisterModal } from "@/components/RegisterModal";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
@@ -31,7 +30,6 @@ import { mumbaiEventJsonLd } from "./seo";
 const eventJsonLd = mumbaiEventJsonLd(mumbaiSpeakers);
 
 export default function Mumbai2026Page() {
-    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const [isSpeakerApplyOpen, setIsSpeakerApplyOpen] = useState(false);
     const [isSponsorshipOpen, setIsSponsorshipOpen] = useState(false);
@@ -50,13 +48,7 @@ export default function Mumbai2026Page() {
             <Navbar />
 
             {/* Floating Buttons - Hidden on mobile by global component logic */}
-            <FloatingAgendaButton eventSlug="mumbai-2026" />
-
-            <AgendaModal
-                isOpen={isAgendaModalOpen}
-                onClose={() => setIsAgendaModalOpen(false)}
-                eventSlug="mumbai-2026"
-            />
+            <FloatingAgendaLink href="/mumbai-2026/agenda" />
 
             <RegisterModal
                 isOpen={isRegisterModalOpen}
@@ -80,7 +72,7 @@ export default function Mumbai2026Page() {
                 <div className="flex items-center gap-3 sm:gap-5 bg-slate-900/95 backdrop-blur-md text-white pl-5 pr-2.5 py-2.5 rounded-full shadow-2xl shadow-slate-900/40 border border-white/10">
                     <div className="flex items-center gap-2 text-xs sm:text-sm font-medium whitespace-nowrap">
                         <Calendar className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                        <span>Dec 7–8</span>
+                        <span>Dec 8</span>
                         <span className="hidden sm:inline text-white/40">·</span>
                         <span className="hidden sm:inline flex items-center gap-1.5">
                             <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
@@ -97,7 +89,6 @@ export default function Mumbai2026Page() {
             </div>
 
             <MumbaiHero
-                onOpenAgenda={() => setIsAgendaModalOpen(true)}
                 onOpenRegister={() => setIsRegisterModalOpen(true)}
             />
 

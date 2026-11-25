@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// LexTalk World Mumbai 2026 — two-day conference programme.
+// LexTalk World Mumbai 2026 — one-day conference programme.
 //
 // Source: "mumbai-2026-agenda.pdf" (Agenda Overview, December 2026, APAC Mumbai).
 //

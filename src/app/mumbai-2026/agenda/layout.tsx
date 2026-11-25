@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-const TITLE = "Agenda | LexTalk World Mumbai 2026 — 7–8 December 2026";
+const TITLE = "Agenda | LexTalk World Mumbai 2026 — 8 December 2026";
 const DESCRIPTION =
-    "The full two-day programme for LexTalk World Mumbai 2026 at Radisson Blu Mumbai International Airport — keynotes, GC power panels, round tables, case studies and the India Legal Honors. Free to view.";
+    "The full one-day programme for LexTalk World Mumbai 2026 at Radisson Blu Mumbai International Airport — keynotes, GC power panels, round tables, case studies and the India Legal Honors. Free to view.";
 const IMAGE = { url: "/og/mumbai-2026.jpg", width: 1200, height: 630, alt: "LexTalk World Mumbai 2026 agenda" };
 
 export const metadata: Metadata = {

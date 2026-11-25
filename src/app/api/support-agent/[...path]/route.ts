@@ -5,7 +5,7 @@ import { createLead } from "@/actions/lead";
 // Agent event slugs → the conference labels actions/lead.ts uses to pick the event
 // page and payment link in the visitor's confirmation email.
 const CONFERENCE_LABELS: Record<string, string> = {
-    "mumbai-2026": "Mumbai India, Dec 7-8 2026",
+    "mumbai-2026": "Mumbai India, Dec 8 2026",
     "singapore-2027": "Singapore, Feb 4 2027",
     "delhi-2027": "Delhi India, July 2027",
 };

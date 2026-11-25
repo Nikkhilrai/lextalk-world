@@ -331,7 +331,7 @@ export default function PressRelease() {
                                 <CalendarDays className="w-5 h-5 text-amber-400" />Mumbai, India
                             </span>
                             <p className="mt-auto text-sm text-slate-400">
-                                7–8 December 2026 · Radisson Blu Mumbai International Airport{" "}
+                                8 December 2026 · Radisson Blu Mumbai International Airport{" "}
                                 <ArrowRight className="inline w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
                             </p>
                         </Link>

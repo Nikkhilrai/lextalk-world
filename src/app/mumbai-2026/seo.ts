@@ -10,8 +10,8 @@ export function mumbaiEventJsonLd(speakers: { name: string; title?: string }[]) 
         "@type": "Event",
         name: "LexTalk World Mumbai 2026 — Legal Conference & Legal Honor Global Awards",
         description:
-            "LexTalk World Mumbai 2026, 7–8 December 2026 at Radisson Blu Mumbai International Airport. Connect with senior legal decision-makers — general counsel, in-house leaders, law firm partners and legal innovators — shaping the future of law in India, with the Legal Honor Global Awards.",
-        startDate: "2026-12-07",
+            "LexTalk World Mumbai 2026, 8 December 2026 at Radisson Blu Mumbai International Airport. Connect with senior legal decision-makers — general counsel, in-house leaders, law firm partners and legal innovators — shaping the future of law in India, with the Legal Honor Global Awards.",
+        startDate: "2026-12-08",
         endDate: "2026-12-08",
         eventStatus: "https://schema.org/EventScheduled",
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

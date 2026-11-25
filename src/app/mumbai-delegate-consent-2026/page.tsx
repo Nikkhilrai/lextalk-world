@@ -45,7 +45,7 @@ export default function MumbaiDelegateConsent2026() {
                     <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/50 text-xs font-semibold uppercase tracking-widest">
                         <div className="flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                            <span>7–8 December 2026</span>
+                            <span>8 December 2026</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <MapPin className="w-3.5 h-3.5 text-amber-400" />
