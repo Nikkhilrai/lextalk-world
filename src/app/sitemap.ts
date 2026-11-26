@@ -41,6 +41,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: `${baseUrl}/mumbai-2026/agenda`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/press-release/mumbai-2026-schedule-update`,
+            lastModified: new Date('2026-11-25'),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
             url: `${baseUrl}/dubai-2026`,
             lastModified: new Date(),
             changeFrequency: 'weekly',

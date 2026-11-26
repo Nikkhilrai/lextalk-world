@@ -7,6 +7,7 @@ import { ArrowRight, Mail, Phone, Globe, Images, CalendarDays } from "lucide-rea
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { awardees } from "../awardees-dubai-2026/awardees-data";
+import { MUMBAI_RELEASE, MUMBAI_RELEASE_HREF } from "./mumbai-2026-schedule-update/release-data";
 import {
     ADVISORY_BOARD,
     AWARDS_INTRO,
@@ -65,6 +66,20 @@ export default function PressRelease() {
     return (
         <main className="min-h-screen bg-[#fcfbf9] text-slate-900 overflow-hidden">
             <Navbar />
+
+            {/* ── Latest release ───────────────────────────────── */}
+            <div className="bg-[#050a15] pt-[72px] md:pt-[88px]">
+            <Link
+                href={MUMBAI_RELEASE_HREF}
+                className="group relative z-20 block bg-amber-500 hover:bg-amber-400 transition-colors"
+            >
+                <div className="max-w-6xl mx-auto px-5 sm:px-8 py-3 flex items-center justify-center gap-3 text-slate-900 text-[13px] md:text-sm">
+                    <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] bg-slate-900 text-amber-400 px-2 py-0.5 rounded">Latest · {MUMBAI_RELEASE.issued}</span>
+                    <span className="font-semibold truncate">Mumbai 2026 moves to a single day on Tuesday, 8 December</span>
+                    <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+            </Link>
+            </div>
 
             {/* ── Masthead ─────────────────────────────────────── */}
             <header className="relative isolate flex items-end min-h-[86vh] max-h-[860px] px-5 sm:px-8 pt-36 pb-32 md:pb-40 bg-[#050a15]">

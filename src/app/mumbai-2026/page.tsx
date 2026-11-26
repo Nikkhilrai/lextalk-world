@@ -19,6 +19,7 @@ import { MumbaiFinalCTA } from "./components/mumbai/MumbaiFinalCTA";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingAgendaLink } from "@/components/FloatingAgendaLink";
+import { MumbaiPressReleasePopup } from "./components/mumbai/MumbaiPressReleasePopup";
 import { RegisterModal } from "@/components/RegisterModal";
 import { SpeakerApplyModal } from "@/components/SpeakerApplyModal";
 import { SponsorshipModal } from "@/components/SponsorshipModal";
@@ -49,6 +50,7 @@ export default function Mumbai2026Page() {
 
             {/* Floating Buttons - Hidden on mobile by global component logic */}
             <FloatingAgendaLink href="/mumbai-2026/agenda" />
+            <MumbaiPressReleasePopup />
 
             <RegisterModal
                 isOpen={isRegisterModalOpen}
