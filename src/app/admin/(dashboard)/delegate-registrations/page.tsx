@@ -507,6 +507,8 @@ export default function DelegateRegistrationsPage() {
                         <option value="corporate-counsel">Corporate Counsel</option>
                         <option value="law-firm-lawyer">Law Firm & Independent Lawyer</option>
                         <option value="general">General Pass</option>
+                        <option value="gc-inclusive">GC Pass (₹7,500)</option>
+                        <option value="law-firm-inclusive">Law Firm Pass (₹12,500)</option>
                         <option value="visitor">Visitor</option>
                         <option value="full-access">Full Access</option>
                         <option value="full-access-vip">Full Access VIP</option>

@@ -28,6 +28,8 @@ function passDisplayName(passType: string): string {
         "law-firm-partner": "Law Firm Partner Pass",
         "law-firm-lawyer": "Law Firm & Independent Lawyer Pass",
         "general": "General Pass",
+        "gc-inclusive": "General Counsel Pass",
+        "law-firm-inclusive": "Law Firm Pass",
         "vendor": "Vendor Pass",
     };
     return map[passType] || passType.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());

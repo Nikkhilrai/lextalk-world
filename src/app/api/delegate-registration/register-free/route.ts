@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 import { triggerDelegateSync } from "@/lib/sheets-sync";
+import { mumbaiFixedPrice } from "@/lib/mumbai-pass-prices";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -36,6 +37,11 @@ export async function POST(request: NextRequest) {
                 { error: "Registration for this event is closed." },
                 { status: 403 }
             );
+        }
+
+        // Fixed-price paid passes can only be issued after payment.
+        if (mumbaiFixedPrice(conferenceSlug, passType)) {
+            return NextResponse.json({ error: "This pass requires payment." }, { status: 403 });
         }
 
         // Check for existing registration (idempotency)

@@ -19,6 +19,8 @@ function passTypeName(pt: string) {
         "corporate-counsel": "Corporate Counsel Pass",
         "law-firm-lawyer": "Law Firm & Independent Lawyer Pass",
         "general": "General Pass",
+        "gc-inclusive": "General Counsel Pass",
+        "law-firm-inclusive": "Law Firm Pass",
         "standard-physical": "Standard Pass",
         "premium-physical": "Premium Pass",
         "exclusive-physical": "Exclusive Pass",
