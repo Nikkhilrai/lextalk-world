@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: false, error: "Registration not found" }, { status: 404 });
         }
 
-        if (registration.paymentStatus !== "success" && registration.paymentType !== "free") {
+        if (registration.paymentStatus !== "success") {
             return NextResponse.json({ success: false, error: "Cannot send ticket for unpaid registration" }, { status: 400 });
         }
 

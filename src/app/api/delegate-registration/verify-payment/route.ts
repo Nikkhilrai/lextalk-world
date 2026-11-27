@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 import { generateBangalorePassPDF, BangalorePassTitle } from "@/lib/bangalore-pass-puppeteer";
@@ -27,6 +28,21 @@ function resolvePassTitle(passType: string, conferenceSlug: string): BangalorePa
     return "DELEGATE";
 }
 
+async function fetchOrder(orderId: string) {
+    const razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID!,
+        key_secret: process.env.RAZORPAY_KEY_SECRET!,
+    });
+    for (let attempt = 1; ; attempt++) {
+        try {
+            return await razorpay.orders.fetch(orderId);
+        } catch (err) {
+            if (attempt === 3) throw err;
+            await new Promise(r => setTimeout(r, 700 * attempt));
+        }
+    }
+}
+
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
@@ -37,16 +53,25 @@ export async function POST(request: NextRequest) {
             registrationId,
         } = body;
 
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || typeof registrationId !== "string") {
+            return NextResponse.json({ error: "Missing payment details" }, { status: 400 });
+        }
+        if (!process.env.RAZORPAY_KEY_SECRET) {
+            return NextResponse.json({ error: "Payment gateway not configured" }, { status: 500 });
+        }
+
+        const prismaClient = prisma as any;
+
         // Verify signature
         const generatedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "")
+            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
             .update(`${razorpay_order_id}|${razorpay_payment_id}`)
             .digest("hex");
 
         if (generatedSignature !== razorpay_signature) {
-            const prismaClient = prisma as any;
-            await prismaClient.delegateRegistration.update({
-                where: { id: registrationId },
+            // Only the pending attempt for this very order can be marked failed.
+            await prismaClient.delegateRegistration.updateMany({
+                where: { id: registrationId, razorpayOrderId: razorpay_order_id, paymentStatus: "pending" },
                 data: { paymentStatus: "failed" },
             });
             return NextResponse.json(
@@ -55,7 +80,13 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const prismaClient = prisma as any;
+        // The order was created by our server for one registration and one pass.
+        const order: any = await fetchOrder(razorpay_order_id);
+        const notes = order?.notes ?? {};
+        if (notes.registrationId !== registrationId) {
+            console.error(`Payment ${razorpay_payment_id} does not belong to registration ${registrationId}`);
+            return NextResponse.json({ error: "This payment does not match the registration" }, { status: 400 });
+        }
 
         // Idempotency check
         const existing = await prismaClient.delegateRegistration.findFirst({
@@ -74,7 +105,18 @@ export async function POST(request: NextRequest) {
         const pendingReg = await prismaClient.delegateRegistration.findUnique({
             where: { id: registrationId },
         });
-        const conferenceSlug = pendingReg?.conferenceSlug || "";
+        if (!pendingReg) {
+            return NextResponse.json({ error: "Registration not found" }, { status: 404 });
+        }
+        if (pendingReg.paymentStatus === "success") {
+            console.warn(`Second payment ${razorpay_payment_id} for paid registration ${registrationId}: check for a refund`);
+            return NextResponse.json({
+                success: true,
+                ticketNumber: pendingReg.ticketNumber,
+                message: "Registration already paid",
+            });
+        }
+        const conferenceSlug: string = notes.conferenceSlug || pendingReg.conferenceSlug || "";
 
         // Generate unique ticket number with correct prefix
         let ticketNumber = generateTicketNumber(conferenceSlug);
@@ -89,10 +131,23 @@ export async function POST(request: NextRequest) {
         // Update registration as successful
         const registration = await prismaClient.delegateRegistration.update({
             where: { id: registrationId },
+            // Record what was paid for. The form can be edited after an order is made,
+            // so the pass and price come from the order, not from the saved draft.
             data: {
                 paymentStatus: "success",
                 razorpayPaymentId: razorpay_payment_id,
+                razorpayOrderId: razorpay_order_id,
                 ticketNumber,
+                conferenceSlug,
+                passType: notes.passType || pendingReg.passType,
+                passCategory: notes.passCategory || pendingReg.passCategory,
+                currency: order.currency,
+                paymentType: order.currency === "INR" ? "india" : "international",
+                ...(notes.originalPrice ? { originalPrice: Number(notes.originalPrice) } : {}),
+                ...(notes.discountedPrice ? { discountedPrice: Number(notes.discountedPrice) } : {}),
+                ...("couponCode" in notes
+                    ? { couponCode: notes.couponCode || null, couponDiscount: notes.couponDiscount ? Number(notes.couponDiscount) : null }
+                    : {}),
             },
         });
 

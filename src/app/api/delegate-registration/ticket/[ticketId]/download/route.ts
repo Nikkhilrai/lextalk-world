@@ -32,6 +32,10 @@ export async function GET(
 
         console.log(`DEBUG: Found registration for ${registration.firstName} ${registration.lastName}. Pass: ${registration.passType}`);
 
+        if (registration.paymentStatus !== "success") {
+            return NextResponse.json({ error: "A pass is available only after payment is confirmed." }, { status: 403 });
+        }
+
         // If ticketId is missing in DB (legacy/test record), we should still generate the PDF
         // and ideally update the record if it happened to be missing
         let finalTicketId = registration.ticketId;

@@ -28,6 +28,10 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "Registration not found" }, { status: 404 });
         }
 
+        if (registration.paymentStatus !== "success") {
+            return NextResponse.json({ error: "A pass is available only after payment is confirmed." }, { status: 403 });
+        }
+
         // Only generate for physical passes
         if (registration.passType?.includes("virtual")) {
             return NextResponse.json({ error: "Entry pass not available for virtual attendees" }, { status: 400 });

@@ -194,17 +194,13 @@ function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, applie
                 body: JSON.stringify({
                     passType: "corporate-counsel",
                     passCategory: "individual",
+                    couponCode: appliedCode,
                     customerDetails: formData,
                     conferenceSlug: "mumbai-2026",
                 }),
             });
             const data = await res.json();
             if (!data.success) throw new Error(data.error || "Registration failed");
-            await fetch("/api/delegate-coupons/use", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ code: appliedCode }),
-            }).catch(() => {});
             setTimeout(() => {
                 onClose();
                 router.push(`/mumbai-delegate-confirmation-2026?regId=${data.id}`);

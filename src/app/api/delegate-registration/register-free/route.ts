@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { sendDelegateConfirmationEmail } from "@/lib/delegate-mail";
 import { triggerDelegateSync } from "@/lib/sheets-sync";
 import { mumbaiFixedPrice } from "@/lib/mumbai-pass-prices";
+import { isOpenConference, quotePass } from "@/lib/delegate-pricing";
+import { checkCoupon, consumeCoupon } from "@/lib/delegate-coupons";
 
 function generateTicketNumber(conferenceSlug: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -28,20 +30,32 @@ export async function POST(request: NextRequest) {
             passCategory,
             customerDetails,
             conferenceSlug,
+            couponCode,
         } = body;
 
-        // Dubai 2026 concluded on Sep 10, 2026 — registration is closed, block server-side
-        // even if a stale client bypasses the disabled UI.
-        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("dubai")) {
-            return NextResponse.json(
-                { error: "Registration for this event is closed." },
-                { status: 403 }
-            );
+        if (!isOpenConference(conferenceSlug)) {
+            return NextResponse.json({ error: "Registration for this event is closed." }, { status: 403 });
         }
 
         // Fixed-price paid passes can only be issued after payment.
         if (mumbaiFixedPrice(conferenceSlug, passType)) {
             return NextResponse.json({ error: "This pass requires payment." }, { status: 403 });
+        }
+
+        const currency = conferenceSlug === "singapore-2027" ? "SGD" : "INR";
+        if (!quotePass(conferenceSlug, passType, currency).ok) {
+            return NextResponse.json({ error: "Unknown pass type" }, { status: 400 });
+        }
+
+        // A free pass needs a valid 100% coupon, checked here and not only in the browser.
+        // The usage limit is enforced when the use is counted, below.
+        const check = await checkCoupon(couponCode, passType, conferenceSlug, { ignoreUsageLimit: true });
+        if (!check.ok || check.coupon.discountPct < 100) {
+            return NextResponse.json({ error: "A valid 100% coupon is required for a free pass." }, { status: 403 });
+        }
+
+        if (!customerDetails?.email) {
+            return NextResponse.json({ error: "Email is required" }, { status: 400 });
         }
 
         // Check for existing registration (idempotency)
@@ -74,6 +88,10 @@ export async function POST(request: NextRequest) {
             attempts++;
         }
 
+        if (!(await consumeCoupon(check.coupon.code, check.coupon.maxUses))) {
+            return NextResponse.json({ error: "This coupon has reached its usage limit." }, { status: 403 });
+        }
+
         // Create free registration
         const prismaClient = prisma as any;
         const registration = await prismaClient.delegateRegistration.create({
@@ -91,6 +109,8 @@ export async function POST(request: NextRequest) {
                 originalPrice: 0,
                 discountedPrice: 0,
                 currency: "FREE",
+                couponCode: check.coupon.code,
+                couponDiscount: check.coupon.discountPct,
                 paymentType: "free",
                 paymentStatus: "success",
                 ticketNumber,

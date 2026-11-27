@@ -2,8 +2,10 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { getAdminSession } from "@/lib/admin-session";
 
 export async function getDelegateRegistrations() {
+    if (!(await getAdminSession())) return { success: false, registrations: [] };
     try {
         const prismaClient = prisma as any;
         const registrations = await prismaClient.delegateRegistration.findMany({
@@ -17,6 +19,7 @@ export async function getDelegateRegistrations() {
 }
 
 export async function deleteDelegateRegistration(id: string) {
+    if (!(await getAdminSession())) return { success: false, error: "Unauthorized" };
     try {
         const prismaClient = prisma as any;
         await prismaClient.delegateRegistration.delete({
@@ -31,6 +34,7 @@ export async function deleteDelegateRegistration(id: string) {
 }
 
 export async function getDelegateRegistrationById(id: string) {
+    if (!(await getAdminSession())) return { success: false, registration: null };
     try {
         const prismaClient = prisma as any;
         const registration = await prismaClient.delegateRegistration.findUnique({
@@ -44,6 +48,7 @@ export async function getDelegateRegistrationById(id: string) {
 }
 
 export async function updateDelegatePaymentStatus(id: string, status: string) {
+    if (!(await getAdminSession())) return { success: false, error: "Unauthorized" };
     try {
         const prismaClient = prisma as any;
         await prismaClient.delegateRegistration.update({

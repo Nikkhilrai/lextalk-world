@@ -194,6 +194,7 @@ function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, applie
                 body: JSON.stringify({
                     passType: "corporate-counsel",
                     passCategory: "individual",
+                    couponCode: appliedCode,
                     customerDetails: formData,
                     conferenceSlug: "bangalore-2026",
                 }),
@@ -202,11 +203,6 @@ function RegistrationModal({ isOpen, onClose, couponApplied, discountPct, applie
             if (!data.success) throw new Error(data.error || "Registration failed");
 
             // Increment coupon usage
-            await fetch("/api/delegate-coupons/use", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ code: appliedCode }),
-            }).catch(() => {});
 
             setTimeout(() => {
                 onClose();

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { prisma } from "@/lib/prisma";
-import { singaporePassPrice, SINGAPORE_CURRENCY } from "@/lib/singapore-pass-prices";
-import { mumbaiFixedPrice } from "@/lib/mumbai-pass-prices";
+import { isOpenConference, quotePass } from "@/lib/delegate-pricing";
+import { checkCoupon } from "@/lib/delegate-coupons";
 
 export async function POST(request: NextRequest) {
     try {
@@ -19,86 +19,60 @@ export async function POST(request: NextRequest) {
         });
 
         const body = await request.json();
+        // Any price, amount or discount sent by the browser is ignored.
         const {
-            amount: rawAmount,
             currency,
             passType,
             passCategory,
-            paymentType,
             customerDetails,
             conferenceSlug,
-            originalPrice: bodyOriginalPrice,
-            discountedPrice: bodyDiscountedPrice,
             registrationId,
             couponCode,
-            couponDiscount,
         } = body;
 
-        // Dubai 2026 concluded on Sep 10, 2026 — registration is closed, block server-side
-        // even if a stale client bypasses the disabled UI.
-        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("dubai")) {
-            return NextResponse.json(
-                { error: "Registration for this event is closed." },
-                { status: 403 }
-            );
+        if (!isOpenConference(conferenceSlug)) {
+            return NextResponse.json({ error: "Registration for this event is closed." }, { status: 403 });
         }
 
-        // Singapore passes: the price comes from the server table, never from the browser.
-        let serverPrice: number | null = null;
-        if (typeof conferenceSlug === "string" && conferenceSlug.toLowerCase().includes("singapore")) {
-            serverPrice = singaporePassPrice(passType);
-            if (serverPrice === null) {
-                return NextResponse.json({ error: "Unknown pass type" }, { status: 400 });
+        let quote = quotePass(conferenceSlug, passType, currency);
+        if (!quote.ok) {
+            return NextResponse.json({ error: quote.error }, { status: 400 });
+        }
+
+        let validatedCouponCode: string | null = null;
+        let validatedCouponDiscount: number | null = null;
+        if (couponCode && quote.couponsAllowed) {
+            const check = await checkCoupon(couponCode, passType, conferenceSlug);
+            if (!check.ok) {
+                return NextResponse.json({ error: check.error }, { status: 400 });
             }
-            if (currency !== SINGAPORE_CURRENCY) {
-                return NextResponse.json({ error: "Invalid currency" }, { status: 400 });
-            }
-        }
-
-        // Mumbai fixed-price passes (law firms / independent lawyers): total comes from the server.
-        const mumbaiFixed = mumbaiFixedPrice(conferenceSlug, passType);
-        if (mumbaiFixed && currency !== "INR") {
-            return NextResponse.json({ error: "Invalid currency" }, { status: 400 });
-        }
-
-        const originalPrice = mumbaiFixed?.originalPrice ?? serverPrice ?? bodyOriginalPrice;
-        const discountedPrice = mumbaiFixed?.discountedPrice ?? serverPrice ?? bodyDiscountedPrice;
-
-        // Server-side coupon validation — if coupon provided, re-validate and recompute amount
-        let finalAmount = mumbaiFixed?.total ?? serverPrice ?? rawAmount;
-        let validatedCouponCode: string | null = mumbaiFixed ? null : couponCode || null;
-        let validatedCouponDiscount: number | null = mumbaiFixed ? null : couponDiscount || null;
-
-        if (couponCode && !mumbaiFixed) {
-            const prismaClient2 = prisma as any;
-            const coupon = await prismaClient2.delegateCoupon.findUnique({
-                where: { code: couponCode.trim().toUpperCase() },
-            });
-
-            const now = new Date();
-            const isValid = coupon &&
-                coupon.isActive &&
-                now >= new Date(coupon.validFrom) &&
-                now <= new Date(coupon.validUntil) &&
-                (coupon.maxUses === null || coupon.usedCount < coupon.maxUses);
-
-            if (isValid) {
-                const GST_RATE = 0.18;
-                const basePrice = currency === "INR" ? (body.baseInrPrice || rawAmount) : (body.baseUsdPrice || rawAmount);
-                const discounted = basePrice * (1 - coupon.discountPct / 100);
-                finalAmount = Math.round(discounted * (1 + GST_RATE) * 100) / 100;
-                validatedCouponCode = coupon.code;
-                validatedCouponDiscount = coupon.discountPct;
+            validatedCouponCode = check.coupon.code;
+            validatedCouponDiscount = check.coupon.discountPct;
+            quote = quotePass(conferenceSlug, passType, currency, check.coupon.discountPct);
+            if (!quote.ok) {
+                return NextResponse.json({ error: quote.error }, { status: 400 });
             }
         }
 
-        const amount = finalAmount;
+        const { originalPrice, discountedPrice, amount } = quote;
+        const paymentType = currency === "INR" ? "india" : "international";
 
         if (!amount || amount <= 0) {
             return NextResponse.json(
                 { error: "Invalid amount" },
                 { status: 400 }
             );
+        }
+
+        if (registrationId) {
+            const current = await (prisma as any).delegateRegistration.findUnique({ where: { id: registrationId } });
+            if (!current) {
+                return NextResponse.json({ error: "Registration not found. Please start again." }, { status: 404 });
+            }
+            // A paid registration must never be reopened or rewritten.
+            if (current.paymentStatus === "success") {
+                return NextResponse.json({ error: "This registration is already paid." }, { status: 409 });
+            }
         }
 
         const prismaClient = prisma as any;
@@ -207,11 +181,17 @@ export async function POST(request: NextRequest) {
             amount: Math.round(amount * 100), // Convert to smallest unit
             currency,
             receipt: `del_${registration.id.slice(-8)}`,
+            // Only the server can write these. Payment verification issues exactly this pass.
             notes: {
                 registrationId: registration.id,
                 passType,
-                passCategory,
+                passCategory: passCategory || "individual",
                 email: customerDetails.email,
+                conferenceSlug,
+                originalPrice: String(originalPrice),
+                discountedPrice: String(discountedPrice),
+                couponCode: validatedCouponCode ?? "",
+                couponDiscount: validatedCouponDiscount === null ? "" : String(validatedCouponDiscount),
             },
         };
 
