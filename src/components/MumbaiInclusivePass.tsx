@@ -358,53 +358,53 @@ function PassCard({ content, onRegister }: { content: InclusivePassContent; onRe
 
     return (
         <div className="relative">
-            <div className="absolute -inset-3 bg-gradient-to-br from-amber-400/15 via-amber-500/8 to-transparent rounded-[2rem] blur-2xl pointer-events-none" />
-            <div className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="absolute -inset-3 bg-gradient-to-br from-amber-300/30 via-amber-200/20 to-transparent rounded-[2rem] blur-2xl pointer-events-none" />
+            <div className="relative bg-white rounded-2xl overflow-hidden ring-1 ring-amber-200/80 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.25)]">
                 <div className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500" />
-                <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-amber-400/6 to-transparent pointer-events-none" />
-                <div className="p-6">
+                <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-amber-50 to-transparent pointer-events-none" />
+                <div className="relative p-6">
                     {/* Top row */}
                     <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/25 rounded-full">
-                            <ShieldCheck size={10} className="text-amber-400" />
-                            <span className="text-amber-400 text-[9px] font-black uppercase tracking-[0.2em]">Exclusive Pass</span>
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200 rounded-full">
+                            <ShieldCheck size={10} className="text-amber-600" />
+                            <span className="text-amber-700 text-[9px] font-black uppercase tracking-[0.2em]">Exclusive Pass</span>
                         </div>
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-full">
                             <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                             </span>
-                            <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-wider">Open</span>
+                            <span className="text-emerald-700 text-[9px] font-bold uppercase tracking-wider">Open</span>
                         </div>
                     </div>
 
-                    <h2 className="font-serif text-2xl font-bold text-white leading-tight mb-3">{content.passName}</h2>
+                    <h2 className="font-serif text-2xl font-bold text-slate-900 leading-tight mb-3">{content.passName}</h2>
                     <div className="flex flex-wrap gap-x-3 gap-y-1.5 mb-5">
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><Calendar size={10} className="text-amber-500/60" /> Dec 8, 2026</span>
-                        <span className="flex items-center gap-1 text-slate-500 text-[11px]"><MapPin size={10} className="text-amber-500/60" /> Radisson Blu Mumbai International Airport</span>
+                        <span className="flex items-center gap-1 text-slate-600 text-[11px]"><Calendar size={10} className="text-amber-600" /> Dec 8, 2026</span>
+                        <span className="flex items-center gap-1 text-slate-600 text-[11px]"><MapPin size={10} className="text-amber-600" /> Radisson Blu Mumbai International Airport</span>
                     </div>
 
-                    <div className="h-px bg-white/6 mb-5" />
+                    <div className="h-px bg-slate-100 mb-5" />
 
                     {/* Price */}
                     <div className="mb-5">
                         <div className="flex items-baseline gap-2 mb-1">
-                            <span className="text-4xl font-black text-white leading-none">₹{total.toLocaleString("en-IN")}</span>
-                            <span className="text-amber-400 text-xs font-bold">All inclusive</span>
+                            <span className="text-4xl font-black text-slate-900 leading-none">₹{total.toLocaleString("en-IN")}</span>
+                            <span className="text-amber-700 text-xs font-bold">All inclusive</span>
                         </div>
                         <p className="text-slate-500 text-[11px]">Includes all taxes. No extra charges at checkout.</p>
                     </div>
 
                     {/* Features */}
                     <div className="mb-5">
-                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3">Includes</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 mb-3">Includes</p>
                         <ul className="space-y-2">
                             {FEATURES.map(({ text }) => (
                                 <li key={text} className="flex items-center gap-2.5">
-                                    <div className="w-4 h-4 rounded-md bg-amber-500/12 flex items-center justify-center flex-shrink-0">
-                                        <Check size={9} strokeWidth={3} className="text-amber-400" />
+                                    <div className="w-4 h-4 rounded-md bg-amber-100 flex items-center justify-center flex-shrink-0">
+                                        <Check size={9} strokeWidth={3} className="text-amber-700" />
                                     </div>
-                                    <span className="text-slate-400 text-xs leading-snug">{text}</span>
+                                    <span className="text-slate-700 text-xs leading-snug">{text}</span>
                                 </li>
                             ))}
                         </ul>
@@ -421,9 +421,9 @@ function PassCard({ content, onRegister }: { content: InclusivePassContent; onRe
                     </button>
 
                     <div className="flex items-center justify-center gap-3 mt-4">
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
-                        <div className="w-px h-3 bg-slate-800" />
-                        <div className="flex items-center gap-1 text-slate-700 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
+                        <div className="flex items-center gap-1 text-slate-500 text-[10px]"><ShieldCheck size={10} /> Razorpay</div>
+                        <div className="w-px h-3 bg-slate-200" />
+                        <div className="flex items-center gap-1 text-slate-500 text-[10px]"><Zap size={10} /> Instant Confirmation</div>
                     </div>
                 </div>
             </div>
@@ -439,16 +439,16 @@ export function MumbaiInclusivePass({ content }: { content: InclusivePassContent
     useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
 
     return (
-        <main className="bg-[#050a15] min-h-screen">
+        <main className="bg-[#faf8f3] min-h-screen">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-            <Navbar />
+            <Navbar variant="light" />
 
             <section className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-28 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-amber-500/6 rounded-full blur-[180px]" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-400/4 rounded-full blur-[140px]" />
-                    <div className="absolute inset-0 opacity-[0.015]"
-                        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+                    <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-amber-200/40 rounded-full blur-[180px]" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-100/60 rounded-full blur-[140px]" />
+                    <div className="absolute inset-0 opacity-[0.035]"
+                        style={{ backgroundImage: "linear-gradient(rgba(15,23,42,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.6) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
                 </div>
 
                 <div className="container mx-auto px-4 max-w-6xl relative z-10">
@@ -457,33 +457,33 @@ export function MumbaiInclusivePass({ content }: { content: InclusivePassContent
                         {/* Left: Info */}
                         <div className="lg:pt-8">
                             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }} transition={{ duration: 0.6, delay: 0.1 }}>
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/25 rounded-full mb-6">
-                                    <ShieldCheck size={12} className="text-amber-400" />
-                                    <span className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.25em]">LexTalk World · Mumbai 2026</span>
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-amber-200 shadow-sm rounded-full mb-6">
+                                    <ShieldCheck size={12} className="text-amber-600" />
+                                    <span className="text-amber-700 text-[10px] font-bold uppercase tracking-[0.25em]">LexTalk World · Mumbai 2026</span>
                                 </div>
                             </motion.div>
 
                             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 24 }} transition={{ duration: 0.7, delay: 0.2 }}
-                                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5"
+                                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-5"
                             >
                                 {content.headline}
-                                <span className="block bg-gradient-to-r from-amber-300 via-amber-500 to-amber-400 bg-clip-text text-transparent">
+                                <span className="block bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
                                     {content.headlineAccent}
                                 </span>
                             </motion.h1>
 
                             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.3 }}
-                                className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg font-light"
+                                className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg font-light"
                             >
                                 {content.intro}
                             </motion.p>
 
                             {/* Audience */}
                             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 16 }} transition={{ duration: 0.6, delay: 0.4 }} className="mb-8">
-                                <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3">For</p>
+                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">For</p>
                                 <div className="flex flex-wrap gap-2">
                                     {content.audience.map(tag => (
-                                        <span key={tag} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-slate-400 text-[11px] font-medium">{tag}</span>
+                                        <span key={tag} className="px-3 py-1.5 bg-white border border-slate-200 shadow-sm rounded-full text-slate-700 text-[11px] font-medium">{tag}</span>
                                     ))}
                                 </div>
                             </motion.div>
@@ -498,8 +498,8 @@ export function MumbaiInclusivePass({ content }: { content: InclusivePassContent
                                     { icon: Users,    text: "50+ Speakers" },
                                 ].map(({ icon: Icon, text }) => (
                                     <div key={text} className="flex items-center gap-2">
-                                        <Icon size={13} className="text-amber-500/60" />
-                                        <span className="text-slate-500 text-xs">{text}</span>
+                                        <Icon size={13} className="text-amber-600" />
+                                        <span className="text-slate-600 text-xs">{text}</span>
                                     </div>
                                 ))}
                             </motion.div>
